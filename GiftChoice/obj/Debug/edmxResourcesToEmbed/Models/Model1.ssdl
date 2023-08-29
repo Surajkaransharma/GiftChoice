@@ -1,0 +1,76 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="GiftChoiceModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="KeywordTbl">
+    <Key>
+      <PropertyRef Name="KeywordId" />
+    </Key>
+    <Property Name="KeywordId" Type="bigint" Nullable="false" />
+    <Property Name="Keyword" Type="nvarchar(max)" />
+    <Property Name="KUrl" Type="nvarchar(max)" />
+    <Property Name="Create_at" Type="datetime" />
+    <Property Name="Update_at" Type="datetime" />
+    <Property Name="Active" Type="bit" />
+    <Property Name="Priority" Type="bigint" />
+    <Property Name="UserId" Type="bigint" />
+  </EntityType>
+  <EntityType Name="MainCateTbl">
+    <Key>
+      <PropertyRef Name="MainCateId" />
+    </Key>
+    <Property Name="MainCateId" Type="bigint" Nullable="false" />
+    <Property Name="MTitle" Type="nvarchar(max)" />
+    <Property Name="MUrl" Type="nvarchar(max)" />
+    <Property Name="Active" Type="bit" />
+    <Property Name="Priority" Type="bigint" />
+    <Property Name="Create_at" Type="datetime" />
+    <Property Name="Update_at" Type="datetime" />
+    <Property Name="MImage" Type="nvarchar(max)" />
+    <Property Name="UserId" Type="bigint" />
+  </EntityType>
+  <EntityType Name="MCKeywordTbl">
+    <Key>
+      <PropertyRef Name="MCkeywordId" />
+    </Key>
+    <Property Name="MCkeywordId" Type="bigint" Nullable="false" />
+    <Property Name="MainCateId" Type="bigint" />
+    <Property Name="KeywordId" Type="bigint" />
+    <Property Name="Active" Type="bit" />
+  </EntityType>
+  <Association Name="FK__MCKeyword__Keywo__3B75D760">
+    <End Role="KeywordTbl" Type="Self.KeywordTbl" Multiplicity="0..1" />
+    <End Role="MCKeywordTbl" Type="Self.MCKeywordTbl" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="KeywordTbl">
+        <PropertyRef Name="KeywordId" />
+      </Principal>
+      <Dependent Role="MCKeywordTbl">
+        <PropertyRef Name="KeywordId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__MCKeyword__MainC__3A81B327">
+    <End Role="MainCateTbl" Type="Self.MainCateTbl" Multiplicity="0..1" />
+    <End Role="MCKeywordTbl" Type="Self.MCKeywordTbl" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MainCateTbl">
+        <PropertyRef Name="MainCateId" />
+      </Principal>
+      <Dependent Role="MCKeywordTbl">
+        <PropertyRef Name="MainCateId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="GiftChoiceModelStoreContainer">
+    <EntitySet Name="KeywordTbl" EntityType="Self.KeywordTbl" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="MainCateTbl" EntityType="Self.MainCateTbl" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="MCKeywordTbl" EntityType="Self.MCKeywordTbl" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__MCKeyword__Keywo__3B75D760" Association="Self.FK__MCKeyword__Keywo__3B75D760">
+      <End Role="KeywordTbl" EntitySet="KeywordTbl" />
+      <End Role="MCKeywordTbl" EntitySet="MCKeywordTbl" />
+    </AssociationSet>
+    <AssociationSet Name="FK__MCKeyword__MainC__3A81B327" Association="Self.FK__MCKeyword__MainC__3A81B327">
+      <End Role="MainCateTbl" EntitySet="MainCateTbl" />
+      <End Role="MCKeywordTbl" EntitySet="MCKeywordTbl" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

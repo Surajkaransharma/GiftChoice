@@ -1,0 +1,406 @@
+﻿
+@{
+    ViewBag.Title = "AddMainCate";
+    Layout = "~/Views/Shared/_Admin.cshtml";
+}
+<style>
+    .img64 img{
+        width : 50px
+    }
+</style>
+<script src="~/Angularjs/Admin.js"></script>
+<div class="page-wrapper" ng-app="AdminApp" ng-controller="AdminController">
+    <div class="page-content">
+        <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
+            <div class="breadcrumb-title pe-3">Main Category</div>
+            <div class="ps-3">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb mb-0 p-0">
+                        <li class="breadcrumb-item">
+                            <a href="javascript:;"><i class="bx bx-home-alt"></i></a>
+                        </li>
+                        <li class="breadcrumb-item active" aria-current="page">Form</li>
+                    </ol>
+                </nav>
+            </div>
+
+        </div>
+        <div class="row">
+            <div class="col-xl-4">
+
+                <div class="card">
+                    <div class="card-body p-4">
+
+                        <form class="row g-3">
+                            <div class="col-md-12">
+                                <label for="input1" class="form-label">Main Category</label>
+                                <input type="text" class="form-control" id="" ng-model="MainCate.MTitle" placeholder="Main Category">
+                                <input type="hidden" class="form-control" id="imgcode" ng-model="MainCate.MImage" placeholder="Main Category">
+                                @*<div id="imageContainer"></div>*@
+                            </div>
+                            <div class="col-md-12">
+                              
+                                <label for="inputFirstName" class="form-label">Main Category Image <span style="color:#ff0000;font-weight:bolder;">700 * 1000</span></label>
+
+                                <section id="image-section">
+                                    <div id="uploadArea" class="upload-area">
+                                        <!-- Header -->
+                                        <div class="upload-area__header" style="display:none">
+                                            <h1 class="upload-area__title">Upload your file</h1>
+                                            <p class="upload-area__paragraph">
+                                                File should be an image
+                                                <strong class="upload-area__tooltip">
+                                                    Like
+                                                    <span class="upload-area__tooltip-data"></span>
+                                                </strong>
+                                            </p>
+                                        </div>
+                                        <!-- End Header -->
+                                        <!-- Drop Zoon -->
+                                        <div id="dropZoon" class="upload-area__drop-zoon drop-zoon">
+                                            <span class="drop-zoon__icon">
+                                                <i class='bx bxs-file-image'></i>
+                                            </span>
+                                            <p class="drop-zoon__paragraph">Drop your file here or Click to browse</p>
+                                            <span id="loadingText" class="drop-zoon__loading-text">Please Wait</span>
+                                            <img src="" alt="Preview Image" id="previewImage" class="drop-zoon__preview-image" draggable="false">
+                                            <input type="file" id="fileInput" upload-file="product.ProductImage" class="drop-zoon__file-input" multiple>
+                                        </div>
+                                        <!-- End Drop Zoon -->
+                                        <!-- File Details -->
+                                        <div id="fileDetails" class="upload-area__file-details file-details">
+                                            <h3 class="file-details__title">Uploaded File</h3>
+
+                                            <div id="uploadedFile" class="uploaded-file">
+                                                <div class="uploaded-file__icon-container">
+                                                    <i class='bx bxs-file-blank uploaded-file__icon'></i>
+                                                    <span class="uploaded-file__icon-text"></span>
+
+                                                </div>
+
+                                                <div id="uploadedFileInfo" class="uploaded-file__info">
+                                                    <span class="uploaded-file__name">Proejct 1</span>
+                                                    <span class="uploaded-file__counter">0%</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- End File Details -->
+                                    </div>
+                                </section>
+
+                            </div>
+
+                            <div class="col-md-12">
+                                <label for="input1" class="form-label">Priority</label>
+                                <input type="number" class="form-control" id="" placeholder="Priority">
+                            </div>
+
+                            @*<div class="col-md-4">
+                                    <label for="input9" class="form-label">State</label>
+                                    <select id="input9" class="form-select">
+                                        <option selected="">Choose...</option>
+                                        <option>One</option>
+                                        <option>Two</option>
+                                        <option>Three</option>
+                                    </select>
+                                </div>*@
+
+                            <div class="col-md-12">
+                                <div class="d-md-flex d-grid align-items-center gap-3">
+                                    <button type="button" ng-click="SubmitMainCate()" class="btn btn-primary px-4">Submit</button>
+                                    <button type="button" class="btn btn-light px-4">Reset</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-xl-8">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="d-lg-flex align-items-center mb-4 gap-3">
+                            <div class="position-relative">
+                                <input type="text" class="form-control ps-5 radius-30" ng-model="search" placeholder="Search here...">
+                                <span class="position-absolute top-50 product-show translate-middle-y"><i class="bx bx-search"></i></span>
+                            </div>
+                            @*  <div class="ms-auto"><a href="javascript:;" class="btn btn-primary radius-30 mt-2 mt-lg-0" data-bs-toggle="modal" data-bs-target="#createcompany"><i class="bx bxs-plus-square"></i>Add New Company</a></div>*@
+
+
+
+
+
+                        </div>
+                        <div class="table-responsive">
+                            <table class="table mb-0 table-bordered" ng-init="GetMainCate()">
+                                <thead class="table-light">
+                                    <tr>
+                                        <th>S.No.</th>
+                                        <th>Main Category Name</th>                                      
+                                        <th>Image</th>
+                                 
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="m in MainCateData">
+                                        <td>{{$index+1}}</td>
+                                        <td>{{m.MTitle}}</td>
+                                        @*<td ng-bind-html="generateImageElement(m.MImage)" class="img64" > </td>*@
+                                        <td><img ng-src="data:image/jpeg;base64,{{m.MImage}}" width="50px"></td>
+                                      
+
+                                    </tr>
+
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+
+
+    // Select Upload-Area
+    const uploadArea = document.querySelector('#uploadArea')
+
+    // Select Drop-Zoon Area
+    const dropZoon = document.querySelector('#dropZoon');
+
+    // Loading Text
+    const loadingText = document.querySelector('#loadingText');
+
+    // Slect File Input
+    const fileInput = document.querySelector('#fileInput');
+
+    // Select Preview Image
+    const previewImage = document.querySelector('#previewImage');
+
+    // File-Details Area
+    const fileDetails = document.querySelector('#fileDetails');
+
+    // Uploaded File
+    const uploadedFile = document.querySelector('#uploadedFile');
+
+    // Uploaded File Info
+    const uploadedFileInfo = document.querySelector('#uploadedFileInfo');
+
+    // Uploaded File  Name
+    const uploadedFileName = document.querySelector('.uploaded-file__name');
+
+    // Uploaded File Icon
+    const uploadedFileIconText = document.querySelector('.uploaded-file__icon-text');
+
+    // Uploaded File Counter
+    const uploadedFileCounter = document.querySelector('.uploaded-file__counter');
+
+    // ToolTip Data
+    const toolTipData = document.querySelector('.upload-area__tooltip-data');
+
+    // Images Types
+    const imagesTypes = [
+        "jpeg",
+        "png",
+        "svg",
+        "gif"
+    ];
+
+    // Append Images Types Array Inisde Tooltip Data
+    toolTipData.innerHTML = [...imagesTypes].join(', .');
+
+    // When (drop-zoon) has (dragover) Event
+    dropZoon.addEventListener('dragover', function (event) {
+        // Prevent Default Behavior
+        event.preventDefault();
+
+        // Add Class (drop-zoon--over) On (drop-zoon)
+        dropZoon.classList.add('drop-zoon--over');
+    });
+
+    // When (drop-zoon) has (dragleave) Event
+    dropZoon.addEventListener('dragleave', function (event) {
+        // Remove Class (drop-zoon--over) from (drop-zoon)
+        dropZoon.classList.remove('drop-zoon--over');
+    });
+
+    // When (drop-zoon) has (drop) Event
+    dropZoon.addEventListener('drop', function (event) {
+        // Prevent Default Behavior
+        event.preventDefault();
+
+        // Remove Class (drop-zoon--over) from (drop-zoon)
+        dropZoon.classList.remove('drop-zoon--over');
+
+        // Select The Dropped File
+        const file = event.dataTransfer.files[0];
+
+        // Call Function uploadFile(), And Send To Her The Dropped File :)
+        uploadFile(file);
+    });
+
+    // When (drop-zoon) has (click) Event
+    dropZoon.addEventListener('click', function (event) {
+        // Click The (fileInput)
+        fileInput.click();
+    });
+
+    // When (fileInput) has (change) Event
+    fileInput.addEventListener('change', function (event) {
+        // Select The Chosen File
+        const file = event.target.files[0];
+
+        // Call Function uploadFile(), And Send To Her The Chosen File :)
+        uploadFile(file);
+    });
+
+    // Upload File Function
+    function uploadFile(file) {
+        // FileReader()
+        const fileReader = new FileReader();
+        // File Type
+        const fileType = file.type;
+        // File Size
+        const fileSize = file.size;
+        const image = new Image();
+        image.src = URL.createObjectURL(file);
+
+        image.onload = function () {
+            if (image.naturalWidth === 800 && image.naturalHeight === 350) {
+                // If File Is Passed from the (File Validation) Function
+                if (fileValidate(fileType, fileSize)) {
+
+                    // Add Class (drop-zoon--Uploaded) on (drop-zoon)
+                    dropZoon.classList.add('drop-zoon--Uploaded');
+
+                    // Show Loading-text
+                    loadingText.style.display = "block";
+                    // Hide Preview Image
+                    previewImage.style.display = 'none';
+
+                    // Remove Class (uploaded-file--open) From (uploadedFile)
+                    uploadedFile.classList.remove('uploaded-file--open');
+                    // Remove Class (uploaded-file__info--active) from (uploadedFileInfo)
+                    uploadedFileInfo.classList.remove('uploaded-file__info--active');
+
+                    // After File Reader Loaded
+                    fileReader.addEventListener('load', function () {
+                        // After Half Second
+
+
+                        setTimeout(function () {
+                            // Add Class (upload-area--open) On (uploadArea)
+                            uploadArea.classList.add('upload-area--open');
+
+                            // Hide Loading-text (please-wait) Element
+                            loadingText.style.display = "none";
+                            // Show Preview Image
+                            previewImage.style.display = 'block';
+
+                            // Add Class (file-details--open) On (fileDetails)
+                            fileDetails.classList.add('file-details--open');
+                            // Add Class (uploaded-file--open) On (uploadedFile)
+                            uploadedFile.classList.add('uploaded-file--open');
+                            // Add Class (uploaded-file__info--active) On (uploadedFileInfo)
+                            uploadedFileInfo.classList.add('uploaded-file__info--active');
+                        }, 500); // 0.5s
+
+                        // Add The (fileReader) Result Inside (previewImage) Source
+                        previewImage.setAttribute('src', fileReader.result);
+
+                        const base64Data = fileReader.result.split(',')[1];
+                        $("#imgcode").val(base64Data)
+                        // Now you have the base64 encoded image data in base64Data variable
+                        console.log('Base64 Encoded Image Data:', base64Data);
+
+                     // Replace with your actual base64 data
+
+                        // Create a new Image element
+                        //const decodedImage = new Image();
+
+                        //// Set the src attribute to the base64 data
+                        //decodedImage.src = 'data:image/jpeg;base64,' + base64Data;
+
+                        //// Add the image to a container element
+                        //const imageContainer = document.querySelector('#imageContainer'); // Replace with your container element's ID
+                        //imageContainer.appendChild(decodedImage);
+
+                        // Add File Name Inside Uploaded File Name
+                        uploadedFileName.innerHTML = file.name;
+
+                        // Call Function progressMove();
+                        progressMove();
+                    });
+
+                    // Read (file) As Data Url
+                    fileReader.readAsDataURL(file);
+                } else { // Else
+
+                    this; // (this) Represent The fileValidate(fileType, fileSize) Function
+
+                };
+            } else {
+                alert('Please make sure your image has dimensions of 500x500 pixels.');
+                return false;
+            }
+        };
+     
+    };
+
+    // Progress Counter Increase Function
+    function progressMove() {
+        // Counter Start
+        let counter = 0;
+
+        // After 600ms
+        setTimeout(() => {
+            // Every 100ms
+            let counterIncrease = setInterval(() => {
+                // If (counter) is equle 100
+                if (counter === 100) {
+                    // Stop (Counter Increase)
+                    clearInterval(counterIncrease);
+                } else { // Else
+                    // plus 10 on counter
+                    counter = counter + 10;
+                    // add (counter) vlaue inisde (uploadedFileCounter)
+                    uploadedFileCounter.innerHTML = `${counter}%`
+                }
+            }, 100);
+        }, 600);
+    };
+
+
+    // Simple File Validate Function
+    function fileValidate(fileType, fileSize) {
+        // File Type Validation
+        let isImage = imagesTypes.filter((type) => fileType.indexOf(`image/${type}`) !== -1);
+
+   
+
+        // If The Uploaded File Type Is 'jpeg'
+        if (isImage[0] === 'jpeg') {
+            // Add Inisde (uploadedFileIconText) The (jpg) Value
+            uploadedFileIconText.innerHTML = 'jpg';
+        } else { // else
+            // Add Inisde (uploadedFileIconText) The Uploaded File Type
+            uploadedFileIconText.innerHTML = isImage[0];
+        };
+
+        // If The Uploaded File Is An Image
+        if (isImage.length !== 0) {
+            // Check, If File Size Is 2MB or Less
+            if (fileSize <= 2000000) { // 2MB :)
+                return true;
+            } else { // Else File Size
+                return alert('Please Your File Should be 2 Megabytes or Less');
+            };
+        } else { // Else File Type
+            return alert('Please make sure to upload An Image File Type');
+        };
+    };
+
+    // :)
+</script>
