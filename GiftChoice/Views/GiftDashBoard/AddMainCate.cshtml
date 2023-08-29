@@ -11,7 +11,7 @@
 <script src="~/Angularjs/Admin.js"></script>
 <div class="page-wrapper" ng-app="AdminApp" ng-controller="AdminController">
     <div class="page-content">
-        <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
+        @*<div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
             <div class="breadcrumb-title pe-3">Main Category</div>
             <div class="ps-3">
                 <nav aria-label="breadcrumb">
@@ -24,23 +24,23 @@
                 </nav>
             </div>
 
-        </div>
+        </div>*@
         <div class="row">
             <div class="col-xl-4">
 
                 <div class="card">
                     <div class="card-body p-4">
 
-                        <form class="row g-3">
+                        <form class="row g-3"  enctype="multipart/form-data">
                             <div class="col-md-12">
-                                <label for="input1" class="form-label">Main Category</label>
+                                <label for="input1" class="form-label"></label>
                                 <input type="text" class="form-control" id="" ng-model="MainCate.MTitle" placeholder="Main Category">
                                 @*<input type="hidden" class="form-control" id="imgcode" ng-model="MainCate.MImage" placeholder="Main Category">*@
                                 @*<div id="imageContainer"></div>*@
                             </div>
                             <div class="col-md-12">
                               
-                                <label for="inputFirstName" class="form-label">Main Category Image <span style="color:#ff0000;font-weight:bolder;">700 * 1000</span></label>
+                                <label for="inputFirstName" class="form-label">Image <span style="color:#ff0000;font-weight:bolder;">700 * 1000</span></label>
 
                                 <section id="image-section">
                                     <div id="uploadArea" class="upload-area">
@@ -64,7 +64,7 @@
                                             <p class="drop-zoon__paragraph">Drop your file here or Click to browse</p>
                                             <span id="loadingText" class="drop-zoon__loading-text">Please Wait</span>
                                             <img src="" alt="Preview Image" id="previewImage" class="drop-zoon__preview-image" draggable="false">
-                                            <input type="file" id="fileInput" upload-file="MainCate.Image" class="drop-zoon__file-input" multiple>
+                                            <input type="file" id="fileInput" ng-model="image" class="drop-zoon__file-input" multiple>
                                         </div>
                                         <!-- End Drop Zoon -->
                                         <!-- File Details -->
@@ -93,6 +93,18 @@
                             <div class="col-md-12">
                                 <label for="input1" class="form-label">Priority</label>
                                 <input type="number" class="form-control" ng-model="MainCate.Priority" id="" placeholder="Priority">
+                            </div>
+                                                 <div class="col-md-12" ng-init="GetKeywordData()">
+                                <label for="input1" class="form-label">Select Keyword</label>
+                                <div class="" id="check_box">
+                                    <label class="checkbox-wrapper" ng-repeat="k in KeywordList">
+                                        <input type="checkbox" id="Keyword_{{k.id}}" class="checkbox-input" value="{{k.KeywordId}}" ng-model="k.Selected" ng-checked="" />
+                                        <span class="checkbox-tile">
+                                            <span class="checkbox-label">{{k.Keyword}}</span>
+                                        </span>
+                                    </label>
+
+                                </div>
                             </div>
 
                             @*<div class="col-md-4">

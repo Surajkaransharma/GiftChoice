@@ -148,10 +148,14 @@ namespace GiftChoice.Controllers
         //}
         public JsonResult GetKeyword()
         {
+            return Json(db.KeywordTbls , JsonRequestBehavior.AllowGet);
+
+        }
+        public JsonResult GetKeywordData()
+        {
             return Json(db.KeywordTbls, JsonRequestBehavior.AllowGet);
 
         }
-
         public JsonResult SubmitKeyword(KeywordTbl model)
         {
             try

@@ -1,12 +1,13 @@
 ﻿var app = angular.module("AdminApp", ['lr.upload']);
 app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function ($scope, upload, $http, $sce) {
     $scope.SubmitMainCate = function () {
-    
+        var formData = new FormData();
+        formData.append('Image', $scope.image);
         debugger
-        upload({
+        $http({
             url: '/GiftDashBoard/SubmitMainCate',
             method: 'post',
-            data: $scope.MainCate
+            data: formData
         }).then(function (d) {
             $scope.result = d.data;
             if ($scope.result.res === "1") {
@@ -67,6 +68,15 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
             alert(error.data);
         });
     };
+
+    $scope.GetKeywordData = function () {
+        $http.get("/GiftDashBoard/GetKeywordData").then(function (d) {
+            $scope.KeywordList = d.data;
+        }, function (error) {
+            alert(error.data);
+        });
+    };
+
     $scope.GetMenu = function () {
         $http.get("/GiftDashBoard/GetMenu").then(function (d) {
             $scope.GetMenuData = d.data;
