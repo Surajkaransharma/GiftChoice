@@ -2,30 +2,447 @@
     ViewBag.Title = "Home Page";
 }
 
-<div class="jumbotron">
-    <h1>ASP.NET</h1>
-    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-    <p><a href="https://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
-</div>
+<!-- Main Content Start -->
+<main class="main">
 
-<div class="row">
-    <div class="col-md-4">
-        <h2>Getting started</h2>
-        <p>
-            ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-            enables a clean separation of concerns and gives you full control over markup
-            for enjoyable, agile development.
-        </p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Get more libraries</h2>
-        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Web Hosting</h2>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
-    </div>
-</div>
+    <!-- Slider Start -->
+    <section class="home-slider">
+        <div id="carouselId" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner" role="listbox">
+                <div class="carousel-item active">
+                    <a href="shop_by_categories.asp">
+                        <img src="~/Content/assets/imgs/slider/slider_1.jpg" class="w-100 d-block img-fluid" loading="lazy" loading="lazy" alt="corporates-gifts">
+                    </a>
+                </div>
+                <div class="carousel-item">
+                    <a href="shop_by_categories.asp">
+                        <img src="~/Content/assets/imgs/slider/slider_2.jpg" class="w-100 d-block img-fluid" loading="lazy" loading="lazy" alt="intirior-wall-decore-gifts">
+                    </a>
+                </div>
+                <div class="carousel-item">
+                    <a href="shop_by_categories.asp">
+                        <img src="~/Content/assets/imgs/slider/slider_3.jpg" class="w-100 d-block img-fluid" loading="lazy" loading="lazy" alt="personalized-gifts-for-him">
+                    </a>
+                </div>
+                <div class="carousel-item">
+                    <a href="shop_by_categories.asp">
+                        <img src="~/Content/assets/imgs/slider/slider_4.jpg" class="w-100 d-block img-fluid" loading="lazy" loading="lazy" alt="personalized-gifts-for-her">
+                    </a>
+                </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselId" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselId" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+    </section>
+    <!-- Slider End -->
+    <!-- Category Section Start -->
+    <section class="popular-categories section-padding">
+        <div class="container wow fadeIn animated">
+            <h3 class="section-title mb-20">Categories</h3>
+            <div class="carausel-6-columns-cover position-relative">
+                <div class="slider-arrow slider-arrow-2 carausel-6-columns-arrow" id="carausel-6-columns-arrows"></div>
+                <div class="carausel-6-columns" id="carausel-6-columns">
+                    <div class="card-1">
+                        <figure class=" img-hover-scale overflow-hidden">
+                            <a href="shop_by_categories.asp">
+                                <img src="~/Content/assets/imgs/categories/cate_1.jpg" loading="lazy" alt="category-name" class="w-100 img-fluid">
+                            </a>
+                        </figure>
+                    </div>
+                    <div class="card-1">
+                        <figure class=" img-hover-scale overflow-hidden">
+                            <a href="shop_by_categories.asp">
+                                <img src="~/Content/assets/imgs/categories/cate_2.jpg" loading="lazy" alt="category-name" class="w-100 img-fluid">
+                            </a>
+                        </figure>
+                    </div>
+                    <div class="card-1">
+                        <figure class=" img-hover-scale overflow-hidden">
+                            <a href="shop_by_categories.asp">
+                                <img src="~/Content/assets/imgs/categories/cate_3.jpg" loading="lazy" alt="category-name" class="w-100 img-fluid">
+                            </a>
+                        </figure>
+                    </div>
+                    <div class="card-1">
+                        <figure class=" img-hover-scale overflow-hidden">
+                            <a href="shop_by_categories.asp">
+                                <img src="~/Content/assets/imgs/categories/cate_4.jpg" loading="lazy" alt="category-name" class="w-100 img-fluid">
+                            </a>
+                        </figure>
+                    </div>
+                    <div class="card-1">
+                        <figure class=" img-hover-scale overflow-hidden">
+                            <a href="shop_by_categories.asp">
+                                <img src="~/Content/assets/imgs/categories/cate_5.jpg" loading="lazy" alt="category-name" class="w-100 img-fluid">
+                            </a>
+                        </figure>
+                    </div>
+                    <div class="card-1">
+                        <figure class=" img-hover-scale overflow-hidden">
+                            <a href="shop_by_categories.asp">
+                                <img src="~/Content/assets/imgs/categories/cate_6.jpg" loading="lazy" alt="category-name" class="w-100 img-fluid">
+                            </a>
+                        </figure>
+                    </div>
+                    <div class="card-1">
+                        <figure class=" img-hover-scale overflow-hidden">
+                            <a href="shop_by_categories.asp">
+                                <img src="~/Content/assets/imgs/categories/cate_7.jpg" loading="lazy" alt="category-name" class="w-100 img-fluid">
+                            </a>
+                        </figure>
+                    </div>
+                    <div class="card-1">
+                        <figure class=" img-hover-scale overflow-hidden">
+                            <a href="shop_by_categories.asp">
+                                <img src="~/Content/assets/imgs/categories/cate_8.jpg" loading="lazy" alt="category-name" class="w-100 img-fluid">
+                            </a>
+                        </figure>
+                    </div>
+                    <div class="card-1">
+                        <figure class=" img-hover-scale overflow-hidden">
+                            <a href="shop_by_categories.asp">
+                                <img src="~/Content/assets/imgs/categories/cate_9.jpg" loading="lazy" alt="category-name" class="w-100 img-fluid">
+                            </a>
+                        </figure>
+                    </div>
+
+                    <div class="card-1">
+                        <figure class=" img-hover-scale overflow-hidden">
+                            <a href="shop_by_categories.asp">
+                                <img src="~/Content/assets/imgs/categories/cate_10.jpg" loading="lazy" alt="category-name" class="w-100 img-fluid">
+                            </a>
+                        </figure>
+                    </div>
+                    <div class="card-1">
+                        <figure class=" img-hover-scale overflow-hidden">
+                            <a href="shop_by_categories.asp">
+                                <img src="~/Content/assets/imgs/categories/cate_11.jpg" loading="lazy" alt="category-name" class="w-100 img-fluid">
+                            </a>
+                        </figure>
+                    </div>
+                    <div class="card-1">
+                        <figure class=" img-hover-scale overflow-hidden">
+                            <a href="shop_by_categories.asp">
+                                <img src="~/Content/assets/imgs/categories/cate_12.jpg" loading="lazy" alt="category-name" class="w-100 img-fluid">
+                            </a>
+                        </figure>
+                    </div>
+                    <div class="card-1">
+                        <figure class=" img-hover-scale overflow-hidden">
+                            <a href="shop_by_categories.asp">
+                                <img src="~/Content/assets/imgs/categories/cate_13.jpg" loading="lazy" alt="category-name" class="w-100 img-fluid">
+                            </a>
+                        </figure>
+                    </div>
+                    <div class="card-1">
+                        <figure class=" img-hover-scale overflow-hidden">
+                            <a href="shop_by_categories.asp">
+                                <img src="~/Content/assets/imgs/categories/cate_14.jpg" loading="lazy" alt="category-name" class="w-100 img-fluid">
+                            </a>
+                        </figure>
+                    </div>
+                    <div class="card-1">
+                        <figure class=" img-hover-scale overflow-hidden">
+                            <a href="shop_by_categories.asp">
+                                <img src="~/Content/assets/imgs/categories/cate_15.jpg" loading="lazy" alt="category-name" class="w-100 img-fluid">
+                            </a>
+                        </figure>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Category Section End -->
+    <!-- Products Section Start -->
+    <section class="product-tabs section-padding bg-light fadeIn animated">
+        <div class="container">
+            <h3 class="section-title mb-20">New Arivals</h3>
+            <div class="tab-content wow fadeIn animated">
+                <div class="tab-pane fade show active" id="tab-one" role="tabpanel" aria-labelledby="tab-one">
+                    <div class="row product-grid-4">
+                        <div class="col-lg-3 col-6 col-sm-4">
+                            <div class="product-cart-wrap mb-30">
+                                <div class="product-img-action-wrap">
+                                    <div class="product-img product-img-zoom">
+                                        <a href="product_detail.asp">
+                                            <img class="default-img img-fluid" src="https://dummyimage.com/500x500/ccc/000" loading="lazy" alt="product-image" loading="lazy" alt="">
+                                            <img class="hover-img img-fluid" src="https://dummyimage.com/500x500/000/fff" loading="lazy" alt="product-hover-image" loading="lazy" alt="">
+                                        </a>
+                                    </div>
+                                    <div class="product-badges product-badges-position product-badges-mrg">
+                                        <span class="hot">New Launch</span>
+                                    </div>
+                                </div>
+                                <div class="product-content-wrap">
+                                    <h2 class="mt-2"><a href="product_detail.asp">Product Name Here</a></h2>
+                                    <div class="product-price">
+                                        <span><i class="fa fa-inr" aria-hidden="true"></i> 200.00/-</span>
+                                    </div>
+                                    <div class="product-action-1 show">
+                                        <a aria-label="Add To Cart" class="action-btn hover-up" href="cart.asp"><i class="fi-rs-shopping-bag-add"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-6 col-sm-4">
+                            <div class="product-cart-wrap mb-30">
+                                <div class="product-img-action-wrap">
+                                    <div class="product-img product-img-zoom">
+                                        <a href="product_detail.asp">
+                                            <img class="default-img img-fluid" src="https://dummyimage.com/500x500/ccc/000" loading="lazy" alt="product-image">
+                                            <img class="hover-img img-fluid" src="https://dummyimage.com/500x500/000/fff" loading="lazy" alt="product-hover-image">
+                                        </a>
+                                    </div>
+                                    <div class="product-badges product-badges-position product-badges-mrg">
+                                        <span class="hot">New Launch</span>
+                                    </div>
+                                </div>
+                                <div class="product-content-wrap">
+                                    <h2 class="mt-2"><a href="product_detail.asp">Product Name Here</a></h2>
+                                    <div class="product-price">
+                                        <span><i class="fa fa-inr" aria-hidden="true"></i> 200.00/-</span>
+                                    </div>
+                                    <div class="product-action-1 show">
+                                        <a aria-label="Add To Cart" class="action-btn hover-up" href="cart.asp"><i class="fi-rs-shopping-bag-add"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-6 col-sm-4">
+                            <div class="product-cart-wrap mb-30">
+                                <div class="product-img-action-wrap">
+                                    <div class="product-img product-img-zoom">
+                                        <a href="product_detail.asp">
+                                            <img class="default-img img-fluid" src="https://dummyimage.com/500x500/ccc/000" loading="lazy" alt="product-image" loading="lazy" alt="">
+                                            <img class="hover-img img-fluid" src="https://dummyimage.com/500x500/000/fff" loading="lazy" alt="product-hover-image" loading="lazy" alt="">
+                                        </a>
+                                    </div>
+                                    <div class="product-badges product-badges-position product-badges-mrg">
+                                        <span class="hot">New Launch</span>
+                                    </div>
+                                </div>
+                                <div class="product-content-wrap">
+                                    <h2 class="mt-2"><a href="product_detail.asp">Product Name Here</a></h2>
+                                    <div class="product-price">
+                                        <span><i class="fa fa-inr" aria-hidden="true"></i> 200.00/-</span>
+                                    </div>
+                                    <div class="product-action-1 show">
+                                        <a aria-label="Add To Cart" class="action-btn hover-up" href="cart.asp"><i class="fi-rs-shopping-bag-add"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-6 col-sm-4">
+                            <div class="product-cart-wrap mb-30">
+                                <div class="product-img-action-wrap">
+                                    <div class="product-img product-img-zoom">
+                                        <a href="product_detail.asp">
+                                            <img class="default-img img-fluid" src="https://dummyimage.com/500x500/ccc/000" loading="lazy" alt="product-image" loading="lazy" alt="">
+                                            <img class="hover-img img-fluid" src="https://dummyimage.com/500x500/000/fff" loading="lazy" alt="product-hover-image" loading="lazy" alt="">
+                                        </a>
+                                    </div>
+                                    <div class="product-badges product-badges-position product-badges-mrg">
+                                        <span class="hot">New Launch</span>
+                                    </div>
+                                </div>
+                                <div class="product-content-wrap">
+                                    <h2 class="mt-2"><a href="product_detail.asp">Product Name Here</a></h2>
+                                    <div class="product-price">
+                                        <span><i class="fa fa-inr" aria-hidden="true"></i> 200.00/-</span>
+                                    </div>
+                                    <div class="product-action-1 show">
+                                        <a aria-label="Add To Cart" class="action-btn hover-up" href="cart.asp"><i class="fi-rs-shopping-bag-add"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-6 col-sm-4">
+                            <div class="product-cart-wrap mb-30">
+                                <div class="product-img-action-wrap">
+                                    <div class="product-img product-img-zoom">
+                                        <a href="product_detail.asp">
+                                            <img class="default-img img-fluid" src="https://dummyimage.com/500x500/ccc/000" loading="lazy" alt="product-image" loading="lazy" alt="">
+                                            <img class="hover-img img-fluid" src="https://dummyimage.com/500x500/000/fff" loading="lazy" alt="product-hover-image" loading="lazy" alt="">
+                                        </a>
+                                    </div>
+                                    <div class="product-badges product-badges-position product-badges-mrg">
+                                        <span class="hot">New Launch</span>
+                                    </div>
+                                </div>
+                                <div class="product-content-wrap">
+                                    <h2 class="mt-2"><a href="product_detail.asp">Product Name Here</a></h2>
+                                    <div class="product-price">
+                                        <span><i class="fa fa-inr" aria-hidden="true"></i> 200.00/-</span>
+                                    </div>
+                                    <div class="product-action-1 show">
+                                        <a aria-label="Add To Cart" class="action-btn hover-up" href="cart.asp"><i class="fi-rs-shopping-bag-add"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-6 col-sm-4">
+                            <div class="product-cart-wrap mb-30">
+                                <div class="product-img-action-wrap">
+                                    <div class="product-img product-img-zoom">
+                                        <a href="product_detail.asp">
+                                            <img class="default-img img-fluid" src="https://dummyimage.com/500x500/ccc/000" loading="lazy" alt="product-image" loading="lazy" alt="">
+                                            <img class="hover-img img-fluid" src="https://dummyimage.com/500x500/000/fff" loading="lazy" alt="product-hover-image" loading="lazy" alt="">
+                                        </a>
+                                    </div>
+                                    <div class="product-badges product-badges-position product-badges-mrg">
+                                        <span class="hot">New Launch</span>
+                                    </div>
+                                </div>
+                                <div class="product-content-wrap">
+                                    <h2 class="mt-2"><a href="product_detail.asp">Product Name Here</a></h2>
+                                    <div class="product-price">
+                                        <span><i class="fa fa-inr" aria-hidden="true"></i> 200.00/-</span>
+                                    </div>
+                                    <div class="product-action-1 show">
+                                        <a aria-label="Add To Cart" class="action-btn hover-up" href="cart.asp"><i class="fi-rs-shopping-bag-add"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-6 col-sm-4">
+                            <div class="product-cart-wrap mb-30">
+                                <div class="product-img-action-wrap">
+                                    <div class="product-img product-img-zoom">
+                                        <a href="product_detail.asp">
+                                            <img class="default-img img-fluid" src="https://dummyimage.com/500x500/ccc/000" loading="lazy" alt="product-image" loading="lazy" alt="">
+                                            <img class="hover-img img-fluid" src="https://dummyimage.com/500x500/000/fff" loading="lazy" alt="product-hover-image" loading="lazy" alt="">
+                                        </a>
+                                    </div>
+                                    <div class="product-badges product-badges-position product-badges-mrg">
+                                        <span class="hot">New Launch</span>
+                                    </div>
+                                </div>
+                                <div class="product-content-wrap">
+                                    <h2 class="mt-2"><a href="product_detail.asp">Product Name Here</a></h2>
+                                    <div class="product-price">
+                                        <span><i class="fa fa-inr" aria-hidden="true"></i> 200.00/-</span>
+                                    </div>
+                                    <div class="product-action-1 show">
+                                        <a aria-label="Add To Cart" class="action-btn hover-up" href="cart.asp"><i class="fi-rs-shopping-bag-add"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-6 col-sm-4">
+                            <div class="product-cart-wrap mb-30">
+                                <div class="product-img-action-wrap">
+                                    <div class="product-img product-img-zoom">
+                                        <a href="product_detail.asp">
+                                            <img class="default-img img-fluid" src="https://dummyimage.com/500x500/ccc/000" loading="lazy" alt="product-image" loading="lazy" alt="">
+                                            <img class="hover-img img-fluid" src="https://dummyimage.com/500x500/000/fff" loading="lazy" alt="product-hover-image" loading="lazy" alt="">
+                                        </a>
+                                    </div>
+                                    <div class="product-badges product-badges-position product-badges-mrg">
+                                        <span class="hot">New Launch</span>
+                                    </div>
+                                </div>
+                                <div class="product-content-wrap">
+                                    <h2 class="mt-2"><a href="product_detail.asp">Product Name Here</a></h2>
+                                    <div class="product-price">
+                                        <span><i class="fa fa-inr" aria-hidden="true"></i> 200.00/-</span>
+                                    </div>
+                                    <div class="product-action-1 show">
+                                        <a aria-label="Add To Cart" class="action-btn hover-up" href="cart.asp"><i class="fi-rs-shopping-bag-add"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Products Section End -->
+    <!-- Advertisement Start -->
+    <section class="banners section-padding">
+        <div class="container">
+            <div class="row g-2 gx-3 justify-content-center">
+                <div class="col-lg-4 col-md-6">
+                    <div class="banner-img mb-0 wow fadeIn animated  rounded-3">
+                        <a href="shop_by_categories.asp">
+                            <img src="~/Content/assets/imgs/banners/banner_1.jpg" loading="lazy" alt="advertisement-image" class="img-fluid rounded-3 w-100 border-light border">
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="banner-img mb-0 wow fadeIn animated  rounded-3">
+                        <a href="shop_by_categories.asp">
+                            <img src="~/Content/assets/imgs/banners/banner_2.jpg" loading="lazy" alt="advertisement-image" class="img-fluid rounded-3 w-100 border-light border">
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="banner-img mb-0 wow fadeIn animated  rounded-3  mb-sm-0">
+                        <a href="shop_by_categories.asp">
+                            <img src="~/Content/assets/imgs/banners/banner_3.jpg" loading="lazy" alt="advertisement-image" class="img-fluid rounded-3 w-100 border-light border">
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="banner-img mb-0 wow fadeIn animated  rounded-3">
+                        <a href="shop_by_categories.asp">
+                            <img src="~/Content/assets/imgs/banners/banner_4.jpg" loading="lazy" alt="advertisement-image" class="img-fluid rounded-3 w-100 border-light border">
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="banner-img mb-0 wow fadeIn animated  rounded-3">
+                        <a href="shop_by_categories.asp">
+                            <img src="~/Content/assets/imgs/banners/banner_4.jpg" loading="lazy" alt="advertisement-image" class="img-fluid rounded-3 w-100 border-light border">
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="banner-img mb-0 wow fadeIn animated  rounded-3  mb-sm-0">
+                        <a href="shop_by_categories.asp">
+                            <img src="~/Content/assets/imgs/banners/banner_5.jpg" loading="lazy" alt="advertisement-image" class="img-fluid rounded-3 w-100 border-light border">
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="banner-img mb-0 wow fadeIn animated  rounded-3">
+                        <a href="shop_by_categories.asp">
+                            <img src="~/Content/assets/imgs/banners/banner_6.jpg" loading="lazy" alt="advertisement-image" class="img-fluid rounded-3 w-100 border-light border">
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="banner-img mb-0 wow fadeIn animated  rounded-3">
+                        <a href="shop_by_categories.asp">
+                            <img src="~/Content/assets/imgs/banners/banner_7.jpg" loading="lazy" alt="advertisement-image" class="img-fluid rounded-3 w-100 border-light border">
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="banner-img mb-0 wow fadeIn animated  rounded-3  mb-sm-0">
+                        <a href="shop_by_categories.asp">
+                            <img src="~/Content/assets/imgs/banners/banner_8.jpg" loading="lazy" alt="advertisement-image" class="img-fluid rounded-3 w-100 border-light border">
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="banner-img mb-0 wow fadeIn animated  rounded-3">
+                        <a href="shop_by_categories.asp">
+                            <img src="~/Content/assets/imgs/banners/banner_9.jpg" loading="lazy" alt="advertisement-image" class="img-fluid rounded-3 w-100 border-light border">
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Advertisement End -->
+
+
+</main>
+<!-- Main Content End -->

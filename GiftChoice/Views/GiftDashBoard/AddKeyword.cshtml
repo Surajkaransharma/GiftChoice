@@ -8,7 +8,7 @@
 <div class="page-wrapper" ng-app="AdminApp" ng-controller="AdminController">
     <div class="page-content">
         <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
-            <div class="breadcrumb-title pe-3"> </div>
+            <div class="breadcrumb-title pe-3">Keywords </div>
             <div class="ps-3">
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb mb-0 p-0">
@@ -29,22 +29,23 @@
 
                         <form class="row g-3">
                             <div class="col-md-12">
-                                <label for="input1" class="form-label"> </label>
-                                <input type="text" class="form-control" id="" ng-model="Keyword.Keyword" placeholder="">
-                      
-                            </div>
-                    
+                                <label for="input1" class="form-label">Keyword Title </label>
+                                <input type="text" class="form-control" id="Keyword" ng-model="Keyword.Keyword" placeholder="Keyword Title ">
 
-                            <div class="col-md-12">
-                                <label for="input1" class="form-label">Priority</label>
-                                <input type="number" class="form-control" ng-model="Keyword.Priority" id="" placeholder="Priority">
                             </div>
+
+
+                            @*<div class="col-md-12">
+                                    <label for="input1" class="form-label">Priority</label>
+                                    <input type="number" class="form-control" ng-model="Keyword.Priority" id="" placeholder="Priority">
+                                </div>*@
 
 
                             <div class="col-md-12">
                                 <div class="d-md-flex d-grid align-items-center gap-3">
-                                    <button type="button" ng-click="SubmitKeyword()" class="btn btn-primary px-4">Submit</button>
-                                    <button type="button" class="btn btn-light px-4">Reset</button>
+                                    <button type="button" id="btn" ng-click="SubmitKeyword()" class="btn btn-primary px-4">Submit</button>
+                                    <button type="button" id="edbtn" style="display: none" ng-click="UpadateKeyword()" class="btn btn-primary px-4">Update</button>
+                                    <button type="button" class="btn btn-light px-4" ng-click="RessetMain()">Reset</button>
                                 </div>
                             </div>
                         </form>
@@ -63,29 +64,25 @@
                             @*  <div class="ms-auto"><a href="javascript:;" class="btn btn-primary radius-30 mt-2 mt-lg-0" data-bs-toggle="modal" data-bs-target="#createcompany"><i class="bx bxs-plus-square"></i>Add New Company</a></div>*@
                         </div>
                         <div class="table-responsive">
-                            <table class="table mb-0 table-bordered" ng-init="GetKeyword()">
+                            <table class="table mb-0 table-bordered" ng-init="GetKeywords()">
                                 <thead class="table-light">
                                     <tr>
                                         <th>S.No.</th>
                                         <th>Name</th>
-                                        <th>Priority</th>
-                                        <th>Image</th>
+                                        <th>Active</th>
+                                        <th>Action</th>
 
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr ng-repeat="m in KeywordData">
+                                    <tr ng-repeat="k in KeywordsData">
                                         <td>{{$index+1}}</td>
-                                        <td>{{m.MTitle}}</td>
-                                        <td>{{m.Priority}}</td>
-                                        <td><img src="~/images/MainCate/{{m.MImage}}" width="50px"></td>
+                                        <td>{{k.Keyword}}</td>
 
-                                        @*<td ng-bind-html="generateImageElement(m.MImage)" class="img64" > </td>*@
-                                        @*<td><img ng-src="data:image/jpeg;base64,{{m.MImage}}" width="50px"></td>*@
+                                        <td><a ng-click="KeywordActiveDeActive(k.KeywordId)" style="cursor:pointer"> <span class="badge {{k.Active==1? 'bg-success' : 'bg-danger'}}">{{k.Active==1?'Active':'Deactive'}}</span></a> </td>
 
-
+                                        <td><a><i class="bx bxs-pencil" ng-click="GetKeywordbyid($index)"></i></a></td>
                                     </tr>
-
 
                                 </tbody>
                             </table>

@@ -1,5 +1,6 @@
 ﻿using GiftChoice.Models;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Web;
@@ -42,10 +43,22 @@ namespace GiftChoice.Controllers
             return View();
         }
 
-        //main Main Category
+        public ActionResult AddProduct()
+        {
+            return View();
+        }
+
+        public ActionResult AddSlider()
+        {
+            return View();
+        }
+        public ActionResult AddBanner()
+        {
+            return View();
+        }
 
 
-        public  class MainCateTblModel
+        public class MainCateTblModel
         {
             public long MainCateId { get; set; }
             public string MTitle { get; set; }
@@ -58,6 +71,7 @@ namespace GiftChoice.Controllers
             public HttpPostedFileBase Image { get; set; }
 
             public Nullable<long> UserId { get; set; }
+            public List<KeywordTbl> keywordTbls { get; set; }
         }
 
         public JsonResult SubmitMainCate(MainCateTblModel model)
@@ -82,7 +96,7 @@ namespace GiftChoice.Controllers
                 mainCateTbl.Priority = model.Priority;
                 db.MainCateTbls.Add(mainCateTbl);
                 db.SaveChanges();
-                var res = new { res = "1" };
+                var res = new { res = "1", MainCateId = mainCateTbl.MainCateId };
                 return Json(res, JsonRequestBehavior.AllowGet);
             }
             catch (Exception ex)
@@ -92,6 +106,50 @@ namespace GiftChoice.Controllers
                 return Json(res, JsonRequestBehavior.AllowGet);
             }
         }
+
+
+        public JsonResult KeywordArrayData(MainCateTblModel model)
+        {
+
+            try
+            {
+
+                MainCateTbl result = db.MainCateTbls.Where(c => c.MainCateId == model.MainCateId).FirstOrDefault();
+
+                if (result == null)
+                {
+                    var res1 = new { res = "0" };
+                    return Json(res1, JsonRequestBehavior.AllowGet);
+                }
+
+
+                if (model.keywordTbls != null)
+                {
+                    for (int i = 0; i < model.keywordTbls.Count; i++)
+                    {
+                        MCKeywordTbl mCKeyword = new MCKeywordTbl();
+                        mCKeyword.MCkeywordId = db.MCKeywordTbls.DefaultIfEmpty().Max(r => r == null ? 0 : r.MCkeywordId) + 1;
+                        mCKeyword.MainCateId = model.MainCateId;
+                        mCKeyword.KeywordId = model.keywordTbls[i].KeywordId;
+                        mCKeyword.Active = true;
+                        db.MCKeywordTbls.Add(mCKeyword);
+                        db.SaveChanges();
+
+                    }
+                }       
+
+                var res = new { res = "1", };
+                return Json(res, JsonRequestBehavior.AllowGet);
+
+            }
+            catch (Exception ex)
+            {
+                var md = ex.Message;
+                var res = new { res = "0" };
+                return Json(res, JsonRequestBehavior.AllowGet);
+            }
+        }
+
         //public JsonResult UpadateMain(MainCate_Tbl model)
         //{
         //    try
@@ -115,7 +173,43 @@ namespace GiftChoice.Controllers
         //}
         public JsonResult GetMainCate()
         {
-            return Json(db.MainCateTbls, JsonRequestBehavior.AllowGet);
+            var res =
+
+               db.MainCateTbls.Select(m => new
+               {
+                   m.MainCateId,
+                   m.MUrl,
+                   m.MTitle,
+                   m.Active,
+                   m.MImage,
+                   m.Priority,
+                   Submenu = db.MCKeywordTbls.Where(s => s.MainCateId == m.MainCateId && s.Active == true).Select(s => new
+                   {
+                       s.MainCateId,
+                       s.KeywordId,
+                       s.MCkeywordId,
+                       SubmenuTitle = db.KeywordTbls.Where(t => t.KeywordId == s.KeywordId).Select(t => t.Keyword).FirstOrDefault()
+                   })
+               });
+            return Json(res, JsonRequestBehavior.AllowGet);
+
+        }
+
+        public JsonResult GetMainCateData()
+        {
+            var res =
+
+               db.MainCateTbls.Select(m => new
+               {
+                   m.MainCateId,
+                   m.MUrl,
+                   m.MTitle,
+                   m.Active,
+                   m.MImage,
+                   m.Priority,
+               
+               });
+            return Json(res, JsonRequestBehavior.AllowGet);
 
         }
 
@@ -146,16 +240,19 @@ namespace GiftChoice.Controllers
         //    }
 
         //}
-        public JsonResult GetKeyword()
+        public JsonResult GetKeywords()
         {
-            return Json(db.KeywordTbls , JsonRequestBehavior.AllowGet);
+            var res = db.KeywordTbls.Select(k => new { k.Keyword, k.Active,k.KeywordId });
+            return Json(res, JsonRequestBehavior.AllowGet);
 
         }
         public JsonResult GetKeywordData()
         {
-            return Json(db.KeywordTbls, JsonRequestBehavior.AllowGet);
+            var res = db.KeywordTbls.Select(k => new { k.Keyword, k.Active , k.KeywordId});
+            return Json(res, JsonRequestBehavior.AllowGet);
 
         }
+
         public JsonResult SubmitKeyword(KeywordTbl model)
         {
             try
@@ -181,6 +278,81 @@ namespace GiftChoice.Controllers
                 var res = new { res = "0" };
                 return Json(res, JsonRequestBehavior.AllowGet);
             }
+        }
+
+        public JsonResult UpadateKeyword(KeywordTbl model)
+        {
+            try
+            {
+                var result = db.KeywordTbls.FirstOrDefault(p => p.KeywordId == model.KeywordId);
+                if (result != null)
+                {
+                    result.Keyword = model.Keyword;
+                    db.SaveChanges();
+
+                }
+                var res = new { res = "1" };
+                return Json(res, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+
+                var res = new { res = "0" };
+                return Json(res, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        public JsonResult MainCateActiveDeActive(int id)
+        {
+            try
+            {
+                var jb = db.MainCateTbls.Where(c => c.MainCateId == id).FirstOrDefault();
+                if (jb != null)
+                {
+
+                    jb.Active = jb.Active == true ? false : true;
+                    db.SaveChanges();
+                    var res = new { res = "1" };
+                    return Json(res, JsonRequestBehavior.AllowGet);
+                }
+                else
+                {
+                    var res = new { res = "2" };
+                    return Json(res, JsonRequestBehavior.AllowGet);
+                }
+            }
+            catch (Exception ex)
+            {
+                var res = new { res = "0" };
+                return Json(res, JsonRequestBehavior.AllowGet);
+            }
+
+        }
+        public JsonResult KeywordActiveDeActive(int id)
+        {
+            try
+            {
+                var jb = db.KeywordTbls.Where(c => c.KeywordId == id).FirstOrDefault();
+                if (jb != null)
+                {
+
+                    jb.Active = jb.Active == true ? false : true;
+                    db.SaveChanges();
+                    var res = new { res = "1" };
+                    return Json(res, JsonRequestBehavior.AllowGet);
+                }
+                else
+                {
+                    var res = new { res = "2" };
+                    return Json(res, JsonRequestBehavior.AllowGet);
+                }
+            }
+            catch (Exception ex)
+            {
+                var res = new { res = "0" };
+                return Json(res, JsonRequestBehavior.AllowGet);
+            }           
+
         }
     }
 }
