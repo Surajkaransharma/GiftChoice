@@ -119,7 +119,8 @@
 
                             <div class="col-md-12">
                                 <div class="d-md-flex d-grid align-items-center gap-3">
-                                    <button type="button" ng-click="SubmitMainCate()" class="btn btn-primary px-4">Submit</button>
+                                    <button type="button" id="btn" ng-click="SubmitMainCate()" class="btn btn-primary px-4">Submit</button>
+                                    <button type="button" id="edbtn" ng-click="UpdateMainCate()" class="btn btn-primary px-4">Update</button>
                                     <button type="button" class="btn btn-light px-4">Reset</button>
                                 </div>
                             </div>
@@ -162,11 +163,9 @@
                                         <td>{{m.MTitle}}</td>
                                         <td><span ng-repeat="n in m.Submenu">{{n.SubmenuTitle}},</span></td>
                                         <td>{{m.Priority}}</td>
-                                        <td><a ng-click="MainCateActiveDeActive(m.MainCateId)" > <span class="badge {{m.Active==1? 'bg-success' : 'bg-danger'}}">{{m.Active==1?'Active':'Deactive'}}</span></a> </td>
-                                        <td><img src="~/images/MainCate/{{m.MImage}}" width="50px"></td>
-
-
-
+                                        <td><a ng-click="MainCateActiveDeActive(m.MainCateId)"> <span class="badge {{m.Active==1? 'bg-success' : 'bg-danger'}}">{{m.Active==1?'Active':'Deactive'}}</span></a> </td>
+                                        <td><img src="~/images/MainCate/{{m.MImage}}" style="width:50px"></td>
+                                        <td><a><i class="bx bxs-pencil" ng-click="GetMainCatebyid($index)"></i></a></td>
                                     </tr>
 
 

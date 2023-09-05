@@ -4,10 +4,6 @@
     Layout = "~/Views/Shared/_Admin.cshtml";
 }
 
-
-
-
-
 <style>
     .img64 img {
         width: 50px
@@ -37,23 +33,23 @@
                     <div class="card-body p-4">
 
                         <form class="row g-3" enctype="multipart/form-data">
-                            <div class="col-md-3">
+                            <div class="col-md-3" ng-init="GetMainCateData()">
                                 <label for="input1" class="form-label">Select Main Category</label>
 
-                                <select id="input9" class="form-select" ng-init="GetMainCateData()">
-                                    <option selected="">Select Main Category</option>
-                                    <option ng-repeat="m in MainCateData" value="{{MainCateId}}">{{m.MTitle}}</option>
+                                <select id="MainCate" class="form-select" ng-model="Product.MainCateId" >
+                                    <option selected="" value="-1">Select Main Category</option>
+                                    <option ng-repeat="m in MainCateData" value="{{m.MainCateId}}">{{m.MTitle}}</option>
                                 </select>
 
 
                             </div>
                             <div class="col-md-3">
                                 <label for="input1" class="form-label">Product Title</label>
-                                <input type="text" class="form-control" id="" ng-model="Product.ProductTitle" placeholder="Product Title">
+                                <input type="text" id="Producttitle" class="form-control" ng-model="Product.ProductTitle" placeholder="Product Title">
                             </div>
                             <div class="col-md-2">
                                 <label for="input1" class="form-label">Label</label>
-                                <input type="text" class="form-control" ng-model="Product.Label" id="" placeholder="Label">
+                                <input type="text" class="form-control" ng-model="Product.PLabel" id="" placeholder="Label">
                             </div>
 
                             <div class="col-md-2">
@@ -65,40 +61,47 @@
                                 <label for="input1" class="form-label">Price</label>
                                 <input type="number" class="form-control" ng-model="Product.Price" id="" placeholder="Price">
                             </div>
+                            <div class="col-md-12" ng-init="GetKeywordData()">
+                                <label for="input1" class="form-label">Select Keyword</label>
+                                <div class="" id="check_box">
+                                    <label class="checkbox-wrapper" ng-repeat="k in KeywordList">
+                                        <input type="checkbox" id="Keyword_{{k.KeywordId}}" class="checkbox-input" value="{{k.KeywordId}}" ng-model="k.Selected" ng-checked="" />
+                                        <span class="checkbox-tile">
+                                            <span class="checkbox-label">{{k.Keyword}}</span>
+                                        </span>
+                                    </label>
+
+                                </div>
+                            </div>
                             <div class="col-md-12">
                                 <label for="input1" class="form-label">Description</label>
                                 <textarea class="ckeditor" id="ckeditor"></textarea>
                             </div>
                             <div class="col-md-2">
                                 <label for="input1" class="form-label">Image 1</label>
-                                <input type="file" class="form-control" ng-model="Product.Image1" id="" placeholder="Price">
+                                <input type="file" id="image1" class="form-control" upload-file="Product.Image1" >
                             </div>
 
                             <div class="col-md-2">
                                 <label for="input1" class="form-label">Image 2</label>
-                                <input type="file" class="form-control" ng-model="Product.Image2" id="" placeholder="Price">
+                                <input type="file" class="form-control" upload-file="Product.Image2" id="">
                             </div>
 
                             <div class="col-md-2">
                                 <label for="input1" class="form-label">Image 3</label>
-                                <input type="file" class="form-control" ng-model="Product.Image3" id="" placeholder="Price">
+                                <input type="file" class="form-control" upload-file="Product.Image3" id="">
                             </div>
                             <div class="col-md-2">
                                 <label for="input1" class="form-label">Image 4</label>
-                                <input type="file" class="form-control" ng-model="Product.Image4" id="" placeholder="Price">
+                                <input type="file" class="form-control" upload-file="Product.Image4" id="">
                             </div>
                             <div class="col-md-2">
                                 <label for="input1" class="form-label">Image 5</label>
-                                <input type="file" class="form-control" ng-model="Product.Image5" id="" placeholder="Price">
+                                <input type="file" class="form-control" upload-file="Product.Image5" id="">
                             </div>
-
-
-
-
-
                             <div class="col-md-12">
                                 <div class="d-md-flex d-grid align-items-center gap-3">
-                                    <button type="button" id="btn" ng-click="SubmitSlider()" class="btn btn-primary px-4">Submit</button>
+                                    <button type="button" id="btn" ng-click="SubmitProduct()" class="btn btn-primary px-4">Submit</button>
                                     <button type="button" class="btn btn-light px-4">Reset</button>
                                 </div>
                             </div>
@@ -123,38 +126,38 @@
 
                         </div>
                         <div class="table-responsive">
-                            <table class="table mb-0 table-bordered" ng-init="GetSlider()">
-                                <thead class="table-light">
-                                    <tr>
-                                        <th>S.No.</th>
-                                        <th>Product Title</th>
-                                        <th>Main Category Name</th>
-                                       <th>Label</th>
-                                        <th>Price</th>
-                                        <th>Priority</th>
-                                        <th>Image</th>
-                                        <th>Active</th>
-                                        <th>Action</th>
+                            <table class="table mb-0 table-bordered" ng-init="GetProduct()">
+                                    <thead class="table-light">
+                                        <tr>
+                                            <th>S.No.</th>
+                                            <th>Product Title</th>
+                                            <th>Main Category Name</th>
+                                           <th>Label</th>
+                                            <th>Price</th>
+                                            <th>Priority</th>
+                                            <th>Keywords</th>
+                                            <th>Image</th>
+                                            <th>Active</th>
+                                            <th>Action</th>
 
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr ng-repeat="m in SliderData">
-                                        <td>{{$index+1}}</td>
-                                        <td>{{m.MTitle}}</td>
-                                        <td><span ng-repeat="n in m.Submenu">{{n.SubmenuTitle}},</span></td>
-                                        <td>{{m.Priority}}</td>
-                                        <td><a ng-click="MainCateActiveDeActive(m.MainCateId)"> <span class="badge {{m.Active==1? 'bg-success' : 'bg-danger'}}">{{m.Active==1?'Active':'Deactive'}}</span></a> </td>
-                                        <td><img src="~/images/MainCate/{{m.MImage}}" width="50px"></td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="m in ProductData">
+                                            <td>{{$index+1}}</td>
+                                            <td>{{m.ProductTitle}}</td>
+                                            <td>{{m.Maincate}}</td>
+                                            <td>{{m.PLabel}}</td>
+                                            <td>{{m.Price}}</td>
+                                            <td>{{m.Priority}}</td>
 
-
-
-                                    </tr>
-
-
-                                </tbody>
-                            </table>
-                        </div>
+                                            <td><span ng-repeat="n in m.Submenu">{{n.SubmenuTitle}},</span></td>
+                                            <td><a ng-click="ProductActiveDeActive(m.ProductId)"> <span class="badge {{m.Active==1? 'bg-success' : 'bg-danger'}}">{{m.Active==1?'Active':'Deactive'}}</span></a> </td>
+                                            <td><img src="~/images/ProductImg/{{m.MImage}}" width="50px"></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                        </div>  
                     </div>
                 </div>
             </div>

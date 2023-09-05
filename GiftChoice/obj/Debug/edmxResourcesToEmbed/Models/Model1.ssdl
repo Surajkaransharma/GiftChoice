@@ -1,5 +1,18 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="GiftChoiceModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="BannerTbl">
+    <Key>
+      <PropertyRef Name="BannerId" />
+    </Key>
+    <Property Name="BannerId" Type="bigint" Nullable="false" />
+    <Property Name="MainCateId" Type="bigint" />
+    <Property Name="BUrl" Type="nvarchar(max)" />
+    <Property Name="BannerImage" Type="nvarchar(max)" />
+    <Property Name="Priority" Type="bigint" />
+    <Property Name="Active" Type="bit" />
+    <Property Name="Create_at" Type="datetime" />
+    <Property Name="Update_at" Type="datetime" />
+  </EntityType>
   <EntityType Name="KeywordTbl">
     <Key>
       <PropertyRef Name="KeywordId" />
@@ -36,6 +49,54 @@
     <Property Name="KeywordId" Type="bigint" />
     <Property Name="Active" Type="bit" />
   </EntityType>
+  <EntityType Name="PKeywordTbl">
+    <Key>
+      <PropertyRef Name="PKeywordId" />
+    </Key>
+    <Property Name="PKeywordId" Type="bigint" Nullable="false" />
+    <Property Name="ProductId" Type="bigint" />
+    <Property Name="KeywordId" Type="bigint" />
+    <Property Name="Active" Type="bit" />
+  </EntityType>
+  <EntityType Name="ProductImage">
+    <Key>
+      <PropertyRef Name="PImageId" />
+    </Key>
+    <Property Name="PImageId" Type="bigint" Nullable="false" />
+    <Property Name="ProductId" Type="bigint" />
+    <Property Name="PImage" Type="nvarchar(max)" />
+    <Property Name="Active" Type="bit" />
+  </EntityType>
+  <EntityType Name="ProductTbl">
+    <Key>
+      <PropertyRef Name="ProductId" />
+    </Key>
+    <Property Name="ProductId" Type="bigint" Nullable="false" />
+    <Property Name="MainCateId" Type="bigint" />
+    <Property Name="ProductTitle" Type="nvarchar(max)" />
+    <Property Name="Price" Type="float" />
+    <Property Name="PUrl" Type="nvarchar(max)" />
+    <Property Name="PLabel" Type="nvarchar(max)" />
+    <Property Name="PDesc" Type="nvarchar(max)" />
+    <Property Name="Priority" Type="bigint" />
+    <Property Name="Active" Type="bit" />
+    <Property Name="Create_at" Type="datetime" />
+    <Property Name="Update_at" Type="datetime" />
+    <Property Name="UserID" Type="bigint" />
+  </EntityType>
+  <EntityType Name="SliderTbl">
+    <Key>
+      <PropertyRef Name="SliderId" />
+    </Key>
+    <Property Name="SliderId" Type="bigint" Nullable="false" />
+    <Property Name="MainCateId" Type="bigint" />
+    <Property Name="SUrl" Type="nvarchar(max)" />
+    <Property Name="SliderImage" Type="nvarchar(max)" />
+    <Property Name="Priority" Type="bigint" />
+    <Property Name="Active" Type="bit" />
+    <Property Name="Create_at" Type="datetime" />
+    <Property Name="Update_at" Type="datetime" />
+  </EntityType>
   <Association Name="FK__MCKeyword__Keywo__3B75D760">
     <End Role="KeywordTbl" Type="Self.KeywordTbl" Multiplicity="0..1" />
     <End Role="MCKeywordTbl" Type="Self.MCKeywordTbl" Multiplicity="*" />
@@ -61,9 +122,14 @@
     </ReferentialConstraint>
   </Association>
   <EntityContainer Name="GiftChoiceModelStoreContainer">
+    <EntitySet Name="BannerTbl" EntityType="Self.BannerTbl" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="KeywordTbl" EntityType="Self.KeywordTbl" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="MainCateTbl" EntityType="Self.MainCateTbl" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="MCKeywordTbl" EntityType="Self.MCKeywordTbl" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PKeywordTbl" EntityType="Self.PKeywordTbl" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ProductImage" EntityType="Self.ProductImage" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ProductTbl" EntityType="Self.ProductTbl" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SliderTbl" EntityType="Self.SliderTbl" Schema="dbo" store:Type="Tables" />
     <AssociationSet Name="FK__MCKeyword__Keywo__3B75D760" Association="Self.FK__MCKeyword__Keywo__3B75D760">
       <End Role="KeywordTbl" EntitySet="KeywordTbl" />
       <End Role="MCKeywordTbl" EntitySet="MCKeywordTbl" />

@@ -27,6 +27,11 @@
       <End Role="MainCateTbl" EntitySet="MainCateTbls" />
       <End Role="MCKeywordTbl" EntitySet="MCKeywordTbls" />
     </AssociationSet>
+    <EntitySet Name="BannerTbls" EntityType="GiftChoiceModel.BannerTbl" />
+    <EntitySet Name="PKeywordTbls" EntityType="GiftChoiceModel.PKeywordTbl" />
+    <EntitySet Name="ProductTbls" EntityType="GiftChoiceModel.ProductTbl" />
+    <EntitySet Name="SliderTbls" EntityType="GiftChoiceModel.SliderTbl" />
+    <EntitySet Name="ProductImages" EntityType="GiftChoiceModel.ProductImage" />
   </EntityContainer>
   <EntityType Name="KeywordTbl">
     <Key>
@@ -77,4 +82,65 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <EntityType Name="BannerTbl">
+    <Key>
+      <PropertyRef Name="BannerId" />
+    </Key>
+    <Property Name="BannerId" Type="Int64" Nullable="false" />
+    <Property Name="MainCateId" Type="Int64" />
+    <Property Name="BUrl" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="BannerImage" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Priority" Type="Int64" />
+    <Property Name="Active" Type="Boolean" />
+    <Property Name="Create_at" Type="DateTime" Precision="3" />
+    <Property Name="Update_at" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="PKeywordTbl">
+    <Key>
+      <PropertyRef Name="PKeywordId" />
+    </Key>
+    <Property Name="PKeywordId" Type="Int64" Nullable="false" />
+    <Property Name="ProductId" Type="Int64" />
+    <Property Name="KeywordId" Type="Int64" />
+    <Property Name="Active" Type="Boolean" />
+  </EntityType>
+  <EntityType Name="ProductTbl">
+    <Key>
+      <PropertyRef Name="ProductId" />
+    </Key>
+    <Property Name="ProductId" Type="Int64" Nullable="false" />
+    <Property Name="MainCateId" Type="Int64" />
+    <Property Name="ProductTitle" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Price" Type="Double" />
+    <Property Name="PUrl" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="PLabel" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="PDesc" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Priority" Type="Int64" />
+    <Property Name="Active" Type="Boolean" />
+    <Property Name="Create_at" Type="DateTime" Precision="3" />
+    <Property Name="Update_at" Type="DateTime" Precision="3" />
+    <Property Name="UserID" Type="Int64" />
+  </EntityType>
+  <EntityType Name="SliderTbl">
+    <Key>
+      <PropertyRef Name="SliderId" />
+    </Key>
+    <Property Name="SliderId" Type="Int64" Nullable="false" />
+    <Property Name="MainCateId" Type="Int64" />
+    <Property Name="SUrl" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="SliderImage" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Priority" Type="Int64" />
+    <Property Name="Active" Type="Boolean" />
+    <Property Name="Create_at" Type="DateTime" Precision="3" />
+    <Property Name="Update_at" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="ProductImage">
+    <Key>
+      <PropertyRef Name="PImageId" />
+    </Key>
+    <Property Name="PImageId" Type="Int64" Nullable="false" />
+    <Property Name="ProductId" Type="Int64" />
+    <Property Name="PImage" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Active" Type="Boolean" />
+  </EntityType>
 </Schema>

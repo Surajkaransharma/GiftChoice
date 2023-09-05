@@ -28,5 +28,10 @@ namespace GiftChoice.Models
         public virtual DbSet<MainCateTbl> MainCateTbls { get; set; }
         public virtual DbSet<KeywordTbl> KeywordTbls { get; set; }
         public virtual DbSet<MCKeywordTbl> MCKeywordTbls { get; set; }
+        public virtual DbSet<BannerTbl> BannerTbls { get; set; }
+        public virtual DbSet<PKeywordTbl> PKeywordTbls { get; set; }
+        public virtual DbSet<ProductTbl> ProductTbls { get; set; }
+        public virtual DbSet<SliderTbl> SliderTbls { get; set; }
+        public virtual DbSet<ProductImage> ProductImages { get; set; }
     }
 }
