@@ -3,6 +3,40 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
 
     ///////  Add Product Start 
 
+    $scope.GetProductbyid = function (index) {
+        $('#btn').css('display', 'none');
+        $('#edbtn').css('display', 'inline');
+        debugger
+
+        for (var s = 0; s < $scope.KeywordList.length; s++) {
+            var vallc1s = $scope.KeywordList[s].KeywordId;
+            $('#Keyword_' + vallc1s).prop('checked', false);
+
+        }
+
+
+        $scope.Product = $scope.ProductData[index];
+        //const previewImage = document.querySelector('#previewImage');
+        //$('#previewImage').css('display', 'block');
+        //previewImage.setAttribute("src", "/images/MainCate/" + $scope.MainCate.MImage);
+        debugger
+        for (var i = 0; i < $scope.Product.Submenu.length; i++) {
+            var vallc = $scope.MainCate.Submenu[i].KeywordId;
+            $('#Keyword_' + vallc).prop('checked', true);
+        }
+
+
+        debugger
+        CKEDITOR.instances.ckeditor.setData($scope.Product.PDesc);
+        //ckeditor.replace('postBody');
+        // $("#ckeditor").val($scope.Product.Description);
+
+
+        debugger
+        $('html, body').animate({ scrollTop: 0 }, '300');
+    };
+
+
     $scope.GetProduct = function () {
         $http.get("/GiftDashBoard/GetProduct").then(function (d) {
             $scope.ProductData = d.data;
@@ -196,7 +230,9 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
 
      
         $scope.MainCate = $scope.MainCateData[index];
-      
+        const previewImage = document.querySelector('#previewImage');
+        $('#previewImage').css('display', 'block');
+        previewImage.setAttribute("src", "/images/MainCate/" + $scope.MainCate.MImage);
         debugger
         for (var i = 0; i < $scope.MainCate.Submenu.length; i++) {
             var vallc = $scope.MainCate.Submenu[i].KeywordId;
@@ -408,17 +444,17 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
     //--------------Slider->------------->---------------------->---------------------------->------->------------>---------->---
     $scope.SubmitSlider = function () {
         debugger
-        $scope.slideimg = $('#input-file-now').val();
-        if ($scope.slideimg == "" || $scope.slideimg == undefined) {
-            toastr["error"]("Please Select Image");
-            $('#input-file-now').focus;
-            return;
-        }
-        if ($('#priority').val() == "") {
-            toastr["error"]("Please Enter Priority");
-            $('#priority').focus;
-            return;
-        }
+        //$scope.slideimg = $('#input-file-now').val();
+        //if ($scope.slideimg == "" || $scope.slideimg == undefined) {
+        //    toastr["error"]("Please Select Image");
+        //    $('#input-file-now').focus;
+        //    return;
+        //}
+        //if ($('#priority').val() == "") {
+        //    toastr["error"]("Please Enter Priority");
+        //    $('#priority').focus;
+        //    return;
+        //}
 
         debugger
         upload({
@@ -460,15 +496,12 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
     $scope.GetSliderDetail = function (index) {
         $('#edbtn').css('display', 'block');
         $('#btn').css('display', 'none');
+        debugger
         $scope.Slider = $scope.SliderListData[index];
-        //$http.get("/GiftDashBoard/GetSliderDetail?id=" + id).then(function (d) {
-
-        //    debugger
-        //    $scope.slider = d.data;
-
-        //}, function (error) {
-        //    alert(error.data);
-        //});
+        const previewImage = document.querySelector('#previewImage');
+        $('#previewImage').css('display', 'block');
+        previewImage.setAttribute("src", "/images/SliderImg/" + $scope.Slider.SliderImage);
+     
     };
     $scope.UpdateSlider = function () {
         //$scope.slideimg = $('#input-file-now').val();
@@ -511,7 +544,7 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
     $scope.ADAcDcShortPage = function (id) {
 
         debugger
-        $http.get("/admin/ADAcDcShortPage?id=" + id).then(function (d) {
+        $http.get("/GiftDashBoard/ADAcDcShortPage?id=" + id).then(function (d) {
             debugger
             $scope.rees = d.data;
 

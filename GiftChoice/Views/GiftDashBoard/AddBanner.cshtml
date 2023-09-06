@@ -16,7 +16,7 @@
 <div class="page-wrapper" ng-app="AdminApp" ng-controller="AdminController">
     <div class="page-content">
         <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
-            <div class="breadcrumb-title pe-3">Slider</div>
+            <div class="breadcrumb-title pe-3">Banner</div>
             <div class="ps-3">
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb mb-0 p-0">
@@ -72,7 +72,7 @@
                                             <p class="drop-zoon__paragraph">Drop your file here or Click to browse</p>
                                             <span id="loadingText" class="drop-zoon__loading-text">Please Wait</span>
                                             <img src="" alt="Preview Image" id="previewImage" class="drop-zoon__preview-image" draggable="false">
-                                            <input type="file" id="fileInput" upload-file="Slider.Image" class="drop-zoon__file-input" multiple>
+                                            <input type="file" id="fileInput" upload-file="Banner.Image" class="drop-zoon__file-input" multiple>
                                         </div>
                                         <!-- End Drop Zoon -->
                                         <!-- File Details -->
@@ -100,7 +100,7 @@
 
                             <div class="col-md-12">
                                 <label for="input1" class="form-label">Priority</label>
-                                <input type="number" class="form-control" ng-model="Slider.Priority" id="" placeholder="Priority">
+                                <input type="number" class="form-control" ng-model="Banner.Priority" id="" placeholder="Priority">
                             </div>
 
 
@@ -108,7 +108,8 @@
 
                             <div class="col-md-12">
                                 <div class="d-md-flex d-grid align-items-center gap-3">
-                                    <button type="button" id="btn" ng-click="SubmitSlider()" class="btn btn-primary px-4">Submit</button>
+                                    <button type="button" id="btn" ng-click="SubmitBanner()" class="btn btn-primary px-4">Submit</button>
+                                    <button type="button" id="edbtn" ng-click="UpdateBanner()" class="btn btn-primary px-4">Update</button>
                                     <button type="button" class="btn btn-light px-4">Reset</button>
                                 </div>
                             </div>
@@ -133,7 +134,7 @@
 
                         </div>
                         <div class="table-responsive">
-                            <table class="table mb-0 table-bordered" ng-init="GetSlider()">
+                            <table class="table mb-0 table-bordered" ng-init="GetBanner()">
                                 <thead class="table-light">
                                     <tr>
                                         <th>S.No.</th>
@@ -146,16 +147,13 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr ng-repeat="m in SliderData">
+                                    <tr ng-repeat="m in BannerData">
                                         <td>{{$index+1}}</td>
-                                        <td>{{m.MTitle}}</td>
-                                        <td><span ng-repeat="n in m.Submenu">{{n.SubmenuTitle}},</span></td>
+                                        <td>{{m.MainCate}}</td>
                                         <td>{{m.Priority}}</td>
-                                        <td><a ng-click="MainCateActiveDeActive(m.MainCateId)"> <span class="badge {{m.Active==1? 'bg-success' : 'bg-danger'}}">{{m.Active==1?'Active':'Deactive'}}</span></a> </td>
-                                        <td><img src="~/images/MainCate/{{m.MImage}}" width="50px"></td>
-
-
-
+                                        <td><img src="~/images/BannerImage/{{m.BannerImage}}"></td>
+                                        <td><a ng-click="ADBanner(m.BannerId)"> <span class="badge {{m.Active==1? 'bg-success' : 'bg-danger'}}">{{m.Active==1?'Active':'Deactive'}}</span></a> </td>
+                                        <td><a><i class="bx bxs-pencil" ng-click="GetBannerDetail($index)"></i></a></td>
                                     </tr>
 
 

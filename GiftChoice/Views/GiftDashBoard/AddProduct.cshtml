@@ -5,7 +5,7 @@
 }
 
 <style>
-    .img64 img {
+     img {
         width: 50px
     }
 </style>
@@ -37,7 +37,7 @@
                                 <label for="input1" class="form-label">Select Main Category</label>
 
                                 <select id="MainCate" class="form-select" ng-model="Product.MainCateId" >
-                                    <option selected="" value="-1">Select Main Category</option>
+                                    <option   ng-selected="true" value="-1">Select Main Category</option>
                                     <option ng-repeat="m in MainCateData" value="{{m.MainCateId}}">{{m.MTitle}}</option>
                                 </select>
 
@@ -52,10 +52,10 @@
                                 <input type="text" class="form-control" ng-model="Product.PLabel" id="" placeholder="Label">
                             </div>
 
-                            <div class="col-md-2">
+                            @*<div class="col-md-2">
                                 <label for="input1" class="form-label">Priority</label>
                                 <input type="number" class="form-control" ng-model="Product.Priority" id="" placeholder="Priority">
-                            </div>
+                            </div>*@
 
                             <div class="col-md-2">
                                 <label for="input1" class="form-label">Price</label>
@@ -102,6 +102,7 @@
                             <div class="col-md-12">
                                 <div class="d-md-flex d-grid align-items-center gap-3">
                                     <button type="button" id="btn" ng-click="SubmitProduct()" class="btn btn-primary px-4">Submit</button>
+                                    <button type="button" id="edbtn" ng-click="UpdateProduct()" class="btn btn-primary px-4">Update</button>
                                     <button type="button" class="btn btn-light px-4">Reset</button>
                                 </div>
                             </div>
@@ -150,10 +151,10 @@
                                             <td>{{m.PLabel}}</td>
                                             <td>{{m.Price}}</td>
                                             <td>{{m.Priority}}</td>
-
                                             <td><span ng-repeat="n in m.Submenu">{{n.SubmenuTitle}},</span></td>
+                                            <td><span ng-repeat="i in m.ProductImage"><img src="~/images/ProductImg/{{i.PImage}}"></span> </td>
                                             <td><a ng-click="ProductActiveDeActive(m.ProductId)"> <span class="badge {{m.Active==1? 'bg-success' : 'bg-danger'}}">{{m.Active==1?'Active':'Deactive'}}</span></a> </td>
-                                            <td><img src="~/images/ProductImg/{{m.MImage}}" width="50px"></td>
+                                            <td><a><i class="bx bxs-pencil" ng-click="GetProductbyid($index)"></i></a></td>
                                         </tr>
                                     </tbody>
                                 </table>

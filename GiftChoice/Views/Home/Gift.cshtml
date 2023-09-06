@@ -3,15 +3,15 @@
     ViewBag.Title = "Gift";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<main class="main">
+<main class="main" ng-init="GetProductByid(@ViewBag.id)">
 
     <!-- Breadcrumb Section Start -->
     <div class="page-header breadcrumb-wrap">
         <div class="container">
             <div class="breadcrumb">
                 <a href="index.asp" rel="nofollow">Home</a>
-                <span></span> Product
-                <span></span> Product Name Here
+                <span></span>{{Product.Maincate}}
+                <span></span> {{Product.ProductTitle}}
             </div>
         </div>
     </div>
@@ -69,24 +69,20 @@
                             </div>
                             <div class="col-lg-6 col-sm-12 col-xs-12">
                                 <div class="detail-info">
-                                    <h2 class="title-detail">Product Name Here</h2>
+                                    <h2 class="title-detail"> {{Product.ProductTitle}}</h2>
                                     <div class="pro-details-brand">
-                                        <span><a href="shop_by_categories.asp">Product Category</a></span>
+                                        <span><a href="shop_by_categories.asp">{{Product.Maincate}}</a></span>
                                     </div>
 
                                     <div class="clearfix product-price-cover border-0 mb-0">
                                         <div class="product-price primary-color float-left">
-                                            <ins><span class="text-brand"><i class="fa fa-inr" aria-hidden="true"></i>120.00/-</span></ins>
+                                            <ins><span class="text-brand"><i class="fa fa-inr" aria-hidden="true"></i>{{Product.Price}}/-</span></ins>
                                         </div>
                                     </div>
 
                                     <div class="description mb-20">
-                                        <p align="justify" class="fs-7">
-                                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloremque nam iste perspiciatis commodi temporibus sunt iure inventore quasi a illo.
-                                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloremque nam iste perspiciatis commodi temporibus sunt iure inventore quasi a illo.
-                                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloremque nam iste perspiciatis commodi temporibus sunt iure inventore quasi a illo.
-                                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloremque nam iste perspiciatis commodi temporibus sunt iure inventore quasi a illo.
-                                        </p>
+                                        <p align="justify" id="desc" class="fs-7">
+                                     </p>
                                         <table class="font-md mb-30 mt-20">
                                             <tbody>
                                                 <tr class="stand-up">

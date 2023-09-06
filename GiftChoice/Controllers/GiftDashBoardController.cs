@@ -723,7 +723,14 @@ namespace GiftChoice.Controllers
         public JsonResult SliderList()
         {
 
-            var res = db.SliderTbls.ToList().OrderBy(c => c.Priority);
+            var res = db.SliderTbls.Select(c => new {
+                c.MainCateId,
+                c.SliderId,
+                c.Priority,
+                c.SliderImage,
+                MainCate = db.MainCateTbls.Where(m => m.MainCateId == c.MainCateId).Select(m => m.MTitle).FirstOrDefault(),
+                c.Active
+            }).OrderBy(c => c.Priority);
             return Json(res, JsonRequestBehavior.AllowGet);
         }
         public JsonResult GetSliderDetail(int id)

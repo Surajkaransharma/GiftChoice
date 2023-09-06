@@ -1375,6 +1375,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="images\BannerImage\" />
     <Folder Include="images\MainCate\" />
     <Folder Include="images\ProductImg\" />
     <Folder Include="images\SliderImg\" />
