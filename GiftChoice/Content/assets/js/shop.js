@@ -90,8 +90,8 @@
     new WOW().init();
 
     //Load functions
-    $(document).ready(function () {
-        productDetails();
-    });
+    //$(document).ready(function () {
+    //    productDetails();
+    //});
 
 })(jQuery);

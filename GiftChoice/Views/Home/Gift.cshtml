@@ -3,6 +3,7 @@
     ViewBag.Title = "Gift";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+
 <main class="main" ng-init="GetProductByid(@ViewBag.id)">
 
     <!-- Breadcrumb Section Start -->
@@ -30,7 +31,10 @@
 
                                     <!-- Main Image -->
                                     <div class="product-image-slider">
-                                        <figure class="border-radius-10">
+                                        <figure class="border-radius-10" ng-repeat="i in Product.ProductImage">
+                                            <img src="~/images/ProductImg/{{i}}" alt="product image" class="img-fluid" loading="lazy">
+                                        </figure>
+                                        @*<figure class="border-radius-10">
                                             <img src="https://dummyimage.com/1100x1200/ccc/000" alt="product image" class="img-fluid" loading="lazy">
                                         </figure>
                                         <figure class="border-radius-10">
@@ -47,21 +51,20 @@
                                         </figure>
                                         <figure class="border-radius-10">
                                             <img src="https://dummyimage.com/1100x1200/ccc/000" alt="product image" class="img-fluid" loading="lazy">
-                                        </figure>
-                                        <figure class="border-radius-10">
-                                            <img src="https://dummyimage.com/1100x1200/ccc/000" alt="product image" class="img-fluid" loading="lazy">
-                                        </figure>
+                                        </figure>*@
                                     </div>
                                     <!-- Main Image -->
                                     <!-- Small Image -->
                                     <div class="slider-nav-thumbnails pl-15 pr-15">
+                                        <div ng-repeat="i in Product.ProductImage" >
+                                        <img src="~/images/ProductImg/{{i}}" class="img-fluid" loading="lazy" alt="product image">
+                                        </div>
+                                        <div><img src="~/images/ProductImg/{{i}}" class="img-fluid" loading="lazy" alt="product image"></div>
+                                        @*<div><img src="https://dummyimage.com/400x400/ccc/000" class="img-fluid" loading="lazy" alt="product image"></div>
                                         <div><img src="https://dummyimage.com/400x400/ccc/000" class="img-fluid" loading="lazy" alt="product image"></div>
                                         <div><img src="https://dummyimage.com/400x400/ccc/000" class="img-fluid" loading="lazy" alt="product image"></div>
                                         <div><img src="https://dummyimage.com/400x400/ccc/000" class="img-fluid" loading="lazy" alt="product image"></div>
-                                        <div><img src="https://dummyimage.com/400x400/ccc/000" class="img-fluid" loading="lazy" alt="product image"></div>
-                                        <div><img src="https://dummyimage.com/400x400/ccc/000" class="img-fluid" loading="lazy" alt="product image"></div>
-                                        <div><img src="https://dummyimage.com/400x400/ccc/000" class="img-fluid" loading="lazy" alt="product image"></div>
-                                        <div><img src="https://dummyimage.com/400x400/ccc/000" class="img-fluid" loading="lazy" alt="product image"></div>
+                                        <div><img src="https://dummyimage.com/400x400/ccc/000" class="img-fluid" loading="lazy" alt="product image"></div>*@
                                     </div>
                                     <!-- Small Image -->
                                 </div>
@@ -83,34 +86,7 @@
                                     <div class="description mb-20">
                                         <p align="justify" id="desc" class="fs-7">
                                      </p>
-                                        <table class="font-md mb-30 mt-20">
-                                            <tbody>
-                                                <tr class="stand-up">
-                                                    <th>Stand Up</th>
-                                                    <td>
-                                                        <p>35″L x 24″W x 37-45″H(front to back wheel)</p>
-                                                    </td>
-                                                </tr>
-                                                <tr class="folded-wo-wheels">
-                                                    <th>Folded (w/o wheels)</th>
-                                                    <td>
-                                                        <p>32.5″L x 18.5″W x 16.5″H</p>
-                                                    </td>
-                                                </tr>
-                                                <tr class="folded-w-wheels">
-                                                    <th>Folded (w/ wheels)</th>
-                                                    <td>
-                                                        <p>32.5″L x 24″W x 18.5″H</p>
-                                                    </td>
-                                                </tr>
-                                                <tr class="weight-wo-wheels">
-                                                    <th>Weight (w/o wheels)</th>
-                                                    <td>
-                                                        <p>20 LBS</p>
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
+
                                     </div>
 
                                     <div class="social-icons single-share mb-20">

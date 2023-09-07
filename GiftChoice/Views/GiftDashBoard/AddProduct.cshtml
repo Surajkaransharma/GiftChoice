@@ -5,10 +5,11 @@
 }
 
 <style>
-     img {
+    img {
         width: 50px
     }
 </style>
+
 <script src="~/Angularjs/Admin.js"></script>
 <div class="page-wrapper" ng-app="AdminApp" ng-controller="AdminController">
     <div class="page-content">
@@ -36,14 +37,14 @@
                             <div class="col-md-3" ng-init="GetMainCateData()">
                                 <label for="input1" class="form-label">Select Main Category</label>
 
-                                <select id="MainCate" class="form-select" ng-model="Product.MainCateId" >
-                                    <option   ng-selected="true" value="-1">Select Main Category</option>
+                                <select id="MainCate" class="form-select" ng-model="Product.MainCateId" onchange="angular.element(this).scope().MainCateKeyword(this.value)">
+                                    <option ng-selected="true" value="-1">Select Main Category</option>
                                     <option ng-repeat="m in MainCateData" value="{{m.MainCateId}}">{{m.MTitle}}</option>
                                 </select>
 
 
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-md-4">
                                 <label for="input1" class="form-label">Product Title</label>
                                 <input type="text" id="Producttitle" class="form-control" ng-model="Product.ProductTitle" placeholder="Product Title">
                             </div>
@@ -53,9 +54,9 @@
                             </div>
 
                             @*<div class="col-md-2">
-                                <label for="input1" class="form-label">Priority</label>
-                                <input type="number" class="form-control" ng-model="Product.Priority" id="" placeholder="Priority">
-                            </div>*@
+                                    <label for="input1" class="form-label">Priority</label>
+                                    <input type="number" class="form-control" ng-model="Product.Priority" id="" placeholder="Priority">
+                                </div>*@
 
                             <div class="col-md-2">
                                 <label for="input1" class="form-label">Price</label>
@@ -79,7 +80,7 @@
                             </div>
                             <div class="col-md-2">
                                 <label for="input1" class="form-label">Image 1</label>
-                                <input type="file" id="image1" class="form-control" upload-file="Product.Image1" >
+                                <input type="file" id="image1" class="form-control" upload-file="Product.Image1">
                             </div>
 
                             <div class="col-md-2">
@@ -102,7 +103,7 @@
                             <div class="col-md-12">
                                 <div class="d-md-flex d-grid align-items-center gap-3">
                                     <button type="button" id="btn" ng-click="SubmitProduct()" class="btn btn-primary px-4">Submit</button>
-                                    <button type="button" id="edbtn" ng-click="UpdateProduct()" class="btn btn-primary px-4">Update</button>
+                                    <button type="button" id="edbtn" style="display: none" ng-click="UpdateProduct()" class="btn btn-primary px-4">Update</button>
                                     <button type="button" class="btn btn-light px-4">Reset</button>
                                 </div>
                             </div>
@@ -128,37 +129,37 @@
                         </div>
                         <div class="table-responsive">
                             <table class="table mb-0 table-bordered" ng-init="GetProduct()">
-                                    <thead class="table-light">
-                                        <tr>
-                                            <th>S.No.</th>
-                                            <th>Product Title</th>
-                                            <th>Main Category Name</th>
-                                           <th>Label</th>
-                                            <th>Price</th>
-                                            <th>Priority</th>
-                                            <th>Keywords</th>
-                                            <th>Image</th>
-                                            <th>Active</th>
-                                            <th>Action</th>
+                                <thead class="table-light">
+                                    <tr>
+                                        <th>S.No.</th>
+                                        <th>Product Title</th>
+                                        <th>Main Category Name</th>
+                                        <th>Label</th>
+                                        <th>Price</th>
+                                        <th>Priority</th>
+                                        <th>Keywords</th>
+                                        <th>Image</th>
+                                        <th>Active</th>
+                                        <th>Action</th>
 
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr ng-repeat="m in ProductData">
-                                            <td>{{$index+1}}</td>
-                                            <td>{{m.ProductTitle}}</td>
-                                            <td>{{m.Maincate}}</td>
-                                            <td>{{m.PLabel}}</td>
-                                            <td>{{m.Price}}</td>
-                                            <td>{{m.Priority}}</td>
-                                            <td><span ng-repeat="n in m.Submenu">{{n.SubmenuTitle}},</span></td>
-                                            <td><span ng-repeat="i in m.ProductImage"><img src="~/images/ProductImg/{{i.PImage}}"></span> </td>
-                                            <td><a ng-click="ProductActiveDeActive(m.ProductId)"> <span class="badge {{m.Active==1? 'bg-success' : 'bg-danger'}}">{{m.Active==1?'Active':'Deactive'}}</span></a> </td>
-                                            <td><a><i class="bx bxs-pencil" ng-click="GetProductbyid($index)"></i></a></td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                        </div>  
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="m in ProductData">
+                                        <td>{{$index+1}}</td>
+                                        <td>{{m.ProductTitle}}</td>
+                                        <td>{{m.Maincate}}</td>
+                                        <td>{{m.PLabel}}</td>
+                                        <td>{{m.Price}}</td>
+                                        <td>{{m.Priority}}</td>
+                                        <td><span ng-repeat="n in m.Submenu">{{n.SubmenuTitle}},</span></td>
+                                        <td><span ng-repeat="i in m.ProductImage"><img src="~/images/ProductImg/{{i}}"></span> </td>
+                                        <td><a ng-click="ProductActiveDeActive(m.ProductId)"> <span class="badge {{m.Active==1? 'bg-success' : 'bg-danger'}}">{{m.Active==1?'Active':'Deactive'}}</span></a> </td>
+                                        <td><a><i class="bx bxs-pencil" ng-click="GetProductbyid($index)"></i></a></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>

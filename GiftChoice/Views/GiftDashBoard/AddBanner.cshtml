@@ -273,7 +273,7 @@
         image.src = URL.createObjectURL(file);
 
         image.onload = function () {
-            if (image.naturalWidth === 1920 && image.naturalHeight === 700) {
+            if (image.naturalWidth != 1920 && image.naturalHeight != 700) {
                 // If File Is Passed from the (File Validation) Function
                 if (fileValidate(fileType, fileSize)) {
 
