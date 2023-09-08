@@ -8,7 +8,7 @@
 
 
 <style>
-    .img64 img {
+     img {
         width: 50px
     }
 </style>
@@ -39,9 +39,9 @@
                             <div class="col-md-12">
                                 <label for="input1" class="form-label">Select Main Category</label>
 
-                                <select id="input9" class="form-select" ng-init="GetMainCateData()">
+                                <select id="input9" class="form-select" ng-init="GetMainCateData()" ng-model="Banner.MainCateId">
                                     <option selected="">Select Main Category</option>
-                                    <option ng-repeat="m in MainCateData" value="{{MainCateId}}">{{m.MTitle}}</option>
+                                    <option ng-repeat="m in MainCateData" value="{{m.MainCateId}}">{{m.MTitle}}</option>
                                 </select>
 
 
@@ -76,7 +76,7 @@
                                         </div>
                                         <!-- End Drop Zoon -->
                                         <!-- File Details -->
-                                        <div id="fileDetails" class="upload-area__file-details file-details">
+                                        <div id="fileDetails" class="upload-area__file-details file-details" style="display: none">
                                             <h3 class="file-details__title">Uploaded File</h3>
 
                                             <div id="uploadedFile" class="uploaded-file">
@@ -134,12 +134,11 @@
 
                         </div>
                         <div class="table-responsive">
-                            <table class="table mb-0 table-bordered" ng-init="GetBanner()">
+                            <table class="table mb-0 table-bordered" ng-init="BannerList()">
                                 <thead class="table-light">
                                     <tr>
                                         <th>S.No.</th>
-                                        <th>Main Category Name</th>
-                                        <th>Keyword</th>
+                                        <th>Main Category Name</th>                                      
                                         <th>Priority</th>
                                         <th>Action</th>
                                         <th>Image</th>
@@ -147,7 +146,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr ng-repeat="m in BannerData">
+                                    <tr ng-repeat="m in BannerListData">
                                         <td>{{$index+1}}</td>
                                         <td>{{m.MainCate}}</td>
                                         <td>{{m.Priority}}</td>

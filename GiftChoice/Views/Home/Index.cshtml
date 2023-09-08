@@ -3,17 +3,50 @@
 }
 
 <!-- Main Content Start -->
-<main class="main" >
+<main class="main">
 
     <!-- Slider Start -->
-    <section class="home-slider">
+    <section ng-init="SliderList()" class="carousel-slider-main text-center border-top border-bottom bg-white">
+            <div class="owl-carousel owl-carousel-slider ">
+                <div ng-repeat="s in SliderListData" class="item">
+                    <a href=""><img class="img-fluid img-responsive" src="~/images/SliderImg/{{s.SliderImage}}" alt="First slide"></a>
+                </div>
+            </div>
+        </section>
+    <style>
+        .owl-controls
+        {
+            margin-top:-25px!important;
+
+        }
+        .owl-pagination clickable {
+            background-color: white !important;
+        }
+        .item img {
+            height: auto;
+        }
+        @@media only screen and (max-width: 767px) {
+             .item {
+
+                height: 25ch;
+            }
+            .item img{
+                width:100vh;
+                height: 200px;
+            }
+        }
+        </style>
+    @*<section class="home-slider">
         <div id="carouselId" class="carousel slide" data-bs-ride="carousel">
             <div class="carousel-inner" role="listbox">
+
+
                 <div class="carousel-item active">
                     <a href="shop_by_categories.asp">
                         <img src="~/Content/assets/imgs/slider/slider_1.jpg" class="w-100 d-block img-fluid" loading="lazy" loading="lazy" alt="corporates-gifts">
                     </a>
                 </div>
+
                 <div class="carousel-item">
                     <a href="shop_by_categories.asp">
                         <img src="~/Content/assets/imgs/slider/slider_2.jpg" class="w-100 d-block img-fluid" loading="lazy" loading="lazy" alt="intirior-wall-decore-gifts">
@@ -39,7 +72,7 @@
                 <span class="visually-hidden">Next</span>
             </button>
         </div>
-    </section>
+    </section>*@
     <!-- Slider End -->
     <!-- Category Section Start -->
     <section class="popular-categories section-padding" ng-init="">
@@ -166,13 +199,13 @@
             <div class="tab-content wow fadeIn animated" ng-init="GetProduct()">
                 <div class="tab-pane fade show active" id="tab-one" role="tabpanel" aria-labelledby="tab-one">
                     <div class="row product-grid-4">
-                        <div class="col-lg-3 col-6 col-sm-4"  ng-repeat="p in ProductData">
+                        <div class="col-lg-3 col-6 col-sm-4" ng-repeat="p in ProductData">
                             <div class="product-cart-wrap mb-30">
                                 <div class="product-img-action-wrap">
                                     <div class="product-img product-img-zoom">
                                         <a href="/Home/Gift?url={{p.PUrl}}">
-                                            <img class="default-img img-fluid" src="~/images/ProductImg/{{p.ProductImage}}" loading="lazy" alt="product-image" >
-                                            <img class="hover-img img-fluid" src="~/images/ProductImg/{{p.ProductImage}}" loading="lazy" alt="product-hover-image" >
+                                            <img class="default-img img-fluid" src="~/images/ProductImg/{{p.ProductImage}}" loading="lazy" alt="product-image">
+                                            <img class="hover-img img-fluid" src="~/images/ProductImg/{{p.ProductImage}}" loading="lazy" alt="product-hover-image">
                                         </a>
                                     </div>
                                     <div class="product-badges product-badges-position product-badges-mrg">
@@ -198,79 +231,17 @@
     </section>
     <!-- Products Section End -->
     <!-- Advertisement Start -->
-    <section class="banners section-padding">
+    <section class="banners section-padding" ng-init="BannerList()">
         <div class="container">
             <div class="row g-2 gx-3 justify-content-center">
-                <div class="col-lg-4 col-md-6">
+                <div class="col-lg-4 col-md-6" ng-repeat="b in BannerListData">
                     <div class="banner-img mb-0 wow fadeIn animated  rounded-3">
                         <a href="shop_by_categories.asp">
-                            <img src="~/Content/assets/imgs/banners/banner_1.jpg" loading="lazy" alt="advertisement-image" class="img-fluid rounded-3 w-100 border-light border">
+                            <img src="~/images/BannerImage/{{b.BannerImage}}" loading="lazy" alt="advertisement-image" class="img-fluid rounded-3 w-100 border-light border">
                         </a>
                     </div>
                 </div>
-                <div class="col-lg-4 col-md-6">
-                    <div class="banner-img mb-0 wow fadeIn animated  rounded-3">
-                        <a href="shop_by_categories.asp">
-                            <img src="~/Content/assets/imgs/banners/banner_2.jpg" loading="lazy" alt="advertisement-image" class="img-fluid rounded-3 w-100 border-light border">
-                        </a>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6">
-                    <div class="banner-img mb-0 wow fadeIn animated  rounded-3  mb-sm-0">
-                        <a href="shop_by_categories.asp">
-                            <img src="~/Content/assets/imgs/banners/banner_3.jpg" loading="lazy" alt="advertisement-image" class="img-fluid rounded-3 w-100 border-light border">
-                        </a>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6">
-                    <div class="banner-img mb-0 wow fadeIn animated  rounded-3">
-                        <a href="shop_by_categories.asp">
-                            <img src="~/Content/assets/imgs/banners/banner_4.jpg" loading="lazy" alt="advertisement-image" class="img-fluid rounded-3 w-100 border-light border">
-                        </a>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6">
-                    <div class="banner-img mb-0 wow fadeIn animated  rounded-3">
-                        <a href="shop_by_categories.asp">
-                            <img src="~/Content/assets/imgs/banners/banner_4.jpg" loading="lazy" alt="advertisement-image" class="img-fluid rounded-3 w-100 border-light border">
-                        </a>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6">
-                    <div class="banner-img mb-0 wow fadeIn animated  rounded-3  mb-sm-0">
-                        <a href="shop_by_categories.asp">
-                            <img src="~/Content/assets/imgs/banners/banner_5.jpg" loading="lazy" alt="advertisement-image" class="img-fluid rounded-3 w-100 border-light border">
-                        </a>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6">
-                    <div class="banner-img mb-0 wow fadeIn animated  rounded-3">
-                        <a href="shop_by_categories.asp">
-                            <img src="~/Content/assets/imgs/banners/banner_6.jpg" loading="lazy" alt="advertisement-image" class="img-fluid rounded-3 w-100 border-light border">
-                        </a>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6">
-                    <div class="banner-img mb-0 wow fadeIn animated  rounded-3">
-                        <a href="shop_by_categories.asp">
-                            <img src="~/Content/assets/imgs/banners/banner_7.jpg" loading="lazy" alt="advertisement-image" class="img-fluid rounded-3 w-100 border-light border">
-                        </a>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6">
-                    <div class="banner-img mb-0 wow fadeIn animated  rounded-3  mb-sm-0">
-                        <a href="shop_by_categories.asp">
-                            <img src="~/Content/assets/imgs/banners/banner_8.jpg" loading="lazy" alt="advertisement-image" class="img-fluid rounded-3 w-100 border-light border">
-                        </a>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6">
-                    <div class="banner-img mb-0 wow fadeIn animated  rounded-3">
-                        <a href="shop_by_categories.asp">
-                            <img src="~/Content/assets/imgs/banners/banner_9.jpg" loading="lazy" alt="advertisement-image" class="img-fluid rounded-3 w-100 border-light border">
-                        </a>
-                    </div>
-                </div>
+
             </div>
         </div>
     </section>

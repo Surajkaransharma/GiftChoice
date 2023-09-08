@@ -1,6 +1,35 @@
 ﻿var app = angular.module("HomeApp", []);
 app.controller("HomeController", ['$scope',  '$http', '$sce', function ($scope,  $http, $sce) {
-   
+
+    $scope.SliderList = function () {
+        debugger
+        $http.get("/Home/SliderList").then(function (d) {
+
+            debugger
+            $scope.SliderListData = d.data;
+            setTimeout(() => {
+                var mainslider = $(".owl-carousel-slider");
+                if (mainslider.length > 0) {
+                    mainslider.owlCarousel({
+                        items: 1,
+                        dots: false,
+                        lazyLoad: true,
+                        pagination: true,
+                        autoPlay: 4000,
+                        loop: true,
+                        singleItem: true,
+                        navigation: true,
+                        stopOnHover: true,
+                        nav: true,
+                        navigationText: ["<i class='fa fa-arrow-left'></i>", "<i class='fa fa-arrow-right'></i>"]
+                    });
+                }
+            }, 10);
+        }, function (error) {
+            alert(error.data);
+        });
+    };
+
         $http.get("/Home/GetNavbarMenu").then(function (d) {
             $scope.NavbarMenuList = d.data;
             debugger
@@ -16,6 +45,19 @@ app.controller("HomeController", ['$scope',  '$http', '$sce', function ($scope, 
             alert(error.data);
         });
     };
+
+    $scope.BannerList = function () {
+        debugger
+        $http.get("/Home/BannerList").then(function (d) {
+
+            debugger
+            $scope.BannerListData = d.data;
+
+        }, function (error) {
+            alert(error.data);
+        });
+    };
+
     $scope.GetProductByid = function (id) {
         debugger 
         $http.get("/Home/GetProductByid?id=" + id).then(function (d) {

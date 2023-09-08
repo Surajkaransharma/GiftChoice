@@ -179,7 +179,7 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
     };
 
 
-    $scope.UpdateProduct = function () {
+    $scope.UpdateProductData = function () {
         debugger
         var editorText = CKEDITOR.instances.ckeditor.getData();
         $scope.Description = editorText;
@@ -211,13 +211,13 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
         //        Keywordarr.push($scope.KeywordList[i]);
         //    }
         //}
-        //$.each($(".checkbox-input:checked"), function () {
-        //    Keywordarr.push({ 'KeywordId': $(this).val() });
-        //});
-
+        $.each($(".checkbox-input:checked"), function () {
+            Keywordarr.push({ 'KeywordId': $(this).val() });
+        });
+        delete $scope.Product.PDesc;
         debugger;
         upload({
-            url: '/GiftDashBoard/UpdateProduct',
+            url: '/GiftDashBoard/UpdateProductData',
             method: 'post',
             data: $scope.Product
         }).then(function (d) {
@@ -240,6 +240,32 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
         });
     };
 
+    $scope.UpdateProductArrayData = function (id) {
+        debugger;
+        $http({
+            url: '/GiftDashBoard/UpdateProductArrayData',
+            method: 'post',
+            data: {
+                ProductId: id,
+                PDesc: $scope.Description,
+                KeywordTbls: Keywordarr
+            }
+        }).then(function (d) {
+            $scope.result = d.data;
+            if ($scope.result.res === "1") {
+
+                toastr["success"]("Product Update successfully");
+                $('#MainCate').val("-1").trigger('change');
+                location.href = '/GiftDashBoard/AddProduct';
+                $scope.Product = null;
+                //    $scope.GetProduct();
+            } else if ($scope.result.res === "2") {
+                toastr["error"]("Product already exist");
+            }
+        }, function (error) {
+            toastr["error"]("Something Went Wrong");
+        });
+    };
     ///   Add Product End
 
     ///// Main Category
@@ -323,6 +349,10 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
 
         $scope.MainCate = $scope.MainCateData[index];
         const previewImage = document.querySelector('#previewImage');
+        const loadingText = document.querySelector('#loadingText');
+        const dropZoon = document.querySelector('#dropZoon');
+        dropZoon.classList.add('drop-zoon--Uploaded');
+        loadingText.style.display = "none";
         $('#previewImage').css('display', 'block');
         previewImage.setAttribute("src", "/images/MainCate/" + $scope.MainCate.MImage);
         debugger
@@ -591,6 +621,10 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
         debugger
         $scope.Slider = $scope.SliderListData[index];
         const previewImage = document.querySelector('#previewImage');
+        const loadingText = document.querySelector('#loadingText');
+        const dropZoon = document.querySelector('#dropZoon');
+        dropZoon.classList.add('drop-zoon--Uploaded');
+        loadingText.style.display = "none";
         $('#previewImage').css('display', 'block');
         previewImage.setAttribute("src", "/images/SliderImg/" + $scope.Slider.SliderImage);
 
@@ -655,6 +689,131 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
         });
     };
 
+    //--------------Banner->------------->---------------------->---------------------------->------->------------>---------->---
+    $scope.SubmitBanner = function () {
+        debugger
+        //$scope.slideimg = $('#input-file-now').val();
+        //if ($scope.slideimg == "" || $scope.slideimg == undefined) {
+        //    toastr["error"]("Please Select Image");
+        //    $('#input-file-now').focus;
+        //    return;
+        //}
+        //if ($('#priority').val() == "") {
+        //    toastr["error"]("Please Enter Priority");
+        //    $('#priority').focus;
+        //    return;
+        //}
+
+        debugger
+        upload({
+            url: '/GiftDashBoard/SubmitBanner',
+            method: 'post',
+            data: $scope.Banner
+        }).then(function (d) {
+            $scope.result = d.data;
+
+            if ($scope.result.res === "1") {
+                toastr["success"]("Slider Saved Successfully");
+                $scope.Banner = null;
+                $scope.BannerList();
+
+
+            }
+            else if ($scope.result.res === "-1") {
+                toastr["error"]("Priority is Already Exist");
+            }
+            else {
+                toastr["error"]("Something Went Worng");
+            }
+        }, function (error) {
+            alert(error.data);
+        });
+    };
+
+    $scope.BannerList = function () {
+        debugger
+        $http.get("/GiftDashBoard/BannerList").then(function (d) {
+
+            debugger
+            $scope.BannerListData = d.data;
+
+        }, function (error) {
+            alert(error.data);
+        });
+    };
+    $scope.GetBannerDetail = function (index) {
+        $('#edbtn').css('display', 'block');
+        $('#btn').css('display', 'none');
+        debugger
+        $scope.Banner = $scope.BannerListData[index];
+        const previewImage = document.querySelector('#previewImage');
+        const loadingText = document.querySelector('#loadingText');
+        const dropZoon = document.querySelector('#dropZoon');
+        dropZoon.classList.add('drop-zoon--Uploaded');
+        loadingText.style.display = "none";
+        $('#previewImage').css('display', 'block');
+        previewImage.setAttribute("src", "/images/BannerImage/" + $scope.Banner.BannerImage);
+
+    };
+    $scope.UpdateBanner = function () {
+        //$scope.slideimg = $('#input-file-now').val();
+        //if ($scope.slideimg == "" || $scope.slideimg == undefined) {
+        //    toastr["error"]("Please Select Image");
+        //    $('#input-file-now').focus;
+        //    return;
+        //}
+        //if ($('#priority').val() == "") {
+        //    toastr["error"]("Please Enter Priority");
+        //    $('#priority').focus;
+        //    return;
+        //}
+
+        debugger
+        upload({
+            url: '/GiftDashBoard/UpdateBanner',
+            method: 'post',
+            data: $scope.Banner
+        }).then(function (d) {
+            $scope.result = d.data;
+
+            if ($scope.result.res === "1") {
+                toastr["success"]("Banner Update Successfully");
+                $scope.Banner = null;
+                $('#update').css('display', 'none');
+                $('#submit').css('display', 'block');
+                $scope.BannerList();
+            }
+            else if ($scope.result.res === "-1") {
+                toastr["error"]("Priority is Already Exist");
+            }
+            else {
+                toastr["error"]("Something Went Worng");
+            }
+        }, function (error) {
+            alert(error.data);
+        });
+    };
+    $scope.ADBanner = function (id) {
+
+        debugger
+        $http.get("/GiftDashBoard/ADBanner?id=" + id).then(function (d) {
+            debugger
+            $scope.rees = d.data;
+
+
+            if ($scope.rees.res === "1") {
+                toastr["success"]("successful");
+                $scope.BannerList();
+            }
+            else {
+                toastr["error"]("something went wrong   ");
+            }
+
+
+        }, function (error) {
+            alert(error.data);
+        });
+    };
 
 }]).directive('uploadFile', ['$parse', function ($parse) {
     return {

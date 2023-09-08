@@ -15,6 +15,35 @@ namespace GiftChoice.Controllers
         {
             return View();
         }
+        public JsonResult SliderList()
+        {
+
+            var res = db.SliderTbls.Where(c => c.Active == true).Select(c => new
+            {
+                c.MainCateId,
+                c.SUrl,
+                c.SliderId,
+                c.Priority,
+                c.SliderImage,
+                MainCate = db.MainCateTbls.Where(m => m.MainCateId == c.MainCateId).Select(m => m.MTitle).FirstOrDefault(),
+                c.Active
+            }).OrderBy(c => c.Priority);
+            return Json(res, JsonRequestBehavior.AllowGet);
+        }
+        public JsonResult BannerList()
+        {
+
+            var res = db.BannerTbls.Where(c => c.Active == true).Select(c => new
+            {
+                c.MainCateId,
+                c.BannerId,
+                c.Priority,
+                c.BannerImage,
+                MainCate = db.MainCateTbls.Where(m => m.MainCateId == c.MainCateId).Select(m => m.MTitle).FirstOrDefault(),
+                c.Active
+            }).OrderBy(c => c.Priority);
+            return Json(res, JsonRequestBehavior.AllowGet);
+        }
         public JsonResult GetProduct()
         {
             var res =
