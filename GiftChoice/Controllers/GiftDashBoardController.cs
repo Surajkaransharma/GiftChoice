@@ -329,6 +329,7 @@ namespace GiftChoice.Controllers
                 if (result != null)
                 {
                     result.Keyword = model.Keyword;
+                    result.KUrl = result.Keyword.Replace(" ","-");
                     db.SaveChanges();
 
                 }

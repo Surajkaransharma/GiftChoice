@@ -102,6 +102,49 @@
           <Property Name="Create_at" Type="datetime" />
           <Property Name="Update_at" Type="datetime" />
         </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'GiftChoice.dbo.VProduct' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="VProduct">
+          <Key>
+            <PropertyRef Name="ProductId" />
+            <PropertyRef Name="PKeywordId" />
+            <PropertyRef Name="Expr3" />
+            <PropertyRef Name="Expr9" />
+          </Key>
+          <Property Name="ProductId" Type="bigint" Nullable="false" />
+          <Property Name="MainCateId" Type="bigint" />
+          <Property Name="ProductTitle" Type="nvarchar(max)" />
+          <Property Name="Price" Type="float" />
+          <Property Name="PUrl" Type="nvarchar(max)" />
+          <Property Name="PLabel" Type="nvarchar(max)" />
+          <Property Name="PDesc" Type="nvarchar(max)" />
+          <Property Name="Priority" Type="bigint" />
+          <Property Name="Active" Type="bit" />
+          <Property Name="Create_at" Type="datetime" />
+          <Property Name="Update_at" Type="datetime" />
+          <Property Name="UserID" Type="bigint" />
+          <Property Name="PKeywordId" Type="bigint" Nullable="false" />
+          <Property Name="Expr1" Type="bigint" />
+          <Property Name="KeywordId" Type="bigint" />
+          <Property Name="Expr2" Type="bit" />
+          <Property Name="Expr3" Type="bigint" Nullable="false" />
+          <Property Name="Keyword" Type="nvarchar(max)" />
+          <Property Name="KUrl" Type="nvarchar(max)" />
+          <Property Name="Expr4" Type="datetime" />
+          <Property Name="Expr5" Type="datetime" />
+          <Property Name="Expr6" Type="bit" />
+          <Property Name="Expr7" Type="bigint" />
+          <Property Name="Expr8" Type="bigint" />
+          <Property Name="Expr9" Type="bigint" Nullable="false" />
+          <Property Name="MTitle" Type="nvarchar(max)" />
+          <Property Name="MUrl" Type="nvarchar(max)" />
+          <Property Name="Expr10" Type="bit" />
+          <Property Name="Expr11" Type="bigint" />
+          <Property Name="MImage" Type="nvarchar(max)" />
+          <Property Name="Expr13" Type="bigint" />
+          <Property Name="Expr12" Type="datetime" />
+          <Property Name="Expr14" Type="datetime" />
+        </EntityType>
         <Association Name="FK__MCKeyword__Keywo__3B75D760">
           <End Role="KeywordTbl" Type="Self.KeywordTbl" Multiplicity="0..1" />
           <End Role="MCKeywordTbl" Type="Self.MCKeywordTbl" Multiplicity="*" />
@@ -135,6 +178,43 @@
           <EntitySet Name="ProductImage" EntityType="Self.ProductImage" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ProductTbl" EntityType="Self.ProductTbl" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SliderTbl" EntityType="Self.SliderTbl" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="VProduct" EntityType="Self.VProduct" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [VProduct].[ProductId] AS [ProductId], 
+    [VProduct].[MainCateId] AS [MainCateId], 
+    [VProduct].[ProductTitle] AS [ProductTitle], 
+    [VProduct].[Price] AS [Price], 
+    [VProduct].[PUrl] AS [PUrl], 
+    [VProduct].[PLabel] AS [PLabel], 
+    [VProduct].[PDesc] AS [PDesc], 
+    [VProduct].[Priority] AS [Priority], 
+    [VProduct].[Active] AS [Active], 
+    [VProduct].[Create_at] AS [Create_at], 
+    [VProduct].[Update_at] AS [Update_at], 
+    [VProduct].[UserID] AS [UserID], 
+    [VProduct].[PKeywordId] AS [PKeywordId], 
+    [VProduct].[Expr1] AS [Expr1], 
+    [VProduct].[KeywordId] AS [KeywordId], 
+    [VProduct].[Expr2] AS [Expr2], 
+    [VProduct].[Expr3] AS [Expr3], 
+    [VProduct].[Keyword] AS [Keyword], 
+    [VProduct].[KUrl] AS [KUrl], 
+    [VProduct].[Expr4] AS [Expr4], 
+    [VProduct].[Expr5] AS [Expr5], 
+    [VProduct].[Expr6] AS [Expr6], 
+    [VProduct].[Expr7] AS [Expr7], 
+    [VProduct].[Expr8] AS [Expr8], 
+    [VProduct].[Expr9] AS [Expr9], 
+    [VProduct].[MTitle] AS [MTitle], 
+    [VProduct].[MUrl] AS [MUrl], 
+    [VProduct].[Expr10] AS [Expr10], 
+    [VProduct].[Expr11] AS [Expr11], 
+    [VProduct].[MImage] AS [MImage], 
+    [VProduct].[Expr13] AS [Expr13], 
+    [VProduct].[Expr12] AS [Expr12], 
+    [VProduct].[Expr14] AS [Expr14]
+    FROM [dbo].[VProduct] AS [VProduct]</DefiningQuery>
+          </EntitySet>
           <AssociationSet Name="FK__MCKeyword__Keywo__3B75D760" Association="Self.FK__MCKeyword__Keywo__3B75D760">
             <End Role="KeywordTbl" EntitySet="KeywordTbl" />
             <End Role="MCKeywordTbl" EntitySet="MCKeywordTbl" />
@@ -180,6 +260,7 @@
           <EntitySet Name="ProductTbls" EntityType="GiftChoiceModel.ProductTbl" />
           <EntitySet Name="SliderTbls" EntityType="GiftChoiceModel.SliderTbl" />
           <EntitySet Name="ProductImages" EntityType="GiftChoiceModel.ProductImage" />
+          <EntitySet Name="VProducts" EntityType="GiftChoiceModel.VProduct" />
         </EntityContainer>
         <EntityType Name="KeywordTbl">
           <Key>
@@ -291,6 +372,47 @@
           <Property Name="PImage" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Active" Type="Boolean" />
         </EntityType>
+        <EntityType Name="VProduct">
+          <Key>
+            <PropertyRef Name="ProductId" />
+            <PropertyRef Name="PKeywordId" />
+            <PropertyRef Name="Expr3" />
+            <PropertyRef Name="Expr9" />
+          </Key>
+          <Property Name="ProductId" Type="Int64" Nullable="false" />
+          <Property Name="MainCateId" Type="Int64" />
+          <Property Name="ProductTitle" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Price" Type="Double" />
+          <Property Name="PUrl" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PLabel" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PDesc" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Priority" Type="Int64" />
+          <Property Name="Active" Type="Boolean" />
+          <Property Name="Create_at" Type="DateTime" Precision="3" />
+          <Property Name="Update_at" Type="DateTime" Precision="3" />
+          <Property Name="UserID" Type="Int64" />
+          <Property Name="PKeywordId" Type="Int64" Nullable="false" />
+          <Property Name="Expr1" Type="Int64" />
+          <Property Name="KeywordId" Type="Int64" />
+          <Property Name="Expr2" Type="Boolean" />
+          <Property Name="Expr3" Type="Int64" Nullable="false" />
+          <Property Name="Keyword" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="KUrl" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Expr4" Type="DateTime" Precision="3" />
+          <Property Name="Expr5" Type="DateTime" Precision="3" />
+          <Property Name="Expr6" Type="Boolean" />
+          <Property Name="Expr7" Type="Int64" />
+          <Property Name="Expr8" Type="Int64" />
+          <Property Name="Expr9" Type="Int64" Nullable="false" />
+          <Property Name="MTitle" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="MUrl" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Expr10" Type="Boolean" />
+          <Property Name="Expr11" Type="Int64" />
+          <Property Name="MImage" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Expr13" Type="Int64" />
+          <Property Name="Expr12" Type="DateTime" Precision="3" />
+          <Property Name="Expr14" Type="DateTime" Precision="3" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -399,6 +521,45 @@
                 <ScalarProperty Name="PImage" ColumnName="PImage" />
                 <ScalarProperty Name="ProductId" ColumnName="ProductId" />
                 <ScalarProperty Name="PImageId" ColumnName="PImageId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VProducts">
+            <EntityTypeMapping TypeName="GiftChoiceModel.VProduct">
+              <MappingFragment StoreEntitySet="VProduct">
+                <ScalarProperty Name="Expr14" ColumnName="Expr14" />
+                <ScalarProperty Name="Expr12" ColumnName="Expr12" />
+                <ScalarProperty Name="Expr13" ColumnName="Expr13" />
+                <ScalarProperty Name="MImage" ColumnName="MImage" />
+                <ScalarProperty Name="Expr11" ColumnName="Expr11" />
+                <ScalarProperty Name="Expr10" ColumnName="Expr10" />
+                <ScalarProperty Name="MUrl" ColumnName="MUrl" />
+                <ScalarProperty Name="MTitle" ColumnName="MTitle" />
+                <ScalarProperty Name="Expr9" ColumnName="Expr9" />
+                <ScalarProperty Name="Expr8" ColumnName="Expr8" />
+                <ScalarProperty Name="Expr7" ColumnName="Expr7" />
+                <ScalarProperty Name="Expr6" ColumnName="Expr6" />
+                <ScalarProperty Name="Expr5" ColumnName="Expr5" />
+                <ScalarProperty Name="Expr4" ColumnName="Expr4" />
+                <ScalarProperty Name="KUrl" ColumnName="KUrl" />
+                <ScalarProperty Name="Keyword" ColumnName="Keyword" />
+                <ScalarProperty Name="Expr3" ColumnName="Expr3" />
+                <ScalarProperty Name="Expr2" ColumnName="Expr2" />
+                <ScalarProperty Name="KeywordId" ColumnName="KeywordId" />
+                <ScalarProperty Name="Expr1" ColumnName="Expr1" />
+                <ScalarProperty Name="PKeywordId" ColumnName="PKeywordId" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="Update_at" ColumnName="Update_at" />
+                <ScalarProperty Name="Create_at" ColumnName="Create_at" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="Priority" ColumnName="Priority" />
+                <ScalarProperty Name="PDesc" ColumnName="PDesc" />
+                <ScalarProperty Name="PLabel" ColumnName="PLabel" />
+                <ScalarProperty Name="PUrl" ColumnName="PUrl" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="ProductTitle" ColumnName="ProductTitle" />
+                <ScalarProperty Name="MainCateId" ColumnName="MainCateId" />
+                <ScalarProperty Name="ProductId" ColumnName="ProductId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

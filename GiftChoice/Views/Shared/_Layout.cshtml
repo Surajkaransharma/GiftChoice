@@ -20,8 +20,8 @@
     <!-- Font Awasome Intro -->
     <link rel="stylesheet" href="~/Content/assets/css/font-awasome/font-awesome.css">
     <link rel="stylesheet" href="~/Content/assets/css/font-awasome/font-awesome.min.css">
-    @*<link href="~/Content/assets/owl-carousel/owl.theme.css" rel="stylesheet" />
-    <link href="~/Content/assets/owl-carousel/owl.carousel.css" rel="stylesheet" />*@
+    <link href="~/Content/assets/owl-carousel/owl.theme.css" rel="stylesheet" />
+    <link href="~/Content/assets/owl-carousel/owl.carousel.css" rel="stylesheet" />
     <script src="~/Angularjs/angular.min.js"></script>
     <script src="~/Angularjs/Home.js"></script>
 </head>
@@ -119,7 +119,7 @@
                                         <li ng-repeat="n in NavbarMenuList">
                                             <a href="#">{{n.MTitle}} <i ng-show="n.Submenu.length>0" class="fi-rs-angle-down"></i></a>
                                             <ul class="sub-menu" ng-show="n.Submenu.length>0">
-                                                <li ng-repeat="s in n.Submenu"><a href="shop_by_categories.asp">{{s.SubmenuTitle}}</a></li>
+                                                <li ng-repeat="s in n.Submenu"><a href="/Home/shop/{{s.SubmenuTitle.KUrl}}">{{s.SubmenuTitle.Keyword}}</a></li>
                                                 @*<li><a href="shop_by_categories.asp">Rakhi For Brother</a></li>
                                                     <li><a href="shop_by_categories.asp">Rakhi For Sister</a></li>*@
                                             </ul>
@@ -449,7 +449,7 @@
     <script src="~/Content/assets/js/plugins/jquery.vticker-min.js"></script>
     <script src="~/Content/assets/js/plugins/jquery.theia.sticky.js"></script>
     <script src="~/Content/assets/js/plugins/jquery.elevatezoom.js"></script>
-    @*<script src="~/Content/assets/owl-carousel/owl.carousel.js"></script>*@
+    <script src="~/Content/assets/owl-carousel/owl.carousel.js"></script>
 
     <!-- Template  JS -->
     <script src="~/Content/assets/js/main.js"></script>

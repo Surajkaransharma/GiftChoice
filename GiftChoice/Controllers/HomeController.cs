@@ -30,6 +30,31 @@ namespace GiftChoice.Controllers
             }).OrderBy(c => c.Priority);
             return Json(res, JsonRequestBehavior.AllowGet);
         }
+
+        public JsonResult GetMainCateData()
+        {
+            var res =
+
+               db.MainCateTbls.Where(m => m.Active == true).Select(m => new
+               {
+                   m.MainCateId,
+                   m.MUrl,
+                   m.MTitle,
+                   m.Active,
+                   m.MImage,
+                   m.Priority,
+                   //Submenu = db.MCKeywordTbls.Where(s => s.MainCateId == m.MainCateId && s.Active == true).Select(s => new
+                   //{
+                   //    s.MainCateId,
+                   //    s.KeywordId,
+                   //    s.MCkeywordId,
+                   //    SubmenuTitle = db.KeywordTbls.Where(t => t.KeywordId == s.KeywordId).Select(t => t.Keyword).FirstOrDefault()
+                   //})
+               });
+            return Json(res, JsonRequestBehavior.AllowGet);
+
+        }
+
         public JsonResult BannerList()
         {
 
@@ -49,6 +74,34 @@ namespace GiftChoice.Controllers
             var res =
 
                db.ProductTbls.Select(m => new
+               {
+                   m.ProductId,
+                   m.MainCateId,
+                   m.ProductTitle,
+                   m.PLabel,
+                   m.Price,
+                   m.PUrl,
+                   m.Active,
+                   m.Priority,
+                   ProductImage = db.ProductImages.Where(i => i.PImageId == m.ProductId).Select(i => i.PImage).FirstOrDefault(),
+                   Maincate = db.MainCateTbls.Where(p => p.MainCateId == m.MainCateId).Select(p => p.MTitle).FirstOrDefault(),
+                   Submenu = db.PKeywordTbls.Where(s => s.ProductId == m.ProductId && s.Active == true).Select(s => new
+                   {
+                       s.ProductId,
+                       s.KeywordId,
+                       s.PKeywordId,
+                       SubmenuTitle = db.KeywordTbls.Where(t => t.KeywordId == s.KeywordId && t.Active == true).Select(t => t.Keyword).FirstOrDefault()
+                   })
+               }).OrderBy(x => Guid.NewGuid()).Take(10);
+            return Json(res, JsonRequestBehavior.AllowGet);
+
+        }
+
+        public JsonResult FilterProduct(string id)
+        {
+            var res =
+
+               db.VProducts.Where(m => m.KUrl == id).Select(m => new
                {
                    m.ProductId,
                    m.MainCateId,
@@ -121,8 +174,10 @@ namespace GiftChoice.Controllers
 
             return View();
         }
-        public ActionResult Shop()
+        public ActionResult Shop(string id)
         {
+            //ViewBag.id = db.MainCateTbls.Where(m => m.MUrl == id).Select(m => m.MainCateId).FirstOrDefault();
+            ViewBag.id = id;
             ViewBag.Message = "Your contact page.";
 
             return View();
@@ -163,6 +218,7 @@ namespace GiftChoice.Controllers
 
         public JsonResult GetNavbarMenu()
         {
+            db.Configuration.ProxyCreationEnabled = false;
             var res =
 
                 db.MainCateTbls.Where(m => m.Active == true).Select(m => new
@@ -175,7 +231,7 @@ namespace GiftChoice.Controllers
                         s.MainCateId,
                         s.KeywordId,
                         s.MCkeywordId,
-                        SubmenuTitle = db.KeywordTbls.Where(t => t.KeywordId == s.KeywordId).Select(t => t.Keyword).FirstOrDefault()
+                        SubmenuTitle = db.KeywordTbls.Where(t => t.KeywordId == s.KeywordId).FirstOrDefault()
                     })
                 });
 

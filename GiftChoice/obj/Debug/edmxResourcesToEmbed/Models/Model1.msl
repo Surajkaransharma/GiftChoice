@@ -106,5 +106,44 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="VProducts">
+      <EntityTypeMapping TypeName="GiftChoiceModel.VProduct">
+        <MappingFragment StoreEntitySet="VProduct">
+          <ScalarProperty Name="Expr14" ColumnName="Expr14" />
+          <ScalarProperty Name="Expr12" ColumnName="Expr12" />
+          <ScalarProperty Name="Expr13" ColumnName="Expr13" />
+          <ScalarProperty Name="MImage" ColumnName="MImage" />
+          <ScalarProperty Name="Expr11" ColumnName="Expr11" />
+          <ScalarProperty Name="Expr10" ColumnName="Expr10" />
+          <ScalarProperty Name="MUrl" ColumnName="MUrl" />
+          <ScalarProperty Name="MTitle" ColumnName="MTitle" />
+          <ScalarProperty Name="Expr9" ColumnName="Expr9" />
+          <ScalarProperty Name="Expr8" ColumnName="Expr8" />
+          <ScalarProperty Name="Expr7" ColumnName="Expr7" />
+          <ScalarProperty Name="Expr6" ColumnName="Expr6" />
+          <ScalarProperty Name="Expr5" ColumnName="Expr5" />
+          <ScalarProperty Name="Expr4" ColumnName="Expr4" />
+          <ScalarProperty Name="KUrl" ColumnName="KUrl" />
+          <ScalarProperty Name="Keyword" ColumnName="Keyword" />
+          <ScalarProperty Name="Expr3" ColumnName="Expr3" />
+          <ScalarProperty Name="Expr2" ColumnName="Expr2" />
+          <ScalarProperty Name="KeywordId" ColumnName="KeywordId" />
+          <ScalarProperty Name="Expr1" ColumnName="Expr1" />
+          <ScalarProperty Name="PKeywordId" ColumnName="PKeywordId" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="Update_at" ColumnName="Update_at" />
+          <ScalarProperty Name="Create_at" ColumnName="Create_at" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+          <ScalarProperty Name="Priority" ColumnName="Priority" />
+          <ScalarProperty Name="PDesc" ColumnName="PDesc" />
+          <ScalarProperty Name="PLabel" ColumnName="PLabel" />
+          <ScalarProperty Name="PUrl" ColumnName="PUrl" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="ProductTitle" ColumnName="ProductTitle" />
+          <ScalarProperty Name="MainCateId" ColumnName="MainCateId" />
+          <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

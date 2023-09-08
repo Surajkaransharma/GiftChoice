@@ -75,118 +75,20 @@
     </section>*@
     <!-- Slider End -->
     <!-- Category Section Start -->
-    <section class="popular-categories section-padding" ng-init="">
+    <section class="popular-categories section-padding" ng-init="GetMainCateData()">
         <div class="container wow fadeIn animated">
             <h3 class="section-title mb-20">Categories</h3>
             <div class="carausel-6-columns-cover position-relative">
                 <div class="slider-arrow slider-arrow-2 carausel-6-columns-arrow" id="carausel-6-columns-arrows"></div>
                 <div class="carausel-6-columns" id="carausel-6-columns">
-                    <div class="card-1">
+                    <div class="card-1" ng-repeat="m in MainCateData">
                         <figure class=" img-hover-scale overflow-hidden">
-                            <a href="shop_by_categories.asp">
-                                <img src="~/Content/assets/imgs/categories/cate_1.jpg" loading="lazy" alt="category-name" class="w-100 img-fluid">
+                            <a href="/Home/shop/{{m.MUrl}}">
+                                <img src="~/images/MainCate/{{m.MImage}}" loading="lazy" alt="category-name" class="w-100 img-fluid">
                             </a>
                         </figure>
                     </div>
-                    <div class="card-1">
-                        <figure class=" img-hover-scale overflow-hidden">
-                            <a href="shop_by_categories.asp">
-                                <img src="~/Content/assets/imgs/categories/cate_2.jpg" loading="lazy" alt="category-name" class="w-100 img-fluid">
-                            </a>
-                        </figure>
-                    </div>
-                    <div class="card-1">
-                        <figure class=" img-hover-scale overflow-hidden">
-                            <a href="shop_by_categories.asp">
-                                <img src="~/Content/assets/imgs/categories/cate_3.jpg" loading="lazy" alt="category-name" class="w-100 img-fluid">
-                            </a>
-                        </figure>
-                    </div>
-                    <div class="card-1">
-                        <figure class=" img-hover-scale overflow-hidden">
-                            <a href="shop_by_categories.asp">
-                                <img src="~/Content/assets/imgs/categories/cate_4.jpg" loading="lazy" alt="category-name" class="w-100 img-fluid">
-                            </a>
-                        </figure>
-                    </div>
-                    <div class="card-1">
-                        <figure class=" img-hover-scale overflow-hidden">
-                            <a href="shop_by_categories.asp">
-                                <img src="~/Content/assets/imgs/categories/cate_5.jpg" loading="lazy" alt="category-name" class="w-100 img-fluid">
-                            </a>
-                        </figure>
-                    </div>
-                    <div class="card-1">
-                        <figure class=" img-hover-scale overflow-hidden">
-                            <a href="shop_by_categories.asp">
-                                <img src="~/Content/assets/imgs/categories/cate_6.jpg" loading="lazy" alt="category-name" class="w-100 img-fluid">
-                            </a>
-                        </figure>
-                    </div>
-                    <div class="card-1">
-                        <figure class=" img-hover-scale overflow-hidden">
-                            <a href="shop_by_categories.asp">
-                                <img src="~/Content/assets/imgs/categories/cate_7.jpg" loading="lazy" alt="category-name" class="w-100 img-fluid">
-                            </a>
-                        </figure>
-                    </div>
-                    <div class="card-1">
-                        <figure class=" img-hover-scale overflow-hidden">
-                            <a href="shop_by_categories.asp">
-                                <img src="~/Content/assets/imgs/categories/cate_8.jpg" loading="lazy" alt="category-name" class="w-100 img-fluid">
-                            </a>
-                        </figure>
-                    </div>
-                    <div class="card-1">
-                        <figure class=" img-hover-scale overflow-hidden">
-                            <a href="shop_by_categories.asp">
-                                <img src="~/Content/assets/imgs/categories/cate_9.jpg" loading="lazy" alt="category-name" class="w-100 img-fluid">
-                            </a>
-                        </figure>
-                    </div>
-
-                    <div class="card-1">
-                        <figure class=" img-hover-scale overflow-hidden">
-                            <a href="shop_by_categories.asp">
-                                <img src="~/Content/assets/imgs/categories/cate_10.jpg" loading="lazy" alt="category-name" class="w-100 img-fluid">
-                            </a>
-                        </figure>
-                    </div>
-                    <div class="card-1">
-                        <figure class=" img-hover-scale overflow-hidden">
-                            <a href="shop_by_categories.asp">
-                                <img src="~/Content/assets/imgs/categories/cate_11.jpg" loading="lazy" alt="category-name" class="w-100 img-fluid">
-                            </a>
-                        </figure>
-                    </div>
-                    <div class="card-1">
-                        <figure class=" img-hover-scale overflow-hidden">
-                            <a href="shop_by_categories.asp">
-                                <img src="~/Content/assets/imgs/categories/cate_12.jpg" loading="lazy" alt="category-name" class="w-100 img-fluid">
-                            </a>
-                        </figure>
-                    </div>
-                    <div class="card-1">
-                        <figure class=" img-hover-scale overflow-hidden">
-                            <a href="shop_by_categories.asp">
-                                <img src="~/Content/assets/imgs/categories/cate_13.jpg" loading="lazy" alt="category-name" class="w-100 img-fluid">
-                            </a>
-                        </figure>
-                    </div>
-                    <div class="card-1">
-                        <figure class=" img-hover-scale overflow-hidden">
-                            <a href="shop_by_categories.asp">
-                                <img src="~/Content/assets/imgs/categories/cate_14.jpg" loading="lazy" alt="category-name" class="w-100 img-fluid">
-                            </a>
-                        </figure>
-                    </div>
-                    <div class="card-1">
-                        <figure class=" img-hover-scale overflow-hidden">
-                            <a href="shop_by_categories.asp">
-                                <img src="~/Content/assets/imgs/categories/cate_15.jpg" loading="lazy" alt="category-name" class="w-100 img-fluid">
-                            </a>
-                        </figure>
-                    </div>
+          
                 </div>
             </div>
         </div>

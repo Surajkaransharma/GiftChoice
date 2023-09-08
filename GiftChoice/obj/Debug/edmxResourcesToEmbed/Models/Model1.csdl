@@ -32,6 +32,7 @@
     <EntitySet Name="ProductTbls" EntityType="GiftChoiceModel.ProductTbl" />
     <EntitySet Name="SliderTbls" EntityType="GiftChoiceModel.SliderTbl" />
     <EntitySet Name="ProductImages" EntityType="GiftChoiceModel.ProductImage" />
+    <EntitySet Name="VProducts" EntityType="GiftChoiceModel.VProduct" />
   </EntityContainer>
   <EntityType Name="KeywordTbl">
     <Key>
@@ -142,5 +143,46 @@
     <Property Name="ProductId" Type="Int64" />
     <Property Name="PImage" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="Active" Type="Boolean" />
+  </EntityType>
+  <EntityType Name="VProduct">
+    <Key>
+      <PropertyRef Name="ProductId" />
+      <PropertyRef Name="PKeywordId" />
+      <PropertyRef Name="Expr3" />
+      <PropertyRef Name="Expr9" />
+    </Key>
+    <Property Name="ProductId" Type="Int64" Nullable="false" />
+    <Property Name="MainCateId" Type="Int64" />
+    <Property Name="ProductTitle" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Price" Type="Double" />
+    <Property Name="PUrl" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="PLabel" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="PDesc" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Priority" Type="Int64" />
+    <Property Name="Active" Type="Boolean" />
+    <Property Name="Create_at" Type="DateTime" Precision="3" />
+    <Property Name="Update_at" Type="DateTime" Precision="3" />
+    <Property Name="UserID" Type="Int64" />
+    <Property Name="PKeywordId" Type="Int64" Nullable="false" />
+    <Property Name="Expr1" Type="Int64" />
+    <Property Name="KeywordId" Type="Int64" />
+    <Property Name="Expr2" Type="Boolean" />
+    <Property Name="Expr3" Type="Int64" Nullable="false" />
+    <Property Name="Keyword" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="KUrl" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Expr4" Type="DateTime" Precision="3" />
+    <Property Name="Expr5" Type="DateTime" Precision="3" />
+    <Property Name="Expr6" Type="Boolean" />
+    <Property Name="Expr7" Type="Int64" />
+    <Property Name="Expr8" Type="Int64" />
+    <Property Name="Expr9" Type="Int64" Nullable="false" />
+    <Property Name="MTitle" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="MUrl" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Expr10" Type="Boolean" />
+    <Property Name="Expr11" Type="Int64" />
+    <Property Name="MImage" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Expr13" Type="Int64" />
+    <Property Name="Expr12" Type="DateTime" Precision="3" />
+    <Property Name="Expr14" Type="DateTime" Precision="3" />
   </EntityType>
 </Schema>

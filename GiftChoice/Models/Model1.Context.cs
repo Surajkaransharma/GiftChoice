@@ -33,5 +33,6 @@ namespace GiftChoice.Models
         public virtual DbSet<ProductTbl> ProductTbls { get; set; }
         public virtual DbSet<SliderTbl> SliderTbls { get; set; }
         public virtual DbSet<ProductImage> ProductImages { get; set; }
+        public virtual DbSet<VProduct> VProducts { get; set; }
     }
 }
