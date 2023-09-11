@@ -9,7 +9,7 @@
     <section ng-init="SliderList()" class="carousel-slider-main text-center border-top border-bottom bg-white">
             <div class="owl-carousel owl-carousel-slider ">
                 <div ng-repeat="s in SliderListData" class="item">
-                    <a href=""><img class="img-fluid img-responsive" src="~/images/SliderImg/{{s.SliderImage}}" alt="First slide"></a>
+                    <a href="/Home/shop/{{s.SUrl}}"><img class="img-fluid img-responsive" src="~/images/SliderImg/{{s.SliderImage}}" alt="First slide"></a>
                 </div>
             </div>
         </section>
@@ -110,12 +110,12 @@
                                             <img class="hover-img img-fluid" src="~/images/ProductImg/{{p.ProductImage}}" loading="lazy" alt="product-hover-image">
                                         </a>
                                     </div>
-                                    <div class="product-badges product-badges-position product-badges-mrg">
+                                    <div class="product-badges product-badges-position product-badges-mrg" ng-show="p.PLabel!=null">
                                         <span class="hot">{{p.PLabel}}</span>
                                     </div>
                                 </div>
                                 <div class="product-content-wrap">
-                                    <h2 class="mt-2"><a href="product_detail.asp">{{p.ProductTitle}}</a></h2>
+                                    <h2 class="mt-2"><a href="/Home/Gift?url={{p.PUrl}}">{{p.ProductTitle}}</a></h2>
                                     <div class="product-price">
                                         <span><i class="fa fa-inr" aria-hidden="true"></i> {{p.Price}}/-</span>
                                     </div>
@@ -138,7 +138,7 @@
             <div class="row g-2 gx-3 justify-content-center">
                 <div class="col-lg-4 col-md-6" ng-repeat="b in BannerListData">
                     <div class="banner-img mb-0 wow fadeIn animated  rounded-3">
-                        <a href="shop_by_categories.asp">
+                        <a href="/Home/shop/{{b.BUrl}}">
                             <img src="~/images/BannerImage/{{b.BannerImage}}" loading="lazy" alt="advertisement-image" class="img-fluid rounded-3 w-100 border-light border">
                         </a>
                     </div>

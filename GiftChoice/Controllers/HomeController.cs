@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using GiftChoice.Models;
+using System;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
-using GiftChoice.Models;
 
 namespace GiftChoice.Controllers
 {
@@ -63,6 +61,7 @@ namespace GiftChoice.Controllers
                 c.MainCateId,
                 c.BannerId,
                 c.Priority,
+                c.BUrl,
                 c.BannerImage,
                 MainCate = db.MainCateTbls.Where(m => m.MainCateId == c.MainCateId).Select(m => m.MTitle).FirstOrDefault(),
                 c.Active
@@ -97,11 +96,11 @@ namespace GiftChoice.Controllers
 
         }
 
-        public JsonResult FilterProduct(string id)
+        public JsonResult FilterProduct(int id)
         {
             var res =
 
-               db.VProducts.Where(m => m.KUrl == id).Select(m => new
+               db.VProducts.Where(m => m.KeywordId == id).Select(m => new
                {
                    m.ProductId,
                    m.MainCateId,
@@ -176,8 +175,8 @@ namespace GiftChoice.Controllers
         }
         public ActionResult Shop(string id)
         {
-            //ViewBag.id = db.MainCateTbls.Where(m => m.MUrl == id).Select(m => m.MainCateId).FirstOrDefault();
-            ViewBag.id = id;
+            ViewBag.id = db.KeywordTbls.Where(m => m.KUrl == id).Select(m => m.KeywordId).FirstOrDefault();
+            //  ViewBag.id = id;
             ViewBag.Message = "Your contact page.";
 
             return View();
@@ -219,13 +218,15 @@ namespace GiftChoice.Controllers
         public JsonResult GetNavbarMenu()
         {
             db.Configuration.ProxyCreationEnabled = false;
-            var res =
+            var res = new
+            {
 
-                db.MainCateTbls.Where(m => m.Active == true).Select(m => new
+                NavbarMenuList = db.MainCateTbls.Where(m => m.Active == true).Select(m => new
                 {
                     m.MainCateId,
                     m.MUrl,
-                    m.MTitle,                
+                    m.MTitle,
+                    m.Priority,
                     Submenu = db.MCKeywordTbls.Where(s => s.MainCateId == m.MainCateId && s.Active == true).Select(s => new
                     {
                         s.MainCateId,
@@ -233,8 +234,15 @@ namespace GiftChoice.Controllers
                         s.MCkeywordId,
                         SubmenuTitle = db.KeywordTbls.Where(t => t.KeywordId == s.KeywordId).FirstOrDefault()
                     })
-                });
-
+                }).OrderBy(m => m.Priority).Take(1),
+                ScondNavbarMenuList = db.MainCateTbls.Where(m => m.Active == true).Select(m => new
+                {
+                    m.MainCateId,
+                    m.MUrl,
+                    m.MTitle,
+                   m.Priority,
+                }).OrderBy(m => m.Priority).Skip(6),
+            };
 
             return Json(res, JsonRequestBehavior.AllowGet);
 
