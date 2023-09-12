@@ -33,12 +33,16 @@ app.controller("HomeController", ['$scope',  '$http', '$sce', function ($scope, 
     };
 
         $http.get("/Home/GetNavbarMenu").then(function (d) {
-            $scope.NavbarMenuList = d.data;
+            $scope.NavbarMenuList = d.data.NavbarMenuList;
+            $scope.ScondNavbarMenuList = d.data.ScondNavbarMenuList;
+
             debugger
         }, function (error) {
             alert(error.data);
         });
+    $scope.FilterProductData = function () {
 
+    };
     $scope.GetMainCateData = function () {
         $http.get("/GiftDashBoard/GetMainCateData").then(function (d) {
             $scope.MainCateData = d.data;
@@ -170,6 +174,11 @@ app.controller("HomeController", ['$scope',  '$http', '$sce', function ($scope, 
         });
     };
 
+    $scope.FilterProductData = function () {
+
+    };
+
+
     $scope.GetProductByid = function (id) {
         debugger 
         $http.get("/Home/GetProductByid?id=" + id).then(function (d) {
@@ -268,6 +277,19 @@ app.controller("HomeController", ['$scope',  '$http', '$sce', function ($scope, 
                 
 
             }, 100);
+
+        }, function (error) {
+            alert(error.data);
+        });
+    };
+    $scope.GetSmillerProduct = function (id) {
+        debugger
+        $http.get("/Home/GetSmillerProduct?id=" + id).then(function (d) {
+            debugger
+            $scope.ProductList = d.data;
+
+          
+      
 
         }, function (error) {
             alert(error.data);

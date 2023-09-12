@@ -55,7 +55,10 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
             var vallc = $scope.Product.Submenu[i].KeywordId;
             $('#Keyword_' + vallc).prop('checked', true);
         }
-
+        for (var i = 0; i < $scope.Product.PSizeList.length; i++) {
+            var vallc = $scope.Product.PSizeList[i].SizeId;
+            $('#Size_' + vallc).prop('checked', true);
+        }
 
         debugger
 
@@ -125,9 +128,9 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
                 Keywordarr.push($scope.KeywordList[i]);
             }
         }
-        for (var i = 0; i < $scope.SizeTitle.length; i++) {
-            if ($scope.SizeTitle[i].Selected) {
-                PSizeArr.push($scope.SizeTitle[i]);
+        for (var i = 0; i < $scope.SizeList.length; i++) {
+            if ($scope.SizeList[i].Selected) {
+                PSizeArr.push($scope.SizeList[i]);
             }
         }
 
@@ -220,6 +223,9 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
         $.each($(".checkbox-input:checked"), function () {
             Keywordarr.push({ 'KeywordId': $(this).val() });
         });
+        $.each($(".checkbox-Size:checked"), function () {
+            PSizeArr.push({ 'SizeId': $(this).val() });
+        });
         delete $scope.Product.PDesc;
         debugger;
         upload({
@@ -254,7 +260,9 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
             data: {
                 ProductId: id,
                 PDesc: $scope.Description,
-                KeywordTbls: Keywordarr
+                KeywordTbls: Keywordarr,
+                SizeTbls: PSizeArr
+
             }
         }).then(function (d) {
             $scope.result = d.data;

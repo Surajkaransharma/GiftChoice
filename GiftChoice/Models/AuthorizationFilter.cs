@@ -46,7 +46,7 @@ namespace GiftChoice.Models
                     filterContext.Result = new RedirectToRouteResult(
                       new RouteValueDictionary
                         {
-                             { "controller", "Login" },
+                             { "controller", "GiftChoiceWelcome" },
                              { "action", "Logout" }
                         });
                 }

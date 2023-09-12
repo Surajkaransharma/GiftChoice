@@ -92,7 +92,7 @@
                             <div class="header-action-right">
                                 <div class="header-action-2">
                                     <div class="header-action-icon-2">
-                                        <a class="mini-cart-icon" href="cart.asp">
+                                        <a class="mini-cart-icon" href="/Home/Cart">
                                             <img alt="cart-image" src="~/Content/assets/imgs/theme/icons/icon-cart.svg">
                                             <span class="pro-count blue">2</span>
                                         </a>
@@ -117,18 +117,19 @@
                                 <nav>
                                     <ul>
                                         <li ng-repeat="n in NavbarMenuList">
-                                            <a href="#">{{n.MTitle}} <i ng-show="n.Submenu.length>0" class="fi-rs-angle-down"></i></a>
+                                            <a href="/Home/shop/{{n.MUrl}}">{{n.MTitle}} <i ng-show="n.Submenu.length>0" class="fi-rs-angle-down"></i></a>
                                             <ul class="sub-menu" ng-show="n.Submenu.length>0">
                                                 <li ng-repeat="s in n.Submenu"><a href="/Home/shop/{{s.SubmenuTitle.KUrl}}">{{s.SubmenuTitle.Keyword}}</a></li>
                                                 @*<li><a href="shop_by_categories.asp">Rakhi For Brother</a></li>
                                                     <li><a href="shop_by_categories.asp">Rakhi For Sister</a></li>*@
                                             </ul>
                                         </li>
-                                 
-                                        <li ng-show="NavbarMenuList.length>1">
+
+                                        <li ng-show="NavbarMenuList.length>5">
                                             <a href="#">More Category <i class="fi-rs-angle-down"></i></a>
-                                            <ul class="sub-menu more-category">
-                                                <li><a href="shop_by_categories.asp">Mug</a></li>
+                                            <ul class="sub-menu more-category"
+                                               <li ng-repeat="s in ScondNavbarMenuList"><a href="/Home/shop/{{s.MUrl}}">{{s.MTitle}}</a></li>
+                                                @*<li><a href="shop_by_categories.asp">Mug</a></li>
                                                 <li><a href="shop_by_categories.asp">Frame</a></li>
                                                 <li><a href="shop_by_categories.asp">Cushion</a></li>
                                                 <li><a href="shop_by_categories.asp">Night Lamps</a></li>
@@ -143,7 +144,7 @@
                                                 <li><a href="shop_by_categories.asp">Gift For Mom</a></li>
                                                 <li><a href="shop_by_categories.asp">Gift For Kids</a></li>
                                                 <li><a href="shop_by_categories.asp">Office Gifts</a></li>
-                                                <li><a href="shop_by_categories.asp">Home Decor</a></li>
+                                                <li><a href="shop_by_categories.asp">Home Decor</a></li>*@
                                             </ul>
                                         </li>
                                         <li><a href="/Home/Contact">Contact Us</a></li>
@@ -206,65 +207,22 @@
                             <ul class="mobile-menu">
                                 <li class="menu-item-has-children"><a href="/Home/Index">Home</a> </li>
 
-                                <li class="menu-item-has-children">
-                                    <span class="menu-expand"></span><a href="shop_by_categories.asp">Rakshabandhan Gifts</a>
+                                <li class="menu-item-has-children" ng-repeat="n in NavbarMenuList">
+                                    <span class="menu-expand"></span><a href="/Home/shop/{{n.MUrl}}">{{n.MTitle}} </a>
                                     <ul class="dropdown">
-                                        <li><a href="shop_by_categories.asp">Rakhi</a></li>
-                                        <li><a href="shop_by_categories.asp">Rakhi For Brother</a></li>
-                                        <li><a href="shop_by_categories.asp">Rakhi For Sister</a></li>
+
+                                        <li ng-repeat="s in n.Submenu">
+                                            <a href="/Home/shop/{{s.SubmenuTitle.KUrl}}">{{s.SubmenuTitle.Keyword}}</a>
+                                        </li>
+
                                     </ul>
                                 </li>
-                                <li class="menu-item-has-children">
-                                    <span class="menu-expand"></span><a href="#">Gift For Friends</a>
-                                    <ul class="dropdown">
-                                        <li><a href="shop_by_categories.asp">Birthday Gifts</a></li>
-                                        <li><a href="shop_by_categories.asp">Farewell Gifts</a></li>
-                                        <li><a href="shop_by_categories.asp">Him Gifts</a></li>
-                                        <li><a href="shop_by_categories.asp">Her Gifts</a></li>
-                                    </ul>
-                                </li>
-                                <li class="menu-item-has-children">
-                                    <span class="menu-expand"></span><a href="#">Gift For Him</a>
-                                    <ul class="dropdown">
-                                        <li><a href="shop_by_categories.asp">Boyfriend Gifts</a></li>
-                                        <li><a href="shop_by_categories.asp">Friend Gifts</a></li>
-                                    </ul>
-                                </li>
-                                <li class="menu-item-has-children">
-                                    <span class="menu-expand"></span><a href="#">Gift For Her</a>
-                                    <ul class="dropdown">
-                                        <li><a href="shop_by_categories.asp">Girlfriend Gifts</a></li>
-                                        <li><a href="shop_by_categories.asp">Friend Gifts</a></li>
-                                    </ul>
-                                </li>
-                                <li class="menu-item-has-children">
-                                    <span class="menu-expand"></span><a href="#">Love Gifts</a>
-                                    <ul class="dropdown">
-                                        <li><a href="shop_by_categories.asp">Anniversary Gits</a></li>
-                                        <li><a href="shop_by_categories.asp">Wedding Gifts</a></li>
-                                        <li><a href="shop_by_categories.asp">Love Gifts</a></li>
-                                    </ul>
-                                </li>
-                                <li class="menu-item-has-children"><a href="#">Gift For Dad</a></li>
-                                <li class="menu-item-has-children">
+
+                                <li class="menu-item-has-children" ng-show="NavbarMenuList.length>5">>
                                     <span class="menu-expand"></span><a href="#">More Category</a>
                                     <ul class="dropdown">
-                                        <li><a href="shop_by_categories.asp">Mug</a></li>
-                                        <li><a href="shop_by_categories.asp">Frame</a></li>
-                                        <li><a href="shop_by_categories.asp">Cushion</a></li>
-                                        <li><a href="shop_by_categories.asp">Night Lamps</a></li>
-                                        <li><a href="shop_by_categories.asp">Keychains</a></li>
-                                        <li><a href="shop_by_categories.asp">Wall Watches</a></li>
-                                        <li><a href="shop_by_categories.asp">Gift Hampers</a></li>
-                                        <li><a href="shop_by_categories.asp">New Releases</a></li>
-                                        <li><a href="shop_by_categories.asp">T-shirts</a></li>
-                                        <li><a href="shop_by_categories.asp">Pendants</a></li>
-                                        <li><a href="shop_by_categories.asp">Statues</a></li>
-                                        <li><a href="shop_by_categories.asp">Name Plates</a></li>
-                                        <li><a href="shop_by_categories.asp">Gift For Mom</a></li>
-                                        <li><a href="shop_by_categories.asp">Gift For Kids</a></li>
-                                        <li><a href="shop_by_categories.asp">Office Gifts</a></li>
-                                        <li><a href="shop_by_categories.asp">Home Decor</a></li>
+                                        <li ng-repeat="s in ScondNavbarMenuList"><a href="/Home/shop/{{s.MUrl}}">{{s.MTitle}}</a></li>
+
                                     </ul>
                                 </li>
                                 <li class="menu-item-has-children"><a href="shop_by_categories.asp">Contact Us</a></li>

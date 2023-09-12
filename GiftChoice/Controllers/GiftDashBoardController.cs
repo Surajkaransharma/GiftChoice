@@ -8,7 +8,7 @@ using System.Web.Mvc;
 
 namespace GiftChoice.Controllers
 {
-    [AuthorizationFilter]
+    //[AuthorizationFilter]
     public class GiftDashBoardController : Controller
     {
         GiftChoiceEntities db = new GiftChoiceEntities();
@@ -444,6 +444,13 @@ namespace GiftChoice.Controllers
                        s.KeywordId,
                        s.PKeywordId,
                        SubmenuTitle = db.KeywordTbls.Where(t => t.KeywordId == s.KeywordId && t.Active == true).Select(t => t.Keyword).FirstOrDefault()
+                   }),
+                   PSizeList = db.PSizeTbls.Where(s => s.ProductId == m.ProductId && s.Active == true).Select(s => new
+                   {
+                       s.ProductId,
+                       s.SizeId,
+                       s.PSizeId,
+                       SizeTitle = db.SizeTbls.Where(t => t.SizeId == s.SizeId && t.Active == true).Select(t => t.SizeTitle).FirstOrDefault()
                    })
                });
             return Json(res, JsonRequestBehavior.AllowGet);
@@ -501,7 +508,7 @@ namespace GiftChoice.Controllers
                     productmodel.Active = true;
                     productmodel.PUrl = model.ProductTitle.Replace(" ", "-");
                     productmodel.PDesc = model.PDesc;
-                    productmodel.PLabel = model.PLabel;
+                    productmodel.PLabel = model.PLabel==null?"": model.PLabel;
                     productmodel.Price = model.Price;
                     productmodel.Create_at = DateTime.Now;
                     productmodel.Update_at = DateTime.Now;
@@ -680,7 +687,7 @@ namespace GiftChoice.Controllers
                     result.MainCateId = model.MainCateId;
                     result.ProductTitle = model.ProductTitle;
                     result.PUrl = model.ProductTitle.Replace(" ", "-");
-                    result.PLabel = model.PLabel;
+                    result.PLabel = model.PLabel==null?"":model.PLabel;
                     result.Price = model.Price;
                     result.Update_at = DateTime.Now;
                     result.Priority = model.Priority;
@@ -797,6 +804,24 @@ namespace GiftChoice.Controllers
                             pKeyword.Active = true;
                             pKeyword.KeywordId = model.KeywordTbls[i].KeywordId;
                             db.PKeywordTbls.Add(pKeyword);
+                            db.SaveChanges();
+
+                        }
+                    }
+
+                    var Sizeid = db.PSizeTbls.Where(p => p.ProductId == model.ProductId);
+                    db.PSizeTbls.RemoveRange(Sizeid);
+                    db.SaveChanges();
+                    if (model.SizeTbls != null)
+                    {
+                        for (int i = 0; i < model.SizeTbls.Count; i++)
+                        {
+                            PSizeTbl pSizeTbl = new PSizeTbl();
+                            pSizeTbl.PSizeId = db.PSizeTbls.DefaultIfEmpty().Max(r => r == null ? 0 : r.PSizeId) + 1;
+                            pSizeTbl.ProductId = model.ProductId;
+                            pSizeTbl.Active = true;
+                            pSizeTbl.SizeId = model.SizeTbls[i].SizeId;
+                            db.PSizeTbls.Add(pSizeTbl);
                             db.SaveChanges();
 
                         }

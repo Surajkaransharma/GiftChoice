@@ -69,6 +69,7 @@
                                     <tr>
                                         <th>S.No.</th>
                                         <th>Size</th>
+                                        <th>Priority</th>
                                         <th>Active</th>
                                         <th>Action</th>
 
@@ -78,7 +79,7 @@
                                     <tr ng-repeat="k in SizeData">
                                         <td>{{$index+1}}</td>
                                         <td>{{k.SizeTitle}}</td>
-
+                                        <td>{{k.Priority}}</td>
                                         <td><a ng-click="SizeActiveDeActive(k.SizeId)" style="cursor:pointer"> <span class="badge {{k.Active==1? 'bg-success' : 'bg-danger'}}">{{k.Active==1?'Active':'Deactive'}}</span></a> </td>
 
                                         <td><a><i class="bx bxs-pencil" ng-click="GetSizebyid($index)"></i></a></td>

@@ -146,8 +146,36 @@ namespace GiftChoice.Controllers
                        s.KeywordId,
                        s.PKeywordId,
                        SubmenuTitle = db.KeywordTbls.Where(t => t.KeywordId == s.KeywordId && t.Active == true).Select(t => t.Keyword).FirstOrDefault()
+                   }),
+                   PSizeList = db.PSizeTbls.Where(s => s.ProductId == m.ProductId && s.Active == true).Select(s => new
+                   {
+                       s.ProductId,
+                       s.SizeId,
+                       s.PSizeId,
+                       SizeTitle = db.SizeTbls.Where(t => t.SizeId == s.SizeId && t.Active == true).Select(t => t.SizeTitle).FirstOrDefault()
                    })
                }).FirstOrDefault();
+            return Json(res, JsonRequestBehavior.AllowGet);
+
+        }
+        public JsonResult GetSmillerProduct(int id)
+        {
+            var res =
+
+               db.ProductTbls.Where(p => p.ProductId != id && p.Active == true).Select(m => new
+               {
+                   m.ProductId,
+                   m.MainCateId,
+                   m.ProductTitle,
+                   m.PLabel,
+                   m.Price,
+                   m.PUrl,
+                 
+                   m.Active,
+                   m.Priority,
+                   ProductImage = db.ProductImages.Where(i => i.ProductId == m.ProductId).Select(i => i.PImage).FirstOrDefault(),
+                 
+               });
             return Json(res, JsonRequestBehavior.AllowGet);
 
         }
@@ -234,7 +262,7 @@ namespace GiftChoice.Controllers
                         s.MCkeywordId,
                         SubmenuTitle = db.KeywordTbls.Where(t => t.KeywordId == s.KeywordId).FirstOrDefault()
                     })
-                }).OrderBy(m => m.Priority).Take(1),
+                }).OrderBy(m => m.Priority).Take(6),
                 ScondNavbarMenuList = db.MainCateTbls.Where(m => m.Active == true).Select(m => new
                 {
                     m.MainCateId,

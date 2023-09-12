@@ -45,7 +45,7 @@
                                         <li><a href="#">Price: Low to High</a></li>
                                         <li><a href="#">Price: High to Low</a></li>
                                         <li><a href="#">Release Date</a></li>
-                                        <li><a href="#">Avg. Rating</a></li>
+                                   
                                     </ul>
                                 </div>
                             </div>
@@ -61,7 +61,7 @@
                                             <img class="hover-img img-fluid" src="~/images/ProductImg/{{p.ProductImage}}" loading="lazy" alt="product-hover-image" loading="lazy" alt="">
                                         </a>
                                     </div>
-                                    <div class="product-badges product-badges-position product-badges-mrg" ng-show="p.PLabel==null">
+                                    <div class="product-badges product-badges-position product-badges-mrg"  ng-show="p.PLabel!=''">
                                         <span  class="hot">{{p.PLabel}}</span>
                                     </div>
                                 </div>
@@ -159,7 +159,7 @@
                     </div>
                     <div align="right">
                         <a href="#" class="btn btn-sm btn-danger"><i class="fi-rs-filter mr-5"></i> Clear Filter</a>
-                        <a href="#" class="btn btn-sm btn-default"><i class="fa fa-trash" aria-hidden="true"></i> Apply Fillter</a>
+                        <a href="#" class="btn btn-sm btn-default"><i class="fa fa-trash" aria-hidden="true" ng-click="FilterProductData()"></i> Apply Fillter</a>
                     </div>
                 </div>
             </div>
