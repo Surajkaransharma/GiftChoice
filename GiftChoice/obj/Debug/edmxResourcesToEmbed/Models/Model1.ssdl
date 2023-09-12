@@ -1,5 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="GiftChoiceModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="AdminTbl">
+    <Key>
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="UserId" Type="int" Nullable="false" />
+    <Property Name="UserName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="UPassword" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="UserType" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Active" Type="bit" Nullable="false" />
+    <Property Name="Create_at" Type="date" Nullable="false" />
+  </EntityType>
   <EntityType Name="BannerTbl">
     <Key>
       <PropertyRef Name="BannerId" />
@@ -84,6 +95,26 @@
     <Property Name="Update_at" Type="datetime" />
     <Property Name="UserID" Type="bigint" />
   </EntityType>
+  <EntityType Name="PSizeTbl">
+    <Key>
+      <PropertyRef Name="PSizeId" />
+    </Key>
+    <Property Name="PSizeId" Type="int" Nullable="false" />
+    <Property Name="SizeId" Type="int" />
+    <Property Name="ProductId" Type="bigint" />
+    <Property Name="Active" Type="bit" />
+  </EntityType>
+  <EntityType Name="SizeTbl">
+    <Key>
+      <PropertyRef Name="SizeId" />
+    </Key>
+    <Property Name="SizeId" Type="int" Nullable="false" />
+    <Property Name="SizeTitle" Type="nvarchar" MaxLength="50" />
+    <Property Name="Create_at" Type="date" />
+    <Property Name="Update_at" Type="date" />
+    <Property Name="Active" Type="bit" />
+    <Property Name="Priority" Type="int" />
+  </EntityType>
   <EntityType Name="SliderTbl">
     <Key>
       <PropertyRef Name="SliderId" />
@@ -165,6 +196,7 @@ warning 6002: The table/view 'GiftChoice.dbo.VProduct' does not have a primary k
     </ReferentialConstraint>
   </Association>
   <EntityContainer Name="GiftChoiceModelStoreContainer">
+    <EntitySet Name="AdminTbl" EntityType="Self.AdminTbl" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="BannerTbl" EntityType="Self.BannerTbl" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="KeywordTbl" EntityType="Self.KeywordTbl" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="MainCateTbl" EntityType="Self.MainCateTbl" Schema="dbo" store:Type="Tables" />
@@ -172,6 +204,8 @@ warning 6002: The table/view 'GiftChoice.dbo.VProduct' does not have a primary k
     <EntitySet Name="PKeywordTbl" EntityType="Self.PKeywordTbl" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ProductImage" EntityType="Self.ProductImage" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ProductTbl" EntityType="Self.ProductTbl" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PSizeTbl" EntityType="Self.PSizeTbl" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SizeTbl" EntityType="Self.SizeTbl" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="SliderTbl" EntityType="Self.SliderTbl" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="VProduct" EntityType="Self.VProduct" store:Type="Views" store:Schema="dbo">
       <DefiningQuery>SELECT 

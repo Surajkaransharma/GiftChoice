@@ -129,11 +129,16 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\GiftChoiceWelcomeController.cs" />
     <Compile Include="Controllers\GiftDashBoardController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\AdminTbl.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AuthorizationFilter.cs" />
     <Compile Include="Models\BannerTbl.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -170,6 +175,12 @@
     <Compile Include="Models\ProductTbl.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\PSizeTbl.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SizeTbl.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\SliderTbl.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -184,6 +195,7 @@
     <Content Include="Angularjs\angular.js" />
     <Content Include="Angularjs\angular.min.js" />
     <Content Include="Angularjs\Home.js" />
+    <Content Include="Angularjs\LoginJs.js" />
     <Content Include="Angularjs\toast-alert\toastr.css" />
     <Content Include="Angularjs\toast-alert\toastr.js" />
     <Content Include="assets\ckeditor\adapters\jquery.js" />
@@ -1378,6 +1390,8 @@
     <Content Include="Views\Home\privacy_policy.cshtml" />
     <Content Include="Views\Home\terms_condition.cshtml" />
     <Content Include="Views\Home\thankyou.cshtml" />
+    <Content Include="Views\GiftDashBoard\AddSize.cshtml" />
+    <Content Include="Views\GiftChoiceWelcome\LoginGiftChoice.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

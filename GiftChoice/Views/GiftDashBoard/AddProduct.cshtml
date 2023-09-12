@@ -54,9 +54,9 @@
                             </div>
 
                             @*<div class="col-md-2">
-                                    <label for="input1" class="form-label">Priority</label>
-                                    <input type="number" class="form-control" ng-model="Product.Priority" id="" placeholder="Priority">
-                                </div>*@
+            <label for="input1" class="form-label">Priority</label>
+            <input type="number" class="form-control" ng-model="Product.Priority" id="" placeholder="Priority">
+        </div>*@
 
                             <div class="col-md-2">
                                 <label for="input1" class="form-label">Price</label>
@@ -69,6 +69,18 @@
                                         <input type="checkbox" id="Keyword_{{k.KeywordId}}" class="checkbox-input" value="{{k.KeywordId}}" ng-model="k.Selected" ng-checked="" />
                                         <span class="checkbox-tile">
                                             <span class="checkbox-label">{{k.Keyword}}</span>
+                                        </span>
+                                    </label>
+
+                                </div>
+                            </div>
+                            <div class="col-md-12" ng-init="GetSizeData()">
+                                <label for="input1" class="form-label">Select Size</label>
+                                <div class="" id="check_box">
+                                    <label class="checkbox-wrapper" ng-repeat="s in SizeList">
+                                        <input type="checkbox" id="Size_{{s.SizeId}}" class="checkbox-input" value="{{s.SizeId}}" ng-model="s.Selected" ng-checked="" />
+                                        <span class="checkbox-tile">
+                                            <span class="checkbox-label">{{s.SizeTitle}}</span>
                                         </span>
                                     </label>
 

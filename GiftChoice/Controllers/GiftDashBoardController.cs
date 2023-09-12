@@ -8,6 +8,7 @@ using System.Web.Mvc;
 
 namespace GiftChoice.Controllers
 {
+    [AuthorizationFilter]
     public class GiftDashBoardController : Controller
     {
         GiftChoiceEntities db = new GiftChoiceEntities();
@@ -38,6 +39,11 @@ namespace GiftChoice.Controllers
         }
 
         public ActionResult AddMainCate()
+        {
+            return View();
+        }
+
+        public ActionResult AddSize()
         {
             return View();
         }
@@ -281,13 +287,53 @@ namespace GiftChoice.Controllers
         }
 
 
-        public JsonResult GetKeywords()
+   
+        public JsonResult GetKeywordData()
         {
-            var res = db.KeywordTbls.Select(k => new { k.Keyword, k.Active, k.KeywordId });
+            var res = db.KeywordTbls.Where(k => k.Active == true).Select(k => new { k.Keyword, k.Active, k.KeywordId });
             return Json(res, JsonRequestBehavior.AllowGet);
 
         }
-        public JsonResult GetKeywordData()
+
+        public JsonResult GetSizeData()
+        {
+            var res = db.SizeTbls.Where(k => k.Active == true);
+            return Json(res, JsonRequestBehavior.AllowGet);
+
+        }
+
+
+        public JsonResult MainCateActiveDeActive(int id)
+        {
+            try
+            {
+                var jb = db.MainCateTbls.Where(c => c.MainCateId == id).FirstOrDefault();
+                if (jb != null)
+                {
+
+                    jb.Active = jb.Active == true ? false : true;
+                    db.SaveChanges();
+                    var res = new { res = "1" };
+                    return Json(res, JsonRequestBehavior.AllowGet);
+                }
+                else
+                {
+                    var res = new { res = "2" };
+                    return Json(res, JsonRequestBehavior.AllowGet);
+                }
+            }
+            catch (Exception ex)
+            {
+                var res = new { res = "0" };
+                return Json(res, JsonRequestBehavior.AllowGet);
+            }
+
+        }
+
+
+        /////// Keyword Code start 
+
+        public JsonResult GetKeywords()
         {
             var res = db.KeywordTbls.Select(k => new { k.Keyword, k.Active, k.KeywordId });
             return Json(res, JsonRequestBehavior.AllowGet);
@@ -329,7 +375,7 @@ namespace GiftChoice.Controllers
                 if (result != null)
                 {
                     result.Keyword = model.Keyword;
-                    result.KUrl = result.Keyword.Replace(" ","-");
+                    result.KUrl = result.Keyword.Replace(" ", "-");
                     db.SaveChanges();
 
                 }
@@ -342,33 +388,6 @@ namespace GiftChoice.Controllers
                 var res = new { res = "0" };
                 return Json(res, JsonRequestBehavior.AllowGet);
             }
-        }
-
-        public JsonResult MainCateActiveDeActive(int id)
-        {
-            try
-            {
-                var jb = db.MainCateTbls.Where(c => c.MainCateId == id).FirstOrDefault();
-                if (jb != null)
-                {
-
-                    jb.Active = jb.Active == true ? false : true;
-                    db.SaveChanges();
-                    var res = new { res = "1" };
-                    return Json(res, JsonRequestBehavior.AllowGet);
-                }
-                else
-                {
-                    var res = new { res = "2" };
-                    return Json(res, JsonRequestBehavior.AllowGet);
-                }
-            }
-            catch (Exception ex)
-            {
-                var res = new { res = "0" };
-                return Json(res, JsonRequestBehavior.AllowGet);
-            }
-
         }
 
         public JsonResult KeywordActiveDeActive(int id)
@@ -399,6 +418,7 @@ namespace GiftChoice.Controllers
         }
 
 
+        /////// Keyword Code End 
         //// Product Code 
 
         public JsonResult GetProduct()
@@ -452,6 +472,7 @@ namespace GiftChoice.Controllers
             public HttpPostedFileBase Image4 { get; set; }
             public HttpPostedFileBase Image5 { get; set; }
             public List<KeywordTbl> KeywordTbls { get; set; }
+            public List<SizeTbl> SizeTbls { get; set; }
 
 
         }
@@ -587,6 +608,21 @@ namespace GiftChoice.Controllers
                         pKeyword.Active = true;
                         pKeyword.KeywordId = model.KeywordTbls[i].KeywordId;
                         db.PKeywordTbls.Add(pKeyword);
+                        db.SaveChanges();
+
+                    }
+                }
+
+                if (model.SizeTbls != null)
+                {
+                    for (int i = 0; i < model.SizeTbls.Count; i++)
+                    {
+                        PSizeTbl pSizeTbl = new PSizeTbl();
+                        pSizeTbl.PSizeId = db.PSizeTbls.DefaultIfEmpty().Max(r => r == null ? 0 : r.PSizeId) + 1;
+                        pSizeTbl.ProductId = model.ProductId;
+                        pSizeTbl.Active = true;
+                        pSizeTbl.SizeId = model.SizeTbls[i].SizeId;
+                        db.PSizeTbls.Add(pSizeTbl);
                         db.SaveChanges();
 
                     }
@@ -1014,6 +1050,95 @@ namespace GiftChoice.Controllers
             }).OrderBy(c => c.Priority);
             return Json(res, JsonRequestBehavior.AllowGet);
         }
-   
+
+
+        /////// Sixe Code start 
+
+        public JsonResult GetSize()
+        {
+            var res = db.SizeTbls;
+            return Json(res, JsonRequestBehavior.AllowGet);
+
+        }
+
+        public JsonResult SubmitSize(SizeTbl model)
+        {
+            try
+            {
+
+                model.SizeId = db.SizeTbls.DefaultIfEmpty().Max(r => r == null ? 0 : r.SizeId) + 1;
+
+
+                model.SizeTitle = model.SizeTitle;              
+                model.Create_at = DateTime.Now;
+                model.Update_at = DateTime.Now;
+                model.Active = true;
+                model.Priority = model.Priority;
+                db.SizeTbls.Add(model);
+                db.SaveChanges();
+                var res = new { res = "1" };
+                return Json(res, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+
+                var res = new { res = "0" };
+                return Json(res, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        public JsonResult UpadateSize(SizeTbl model)
+        {
+            try
+            {
+                var result = db.SizeTbls.FirstOrDefault(p => p.SizeId == model.SizeId);
+                if (result != null)
+                {
+                    result.SizeTitle = model.SizeTitle;
+                    result.Priority = model.Priority;
+                    db.SaveChanges();
+
+                }
+                var res = new { res = "1" };
+                return Json(res, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+
+                var res = new { res = "0" };
+                return Json(res, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        public JsonResult SizeActiveDeActive(int id)
+        {
+            try
+            {
+                var jb = db.SizeTbls.Where(c => c.SizeId == id).FirstOrDefault();
+                if (jb != null)
+                {
+
+                    jb.Active = jb.Active == true ? false : true;
+                    db.SaveChanges();
+                    var res = new { res = "1" };
+                    return Json(res, JsonRequestBehavior.AllowGet);
+                }
+                else
+                {
+                    var res = new { res = "2" };
+                    return Json(res, JsonRequestBehavior.AllowGet);
+                }
+            }
+            catch (Exception ex)
+            {
+                var res = new { res = "0" };
+                return Json(res, JsonRequestBehavior.AllowGet);
+            }
+
+        }
+
+
+        /////// Keyword Code End 
+
     }
 }

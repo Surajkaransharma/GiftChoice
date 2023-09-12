@@ -92,7 +92,7 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
             alert(error.data);
         });
     };
-
+    var PSizeArr = [];
     $scope.SubmitProduct = function () {
         debugger
         var editorText = CKEDITOR.instances.ckeditor.getData();
@@ -123,6 +123,11 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
         for (var i = 0; i < $scope.KeywordList.length; i++) {
             if ($scope.KeywordList[i].Selected) {
                 Keywordarr.push($scope.KeywordList[i]);
+            }
+        }
+        for (var i = 0; i < $scope.SizeTitle.length; i++) {
+            if ($scope.SizeTitle[i].Selected) {
+                PSizeArr.push($scope.SizeTitle[i]);
             }
         }
 
@@ -159,7 +164,8 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
             data: {
                 ProductId: id,
                 PDesc: $scope.Description,
-                KeywordTbls: Keywordarr
+                KeywordTbls: Keywordarr,
+                SizeTbls: PSizeArr
             }
         }).then(function (d) {
             $scope.result = d.data;
@@ -546,6 +552,15 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
             alert(error.data);
         });
     };
+
+    $scope.GetSizeData = function () {
+        $http.get("/GiftDashBoard/GetSizeData").then(function (d) {
+            $scope.SizeList = d.data;
+        }, function (error) {
+            alert(error.data);
+        });
+    };
+
     $scope.GetMainCateData = function () {
         $http.get("/GiftDashBoard/GetMainCateData").then(function (d) {
             $scope.MainCateData = d.data;
@@ -815,6 +830,102 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
         });
     };
 
+    //--------------Size->------------->---------------------->---------------------------->------->------------>---------->---
+
+    ///// Size Code
+    $scope.SubmitSize = function () {
+        if ($("#SizeTitle").val() === "") {
+            toastr["error"]("Please Enter Size");
+            return;
+        }
+        debugger
+        $http({
+            url: '/GiftDashBoard/SubmitSize',
+            method: 'post',
+            data: $scope.Size
+        }).then(function (d) {
+            $scope.result = d.data;
+            if ($scope.result.res === "1") {
+                toastr["success"]("Size save successfully");
+                $scope.Size = null;
+                $scope.GetSize();
+
+            } else if ($scope.result.res === "2") {
+                toastr["error"]("Size already exist");
+            }
+            else {
+                toastr["error"]("Size not save");
+            }
+        }, function (error) {
+            toastr["error"]("Something Went Wrong");
+        });
+    };
+
+    $scope.GetSizebyid = function (index) {
+        $('#btn').css('display', 'none');
+        $('#edbtn').css('display', 'inline');
+        $scope.Size = $scope.SizeData[index];
+    };
+
+    $scope.RessetMain = function () {
+        $('#btn').css('display', 'inline');
+        $('#edbtn').css('display', 'none');
+        $scope.Size = null;
+    };
+
+    $scope.UpadateSize = function () {
+
+        if ($("#SizeTitle").val() === "") {
+            toastr["error"]("Please Enter Size");
+
+            return;
+        }
+        $http({
+            url: '/GiftDashBoard/UpadateSize',
+            method: 'post',
+            data: $scope.Size
+        }).then(function (d) {
+            $scope.result = d.data;
+            if ($scope.result.res === "1") {
+                toastr["success"]("Size Update successfully");
+                $scope.Size = null;
+                $scope.RessetSize();
+                $scope.GetSize();
+            }
+            else {
+                toastr["error"]("Size not save");
+            }
+        }, function (error) {
+            toastr["error"]("Something Went Wrong");
+        });
+    };
+
+    $scope.SizeActiveDeActive = function (id) {
+        $http.get("/GiftDashBoard/SizeActiveDeActive?id=" + id).then(function (d) {
+            $scope.rees = d.data;
+            if ($scope.rees.res === "1") {
+                toastr["success"]("successful");
+                $scope.GetSize();
+            }
+            else {
+                toastr["error"]("something went wrong   ");
+            }
+
+
+        }, function (error) {
+            alert(error.data);
+        });
+    };
+
+    $scope.GetSize = function () {
+        $http.get("/GiftDashBoard/GetSize").then(function (d) {
+            $scope.SizeData = d.data;
+            debugger
+        }, function (error) {
+            alert(error.data);
+        });
+    };
+//--------------Size End->------------->---------------------->---------------------------->------->------------>---------->---
 }]).directive('uploadFile', ['$parse', function ($parse) {
     return {
         restrict: 'A',
