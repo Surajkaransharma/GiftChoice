@@ -24,6 +24,12 @@
     <link href="~/Content/assets/owl-carousel/owl.carousel.css" rel="stylesheet" />
     <script src="~/Angularjs/angular.min.js"></script>
     <script src="~/Angularjs/Home.js"></script>
+    <script src="~/Angularjs/AnguAutoComplete/angucomplete-alt.js"></script>
+    <link href="~/Angularjs/AnguAutoComplete/angucomplete-alt.css" rel="stylesheet" />
+    <link href="https://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css"
+          rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+    <script src="https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
 </head>
 <body ng-app="HomeApp" ng-controller="HomeController">
     <div>
@@ -85,9 +91,18 @@
                         </div>
                         <div class="header-right">
                             <div class="search-style-2">
-                                <form action="#">
-                                    <input type="text" placeholder="Search for items..." class="w-100">
-                                </form>
+
+                                @*<div angucomplete-alt id="txtKeyword" placeholder="KeyWords" pause="100" selected-object="SelectedKeyword" local-data="GetKeywordData" search-fields="Keyword" title-field="Keyword"  minlength="1" input-class="w-100" match-class="highlight">
+                                </div>
+                                <style>
+                                    .angucomplete-dropdown {
+                                        width: 100% !important;
+                                    }
+                                </style>
+                                <input type="text" id="Keyword" value="{{SelectedKeyword.title}}"  placeholder="Enter Keywords">*@
+
+                                <input type="text" id="Keyword" placeholder="Search for items..." ng-model="Keyword" ng-change="GetRandomKeyword()"  class="w-100">
+
                             </div>
                             <div class="header-action-right">
                                 <div class="header-action-2">
@@ -177,7 +192,16 @@
                 <div class="container-fluid">
                     <div class="search-style-3">
                         <form action="#" class="mb-0">
-                            <input type="text" placeholder="Search for items…">
+                            @*<div angucomplete-alt id="txtKeyword" placeholder="KeyWords" pause="100" selected-object="SelectedKeyword"
+                                 local-data="GetKeywordData" search-fields="Keyword" title-field="Keyword" minlength="1" input-class="w-100" match-class="highlight">
+                            </div>
+                            <style>
+                                .angucomplete-dropdown {
+                                    width: 100% !important;
+                                }
+                            </style>
+                            <input type="hidden" id="Keyword" value="{{SelectedKeyword.title}}" placeholder="Enter Keywords">*@
+                            <input type="text" placeholder="Search for items…" id="Keyword"   ng-model="Keyword" ng-change="GetRandomKeyword()" >
                             <button type="submit"><i class="fi-rs-search"></i></button>
                         </form>
                     </div>
@@ -218,7 +242,8 @@
                                     </ul>
                                 </li>
 
-                                <li class="menu-item-has-children" ng-show="NavbarMenuList.length>5">>
+                                <li class="menu-item-has-children" ng-show="NavbarMenuList.length>5">
+                                    >
                                     <span class="menu-expand"></span><a href="#">More Category</a>
                                     <ul class="dropdown">
                                         <li ng-repeat="s in ScondNavbarMenuList"><a href="/Home/shop/{{s.MUrl}}">{{s.MTitle}}</a></li>

@@ -5,6 +5,7 @@
 }
 
 
+
 <main class="main">
     <div class="page-header breadcrumb-wrap">
         <div class="container">
@@ -19,95 +20,110 @@
         <div class="container">
             <div class="row">
                 <div class="col-12">
-                    <div class="table-responsive">
-                        <table class="table text-center clean table-bordered cart-table">
-                            <thead>
-                                <tr class="main-heading">
-                                    <th scope="col">#</th>
-                                    <th scope="col">Image</th>
-                                    <th scope="col">Name</th>
-                                    <th scope="col">Price</th>
-                                    <th scope="col">Quantity</th>
-                                    <th scope="col">Subtotal</th>
-                                    <th scope="col">Remove</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td class="image product-thumbnail">
-                                        <a href="product_detail.asp">
-                                            <img src="https://dummyimage.com/200x200/ccc/000" alt="#" class="img-fluid rounded-2">
-                                        </a>
-                                    </td>
+                    <h1>Shopping Cart</h1>
+                    <ul>
+                        <li ng-repeat="i in cart">
+                            {{ i.name }} - ${{ i.price }}
+                            <button ng-click="removeItemFromCart($index)">Remove</button>
+                        </li>
+                    </ul>
+                    <button ng-click="clearCart()">Clear Cart</button>
 
-                                    <td class="product-des product-name" width="500">
-                                        <h5 class="product-name">
-                                            <a href="product_detail.asp">Product Name Here</a>
-                                        </h5>
-                                    </td>
-
-                                    <td class="price">
-                                        <span><i class="fa fa-inr" aria-hidden="true"></i>65.00 </span>
-                                    </td>
-
-                                    <td class="text-center">
-                                        <div class="detail-qty border radius  m-auto">
-                                            <a href="#" class="qty-down"><i class="fi-rs-angle-small-down"></i></a>
-                                            <span class="qty-val">1</span>
-                                            <a href="#" class="qty-up"><i class="fi-rs-angle-small-up"></i></a>
-                                        </div>
-                                    </td>
-
-                                    <td class="text-right">
-                                        <span><i class="fa fa-inr" aria-hidden="true"></i>65.00 </span>
-                                    </td>
-
-                                    <td class="action">
-                                        <a href="#" class="text-danger"><i class="fi-rs-trash"></i></a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td class="image product-thumbnail">
-                                        <a href="product_detail.asp">
-                                            <img src="https://dummyimage.com/200x200/ccc/000" alt="#" class="img-fluid rounded-2">
-                                        </a>
-                                    </td>
-
-                                    <td class="product-des product-name" width="500">
-                                        <h5 class="product-name">
-                                            <a href="product_detail.asp">Product Name Here</a>
-                                        </h5>
-                                    </td>
-
-                                    <td class="price">
-                                        <span><i class="fa fa-inr" aria-hidden="true"></i>65.00 </span>
-                                    </td>
-
-                                    <td class="text-center">
-                                        <div class="detail-qty border radius  m-auto">
-                                            <a href="#" class="qty-down"><i class="fi-rs-angle-small-down"></i></a>
-                                            <span class="qty-val">1</span>
-                                            <a href="#" class="qty-up"><i class="fi-rs-angle-small-up"></i></a>
-                                        </div>
-                                    </td>
-
-                                    <td class="text-right">
-                                        <span><i class="fa fa-inr" aria-hidden="true"></i>65.00 </span>
-                                    </td>
-
-                                    <td class="action">
-                                        <a href="#" class="text-danger"><i class="fi-rs-trash"></i></a>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
+                    <h2>Add Items to Cart</h2>
+                    <div >
+                        <input type="text" ng-model="name" placeholder="Item Name">
+                        <input type="number" ng-model="price" placeholder="Item Price">
+                        <button ng-click="addItemToCart()">Add to Cart</button>
                     </div>
-                    <div class="cart-action text-end d-flex justify-content-end gap-2">
-                        <a class="btn" href="/Home/index">Continue Shopping</a>
-                        <a class="btn" href="/Home/checkout">Prodcced to Checkout</a>
-                    </div>
+                    @*<div class="table-responsive">
+                            <table class="table text-center clean table-bordered cart-table">
+                                <thead>
+                                    <tr class="main-heading">
+                                        <th scope="col">#</th>
+                                        <th scope="col">Image</th>
+                                        <th scope="col">Name</th>
+                                        <th scope="col">Price</th>
+                                        <th scope="col">Quantity</th>
+                                        <th scope="col">Subtotal</th>
+                                        <th scope="col">Remove</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>1</td>
+                                        <td class="image product-thumbnail">
+                                            <a href="product_detail.asp">
+                                                <img src="https://dummyimage.com/200x200/ccc/000" alt="#" class="img-fluid rounded-2">
+                                            </a>
+                                        </td>
+
+                                        <td class="product-des product-name" width="500">
+                                            <h5 class="product-name">
+                                                <a href="product_detail.asp">Product Name Here</a>
+                                            </h5>
+                                        </td>
+
+                                        <td class="price">
+                                            <span><i class="fa fa-inr" aria-hidden="true"></i>65.00 </span>
+                                        </td>
+
+                                        <td class="text-center">
+                                            <div class="detail-qty border radius  m-auto">
+                                                <a href="#" class="qty-down"><i class="fi-rs-angle-small-down"></i></a>
+                                                <span class="qty-val">1</span>
+                                                <a href="#" class="qty-up"><i class="fi-rs-angle-small-up"></i></a>
+                                            </div>
+                                        </td>
+
+                                        <td class="text-right">
+                                            <span><i class="fa fa-inr" aria-hidden="true"></i>65.00 </span>
+                                        </td>
+
+                                        <td class="action">
+                                            <a href="#" class="text-danger"><i class="fi-rs-trash"></i></a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>2</td>
+                                        <td class="image product-thumbnail">
+                                            <a href="product_detail.asp">
+                                                <img src="https://dummyimage.com/200x200/ccc/000" alt="#" class="img-fluid rounded-2">
+                                            </a>
+                                        </td>
+
+                                        <td class="product-des product-name" width="500">
+                                            <h5 class="product-name">
+                                                <a href="product_detail.asp">Product Name Here</a>
+                                            </h5>
+                                        </td>
+
+                                        <td class="price">
+                                            <span><i class="fa fa-inr" aria-hidden="true"></i>65.00 </span>
+                                        </td>
+
+                                        <td class="text-center">
+                                            <div class="detail-qty border radius  m-auto">
+                                                <a href="#" class="qty-down"><i class="fi-rs-angle-small-down"></i></a>
+                                                <span class="qty-val">1</span>
+                                                <a href="#" class="qty-up"><i class="fi-rs-angle-small-up"></i></a>
+                                            </div>
+                                        </td>
+
+                                        <td class="text-right">
+                                            <span><i class="fa fa-inr" aria-hidden="true"></i>65.00 </span>
+                                        </td>
+
+                                        <td class="action">
+                                            <a href="#" class="text-danger"><i class="fi-rs-trash"></i></a>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="cart-action text-end d-flex justify-content-end gap-2">
+                            <a class="btn" href="/Home/index">Continue Shopping</a>
+                            <a class="btn" href="/Home/checkout">Prodcced to Checkout</a>
+                        </div>*@
                 </div>
             </div>
         </div>

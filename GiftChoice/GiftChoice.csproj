@@ -191,6 +191,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Angularjs\Admin.js" />
+    <Content Include="Angularjs\AnguAutoComplete\angucomplete-alt.css" />
+    <Content Include="Angularjs\AnguAutoComplete\angucomplete-alt.js" />
     <Content Include="Angularjs\angular-upload.js" />
     <Content Include="Angularjs\angular.js" />
     <Content Include="Angularjs\angular.min.js" />

@@ -1,8 +1,124 @@
-﻿var app = angular.module("HomeApp", []);
+﻿var app = angular.module("HomeApp", ['angucomplete-alt']);
 app.controller("HomeController", ['$scope',  '$http', '$sce', function ($scope,  $http, $sce) {
 
+    $http.get("/Home/GetNavbarMenu").then(function (d) {
+        $scope.NavbarMenuList = d.data.NavbarMenuList;
+        $scope.ScondNavbarMenuList = d.data.ScondNavbarMenuList;
+
+        debugger
+    }, function (error) {
+        alert(error.data);
+    });
+    $scope.cart = JSON.parse(localStorage.getItem('cart')) || [];
+ 
+      $scope.addItemToCart = function() {
+          $scope.cart.push({
+              'name': $scope.name,
+              'price': $scope.price
+          });
+    localStorage.setItem('cart', JSON.stringify($scope.cart));
+  };
+
+  // Function to remove an item from the cart.
+  $scope.removeItemFromCart = function(index) {
+    $scope.cart.splice(index, 1);
+    localStorage.setItem('cart', JSON.stringify($scope.cart));
+  };
+
+  // Function to clear the entire cart.
+  $scope.clearCart = function() {
+    $scope.cart = [];
+    localStorage.removeItem('cart');
+    };
+
+    $scope.GetKeywordData = null;
+    $scope.SelectedKeyword = null;
+    var post2 = $http({
+        method: "POST",
+        url: "/Home/GetKeyword",
+        dataType: 'json',
+        data: {},
+        headers: { "Content-Type": "application/json" }
+    });
+
+    post2.success(function (data, status) {
+
+        $scope.GetKeywordData = data.Keywordlist;
+    });
+
+    post2.error(function (data, status) {
+        $window.alert(data.Message);
+    });
 
 
+    $scope.GetRandomKeyword = function () {
+      
+        $("#Keyword").addClass('ui-autocomplete-loader-center');
+        $http.get("/Home/GetRandomKeyword?id=" + $scope.Keyword).then(function (d) {
+         
+            $("#Keyword").removeClass('ui-autocomplete-loader-center');
+
+            $("#Keyword").autocomplete({
+                source: d.data.KeyWordList,
+                select: function (event, ui) {
+                    var label = ui.item.label;
+                    var value = ui.item.value;
+
+                    for (var i = 0; i < d.data.KeyWordList.length; i++) {
+                        if (label === d.data.KeyWordList[i].label) {
+                            location.href = '/Home/Shop?Keyword=' + label  ;
+
+                            //var UniversityName = d.data.Renew[i].University_name;
+                            //$('#University_name').val(UniversityName).trigger('change');
+                            //var courseName = d.data.Renew[i].course_name;
+                            //$('#course_name').val(courseName).trigger('change');
+
+
+                            return;
+                        }
+                    }
+
+                    event.preventDefault();
+                    $(this).val('');
+
+                },
+                focus: function (event, ui) {
+                    this.value = ui.item.label;
+                    event.preventDefault();
+                    $(this).val(ui.item.label);
+                }
+            });
+        }, function (error) {
+            alert(error.data);
+        });
+
+    };
+
+    $scope.SearchData = function () {
+        debugger
+        $scope.kk = $("#Keyword").val();
+        debugger;
+        $http({
+            url: '/Home/SearchData',
+            method: 'POST',
+            data: {
+                list_keyword: $("#Keyword").val(),
+                brand: $("#brand").val(),
+                CompanyName: $("#CompanyName").val(),
+                City_id: $("#CityId").val(),
+                maincategory_id: $("#MainCate").val()
+            }
+        }).then(function (d) {
+            debugger
+            $scope.result = d.data.Keywordlist;
+            debugger
+        //    location.href = '/Home/SearchList?list=' + $scope.result.list + 'brand' + $scope.result.brand + 'CompanyName' + $scope.result.cname + 'CityId' + $scope.result.ctid + 'MainCate' + $scope.result.mcate;
+
+        }, function (error) {
+            alert(error.data);
+        });
+
+    };
     $scope.SliderList = function () {
         debugger
         $http.get("/Home/SliderList").then(function (d) {
@@ -32,14 +148,7 @@ app.controller("HomeController", ['$scope',  '$http', '$sce', function ($scope, 
         });
     };
 
-        $http.get("/Home/GetNavbarMenu").then(function (d) {
-            $scope.NavbarMenuList = d.data.NavbarMenuList;
-            $scope.ScondNavbarMenuList = d.data.ScondNavbarMenuList;
-
-            debugger
-        }, function (error) {
-            alert(error.data);
-        });
+     
     $scope.FilterProductData = function () {
 
     };

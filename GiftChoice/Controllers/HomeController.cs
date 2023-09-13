@@ -275,5 +275,55 @@ namespace GiftChoice.Controllers
             return Json(res, JsonRequestBehavior.AllowGet);
 
         }
+
+        public JsonResult GetKeyword()
+        {
+            db.Configuration.ProxyCreationEnabled = false;
+            var query = new
+            {
+
+                Keywordlist = db.KeywordTbls.Where(p => p.Active == true).OrderByDescending(p => p.Keyword).ToList().Distinct()
+            };
+            return Json(query, JsonRequestBehavior.AllowGet);
+
+        }
+
+        public JsonResult SearchData(string KeyWords)
+       {
+            db.Configuration.ProxyCreationEnabled = false;
+            Session["Keyword"] = KeyWords;
+            var query = new
+            {
+
+                Keyword = Session["Keyword"]
+            };
+            return Json(query, JsonRequestBehavior.AllowGet);
+
+        }
+
+
+        public JsonResult GetRandomKeyword(string id)
+        {
+      
+            
+
+                var res = new
+                {
+
+                    KeyWordList = (from c in db.KeywordTbls
+                             where c.Keyword.Contains(id)
+                             select new
+                             {
+                                 label = c.Keyword,
+                                 value = c.Keyword,
+                                 
+                             }).Take(5)
+
+                };
+                return Json(res, JsonRequestBehavior.AllowGet);
+            
+          
+        }
+
     }
 }
