@@ -8,7 +8,7 @@ using System.Web.Mvc;
 
 namespace GiftChoice.Controllers
 {
-    //[AuthorizationFilter]
+    [AuthorizationFilter]
     public class GiftDashBoardController : Controller
     {
         GiftChoiceEntities db = new GiftChoiceEntities();
@@ -264,6 +264,7 @@ namespace GiftChoice.Controllers
 
         public JsonResult GetMainCateData()
         {
+            db.Configuration.ProxyCreationEnabled = false;
             var res =
 
                db.MainCateTbls.Select(m => new

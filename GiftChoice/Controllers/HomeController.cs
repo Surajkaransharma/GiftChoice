@@ -31,6 +31,7 @@ namespace GiftChoice.Controllers
 
         public JsonResult GetMainCateData()
         {
+            db.Configuration.ProxyCreationEnabled = false;
             var res =
 
                db.MainCateTbls.Where(m => m.Active == true).Select(m => new
@@ -316,7 +317,7 @@ namespace GiftChoice.Controllers
                              {
                                  label = c.Keyword,
                                  value = c.Keyword,
-                                 
+                                 KUrl = c.KUrl
                              }).Take(5)
 
                 };

@@ -1,4 +1,4 @@
-﻿var app = angular.module("HomeApp", ['angucomplete-alt']);
+﻿var app = angular.module("HomeApp", []);
 app.controller("HomeController", ['$scope',  '$http', '$sce', function ($scope,  $http, $sce) {
 
     $http.get("/Home/GetNavbarMenu").then(function (d) {
@@ -8,10 +8,12 @@ app.controller("HomeController", ['$scope',  '$http', '$sce', function ($scope, 
         debugger
     }, function (error) {
         alert(error.data);
-    });
+        });
+
+    $scope.cart = [];
     $scope.cart = JSON.parse(localStorage.getItem('cart')) || [];
- 
-      $scope.addItemToCart = function() {
+    $scope.addItemToCart = function () {
+        debugger
           $scope.cart.push({
               'name': $scope.name,
               'price': $scope.price
@@ -66,14 +68,7 @@ app.controller("HomeController", ['$scope',  '$http', '$sce', function ($scope, 
 
                     for (var i = 0; i < d.data.KeyWordList.length; i++) {
                         if (label === d.data.KeyWordList[i].label) {
-                            location.href = '/Home/Shop?Keyword=' + label  ;
-
-                            //var UniversityName = d.data.Renew[i].University_name;
-                            //$('#University_name').val(UniversityName).trigger('change');
-                            //var courseName = d.data.Renew[i].course_name;
-                            //$('#course_name').val(courseName).trigger('change');
-
-
+                            location.href = '/Home/Shop/' + d.data.KeyWordList[i].KUrl;                    
                             return;
                         }
                     }
@@ -153,8 +148,9 @@ app.controller("HomeController", ['$scope',  '$http', '$sce', function ($scope, 
 
     };
     $scope.GetMainCateData = function () {
-        $http.get("/GiftDashBoard/GetMainCateData").then(function (d) {
+        $http.get("/Home/GetMainCateData").then(function (d) {
             $scope.MainCateData = d.data;
+            debugger
             setTimeout(() => {
                 $(".carausel-6-columns").each(function (key, item) {
                     var id = $(this).attr("id");
