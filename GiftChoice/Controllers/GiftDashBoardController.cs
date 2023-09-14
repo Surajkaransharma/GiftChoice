@@ -67,6 +67,10 @@ namespace GiftChoice.Controllers
         {
             return View();
         }
+        public ActionResult OrderList()
+        {
+            return View();
+        }
 
 
         public class MainCateTblModel
@@ -511,6 +515,7 @@ namespace GiftChoice.Controllers
                     productmodel.PDesc = model.PDesc;
                     productmodel.PLabel = model.PLabel==null?"": model.PLabel;
                     productmodel.Price = model.Price;
+                    productmodel.Qty = 1;
                     productmodel.Create_at = DateTime.Now;
                     productmodel.Update_at = DateTime.Now;
                     productmodel.Priority = model.Priority;
@@ -1165,6 +1170,38 @@ namespace GiftChoice.Controllers
 
 
         /////// Keyword Code End 
+        [JsonNetFilter]
+        public JsonResult GetOrder()
+        {
+            var res =
 
+               db.OrderMainTbls.Where(o => o.Active == true && o.Cancel == false).Select(m => new
+               {
+                 
+                   m.RUserId,                 
+                   m.Active,
+                   m.Cancel,                  
+                   m.TotalAmount,
+                   m.Create_at,
+                   UserData = db.UserRegisters.Where(u => u.RUserId == m.RUserId).FirstOrDefault(),  
+                  OrderListData = db.OrderTbls.Where(p => p.MorderId == m.MorderId).Select(p => new {
+                      p.PPrice,
+                      p.PQty,
+                      p.ProductId,
+                      p.OrderId,
+                      p.MorderId,
+                      p.RUserId,
+
+                      ProductDetail = db.VProducts.Where(q => q.ProductId == p.ProductId).FirstOrDefault(),
+                      Productimage = db.ProductImages.Where(q => q.ProductId == p.ProductId == q.Active == true).Select(q => q.PImage),
+
+                  })
+                  
+           
+               
+               });
+            return Json(res, JsonRequestBehavior.AllowGet);
+
+        }
     }
 }

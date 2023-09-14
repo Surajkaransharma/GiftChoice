@@ -1,6 +1,8 @@
 ﻿var app = angular.module("app", []);
 app.controller("appController", function ($scope, $http) {
+    
     $scope.login = function () {
+        debugger
         $http({
             url: '/GiftChoiceWelcome/Login',
             method: 'post',

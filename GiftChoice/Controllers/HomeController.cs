@@ -1,5 +1,7 @@
 ﻿using GiftChoice.Models;
 using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web.Mvc;
 
@@ -73,7 +75,7 @@ namespace GiftChoice.Controllers
         {
             var res =
 
-               db.ProductTbls.Select(m => new
+               db.ProductTbls.Where(m => m.Active == true).Select(m => new
                {
                    m.ProductId,
                    m.MainCateId,
@@ -83,6 +85,7 @@ namespace GiftChoice.Controllers
                    m.PUrl,
                    m.Active,
                    m.Priority,
+                   m.Qty,
                    ProductImage = db.ProductImages.Where(i => i.PImageId == m.ProductId).Select(i => i.PImage).FirstOrDefault(),
                    Maincate = db.MainCateTbls.Where(p => p.MainCateId == m.MainCateId).Select(p => p.MTitle).FirstOrDefault(),
                    Submenu = db.PKeywordTbls.Where(s => s.ProductId == m.ProductId && s.Active == true).Select(s => new
@@ -171,11 +174,11 @@ namespace GiftChoice.Controllers
                    m.PLabel,
                    m.Price,
                    m.PUrl,
-                 
+
                    m.Active,
                    m.Priority,
                    ProductImage = db.ProductImages.Where(i => i.ProductId == m.ProductId).Select(i => i.PImage).FirstOrDefault(),
-                 
+
                });
             return Json(res, JsonRequestBehavior.AllowGet);
 
@@ -269,7 +272,7 @@ namespace GiftChoice.Controllers
                     m.MainCateId,
                     m.MUrl,
                     m.MTitle,
-                   m.Priority,
+                    m.Priority,
                 }).OrderBy(m => m.Priority).Skip(6),
             };
 
@@ -290,7 +293,7 @@ namespace GiftChoice.Controllers
         }
 
         public JsonResult SearchData(string KeyWords)
-       {
+        {
             db.Configuration.ProxyCreationEnabled = false;
             Session["Keyword"] = KeyWords;
             var query = new
@@ -305,25 +308,132 @@ namespace GiftChoice.Controllers
 
         public JsonResult GetRandomKeyword(string id)
         {
-      
-            
 
-                var res = new
+
+
+            var res = new
+            {
+
+                KeyWordList = (from c in db.KeywordTbls
+                               where c.Keyword.Contains(id)
+                               select new
+                               {
+                                   label = c.Keyword,
+                                   value = c.Keyword,
+                                   KUrl = c.KUrl
+                               }).Take(5)
+
+            };
+            return Json(res, JsonRequestBehavior.AllowGet);
+
+
+        }
+
+        public class Cartmodel
+        {
+            public long RUserId { get; set; }
+
+            [Required]
+            public string UName { get; set; }
+            [Required]
+            public string MobileNo { get; set; }
+            public string UEmail { get; set; }
+            public string UAddress { get; set; }
+            public string City { get; set; }
+            public string UState { get; set; }
+            public string Pincode { get; set; }
+            public Nullable<bool> Active { get; set; }
+            public Nullable<System.DateTime> Create_at { get; set; }
+            public List<OrderList> OrderList { get; set; }
+            public Nullable<double> OrderAmount { get; set; }
+
+        }
+
+        public class OrderList
+        {
+            public long OrderId { get; set; }
+            public long RUserId { get; set; }
+            public long ProductId { get; set; }
+            public Nullable<long> Qty { get; set; }
+            public Nullable<double> Price { get; set; }
+            public Nullable<double> OrderAmount { get; set; }
+            public Nullable<bool> Active { get; set; }
+            public Nullable<bool> Cancel { get; set; }
+            public Nullable<System.DateTime> Create_at { get; set; }
+        }
+
+        public JsonResult AddOrder(Cartmodel model)
+        {
+            try
+            {
+                var result = db.UserRegisters.Where(r => r.MobileNo == model.MobileNo).FirstOrDefault();
+                long Userid;
+                if (result == null)
                 {
 
-                    KeyWordList = (from c in db.KeywordTbls
-                             where c.Keyword.Contains(id)
-                             select new
-                             {
-                                 label = c.Keyword,
-                                 value = c.Keyword,
-                                 KUrl = c.KUrl
-                             }).Take(5)
+                    UserRegister user = new UserRegister();
+                    user.RUserId = db.UserRegisters.DefaultIfEmpty().Max(r => r == null ? 0 : r.RUserId) + 1;
+                    Userid = user.RUserId;
+                    user.UName = model.UName;
+                    user.UEmail = model.UEmail;
+                    user.MobileNo = model.MobileNo;
+                    user.City = model.City;
+                    user.UAddress = model.UAddress;
+                    user.UState = model.UState;
+                    user.Pincode = model.Pincode;
+                    user.Create_at = DateTime.Now;
+                    user.Active = true;
+                    db.UserRegisters.Add(user);
+                    db.SaveChanges();
 
-                };
+                }
+                else
+                {
+                    Userid = result.RUserId;
+                }
+
+                if (model.OrderList != null)
+                {
+
+                    OrderMainTbl orderMain = new OrderMainTbl();
+                    orderMain.MorderId = db.OrderMainTbls.DefaultIfEmpty().Max(r => r == null ? 0 : r.MorderId) + 1;
+                    orderMain.RUserId = Userid;
+                    orderMain.TotalAmount = model.OrderAmount;
+                    orderMain.Create_at = DateTime.Now;
+                    orderMain.Delivery = false;
+                    orderMain.Dispatch = false;
+                    orderMain.Active = true;
+                    orderMain.Cancel = false;
+                    db.OrderMainTbls.Add(orderMain);
+                    db.SaveChanges();
+
+                    for (int i = 0; i < model.OrderList.Count; i++)
+                    {
+
+                        OrderTbl orderTbl = new OrderTbl();
+                        orderTbl.OrderId = db.OrderTbls.DefaultIfEmpty().Max(r => r == null ? 0 : r.OrderId) + 1;
+                        orderTbl.MorderId = orderMain.MorderId;
+                        orderTbl.RUserId = Userid;
+                        orderTbl.ProductId = model.OrderList[i].ProductId;
+                        orderTbl.PPrice = model.OrderList[i].Price;
+                        orderTbl.PQty = model.OrderList[i].Qty;
+                        orderTbl.OrderAmount = model.OrderAmount;
+                        orderTbl.Create_at = DateTime.Now;
+                        orderTbl.Active = true;
+                        orderTbl.Cancel = false;
+                        db.OrderTbls.Add(orderTbl);
+                        db.SaveChanges();
+                    }
+                }
+                var res = new { res = "1" };
                 return Json(res, JsonRequestBehavior.AllowGet);
-            
-          
+            }
+            catch (Exception ex)
+            {
+
+                var res = new { res = "0" };
+                return Json(res, JsonRequestBehavior.AllowGet);
+            }
         }
 
     }

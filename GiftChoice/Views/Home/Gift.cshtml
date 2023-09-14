@@ -10,7 +10,7 @@
     <div class="page-header breadcrumb-wrap">
         <div class="container">
             <div class="breadcrumb">
-                <a href="index.asp" rel="nofollow">Home</a>
+                <a href="/Home/Index" rel="nofollow">Home</a>
                 <span></span>{{Product.Maincate}}
                 <span></span> {{Product.ProductTitle}}
             </div>
@@ -55,9 +55,9 @@
                                     </div>
                                     <!-- Main Image -->
                                     <!-- Small Image -->
-                                    <div class="slider-nav-thumbnails pl-15 pr-15">
-                                        <div ng-repeat="i in Product.ProductImage" >
-                                        <img src="~/images/ProductImg/{{i}}" class="img-fluid" loading="lazy" alt="product image">
+                                    <div class="slider-nav-thumbnails pl-15 pr-15" ng-show="Product.ProductImage.length>1">
+                                        <div ng-repeat="i in Product.ProductImage" ng-show="i!=null" >
+                                        <img src="~/images/ProductImg/{{i}}" ng-show="i!=null" class="img-fluid" loading="lazy" alt="product image">
                                         </div>
                                         <div><img src="~/images/ProductImg/{{i}}" class="img-fluid" loading="lazy" alt="product image"></div>
                                         @*<div><img src="https://dummyimage.com/400x400/ccc/000" class="img-fluid" loading="lazy" alt="product image"></div>
@@ -74,7 +74,7 @@
                                 <div class="detail-info">
                                     <h2 class="title-detail"> {{Product.ProductTitle}}</h2>
                                     <div class="pro-details-brand">
-                                        <span><a href="shop_by_categories.asp">{{Product.Maincate}}</a></span>
+                                        <span><a href="">{{Product.Maincate}}</a></span>
                                     </div>
 
                                     <div class="clearfix product-price-cover border-0 mb-0">
@@ -108,12 +108,12 @@
                                     </div>
 
                                     <div class="detail-extralink">
-                                        <div class="detail-qty border radius">
+                                        @*<div class="detail-qty border radius">
                                             <a href="#" class="qty-down"><i class="fi-rs-angle-small-down"></i></a>
                                             <span class="qty-val">1</span>
                                             <a href="#" class="qty-up"><i class="fi-rs-angle-small-up"></i></a>
-                                        </div>
-                                        <a class="button button-add-to-cart text-white" href="cart.asp" role="button">Add To Cart</a>
+                                        </div>*@
+                                        <a class="button button-add-to-cart text-white"  ng-click="GiftAddItemToCart($index)"  role="button">Add To Cart</a>
                                     </div>
                                 </div>
                             </div>
@@ -125,7 +125,7 @@
                                 <h3 class="section-title style-1 mb-30">Related products</h3>
                             </div>
                             <div class="row product-grid-4" ng-init="GetSmillerProduct(@ViewBag.id)">
-                                <div class="col-lg-3 col-6 col-sm-4" ng-repeat="q in ProductList">
+                                <div class="col-lg-3 col-6 col-sm-4" ng-repeat="q in ProductData">
                                     <div class="product-cart-wrap mb-30">
                                         <div class="product-img-action-wrap">
                                             <div class="product-img product-img-zoom">
@@ -144,7 +144,7 @@
                                                 <span><i class="fa fa-inr" aria-hidden="true"></i> {{q.Price}}/-</span>
                                             </div>
                                             <div class="product-action-1 show">
-                                                <a aria-label="Add To Cart" class="action-btn hover-up" href="#"><i class="fi-rs-shopping-bag-add"></i></a>
+                                                <a aria-label="Add To Cart" class="action-btn hover-up"  ng-click="addItemToCart($index)"><i class="fi-rs-shopping-bag-add"></i></a>
                                             </div>
                                         </div>
                                     </div>

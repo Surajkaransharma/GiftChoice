@@ -15,7 +15,7 @@ namespace GiftChoice.Models
                     
             int CompanyId = Convert.ToInt32(System.Web.HttpContext.Current.Session["AdminCode"]);
       
-            string role = Convert.ToString(System.Web.HttpContext.Current.Session["AdminType"]);
+        //    string role = Convert.ToString(System.Web.HttpContext.Current.Session["AdminType"]);
             string actionName = filterContext.ActionDescriptor.ActionName;
             string controllerName = filterContext.ActionDescriptor.ControllerDescriptor.ControllerName;
             string tag = controllerName + actionName;
@@ -28,7 +28,7 @@ namespace GiftChoice.Models
             }
 
             // Check for authorization
-            if (System.Web.HttpContext.Current.Session["CompanyId"] == null)
+            if (System.Web.HttpContext.Current.Session["AdminCode"] == null)
             {
                 filterContext.Result = new HttpUnauthorizedResult();
             }
@@ -36,7 +36,7 @@ namespace GiftChoice.Models
             {
                 bool isPermitted = false;
 
-                var viewPermission = db.AdminTbls.Where(x => x.UserId == CompanyId && x.Active == true && x.UserType == role).SingleOrDefault();
+                var viewPermission = db.AdminTbls.Where(x => x.UserId == CompanyId && x.Active == true).SingleOrDefault();
                 if (viewPermission != null)
                 {              
                         isPermitted = true;                  

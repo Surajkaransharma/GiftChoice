@@ -79,6 +79,22 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
         });
     };
 
+    $scope.GetOrder = function () {
+        $http.get("/GiftDashBoard/GetOrder").then(function (d) {
+            $scope.OrderData = d.data;
+        }, function (error) {
+            alert(error.data);
+        });
+    };
+
+
+    $scope.OrderDetails = function (index) {
+        debugger
+        $scope.OrderDetailsData = $scope.OrderData[index]; 
+        $("#OrderDetailsModel").modal("toggle");
+    };
+
+
     $scope.ProductActiveDeActive = function (id) {
         $http.get("/GiftDashBoard/ProductActiveDeActive?id=" + id).then(function (d) {
             $scope.rees = d.data;

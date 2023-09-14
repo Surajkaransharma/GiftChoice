@@ -23,31 +23,31 @@
                         </div>
                         <form method="post">
                             <div class="form-group">
-                                <input type="text" required="" name="fname" placeholder="Enter Full Name *">
+                                <input type="text" required="" id="Name" name="fname" placeholder="Enter Full Name *">
                             </div>
                             <div class="form-group">
-                                <input type="number" required="" name="mnumber" placeholder="Enter Mobile Number *">
+                                <input type="number" required="" id="MobileNo" name="mnumber" placeholder="Enter Mobile Number *">
                             </div>
                             <div class="form-group">
-                                <input required="" type="email" name="email" placeholder="Enter Email address">
+                                <input required="" type="email" name="email" id="Email" placeholder="Enter Email address">
                             </div>
                             <div class="form-group">
-                                <input required="" type="text" name="city" placeholder="City / Town *">
+                                <input required="" type="text" name="city" id="City" placeholder="City / Town *">
                             </div>
                             <div class="form-group">
-                                <input required="" type="text" name="state" placeholder="State / County *">
+                                <input required="" type="text" name="state" id="State" placeholder="State / County *">
                             </div>
                             <div class="form-group">
-                                <input required="" type="text" name="zipcode" placeholder="Postcode / ZIP *">
+                                <input required="" type="text" name="zipcode" id="zipcode" placeholder="Postcode / ZIP *">
                             </div>
                             <div class="form-group mb-0">
-                                <textarea rows="3" placeholder="Enter Address"></textarea>
+                                <textarea rows="3" placeholder="Enter Address" id="Address"></textarea>
                             </div>
                         </form>
                     </div>
                 </div>
                 <div class="col-md-6">
-                    <div class="order_review">
+                    <div class="order_review" ng-init="GetCart()">
                         <div class="mb-20">
                             <h4>Your Orders</h4>
                         </div>
@@ -61,71 +61,36 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>1</td>
+                                    <tr ng-repeat="i in cart track by $index">
+                                        <td>{{$index+1}}</td>
 
                                         <td class="image product-thumbnail">
-                                            <a href="product_detail.asp">
-                                                <img src="https://dummyimage.com/50x50/ccc/000" alt="#" class="img-fluid rounded-3">
+                                            <a href="#">
+                                                <img src="~/images/ProductImg/{{i.ProductImage}}" alt="#" class="img-fluid rounded-3">
                                             </a>
                                         </td>
 
                                         <td>
                                             <h5>
-                                                <a href="product_detail.asp">Yidarton Women Summer Blue</a>
+                                                <a href="#">{{i.ProductTitle}}</a>
                                             </h5>
-                                            <span class="product-qty"> <i class="fa fa-inr" aria-hidden="true"></i>100 x 2</span>
+                                            <span class="product-qty"> <i class="fa fa-inr" aria-hidden="true"></i>{{i.Price}} x{{i.Qty}}</span>
                                         </td>
 
-                                        <td><i class="fa fa-inr" aria-hidden="true"></i>200.00</td>
+                                        <td><i class="fa fa-inr" aria-hidden="true"></i>{{i.Price*i.Qty}}</td>
                                     </tr>
-                                    <tr>
-                                        <td>2</td>
-
-                                        <td class="image product-thumbnail">
-                                            <a href="product_detail.asp">
-                                                <img src="https://dummyimage.com/50x50/ccc/000" alt="#" class="img-fluid rounded-3">
-                                            </a>
-                                        </td>
-
-                                        <td>
-                                            <h5>
-                                                <a href="product_detail.asp">Yidarton Women Summer Blue</a>
-                                            </h5>
-                                            <span class="product-qty"> <i class="fa fa-inr" aria-hidden="true"></i>100 x 2</span>
-                                        </td>
-
-                                        <td><i class="fa fa-inr" aria-hidden="true"></i>200.00</td>
-                                    </tr>
-                                    <tr>
-                                        <td>3</td>
-
-                                        <td class="image product-thumbnail">
-                                            <a href="product_detail.asp">
-                                                <img src="https://dummyimage.com/50x50/ccc/000" alt="#" class="img-fluid rounded-3">
-                                            </a>
-                                        </td>
-
-                                        <td>
-                                            <h5>
-                                                <a href="product_detail.asp">Yidarton Women Summer Blue</a>
-                                            </h5>
-                                            <span class="product-qty"> <i class="fa fa-inr" aria-hidden="true"></i>100 x 2</span>
-                                        </td>
-
-                                        <td><i class="fa fa-inr" aria-hidden="true"></i>200.00</td>
-                                    </tr>
+                           
                                     <tr>
                                         <td colspan="2">Total Payble Amount</td>
                                         <td colspan="2" class="product-subtotal">
-                                            <span class="font-xl text-brand fw-600"><i class="fa fa-inr" aria-hidden="true"></i>600.00</span>
+                                            <span class="font-xl text-brand fw-600"><i class="fa fa-inr" aria-hidden="true"></i>{{TotalAmount}}</span>
                                         </td>
                                     </tr>
                                 </tbody>
                             </table>
                         </div>
                         <div class="text-end">
-                            <a href="thankyou.asp" class="btn btn-fill-out btn-block">Place Order</a>
+                            <a ng-click="AddOrder()" class="btn btn-fill-out btn-block">Place Order</a>
                         </div>
                     </div>
                 </div>

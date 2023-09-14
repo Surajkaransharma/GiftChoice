@@ -6,12 +6,15 @@
     <EntitySet Name="KeywordTbls" EntityType="GiftChoiceModel.KeywordTbl" />
     <EntitySet Name="MainCateTbls" EntityType="GiftChoiceModel.MainCateTbl" />
     <EntitySet Name="MCKeywordTbls" EntityType="GiftChoiceModel.MCKeywordTbl" />
+    <EntitySet Name="OrderMainTbls" EntityType="GiftChoiceModel.OrderMainTbl" />
+    <EntitySet Name="OrderTbls" EntityType="GiftChoiceModel.OrderTbl" />
     <EntitySet Name="PKeywordTbls" EntityType="GiftChoiceModel.PKeywordTbl" />
     <EntitySet Name="ProductImages" EntityType="GiftChoiceModel.ProductImage" />
     <EntitySet Name="ProductTbls" EntityType="GiftChoiceModel.ProductTbl" />
     <EntitySet Name="PSizeTbls" EntityType="GiftChoiceModel.PSizeTbl" />
     <EntitySet Name="SizeTbls" EntityType="GiftChoiceModel.SizeTbl" />
     <EntitySet Name="SliderTbls" EntityType="GiftChoiceModel.SliderTbl" />
+    <EntitySet Name="UserRegisters" EntityType="GiftChoiceModel.UserRegister" />
     <EntitySet Name="VProducts" EntityType="GiftChoiceModel.VProduct" />
     <AssociationSet Name="FK__MCKeyword__Keywo__3B75D760" Association="GiftChoiceModel.FK__MCKeyword__Keywo__3B75D760">
       <End Role="KeywordTbl" EntitySet="KeywordTbls" />
@@ -86,6 +89,34 @@
     <NavigationProperty Name="KeywordTbl" Relationship="GiftChoiceModel.FK__MCKeyword__Keywo__3B75D760" FromRole="MCKeywordTbl" ToRole="KeywordTbl" />
     <NavigationProperty Name="MainCateTbl" Relationship="GiftChoiceModel.FK__MCKeyword__MainC__3A81B327" FromRole="MCKeywordTbl" ToRole="MainCateTbl" />
   </EntityType>
+  <EntityType Name="OrderMainTbl">
+    <Key>
+      <PropertyRef Name="MorderId" />
+    </Key>
+    <Property Name="MorderId" Type="Int64" Nullable="false" />
+    <Property Name="RUserId" Type="Int64" />
+    <Property Name="Delivery" Type="Boolean" />
+    <Property Name="Dispatch" Type="Boolean" />
+    <Property Name="Active" Type="Boolean" />
+    <Property Name="Cancel" Type="Boolean" />
+    <Property Name="Create_at" Type="DateTime" Precision="0" />
+    <Property Name="TotalAmount" Type="Double" />
+  </EntityType>
+  <EntityType Name="OrderTbl">
+    <Key>
+      <PropertyRef Name="OrderId" />
+    </Key>
+    <Property Name="OrderId" Type="Int64" Nullable="false" />
+    <Property Name="RUserId" Type="Int64" Nullable="false" />
+    <Property Name="ProductId" Type="Int64" Nullable="false" />
+    <Property Name="PQty" Type="Int64" />
+    <Property Name="PPrice" Type="Double" />
+    <Property Name="OrderAmount" Type="Double" />
+    <Property Name="Active" Type="Boolean" />
+    <Property Name="Cancel" Type="Boolean" />
+    <Property Name="Create_at" Type="DateTime" Precision="0" />
+    <Property Name="MorderId" Type="Int64" />
+  </EntityType>
   <EntityType Name="PKeywordTbl">
     <Key>
       <PropertyRef Name="PKeywordId" />
@@ -120,6 +151,7 @@
     <Property Name="Create_at" Type="DateTime" Precision="3" />
     <Property Name="Update_at" Type="DateTime" Precision="3" />
     <Property Name="UserID" Type="Int64" />
+    <Property Name="Qty" Type="Int64" />
   </EntityType>
   <EntityType Name="PSizeTbl">
     <Key>
@@ -153,6 +185,21 @@
     <Property Name="Active" Type="Boolean" />
     <Property Name="Create_at" Type="DateTime" Precision="3" />
     <Property Name="Update_at" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="UserRegister">
+    <Key>
+      <PropertyRef Name="RUserId" />
+    </Key>
+    <Property Name="RUserId" Type="Int64" Nullable="false" />
+    <Property Name="UName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="MobileNo" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="UEmail" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="UAddress" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="City" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="UState" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Pincode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Active" Type="Boolean" />
+    <Property Name="Create_at" Type="DateTime" Precision="0" />
   </EntityType>
   <EntityType Name="VProduct">
     <Key>

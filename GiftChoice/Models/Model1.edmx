@@ -65,6 +65,34 @@
           <Property Name="KeywordId" Type="bigint" />
           <Property Name="Active" Type="bit" />
         </EntityType>
+        <EntityType Name="OrderMainTbl">
+          <Key>
+            <PropertyRef Name="MorderId" />
+          </Key>
+          <Property Name="MorderId" Type="bigint" Nullable="false" />
+          <Property Name="RUserId" Type="bigint" />
+          <Property Name="Delivery" Type="bit" />
+          <Property Name="Dispatch" Type="bit" />
+          <Property Name="Active" Type="bit" />
+          <Property Name="Cancel" Type="bit" />
+          <Property Name="Create_at" Type="date" />
+          <Property Name="TotalAmount" Type="float" />
+        </EntityType>
+        <EntityType Name="OrderTbl">
+          <Key>
+            <PropertyRef Name="OrderId" />
+          </Key>
+          <Property Name="OrderId" Type="bigint" Nullable="false" />
+          <Property Name="RUserId" Type="bigint" Nullable="false" />
+          <Property Name="ProductId" Type="bigint" Nullable="false" />
+          <Property Name="PQty" Type="bigint" />
+          <Property Name="PPrice" Type="float" />
+          <Property Name="OrderAmount" Type="float" />
+          <Property Name="Active" Type="bit" />
+          <Property Name="Cancel" Type="bit" />
+          <Property Name="Create_at" Type="date" />
+          <Property Name="MorderId" Type="bigint" />
+        </EntityType>
         <EntityType Name="PKeywordTbl">
           <Key>
             <PropertyRef Name="PKeywordId" />
@@ -99,6 +127,7 @@
           <Property Name="Create_at" Type="datetime" />
           <Property Name="Update_at" Type="datetime" />
           <Property Name="UserID" Type="bigint" />
+          <Property Name="Qty" Type="bigint" />
         </EntityType>
         <EntityType Name="PSizeTbl">
           <Key>
@@ -132,6 +161,21 @@
           <Property Name="Active" Type="bit" />
           <Property Name="Create_at" Type="datetime" />
           <Property Name="Update_at" Type="datetime" />
+        </EntityType>
+        <EntityType Name="UserRegister">
+          <Key>
+            <PropertyRef Name="RUserId" />
+          </Key>
+          <Property Name="RUserId" Type="bigint" Nullable="false" />
+          <Property Name="UName" Type="varchar" MaxLength="100" />
+          <Property Name="MobileNo" Type="varchar" MaxLength="20" />
+          <Property Name="UEmail" Type="varchar" MaxLength="50" />
+          <Property Name="UAddress" Type="varchar(max)" />
+          <Property Name="City" Type="varchar(max)" />
+          <Property Name="UState" Type="varchar(max)" />
+          <Property Name="Pincode" Type="varchar" MaxLength="50" />
+          <Property Name="Active" Type="bit" />
+          <Property Name="Create_at" Type="date" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'GiftChoice.dbo.VProduct' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -206,12 +250,15 @@ warning 6002: The table/view 'GiftChoice.dbo.VProduct' does not have a primary k
           <EntitySet Name="KeywordTbl" EntityType="Self.KeywordTbl" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MainCateTbl" EntityType="Self.MainCateTbl" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MCKeywordTbl" EntityType="Self.MCKeywordTbl" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OrderMainTbl" EntityType="Self.OrderMainTbl" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OrderTbl" EntityType="Self.OrderTbl" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PKeywordTbl" EntityType="Self.PKeywordTbl" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ProductImage" EntityType="Self.ProductImage" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ProductTbl" EntityType="Self.ProductTbl" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PSizeTbl" EntityType="Self.PSizeTbl" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SizeTbl" EntityType="Self.SizeTbl" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SliderTbl" EntityType="Self.SliderTbl" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserRegister" EntityType="Self.UserRegister" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="VProduct" EntityType="Self.VProduct" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [VProduct].[ProductId] AS [ProductId], 
@@ -268,12 +315,15 @@ warning 6002: The table/view 'GiftChoice.dbo.VProduct' does not have a primary k
           <EntitySet Name="KeywordTbls" EntityType="GiftChoiceModel.KeywordTbl" />
           <EntitySet Name="MainCateTbls" EntityType="GiftChoiceModel.MainCateTbl" />
           <EntitySet Name="MCKeywordTbls" EntityType="GiftChoiceModel.MCKeywordTbl" />
+          <EntitySet Name="OrderMainTbls" EntityType="GiftChoiceModel.OrderMainTbl" />
+          <EntitySet Name="OrderTbls" EntityType="GiftChoiceModel.OrderTbl" />
           <EntitySet Name="PKeywordTbls" EntityType="GiftChoiceModel.PKeywordTbl" />
           <EntitySet Name="ProductImages" EntityType="GiftChoiceModel.ProductImage" />
           <EntitySet Name="ProductTbls" EntityType="GiftChoiceModel.ProductTbl" />
           <EntitySet Name="PSizeTbls" EntityType="GiftChoiceModel.PSizeTbl" />
           <EntitySet Name="SizeTbls" EntityType="GiftChoiceModel.SizeTbl" />
           <EntitySet Name="SliderTbls" EntityType="GiftChoiceModel.SliderTbl" />
+          <EntitySet Name="UserRegisters" EntityType="GiftChoiceModel.UserRegister" />
           <EntitySet Name="VProducts" EntityType="GiftChoiceModel.VProduct" />
           <AssociationSet Name="FK__MCKeyword__Keywo__3B75D760" Association="GiftChoiceModel.FK__MCKeyword__Keywo__3B75D760">
             <End Role="KeywordTbl" EntitySet="KeywordTbls" />
@@ -348,6 +398,34 @@ warning 6002: The table/view 'GiftChoice.dbo.VProduct' does not have a primary k
           <NavigationProperty Name="KeywordTbl" Relationship="GiftChoiceModel.FK__MCKeyword__Keywo__3B75D760" FromRole="MCKeywordTbl" ToRole="KeywordTbl" />
           <NavigationProperty Name="MainCateTbl" Relationship="GiftChoiceModel.FK__MCKeyword__MainC__3A81B327" FromRole="MCKeywordTbl" ToRole="MainCateTbl" />
         </EntityType>
+        <EntityType Name="OrderMainTbl">
+          <Key>
+            <PropertyRef Name="MorderId" />
+          </Key>
+          <Property Name="MorderId" Type="Int64" Nullable="false" />
+          <Property Name="RUserId" Type="Int64" />
+          <Property Name="Delivery" Type="Boolean" />
+          <Property Name="Dispatch" Type="Boolean" />
+          <Property Name="Active" Type="Boolean" />
+          <Property Name="Cancel" Type="Boolean" />
+          <Property Name="Create_at" Type="DateTime" Precision="0" />
+          <Property Name="TotalAmount" Type="Double" />
+        </EntityType>
+        <EntityType Name="OrderTbl">
+          <Key>
+            <PropertyRef Name="OrderId" />
+          </Key>
+          <Property Name="OrderId" Type="Int64" Nullable="false" />
+          <Property Name="RUserId" Type="Int64" Nullable="false" />
+          <Property Name="ProductId" Type="Int64" Nullable="false" />
+          <Property Name="PQty" Type="Int64" />
+          <Property Name="PPrice" Type="Double" />
+          <Property Name="OrderAmount" Type="Double" />
+          <Property Name="Active" Type="Boolean" />
+          <Property Name="Cancel" Type="Boolean" />
+          <Property Name="Create_at" Type="DateTime" Precision="0" />
+          <Property Name="MorderId" Type="Int64" />
+        </EntityType>
         <EntityType Name="PKeywordTbl">
           <Key>
             <PropertyRef Name="PKeywordId" />
@@ -382,6 +460,7 @@ warning 6002: The table/view 'GiftChoice.dbo.VProduct' does not have a primary k
           <Property Name="Create_at" Type="DateTime" Precision="3" />
           <Property Name="Update_at" Type="DateTime" Precision="3" />
           <Property Name="UserID" Type="Int64" />
+          <Property Name="Qty" Type="Int64" />
         </EntityType>
         <EntityType Name="PSizeTbl">
           <Key>
@@ -415,6 +494,21 @@ warning 6002: The table/view 'GiftChoice.dbo.VProduct' does not have a primary k
           <Property Name="Active" Type="Boolean" />
           <Property Name="Create_at" Type="DateTime" Precision="3" />
           <Property Name="Update_at" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="UserRegister">
+          <Key>
+            <PropertyRef Name="RUserId" />
+          </Key>
+          <Property Name="RUserId" Type="Int64" Nullable="false" />
+          <Property Name="UName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="MobileNo" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="UEmail" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="UAddress" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="City" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="UState" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Pincode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Active" Type="Boolean" />
+          <Property Name="Create_at" Type="DateTime" Precision="0" />
         </EntityType>
         <EntityType Name="VProduct">
           <Key>
@@ -552,6 +646,36 @@ warning 6002: The table/view 'GiftChoice.dbo.VProduct' does not have a primary k
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="OrderMainTbls">
+            <EntityTypeMapping TypeName="GiftChoiceModel.OrderMainTbl">
+              <MappingFragment StoreEntitySet="OrderMainTbl">
+                <ScalarProperty Name="TotalAmount" ColumnName="TotalAmount" />
+                <ScalarProperty Name="Create_at" ColumnName="Create_at" />
+                <ScalarProperty Name="Cancel" ColumnName="Cancel" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="Dispatch" ColumnName="Dispatch" />
+                <ScalarProperty Name="Delivery" ColumnName="Delivery" />
+                <ScalarProperty Name="RUserId" ColumnName="RUserId" />
+                <ScalarProperty Name="MorderId" ColumnName="MorderId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OrderTbls">
+            <EntityTypeMapping TypeName="GiftChoiceModel.OrderTbl">
+              <MappingFragment StoreEntitySet="OrderTbl">
+                <ScalarProperty Name="MorderId" ColumnName="MorderId" />
+                <ScalarProperty Name="Create_at" ColumnName="Create_at" />
+                <ScalarProperty Name="Cancel" ColumnName="Cancel" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="OrderAmount" ColumnName="OrderAmount" />
+                <ScalarProperty Name="PPrice" ColumnName="PPrice" />
+                <ScalarProperty Name="PQty" ColumnName="PQty" />
+                <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+                <ScalarProperty Name="RUserId" ColumnName="RUserId" />
+                <ScalarProperty Name="OrderId" ColumnName="OrderId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="PKeywordTbls">
             <EntityTypeMapping TypeName="GiftChoiceModel.PKeywordTbl">
               <MappingFragment StoreEntitySet="PKeywordTbl">
@@ -575,6 +699,7 @@ warning 6002: The table/view 'GiftChoice.dbo.VProduct' does not have a primary k
           <EntitySetMapping Name="ProductTbls">
             <EntityTypeMapping TypeName="GiftChoiceModel.ProductTbl">
               <MappingFragment StoreEntitySet="ProductTbl">
+                <ScalarProperty Name="Qty" ColumnName="Qty" />
                 <ScalarProperty Name="UserID" ColumnName="UserID" />
                 <ScalarProperty Name="Update_at" ColumnName="Update_at" />
                 <ScalarProperty Name="Create_at" ColumnName="Create_at" />
@@ -623,6 +748,22 @@ warning 6002: The table/view 'GiftChoice.dbo.VProduct' does not have a primary k
                 <ScalarProperty Name="SUrl" ColumnName="SUrl" />
                 <ScalarProperty Name="MainCateId" ColumnName="MainCateId" />
                 <ScalarProperty Name="SliderId" ColumnName="SliderId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserRegisters">
+            <EntityTypeMapping TypeName="GiftChoiceModel.UserRegister">
+              <MappingFragment StoreEntitySet="UserRegister">
+                <ScalarProperty Name="Create_at" ColumnName="Create_at" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="Pincode" ColumnName="Pincode" />
+                <ScalarProperty Name="UState" ColumnName="UState" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="UAddress" ColumnName="UAddress" />
+                <ScalarProperty Name="UEmail" ColumnName="UEmail" />
+                <ScalarProperty Name="MobileNo" ColumnName="MobileNo" />
+                <ScalarProperty Name="UName" ColumnName="UName" />
+                <ScalarProperty Name="RUserId" ColumnName="RUserId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

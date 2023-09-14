@@ -60,6 +60,34 @@
     <Property Name="KeywordId" Type="bigint" />
     <Property Name="Active" Type="bit" />
   </EntityType>
+  <EntityType Name="OrderMainTbl">
+    <Key>
+      <PropertyRef Name="MorderId" />
+    </Key>
+    <Property Name="MorderId" Type="bigint" Nullable="false" />
+    <Property Name="RUserId" Type="bigint" />
+    <Property Name="Delivery" Type="bit" />
+    <Property Name="Dispatch" Type="bit" />
+    <Property Name="Active" Type="bit" />
+    <Property Name="Cancel" Type="bit" />
+    <Property Name="Create_at" Type="date" />
+    <Property Name="TotalAmount" Type="float" />
+  </EntityType>
+  <EntityType Name="OrderTbl">
+    <Key>
+      <PropertyRef Name="OrderId" />
+    </Key>
+    <Property Name="OrderId" Type="bigint" Nullable="false" />
+    <Property Name="RUserId" Type="bigint" Nullable="false" />
+    <Property Name="ProductId" Type="bigint" Nullable="false" />
+    <Property Name="PQty" Type="bigint" />
+    <Property Name="PPrice" Type="float" />
+    <Property Name="OrderAmount" Type="float" />
+    <Property Name="Active" Type="bit" />
+    <Property Name="Cancel" Type="bit" />
+    <Property Name="Create_at" Type="date" />
+    <Property Name="MorderId" Type="bigint" />
+  </EntityType>
   <EntityType Name="PKeywordTbl">
     <Key>
       <PropertyRef Name="PKeywordId" />
@@ -94,6 +122,7 @@
     <Property Name="Create_at" Type="datetime" />
     <Property Name="Update_at" Type="datetime" />
     <Property Name="UserID" Type="bigint" />
+    <Property Name="Qty" Type="bigint" />
   </EntityType>
   <EntityType Name="PSizeTbl">
     <Key>
@@ -127,6 +156,21 @@
     <Property Name="Active" Type="bit" />
     <Property Name="Create_at" Type="datetime" />
     <Property Name="Update_at" Type="datetime" />
+  </EntityType>
+  <EntityType Name="UserRegister">
+    <Key>
+      <PropertyRef Name="RUserId" />
+    </Key>
+    <Property Name="RUserId" Type="bigint" Nullable="false" />
+    <Property Name="UName" Type="varchar" MaxLength="100" />
+    <Property Name="MobileNo" Type="varchar" MaxLength="20" />
+    <Property Name="UEmail" Type="varchar" MaxLength="50" />
+    <Property Name="UAddress" Type="varchar(max)" />
+    <Property Name="City" Type="varchar(max)" />
+    <Property Name="UState" Type="varchar(max)" />
+    <Property Name="Pincode" Type="varchar" MaxLength="50" />
+    <Property Name="Active" Type="bit" />
+    <Property Name="Create_at" Type="date" />
   </EntityType>
   <!--Errors Found During Generation:
 warning 6002: The table/view 'GiftChoice.dbo.VProduct' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -201,12 +245,15 @@ warning 6002: The table/view 'GiftChoice.dbo.VProduct' does not have a primary k
     <EntitySet Name="KeywordTbl" EntityType="Self.KeywordTbl" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="MainCateTbl" EntityType="Self.MainCateTbl" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="MCKeywordTbl" EntityType="Self.MCKeywordTbl" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="OrderMainTbl" EntityType="Self.OrderMainTbl" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="OrderTbl" EntityType="Self.OrderTbl" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="PKeywordTbl" EntityType="Self.PKeywordTbl" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ProductImage" EntityType="Self.ProductImage" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ProductTbl" EntityType="Self.ProductTbl" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="PSizeTbl" EntityType="Self.PSizeTbl" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="SizeTbl" EntityType="Self.SizeTbl" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="SliderTbl" EntityType="Self.SliderTbl" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="UserRegister" EntityType="Self.UserRegister" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="VProduct" EntityType="Self.VProduct" store:Type="Views" store:Schema="dbo">
       <DefiningQuery>SELECT 
     [VProduct].[ProductId] AS [ProductId], 

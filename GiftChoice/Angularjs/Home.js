@@ -1,5 +1,5 @@
 ﻿var app = angular.module("HomeApp", []);
-app.controller("HomeController", ['$scope',  '$http', '$sce', function ($scope,  $http, $sce) {
+app.controller("HomeController", ['$scope', '$http', '$sce', function ($scope, $http, $sce) {
 
     $http.get("/Home/GetNavbarMenu").then(function (d) {
         $scope.NavbarMenuList = d.data.NavbarMenuList;
@@ -8,31 +8,86 @@ app.controller("HomeController", ['$scope',  '$http', '$sce', function ($scope, 
         debugger
     }, function (error) {
         alert(error.data);
+    });
+
+    $scope.cart = [];
+    //$scope.CartItem = JSON.parse(localStorage.getItem('cart'));
+    $scope.GetCart = function () {
+        debugger
+        var cartlist = [];
+
+        $scope.cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+        if ($scope.cart != null) {
+            $scope.TotalAmount = 0;
+            for (var i = 0; i < $scope.cart.length; i++) {
+                $scope.TotalAmount += $scope.cart[i].Price * $scope.cart[i].Qty;
+            }
+        }
+    };
+    $scope.addItemToCart = function (index) {
+        debugger
+        debugger;
+
+        var selectedProduct = $scope.ProductData[index];
+        var productId = selectedProduct.ProductId;
+
+        // Check if the product with the same productId is already in the cart
+        var productInCart = $scope.cart.find(function (item) {
+            return item.ProductId === productId;
         });
 
-    $scope.cart = [];
-    $scope.cart = JSON.parse(localStorage.getItem('cart')) || [];
-    $scope.addItemToCart = function () {
-        debugger
-          $scope.cart.push({
-              'name': $scope.name,
-              'price': $scope.price
-          });
-    localStorage.setItem('cart', JSON.stringify($scope.cart));
-  };
+        if (!productInCart) {
+            // If the product is not in the cart, add it
+            $scope.cart.push(selectedProduct);
+            localStorage.setItem('cart', JSON.stringify($scope.cart));
+            $scope.GetCart();
+            toastr["success"]("Product successfully added to the cart.");
+        } else {
+            // If the product is already in the cart, you can handle this case as needed.
+            // For example, you can display a message to the user.
 
-  // Function to remove an item from the cart.
-  $scope.removeItemFromCart = function(index) {
-    $scope.cart.splice(index, 1);
-    localStorage.setItem('cart', JSON.stringify($scope.cart));
-  };
-
-  // Function to clear the entire cart.
-  $scope.clearCart = function() {
-    $scope.cart = [];
-    localStorage.removeItem('cart');
+            toastr["error"]('This product is already in your cart.');
+            return;
+        }
+        //$scope.cart.push($scope.ProductData[index]);
+        ////$scope.cart =    $scope.ProductData[index];
+        ////$scope.cart.push({
+        ////    'name': $scope.name,
+        ////    'price': $scope.price
+        ////});
+        //localStorage.setItem('cart', JSON.stringify($scope.cart));
+        //$scope.GetCart();
     };
 
+    // Function to remove an item from the cart.
+    $scope.removeItemFromCart = function (index) {
+        $scope.cart.splice(index, 1);
+        localStorage.setItem('cart', JSON.stringify($scope.cart));
+    };
+
+    // Function to clear the entire cart.
+    $scope.clearCart = function () {
+        $scope.cart = [];
+        localStorage.removeItem('cart');
+    };
+    $scope.Qty = 1;
+    $scope.AddQty = function (id, index) {
+        debugger
+
+        if (id == 1) {
+
+            $scope.Qty += 1;
+
+            $scope.cart[index].Qty = $scope.Qty;
+        }
+        if (id == 0) {
+            $scope.Qty -= 1;
+            $scope.cart[index].Qty = $scope.Qty;
+        }
+
+        localStorage.setItem('cart', JSON.stringify($scope.cart));
+    }
     $scope.GetKeywordData = null;
     $scope.SelectedKeyword = null;
     var post2 = $http({
@@ -54,10 +109,10 @@ app.controller("HomeController", ['$scope',  '$http', '$sce', function ($scope, 
 
 
     $scope.GetRandomKeyword = function () {
-      
+
         $("#Keyword").addClass('ui-autocomplete-loader-center');
         $http.get("/Home/GetRandomKeyword?id=" + $scope.Keyword).then(function (d) {
-         
+
             $("#Keyword").removeClass('ui-autocomplete-loader-center');
 
             $("#Keyword").autocomplete({
@@ -68,7 +123,7 @@ app.controller("HomeController", ['$scope',  '$http', '$sce', function ($scope, 
 
                     for (var i = 0; i < d.data.KeyWordList.length; i++) {
                         if (label === d.data.KeyWordList[i].label) {
-                            location.href = '/Home/Shop/' + d.data.KeyWordList[i].KUrl;                    
+                            location.href = '/Home/Shop/' + d.data.KeyWordList[i].KUrl;
                             return;
                         }
                     }
@@ -107,7 +162,7 @@ app.controller("HomeController", ['$scope',  '$http', '$sce', function ($scope, 
             debugger
             $scope.result = d.data.Keywordlist;
             debugger
-        //    location.href = '/Home/SearchList?list=' + $scope.result.list + 'brand' + $scope.result.brand + 'CompanyName' + $scope.result.cname + 'CityId' + $scope.result.ctid + 'MainCate' + $scope.result.mcate;
+            //    location.href = '/Home/SearchList?list=' + $scope.result.list + 'brand' + $scope.result.brand + 'CompanyName' + $scope.result.cname + 'CityId' + $scope.result.ctid + 'MainCate' + $scope.result.mcate;
 
         }, function (error) {
             alert(error.data);
@@ -143,7 +198,7 @@ app.controller("HomeController", ['$scope',  '$http', '$sce', function ($scope, 
         });
     };
 
-     
+
     $scope.FilterProductData = function () {
 
     };
@@ -283,9 +338,43 @@ app.controller("HomeController", ['$scope',  '$http', '$sce', function ($scope, 
 
     };
 
+    $scope.GiftAddItemToCart = function (index) {
+        debugger
+        debugger;
+
+        var selectedProduct = $scope.Product[index];
+        var productId = selectedProduct.ProductId;
+
+        // Check if the product with the same productId is already in the cart
+        var productInCart = $scope.cart.find(function (item) {
+            return item.ProductId === productId;
+        });
+
+        if (!productInCart) {
+            // If the product is not in the cart, add it
+            $scope.cart.push(selectedProduct);
+            localStorage.setItem('cart', JSON.stringify($scope.cart));
+            $scope.GetCart();
+            toastr["success"]("Product successfully added to the cart.");
+        } else {
+            // If the product is already in the cart, you can handle this case as needed.
+            // For example, you can display a message to the user.
+
+            toastr["error"]('This product is already in your cart.');
+            return;
+        }
+        //$scope.cart.push($scope.ProductData[index]);
+        ////$scope.cart =    $scope.ProductData[index];
+        ////$scope.cart.push({
+        ////    'name': $scope.name,
+        ////    'price': $scope.price
+        ////});
+        //localStorage.setItem('cart', JSON.stringify($scope.cart));
+        //$scope.GetCart();
+    };
 
     $scope.GetProductByid = function (id) {
-        debugger 
+        debugger
         $http.get("/Home/GetProductByid?id=" + id).then(function (d) {
             debugger
             $scope.Product = d.data;
@@ -293,93 +382,93 @@ app.controller("HomeController", ['$scope',  '$http', '$sce', function ($scope, 
             $('#desc').html($scope.Product.PDesc);
 
             setTimeout(() => {
-          
-                    //Load functions
-                 
-                        $('.product-image-slider').slick({
-                            slidesToShow: 1,
-                            slidesToScroll: 1,
-                            arrows: false,
-                            fade: false,
-                            asNavFor: '.slider-nav-thumbnails',
-                        });
 
-                        $('.slider-nav-thumbnails').slick({
-                            slidesToShow: 5,
-                            slidesToScroll: 1,
-                            asNavFor: '.product-image-slider',
-                            dots: false,
-                            focusOnSelect: true,
-                            prevArrow: '<button type="button" class="slick-prev"><i class="fi-rs-angle-left"></i></button>',
-                            nextArrow: '<button type="button" class="slick-next"><i class="fi-rs-angle-right"></i></button>'
-                        });
+                //Load functions
 
-                        // Remove active class from all thumbnail slides
-                        $('.slider-nav-thumbnails .slick-slide').removeClass('slick-active');
+                $('.product-image-slider').slick({
+                    slidesToShow: 1,
+                    slidesToScroll: 1,
+                    arrows: false,
+                    fade: false,
+                    asNavFor: '.slider-nav-thumbnails',
+                });
 
-                        // Set active class to first thumbnail slides
-                        $('.slider-nav-thumbnails .slick-slide').eq(0).addClass('slick-active');
+                $('.slider-nav-thumbnails').slick({
+                    slidesToShow: 5,
+                    slidesToScroll: 1,
+                    asNavFor: '.product-image-slider',
+                    dots: false,
+                    focusOnSelect: true,
+                    prevArrow: '<button type="button" class="slick-prev"><i class="fi-rs-angle-left"></i></button>',
+                    nextArrow: '<button type="button" class="slick-next"><i class="fi-rs-angle-right"></i></button>'
+                });
 
-                        // On before slide change match active thumbnail to current slide
-                        $('.product-image-slider').on('beforeChange', function (event, slick, currentSlide, nextSlide) {
-                            var mySlideNumber = nextSlide;
-                            $('.slider-nav-thumbnails .slick-slide').removeClass('slick-active');
-                            $('.slider-nav-thumbnails .slick-slide').eq(mySlideNumber).addClass('slick-active');
-                        });
+                // Remove active class from all thumbnail slides
+                $('.slider-nav-thumbnails .slick-slide').removeClass('slick-active');
 
-                        $('.product-image-slider').on('beforeChange', function (event, slick, currentSlide, nextSlide) {
-                            var img = $(slick.$slides[nextSlide]).find("img");
-                            $('.zoomWindowContainer,.zoomContainer').remove();
-                            $(img).elevateZoom({
-                                zoomType: "inner",
-                                cursor: "crosshair",
-                                zoomWindowFadeIn: 500,
-                                zoomWindowFadeOut: 750
-                            });
-                        });
-                        //Elevate Zoom
-                        if ($(".product-image-slider").length) {
-                            $('.product-image-slider .slick-active img').elevateZoom({
-                                zoomType: "inner",
-                                cursor: "crosshair",
-                                zoomWindowFadeIn: 500,
-                                zoomWindowFadeOut: 750
-                            });
+                // Set active class to first thumbnail slides
+                $('.slider-nav-thumbnails .slick-slide').eq(0).addClass('slick-active');
+
+                // On before slide change match active thumbnail to current slide
+                $('.product-image-slider').on('beforeChange', function (event, slick, currentSlide, nextSlide) {
+                    var mySlideNumber = nextSlide;
+                    $('.slider-nav-thumbnails .slick-slide').removeClass('slick-active');
+                    $('.slider-nav-thumbnails .slick-slide').eq(mySlideNumber).addClass('slick-active');
+                });
+
+                $('.product-image-slider').on('beforeChange', function (event, slick, currentSlide, nextSlide) {
+                    var img = $(slick.$slides[nextSlide]).find("img");
+                    $('.zoomWindowContainer,.zoomContainer').remove();
+                    $(img).elevateZoom({
+                        zoomType: "inner",
+                        cursor: "crosshair",
+                        zoomWindowFadeIn: 500,
+                        zoomWindowFadeOut: 750
+                    });
+                });
+                //Elevate Zoom
+                if ($(".product-image-slider").length) {
+                    $('.product-image-slider .slick-active img').elevateZoom({
+                        zoomType: "inner",
+                        cursor: "crosshair",
+                        zoomWindowFadeIn: 500,
+                        zoomWindowFadeOut: 750
+                    });
+                }
+                //Filter color/Size
+                $('.list-filter').each(function () {
+                    $(this).find('a').on('click', function (event) {
+                        event.preventDefault();
+                        $(this).parent().siblings().removeClass('active');
+                        $(this).parent().toggleClass('active');
+                        $(this).parents('.attr-detail').find('.current-size').text($(this).text());
+                        $(this).parents('.attr-detail').find('.current-color').text($(this).attr('data-color'));
+                    });
+                });
+                //Qty Up-Down
+                $('.detail-qty').each(function () {
+                    var qtyval = parseInt($(this).find('.qty-val').text(), 10);
+                    $('.qty-up').on('click', function (event) {
+                        event.preventDefault();
+                        qtyval = qtyval + 1;
+                        $(this).prev().text(qtyval);
+                    });
+                    $('.qty-down').on('click', function (event) {
+                        event.preventDefault();
+                        qtyval = qtyval - 1;
+                        if (qtyval > 1) {
+                            $(this).next().text(qtyval);
+                        } else {
+                            qtyval = 1;
+                            $(this).next().text(qtyval);
                         }
-                        //Filter color/Size
-                        $('.list-filter').each(function () {
-                            $(this).find('a').on('click', function (event) {
-                                event.preventDefault();
-                                $(this).parent().siblings().removeClass('active');
-                                $(this).parent().toggleClass('active');
-                                $(this).parents('.attr-detail').find('.current-size').text($(this).text());
-                                $(this).parents('.attr-detail').find('.current-color').text($(this).attr('data-color'));
-                            });
-                        });
-                        //Qty Up-Down
-                        $('.detail-qty').each(function () {
-                            var qtyval = parseInt($(this).find('.qty-val').text(), 10);
-                            $('.qty-up').on('click', function (event) {
-                                event.preventDefault();
-                                qtyval = qtyval + 1;
-                                $(this).prev().text(qtyval);
-                            });
-                            $('.qty-down').on('click', function (event) {
-                                event.preventDefault();
-                                qtyval = qtyval - 1;
-                                if (qtyval > 1) {
-                                    $(this).next().text(qtyval);
-                                } else {
-                                    qtyval = 1;
-                                    $(this).next().text(qtyval);
-                                }
-                            });
-                        });
+                    });
+                });
 
-                        $('.dropdown-menu .cart_list').on('click', function (event) {
-                            event.stopPropagation();
-                        });
-                
+                $('.dropdown-menu .cart_list').on('click', function (event) {
+                    event.stopPropagation();
+                });
+
 
             }, 100);
 
@@ -391,13 +480,59 @@ app.controller("HomeController", ['$scope',  '$http', '$sce', function ($scope, 
         debugger
         $http.get("/Home/GetSmillerProduct?id=" + id).then(function (d) {
             debugger
-            $scope.ProductList = d.data;
+            $scope.ProductData = d.data;
 
-          
-      
+
+
 
         }, function (error) {
             alert(error.data);
         });
     };
+
+
+    $scope.AddOrder = function () {
+           
+        if ($("#Name").val() === "") {
+            toastr["error"]("Please Enter Name");
+       
+            return;
+        }
+
+        if ($("#MobileNo").val() === "") {
+            toastr["error"]("Please Enter Mobile No.");
+
+            return;
+        }
+
+        debugger;
+        $http({
+            url: '/Home/AddOrder',
+            method: 'post',
+            data: {
+                UName: $("#Name").val(),
+                MobileNo: $("#MobileNo").val(),
+                UEmail: $("#Email").val(),
+                UAddress: $("#Address").val(),
+                City: $("#City").val(),
+                UState: $("#State").val(),
+                Pincode: $("#zipcode").val(),
+                OrderList: $scope.cart,
+                OrderAmount: $scope.TotalAmount
+            }
+        }).then(function (d) {
+            $scope.result = d.data;
+            debugger
+            if ($scope.result.res === "1") {
+             
+                $scope.cart = [];
+                localStorage.removeItem('cart');
+
+                window.location.href = "/Home/thankyou"
+            }
+        }, function (error) {
+            toastr["error"]("Something Went Wrong");
+        });
+    };
+
 }]);

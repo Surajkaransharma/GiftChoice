@@ -22,10 +22,11 @@
     <link rel="stylesheet" href="~/Content/assets/css/font-awasome/font-awesome.min.css">
     <link href="~/Content/assets/owl-carousel/owl.theme.css" rel="stylesheet" />
     <link href="~/Content/assets/owl-carousel/owl.carousel.css" rel="stylesheet" />
+    <link href="~/Angularjs/toast-alert/toastr.css" rel="stylesheet" />
     <script src="~/Angularjs/angular.min.js"></script>
     <script src="~/Angularjs/Home.js"></script>
     @*<script src="~/Angularjs/AnguAutoComplete/angucomplete-alt.js"></script>
-    <link href="~/Angularjs/AnguAutoComplete/angucomplete-alt.css" rel="stylesheet" />*@
+        <link href="~/Angularjs/AnguAutoComplete/angucomplete-alt.css" rel="stylesheet" />*@
     <link href="https://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
     <script src="https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
@@ -92,23 +93,23 @@
                             <div class="search-style-2">
 
                                 @*<div angucomplete-alt id="txtKeyword" placeholder="KeyWords" pause="100" selected-object="SelectedKeyword" local-data="GetKeywordData" search-fields="Keyword" title-field="Keyword"  minlength="1" input-class="w-100" match-class="highlight">
-                                </div>
-                                <style>
-                                    .angucomplete-dropdown {
-                                        width: 100% !important;
-                                    }
-                                </style>
-                                <input type="text" id="Keyword" value="{{SelectedKeyword.title}}"  placeholder="Enter Keywords">*@
+                                    </div>
+                                    <style>
+                                        .angucomplete-dropdown {
+                                            width: 100% !important;
+                                        }
+                                    </style>
+                                    <input type="text" id="Keyword" value="{{SelectedKeyword.title}}"  placeholder="Enter Keywords">*@
 
-                                <input type="text" id="Keyword" placeholder="Search for items..." ng-model="Keyword" ng-change="GetRandomKeyword()"  class="w-100">
+                                <input type="text" id="Keyword" placeholder="Search for items..." ng-model="Keyword" ng-change="GetRandomKeyword()" class="w-100">
 
                             </div>
                             <div class="header-action-right">
                                 <div class="header-action-2">
-                                    <div class="header-action-icon-2">
+                                    <div class="header-action-icon-2" ng-init="GetCart()">
                                         <a class="mini-cart-icon" href="/Home/Cart">
                                             <img alt="cart-image" src="~/Content/assets/imgs/theme/icons/icon-cart.svg">
-                                            <span class="pro-count blue">2</span>
+                                            <span class="pro-count blue">{{cart.length==null?0:cart.length}}</span>
                                         </a>
                                     </div>
                                 </div>
@@ -170,7 +171,7 @@
                         <div class="header-action-right d-block d-lg-none">
                             <div class="header-action-2">
                                 <div class="header-action-icon-2">
-                                    <a class="mini-cart-icon" href="cart.asp">
+                                    <a class="mini-cart-icon" href="/Home/Cart">
                                         <img alt="Evara" src="~/Content/assets/imgs/theme/icons/icon-cart.svg">
                                         <span class="pro-count white">2</span>
                                     </a>
@@ -192,15 +193,15 @@
                     <div class="search-style-3">
                         <form action="#" class="mb-0">
                             @*<div angucomplete-alt id="txtKeyword" placeholder="KeyWords" pause="100" selected-object="SelectedKeyword"
-                                 local-data="GetKeywordData" search-fields="Keyword" title-field="Keyword" minlength="1" input-class="w-100" match-class="highlight">
-                            </div>
-                            <style>
-                                .angucomplete-dropdown {
-                                    width: 100% !important;
-                                }
-                            </style>
-                            <input type="hidden" id="Keyword" value="{{SelectedKeyword.title}}" placeholder="Enter Keywords">*@
-                            <input type="text" placeholder="Search for items…" id="Keyword"   ng-model="Keyword" ng-change="GetRandomKeyword()" >
+                                     local-data="GetKeywordData" search-fields="Keyword" title-field="Keyword" minlength="1" input-class="w-100" match-class="highlight">
+                                </div>
+                                <style>
+                                    .angucomplete-dropdown {
+                                        width: 100% !important;
+                                    }
+                                </style>
+                                <input type="hidden" id="Keyword" value="{{SelectedKeyword.title}}" placeholder="Enter Keywords">*@
+                            <input type="text" placeholder="Search for items…" id="Keyword" ng-model="Keyword" ng-change="GetRandomKeyword()">
                             <button type="submit"><i class="fi-rs-search"></i></button>
                         </form>
                     </div>
@@ -401,7 +402,7 @@
     <script src="~/Content/assets/js/plugins/jquery.theia.sticky.js"></script>
     <script src="~/Content/assets/js/plugins/jquery.elevatezoom.js"></script>
     <script src="~/Content/assets/owl-carousel/owl.carousel.js"></script>
-
+    <script src="~/Angularjs/toast-alert/toastr.js"></script>
     <!-- Template  JS -->
     <script src="~/Content/assets/js/main.js"></script>
     <script src="~/Content/assets/js/shop.js"></script>

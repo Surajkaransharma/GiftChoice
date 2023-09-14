@@ -66,6 +66,36 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="OrderMainTbls">
+      <EntityTypeMapping TypeName="GiftChoiceModel.OrderMainTbl">
+        <MappingFragment StoreEntitySet="OrderMainTbl">
+          <ScalarProperty Name="TotalAmount" ColumnName="TotalAmount" />
+          <ScalarProperty Name="Create_at" ColumnName="Create_at" />
+          <ScalarProperty Name="Cancel" ColumnName="Cancel" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+          <ScalarProperty Name="Dispatch" ColumnName="Dispatch" />
+          <ScalarProperty Name="Delivery" ColumnName="Delivery" />
+          <ScalarProperty Name="RUserId" ColumnName="RUserId" />
+          <ScalarProperty Name="MorderId" ColumnName="MorderId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="OrderTbls">
+      <EntityTypeMapping TypeName="GiftChoiceModel.OrderTbl">
+        <MappingFragment StoreEntitySet="OrderTbl">
+          <ScalarProperty Name="MorderId" ColumnName="MorderId" />
+          <ScalarProperty Name="Create_at" ColumnName="Create_at" />
+          <ScalarProperty Name="Cancel" ColumnName="Cancel" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+          <ScalarProperty Name="OrderAmount" ColumnName="OrderAmount" />
+          <ScalarProperty Name="PPrice" ColumnName="PPrice" />
+          <ScalarProperty Name="PQty" ColumnName="PQty" />
+          <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+          <ScalarProperty Name="RUserId" ColumnName="RUserId" />
+          <ScalarProperty Name="OrderId" ColumnName="OrderId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="PKeywordTbls">
       <EntityTypeMapping TypeName="GiftChoiceModel.PKeywordTbl">
         <MappingFragment StoreEntitySet="PKeywordTbl">
@@ -89,6 +119,7 @@
     <EntitySetMapping Name="ProductTbls">
       <EntityTypeMapping TypeName="GiftChoiceModel.ProductTbl">
         <MappingFragment StoreEntitySet="ProductTbl">
+          <ScalarProperty Name="Qty" ColumnName="Qty" />
           <ScalarProperty Name="UserID" ColumnName="UserID" />
           <ScalarProperty Name="Update_at" ColumnName="Update_at" />
           <ScalarProperty Name="Create_at" ColumnName="Create_at" />
@@ -137,6 +168,22 @@
           <ScalarProperty Name="SUrl" ColumnName="SUrl" />
           <ScalarProperty Name="MainCateId" ColumnName="MainCateId" />
           <ScalarProperty Name="SliderId" ColumnName="SliderId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UserRegisters">
+      <EntityTypeMapping TypeName="GiftChoiceModel.UserRegister">
+        <MappingFragment StoreEntitySet="UserRegister">
+          <ScalarProperty Name="Create_at" ColumnName="Create_at" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+          <ScalarProperty Name="Pincode" ColumnName="Pincode" />
+          <ScalarProperty Name="UState" ColumnName="UState" />
+          <ScalarProperty Name="City" ColumnName="City" />
+          <ScalarProperty Name="UAddress" ColumnName="UAddress" />
+          <ScalarProperty Name="UEmail" ColumnName="UEmail" />
+          <ScalarProperty Name="MobileNo" ColumnName="MobileNo" />
+          <ScalarProperty Name="UName" ColumnName="UName" />
+          <ScalarProperty Name="RUserId" ColumnName="RUserId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
