@@ -18,6 +18,16 @@ namespace GiftChoice
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
             );
+      //      routes.MapRoute(
+      //      name: "AllShop",
+      //      url: "AllShop/{Keyword}",
+      //      defaults: new { controller = "Home", action = "Shop", Keyword = UrlParameter.Optional }
+      //  );
+      //      routes.MapRoute(
+      //    name: "NewShop",
+      //    url: "NewShop/{Main}",
+      //    defaults: new { controller = "Home", action = "Shop", Main = UrlParameter.Optional }
+      //);
         }
     }
 }

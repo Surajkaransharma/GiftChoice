@@ -950,6 +950,41 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
         });
     };
 //--------------Size End->------------->---------------------->---------------------------->------->------------>---------->---
+
+    $scope.isDragging = false;
+    $scope.imageDataUrl = '';
+
+    $scope.dragOver = function (event) {
+        event.preventDefault();
+        $scope.isDragging = true;
+    };
+
+    $scope.dragLeave = function (event) {
+        event.preventDefault();
+        $scope.isDragging = false;
+    };
+
+    $scope.drop = function (event) {
+        event.preventDefault();
+        $scope.isDragging = false;
+        var file = event.dataTransfer.files[0];
+        if (file) {
+            $scope.selectedFile = file;
+            $scope.previewImage();
+        }
+    };
+
+    $scope.previewImage = function () {
+        if ($scope.selectedFile) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                $scope.$apply(function () {
+                    $scope.imageDataUrl = e.target.result;
+                });
+            };
+            reader.readAsDataURL($scope.selectedFile);
+        }
+    };
 }]).directive('uploadFile', ['$parse', function ($parse) {
     return {
         restrict: 'A',

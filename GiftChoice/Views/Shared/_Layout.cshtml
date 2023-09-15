@@ -132,9 +132,9 @@
                                 <nav>
                                     <ul>
                                         <li ng-repeat="n in NavbarMenuList">
-                                            <a href="/Home/shop/{{n.MUrl}}">{{n.MTitle}} <i ng-show="n.Submenu.length>0" class="fi-rs-angle-down"></i></a>
+                                            <a href="/Home/shop?Main={{n.MUrl}}">{{n.MTitle}} <i ng-show="n.Submenu.length>0" class="fi-rs-angle-down"></i></a>
                                             <ul class="sub-menu" ng-show="n.Submenu.length>0">
-                                                <li ng-repeat="s in n.Submenu"><a href="/Home/shop/{{s.SubmenuTitle.KUrl}}">{{s.SubmenuTitle.Keyword}}</a></li>
+                                                <li ng-repeat="s in n.Submenu"><a href="/Home/shop?Keyword={{s.SubmenuTitle.KUrl}}">{{s.SubmenuTitle.Keyword}}</a></li>
                                                 @*<li><a href="shop_by_categories.asp">Rakhi For Brother</a></li>
                                                     <li><a href="shop_by_categories.asp">Rakhi For Sister</a></li>*@
                                             </ul>
@@ -142,7 +142,7 @@
 
                                         <li ng-show="NavbarMenuList.length>5">
                                             <a href="#">More Category <i class="fi-rs-angle-down"></i></a>
-                                            <ul class="sub-menu more-category"
+                                            <ul class="sub-menu more-category">
                                                <li ng-repeat="s in ScondNavbarMenuList"><a href="/Home/shop/{{s.MUrl}}">{{s.MTitle}}</a></li>
                                                 @*<li><a href="shop_by_categories.asp">Mug</a></li>
                                                 <li><a href="shop_by_categories.asp">Frame</a></li>

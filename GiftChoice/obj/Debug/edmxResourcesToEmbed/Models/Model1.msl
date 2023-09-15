@@ -190,6 +190,7 @@
     <EntitySetMapping Name="VProducts">
       <EntityTypeMapping TypeName="GiftChoiceModel.VProduct">
         <MappingFragment StoreEntitySet="VProduct">
+          <ScalarProperty Name="Qty" ColumnName="Qty" />
           <ScalarProperty Name="Expr14" ColumnName="Expr14" />
           <ScalarProperty Name="Expr12" ColumnName="Expr12" />
           <ScalarProperty Name="Expr13" ColumnName="Expr13" />

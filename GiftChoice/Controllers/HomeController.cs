@@ -71,6 +71,7 @@ namespace GiftChoice.Controllers
             }).OrderBy(c => c.Priority);
             return Json(res, JsonRequestBehavior.AllowGet);
         }
+        [JsonNetFilter]
         public JsonResult GetProduct()
         {
             var res =
@@ -84,9 +85,10 @@ namespace GiftChoice.Controllers
                    m.Price,
                    m.PUrl,
                    m.Active,
+                   m.Create_at,
                    m.Priority,
                    m.Qty,
-                   ProductImage = db.ProductImages.Where(i => i.PImageId == m.ProductId).Select(i => i.PImage).FirstOrDefault(),
+                   ProductImage = db.ProductImages.Where(i => i.ProductId == m.ProductId).Select(i => i.PImage).FirstOrDefault(),
                    Maincate = db.MainCateTbls.Where(p => p.MainCateId == m.MainCateId).Select(p => p.MTitle).FirstOrDefault(),
                    Submenu = db.PKeywordTbls.Where(s => s.ProductId == m.ProductId && s.Active == true).Select(s => new
                    {
@@ -99,34 +101,70 @@ namespace GiftChoice.Controllers
             return Json(res, JsonRequestBehavior.AllowGet);
 
         }
-
-        public JsonResult FilterProduct(int id)
+        [JsonNetFilter]
+        public JsonResult FilterProduct(int Keyword, int Main)
         {
-            var res =
+            if (Keyword != 0)
+            {
+                var res =
 
-               db.VProducts.Where(m => m.KeywordId == id).Select(m => new
+           db.VProducts.Where(m => (Keyword == 0 ? true : m.KeywordId == Keyword)).Select(m => new
+           {
+               m.ProductId,
+               m.MainCateId,
+               m.ProductTitle,
+               m.PLabel,
+               m.Price,
+               m.PUrl,
+               m.Qty,
+               m.Create_at,
+               m.Active,
+               m.Priority,
+               ProductImage = db.ProductImages.Where(i => i.ProductId == m.ProductId).Select(i => i.PImage).FirstOrDefault(),
+               Maincate = db.MainCateTbls.Where(p => p.MainCateId == m.MainCateId).Select(p => p.MTitle).FirstOrDefault(),
+               Submenu = db.PKeywordTbls.Where(s => s.ProductId == m.ProductId && s.Active == true).Select(s => new
                {
-                   m.ProductId,
-                   m.MainCateId,
-                   m.ProductTitle,
-                   m.PLabel,
-                   m.Price,
-                   m.PUrl,
-                   m.Active,
-                   m.Priority,
-                   ProductImage = db.ProductImages.Where(i => i.PImageId == m.ProductId).Select(i => i.PImage).FirstOrDefault(),
-                   Maincate = db.MainCateTbls.Where(p => p.MainCateId == m.MainCateId).Select(p => p.MTitle).FirstOrDefault(),
-                   Submenu = db.PKeywordTbls.Where(s => s.ProductId == m.ProductId && s.Active == true).Select(s => new
-                   {
-                       s.ProductId,
-                       s.KeywordId,
-                       s.PKeywordId,
-                       SubmenuTitle = db.KeywordTbls.Where(t => t.KeywordId == s.KeywordId && t.Active == true).Select(t => t.Keyword).FirstOrDefault()
-                   })
-               }).OrderBy(x => Guid.NewGuid()).Take(10);
-            return Json(res, JsonRequestBehavior.AllowGet);
+                   s.ProductId,
+                   s.KeywordId,
+                   s.PKeywordId,
+                   SubmenuTitle = db.KeywordTbls.Where(t => t.KeywordId == s.KeywordId && t.Active == true).Select(t => t.Keyword).FirstOrDefault()
+               })
+           }).OrderBy(x => Guid.NewGuid());
+                return Json(res, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                var res =
+
+           db.ProductTbls.Where(m =>
+           (Main == 0 ? true : m.MainCateId == Main)).Select(m => new
+           {
+               m.ProductId,
+               m.MainCateId,
+               m.ProductTitle,
+               m.PLabel,
+               m.Price,
+               m.PUrl,
+               m.Qty,
+               m.Create_at,
+               m.Active,
+               m.Priority,
+               ProductImage = db.ProductImages.Where(i => i.ProductId == m.ProductId).Select(i => i.PImage).FirstOrDefault(),
+               Maincate = db.MainCateTbls.Where(p => p.MainCateId == m.MainCateId).Select(p => p.MTitle).FirstOrDefault(),
+               Submenu = db.PKeywordTbls.Where(s => s.ProductId == m.ProductId && s.Active == true).Select(s => new
+               {
+                   s.ProductId,
+                   s.KeywordId,
+                   s.PKeywordId,
+                   SubmenuTitle = db.KeywordTbls.Where(t => t.KeywordId == s.KeywordId && t.Active == true).Select(t => t.Keyword).FirstOrDefault()
+               })
+           }).OrderBy(x => Guid.NewGuid());
+                return Json(res, JsonRequestBehavior.AllowGet);
+            }
+
 
         }
+        [JsonNetFilter]
         public JsonResult GetProductByid(int id)
         {
             var res =
@@ -138,6 +176,7 @@ namespace GiftChoice.Controllers
                    m.ProductTitle,
                    m.PLabel,
                    m.Price,
+                   m.Create_at,
                    m.PUrl,
                    m.PDesc,
                    m.Active,
@@ -162,6 +201,7 @@ namespace GiftChoice.Controllers
             return Json(res, JsonRequestBehavior.AllowGet);
 
         }
+        [JsonNetFilter]
         public JsonResult GetSmillerProduct(int id)
         {
             var res =
@@ -174,7 +214,7 @@ namespace GiftChoice.Controllers
                    m.PLabel,
                    m.Price,
                    m.PUrl,
-
+                   m.Create_at,
                    m.Active,
                    m.Priority,
                    ProductImage = db.ProductImages.Where(i => i.ProductId == m.ProductId).Select(i => i.PImage).FirstOrDefault(),
@@ -205,11 +245,17 @@ namespace GiftChoice.Controllers
 
             return View();
         }
-        public ActionResult Shop(string id)
+
+        public ActionResult Shop(string Keyword = "", string Main = "")
         {
-            ViewBag.id = db.KeywordTbls.Where(m => m.KUrl == id).Select(m => m.KeywordId).FirstOrDefault();
-            //  ViewBag.id = id;
-            ViewBag.Message = "Your contact page.";
+
+            ViewBag.Keyword = Keyword == "" ? 0 : db.KeywordTbls.Where(m => m.KUrl == Keyword).Select(m => m.KeywordId).FirstOrDefault();
+
+
+            ViewBag.Main = Main == "" ? 0 : db.MainCateTbls.Where(m => m.MUrl == Main).Select(m => m.MainCateId).FirstOrDefault();
+
+
+
 
             return View();
         }
@@ -435,6 +481,104 @@ namespace GiftChoice.Controllers
                 return Json(res, JsonRequestBehavior.AllowGet);
             }
         }
+
+        public class PriceTbl
+        {
+            public int id { get; set; }
+            public Double? maxPrice { get; set; }
+            public Double? minPrice { get; set; }
+
+
+        }
+        //, List<PriceTbl> priceTbls
+        [JsonNetFilter]
+        public JsonResult FilterProductData(int[] Cid)
+        {
+
+            if (Cid != null /*&& priceTbls != null*/)
+            {
+
+
+                List<long> subid = new List<long>();
+
+                for (int i = 0; i < Cid.Length; i++)
+                {
+                    subid.Add(Cid[i]);
+                }
+
+                //List<double> price = new List<double>();
+
+                //for (int i = 0; i < priceTbls.Count; i++)
+                //{
+                //    price.Add(priceTbls[i].minPrice);
+                //}
+
+                var res = new
+                {
+                     //&& priceTbls.Any(priceRange => p.Price >= priceRange.minPrice && p.Price <= priceRange.maxPrice)
+                    ProductList =
+               db.ProductTbls.Where(p => p.Active == true && subid.Contains(p.MainCateId ?? 0)).Select(m => new
+               {
+                   m.ProductId,
+                   m.MainCateId,
+                   m.ProductTitle,
+                   m.PLabel,
+                   m.Create_at,
+                   m.Price,
+                   m.PUrl,
+                   m.Active,
+                   m.Priority,
+                   m.Qty,
+                   ProductImage = db.ProductImages.Where(i => i.ProductId == m.ProductId).Select(i => i.PImage).FirstOrDefault(),
+                   Maincate = db.MainCateTbls.Where(p => p.MainCateId == m.MainCateId).Select(p => p.MTitle).FirstOrDefault(),
+                   Submenu = db.PKeywordTbls.Where(s => s.ProductId == m.ProductId && s.Active == true).Select(s => new
+                   {
+                       s.ProductId,
+                       s.KeywordId,
+                       s.PKeywordId,
+                       SubmenuTitle = db.KeywordTbls.Where(t => t.KeywordId == s.KeywordId && t.Active == true).Select(t => t.Keyword).FirstOrDefault()
+                   })
+               }).OrderBy(x => Guid.NewGuid()).Take(10)
+                };
+
+
+                return Json(res, JsonRequestBehavior.AllowGet);
+            }
+
+            else
+            {
+                var res = new
+                {
+                    ProductList = db.ProductTbls.Where(m => m.Active == true).Select(m => new
+                    {
+                        m.ProductId,
+                        m.MainCateId,
+                        m.ProductTitle,
+                        m.PLabel,
+                        m.Price,
+                        m.PUrl,
+                        m.Active,
+                        m.Priority,
+                        m.Create_at,
+                        m.Qty,
+                        ProductImage = db.ProductImages.Where(i => i.ProductId == m.ProductId).Select(i => i.PImage).FirstOrDefault(),
+                        Maincate = db.MainCateTbls.Where(p => p.MainCateId == m.MainCateId).Select(p => p.MTitle).FirstOrDefault(),
+                        Submenu = db.PKeywordTbls.Where(s => s.ProductId == m.ProductId && s.Active == true).Select(s => new
+                        {
+                            s.ProductId,
+                            s.KeywordId,
+                            s.PKeywordId,
+                            SubmenuTitle = db.KeywordTbls.Where(t => t.KeywordId == s.KeywordId && t.Active == true).Select(t => t.Keyword).FirstOrDefault()
+                        })
+                    }).OrderBy(x => Guid.NewGuid()).Take(10)
+                };
+
+
+                return Json(res, JsonRequestBehavior.AllowGet);
+            }
+
+        }
+
 
     }
 }

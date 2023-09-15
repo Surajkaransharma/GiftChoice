@@ -4,11 +4,11 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<main class="main" ng-init="FilterProduct(@ViewBag.id)">
+<main class="main" ng-init="FilterProduct(@ViewBag.Keyword,@ViewBag.Main)">
     <div class="page-header breadcrumb-wrap">
         <div class="container">
             <div class="breadcrumb">
-                <a href="index.asp" rel="nofollow">Home</a>
+                <a href="/Home/Index" rel="nofollow">Home</a>
                 <span></span> Shop By Category
             </div>
         </div>
@@ -42,10 +42,10 @@
                                 <div class="sort-by-dropdown">
                                     <ul>
                                         <li><a class="active" href="#">Featured</a></li>
-                                        <li><a href="#">Price: Low to High</a></li>
-                                        <li><a href="#">Price: High to Low</a></li>
-                                        <li><a href="#">Release Date</a></li>
-                                   
+                                        <li><a ng-click="sortByPrice('asc')">Price: Low to High</a></li>
+                                        <li><a ng-click="sortByPrice('desc')">Price: High to Low</a></li>
+                                        <li><a ng-click="sortByReleaseDate('desc')">Release Date</a></li>
+
                                     </ul>
                                 </div>
                             </div>
@@ -61,8 +61,8 @@
                                             <img class="hover-img img-fluid" src="~/images/ProductImg/{{p.ProductImage}}" loading="lazy" alt="product-hover-image" loading="lazy" alt="">
                                         </a>
                                     </div>
-                                    <div class="product-badges product-badges-position product-badges-mrg"  ng-show="p.PLabel!=''">
-                                        <span  class="hot">{{p.PLabel}}</span>
+                                    <div class="product-badges product-badges-position product-badges-mrg" ng-show="p.PLabel!=''">
+                                        <span class="hot">{{p.PLabel}}</span>
                                     </div>
                                 </div>
                                 <div class="product-content-wrap">
@@ -71,26 +71,26 @@
                                         <span><i class="fa fa-inr" aria-hidden="true"></i> {{p.Price}}/-</span>
                                     </div>
                                     <div class="product-action-1 show">
-                                        <a aria-label="Add To Cart" class="action-btn hover-up"  ng-click="addItemToCart($index)"><i class="fi-rs-shopping-bag-add"></i></a>
+                                        <a aria-label="Add To Cart" class="action-btn hover-up" ng-click="addItemToCart($index)"><i class="fi-rs-shopping-bag-add"></i></a>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    
+
                     </div>
                     <!--pagination-->
                     @*<div class="pagination-area mt-15 mb-sm-5 mb-lg-0">
-                        <nav aria-label="Page navigation example">
-                            <ul class="pagination justify-content-start">
-                                <li class="page-item active"><a class="page-link" href="#">01</a></li>
-                                <li class="page-item"><a class="page-link" href="#">02</a></li>
-                                <li class="page-item"><a class="page-link" href="#">03</a></li>
-                                <li class="page-item"><a class="page-link dot" href="#">...</a></li>
-                                <li class="page-item"><a class="page-link" href="#">16</a></li>
-                                <li class="page-item"><a class="page-link" href="#"><i class="fi-rs-angle-double-small-right"></i></a></li>
-                            </ul>
-                        </nav>
-                    </div>*@
+                            <nav aria-label="Page navigation example">
+                                <ul class="pagination justify-content-start">
+                                    <li class="page-item active"><a class="page-link" href="#">01</a></li>
+                                    <li class="page-item"><a class="page-link" href="#">02</a></li>
+                                    <li class="page-item"><a class="page-link" href="#">03</a></li>
+                                    <li class="page-item"><a class="page-link dot" href="#">...</a></li>
+                                    <li class="page-item"><a class="page-link" href="#">16</a></li>
+                                    <li class="page-item"><a class="page-link" href="#"><i class="fi-rs-angle-double-small-right"></i></a></li>
+                                </ul>
+                            </nav>
+                        </div>*@
                 </div>
             </div>
         </div>
@@ -109,26 +109,13 @@
                             <div class="list-group-item mb-1 mt-1">
                                 <label class="fw-900">Select Category</label>
                                 <div class="custome-checkbox">
-                                    <div  ng-repeat="m in MainCateData">
+                                    <div ng-repeat="m in MainCateData">
 
-                                    <input class="form-check-input" type="checkbox" name="checkbox" id="Main_{{m.MainCateId}}" value="">
-                                    <label class="form-check-label" for="Main_{{m.MainCateId}}"><span>{{m.MTitle}}</span></label>
+                                        <input class="form-check-input" type="checkbox" name="checkbox" id="Main_{{m.MainCateId}}" value="{{m.MainCateId}}">
+                                        <label class="form-check-label" for="Main_{{m.MainCateId}}"><span>{{m.MTitle}}</span></label>
                                     </div>
                                     <br>
-                                    @*<input class="form-check-input" type="checkbox" name="checkbox" id="exampleCheckbox21" value="">
-                                    <label class="form-check-label" for="exampleCheckbox21"><span>Gift For Her</span></label>
-                                    <br>
-                                    <input class="form-check-input" type="checkbox" name="checkbox" id="exampleCheckbox31" value="">
-                                    <label class="form-check-label" for="exampleCheckbox31"><span>Gift For Dad</span></label>
-                                    <br>
-                                    <input class="form-check-input" type="checkbox" name="checkbox" id="exampleCheckbox11" value="">
-                                    <label class="form-check-label" for="exampleCheckbox11"><span>Gift For Mom</span></label>
-                                    <br>
-                                    <input class="form-check-input" type="checkbox" name="checkbox" id="exampleCheckbox21" value="">
-                                    <label class="form-check-label" for="exampleCheckbox21"><span>Rakshabandhan Gifts</span></label>
-                                    <br>
-                                    <input class="form-check-input" type="checkbox" name="checkbox" id="exampleCheckbox31" value="">
-                                    <label class="form-check-label" for="exampleCheckbox31"><span>Light Lamp</span></label>*@
+
                                 </div>
                             </div>
                         </div>
@@ -137,29 +124,19 @@
                         <div class="list-group-item mb-1 mt-1">
                             <label class="fw-900">Select Price</label>
                             <div class="custome-checkbox">
-                                <input class="form-check-input" type="checkbox" name="checkbox" id="price_1" value="">
-                                <label class="form-check-label" for="price_1"><span><i class="fa fa-inr" aria-hidden="true"></i>0 - 300</span></label>
-                                <br>
-                                <input class="form-check-input" type="checkbox" name="checkbox" id="price_2" value="">
-                                <label class="form-check-label" for="price_2"><span><i class="fa fa-inr" aria-hidden="true"></i>300 - 500</span></label>
-                                <br>
-                                <input class="form-check-input" type="checkbox" name="checkbox" id="price_3" value="">
-                                <label class="form-check-label" for="price_3"><span><i class="fa fa-inr" aria-hidden="true"></i>500 - 700</span></label>
-                                <br>
-                                <input class="form-check-input" type="checkbox" name="checkbox" id="price_4" value="">
-                                <label class="form-check-label" for="price_4"><span><i class="fa fa-inr" aria-hidden="true"></i>700 - 1000</span></label>
-                                <br>
-                                <input class="form-check-input" type="checkbox" name="checkbox" id="price_5" value="">
-                                <label class="form-check-label" for="price_5"><span><i class="fa fa-inr" aria-hidden="true"></i>1000 - 1300</span></label>
-                                <br>
-                                <input class="form-check-input" type="checkbox" name="checkbox" id="price_5" value="">
-                                <label class="form-check-label" for="price_5"><span><i class="fa fa-inr" aria-hidden="true"></i>1300 - 1500</span></label>
+                                <div ng-repeat="r in priceRanges">
+                                    <input class="form-check-input" type="checkbox" name="checkbox" id="price_{{r.id}}" value="{{r.id}}"  ng-model="r.Selected">
+                                    <label class="form-check-label" for="price_{{r.id}}"><span>
+                                        <i class="fa fa-inr" aria-hidden="true"></i>{{r.minPrice}} - {{r.maxPrice}}</span></label>
+                                </div>
+
+                            
                             </div>
                         </div>
                     </div>
                     <div align="right">
-                        <a href="#" class="btn btn-sm btn-danger"><i class="fi-rs-filter mr-5"></i> Clear Filter</a>
-                        <a href="#" class="btn btn-sm btn-default"><i class="fa fa-trash" aria-hidden="true" ng-click="FilterProductData()"></i> Apply Fillter</a>
+                        <a href="#" class="btn btn-sm btn-danger" ng-click="FClear()"> <i class="fa fa-trash" aria-hidden="true"></i>Clear Filter</a>
+                        <a class="btn btn-sm btn-default" ng-click="FilterProductData()"><i class="fi-rs-filter mr-5"></i> Apply Fillter</a>
                     </div>
                 </div>
             </div>

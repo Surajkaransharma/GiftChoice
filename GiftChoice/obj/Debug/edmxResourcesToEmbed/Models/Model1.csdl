@@ -241,6 +241,7 @@
     <Property Name="Expr13" Type="Int64" />
     <Property Name="Expr12" Type="DateTime" Precision="3" />
     <Property Name="Expr14" Type="DateTime" Precision="3" />
+    <Property Name="Qty" Type="Int64" />
   </EntityType>
   <Association Name="FK__MCKeyword__Keywo__3B75D760">
     <End Type="GiftChoiceModel.KeywordTbl" Role="KeywordTbl" Multiplicity="0..1" />

@@ -47,5 +47,6 @@ namespace GiftChoice.Models
         public Nullable<long> Expr13 { get; set; }
         public Nullable<System.DateTime> Expr12 { get; set; }
         public Nullable<System.DateTime> Expr14 { get; set; }
+        public Nullable<long> Qty { get; set; }
     }
 }

@@ -219,6 +219,7 @@ warning 6002: The table/view 'GiftChoice.dbo.VProduct' does not have a primary k
           <Property Name="Expr13" Type="bigint" />
           <Property Name="Expr12" Type="datetime" />
           <Property Name="Expr14" Type="datetime" />
+          <Property Name="Qty" Type="bigint" />
         </EntityType>
         <Association Name="FK__MCKeyword__Keywo__3B75D760">
           <End Role="KeywordTbl" Type="Self.KeywordTbl" Multiplicity="0..1" />
@@ -293,7 +294,8 @@ warning 6002: The table/view 'GiftChoice.dbo.VProduct' does not have a primary k
     [VProduct].[MImage] AS [MImage], 
     [VProduct].[Expr13] AS [Expr13], 
     [VProduct].[Expr12] AS [Expr12], 
-    [VProduct].[Expr14] AS [Expr14]
+    [VProduct].[Expr14] AS [Expr14], 
+    [VProduct].[Qty] AS [Qty]
     FROM [dbo].[VProduct] AS [VProduct]</DefiningQuery>
           </EntitySet>
           <AssociationSet Name="FK__MCKeyword__Keywo__3B75D760" Association="Self.FK__MCKeyword__Keywo__3B75D760">
@@ -550,6 +552,7 @@ warning 6002: The table/view 'GiftChoice.dbo.VProduct' does not have a primary k
           <Property Name="Expr13" Type="Int64" />
           <Property Name="Expr12" Type="DateTime" Precision="3" />
           <Property Name="Expr14" Type="DateTime" Precision="3" />
+          <Property Name="Qty" Type="Int64" />
         </EntityType>
         <Association Name="FK__MCKeyword__Keywo__3B75D760">
           <End Type="GiftChoiceModel.KeywordTbl" Role="KeywordTbl" Multiplicity="0..1" />
@@ -770,6 +773,7 @@ warning 6002: The table/view 'GiftChoice.dbo.VProduct' does not have a primary k
           <EntitySetMapping Name="VProducts">
             <EntityTypeMapping TypeName="GiftChoiceModel.VProduct">
               <MappingFragment StoreEntitySet="VProduct">
+                <ScalarProperty Name="Qty" ColumnName="Qty" />
                 <ScalarProperty Name="Expr14" ColumnName="Expr14" />
                 <ScalarProperty Name="Expr12" ColumnName="Expr12" />
                 <ScalarProperty Name="Expr13" ColumnName="Expr13" />

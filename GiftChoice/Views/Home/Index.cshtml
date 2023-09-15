@@ -9,7 +9,7 @@
     <section ng-init="SliderList()" class="carousel-slider-main text-center border-top border-bottom bg-white">
             <div class="owl-carousel owl-carousel-slider ">
                 <div ng-repeat="s in SliderListData" class="item">
-                    <a href="/Home/shop/{{s.SUrl}}"><img class="img-fluid img-responsive" src="~/images/SliderImg/{{s.SliderImage}}" alt="First slide"></a>
+                    <a href="/Home/shop?Main={{s.SUrl}}"><img class="img-fluid img-responsive" src="~/images/SliderImg/{{s.SliderImage}}" alt="First slide"></a>
                 </div>
             </div>
         </section>
@@ -36,43 +36,7 @@
             }
         }
         </style>
-    @*<section class="home-slider">
-        <div id="carouselId" class="carousel slide" data-bs-ride="carousel">
-            <div class="carousel-inner" role="listbox">
-
-
-                <div class="carousel-item active">
-                    <a href="shop_by_categories.asp">
-                        <img src="~/Content/assets/imgs/slider/slider_1.jpg" class="w-100 d-block img-fluid" loading="lazy" loading="lazy" alt="corporates-gifts">
-                    </a>
-                </div>
-
-                <div class="carousel-item">
-                    <a href="shop_by_categories.asp">
-                        <img src="~/Content/assets/imgs/slider/slider_2.jpg" class="w-100 d-block img-fluid" loading="lazy" loading="lazy" alt="intirior-wall-decore-gifts">
-                    </a>
-                </div>
-                <div class="carousel-item">
-                    <a href="shop_by_categories.asp">
-                        <img src="~/Content/assets/imgs/slider/slider_3.jpg" class="w-100 d-block img-fluid" loading="lazy" loading="lazy" alt="personalized-gifts-for-him">
-                    </a>
-                </div>
-                <div class="carousel-item">
-                    <a href="shop_by_categories.asp">
-                        <img src="~/Content/assets/imgs/slider/slider_4.jpg" class="w-100 d-block img-fluid" loading="lazy" loading="lazy" alt="personalized-gifts-for-her">
-                    </a>
-                </div>
-            </div>
-            <button class="carousel-control-prev" type="button" data-bs-target="#carouselId" data-bs-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Previous</span>
-            </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#carouselId" data-bs-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Next</span>
-            </button>
-        </div>
-    </section>*@
+   
     <!-- Slider End -->
     <!-- Category Section Start -->
     <section class="popular-categories section-padding" ng-init="GetMainCateData()">
@@ -83,7 +47,7 @@
                 <div class="carausel-6-columns" id="carausel-6-columns">
                     <div class="card-1" ng-repeat="m in MainCateData">
                         <figure class=" img-hover-scale overflow-hidden">
-                            <a href="/Home/shop/{{m.MUrl}}">
+                            <a href="/Home/shop?Main={{m.MUrl}}">
                                 <img src="~/images/MainCate/{{m.MImage}}" loading="lazy" alt="category-name" class="w-100 img-fluid">
                             </a>
                         </figure>
@@ -105,7 +69,7 @@
                             <div class="product-cart-wrap mb-30">
                                 <div class="product-img-action-wrap">
                                     <div class="product-img product-img-zoom">
-                                        <a href="/Home/Gift?url={{p.PUrl}}">
+                                        <a href="/Home/Gift/{{p.PUrl}}">
                                             <img class="default-img img-fluid" src="~/images/ProductImg/{{p.ProductImage}}" loading="lazy" alt="product-image">
                                             <img class="hover-img img-fluid" src="~/images/ProductImg/{{p.ProductImage}}" loading="lazy" alt="product-hover-image">
                                         </a>
@@ -115,7 +79,7 @@
                                     </div>
                                 </div>
                                 <div class="product-content-wrap">
-                                    <h2 class="mt-2"><a href="/Home/Gift?url={{p.PUrl}}">{{p.ProductTitle}}</a></h2>
+                                    <h2 class="mt-2"><a href="/Home/Gift/{{p.PUrl}}">{{p.ProductTitle}}</a></h2>
                                     <div class="product-price">
                                         <span><i class="fa fa-inr" aria-hidden="true"></i> {{p.Price}}/-</span>
                                     </div>
@@ -138,7 +102,7 @@
             <div class="row g-2 gx-3 justify-content-center">
                 <div class="col-lg-4 col-md-6" ng-repeat="b in BannerListData">
                     <div class="banner-img mb-0 wow fadeIn animated  rounded-3">
-                        <a href="/Home/shop/{{b.BUrl}}">
+                        <a href="/Home/shop?Main={{b.BUrl}}">
                             <img src="~/images/BannerImage/{{b.BannerImage}}" loading="lazy" alt="advertisement-image" class="img-fluid rounded-3 w-100 border-light border">
                         </a>
                     </div>

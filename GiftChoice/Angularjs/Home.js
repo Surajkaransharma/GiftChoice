@@ -1,5 +1,5 @@
 ﻿var app = angular.module("HomeApp", []);
-app.controller("HomeController", ['$scope', '$http', '$sce', function ($scope, $http, $sce) {
+app.controller("HomeController", ['$scope', '$http', '$sce','orderByFilter', function ($scope, $http, $sce, orderBy) {
 
     $http.get("/Home/GetNavbarMenu").then(function (d) {
         $scope.NavbarMenuList = d.data.NavbarMenuList;
@@ -123,7 +123,7 @@ app.controller("HomeController", ['$scope', '$http', '$sce', function ($scope, $
 
                     for (var i = 0; i < d.data.KeyWordList.length; i++) {
                         if (label === d.data.KeyWordList[i].label) {
-                            location.href = '/Home/Shop/' + d.data.KeyWordList[i].KUrl;
+                            location.href = '/Home/Shop?Keyword=' + d.data.KeyWordList[i].KUrl;
                             return;
                         }
                     }
@@ -197,9 +197,73 @@ app.controller("HomeController", ['$scope', '$http', '$sce', function ($scope, $
             alert(error.data);
         });
     };
+    $scope.sortByPrice = function (order) {
+        debugger
+        $scope.ProductData.sort(function (a, b) {
+            if (order === 'asc') {
+                return a.Price - b.Price;
+            } else {
+                return b.Price - a.Price;
+            }
+        });
+    };
+    $scope.FClear = function () {
+        for (var s = 0; s < $scope.MainCateData.length; s++) {
+            var vallc1s = $scope.MainCateData[s].MainCateId;
+            $('#Main_' + vallc1s).prop('checked', false);
 
+        }
+        for (var i = 0; i < $scope.priceRanges.length; i++) {
+            var id = $scope.priceRanges[i].id;
+            $('#price_' + id).prop('checked', false);
 
+        }
+    };
+    $scope.sortByReleaseDate = function (order) {
+        $scope.ProductData.sort(function (a, b) {
+            if (order === 'asc') {
+                return new Date(a.Create_at) - new Date(b.Create_at);
+            } else {
+                return new Date(b.Create_at) - new Date(a.Create_at);
+            }
+        });
+    };
+    //$scope.propertyName = 'CompanyName';
+    //$scope.reverse = true;
+    //$scope.ProductData = orderBy($scope.ProductData, $scope.propertyName, $scope.reverse);
+    //$scope.sortBy = function (propertyName) {
+    //    debugger;
+    //    $scope.reverse = (propertyName !== null && $scope.propertyName === propertyName)
+    //        ? !$scope.reverse : false;
+    //    $scope.propertyName = propertyName;
+    //    $scope.ProductData = orderBy($scope.ProductData, $scope.propertyName, $scope.reverse);
+    //};
     $scope.FilterProductData = function () {
+    debugger;
+     
+        var Cid = [];
+        $.each($(".form-check-input:checked"), function () {
+            Cid.push(parseInt($(this).val()));
+        });
+        var priceTblarr = [];
+        for (var i = 0; i < $scope.priceRanges.length; i++) {
+            if ($scope.priceRanges[i].Selected) {
+                priceTblarr.push($scope.priceRanges[i]);
+            }
+        }
+        debugger
+        $http({
+            url: '/Home/FilterProductData',
+            method: 'post',
+            data: {
+                Cid: Cid
+            }
+        }).then(function (d) {
+            $scope.ProductData = d.data.ProductList;
+            $('.offcanvas').removeClass('show');
+        }), function (error) {
+            toastr["error"]("Something Went Wrong");
+        };
 
     };
     $scope.GetMainCateData = function () {
@@ -311,9 +375,9 @@ app.controller("HomeController", ['$scope', '$http', '$sce', function ($scope, $
         });
     };
 
-    $scope.FilterProduct = function (id) {
+    $scope.FilterProduct = function (Keyword, Main) {
         debugger
-        $http.get("/Home/FilterProduct?id=" + id).then(function (d) {
+        $http.get("/Home/FilterProduct?Keyword=" + Keyword + '&Main=' + Main).then(function (d) {
             debugger
             $scope.ProductData = d.data;
         }, function (error) {
@@ -321,6 +385,16 @@ app.controller("HomeController", ['$scope', '$http', '$sce', function ($scope, $
         });
     };
 
+    $scope.priceRanges = [
+        { id : 1 , minPrice: 0, maxPrice: 300, selected: false },
+        { id: 2, minPrice: 300, maxPrice: 500, selected: false },
+        { id: 3, minPrice: 500, maxPrice: 700, selected: false },
+        { id: 4, minPrice: 700, maxPrice: 1000, selected: false },
+        { id: 5, minPrice: 1000, maxPrice: 1300, selected: false },
+        { id: 6, minPrice: 1300, maxPrice: 1500, selected: false },
+
+    ];
+ 
 
     $scope.BannerList = function () {
         debugger
@@ -334,9 +408,7 @@ app.controller("HomeController", ['$scope', '$http', '$sce', function ($scope, $
         });
     };
 
-    $scope.FilterProductData = function () {
 
-    };
 
     $scope.GiftAddItemToCart = function (index) {
         debugger
