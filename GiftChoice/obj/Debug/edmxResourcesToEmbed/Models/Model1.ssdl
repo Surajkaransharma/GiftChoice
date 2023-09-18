@@ -173,7 +173,7 @@
     <Property Name="Create_at" Type="date" />
   </EntityType>
   <!--Errors Found During Generation:
-warning 6002: The table/view 'GiftChoice.dbo.VProduct' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'giftchoice.dbo.VProduct' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
   <EntityType Name="VProduct">
     <Key>
       <PropertyRef Name="ProductId" />
@@ -216,7 +216,7 @@ warning 6002: The table/view 'GiftChoice.dbo.VProduct' does not have a primary k
     <Property Name="Expr14" Type="datetime" />
     <Property Name="Qty" Type="bigint" />
   </EntityType>
-  <Association Name="FK__MCKeyword__Keywo__3B75D760">
+  <Association Name="FK__MCKeyword__Keywo__52593CB8">
     <End Role="KeywordTbl" Type="Self.KeywordTbl" Multiplicity="0..1" />
     <End Role="MCKeywordTbl" Type="Self.MCKeywordTbl" Multiplicity="*" />
     <ReferentialConstraint>
@@ -228,7 +228,7 @@ warning 6002: The table/view 'GiftChoice.dbo.VProduct' does not have a primary k
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__MCKeyword__MainC__3A81B327">
+  <Association Name="FK__MCKeyword__MainC__534D60F1">
     <End Role="MainCateTbl" Type="Self.MainCateTbl" Multiplicity="0..1" />
     <End Role="MCKeywordTbl" Type="Self.MCKeywordTbl" Multiplicity="*" />
     <ReferentialConstraint>
@@ -293,11 +293,11 @@ warning 6002: The table/view 'GiftChoice.dbo.VProduct' does not have a primary k
     [VProduct].[Qty] AS [Qty]
     FROM [dbo].[VProduct] AS [VProduct]</DefiningQuery>
     </EntitySet>
-    <AssociationSet Name="FK__MCKeyword__Keywo__3B75D760" Association="Self.FK__MCKeyword__Keywo__3B75D760">
+    <AssociationSet Name="FK__MCKeyword__Keywo__52593CB8" Association="Self.FK__MCKeyword__Keywo__52593CB8">
       <End Role="KeywordTbl" EntitySet="KeywordTbl" />
       <End Role="MCKeywordTbl" EntitySet="MCKeywordTbl" />
     </AssociationSet>
-    <AssociationSet Name="FK__MCKeyword__MainC__3A81B327" Association="Self.FK__MCKeyword__MainC__3A81B327">
+    <AssociationSet Name="FK__MCKeyword__MainC__534D60F1" Association="Self.FK__MCKeyword__MainC__534D60F1">
       <End Role="MainCateTbl" EntitySet="MainCateTbl" />
       <End Role="MCKeywordTbl" EntitySet="MCKeywordTbl" />
     </AssociationSet>

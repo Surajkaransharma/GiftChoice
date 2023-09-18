@@ -16,11 +16,11 @@
     <EntitySet Name="SliderTbls" EntityType="GiftChoiceModel.SliderTbl" />
     <EntitySet Name="UserRegisters" EntityType="GiftChoiceModel.UserRegister" />
     <EntitySet Name="VProducts" EntityType="GiftChoiceModel.VProduct" />
-    <AssociationSet Name="FK__MCKeyword__Keywo__3B75D760" Association="GiftChoiceModel.FK__MCKeyword__Keywo__3B75D760">
+    <AssociationSet Name="FK__MCKeyword__Keywo__52593CB8" Association="GiftChoiceModel.FK__MCKeyword__Keywo__52593CB8">
       <End Role="KeywordTbl" EntitySet="KeywordTbls" />
       <End Role="MCKeywordTbl" EntitySet="MCKeywordTbls" />
     </AssociationSet>
-    <AssociationSet Name="FK__MCKeyword__MainC__3A81B327" Association="GiftChoiceModel.FK__MCKeyword__MainC__3A81B327">
+    <AssociationSet Name="FK__MCKeyword__MainC__534D60F1" Association="GiftChoiceModel.FK__MCKeyword__MainC__534D60F1">
       <End Role="MainCateTbl" EntitySet="MainCateTbls" />
       <End Role="MCKeywordTbl" EntitySet="MCKeywordTbls" />
     </AssociationSet>
@@ -61,7 +61,7 @@
     <Property Name="Active" Type="Boolean" />
     <Property Name="Priority" Type="Int64" />
     <Property Name="UserId" Type="Int64" />
-    <NavigationProperty Name="MCKeywordTbls" Relationship="GiftChoiceModel.FK__MCKeyword__Keywo__3B75D760" FromRole="KeywordTbl" ToRole="MCKeywordTbl" />
+    <NavigationProperty Name="MCKeywordTbls" Relationship="GiftChoiceModel.FK__MCKeyword__Keywo__52593CB8" FromRole="KeywordTbl" ToRole="MCKeywordTbl" />
   </EntityType>
   <EntityType Name="MainCateTbl">
     <Key>
@@ -76,7 +76,7 @@
     <Property Name="Update_at" Type="DateTime" Precision="3" />
     <Property Name="MImage" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="UserId" Type="Int64" />
-    <NavigationProperty Name="MCKeywordTbls" Relationship="GiftChoiceModel.FK__MCKeyword__MainC__3A81B327" FromRole="MainCateTbl" ToRole="MCKeywordTbl" />
+    <NavigationProperty Name="MCKeywordTbls" Relationship="GiftChoiceModel.FK__MCKeyword__MainC__534D60F1" FromRole="MainCateTbl" ToRole="MCKeywordTbl" />
   </EntityType>
   <EntityType Name="MCKeywordTbl">
     <Key>
@@ -86,8 +86,8 @@
     <Property Name="MainCateId" Type="Int64" />
     <Property Name="KeywordId" Type="Int64" />
     <Property Name="Active" Type="Boolean" />
-    <NavigationProperty Name="KeywordTbl" Relationship="GiftChoiceModel.FK__MCKeyword__Keywo__3B75D760" FromRole="MCKeywordTbl" ToRole="KeywordTbl" />
-    <NavigationProperty Name="MainCateTbl" Relationship="GiftChoiceModel.FK__MCKeyword__MainC__3A81B327" FromRole="MCKeywordTbl" ToRole="MainCateTbl" />
+    <NavigationProperty Name="KeywordTbl" Relationship="GiftChoiceModel.FK__MCKeyword__Keywo__52593CB8" FromRole="MCKeywordTbl" ToRole="KeywordTbl" />
+    <NavigationProperty Name="MainCateTbl" Relationship="GiftChoiceModel.FK__MCKeyword__MainC__534D60F1" FromRole="MCKeywordTbl" ToRole="MainCateTbl" />
   </EntityType>
   <EntityType Name="OrderMainTbl">
     <Key>
@@ -243,7 +243,7 @@
     <Property Name="Expr14" Type="DateTime" Precision="3" />
     <Property Name="Qty" Type="Int64" />
   </EntityType>
-  <Association Name="FK__MCKeyword__Keywo__3B75D760">
+  <Association Name="FK__MCKeyword__Keywo__52593CB8">
     <End Type="GiftChoiceModel.KeywordTbl" Role="KeywordTbl" Multiplicity="0..1" />
     <End Type="GiftChoiceModel.MCKeywordTbl" Role="MCKeywordTbl" Multiplicity="*" />
     <ReferentialConstraint>
@@ -255,7 +255,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__MCKeyword__MainC__3A81B327">
+  <Association Name="FK__MCKeyword__MainC__534D60F1">
     <End Type="GiftChoiceModel.MainCateTbl" Role="MainCateTbl" Multiplicity="0..1" />
     <End Type="GiftChoiceModel.MCKeywordTbl" Role="MCKeywordTbl" Multiplicity="*" />
     <ReferentialConstraint>

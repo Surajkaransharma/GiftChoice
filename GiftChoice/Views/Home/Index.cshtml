@@ -7,36 +7,37 @@
 
     <!-- Slider Start -->
     <section ng-init="SliderList()" class="carousel-slider-main text-center border-top border-bottom bg-white">
-            <div class="owl-carousel owl-carousel-slider ">
-                <div ng-repeat="s in SliderListData" class="item">
-                    <a href="/Home/shop?Main={{s.SUrl}}"><img class="img-fluid img-responsive" src="~/images/SliderImg/{{s.SliderImage}}" alt="First slide"></a>
-                </div>
+        <div class="owl-carousel owl-carousel-slider ">
+            <div ng-repeat="s in SliderListData" class="item">
+                <a href="/Home/shop?Main={{s.SUrl}}"><img class="img-fluid img-responsive" src="~/images/SliderImg/{{s.SliderImage}}" alt="First slide"></a>
             </div>
-        </section>
+        </div>
+    </section>
     <style>
-        .owl-controls
-        {
-            margin-top:-25px!important;
-
+        .owl-controls {
+            margin-top: -25px !important;
         }
+
         .owl-pagination clickable {
             background-color: white !important;
         }
+
         .item img {
             height: auto;
         }
-        @@media only screen and (max-width: 767px) {
-             .item {
 
+        @@media only screen and (max-width: 767px) {
+            .item {
                 height: 25ch;
             }
-            .item img{
-                width:100vh;
-                height: 200px;
-            }
+
+                .item img { 
+                    width: 100vh;
+                    height: 200px;
+                }
         }
-        </style>
-   
+    </style>
+
     <!-- Slider End -->
     <!-- Category Section Start -->
     <section class="popular-categories section-padding" ng-init="GetMainCateData()">
@@ -52,7 +53,7 @@
                             </a>
                         </figure>
                     </div>
-          
+
                 </div>
             </div>
         </div>
@@ -69,7 +70,7 @@
                             <div class="product-cart-wrap mb-30">
                                 <div class="product-img-action-wrap">
                                     <div class="product-img product-img-zoom">
-                                        <a href="/Home/Gift/{{p.PUrl}}">
+                                        <a href="/Home/Gift?url={{p.PUrl}}">
                                             <img class="default-img img-fluid" src="~/images/ProductImg/{{p.ProductImage}}" loading="lazy" alt="product-image">
                                             <img class="hover-img img-fluid" src="~/images/ProductImg/{{p.ProductImage}}" loading="lazy" alt="product-hover-image">
                                         </a>
@@ -112,7 +113,171 @@
         </div>
     </section>
     <!-- Advertisement End -->
-
-
+    <!-- Testimonial Start -->
+    <section class="testimonial-start section-padding bg-light">
+        <div class="container">
+            <div class="d-flex justify-content-between">
+                <div class="title">
+                    <h3 class="section-title mb-20">What's Our Client Says</h3>
+                </div>
+                <div class="more-button">
+                    <a target="_blank" href="https://www.google.com/search?q=gift+choice+bhilwara&oq=gift+cho&aqs=chrome.0.69i59j69i57j46i20i175i199i263i512j0i512l3j69i60l2.5751j0j1&sourceid=chrome&ie=UTF-8#ip=1&lrd=0x3968c36f441ad415:0x69f62d52129e7901,1,,,," class="text-brand">View All <i class="fi-rs-arrow-right"></i></a>
+                </div>
+            </div>
+            <div class="row g-3">
+                <div class="col-lg-4 col-sm-6 col-12">
+                    <div class="card p-3 h-100">
+                        <article class="wow fadeIn animated hover-up animated">
+                            <div class="entry-content-2">
+                                <p class="post-exerpt mb-10">Amazing Range of personalized printed & engraved wooden frames. I personally loved their heart shaped scented candles & wooden greeting card. Awesome work guys.</p>
+                                <div class="rating">
+                                    <span>
+                                        <i class="fa fa-star text-warning" aria-hidden="true"></i>
+                                        <i class="fa fa-star text-warning" aria-hidden="true"></i>
+                                        <i class="fa fa-star text-warning" aria-hidden="true"></i>
+                                        <i class="fa fa-star text-warning" aria-hidden="true"></i>
+                                        <i class="fa fa-star text-warning" aria-hidden="true"></i>
+                                    </span>
+                                </div>
+                                <div class="entry-meta meta-1 font-xs color-grey mt-10 pb-10">
+                                    <div>
+                                        <span class="post-on"> <i class="fi-rs-clock"></i> A year ago</span>
+                                        <span class="hit-count has-dot">Ashish Maheshwari</span>
+                                    </div>
+                                    <a target="_blank" href="https://www.google.com/search?q=gift+choice+bhilwara&oq=gift+cho&aqs=chrome.0.69i59j69i57j46i20i175i199i263i512j0i512l3j69i60l2.5751j0j1&sourceid=chrome&ie=UTF-8#ip=1&lrd=0x3968c36f441ad415:0x69f62d52129e7901,1,,,," class="text-brand">Read more <i class="fi-rs-arrow-right"></i></a>
+                                </div>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-sm-6 col-12">
+                    <div class="card p-3 h-100">
+                        <article class="wow fadeIn animated hover-up animated">
+                            <div class="entry-content-2">
+                                <p class="post-exerpt mb-10">Amazing variety of items. A must visit place for all the gift choices you wish for.</p>
+                                <div class="rating">
+                                    <span>
+                                        <i class="fa fa-star text-warning" aria-hidden="true"></i>
+                                        <i class="fa fa-star text-warning" aria-hidden="true"></i>
+                                        <i class="fa fa-star text-warning" aria-hidden="true"></i>
+                                        <i class="fa fa-star text-warning" aria-hidden="true"></i>
+                                        <i class="fa fa-star text-warning" aria-hidden="true"></i>
+                                    </span>
+                                </div>
+                                <div class="entry-meta meta-1 font-xs color-grey mt-10 pb-10">
+                                    <div>
+                                        <span class="post-on"> <i class="fi-rs-clock"></i> 10 months ago</span>
+                                        <span class="hit-count has-dot">Akash Soral</span>
+                                    </div>
+                                    <a target="_blank" href="https://www.google.com/search?q=gift+choice+bhilwara&oq=gift+cho&aqs=chrome.0.69i59j69i57j46i20i175i199i263i512j0i512l3j69i60l2.5751j0j1&sourceid=chrome&ie=UTF-8#ip=1&lrd=0x3968c36f441ad415:0x69f62d52129e7901,1,,,," class="text-brand">Read more <i class="fi-rs-arrow-right"></i></a>
+                                </div>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-sm-6 col-12">
+                    <div class="card p-3 h-100">
+                        <article class="wow fadeIn animated hover-up animated">
+                            <div class="entry-content-2">
+                                <p class="post-exerpt mb-10">I have ordered a customised led alarm clock and an engraved pen. It was amazing😍 and also in very reasonable price.</p>
+                                <div class="rating">
+                                    <span>
+                                        <i class="fa fa-star text-warning" aria-hidden="true"></i>
+                                        <i class="fa fa-star text-warning" aria-hidden="true"></i>
+                                        <i class="fa fa-star text-warning" aria-hidden="true"></i>
+                                        <i class="fa fa-star text-warning" aria-hidden="true"></i>
+                                        <i class="fa fa-star-o text-warning" aria-hidden="true"></i>
+                                    </span>
+                                </div>
+                                <div class="entry-meta meta-1 font-xs color-grey mt-10 pb-10">
+                                    <div>
+                                        <span class="post-on"> <i class="fi-rs-clock"></i> A year ago</span>
+                                        <span class="hit-count has-dot">Kunika Rawlani</span>
+                                    </div>
+                                    <a target="_blank" href="https://www.google.com/search?q=gift+choice+bhilwara&oq=gift+cho&aqs=chrome.0.69i59j69i57j46i20i175i199i263i512j0i512l3j69i60l2.5751j0j1&sourceid=chrome&ie=UTF-8#ip=1&lrd=0x3968c36f441ad415:0x69f62d52129e7901,1,,,," class="text-brand">Read more <i class="fi-rs-arrow-right"></i></a>
+                                </div>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-sm-6 col-12">
+                    <div class="card p-3 h-100">
+                        <article class="wow fadeIn animated hover-up animated">
+                            <div class="entry-content-2">
+                                <p class="post-exerpt mb-10">Best gift options are available over here  in bhilwara It's customisation is awesome</p>
+                                <div class="rating">
+                                    <span>
+                                        <i class="fa fa-star text-warning" aria-hidden="true"></i>
+                                        <i class="fa fa-star text-warning" aria-hidden="true"></i>
+                                        <i class="fa fa-star text-warning" aria-hidden="true"></i>
+                                        <i class="fa fa-star text-warning" aria-hidden="true"></i>
+                                        <i class="fa fa-star text-warning" aria-hidden="true"></i>
+                                    </span>
+                                </div>
+                                <div class="entry-meta meta-1 font-xs color-grey mt-10 pb-10">
+                                    <div>
+                                        <span class="post-on"> <i class="fi-rs-clock"></i> 2 years ago</span>
+                                        <span class="hit-count has-dot">Anusha Jhamer</span>
+                                    </div>
+                                    <a target="_blank" href="https://www.google.com/search?q=gift+choice+bhilwara&oq=gift+cho&aqs=chrome.0.69i59j69i57j46i20i175i199i263i512j0i512l3j69i60l2.5751j0j1&sourceid=chrome&ie=UTF-8#ip=1&lrd=0x3968c36f441ad415:0x69f62d52129e7901,1,,,," class="text-brand">Read more <i class="fi-rs-arrow-right"></i></a>
+                                </div>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-sm-6 col-12">
+                    <div class="card p-3 h-100">
+                        <article class="wow fadeIn animated hover-up animated">
+                            <div class="entry-content-2">
+                                <p class="post-exerpt mb-10">Best designer gifts... , Everything you need.. , Visit ship , i gurnteed everyone satisfied...</p>
+                                <div class="rating">
+                                    <span>
+                                        <i class="fa fa-star text-warning" aria-hidden="true"></i>
+                                        <i class="fa fa-star text-warning" aria-hidden="true"></i>
+                                        <i class="fa fa-star text-warning" aria-hidden="true"></i>
+                                        <i class="fa fa-star text-warning" aria-hidden="true"></i>
+                                        <i class="fa fa-star text-warning" aria-hidden="true"></i>
+                                    </span>
+                                </div>
+                                <div class="entry-meta meta-1 font-xs color-grey mt-10 pb-10">
+                                    <div>
+                                        <span class="post-on"> <i class="fi-rs-clock"></i> A year ago</span>
+                                        <span class="hit-count has-dot">Sanjay Kumar</span>
+                                    </div>
+                                    <a target="_blank" href="https://www.google.com/search?q=gift+choice+bhilwara&oq=gift+cho&aqs=chrome.0.69i59j69i57j46i20i175i199i263i512j0i512l3j69i60l2.5751j0j1&sourceid=chrome&ie=UTF-8#ip=1&lrd=0x3968c36f441ad415:0x69f62d52129e7901,1,,,," class="text-brand">Read more <i class="fi-rs-arrow-right"></i></a>
+                                </div>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-sm-6 col-12">
+                    <div class="card p-3 h-100">
+                        <article class="wow fadeIn animated hover-up animated">
+                            <div class="entry-content-2">
+                                <p class="post-exerpt mb-10"># best in bhilwara...all the products you made are breathtaking....keep it up Yash bhaiya 👍👍👍👍</p>
+                                <div class="rating">
+                                    <span>
+                                        <i class="fa fa-star text-warning" aria-hidden="true"></i>
+                                        <i class="fa fa-star text-warning" aria-hidden="true"></i>
+                                        <i class="fa fa-star text-warning" aria-hidden="true"></i>
+                                        <i class="fa fa-star text-warning" aria-hidden="true"></i>
+                                        <i class="fa fa-star text-warning" aria-hidden="true"></i>
+                                    </span>
+                                </div>
+                                <div class="entry-meta meta-1 font-xs color-grey mt-10 pb-10">
+                                    <div>
+                                        <span class="post-on"> <i class="fi-rs-clock"></i> A year ago</span>
+                                        <span class="hit-count has-dot">Saksham Lodha</span>
+                                    </div>
+                                    <a target="_blank" href="https://www.google.com/search?q=gift+choice+bhilwara&oq=gift+cho&aqs=chrome.0.69i59j69i57j46i20i175i199i263i512j0i512l3j69i60l2.5751j0j1&sourceid=chrome&ie=UTF-8#ip=1&lrd=0x3968c36f441ad415:0x69f62d52129e7901,1,,,," class="text-brand">Read more <i class="fi-rs-arrow-right"></i></a>
+                                </div>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Testimonial End -->
 </main>
 <!-- Main Content End -->

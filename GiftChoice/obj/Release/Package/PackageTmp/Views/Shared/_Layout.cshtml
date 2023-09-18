@@ -1,42 +1,411 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
-    @Styles.Render("~/Content/css")
-    @Scripts.Render("~/bundles/modernizr")
+    <meta charset="utf-8">
+    <title>Welcome to Gift Choice Bhilwara</title>
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta property="og:title" content="">
+    <meta property="og:type" content="">
+    <meta property="og:url" content="">
+    <meta property="og:image" content="">
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" type="image/x-icon" href="~/images/gift-choice-vertical.png">
+
+    <!-- Template CSS -->
+    <link rel="stylesheet" href="~/Content/assets/css/main.css">
+
+    <!-- Font Awasome Intro -->
+    <link rel="stylesheet" href="~/Content/assets/css/font-awasome/font-awesome.css">
+    <link rel="stylesheet" href="~/Content/assets/css/font-awasome/font-awesome.min.css">
+    <link href="~/Content/assets/owl-carousel/owl.theme.css" rel="stylesheet" />
+    <link href="~/Content/assets/owl-carousel/owl.carousel.css" rel="stylesheet" />
+    <link href="~/Angularjs/toast-alert/toastr.css" rel="stylesheet" />
+    <script src="~/Angularjs/angular.min.js"></script>
+    <script src="~/Angularjs/Home.js"></script>
+    @*<script src="~/Angularjs/AnguAutoComplete/angucomplete-alt.js"></script>
+        <link href="~/Angularjs/AnguAutoComplete/angucomplete-alt.css" rel="stylesheet" />*@
+    <link href="https://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+    <script src="https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
 </head>
-<body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+<body ng-app="HomeApp" ng-controller="HomeController">
+    <div>
+        <header class="header-area header-style-4 header-height-2">
+
+            <!-- Topbar Section Start -->
+            <div class="header-top header-top-ptb-1 d-none d-lg-block d-sm-none">
+                <div class="container">
+                    <div class="row align-items-center">
+                        <div class="col-xl-9 col-lg-9">
+                            <div class="header-info">
+                                <ul>
+                                    <!-- <li><i class="fi-rs-smartphone"></i> <a href="tel:(+91)9001097357">(+91) 90010-97357</a> <span class="pl-5">(10:00AM to 8:00PM)</span></li> -->
+                                    <li><i class="fi-rs-marker"></i><a href="https://goo.gl/maps/kRtQzQX6ASj5CYfJ7">Bhilwara Furniture House Near Sitaram Ji Ki Bawri, Bhilwara,311001- Rajasthan, INDIA</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-lg-3">
+                            <div class="header-info header-info-right">
+                                <ul>
+                                    <li>
+                                        <a href="https://www.facebook.com/giftchoicebhl" target="_blank">
+                                            <i class="fa fa-facebook" aria-hidden="true"></i>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="http://wa.me/+917976948872" target="_blank">
+                                            <i class="fa fa-whatsapp" aria-hidden="true"></i>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="https://www.instagram.com/abhumagift" target="_blank">
+                                            <i class="fa fa-instagram" aria-hidden="true"></i>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="https://g.co/kgs/Tc2NEJ" target="_blank">
+                                            <i class="fa fa-google" aria-hidden="true"></i>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="https://www.amazon.in/stores/page/7F00F625-0CD6-4CC8-B09A-BD87E2789777?ingress=2&visitId=f5292db0-acc6-4d9d-b57e-bcacef6966f0&ref_=ast_bln" target="_blank">
+                                            <i class="fa fa-amazon" aria-hidden="true"></i>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                </ul>
+            <!-- Topbar Section End -->
+            <!-- Middle Header Start -->
+            <div class="header-middle header-middle-ptb-1 d-none d-lg-block">
+                <div class="container">
+                    <div class="header-wrap">
+                        <div class="logo logo-width-1">
+                            <a href="/Home/Index"><img src="~/Content/assets/imgs/resources/gift-choice-vertical.png" alt="logo"></a>
+                        </div>
+                        <div class="header-right">
+                            <div class="search-style-2">
+
+                                @*<div angucomplete-alt id="txtKeyword" placeholder="KeyWords" pause="100" selected-object="SelectedKeyword" local-data="GetKeywordData" search-fields="Keyword" title-field="Keyword"  minlength="1" input-class="w-100" match-class="highlight">
+                                    </div>
+                                    <style>
+                                        .angucomplete-dropdown {
+                                            width: 100% !important;
+                                        }
+                                    </style>
+                                    <input type="text" id="Keyword" value="{{SelectedKeyword.title}}"  placeholder="Enter Keywords">*@
+
+                                <input type="text" id="Keyword" placeholder="Search for items..." ng-model="Keyword" ng-change="GetRandomKeyword()" class="w-100">
+
+                            </div>
+                            <div class="header-action-right">
+                                <div class="header-action-2">
+                                    <div class="header-action-icon-2" ng-init="GetCart()">
+                                        <a class="mini-cart-icon" href="/Home/Cart">
+                                            <img alt="cart-image" src="~/Content/assets/imgs/theme/icons/icon-cart.svg">
+                                            <span class="pro-count blue">{{cart.length==null?0:cart.length}}</span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Middle Header End -->
+            <!-- Header Bottom Start -->
+            <div class="header-bottom header-bottom-bg-color sticky-bar">
+                <div class="container-fluid">
+                    <div class="header-wrap justify-content-center position-relative mobile-justify-content-between">
+                        <div class="logo logo-width-1 d-block d-lg-none">
+                            <a href="/Home/Index"><img src="~/Content/assets/imgs/resources/gift-choice-vertical.png" alt="logo"></a>
+                        </div>
+
+                        <div class="header-nav  d-none d-lg-flex">
+                            <div class="main-menu main-menu-padding-1 main-menu-lh-2 d-none d-lg-block">
+                                <nav>
+                                    <ul>
+                                        <li ng-repeat="n in NavbarMenuList">
+                                            <a href="/Home/shop?Main={{n.MUrl}}">{{n.MTitle}} <i ng-show="n.Submenu.length>0" class="fi-rs-angle-down"></i></a>
+                                            <ul class="sub-menu" ng-show="n.Submenu.length>0">
+                                                <li ng-repeat="s in n.Submenu"><a href="/Home/shop?Keyword={{s.SubmenuTitle.KUrl}}">{{s.SubmenuTitle.Keyword}}</a></li>
+                                                @*<li><a href="shop_by_categories.asp">Rakhi For Brother</a></li>
+                                                    <li><a href="shop_by_categories.asp">Rakhi For Sister</a></li>*@
+                                            </ul>
+                                        </li>
+
+                                        <li ng-show="NavbarMenuList.length>5">
+                                            <a href="#">More Category <i class="fi-rs-angle-down"></i></a>
+                                            <ul class="sub-menu more-category">
+                                               <li ng-repeat="s in ScondNavbarMenuList"><a href="/Home/shop/{{s.MUrl}}">{{s.MTitle}}</a></li>
+                                                @*<li><a href="shop_by_categories.asp">Mug</a></li>
+                                                <li><a href="shop_by_categories.asp">Frame</a></li>
+                                                <li><a href="shop_by_categories.asp">Cushion</a></li>
+                                                <li><a href="shop_by_categories.asp">Night Lamps</a></li>
+                                                <li><a href="shop_by_categories.asp">Keychains</a></li>
+                                                <li><a href="shop_by_categories.asp">Wall Watches</a></li>
+                                                <li><a href="shop_by_categories.asp">Gift Hampers</a></li>
+                                                <li><a href="shop_by_categories.asp">New Releases</a></li>
+                                                <li><a href="shop_by_categories.asp">T-shirts</a></li>
+                                                <li><a href="shop_by_categories.asp">Pendants</a></li>
+                                                <li><a href="shop_by_categories.asp">Statues</a></li>
+                                                <li><a href="shop_by_categories.asp">Name Plates</a></li>
+                                                <li><a href="shop_by_categories.asp">Gift For Mom</a></li>
+                                                <li><a href="shop_by_categories.asp">Gift For Kids</a></li>
+                                                <li><a href="shop_by_categories.asp">Office Gifts</a></li>
+                                                <li><a href="shop_by_categories.asp">Home Decor</a></li>*@
+                                            </ul>
+                                        </li>
+                                        <li><a href="/Home/Contact">Contact Us</a></li>
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div>
+
+                        <div class="header-action-right d-block d-lg-none">
+                            <div class="header-action-2">
+                                <div class="header-action-icon-2" ng-init="GetCart()">
+                                    <a class="mini-cart-icon" href="/Home/Cart">
+                                        <img alt="Evara" src="~/Content/assets/imgs/theme/icons/icon-cart.svg">
+                                        <span class="pro-count white">{{cart.length==null?0:cart.length}}</span>
+                                    </a>
+                                </div>
+                                <div class="header-action-icon-2 d-block d-lg-none">
+                                    <div class="burger-icon burger-icon-white">
+                                        <span class="burger-icon-top"></span>
+                                        <span class="burger-icon-mid"></span>
+                                        <span class="burger-icon-bottom"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="searchbar-section d-lg-none d-sm-block d-block pt-3 pb-3">
+                <div class="container-fluid">
+                    <div class="search-style-3">
+                        <div class="mb-0">
+                            @*<div angucomplete-alt id="txtKeyword" placeholder="KeyWords" pause="100" selected-object="SelectedKeyword"
+                                     local-data="GetKeywordData" search-fields="Keyword" title-field="Keyword" minlength="1" input-class="w-100" match-class="highlight">
+                                </div>
+                                <style>
+                                    .angucomplete-dropdown {
+                                        width: 100% !important;
+                                    }
+                                </style>
+                                <input type="hidden" id="Keyword" value="{{SelectedKeyword.title}}" placeholder="Enter Keywords">*@
+                            <input type="text" placeholder="Search for items…" id="MKeyword" ng-model="Keyword" ng-change="GetRandomKeywordMobile()">
+                            @*<button type="submit"><i class="fi-rs-search"></i></button>*@
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Header Bottom End -->
+
+        </header>
+
+        <!-- Mobile Sidebar STart -->
+        <div class="mobile-header-active mobile-header-wrapper-style">
+            <div class="mobile-header-wrapper-inner">
+                <div class="mobile-header-top">
+                    <div class="mobile-header-logo">
+                        <a href="/Home/Index"><img src="~/Content/assets/imgs/resources/gift-choice-vertical.png" alt="logo"></a>
+                    </div>
+                    <div class="mobile-menu-close close-style-wrap close-style-position-inherit">
+                        <button class="close-style search-close">
+                            <i class="icon-top"></i>
+                            <i class="icon-bottom"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="mobile-header-content-area">
+                    <div class="mobile-menu-wrap mobile-header-border">
+                        <nav>
+                            <ul class="mobile-menu">
+                                <li class="menu-item-has-children"><a href="/Home/Index">Home</a> </li>
+
+                                <li class="menu-item-has-children" ng-repeat="n in NavbarMenuList">
+                                    <span class="menu-expand"></span><a href="/Home/shop/{{n.MUrl}}">{{n.MTitle}} </a>
+                                    <ul class="dropdown">
+
+                                        <li ng-repeat="s in n.Submenu">
+                                            <a href="/Home/shop/{{s.SubmenuTitle.KUrl}}">{{s.SubmenuTitle.Keyword}}</a>
+                                        </li>
+
+                                    </ul>
+                                </li>
+
+                                <li class="menu-item-has-children" ng-show="NavbarMenuList.length>5">
+                                    >
+                                    <span class="menu-expand"></span><a href="#">More Category</a>
+                                    <ul class="dropdown">
+                                        <li ng-repeat="s in ScondNavbarMenuList"><a href="/Home/shop/{{s.MUrl}}">{{s.MTitle}}</a></li>
+
+                                    </ul>
+                                </li>
+                                <li class="menu-item-has-children"><a href="shop_by_categories.asp">Contact Us</a></li>
+                            </ul>
+                        </nav>
+                        <!-- mobile menu end -->
+                    </div>
+                    <div class="mobile-header-info-wrap mobile-header-border">
+                        <div class="single-mobile-header-info mt-30">
+                            <p class="mb-0"><i class="fa fa-map" aria-hidden="true"></i> Our location</p>
+                            <a href="#">Bhilwara Furniture House Near Sitaram Ji Ki Bawri, Bhilwara,311001- Rajasthan, INDIA</a>
+                        </div>
+
+                        <hr>
+
+                        <div class="single-mobile-header-info">
+                            <p class="mb-0"><i class="fa fa-mobile" aria-hidden="true"></i> Contact No.</p>
+                            <a href="#">+91 79769-48872</a>
+                            <span><i class="fa fa-clock-o" aria-hidden="true"></i> 10:00AM to 8:00PM</span>
+                        </div>
+
+                        <hr>
+
+                        <div class="single-mobile-header-info">
+                            <p class="mb-0"><i class="fa fa-envelope" aria-hidden="true"></i> E-mail Address</p>
+                            <a href="#">yashj.6628@gmail.com</a>
+                        </div>
+                    </div>
+                    <div class="mobile-social-icon">
+                        <h5 class="mb-15 text-grey-4">Follow Us</h5>
+                        <a href="https://www.facebook.com/giftchoicebhl" target="_blank">
+                            <i class="fa fa-facebook" aria-hidden="true"></i>
+                        </a>
+                        <a href="http://wa.me/+917976948872" target="_blank">
+                            <i class="fa fa-whatsapp" aria-hidden="true"></i>
+                        </a>
+                        <a href="https://www.instagram.com/abhumagift" target="_blank">
+                            <i class="fa fa-instagram" aria-hidden="true"></i>
+                        </a>
+                        <a href="https://g.co/kgs/Tc2NEJ" target="_blank">
+                            <i class="fa fa-google" aria-hidden="true"></i>
+                        </a>
+                        <a href="https://www.amazon.in/stores/page/7F00F625-0CD6-4CC8-B09A-BD87E2789777?ingress=2&visitId=f5292db0-acc6-4d9d-b57e-bcacef6966f0&ref_=ast_bln" target="_blank">
+                            <i class="fa fa-amazon" aria-hidden="true"></i>
+                        </a>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
-    <div class="container body-content">
+        <!-- Mobile Sidebar End -->
+
         @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+        <footer class="main">
+
+            <!-- Green Box Start -->
+            <section class="newsletter p-30 text-white wow fadeIn animated">
+                <div class="container">
+                    <div class="row align-items-center">
+                    </div>
+                </div>
+            </section>
+            <!-- Green Box End -->
+            <!-- Main Footer Section Start -->
+            <section class="section-padding footer-mid">
+                <div class="container pt-15 pb-20">
+                    <div class="row align-items-center">
+                        <div class="col-lg-5 col-sm-5">
+                            <div class="widget-about font-md mb-md-5 mb-lg-0">
+                                <div class="logo logo-width-1 wow fadeIn animated">
+                                    <a href="/Home/Index"><img src="~/Content/assets/imgs/resources/gift-choice-vertical.png" alt="logo" class="img-fluid"></a>
+                                </div>
+                                <p class="wow fadeIn animated text-justify">
+                                    Discover a world of personalized gifts that make every moment extraordinary. At Gift Choice Bhilwara, we believe in the magic of unique and special presents.
+                                </p>
+                                <div class="mobile-social-icon wow fadeIn animated mb-sm-5 mt-3 mb-md-0">
+                                    <a href="https://www.facebook.com/giftchoicebhl" target="_blank">
+                                        <i class="fa fa-facebook" aria-hidden="true"></i>
+                                    </a>
+                                    <a href="http://wa.me/+917976948872" target="_blank">
+                                        <i class="fa fa-whatsapp" aria-hidden="true"></i>
+                                    </a>
+                                    <a href="https://www.instagram.com/abhumagift" target="_blank">
+                                        <i class="fa fa-instagram" aria-hidden="true"></i>
+                                    </a>
+                                    <a href="https://g.co/kgs/Tc2NEJ" target="_blank">
+                                        <i class="fa fa-google" aria-hidden="true"></i>
+                                    </a>
+                                    <a href="https://www.amazon.in/stores/page/7F00F625-0CD6-4CC8-B09A-BD87E2789777?ingress=2&visitId=f5292db0-acc6-4d9d-b57e-bcacef6966f0&ref_=ast_bln" target="_blank">
+                                        <i class="fa fa-amazon" aria-hidden="true"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="offest-lg-2 offset-md-1 col-lg-5 col-sm-5">
+                            <h5 class="widget-title wow fadeIn animated">Help &amp; Support</h5>
+                            <div class="widget-about font-md mb-md-5 mb-lg-0">
+                                <p class="wow fadeIn animated">
+                                    <strong>Address: </strong>Bhilwara Furniture House Near Sitaram Ji Ki Bawri, Bhilwara,311001- Rajasthan, INDIA
+                                </p>
+                                <p class="wow fadeIn animated">
+                                    <strong>Contact: </strong>+91 79769-48872 <br><span class="text-dark"><i class="fa fa-clock-o" aria-hidden="true"></i> 10:00AM to 8:00PM</span>
+                                </p>
+                                <p class="wow fadeIn animated">
+                                    <strong>Email: </strong>yashj.6628@gmail.com
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- Main Footer Section End -->
+
+
+            <div class="container pb-20 wow fadeIn animated">
+                <div class="row">
+                    <div class="col-12 mb-20">
+                        <div class="footer-bottom"></div>
+                    </div>
+                    <div class="col-lg-6">
+                        <p class="float-md-left font-sm text-muted mb-0">&copy; 2023 <a href="/Home/Index"> <strong class="text-brand">Gift Choice Bhilwara</strong></a> </p>
+                    </div>
+                    <div class="col-lg-6">
+                        <p class="text-lg-end text-start font-sm text-muted mb-0">
+                            Designed by <a href="/Home/Index" target="_blank">Gift Choice Bhilwara</a>. All rights reserved
+                        </p>
+                    </div>
+                </div>
+            </div>
         </footer>
+
     </div>
 
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
-    @RenderSection("scripts", required: false)
+    <!-- Vendor JS-->
+    <script src="~/Content/assets/js/vendor/modernizr-3.6.0.min.js"></script>
+    <script src="~/Content/assets/js/vendor/jquery-3.6.0.min.js"></script>
+    <script src="~/Content/assets/js/vendor/jquery-migrate-3.3.0.min.js"></script>
+    <script src="~/Content/assets/js/vendor/bootstrap.bundle.min.js"></script>
+    <script src="~/Content/assets/js/plugins/slick.js"></script>
+    <script src="~/Content/assets/js/plugins/jquery.syotimer.min.js"></script>
+    <script src="~/Content/assets/js/plugins/wow.js"></script>
+    <script src="~/Content/assets/js/plugins/jquery-ui.js"></script>
+    <script src="~/Content/assets/js/plugins/perfect-scrollbar.js"></script>
+    <script src="~/Content/assets/js/plugins/magnific-popup.js"></script>
+    <script src="~/Content/assets/js/plugins/select2.min.js"></script>
+    <script src="~/Content/assets/js/plugins/waypoints.js"></script>
+    <script src="~/Content/assets/js/plugins/counterup.js"></script>
+    <script src="~/Content/assets/js/plugins/jquery.countdown.min.js"></script>
+    <script src="~/Content/assets/js/plugins/images-loaded.js"></script>
+    <script src="~/Content/assets/js/plugins/isotope.js"></script>
+    <script src="~/Content/assets/js/plugins/scrollup.js"></script>
+    <script src="~/Content/assets/js/plugins/jquery.vticker-min.js"></script>
+    <script src="~/Content/assets/js/plugins/jquery.theia.sticky.js"></script>
+    <script src="~/Content/assets/js/plugins/jquery.elevatezoom.js"></script>
+    <script src="~/Content/assets/owl-carousel/owl.carousel.js"></script>
+    <script src="~/Angularjs/toast-alert/toastr.js"></script>
+    <!-- Template  JS -->
+    <script src="~/Content/assets/js/main.js"></script>
+    <script src="~/Content/assets/js/shop.js"></script>
+
 </body>
 </html>

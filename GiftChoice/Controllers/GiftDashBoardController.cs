@@ -679,6 +679,33 @@ namespace GiftChoice.Controllers
 
         }
 
+        public JsonResult ProductOrderCompelete(int id)
+        {
+            try
+            {
+                var jb = db.OrderMainTbls.Where(c => c.MorderId == id).FirstOrDefault();
+                if (jb != null)
+                {
+                    jb.Delivery = true;
+                    //  jb.Delivery = jb.Delivery == true ? false : true;
+                    db.SaveChanges();
+                    var res = new { res = "1" };
+                    return Json(res, JsonRequestBehavior.AllowGet);
+                }
+                else
+                {
+                    var res = new { res = "2" };
+                    return Json(res, JsonRequestBehavior.AllowGet);
+                }
+            }
+            catch (Exception ex)
+            {
+                var res = new { res = "0" };
+                return Json(res, JsonRequestBehavior.AllowGet);
+            }
+
+        }
+
 
         public JsonResult UpdateProductData(ProductTblmodel model)
         {
@@ -1180,7 +1207,8 @@ namespace GiftChoice.Controllers
                  
                    m.RUserId,                 
                    m.Active,
-                   m.Cancel,                  
+                   m.Cancel,     
+                   m.MorderId,
                    m.TotalAmount,
                    m.Create_at,
                    UserData = db.UserRegisters.Where(u => u.RUserId == m.RUserId).FirstOrDefault(),  

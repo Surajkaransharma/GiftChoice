@@ -90,7 +90,7 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
 
     $scope.OrderDetails = function (index) {
         debugger
-        $scope.OrderDetailsData = $scope.OrderData[index]; 
+        $scope.OrderDetailsData = $scope.OrderData[index];
         $("#OrderDetailsModel").modal("toggle");
     };
 
@@ -100,6 +100,22 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
             $scope.rees = d.data;
             if ($scope.rees.res === "1") {
                 toastr["success"]("successful");
+                $scope.GetProduct();
+            }
+            else {
+                toastr["error"]("something went wrong   ");
+            }
+
+
+        }, function (error) {
+            alert(error.data);
+        });
+    };
+    $scope.ProductOrderCompelete = function (id) {
+        $http.get("/GiftDashBoard/ProductOrderCompelete?id=" + id).then(function (d) {
+            $scope.rees = d.data;
+            if ($scope.rees.res === "1") {
+                toastr["success"](" Complete Successful");
                 $scope.GetProduct();
             }
             else {
@@ -310,6 +326,7 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
     var Keywordarr = [];
 
     $scope.SubmitMainCate = function () {
+        debugger
         for (var i = 0; i < $scope.KeywordList.length; i++) {
             if ($scope.KeywordList[i].Selected) {
                 Keywordarr.push($scope.KeywordList[i]);
@@ -323,10 +340,13 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
         }).then(function (d) {
             $scope.result = d.data;
             if ($scope.result.res === "1") {
-                $scope.KeywordArrayData($scope.result.MainCateId);
-                //toastr["success"]("Main Category save successfully");
-                //$scope.MainCate = null;
-                //$scope.GetMainCate();
+                if (Keywordarr != null) {
+
+                    $scope.KeywordArrayData($scope.result.MainCateId);
+                }
+                toastr["success"]("Main Category save successfully");
+                $scope.MainCate = null;
+                $scope.GetMainCate();
 
             } else if ($scope.result.res === "2") {
                 toastr["error"]("Main Category already exist");
@@ -355,7 +375,8 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
             $scope.result = d.data;
             if ($scope.result.res === "1") {
                 toastr["success"]("Main Category save successfully");
-
+                $scope.MainCate = null;
+                $scope.GetMainCate();
             } else if ($scope.result.res === "2") {
                 toastr["error"]("Product already exist");
             }
@@ -404,6 +425,7 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
 
 
     $scope.UpdateMainCate = function () {
+        debugger
         var maincate = angular.element(document.getElementById("title"));
         if (maincate.val() === "") {
             toastr["error"]("Please Enter Main Category");
@@ -413,14 +435,19 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
         $.each($(".checkbox-input:checked"), function () {
             Keywordarr.push({ 'KeywordId': $(this).val() });
         });
-        $http({
+        upload({
             url: '/GiftDashBoard/UpdateMainCate',
             method: 'post',
             data: $scope.MainCate
         }).then(function (d) {
             $scope.result = d.data;
             if ($scope.result.res === "1") {
+                if (Keywordarr !== null) {
+
                 $scope.UpdateKeywordArrayData($scope.result.MainCateId);
+                }
+                $scope.MainCate = null;
+                $scope.GetMainCate();
             }
             else {
                 toastr["error"]("Main Category not save");
@@ -444,6 +471,8 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
             $scope.result = d.data;
             if ($scope.result.res === "1") {
                 toastr["success"]("Main Category Update successfully");
+                $scope.MainCate = null;
+                $scope.GetMainCate();
 
             } else if ($scope.result.res === "2") {
                 toastr["error"]("Product already exist");
@@ -949,7 +978,7 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
             alert(error.data);
         });
     };
-//--------------Size End->------------->---------------------->---------------------------->------->------------>---------->---
+    //--------------Size End->------------->---------------------->---------------------------->------->------------>---------->---
 
     $scope.isDragging = false;
     $scope.imageDataUrl = '';

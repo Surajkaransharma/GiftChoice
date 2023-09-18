@@ -59,16 +59,8 @@
                                         <th>Address </th>
                                         <th>Order Date</th>
                                         <th>Total Amount</th>
+                                        <th>Delivery</th>
                                         <th>Order Deatils</th>
-                                        @*<th>Product Title</th>
-                                            <th>Main Category Name</th>
-                                            <th>Label</th>
-                                            <th>Price</th>
-                                            <th>Priority</th>
-                                            <th>Keywords</th>
-                                            <th>Size</th>
-                                            <th>Image</th>
-                                            <th>Order Cancel</th>*@
 
 
                                     </tr>
@@ -85,16 +77,8 @@
                                         <td> {{m.UserData.UAddress}}</td>
                                         <td>{{m.Create_at | date:'dd-MM-yyyy'}}</td>
                                         <td>{{m.TotalAmount}}</td>
+                                        <td><a ng-click="ProductOrderCompelete(m.MorderId)"> <span class="badge {{m.Active==0?  'bg-danger' : 'bg-success'}}">{{m.Active==0?'Pending':'Complete'}}</span></a> </td>
                                         <td> <a ng-click="OrderDetails($index)"> Details</a></td>
-
-                                        @*<td>{{m.Maincate}}</td>
-                                            <td>{{m.PLabel}}</td>
-                                            <td>{{m.Price}}</td>
-                                            <td>{{m.Priority}}</td>
-                                            <td><span ng-repeat="n in m.Submenu">{{n.SubmenuTitle}},<br /></span></td>
-                                            <td><span ng-repeat="n in m.PSizeList">{{n.SizeTitle}},<br /></span></td>
-                                            <td><span ng-repeat="i in m.ProductImage"><img src="~/images/ProductImg/{{i}}"><br /></span> </td>
-                                            <td><a ng-click="ProductActiveDeActive(m.ProductId)"> <span class="badge {{m.Active==1? 'bg-success' : 'bg-danger'}}">{{m.Active==1?'Active':'Deactive'}}</span></a> </td>*@
 
                                     </tr>
                                 </tbody>
@@ -110,7 +94,7 @@
             <div class="modal-content">
                 <div class="modal-header">
 
-                            <h5 class="modal-title" id="exampleModalLabel">Order Details</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Order Details</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
 
@@ -149,16 +133,16 @@
 
 
                                                 @*<td>{{p.Maincate}}</td>
-        <td>{{p.PLabel}}</td>
-        <td>{{m.Price}}</td>
-        <td>{{m.Priority}}</td>
-        <td><span ng-repeat="n in m.Submenu">{{n.SubmenuTitle}},<br /></span></td>
-        <td><span ng-repeat="n in m.PSizeList">{{n.SizeTitle}},<br /></span></td>
-        <td><span ng-repeat="i in m.ProductImage"><img src="~/images/ProductImg/{{i}}"><br /></span> </td>*@
+                                                    <td>{{p.PLabel}}</td>
+                                                    <td>{{m.Price}}</td>
+                                                    <td>{{m.Priority}}</td>
+                                                    <td><span ng-repeat="n in m.Submenu">{{n.SubmenuTitle}},<br /></span></td>
+                                                    <td><span ng-repeat="n in m.PSizeList">{{n.SizeTitle}},<br /></span></td>
+                                                    <td><span ng-repeat="i in m.ProductImage"><img src="~/images/ProductImg/{{i}}"><br /></span> </td>*@
 
 
                                                 @*<td>{{m.TotalAmount}}</td>
-        <td> <a ng-click="OrderDetails($index)"> Details</a></td>*@
+                                                    <td> <a ng-click="OrderDetails($index)"> Details</a></td>*@
 
 
                                             </tr>

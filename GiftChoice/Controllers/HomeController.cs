@@ -108,7 +108,7 @@ namespace GiftChoice.Controllers
             {
                 var res =
 
-           db.VProducts.Where(m => (Keyword == 0 ? true : m.KeywordId == Keyword)).Select(m => new
+           db.VProducts.Where(m => (Keyword == 0 ? true : m.KeywordId == Keyword) && m.Active == true).Select(m => new
            {
                m.ProductId,
                m.MainCateId,
@@ -137,7 +137,7 @@ namespace GiftChoice.Controllers
                 var res =
 
            db.ProductTbls.Where(m =>
-           (Main == 0 ? true : m.MainCateId == Main)).Select(m => new
+           (Main == 0 ? true : m.MainCateId == Main) && m.Active == true).Select(m => new
            {
                m.ProductId,
                m.MainCateId,

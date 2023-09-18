@@ -20,8 +20,8 @@
         <EntityTypeShape EntityType="GiftChoiceModel.SliderTbl" Width="1.5" PointX="8.75" PointY="6.75" />
         <EntityTypeShape EntityType="GiftChoiceModel.UserRegister" Width="1.5" PointX="10.75" PointY="0.75" />
         <EntityTypeShape EntityType="GiftChoiceModel.VProduct" Width="1.5" PointX="10.75" PointY="4.75" />
-        <AssociationConnector Association="GiftChoiceModel.FK__MCKeyword__Keywo__3B75D760" />
-        <AssociationConnector Association="GiftChoiceModel.FK__MCKeyword__MainC__3A81B327" />
+        <AssociationConnector Association="GiftChoiceModel.FK__MCKeyword__Keywo__52593CB8" />
+        <AssociationConnector Association="GiftChoiceModel.FK__MCKeyword__MainC__534D60F1" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
