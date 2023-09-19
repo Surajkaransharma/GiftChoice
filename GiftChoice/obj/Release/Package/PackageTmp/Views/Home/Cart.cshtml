@@ -1,0 +1,99 @@
+﻿
+@{
+    ViewBag.Title = "Cart";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<main class="main">
+    <div class="page-header breadcrumb-wrap">
+        <div class="container">
+            <div class="breadcrumb">
+                <a href="index.asp" rel="nofollow">Home</a>
+                <span></span>Cart
+            </div>
+        </div>
+    </div>
+
+    <section class="mt-50 mb-50 cart-section">
+        <div class="container" ng-init="GetCart()">
+            <div class="row">
+                <div class="col-12">
+                    <h1>Shopping Cart</h1>
+                    @*<ul>
+                        <li ng-repeat="i in cart track by $index">
+                            {{ i.name }} - ${{ i.price }}
+                            <button ng-click="removeItemFromCart($index)">Remove</button>
+                        </li>
+                    </ul>
+                    <button ng-click="clearCart()">Clear Cart</button>
+
+                    <h2>Add Items to Cart</h2>
+                    <div >
+                        <input type="text" ng-model="name" placeholder="Item Name">
+                        <input type="number" ng-model="price" placeholder="Item Price">
+                        <button ng-click="addItemToCart()">Add to Cart</button>
+                    </div>*@
+                    <div class="table-responsive">
+                            <table class="table text-center clean table-bordered cart-table">
+                                <thead>
+                                    <tr class="main-heading">
+                                        <th scope="col">#</th>
+                                        <th scope="col">Image</th>
+                                        <th scope="col">Name</th>
+                                        <th scope="col">Price</th>
+                                        <th scope="col">Quantity</th>
+                                        <th scope="col">Subtotal</th>
+                                        <th scope="col">Remove</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="i in cart track by $index">
+                                        <td>{{$index+1}}</td>
+                                        <td class="image product-thumbnail">
+                                            <a href="">
+                                                <img src="~/images/ProductImg/{{i.ProductImage}}" alt="#" class="img-fluid rounded-2">
+                                            </a>
+                                        </td>
+
+                                        <td class="product-des product-name" width="500">
+                                            <h5 class="product-name">
+                                                <a href="product_detail.asp">{{i.ProductTitle}}</a>
+                                            </h5>
+                                        </td>
+
+                                        <td class="price">
+                                            <span><i class="fa fa-inr" aria-hidden="true"></i>{{i.Price}} </span>
+                                        </td>
+
+                                        <td class="text-center">
+                                            <div class="detail-qty border radius  m-auto">
+                                                <a ng-click="AddQty(0,$index)" class="qty-down"><i class="fi-rs-angle-small-down"></i></a>
+                                                <span class="qty-val">{{i.Qty}}</span>
+                                                <a ng-click="AddQty(1,$index)" class="qty-up"><i class="fi-rs-angle-small-up"></i></a>
+                                            </div>
+                                        </td>
+
+                                        <td class="text-right">
+                                            <span><i class="fa fa-inr" aria-hidden="true"></i>{{i.Price*i.Qty}}</span>
+                                        </td>
+
+                                        <td class="action">
+                                            <a ng-click="removeItemFromCart($index)" class="text-danger"><i class="fi-rs-trash"></i></a>
+                                        </td>
+                                    </tr>
+                  
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="cart-action text-end d-flex justify-content-end gap-2">
+                            <a class="btn" href="/Home/index">Continue Shopping</a>
+                            <a class="btn" href="/Home/checkout">Prodcced to Checkout</a>
+                        </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+

@@ -102,13 +102,13 @@ namespace GiftChoice.Controllers
 
         }
         [JsonNetFilter]
-        public JsonResult FilterProduct(int Keyword, int Main)
+        public JsonResult FilterProduct(string Keyword = "", string Main = "")
         {
-            if (Keyword != 0)
+            if (Keyword != "")
             {
                 var res =
 
-           db.VProducts.Where(m => (Keyword == 0 ? true : m.KeywordId == Keyword)).Select(m => new
+           db.VProducts.Where(m => (Keyword == "" ? true : m.KUrl == Keyword)).Select(m => new
            {
                m.ProductId,
                m.MainCateId,
@@ -134,12 +134,16 @@ namespace GiftChoice.Controllers
             }
             else
             {
+
+                long Mid = db.MainCateTbls.Where(p => p.MUrl == Main).Select(p => p.MainCateId).FirstOrDefault();
+
                 var res =
 
            db.ProductTbls.Where(m =>
-           (Main == 0 ? true : m.MainCateId == Main)).Select(m => new
+           (Mid == 0 ? true : m.MainCateId == Mid)).Select(m => new
            {
                m.ProductId,
+
                m.MainCateId,
                m.ProductTitle,
                m.PLabel,
@@ -165,11 +169,11 @@ namespace GiftChoice.Controllers
 
         }
         [JsonNetFilter]
-        public JsonResult GetProductByid(int id)
+        public JsonResult GetProductByid(string Details)
         {
             var res =
 
-               db.ProductTbls.Where(p => p.ProductId == id).Select(m => new
+               db.ProductTbls.Where(p => p.PUrl == Details).Select(m => new
                {
                    m.ProductId,
                    m.MainCateId,
@@ -202,11 +206,11 @@ namespace GiftChoice.Controllers
 
         }
         [JsonNetFilter]
-        public JsonResult GetSmillerProduct(int id)
+        public JsonResult GetSmillerProduct(string Details)
         {
             var res =
 
-               db.ProductTbls.Where(p => p.ProductId != id && p.Active == true).Select(m => new
+               db.ProductTbls.Where(p => p.PUrl != Details && p.Active == true).Select(m => new
                {
                    m.ProductId,
                    m.MainCateId,
@@ -515,7 +519,7 @@ namespace GiftChoice.Controllers
 
                 var res = new
                 {
-                     //&& priceTbls.Any(priceRange => p.Price >= priceRange.minPrice && p.Price <= priceRange.maxPrice)
+                    //&& priceTbls.Any(priceRange => p.Price >= priceRange.minPrice && p.Price <= priceRange.maxPrice)
                     ProductList =
                db.ProductTbls.Where(p => p.Active == true && subid.Contains(p.MainCateId ?? 0)).Select(m => new
                {

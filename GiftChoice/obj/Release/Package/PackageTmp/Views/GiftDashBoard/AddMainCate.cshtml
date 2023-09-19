@@ -4,8 +4,8 @@
     Layout = "~/Views/Shared/_Admin.cshtml";
 }
 <style>
-    .img64 img{
-        width : 50px
+    .img64 img {
+        width: 50px
     }
 </style>
 <script src="~/Angularjs/Admin.js"></script>
@@ -31,16 +31,16 @@
                 <div class="card">
                     <div class="card-body p-4">
 
-                        <form class="row g-3">
+                        <form class="row g-3" enctype="multipart/form-data">
                             <div class="col-md-12">
-                                <label for="input1" class="form-label">Main Category</label>
+                                <label for="input1" class="form-label">Main Category Title</label>
                                 <input type="text" class="form-control" id="" ng-model="MainCate.MTitle" placeholder="Main Category">
-                                <input type="hidden" class="form-control" id="imgcode" ng-model="MainCate.MImage" placeholder="Main Category">
+                                @*<input type="hidden" class="form-control" id="imgcode" ng-model="MainCate.MImage" placeholder="Main Category">*@
                                 @*<div id="imageContainer"></div>*@
                             </div>
                             <div class="col-md-12">
-                              
-                                <label for="inputFirstName" class="form-label">Main Category Image <span style="color:#ff0000;font-weight:bolder;">700 * 1000</span></label>
+
+                                <label for="inputFirstName" class="form-label">Image <span style="color:#ff0000;font-weight:bolder;">880 * 880</span></label>
 
                                 <section id="image-section">
                                     <div id="uploadArea" class="upload-area">
@@ -64,11 +64,11 @@
                                             <p class="drop-zoon__paragraph">Drop your file here or Click to browse</p>
                                             <span id="loadingText" class="drop-zoon__loading-text">Please Wait</span>
                                             <img src="" alt="Preview Image" id="previewImage" class="drop-zoon__preview-image" draggable="false">
-                                            <input type="file" id="fileInput" upload-file="product.ProductImage" class="drop-zoon__file-input" multiple>
+                                            <input type="file" id="fileInput" upload-file="MainCate.Image" class="drop-zoon__file-input" multiple>
                                         </div>
                                         <!-- End Drop Zoon -->
                                         <!-- File Details -->
-                                        <div id="fileDetails" class="upload-area__file-details file-details">
+                                        <div id="fileDetails" class="upload-area__file-details file-details" style="display: none">
                                             <h3 class="file-details__title">Uploaded File</h3>
 
                                             <div id="uploadedFile" class="uploaded-file">
@@ -92,7 +92,19 @@
 
                             <div class="col-md-12">
                                 <label for="input1" class="form-label">Priority</label>
-                                <input type="number" class="form-control" id="" placeholder="Priority">
+                                <input type="number" class="form-control" ng-model="MainCate.Priority" id="" placeholder="Priority">
+                            </div>
+                            <div class="col-md-12" ng-init="GetKeywordData()">
+                                <label for="input1" class="form-label">Select Keyword</label>
+                                <div class="" id="check_box">
+                                    <label class="checkbox-wrapper" ng-repeat="k in KeywordList">
+                                        <input type="checkbox" id="Keyword_{{k.KeywordId}}" class="checkbox-input" value="{{k.KeywordId}}" ng-model="k.Selected" ng-checked="" />
+                                        <span class="checkbox-tile">
+                                            <span class="checkbox-label">{{k.Keyword}}</span>
+                                        </span>
+                                    </label>
+
+                                </div>
                             </div>
 
                             @*<div class="col-md-4">
@@ -107,7 +119,8 @@
 
                             <div class="col-md-12">
                                 <div class="d-md-flex d-grid align-items-center gap-3">
-                                    <button type="button" ng-click="SubmitMainCate()" class="btn btn-primary px-4">Submit</button>
+                                    <button type="button" id="btn" ng-click="SubmitMainCate()" class="btn btn-primary px-4">Submit</button>
+                                    <button type="button" id="edbtn" ng-click="UpdateMainCate()" style="display: none" class="btn btn-primary px-4">Update</button>
                                     <button type="button" class="btn btn-light px-4">Reset</button>
                                 </div>
                             </div>
@@ -136,19 +149,25 @@
                                 <thead class="table-light">
                                     <tr>
                                         <th>S.No.</th>
-                                        <th>Main Category Name</th>                                      
+                                        <th>Main Category Name</th>
+                                        <th>Keyword</th>
+                                        <th>Priority</th>
                                         <th>Image</th>
-                                 
+                                        <th>Active</th>
+
+                                        <th>Action</th>
+
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr ng-repeat="m in MainCateData">
                                         <td>{{$index+1}}</td>
                                         <td>{{m.MTitle}}</td>
-                                        @*<td ng-bind-html="generateImageElement(m.MImage)" class="img64" > </td>*@
-                                        <td><img ng-src="data:image/jpeg;base64,{{m.MImage}}" width="50px"></td>
-                                      
-
+                                        <td><span ng-repeat="n in m.Submenu">{{n.SubmenuTitle}},</span></td>
+                                        <td>{{m.Priority}}</td>
+                                        <td><a ng-click="MainCateActiveDeActive(m.MainCateId)"> <span class="badge {{m.Active==1? 'bg-success' : 'bg-danger'}}">{{m.Active==1?'Active':'Deactive'}}</span></a> </td>
+                                        <td><img src="~/images/MainCate/{{m.MImage}}" style="width:50px"></td>
+                                        <td><a><i class="bx bxs-pencil" ng-click="GetMainCatebyid($index)"></i></a></td>
                                     </tr>
 
 
@@ -174,7 +193,7 @@
     const loadingText = document.querySelector('#loadingText');
 
     // Slect File Input
-    const fileInput = document.querySelector('#fileInput');
+    const fileInput = document.querySelector('input[type="file"]');
 
     // Select Preview Image
     const previewImage = document.querySelector('#previewImage');
@@ -268,7 +287,7 @@
         image.src = URL.createObjectURL(file);
 
         image.onload = function () {
-            if (image.naturalWidth === 800 && image.naturalHeight === 350) {
+            if (image.naturalWidth === 880 && image.naturalHeight === 880) {
                 // If File Is Passed from the (File Validation) Function
                 if (fileValidate(fileType, fileSize)) {
 
@@ -310,12 +329,12 @@
                         // Add The (fileReader) Result Inside (previewImage) Source
                         previewImage.setAttribute('src', fileReader.result);
 
-                        const base64Data = fileReader.result.split(',')[1];
-                        $("#imgcode").val(base64Data)
-                        // Now you have the base64 encoded image data in base64Data variable
-                        console.log('Base64 Encoded Image Data:', base64Data);
+                        //const base64Data = fileReader.result.split(',')[1];
+                        //$("#imgcode").val(base64Data)
+                        //// Now you have the base64 encoded image data in base64Data variable
+                        //console.log('Base64 Encoded Image Data:', base64Data);
 
-                     // Replace with your actual base64 data
+                        // Replace with your actual base64 data
 
                         // Create a new Image element
                         //const decodedImage = new Image();
@@ -342,11 +361,11 @@
 
                 };
             } else {
-                alert('Please make sure your image has dimensions of 500x500 pixels.');
+                alert('Please make sure your image has dimensions of 880*880 pixels.');
                 return false;
             }
         };
-     
+
     };
 
     // Progress Counter Increase Function
@@ -378,7 +397,7 @@
         // File Type Validation
         let isImage = imagesTypes.filter((type) => fileType.indexOf(`image/${type}`) !== -1);
 
-   
+
 
         // If The Uploaded File Type Is 'jpeg'
         if (isImage[0] === 'jpeg') {

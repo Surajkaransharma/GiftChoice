@@ -1,0 +1,79 @@
+﻿<main class="main">
+    <div class="page-header breadcrumb-wrap">
+        <div class="container">
+            <div class="breadcrumb">
+                <a href="index.asp" rel="nofollow">Home</a>
+                <span></span>Cart
+            </div>
+        </div>
+    </div>
+
+    <section class="mt-50 mb-50 cart-section">
+        <div class="container" ng-init="GetCart()">
+            <div class="row">
+                <div class="col-12">
+                    <h1>Shopping Cart</h1>
+            
+                    <div class="table-responsive">
+                        <table class="table text-center clean table-bordered cart-table">
+                            <thead>
+                                <tr class="main-heading">
+                                    <th scope="col">#</th>
+                                    <th scope="col">Image</th>
+                                    <th scope="col">Name</th>
+                                    <th scope="col">Price</th>
+                                    <th scope="col">Quantity</th>
+                                    <th scope="col">Subtotal</th>
+                                    <th scope="col">Remove</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="i in cart track by $index">
+                                    <td>{{$index+1}}</td>
+                                    <td class="image product-thumbnail">
+                                        <a href="">
+                                            <img src="/images/ProductImg/{{i.ProductImage}}" alt="#" class="img-fluid rounded-2">
+                                        </a>
+                                    </td>
+
+                                    <td class="product-des product-name" width="500">
+                                        <h5 class="product-name">
+                                            <a href="product_detail.asp">{{i.ProductTitle}}</a>
+                                        </h5>
+                                    </td>
+
+                                    <td class="price">
+                                        <span><i class="fa fa-inr" aria-hidden="true"></i>{{i.Price}} </span>
+                                    </td>
+
+                                    <td class="text-center">
+                                        <div class="detail-qty border radius  m-auto">
+                                            <a class="qty-down"><i ng-click="AddQty(0,$index)"  class="fi-rs-angle-small-down"></i></a>
+                                            <span class="qty-val">{{i.Qty}}</span>
+                                            <a class="qty-up"><i ng-click="AddQty(1,$index)"  class="fi-rs-angle-small-up"></i></a>
+                                        </div>
+                                    </td>
+
+                                    <td class="text-right">
+                                        <span><i class="fa fa-inr" aria-hidden="true"></i>{{i.Price*i.Qty}}</span>
+                                    </td>
+
+                                    <td class="action">
+                                        <a ng-click="removeItemFromCart($index)" class="text-danger"><i class="fi-rs-trash"></i></a>
+                                    </td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="cart-action text-end d-flex justify-content-end gap-2">
+                        <a class="btn" href="/Home/index">Continue Shopping</a>
+                        <a class="btn" href="/Home/checkout">Prodcced to Checkout</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+<appfooter></appfooter>

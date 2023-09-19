@@ -1,5 +1,42 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="GiftChoiceModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="AdminTbl">
+    <Key>
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="UserId" Type="int" Nullable="false" />
+    <Property Name="UserName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="UPassword" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="UserType" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Active" Type="bit" Nullable="false" />
+    <Property Name="Create_at" Type="date" Nullable="false" />
+  </EntityType>
+  <EntityType Name="BannerTbl">
+    <Key>
+      <PropertyRef Name="BannerId" />
+    </Key>
+    <Property Name="BannerId" Type="bigint" Nullable="false" />
+    <Property Name="MainCateId" Type="bigint" />
+    <Property Name="BUrl" Type="nvarchar(max)" />
+    <Property Name="BannerImage" Type="nvarchar(max)" />
+    <Property Name="Priority" Type="bigint" />
+    <Property Name="Active" Type="bit" />
+    <Property Name="Create_at" Type="datetime" />
+    <Property Name="Update_at" Type="datetime" />
+  </EntityType>
+  <EntityType Name="KeywordTbl">
+    <Key>
+      <PropertyRef Name="KeywordId" />
+    </Key>
+    <Property Name="KeywordId" Type="bigint" Nullable="false" />
+    <Property Name="Keyword" Type="nvarchar(max)" />
+    <Property Name="KUrl" Type="nvarchar(max)" />
+    <Property Name="Create_at" Type="datetime" />
+    <Property Name="Update_at" Type="datetime" />
+    <Property Name="Active" Type="bit" />
+    <Property Name="Priority" Type="bigint" />
+    <Property Name="UserId" Type="bigint" />
+  </EntityType>
   <EntityType Name="MainCateTbl">
     <Key>
       <PropertyRef Name="MainCateId" />
@@ -14,7 +51,255 @@
     <Property Name="MImage" Type="nvarchar(max)" />
     <Property Name="UserId" Type="bigint" />
   </EntityType>
+  <EntityType Name="MCKeywordTbl">
+    <Key>
+      <PropertyRef Name="MCkeywordId" />
+    </Key>
+    <Property Name="MCkeywordId" Type="bigint" Nullable="false" />
+    <Property Name="MainCateId" Type="bigint" />
+    <Property Name="KeywordId" Type="bigint" />
+    <Property Name="Active" Type="bit" />
+  </EntityType>
+  <EntityType Name="OrderMainTbl">
+    <Key>
+      <PropertyRef Name="MorderId" />
+    </Key>
+    <Property Name="MorderId" Type="bigint" Nullable="false" />
+    <Property Name="RUserId" Type="bigint" />
+    <Property Name="Delivery" Type="bit" />
+    <Property Name="Dispatch" Type="bit" />
+    <Property Name="Active" Type="bit" />
+    <Property Name="Cancel" Type="bit" />
+    <Property Name="Create_at" Type="date" />
+    <Property Name="TotalAmount" Type="float" />
+  </EntityType>
+  <EntityType Name="OrderTbl">
+    <Key>
+      <PropertyRef Name="OrderId" />
+    </Key>
+    <Property Name="OrderId" Type="bigint" Nullable="false" />
+    <Property Name="RUserId" Type="bigint" Nullable="false" />
+    <Property Name="ProductId" Type="bigint" Nullable="false" />
+    <Property Name="PQty" Type="bigint" />
+    <Property Name="PPrice" Type="float" />
+    <Property Name="OrderAmount" Type="float" />
+    <Property Name="Active" Type="bit" />
+    <Property Name="Cancel" Type="bit" />
+    <Property Name="Create_at" Type="date" />
+    <Property Name="MorderId" Type="bigint" />
+  </EntityType>
+  <EntityType Name="PKeywordTbl">
+    <Key>
+      <PropertyRef Name="PKeywordId" />
+    </Key>
+    <Property Name="PKeywordId" Type="bigint" Nullable="false" />
+    <Property Name="ProductId" Type="bigint" />
+    <Property Name="KeywordId" Type="bigint" />
+    <Property Name="Active" Type="bit" />
+  </EntityType>
+  <EntityType Name="ProductImage">
+    <Key>
+      <PropertyRef Name="PImageId" />
+    </Key>
+    <Property Name="PImageId" Type="bigint" Nullable="false" />
+    <Property Name="ProductId" Type="bigint" />
+    <Property Name="PImage" Type="nvarchar(max)" />
+    <Property Name="Active" Type="bit" />
+  </EntityType>
+  <EntityType Name="ProductTbl">
+    <Key>
+      <PropertyRef Name="ProductId" />
+    </Key>
+    <Property Name="ProductId" Type="bigint" Nullable="false" />
+    <Property Name="MainCateId" Type="bigint" />
+    <Property Name="ProductTitle" Type="nvarchar(max)" />
+    <Property Name="Price" Type="float" />
+    <Property Name="PUrl" Type="nvarchar(max)" />
+    <Property Name="PLabel" Type="nvarchar(max)" />
+    <Property Name="PDesc" Type="nvarchar(max)" />
+    <Property Name="Priority" Type="bigint" />
+    <Property Name="Active" Type="bit" />
+    <Property Name="Create_at" Type="datetime" />
+    <Property Name="Update_at" Type="datetime" />
+    <Property Name="UserID" Type="bigint" />
+    <Property Name="Qty" Type="bigint" />
+  </EntityType>
+  <EntityType Name="PSizeTbl">
+    <Key>
+      <PropertyRef Name="PSizeId" />
+    </Key>
+    <Property Name="PSizeId" Type="int" Nullable="false" />
+    <Property Name="SizeId" Type="int" />
+    <Property Name="ProductId" Type="bigint" />
+    <Property Name="Active" Type="bit" />
+  </EntityType>
+  <EntityType Name="SizeTbl">
+    <Key>
+      <PropertyRef Name="SizeId" />
+    </Key>
+    <Property Name="SizeId" Type="int" Nullable="false" />
+    <Property Name="SizeTitle" Type="nvarchar" MaxLength="50" />
+    <Property Name="Create_at" Type="date" />
+    <Property Name="Update_at" Type="date" />
+    <Property Name="Active" Type="bit" />
+    <Property Name="Priority" Type="int" />
+  </EntityType>
+  <EntityType Name="SliderTbl">
+    <Key>
+      <PropertyRef Name="SliderId" />
+    </Key>
+    <Property Name="SliderId" Type="bigint" Nullable="false" />
+    <Property Name="MainCateId" Type="bigint" />
+    <Property Name="SUrl" Type="nvarchar(max)" />
+    <Property Name="SliderImage" Type="nvarchar(max)" />
+    <Property Name="Priority" Type="bigint" />
+    <Property Name="Active" Type="bit" />
+    <Property Name="Create_at" Type="datetime" />
+    <Property Name="Update_at" Type="datetime" />
+  </EntityType>
+  <EntityType Name="UserRegister">
+    <Key>
+      <PropertyRef Name="RUserId" />
+    </Key>
+    <Property Name="RUserId" Type="bigint" Nullable="false" />
+    <Property Name="UName" Type="varchar" MaxLength="100" />
+    <Property Name="MobileNo" Type="varchar" MaxLength="20" />
+    <Property Name="UEmail" Type="varchar" MaxLength="50" />
+    <Property Name="UAddress" Type="varchar(max)" />
+    <Property Name="City" Type="varchar(max)" />
+    <Property Name="UState" Type="varchar(max)" />
+    <Property Name="Pincode" Type="varchar" MaxLength="50" />
+    <Property Name="Active" Type="bit" />
+    <Property Name="Create_at" Type="date" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'GiftChoice.dbo.VProduct' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="VProduct">
+    <Key>
+      <PropertyRef Name="ProductId" />
+      <PropertyRef Name="PKeywordId" />
+      <PropertyRef Name="Expr3" />
+      <PropertyRef Name="Expr9" />
+    </Key>
+    <Property Name="ProductId" Type="bigint" Nullable="false" />
+    <Property Name="MainCateId" Type="bigint" />
+    <Property Name="ProductTitle" Type="nvarchar(max)" />
+    <Property Name="Price" Type="float" />
+    <Property Name="PUrl" Type="nvarchar(max)" />
+    <Property Name="PLabel" Type="nvarchar(max)" />
+    <Property Name="PDesc" Type="nvarchar(max)" />
+    <Property Name="Priority" Type="bigint" />
+    <Property Name="Active" Type="bit" />
+    <Property Name="Create_at" Type="datetime" />
+    <Property Name="Update_at" Type="datetime" />
+    <Property Name="UserID" Type="bigint" />
+    <Property Name="PKeywordId" Type="bigint" Nullable="false" />
+    <Property Name="Expr1" Type="bigint" />
+    <Property Name="KeywordId" Type="bigint" />
+    <Property Name="Expr2" Type="bit" />
+    <Property Name="Expr3" Type="bigint" Nullable="false" />
+    <Property Name="Keyword" Type="nvarchar(max)" />
+    <Property Name="KUrl" Type="nvarchar(max)" />
+    <Property Name="Expr4" Type="datetime" />
+    <Property Name="Expr5" Type="datetime" />
+    <Property Name="Expr6" Type="bit" />
+    <Property Name="Expr7" Type="bigint" />
+    <Property Name="Expr8" Type="bigint" />
+    <Property Name="Expr9" Type="bigint" Nullable="false" />
+    <Property Name="MTitle" Type="nvarchar(max)" />
+    <Property Name="MUrl" Type="nvarchar(max)" />
+    <Property Name="Expr10" Type="bit" />
+    <Property Name="Expr11" Type="bigint" />
+    <Property Name="MImage" Type="nvarchar(max)" />
+    <Property Name="Expr13" Type="bigint" />
+    <Property Name="Expr12" Type="datetime" />
+    <Property Name="Expr14" Type="datetime" />
+    <Property Name="Qty" Type="bigint" />
+  </EntityType>
+  <Association Name="FK__MCKeyword__Keywo__3B75D760">
+    <End Role="KeywordTbl" Type="Self.KeywordTbl" Multiplicity="0..1" />
+    <End Role="MCKeywordTbl" Type="Self.MCKeywordTbl" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="KeywordTbl">
+        <PropertyRef Name="KeywordId" />
+      </Principal>
+      <Dependent Role="MCKeywordTbl">
+        <PropertyRef Name="KeywordId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__MCKeyword__MainC__3A81B327">
+    <End Role="MainCateTbl" Type="Self.MainCateTbl" Multiplicity="0..1" />
+    <End Role="MCKeywordTbl" Type="Self.MCKeywordTbl" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MainCateTbl">
+        <PropertyRef Name="MainCateId" />
+      </Principal>
+      <Dependent Role="MCKeywordTbl">
+        <PropertyRef Name="MainCateId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <EntityContainer Name="GiftChoiceModelStoreContainer">
+    <EntitySet Name="AdminTbl" EntityType="Self.AdminTbl" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="BannerTbl" EntityType="Self.BannerTbl" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="KeywordTbl" EntityType="Self.KeywordTbl" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="MainCateTbl" EntityType="Self.MainCateTbl" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="MCKeywordTbl" EntityType="Self.MCKeywordTbl" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="OrderMainTbl" EntityType="Self.OrderMainTbl" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="OrderTbl" EntityType="Self.OrderTbl" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PKeywordTbl" EntityType="Self.PKeywordTbl" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ProductImage" EntityType="Self.ProductImage" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ProductTbl" EntityType="Self.ProductTbl" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PSizeTbl" EntityType="Self.PSizeTbl" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SizeTbl" EntityType="Self.SizeTbl" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SliderTbl" EntityType="Self.SliderTbl" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="UserRegister" EntityType="Self.UserRegister" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="VProduct" EntityType="Self.VProduct" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [VProduct].[ProductId] AS [ProductId], 
+    [VProduct].[MainCateId] AS [MainCateId], 
+    [VProduct].[ProductTitle] AS [ProductTitle], 
+    [VProduct].[Price] AS [Price], 
+    [VProduct].[PUrl] AS [PUrl], 
+    [VProduct].[PLabel] AS [PLabel], 
+    [VProduct].[PDesc] AS [PDesc], 
+    [VProduct].[Priority] AS [Priority], 
+    [VProduct].[Active] AS [Active], 
+    [VProduct].[Create_at] AS [Create_at], 
+    [VProduct].[Update_at] AS [Update_at], 
+    [VProduct].[UserID] AS [UserID], 
+    [VProduct].[PKeywordId] AS [PKeywordId], 
+    [VProduct].[Expr1] AS [Expr1], 
+    [VProduct].[KeywordId] AS [KeywordId], 
+    [VProduct].[Expr2] AS [Expr2], 
+    [VProduct].[Expr3] AS [Expr3], 
+    [VProduct].[Keyword] AS [Keyword], 
+    [VProduct].[KUrl] AS [KUrl], 
+    [VProduct].[Expr4] AS [Expr4], 
+    [VProduct].[Expr5] AS [Expr5], 
+    [VProduct].[Expr6] AS [Expr6], 
+    [VProduct].[Expr7] AS [Expr7], 
+    [VProduct].[Expr8] AS [Expr8], 
+    [VProduct].[Expr9] AS [Expr9], 
+    [VProduct].[MTitle] AS [MTitle], 
+    [VProduct].[MUrl] AS [MUrl], 
+    [VProduct].[Expr10] AS [Expr10], 
+    [VProduct].[Expr11] AS [Expr11], 
+    [VProduct].[MImage] AS [MImage], 
+    [VProduct].[Expr13] AS [Expr13], 
+    [VProduct].[Expr12] AS [Expr12], 
+    [VProduct].[Expr14] AS [Expr14], 
+    [VProduct].[Qty] AS [Qty]
+    FROM [dbo].[VProduct] AS [VProduct]</DefiningQuery>
+    </EntitySet>
+    <AssociationSet Name="FK__MCKeyword__Keywo__3B75D760" Association="Self.FK__MCKeyword__Keywo__3B75D760">
+      <End Role="KeywordTbl" EntitySet="KeywordTbl" />
+      <End Role="MCKeywordTbl" EntitySet="MCKeywordTbl" />
+    </AssociationSet>
+    <AssociationSet Name="FK__MCKeyword__MainC__3A81B327" Association="Self.FK__MCKeyword__MainC__3A81B327">
+      <End Role="MainCateTbl" EntitySet="MainCateTbl" />
+      <End Role="MCKeywordTbl" EntitySet="MCKeywordTbl" />
+    </AssociationSet>
   </EntityContainer>
 </Schema>

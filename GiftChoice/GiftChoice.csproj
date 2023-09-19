@@ -203,11 +203,13 @@
     <Content Include="Angularjs\Admin.js" />
     <Content Include="Angularjs\AnguAutoComplete\angucomplete-alt.css" />
     <Content Include="Angularjs\AnguAutoComplete\angucomplete-alt.js" />
+    <Content Include="Angularjs\angular-route.js" />
     <Content Include="Angularjs\angular-upload.js" />
     <Content Include="Angularjs\angular.js" />
     <Content Include="Angularjs\angular.min.js" />
     <Content Include="Angularjs\Home.js" />
     <Content Include="Angularjs\LoginJs.js" />
+    <Content Include="Angularjs\toast-alert\angular.min.js" />
     <Content Include="Angularjs\toast-alert\toastr.css" />
     <Content Include="Angularjs\toast-alert\toastr.js" />
     <Content Include="assets\ckeditor\adapters\jquery.js" />
@@ -1224,6 +1226,8 @@
     <Content Include="assets\plugins\vectormap\jquery-jvectormap-us-aea-en.js" />
     <Content Include="assets\plugins\vectormap\jquery-jvectormap-world-mill-en.js" />
     <Content Include="assets\plugins\vectormap\jvectormap.custom.js" />
+    <Content Include="Component\footer.html" />
+    <Content Include="Component\navbar.html" />
     <Content Include="Content\assets\css\font-awasome\font-awesome.css" />
     <Content Include="Content\assets\css\font-awasome\font-awesome.min.css" />
     <Content Include="Content\assets\css\font-awasome\fonts\fontawesome-webfont.svg" />
@@ -1307,6 +1311,15 @@
     <Content Include="Content\Site.css" />
     <Content Include="images\check_img.png" />
     <Content Include="images\gift-choice-vertical.png" />
+    <Content Include="images\ProductImg\1.jpg" />
+    <Content Include="images\ProductImg\1.png" />
+    <Content Include="images\ProductImg\2.png" />
+    <Content Include="images\ProductImg\3.png" />
+    <Content Include="images\ProductImg\4.png" />
+    <Content Include="images\ProductImg\5.png" />
+    <Content Include="images\ProductImg\6.png" />
+    <Content Include="index.html" />
+    <Content Include="index.js" />
     <Content Include="Models\Model1.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Model1.Context.cs</LastGenOutput>
@@ -1317,6 +1330,11 @@
       <DependentUpon>Model1.edmx</DependentUpon>
       <LastGenOutput>Model1.cs</LastGenOutput>
     </Content>
+    <Content Include="Pages\Cart.html" />
+    <Content Include="Pages\Contact.html" />
+    <Content Include="Pages\GiftDetails.html" />
+    <Content Include="Pages\home.html" />
+    <Content Include="Pages\Shop.html" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="assets\fonts\boxicons.eot" />
@@ -1410,7 +1428,6 @@
     <Folder Include="App_Data\" />
     <Folder Include="images\BannerImage\" />
     <Folder Include="images\MainCate\" />
-    <Folder Include="images\ProductImg\" />
     <Folder Include="images\SliderImg\" />
   </ItemGroup>
   <ItemGroup>

@@ -1,5 +1,68 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="GiftChoiceModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="GiftChoiceEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="AdminTbls" EntityType="GiftChoiceModel.AdminTbl" />
+    <EntitySet Name="BannerTbls" EntityType="GiftChoiceModel.BannerTbl" />
+    <EntitySet Name="KeywordTbls" EntityType="GiftChoiceModel.KeywordTbl" />
+    <EntitySet Name="MainCateTbls" EntityType="GiftChoiceModel.MainCateTbl" />
+    <EntitySet Name="MCKeywordTbls" EntityType="GiftChoiceModel.MCKeywordTbl" />
+    <EntitySet Name="OrderMainTbls" EntityType="GiftChoiceModel.OrderMainTbl" />
+    <EntitySet Name="OrderTbls" EntityType="GiftChoiceModel.OrderTbl" />
+    <EntitySet Name="PKeywordTbls" EntityType="GiftChoiceModel.PKeywordTbl" />
+    <EntitySet Name="ProductImages" EntityType="GiftChoiceModel.ProductImage" />
+    <EntitySet Name="ProductTbls" EntityType="GiftChoiceModel.ProductTbl" />
+    <EntitySet Name="PSizeTbls" EntityType="GiftChoiceModel.PSizeTbl" />
+    <EntitySet Name="SizeTbls" EntityType="GiftChoiceModel.SizeTbl" />
+    <EntitySet Name="SliderTbls" EntityType="GiftChoiceModel.SliderTbl" />
+    <EntitySet Name="UserRegisters" EntityType="GiftChoiceModel.UserRegister" />
+    <EntitySet Name="VProducts" EntityType="GiftChoiceModel.VProduct" />
+    <AssociationSet Name="FK__MCKeyword__Keywo__3B75D760" Association="GiftChoiceModel.FK__MCKeyword__Keywo__3B75D760">
+      <End Role="KeywordTbl" EntitySet="KeywordTbls" />
+      <End Role="MCKeywordTbl" EntitySet="MCKeywordTbls" />
+    </AssociationSet>
+    <AssociationSet Name="FK__MCKeyword__MainC__3A81B327" Association="GiftChoiceModel.FK__MCKeyword__MainC__3A81B327">
+      <End Role="MainCateTbl" EntitySet="MainCateTbls" />
+      <End Role="MCKeywordTbl" EntitySet="MCKeywordTbls" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="AdminTbl">
+    <Key>
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="UserId" Type="Int32" Nullable="false" />
+    <Property Name="UserName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="UPassword" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="UserType" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Active" Type="Boolean" Nullable="false" />
+    <Property Name="Create_at" Type="DateTime" Nullable="false" Precision="0" />
+  </EntityType>
+  <EntityType Name="BannerTbl">
+    <Key>
+      <PropertyRef Name="BannerId" />
+    </Key>
+    <Property Name="BannerId" Type="Int64" Nullable="false" />
+    <Property Name="MainCateId" Type="Int64" />
+    <Property Name="BUrl" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="BannerImage" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Priority" Type="Int64" />
+    <Property Name="Active" Type="Boolean" />
+    <Property Name="Create_at" Type="DateTime" Precision="3" />
+    <Property Name="Update_at" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="KeywordTbl">
+    <Key>
+      <PropertyRef Name="KeywordId" />
+    </Key>
+    <Property Name="KeywordId" Type="Int64" Nullable="false" />
+    <Property Name="Keyword" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="KUrl" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Create_at" Type="DateTime" Precision="3" />
+    <Property Name="Update_at" Type="DateTime" Precision="3" />
+    <Property Name="Active" Type="Boolean" />
+    <Property Name="Priority" Type="Int64" />
+    <Property Name="UserId" Type="Int64" />
+    <NavigationProperty Name="MCKeywordTbls" Relationship="GiftChoiceModel.FK__MCKeyword__Keywo__3B75D760" FromRole="KeywordTbl" ToRole="MCKeywordTbl" />
+  </EntityType>
   <EntityType Name="MainCateTbl">
     <Key>
       <PropertyRef Name="MainCateId" />
@@ -13,8 +76,195 @@
     <Property Name="Update_at" Type="DateTime" Precision="3" />
     <Property Name="MImage" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="UserId" Type="Int64" />
+    <NavigationProperty Name="MCKeywordTbls" Relationship="GiftChoiceModel.FK__MCKeyword__MainC__3A81B327" FromRole="MainCateTbl" ToRole="MCKeywordTbl" />
   </EntityType>
-  <EntityContainer Name="GiftChoiceEntities" annotation:LazyLoadingEnabled="true">
-    <EntitySet Name="MainCateTbls" EntityType="Self.MainCateTbl" />
-  </EntityContainer>
+  <EntityType Name="MCKeywordTbl">
+    <Key>
+      <PropertyRef Name="MCkeywordId" />
+    </Key>
+    <Property Name="MCkeywordId" Type="Int64" Nullable="false" />
+    <Property Name="MainCateId" Type="Int64" />
+    <Property Name="KeywordId" Type="Int64" />
+    <Property Name="Active" Type="Boolean" />
+    <NavigationProperty Name="KeywordTbl" Relationship="GiftChoiceModel.FK__MCKeyword__Keywo__3B75D760" FromRole="MCKeywordTbl" ToRole="KeywordTbl" />
+    <NavigationProperty Name="MainCateTbl" Relationship="GiftChoiceModel.FK__MCKeyword__MainC__3A81B327" FromRole="MCKeywordTbl" ToRole="MainCateTbl" />
+  </EntityType>
+  <EntityType Name="OrderMainTbl">
+    <Key>
+      <PropertyRef Name="MorderId" />
+    </Key>
+    <Property Name="MorderId" Type="Int64" Nullable="false" />
+    <Property Name="RUserId" Type="Int64" />
+    <Property Name="Delivery" Type="Boolean" />
+    <Property Name="Dispatch" Type="Boolean" />
+    <Property Name="Active" Type="Boolean" />
+    <Property Name="Cancel" Type="Boolean" />
+    <Property Name="Create_at" Type="DateTime" Precision="0" />
+    <Property Name="TotalAmount" Type="Double" />
+  </EntityType>
+  <EntityType Name="OrderTbl">
+    <Key>
+      <PropertyRef Name="OrderId" />
+    </Key>
+    <Property Name="OrderId" Type="Int64" Nullable="false" />
+    <Property Name="RUserId" Type="Int64" Nullable="false" />
+    <Property Name="ProductId" Type="Int64" Nullable="false" />
+    <Property Name="PQty" Type="Int64" />
+    <Property Name="PPrice" Type="Double" />
+    <Property Name="OrderAmount" Type="Double" />
+    <Property Name="Active" Type="Boolean" />
+    <Property Name="Cancel" Type="Boolean" />
+    <Property Name="Create_at" Type="DateTime" Precision="0" />
+    <Property Name="MorderId" Type="Int64" />
+  </EntityType>
+  <EntityType Name="PKeywordTbl">
+    <Key>
+      <PropertyRef Name="PKeywordId" />
+    </Key>
+    <Property Name="PKeywordId" Type="Int64" Nullable="false" />
+    <Property Name="ProductId" Type="Int64" />
+    <Property Name="KeywordId" Type="Int64" />
+    <Property Name="Active" Type="Boolean" />
+  </EntityType>
+  <EntityType Name="ProductImage">
+    <Key>
+      <PropertyRef Name="PImageId" />
+    </Key>
+    <Property Name="PImageId" Type="Int64" Nullable="false" />
+    <Property Name="ProductId" Type="Int64" />
+    <Property Name="PImage" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Active" Type="Boolean" />
+  </EntityType>
+  <EntityType Name="ProductTbl">
+    <Key>
+      <PropertyRef Name="ProductId" />
+    </Key>
+    <Property Name="ProductId" Type="Int64" Nullable="false" />
+    <Property Name="MainCateId" Type="Int64" />
+    <Property Name="ProductTitle" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Price" Type="Double" />
+    <Property Name="PUrl" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="PLabel" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="PDesc" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Priority" Type="Int64" />
+    <Property Name="Active" Type="Boolean" />
+    <Property Name="Create_at" Type="DateTime" Precision="3" />
+    <Property Name="Update_at" Type="DateTime" Precision="3" />
+    <Property Name="UserID" Type="Int64" />
+    <Property Name="Qty" Type="Int64" />
+  </EntityType>
+  <EntityType Name="PSizeTbl">
+    <Key>
+      <PropertyRef Name="PSizeId" />
+    </Key>
+    <Property Name="PSizeId" Type="Int32" Nullable="false" />
+    <Property Name="SizeId" Type="Int32" />
+    <Property Name="ProductId" Type="Int64" />
+    <Property Name="Active" Type="Boolean" />
+  </EntityType>
+  <EntityType Name="SizeTbl">
+    <Key>
+      <PropertyRef Name="SizeId" />
+    </Key>
+    <Property Name="SizeId" Type="Int32" Nullable="false" />
+    <Property Name="SizeTitle" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Create_at" Type="DateTime" Precision="0" />
+    <Property Name="Update_at" Type="DateTime" Precision="0" />
+    <Property Name="Active" Type="Boolean" />
+    <Property Name="Priority" Type="Int32" />
+  </EntityType>
+  <EntityType Name="SliderTbl">
+    <Key>
+      <PropertyRef Name="SliderId" />
+    </Key>
+    <Property Name="SliderId" Type="Int64" Nullable="false" />
+    <Property Name="MainCateId" Type="Int64" />
+    <Property Name="SUrl" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="SliderImage" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Priority" Type="Int64" />
+    <Property Name="Active" Type="Boolean" />
+    <Property Name="Create_at" Type="DateTime" Precision="3" />
+    <Property Name="Update_at" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="UserRegister">
+    <Key>
+      <PropertyRef Name="RUserId" />
+    </Key>
+    <Property Name="RUserId" Type="Int64" Nullable="false" />
+    <Property Name="UName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="MobileNo" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="UEmail" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="UAddress" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="City" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="UState" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Pincode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Active" Type="Boolean" />
+    <Property Name="Create_at" Type="DateTime" Precision="0" />
+  </EntityType>
+  <EntityType Name="VProduct">
+    <Key>
+      <PropertyRef Name="ProductId" />
+      <PropertyRef Name="PKeywordId" />
+      <PropertyRef Name="Expr3" />
+      <PropertyRef Name="Expr9" />
+    </Key>
+    <Property Name="ProductId" Type="Int64" Nullable="false" />
+    <Property Name="MainCateId" Type="Int64" />
+    <Property Name="ProductTitle" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Price" Type="Double" />
+    <Property Name="PUrl" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="PLabel" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="PDesc" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Priority" Type="Int64" />
+    <Property Name="Active" Type="Boolean" />
+    <Property Name="Create_at" Type="DateTime" Precision="3" />
+    <Property Name="Update_at" Type="DateTime" Precision="3" />
+    <Property Name="UserID" Type="Int64" />
+    <Property Name="PKeywordId" Type="Int64" Nullable="false" />
+    <Property Name="Expr1" Type="Int64" />
+    <Property Name="KeywordId" Type="Int64" />
+    <Property Name="Expr2" Type="Boolean" />
+    <Property Name="Expr3" Type="Int64" Nullable="false" />
+    <Property Name="Keyword" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="KUrl" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Expr4" Type="DateTime" Precision="3" />
+    <Property Name="Expr5" Type="DateTime" Precision="3" />
+    <Property Name="Expr6" Type="Boolean" />
+    <Property Name="Expr7" Type="Int64" />
+    <Property Name="Expr8" Type="Int64" />
+    <Property Name="Expr9" Type="Int64" Nullable="false" />
+    <Property Name="MTitle" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="MUrl" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Expr10" Type="Boolean" />
+    <Property Name="Expr11" Type="Int64" />
+    <Property Name="MImage" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Expr13" Type="Int64" />
+    <Property Name="Expr12" Type="DateTime" Precision="3" />
+    <Property Name="Expr14" Type="DateTime" Precision="3" />
+    <Property Name="Qty" Type="Int64" />
+  </EntityType>
+  <Association Name="FK__MCKeyword__Keywo__3B75D760">
+    <End Type="GiftChoiceModel.KeywordTbl" Role="KeywordTbl" Multiplicity="0..1" />
+    <End Type="GiftChoiceModel.MCKeywordTbl" Role="MCKeywordTbl" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="KeywordTbl">
+        <PropertyRef Name="KeywordId" />
+      </Principal>
+      <Dependent Role="MCKeywordTbl">
+        <PropertyRef Name="KeywordId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__MCKeyword__MainC__3A81B327">
+    <End Type="GiftChoiceModel.MainCateTbl" Role="MainCateTbl" Multiplicity="0..1" />
+    <End Type="GiftChoiceModel.MCKeywordTbl" Role="MCKeywordTbl" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MainCateTbl">
+        <PropertyRef Name="MainCateId" />
+      </Principal>
+      <Dependent Role="MCKeywordTbl">
+        <PropertyRef Name="MainCateId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema>

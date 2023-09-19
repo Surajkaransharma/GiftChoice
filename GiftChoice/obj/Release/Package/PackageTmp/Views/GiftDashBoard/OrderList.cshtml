@@ -1,0 +1,179 @@
+﻿
+@{
+    ViewBag.Title = "OrderList";
+    Layout = "~/Views/Shared/_Admin.cshtml";
+}
+
+
+<style>
+    img {
+        width: 50px
+    }
+</style>
+
+<script src="~/Angularjs/Admin.js"></script>
+<div class="page-wrapper" ng-app="AdminApp" ng-controller="AdminController">
+    <div class="page-content">
+        <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
+            <div class="breadcrumb-title pe-3">Order</div>
+            <div class="ps-3">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb mb-0 p-0">
+                        <li class="breadcrumb-item">
+                            <a href="javascript:;"><i class="bx bx-home-alt"></i></a>
+                        </li>
+                        <li class="breadcrumb-item active" aria-current="page">List</li>
+                    </ol>
+                </nav>
+            </div>
+
+        </div>
+        <div class="row">
+
+            <div class="col-xl-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="d-lg-flex align-items-center mb-4 gap-3">
+                            <div class="position-relative">
+                                <input type="text" class="form-control ps-5 radius-30" ng-model="search" placeholder="Search here...">
+                                <span class="position-absolute top-50 product-show translate-middle-y"><i class="bx bx-search"></i></span>
+                            </div>
+                            @*  <div class="ms-auto"><a href="javascript:;" class="btn btn-primary radius-30 mt-2 mt-lg-0" data-bs-toggle="modal" data-bs-target="#createcompany"><i class="bx bxs-plus-square"></i>Add New Company</a></div>*@
+
+
+
+
+
+                        </div>
+                        <div class="table-responsive">
+                            <table class="table mb-0 table-bordered" ng-init="GetOrder()">
+                                <thead class="table-light">
+                                    <tr>
+                                        <th>S.No.</th>
+                                        <th>Name </th>
+                                        <th>Mobile No. </th>
+                                        <th>Email  </th>
+                                        <th>City</th>
+                                        <th>State </th>
+                                        <th>Pin Code </th>
+                                        <th>Address </th>
+                                        <th>Order Date</th>
+                                        <th>Total Amount</th>
+                                        <th>Order Deatils</th>
+                                        @*<th>Product Title</th>
+                                            <th>Main Category Name</th>
+                                            <th>Label</th>
+                                            <th>Price</th>
+                                            <th>Priority</th>
+                                            <th>Keywords</th>
+                                            <th>Size</th>
+                                            <th>Image</th>
+                                            <th>Order Cancel</th>*@
+
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="m in OrderData">
+                                        <td>{{$index+1}}</td>
+                                        <td>{{m.UserData.UName}}</td>
+                                        <td>{{m.UserData.MobileNo}}</td>
+                                        <td>{{m.UserData.UEmail}}</td>
+                                        <td>{{m.UserData.City}}</td>
+                                        <td>{{m.UserData.UState}}</td>
+                                        <td> {{m.UserData.Pincode}}</td>
+                                        <td> {{m.UserData.UAddress}}</td>
+                                        <td>{{m.Create_at | date:'dd-MM-yyyy'}}</td>
+                                        <td>{{m.TotalAmount}}</td>
+                                        <td> <a ng-click="OrderDetails($index)"> Details</a></td>
+
+                                        @*<td>{{m.Maincate}}</td>
+                                            <td>{{m.PLabel}}</td>
+                                            <td>{{m.Price}}</td>
+                                            <td>{{m.Priority}}</td>
+                                            <td><span ng-repeat="n in m.Submenu">{{n.SubmenuTitle}},<br /></span></td>
+                                            <td><span ng-repeat="n in m.PSizeList">{{n.SizeTitle}},<br /></span></td>
+                                            <td><span ng-repeat="i in m.ProductImage"><img src="~/images/ProductImg/{{i}}"><br /></span> </td>
+                                            <td><a ng-click="ProductActiveDeActive(m.ProductId)"> <span class="badge {{m.Active==1? 'bg-success' : 'bg-danger'}}">{{m.Active==1?'Active':'Deactive'}}</span></a> </td>*@
+
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="OrderDetailsModel">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+
+                            <h5 class="modal-title" id="exampleModalLabel">Order Details</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+
+                <div class="page-content" style="padding: 10px">
+
+                    <div class="col-md-12">
+                        <div class="row">
+                            <div class="card-body p-4">
+                                <div class="table-responsive">
+                                    <table class="table mb-0 table-bordered" ng-init="GetOrder()">
+                                        <thead class="table-light">
+                                            <tr>
+                                                <th>S.No.</th>
+                                                <th>Product Title</th>
+                                                <th>Main Category Name</th>
+                                                <th>Image</th>
+                                                <th>Price</th>
+                                                <th>Quantity</th>
+
+                                                <th>Amount</th>
+
+
+
+
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr ng-repeat="p in OrderDetailsData.OrderListData">
+                                                <td>{{$index+1}}</td>
+                                                <td>{{p.ProductDetail.ProductTitle}}</td>
+                                                <td>{{p.ProductDetail.MTitle}}</td>
+                                                <td><span ng-repeat="i in p.Productimage"><img src="~/images/ProductImg/{{i}}"><br /></span></td>
+                                                <td>{{p.PPrice}}</td>
+                                                <td>{{p.PQty}}</td>
+                                                <td>{{p.PPrice*p.PQty}}</td>
+
+
+                                                @*<td>{{p.Maincate}}</td>
+        <td>{{p.PLabel}}</td>
+        <td>{{m.Price}}</td>
+        <td>{{m.Priority}}</td>
+        <td><span ng-repeat="n in m.Submenu">{{n.SubmenuTitle}},<br /></span></td>
+        <td><span ng-repeat="n in m.PSizeList">{{n.SizeTitle}},<br /></span></td>
+        <td><span ng-repeat="i in m.ProductImage"><img src="~/images/ProductImg/{{i}}"><br /></span> </td>*@
+
+
+                                                @*<td>{{m.TotalAmount}}</td>
+        <td> <a ng-click="OrderDetails($index)"> Details</a></td>*@
+
+
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+
+
+    </div>
