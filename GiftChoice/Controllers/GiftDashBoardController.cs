@@ -185,7 +185,7 @@ namespace GiftChoice.Controllers
                     db.SaveChanges();
 
                 }
-                var res = new { res = "1" };
+                var res = new { res = "1" , MainCateId = result.MainCateId };
                 return Json(res, JsonRequestBehavior.AllowGet);
             }
             catch (Exception ex)
@@ -261,7 +261,7 @@ namespace GiftChoice.Controllers
                        s.MCkeywordId,
                        SubmenuTitle = db.KeywordTbls.Where(t => t.KeywordId == s.KeywordId).Select(t => t.Keyword).FirstOrDefault()
                    })
-               });
+               }).OrderBy(m => m.Priority);
             return Json(res, JsonRequestBehavior.AllowGet);
 
         }

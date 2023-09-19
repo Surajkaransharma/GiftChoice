@@ -447,11 +447,11 @@ app.controller("HomeController", ['$scope', '$http', '$sce','orderByFilter', fun
 
 
 
-    $scope.GiftAddItemToCart = function (index) {
+    $scope.GiftAddItemToCart = function (Productid) {
         debugger
         debugger;
 
-        var selectedProduct = $scope.Product[index];
+        var selectedProduct = Productid;
         var productId = selectedProduct.ProductId;
 
         // Check if the product with the same productId is already in the cart

@@ -34,24 +34,7 @@
                                         <figure class="border-radius-10" ng-repeat="i in Product.ProductImage">
                                             <img src="~/images/ProductImg/{{i}}" alt="product image" class="img-fluid" loading="lazy">
                                         </figure>
-                                        @*<figure class="border-radius-10">
-                                            <img src="https://dummyimage.com/1100x1200/ccc/000" alt="product image" class="img-fluid" loading="lazy">
-                                        </figure>
-                                        <figure class="border-radius-10">
-                                            <img src="https://dummyimage.com/1100x1200/ccc/000" alt="product image" class="img-fluid" loading="lazy">
-                                        </figure>
-                                        <figure class="border-radius-10">
-                                            <img src="https://dummyimage.com/1100x1200/ccc/000" alt="product image" class="img-fluid" loading="lazy">
-                                        </figure>
-                                        <figure class="border-radius-10">
-                                            <img src="https://dummyimage.com/1100x1200/ccc/000" alt="product image" class="img-fluid" loading="lazy">
-                                        </figure>
-                                        <figure class="border-radius-10">
-                                            <img src="https://dummyimage.com/1100x1200/ccc/000" alt="product image" class="img-fluid" loading="lazy">
-                                        </figure>
-                                        <figure class="border-radius-10">
-                                            <img src="https://dummyimage.com/1100x1200/ccc/000" alt="product image" class="img-fluid" loading="lazy">
-                                        </figure>*@
+                                     
                                     </div>
                                     <!-- Main Image -->
                                     <!-- Small Image -->
@@ -60,11 +43,7 @@
                                         <img src="~/images/ProductImg/{{i}}" ng-show="i!=null" class="img-fluid" loading="lazy" alt="product image">
                                         </div>
                                         <div><img src="~/images/ProductImg/{{i}}" class="img-fluid" loading="lazy" alt="product image"></div>
-                                        @*<div><img src="https://dummyimage.com/400x400/ccc/000" class="img-fluid" loading="lazy" alt="product image"></div>
-                                        <div><img src="https://dummyimage.com/400x400/ccc/000" class="img-fluid" loading="lazy" alt="product image"></div>
-                                        <div><img src="https://dummyimage.com/400x400/ccc/000" class="img-fluid" loading="lazy" alt="product image"></div>
-                                        <div><img src="https://dummyimage.com/400x400/ccc/000" class="img-fluid" loading="lazy" alt="product image"></div>
-                                        <div><img src="https://dummyimage.com/400x400/ccc/000" class="img-fluid" loading="lazy" alt="product image"></div>*@
+                                      
                                     </div>
                                     <!-- Small Image -->
                                 </div>
@@ -113,7 +92,7 @@
                                             <span class="qty-val">1</span>
                                             <a href="#" class="qty-up"><i class="fi-rs-angle-small-up"></i></a>
                                         </div>*@
-                                        <a class="button button-add-to-cart text-white"  ng-click="GiftAddItemToCart($index)"  role="button">Add To Cart</a>
+                                        <a class="button button-add-to-cart text-white"  ng-click="GiftAddItemToCart(Product.ProductId)"  role="button">Add To Cart</a>
                                     </div>
                                 </div>
                             </div>

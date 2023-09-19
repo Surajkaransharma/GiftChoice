@@ -44,14 +44,8 @@ namespace GiftChoice.Controllers
                    m.Active,
                    m.MImage,
                    m.Priority,
-                   //Submenu = db.MCKeywordTbls.Where(s => s.MainCateId == m.MainCateId && s.Active == true).Select(s => new
-                   //{
-                   //    s.MainCateId,
-                   //    s.KeywordId,
-                   //    s.MCkeywordId,
-                   //    SubmenuTitle = db.KeywordTbls.Where(t => t.KeywordId == s.KeywordId).Select(t => t.Keyword).FirstOrDefault()
-                   //})
-               });
+               
+               }).OrderBy(m => m.Priority);
             return Json(res, JsonRequestBehavior.AllowGet);
 
         }
@@ -219,7 +213,7 @@ namespace GiftChoice.Controllers
                    m.Priority,
                    ProductImage = db.ProductImages.Where(i => i.ProductId == m.ProductId).Select(i => i.PImage).FirstOrDefault(),
 
-               });
+               }).OrderBy(x => Guid.NewGuid()).Take(10);
             return Json(res, JsonRequestBehavior.AllowGet);
 
         }
