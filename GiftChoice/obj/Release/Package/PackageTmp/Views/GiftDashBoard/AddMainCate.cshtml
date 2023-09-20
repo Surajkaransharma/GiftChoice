@@ -34,7 +34,7 @@
                         <form class="row g-3" enctype="multipart/form-data">
                             <div class="col-md-12">
                                 <label for="input1" class="form-label">Main Category Title</label>
-                                <input type="text" class="form-control" id="" ng-model="MainCate.MTitle" placeholder="Main Category">
+                                <input type="text" class="form-control" id="MTitle" ng-model="MainCate.MTitle" placeholder="Main Category">
                                 @*<input type="hidden" class="form-control" id="imgcode" ng-model="MainCate.MImage" placeholder="Main Category">*@
                                 @*<div id="imageContainer"></div>*@
                             </div>
@@ -92,7 +92,7 @@
 
                             <div class="col-md-12">
                                 <label for="input1" class="form-label">Priority</label>
-                                <input type="number" class="form-control" ng-model="MainCate.Priority" id="" placeholder="Priority">
+                                <input type="number"  id="Priority" class="form-control" ng-model="MainCate.Priority"  placeholder="Priority">
                             </div>
                             <div class="col-md-12" ng-init="GetKeywordData()">
                                 <label for="input1" class="form-label">Select Keyword</label>

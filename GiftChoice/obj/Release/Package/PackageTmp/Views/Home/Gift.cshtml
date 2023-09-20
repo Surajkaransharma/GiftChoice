@@ -11,8 +11,8 @@
         <div class="container">
             <div class="breadcrumb">
                 <a href="/Home/Index" rel="nofollow">Home</a>
-                <span></span>{{Product.Maincate}}
-                <span></span> {{Product.ProductTitle}}
+                <a href="/Home/shop?Main={{Product.Maincate.MUrl}}"> <span>{{Product.Maincate.MTitle}}</span></a>
+                <span> {{Product.ProductTitle}}</span>
             </div>
         </div>
     </div>
@@ -31,15 +31,15 @@
 
                                     <!-- Main Image -->
                                     <div class="product-image-slider">
-                                        <figure class="border-radius-10" ng-repeat="i in Product.ProductImage">
+                                        <figure class="border-radius-10" ng-repeat="i in Product.AllProductImage">
                                             <img src="~/images/ProductImg/{{i}}" alt="product image" class="img-fluid" loading="lazy">
                                         </figure>
                                      
                                     </div>
                                     <!-- Main Image -->
                                     <!-- Small Image -->
-                                    <div class="slider-nav-thumbnails pl-15 pr-15" ng-show="Product.ProductImage.length>1">
-                                        <div ng-repeat="i in Product.ProductImage" ng-show="i!=null" >
+                                    <div class="slider-nav-thumbnails pl-15 pr-15" ng-show="Product.AllProductImage.length>1">
+                                        <div ng-repeat="i in Product.AllProductImage" ng-show="i!=null" >
                                         <img src="~/images/ProductImg/{{i}}" ng-show="i!=null" class="img-fluid" loading="lazy" alt="product image">
                                         </div>
                                         <div><img src="~/images/ProductImg/{{i}}" class="img-fluid" loading="lazy" alt="product image"></div>
@@ -53,7 +53,7 @@
                                 <div class="detail-info">
                                     <h2 class="title-detail"> {{Product.ProductTitle}}</h2>
                                     <div class="pro-details-brand">
-                                        <span><a href="">{{Product.Maincate}}</a></span>
+                                        <span><a href="">{{Product.Maincate.MTitle}}</a></span>
                                     </div>
 
                                     <div class="clearfix product-price-cover border-0 mb-0">

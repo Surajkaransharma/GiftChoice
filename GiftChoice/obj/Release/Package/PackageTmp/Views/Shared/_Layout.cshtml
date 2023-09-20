@@ -25,8 +25,7 @@
     <link href="~/Angularjs/toast-alert/toastr.css" rel="stylesheet" />
     <script src="~/Angularjs/angular.min.js"></script>
     <script src="~/Angularjs/Home.js"></script>
-    @*<script src="~/Angularjs/AnguAutoComplete/angucomplete-alt.js"></script>
-        <link href="~/Angularjs/AnguAutoComplete/angucomplete-alt.css" rel="stylesheet" />*@
+
     <link href="https://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
     <script src="https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
@@ -42,8 +41,7 @@
                         <div class="col-xl-9 col-lg-9">
                             <div class="header-info">
                                 <ul>
-                                    <!-- <li><i class="fi-rs-smartphone"></i> <a href="tel:(+91)9001097357">(+91) 90010-97357</a> <span class="pl-5">(10:00AM to 8:00PM)</span></li> -->
-                                    <li><i class="fi-rs-marker"></i><a href="https://goo.gl/maps/kRtQzQX6ASj5CYfJ7">Bhilwara Furniture House Near Sitaram Ji Ki Bawri, Bhilwara,311001- Rajasthan, INDIA</a></li>
+                                  <li><i class="fi-rs-marker"></i><a href="https://goo.gl/maps/kRtQzQX6ASj5CYfJ7">Bhilwara Furniture House Near Sitaram Ji Ki Bawri, Bhilwara,311001- Rajasthan, INDIA</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -92,15 +90,7 @@
                         <div class="header-right">
                             <div class="search-style-2">
 
-                                @*<div angucomplete-alt id="txtKeyword" placeholder="KeyWords" pause="100" selected-object="SelectedKeyword" local-data="GetKeywordData" search-fields="Keyword" title-field="Keyword"  minlength="1" input-class="w-100" match-class="highlight">
-                                    </div>
-                                    <style>
-                                        .angucomplete-dropdown {
-                                            width: 100% !important;
-                                        }
-                                    </style>
-                                    <input type="text" id="Keyword" value="{{SelectedKeyword.title}}"  placeholder="Enter Keywords">*@
-
+                       
                                 <input type="text" id="Keyword" placeholder="Search for items..." ng-model="Keyword" ng-change="GetRandomKeyword()" class="w-100">
 
                             </div>
@@ -135,31 +125,14 @@
                                             <a href="/Home/shop?Main={{n.MUrl}}">{{n.MTitle}} <i ng-show="n.Submenu.length>0" class="fi-rs-angle-down"></i></a>
                                             <ul class="sub-menu" ng-show="n.Submenu.length>0">
                                                 <li ng-repeat="s in n.Submenu"><a href="/Home/shop?Keyword={{s.SubmenuTitle.KUrl}}">{{s.SubmenuTitle.Keyword}}</a></li>
-                                                @*<li><a href="shop_by_categories.asp">Rakhi For Brother</a></li>
-                                                    <li><a href="shop_by_categories.asp">Rakhi For Sister</a></li>*@
+                                   
                                             </ul>
                                         </li>
 
-                                        <li ng-show="NavbarMenuList.length>5">
-                                            <a href="#">More Category <i class="fi-rs-angle-down"></i></a>
+                                        <li ng-show='NavbarMenuList.length>5' >    <a href="#">More Category <i class="fi-rs-angle-down"></i></a>
                                             <ul class="sub-menu more-category">
-                                               <li ng-repeat="s in ScondNavbarMenuList"><a href="/Home/shop/{{s.MUrl}}">{{s.MTitle}}</a></li>
-                                                @*<li><a href="shop_by_categories.asp">Mug</a></li>
-                                                <li><a href="shop_by_categories.asp">Frame</a></li>
-                                                <li><a href="shop_by_categories.asp">Cushion</a></li>
-                                                <li><a href="shop_by_categories.asp">Night Lamps</a></li>
-                                                <li><a href="shop_by_categories.asp">Keychains</a></li>
-                                                <li><a href="shop_by_categories.asp">Wall Watches</a></li>
-                                                <li><a href="shop_by_categories.asp">Gift Hampers</a></li>
-                                                <li><a href="shop_by_categories.asp">New Releases</a></li>
-                                                <li><a href="shop_by_categories.asp">T-shirts</a></li>
-                                                <li><a href="shop_by_categories.asp">Pendants</a></li>
-                                                <li><a href="shop_by_categories.asp">Statues</a></li>
-                                                <li><a href="shop_by_categories.asp">Name Plates</a></li>
-                                                <li><a href="shop_by_categories.asp">Gift For Mom</a></li>
-                                                <li><a href="shop_by_categories.asp">Gift For Kids</a></li>
-                                                <li><a href="shop_by_categories.asp">Office Gifts</a></li>
-                                                <li><a href="shop_by_categories.asp">Home Decor</a></li>*@
+                                               <li ng-repeat="s in ScondNavbarMenuList"><a href="/Home/shop?Main={{s.MUrl}}">{{s.MTitle}}</a></li>
+                                              
                                             </ul>
                                         </li>
                                         <li><a href="/Home/Contact">Contact Us</a></li>
@@ -192,17 +165,9 @@
                 <div class="container-fluid">
                     <div class="search-style-3">
                         <div class="mb-0">
-                            @*<div angucomplete-alt id="txtKeyword" placeholder="KeyWords" pause="100" selected-object="SelectedKeyword"
-                                     local-data="GetKeywordData" search-fields="Keyword" title-field="Keyword" minlength="1" input-class="w-100" match-class="highlight">
-                                </div>
-                                <style>
-                                    .angucomplete-dropdown {
-                                        width: 100% !important;
-                                    }
-                                </style>
-                                <input type="hidden" id="Keyword" value="{{SelectedKeyword.title}}" placeholder="Enter Keywords">*@
+                         
                             <input type="text" placeholder="Search for items…" id="MKeyword" ng-model="Keyword" ng-change="GetRandomKeywordMobile()">
-                            @*<button type="submit"><i class="fi-rs-search"></i></button>*@
+                     
                         </div>
                     </div>
                 </div>
@@ -232,8 +197,8 @@
                                 <li class="menu-item-has-children"><a href="/Home/Index">Home</a> </li>
 
                                 <li class="menu-item-has-children" ng-repeat="n in NavbarMenuList">
-                                    <span class="menu-expand"></span><a href="/Home/shop/{{n.MUrl}}">{{n.MTitle}} </a>
-                                    <ul class="dropdown">
+                                    <span  ng-show="n.Submenu.length>0" class="menu-expand"></span><a href="/Home/shop?Main={{n.MUrl}}">{{n.MTitle}} </a>
+                                    <ul class="dropdown" ng-show="n.Submenu.length>0">
 
                                         <li ng-repeat="s in n.Submenu">
                                             <a href="/Home/shop/{{s.SubmenuTitle.KUrl}}">{{s.SubmenuTitle.Keyword}}</a>
@@ -243,10 +208,10 @@
                                 </li>
 
                                 <li class="menu-item-has-children" ng-show="NavbarMenuList.length>5">
-                                    >
-                                    <span class="menu-expand"></span><a href="#">More Category</a>
+                                    
+                                    <span class="menu-expand" ></span><a href="#">More Category</a>
                                     <ul class="dropdown">
-                                        <li ng-repeat="s in ScondNavbarMenuList"><a href="/Home/shop/{{s.MUrl}}">{{s.MTitle}}</a></li>
+                                        <li ng-repeat="s in ScondNavbarMenuList"><a href="/Home/shop?Main={{s.MUrl}}">{{s.MTitle}}</a></li>
 
                                     </ul>
                                 </li>

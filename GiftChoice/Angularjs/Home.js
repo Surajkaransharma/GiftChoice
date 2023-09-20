@@ -451,7 +451,7 @@ app.controller("HomeController", ['$scope', '$http', '$sce','orderByFilter', fun
         debugger
         debugger;
 
-        var selectedProduct = Productid;
+        var selectedProduct = $scope.Product;
         var productId = selectedProduct.ProductId;
 
         // Check if the product with the same productId is already in the cart

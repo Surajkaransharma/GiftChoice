@@ -39,8 +39,8 @@
                             <div class="col-md-12">
                                 <label for="input1" class="form-label">Select Main Category</label>
 
-                                <select id="input9" class="form-select" ng-init="GetMainCateData()" ng-model="Banner.MainCateId">
-                                    <option selected="">Select Main Category</option>
+                                <select id="MainCateSelect" class="form-select" ng-init="GetMainCateData()" ng-model="Banner.MainCateId">
+                                    <option  ng-selected="true" value="-1">Select Main Category</option>
                                     <option ng-repeat="m in MainCateData" value="{{m.MainCateId}}">{{m.MTitle}}</option>
                                 </select>
 
@@ -100,7 +100,7 @@
 
                             <div class="col-md-12">
                                 <label for="input1" class="form-label">Priority</label>
-                                <input type="number" class="form-control" ng-model="Banner.Priority" id="" placeholder="Priority">
+                                <input type="number" class="form-control" ng-model="Banner.Priority" id="Priority" placeholder="Priority">
                             </div>
 
 

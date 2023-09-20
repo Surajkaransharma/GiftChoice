@@ -91,7 +91,7 @@ namespace GiftChoice.Controllers
                        s.PKeywordId,
                        SubmenuTitle = db.KeywordTbls.Where(t => t.KeywordId == s.KeywordId && t.Active == true).Select(t => t.Keyword).FirstOrDefault()
                    })
-               }).OrderBy(x => Guid.NewGuid()).Take(10);
+               }).OrderBy(x => Guid.NewGuid()).Take(8);
             return Json(res, JsonRequestBehavior.AllowGet);
 
         }
@@ -173,10 +173,12 @@ namespace GiftChoice.Controllers
                    m.Create_at,
                    m.PUrl,
                    m.PDesc,
+                   m.Qty,                   
                    m.Active,
                    m.Priority,
-                   ProductImage = db.ProductImages.Where(i => i.ProductId == m.ProductId).Select(i => i.PImage),
-                   Maincate = db.MainCateTbls.Where(p => p.MainCateId == m.MainCateId).Select(p => p.MTitle).FirstOrDefault(),
+                   ProductImage = db.ProductImages.Where(i => i.ProductId == m.ProductId).Select(i => i.PImage).FirstOrDefault(),
+                   AllProductImage = db.ProductImages.Where(i => i.ProductId == m.ProductId).Select(i => i.PImage),
+                   Maincate = db.MainCateTbls.Where(p => p.MainCateId == m.MainCateId).FirstOrDefault(),
                    Submenu = db.PKeywordTbls.Where(s => s.ProductId == m.ProductId && s.Active == true).Select(s => new
                    {
                        s.ProductId,
@@ -213,7 +215,7 @@ namespace GiftChoice.Controllers
                    m.Priority,
                    ProductImage = db.ProductImages.Where(i => i.ProductId == m.ProductId).Select(i => i.PImage).FirstOrDefault(),
 
-               }).OrderBy(x => Guid.NewGuid()).Take(10);
+               }).OrderBy(x => Guid.NewGuid()).Take(8);
             return Json(res, JsonRequestBehavior.AllowGet);
 
         }
@@ -532,7 +534,7 @@ namespace GiftChoice.Controllers
                        s.PKeywordId,
                        SubmenuTitle = db.KeywordTbls.Where(t => t.KeywordId == s.KeywordId && t.Active == true).Select(t => t.Keyword).FirstOrDefault()
                    })
-               }).OrderBy(x => Guid.NewGuid()).Take(10)
+               }).OrderBy(x => Guid.NewGuid())
                 };
 
 
@@ -564,7 +566,7 @@ namespace GiftChoice.Controllers
                             s.PKeywordId,
                             SubmenuTitle = db.KeywordTbls.Where(t => t.KeywordId == s.KeywordId && t.Active == true).Select(t => t.Keyword).FirstOrDefault()
                         })
-                    }).OrderBy(x => Guid.NewGuid()).Take(10)
+                    }).OrderBy(x => Guid.NewGuid())
                 };
 
 

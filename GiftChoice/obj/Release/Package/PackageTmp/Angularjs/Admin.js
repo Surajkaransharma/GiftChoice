@@ -135,24 +135,6 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
 
 
 
-        //if (MainCate.val() === "-1" || MainCate.val() === "") {
-        //    toastr["error"]("Please Select Main Category");
-        //    MainCate.focus();
-        //    return;
-        //}
-
-        //var Producttitle = angular.element(document.getElementById("Producttitle"));
-        //if (Producttitle.val() === "") {
-        //    toastr["error"]("Please Enter Product Name");
-        //    Producttitle.focus();
-        //    return;
-        //}
-        //$scope.image1 = $('#image1').val();
-        //if ($scope.image1 == "" || $scope.image1 == undefined) {
-        //    toastr["error"]("Please Select Image");
-        //    $('#image1').focus;
-        //    return;
-        //}
 
         debugger;
         for (var i = 0; i < $scope.KeywordList.length; i++) {
@@ -326,6 +308,18 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
     var Keywordarr = [];
 
     $scope.SubmitMainCate = function () {
+
+        if ($("#MTitle").val() == "") {
+            toastr["error"]("Enter Main Category Title");
+            return;
+        }
+    
+        if ($("#Priority").val() == "") {
+            toastr["error"]("Enter Main Category Priority");
+            return;
+        }
+
+
         debugger
         for (var i = 0; i < $scope.KeywordList.length; i++) {
             if ($scope.KeywordList[i].Selected) {
@@ -426,12 +420,17 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
 
     $scope.UpdateMainCate = function () {
         debugger
-        var maincate = angular.element(document.getElementById("title"));
+        var maincate = angular.element(document.getElementById("MTitle"));
         if (maincate.val() === "") {
             toastr["error"]("Please Enter Main Category");
             maincate.focus();
             return;
         }
+        if ($("#Priority").val() == "") {
+            toastr["error"]("Enter Main Category Priority");
+            return;
+        }
+  
         $.each($(".checkbox-input:checked"), function () {
             Keywordarr.push({ 'KeywordId': $(this).val() });
         });
@@ -444,7 +443,7 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
             if ($scope.result.res === "1") {
                 if (Keywordarr !== null) {
 
-                $scope.UpdateKeywordArrayData($scope.result.MainCateId);
+                    $scope.UpdateKeywordArrayData($scope.result.MainCateId);
                 }
                 $scope.MainCate = null;
                 $scope.GetMainCate();
@@ -760,17 +759,17 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
     //--------------Banner->------------->---------------------->---------------------------->------->------------>---------->---
     $scope.SubmitBanner = function () {
         debugger
-        //$scope.slideimg = $('#input-file-now').val();
-        //if ($scope.slideimg == "" || $scope.slideimg == undefined) {
-        //    toastr["error"]("Please Select Image");
-        //    $('#input-file-now').focus;
-        //    return;
-        //}
-        //if ($('#priority').val() == "") {
-        //    toastr["error"]("Please Enter Priority");
-        //    $('#priority').focus;
-        //    return;
-        //}
+
+        if ($("#MainCateSelect option:selected").val() == "-1" || $("#MainCateSelect option:selected").val() == "") {
+            toastr["error"]("Select Main Category");
+            return;
+        }
+   
+        if ($("#Priority").val() == "") {
+            toastr["error"]("Enter Banner Priority");
+            return;
+        }
+     
 
         debugger
         upload({
@@ -824,18 +823,16 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
 
     };
     $scope.UpdateBanner = function () {
-        //$scope.slideimg = $('#input-file-now').val();
-        //if ($scope.slideimg == "" || $scope.slideimg == undefined) {
-        //    toastr["error"]("Please Select Image");
-        //    $('#input-file-now').focus;
-        //    return;
-        //}
-        //if ($('#priority').val() == "") {
-        //    toastr["error"]("Please Enter Priority");
-        //    $('#priority').focus;
-        //    return;
-        //}
-
+        debugger
+        if ($("#MainCateSelect option:selected").val() == "-1" || $("#MainCateSelect option:selected").val() == "") {
+            toastr["error"]("Select Main Category");
+            return;
+        }
+        if ($("#Priority").val() == "") {
+            toastr["error"]("Enter Banner Priority");
+            return;
+        }
+     
         debugger
         upload({
             url: '/GiftDashBoard/UpdateBanner',
