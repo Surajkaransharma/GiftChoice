@@ -2469,7 +2469,7 @@ label {
 .page-header .breadcrumb span {
   position: relative;
   text-align: center;
-  padding: 0 10px;
+/*  padding: 0 0px;*/
 }
 
 .page-header .breadcrumb span::before {
@@ -9625,7 +9625,7 @@ span.fi-rs-apps {
     display: block;
   }
   .carausel-6-columns, .carausel-4-columns {
-    max-width: 375px;
+    /*max-width: 375px;*/
     overflow: hidden;
   }
   .slider-arrow .slider-btn.slider-next {
@@ -9925,7 +9925,7 @@ span.fi-rs-apps {
   .product-cart-wrap .product-content-wrap h2 {
     font-size: 12px;
     display: -webkit-box;
-    -webkit-line-clamp: 2;
+    -webkit-line-clamp: 1;
     -webkit-box-orient: vertical;  
     overflow: hidden;
   }
