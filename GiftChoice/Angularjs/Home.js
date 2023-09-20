@@ -293,7 +293,7 @@ app.controller("HomeController", ['$scope', '$http', '$sce','orderByFilter', fun
             url: '/Home/FilterProductData',
             method: 'post',
             data: {
-                Cid: Cid
+                Cid: Cid,
             }
         }).then(function (d) {
             $scope.ProductData = d.data.ProductList;
@@ -316,11 +316,11 @@ app.controller("HomeController", ['$scope', '$http', '$sce','orderByFilter', fun
                     $(sliderID).slick({
                         dots: false,
                         infinite: true,
-                        speed: 1000,
+                        speed: 400,
                         arrows: true,
                         autoplay: true,
                         slidesToShow: 8,
-                        slidesToScroll: 1,
+                        slidesToScroll: 2,
                         loop: true,
                         adaptiveHeight: true,
                         responsive: [
@@ -328,21 +328,21 @@ app.controller("HomeController", ['$scope', '$http', '$sce','orderByFilter', fun
                                 breakpoint: 1025,
                                 settings: {
                                     slidesToShow: 4,
-                                    slidesToScroll: 1,
+                                    slidesToScroll: 2,
                                 }
                             },
                             {
                                 breakpoint: 768,
                                 settings: {
                                     slidesToShow: 3,
-                                    slidesToScroll: 1,
+                                    slidesToScroll: 2,
                                 }
                             },
                             {
                                 breakpoint: 480,
                                 settings: {
                                     slidesToShow: 3,
-                                    slidesToScroll: 1
+                                    slidesToScroll: 2
                                 }
                             }
                         ],
@@ -360,11 +360,11 @@ app.controller("HomeController", ['$scope', '$http', '$sce','orderByFilter', fun
                     $(sliderID).slick({
                         dots: false,
                         infinite: true,
-                        speed: 1000,
+                        speed: 400,
                         arrows: true,
                         autoplay: true,
                         slidesToShow: 8,
-                        slidesToScroll: 1,
+                        slidesToScroll: 2,
                         loop: true,
                         adaptiveHeight: true,
                         responsive: [
@@ -372,21 +372,21 @@ app.controller("HomeController", ['$scope', '$http', '$sce','orderByFilter', fun
                                 breakpoint: 1025,
                                 settings: {
                                     slidesToShow: 4,
-                                    slidesToScroll: 1,
+                                    slidesToScroll: 2,
                                 }
                             },
                             {
                                 breakpoint: 768,
                                 settings: {
                                     slidesToShow: 4,
-                                    slidesToScroll: 1,
+                                    slidesToScroll: 2,
                                 }
                             },
                             {
                                 breakpoint: 480,
                                 settings: {
                                     slidesToShow: 4,
-                                    slidesToScroll: 1
+                                    slidesToScroll: 2
                                 }
                             }
                         ],

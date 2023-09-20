@@ -41,10 +41,10 @@
                                 </div>
                                 <div class="sort-by-dropdown">
                                     <ul>
-                                        <li><a class="active" href="#">Featured</a></li>
+                                        @*<li><a class="active" href="#">Featured</a></li>*@
                                         <li><a ng-click="sortByPrice('asc')">Price: Low to High</a></li>
                                         <li><a ng-click="sortByPrice('desc')">Price: High to Low</a></li>
-                                        <li><a ng-click="sortByReleaseDate('desc')">Release Date</a></li>
+                                        @*<li><a ng-click="sortByReleaseDate('desc')">Release Date</a></li>*@
 
                                     </ul>
                                 </div>
@@ -125,7 +125,7 @@
                             <label class="fw-900">Select Price</label>
                             <div class="custome-checkbox">
                                 <div ng-repeat="r in priceRanges">
-                                    <input class="form-check-input" type="checkbox" name="checkbox" id="price_{{r.id}}" value="{{r.id}}"  ng-model="r.Selected">
+                                    <input class="form-check-input" type="checkbox" name="checkbox" id="price_{{r.id}}" value="{{r.id}}"  ng-model="r.Selected" ng-change="">
                                     <label class="form-check-label" for="price_{{r.id}}"><span>
                                         <i class="fa fa-inr" aria-hidden="true"></i>{{r.minPrice}} - {{r.maxPrice}}</span></label>
                                 </div>
@@ -136,7 +136,7 @@
                     </div>
                     <div align="right">
                         <a href="#" class="btn btn-sm btn-danger" ng-click="FClear()"> <i class="fa fa-trash" aria-hidden="true"></i>Clear Filter</a>
-                        <a class="btn btn-sm btn-default" ng-click="FilterProductData()"><i class="fi-rs-filter mr-5"></i> Apply Fillter</a>
+                        <a class="btn btn-sm btn-default" ng-click="FilterProductData()" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample"><i class="fi-rs-filter mr-5"></i> Apply Fillter</a>
                     </div>
                 </div>
             </div>
