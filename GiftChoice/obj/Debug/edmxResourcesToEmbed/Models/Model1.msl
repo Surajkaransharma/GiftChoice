@@ -227,5 +227,13 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="AutocompleteSuggestions">
+      <EntityTypeMapping TypeName="GiftChoiceModel.AutocompleteSuggestion">
+        <MappingFragment StoreEntitySet="AutocompleteSuggestions">
+          <ScalarProperty Name="Suggestion" ColumnName="Suggestion" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

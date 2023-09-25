@@ -112,7 +112,7 @@ app.controller("HomeController", ['$scope', '$http', '$sce','orderByFilter', fun
 
         $("#Keyword").addClass('ui-autocomplete-loader-center');
         $http.get("/Home/GetRandomKeyword?id=" + $scope.Keyword).then(function (d) {
-            debugger
+            
             $("#Keyword").removeClass('ui-autocomplete-loader-center');
 
             $("#Keyword").autocomplete({
@@ -124,6 +124,7 @@ app.controller("HomeController", ['$scope', '$http', '$sce','orderByFilter', fun
                     for (var i = 0; i < d.data.KeyWordList.length; i++) {
                         if (label === d.data.KeyWordList[i].label) {
                             location.href = '/Home/Shop?Keyword=' + d.data.KeyWordList[i].KUrl;
+                            debugger
                             return;
                         }
                     }

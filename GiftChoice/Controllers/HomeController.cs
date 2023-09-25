@@ -68,6 +68,7 @@ namespace GiftChoice.Controllers
         [JsonNetFilter]
         public JsonResult GetProduct()
         {
+            db.Configuration.ProxyCreationEnabled = false;
             var res =
 
                db.ProductTbls.Where(m => m.Active == true).Select(m => new
@@ -96,13 +97,14 @@ namespace GiftChoice.Controllers
 
         }
         [JsonNetFilter]
-        public JsonResult FilterProduct(int Keyword, int Main)
+        public JsonResult FilterProduct(string Keyword, int Main)
         {
-            if (Keyword != 0)
+            db.Configuration.ProxyCreationEnabled = false;
+            if (Keyword != "")
             {
                 var res =
 
-           db.VProducts.Where(m => (Keyword == 0 ? true : m.KeywordId == Keyword) && m.Active == true).Select(m => new
+           db.VProducts.Where(m => (Keyword == "" ? true : m.ProductTitle.Contains(Keyword)) && (Keyword == "" ? true : m.Keyword.Contains(Keyword)) && (Keyword == "" ? true : m.MTitle.Contains(Keyword)) && m.Active == true).Select(m => new
            {
                m.ProductId,
                m.MainCateId,
@@ -161,6 +163,7 @@ namespace GiftChoice.Controllers
         [JsonNetFilter]
         public JsonResult GetProductByid(int id)
         {
+            db.Configuration.ProxyCreationEnabled = false;
             var res =
 
                db.ProductTbls.Where(p => p.ProductId == id).Select(m => new
@@ -200,6 +203,7 @@ namespace GiftChoice.Controllers
         [JsonNetFilter]
         public JsonResult GetSmillerProduct(int id)
         {
+            db.Configuration.ProxyCreationEnabled = false;
             var res =
 
                db.ProductTbls.Where(p => p.ProductId != id && p.Active == true).Select(m => new
@@ -245,7 +249,9 @@ namespace GiftChoice.Controllers
         public ActionResult Shop(string Keyword = "", string Main = "")
         {
 
-            ViewBag.Keyword = Keyword == "" ? 0 : db.KeywordTbls.Where(m => m.KUrl == Keyword).Select(m => m.KeywordId).FirstOrDefault();
+            //ViewBag.Keyword = Keyword == "" ? 0 : db.KeywordTbls.Where(m => m.KUrl == Keyword).Select(m => m.KeywordId).FirstOrDefault();
+
+            ViewBag.Keyword = Keyword == "" ? "" : Keyword;
 
 
             ViewBag.Main = Main == "" ? 0 : db.MainCateTbls.Where(m => m.MUrl == Main).Select(m => m.MainCateId).FirstOrDefault();
@@ -356,13 +362,13 @@ namespace GiftChoice.Controllers
             var res = new
             {
 
-                KeyWordList = (from c in db.KeywordTbls
-                               where c.Keyword.Contains(id)
+                KeyWordList = (from c in db.AutocompleteSuggestions
+                               where c.Suggestion.Contains(id)
                                select new
                                {
-                                   label = c.Keyword,
-                                   value = c.Keyword,
-                                   KUrl = c.KUrl
+                                   label = c.Suggestion,
+                                   value = c.Suggestion,
+                                   KUrl = c.Suggestion
                                }).Take(5)
 
             };
@@ -490,7 +496,7 @@ namespace GiftChoice.Controllers
         [JsonNetFilter]
         public JsonResult FilterProductData(int[] Cid)
         {
-
+            db.Configuration.ProxyCreationEnabled = false;
             if (Cid != null /*&& priceTbls != null*/)
             {
 

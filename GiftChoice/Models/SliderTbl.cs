@@ -23,7 +23,6 @@ namespace GiftChoice.Models
         public Nullable<bool> Active { get; set; }
         public Nullable<System.DateTime> Create_at { get; set; }
         public Nullable<System.DateTime> Update_at { get; set; }
-
         public HttpPostedFileBase Image { get; set; }
     }
 }

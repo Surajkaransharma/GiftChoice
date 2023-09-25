@@ -221,6 +221,15 @@ warning 6002: The table/view 'giftchoice.dbo.VProduct' does not have a primary k
           <Property Name="Expr14" Type="datetime" />
           <Property Name="Qty" Type="bigint" />
         </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'giftchoice.giftchoice.AutocompleteSuggestions' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="AutocompleteSuggestions">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" Nullable="false" />
+          <Property Name="Suggestion" Type="nvarchar(max)" />
+        </EntityType>
         <Association Name="FK__MCKeyword__Keywo__52593CB8">
           <End Role="KeywordTbl" Type="Self.KeywordTbl" Multiplicity="0..1" />
           <End Role="MCKeywordTbl" Type="Self.MCKeywordTbl" Multiplicity="*" />
@@ -298,6 +307,12 @@ warning 6002: The table/view 'giftchoice.dbo.VProduct' does not have a primary k
     [VProduct].[Qty] AS [Qty]
     FROM [dbo].[VProduct] AS [VProduct]</DefiningQuery>
           </EntitySet>
+          <EntitySet Name="AutocompleteSuggestions" EntityType="Self.AutocompleteSuggestions" store:Type="Views" store:Schema="giftchoice">
+            <DefiningQuery>SELECT 
+    [AutocompleteSuggestions].[ID] AS [ID], 
+    [AutocompleteSuggestions].[Suggestion] AS [Suggestion]
+    FROM [giftchoice].[AutocompleteSuggestions] AS [AutocompleteSuggestions]</DefiningQuery>
+          </EntitySet>
           <AssociationSet Name="FK__MCKeyword__Keywo__52593CB8" Association="Self.FK__MCKeyword__Keywo__52593CB8">
             <End Role="KeywordTbl" EntitySet="KeywordTbl" />
             <End Role="MCKeywordTbl" EntitySet="MCKeywordTbl" />
@@ -335,6 +350,7 @@ warning 6002: The table/view 'giftchoice.dbo.VProduct' does not have a primary k
             <End Role="MainCateTbl" EntitySet="MainCateTbls" />
             <End Role="MCKeywordTbl" EntitySet="MCKeywordTbls" />
           </AssociationSet>
+          <EntitySet Name="AutocompleteSuggestions" EntityType="GiftChoiceModel.AutocompleteSuggestion" />
         </EntityContainer>
         <EntityType Name="AdminTbl">
           <Key>
@@ -578,6 +594,13 @@ warning 6002: The table/view 'giftchoice.dbo.VProduct' does not have a primary k
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="AutocompleteSuggestion">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" />
+          <Property Name="Suggestion" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -807,6 +830,14 @@ warning 6002: The table/view 'giftchoice.dbo.VProduct' does not have a primary k
                 <ScalarProperty Name="ProductTitle" ColumnName="ProductTitle" />
                 <ScalarProperty Name="MainCateId" ColumnName="MainCateId" />
                 <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AutocompleteSuggestions">
+            <EntityTypeMapping TypeName="GiftChoiceModel.AutocompleteSuggestion">
+              <MappingFragment StoreEntitySet="AutocompleteSuggestions">
+                <ScalarProperty Name="Suggestion" ColumnName="Suggestion" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

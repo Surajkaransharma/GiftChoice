@@ -22,6 +22,7 @@
         <EntityTypeShape EntityType="GiftChoiceModel.VProduct" Width="1.5" PointX="10.75" PointY="4.75" />
         <AssociationConnector Association="GiftChoiceModel.FK__MCKeyword__Keywo__52593CB8" />
         <AssociationConnector Association="GiftChoiceModel.FK__MCKeyword__MainC__534D60F1" />
+        <EntityTypeShape EntityType="GiftChoiceModel.AutocompleteSuggestion" Width="1.5" PointX="7.375" PointY="10.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
