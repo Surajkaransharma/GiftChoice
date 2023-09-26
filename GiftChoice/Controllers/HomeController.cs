@@ -44,7 +44,7 @@ namespace GiftChoice.Controllers
                    m.Active,
                    m.MImage,
                    m.Priority,
-               
+
                }).OrderBy(m => m.Priority);
             return Json(res, JsonRequestBehavior.AllowGet);
 
@@ -97,14 +97,19 @@ namespace GiftChoice.Controllers
 
         }
         [JsonNetFilter]
-        public JsonResult FilterProduct(string Keyword, int Main)
+        public JsonResult FilterProduct()
         {
             db.Configuration.ProxyCreationEnabled = false;
+
+            string Keyword = Convert.ToString(Session["SearchKeyword"]);
+            int Main = Convert.ToInt32(Session["Main"]);
+            Session.Clear();
+
             if (Keyword != "")
             {
                 var res =
 
-           db.VProducts.Where(m => (Keyword == "" ? true : m.ProductTitle.Contains(Keyword)) && (Keyword == "" ? true : m.Keyword.Contains(Keyword)) && (Keyword == "" ? true : m.MTitle.Contains(Keyword)) && m.Active == true).Select(m => new
+           db.VProducts.Where(m => (Keyword == "" ? true : m.ProductTitle.Contains(Keyword)) || (Keyword == "" ? true : m.Keyword.Contains(Keyword)) && m.Active == true).Select(m => new
            {
                m.ProductId,
                m.MainCateId,
@@ -176,7 +181,7 @@ namespace GiftChoice.Controllers
                    m.Create_at,
                    m.PUrl,
                    m.PDesc,
-                   m.Qty,                   
+                   m.Qty,
                    m.Active,
                    m.Priority,
                    ProductImage = db.ProductImages.Where(i => i.ProductId == m.ProductId).Select(i => i.PImage).FirstOrDefault(),
@@ -252,15 +257,46 @@ namespace GiftChoice.Controllers
             //ViewBag.Keyword = Keyword == "" ? 0 : db.KeywordTbls.Where(m => m.KUrl == Keyword).Select(m => m.KeywordId).FirstOrDefault();
 
             ViewBag.Keyword = Keyword == "" ? "" : Keyword;
+             Session["SearchKeyword"] = ViewBag.Keyword;
 
-
-            ViewBag.Main = Main == "" ? 0 : db.MainCateTbls.Where(m => m.MUrl == Main).Select(m => m.MainCateId).FirstOrDefault();
-
+            ViewBag.Main = Main == "" ? 0 : db.MainCateTbls.Where(m => m.MTitle == Main).Select(m => m.MainCateId).FirstOrDefault();
+              Session["Main"] = ViewBag.Main;
 
 
 
             return View();
         }
+
+
+        public JsonResult SearchDataShop(string Keyword)
+        {
+            try
+            {
+
+                Session["SearchKeyword"] = Keyword;
+
+
+                var res = new
+                {
+                    res = "1",
+
+                    Keywords = Session["SearchKeyword"]
+
+
+                };
+                return Json(res, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+
+                var res = new
+                {
+                    res = "0"
+                };
+                return Json(res, JsonRequestBehavior.AllowGet);
+            }
+        }
+
         public ActionResult Cart()
         {
             ViewBag.Message = "Your contact page.";
@@ -364,6 +400,7 @@ namespace GiftChoice.Controllers
 
                 KeyWordList = (from c in db.AutocompleteSuggestions
                                where c.Suggestion.Contains(id)
+                               orderby c.Suggestion.Length
                                select new
                                {
                                    label = c.Suggestion,
@@ -517,7 +554,7 @@ namespace GiftChoice.Controllers
 
                 var res = new
                 {
-                     //&& priceTbls.Any(priceRange => p.Price >= priceRange.minPrice && p.Price <= priceRange.maxPrice)
+                    //&& priceTbls.Any(priceRange => p.Price >= priceRange.minPrice && p.Price <= priceRange.maxPrice)
                     ProductList =
                db.ProductTbls.Where(p => p.Active == true && subid.Contains(p.MainCateId ?? 0)).Select(m => new
                {

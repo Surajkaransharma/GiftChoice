@@ -123,9 +123,9 @@ app.controller("HomeController", ['$scope', '$http', '$sce','orderByFilter', fun
 
                     for (var i = 0; i < d.data.KeyWordList.length; i++) {
                         if (label === d.data.KeyWordList[i].label) {
-                            location.href = '/Home/Shop?Keyword=' + d.data.KeyWordList[i].KUrl;
-                            debugger
-                            return;
+                            //   window.location.href = '/Home/Shop?Keyword=' + d.data.KeyWordList[i].KUrl;
+                            $scope.KeyWords = d.data.KeyWordList[i].KUrl;
+                            $scope.SearchDataShop($scope.KeyWords);
                         }
                     }
 
@@ -144,7 +144,25 @@ app.controller("HomeController", ['$scope', '$http', '$sce','orderByFilter', fun
         });
 
     };
+    $scope.SearchDataShop = function (id) {
+        $http({
+            url: '/Home/SearchDataShop',
+            method: 'POST',
+            data: {
+                Keyword: id
+             
+            }
+        }).then(function (d) {
+            debugger
+            $scope.result = d.data.Keywords;
+            debugger
+          
+            location.href = '/Home/Shop?Keyword=' + $scope.result;
+        }, function (error) {
+            alert(error.data);
+        });
 
+    };
     $scope.GetRandomKeywordMobile = function () {
 
         $("#MKeyword").addClass('ui-autocomplete-loader-center');
@@ -413,9 +431,9 @@ app.controller("HomeController", ['$scope', '$http', '$sce','orderByFilter', fun
         });
     };
 
-    $scope.FilterProduct = function (Keyword, Main) {
+    $scope.FilterProduct = function () {
         debugger
-        $http.get("/Home/FilterProduct?Keyword=" + Keyword + '&Main=' + Main).then(function (d) {
+        $http.get("/Home/FilterProduct").then(function (d) {
             debugger
             $scope.ProductData = d.data;
         }, function (error) {
