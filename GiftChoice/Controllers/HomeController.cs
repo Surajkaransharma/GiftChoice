@@ -36,7 +36,7 @@ namespace GiftChoice.Controllers
             db.Configuration.ProxyCreationEnabled = false;
             var res =
 
-               db.MainCateTbls.Where(m => m.Active == true).Select(m => new
+               db.MainCateTbls.Select(m => new
                {
                    m.MainCateId,
                    m.MUrl,
@@ -44,7 +44,14 @@ namespace GiftChoice.Controllers
                    m.Active,
                    m.MImage,
                    m.Priority,
-
+                   MCKeyword = db.MCKeywordTbls.Where(k =>  k.MainCateId == m.MainCateId && k.Active == true && k.MenuFilter == true).Select(k => new {
+                       k.Menu,
+                       k.MenuFilter,
+                       k.Fliter,
+                       k.KeywordId,
+                       k.MainCateId,
+                       Keyword = db.KeywordTbls.Where(p => p.KeywordId == k.KeywordId && p.Active == true).Select(p => p.Keyword).FirstOrDefault()
+                   }),
                }).OrderBy(m => m.Priority);
             return Json(res, JsonRequestBehavior.AllowGet);
 

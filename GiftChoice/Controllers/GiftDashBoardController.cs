@@ -84,7 +84,7 @@ namespace GiftChoice.Controllers
             public Nullable<System.DateTime> Update_at { get; set; }
             public string MImage { get; set; }
             public HttpPostedFileBase Image { get; set; }
-
+        
             public Nullable<long> UserId { get; set; }
             public List<KeywordTbl> keywordTbls { get; set; }
         }
@@ -140,11 +140,17 @@ namespace GiftChoice.Controllers
 
                 if (model.keywordTbls != null)
                 {
+                    //     public string Menu { get; set; }
                     for (int i = 0; i < model.keywordTbls.Count; i++)
                     {
                         MCKeywordTbl mCKeyword = new MCKeywordTbl();
                         mCKeyword.MCkeywordId = db.MCKeywordTbls.DefaultIfEmpty().Max(r => r == null ? 0 : r.MCkeywordId) + 1;
                         mCKeyword.MainCateId = model.MainCateId;
+                        mCKeyword.Menu = model.keywordTbls[i].Menu == "Menu" ? true : false;
+                        mCKeyword.Fliter = model.keywordTbls[i].Menu == "Fliter" ? true : false;
+
+                        mCKeyword.MenuFilter = model.keywordTbls[i].Menu == "MenuFilter" ? true : false;
+
                         mCKeyword.KeywordId = model.keywordTbls[i].KeywordId;
                         mCKeyword.Active = true;
                         db.MCKeywordTbls.Add(mCKeyword);

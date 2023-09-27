@@ -59,6 +59,9 @@
     <EntitySetMapping Name="MCKeywordTbls">
       <EntityTypeMapping TypeName="GiftChoiceModel.MCKeywordTbl">
         <MappingFragment StoreEntitySet="MCKeywordTbl">
+          <ScalarProperty Name="MenuFilter" ColumnName="MenuFilter" />
+          <ScalarProperty Name="Fliter" ColumnName="Fliter" />
+          <ScalarProperty Name="Menu" ColumnName="Menu" />
           <ScalarProperty Name="Active" ColumnName="Active" />
           <ScalarProperty Name="KeywordId" ColumnName="KeywordId" />
           <ScalarProperty Name="MainCateId" ColumnName="MainCateId" />

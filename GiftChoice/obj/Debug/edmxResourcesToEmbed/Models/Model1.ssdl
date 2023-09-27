@@ -59,6 +59,9 @@
     <Property Name="MainCateId" Type="bigint" />
     <Property Name="KeywordId" Type="bigint" />
     <Property Name="Active" Type="bit" />
+    <Property Name="Menu" Type="bit" />
+    <Property Name="Fliter" Type="bit" />
+    <Property Name="MenuFilter" Type="bit" />
   </EntityType>
   <EntityType Name="OrderMainTbl">
     <Key>

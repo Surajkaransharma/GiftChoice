@@ -16,6 +16,7 @@
     <EntitySet Name="SliderTbls" EntityType="GiftChoiceModel.SliderTbl" />
     <EntitySet Name="UserRegisters" EntityType="GiftChoiceModel.UserRegister" />
     <EntitySet Name="VProducts" EntityType="GiftChoiceModel.VProduct" />
+    <EntitySet Name="AutocompleteSuggestions" EntityType="GiftChoiceModel.AutocompleteSuggestion" />
     <AssociationSet Name="FK__MCKeyword__Keywo__52593CB8" Association="GiftChoiceModel.FK__MCKeyword__Keywo__52593CB8">
       <End Role="KeywordTbl" EntitySet="KeywordTbls" />
       <End Role="MCKeywordTbl" EntitySet="MCKeywordTbls" />
@@ -24,7 +25,6 @@
       <End Role="MainCateTbl" EntitySet="MainCateTbls" />
       <End Role="MCKeywordTbl" EntitySet="MCKeywordTbls" />
     </AssociationSet>
-    <EntitySet Name="AutocompleteSuggestions" EntityType="GiftChoiceModel.AutocompleteSuggestion" />
   </EntityContainer>
   <EntityType Name="AdminTbl">
     <Key>
@@ -87,6 +87,9 @@
     <Property Name="MainCateId" Type="Int64" />
     <Property Name="KeywordId" Type="Int64" />
     <Property Name="Active" Type="Boolean" />
+    <Property Name="Menu" Type="Boolean" />
+    <Property Name="Fliter" Type="Boolean" />
+    <Property Name="MenuFilter" Type="Boolean" />
     <NavigationProperty Name="KeywordTbl" Relationship="GiftChoiceModel.FK__MCKeyword__Keywo__52593CB8" FromRole="MCKeywordTbl" ToRole="KeywordTbl" />
     <NavigationProperty Name="MainCateTbl" Relationship="GiftChoiceModel.FK__MCKeyword__MainC__534D60F1" FromRole="MCKeywordTbl" ToRole="MainCateTbl" />
   </EntityType>
@@ -244,6 +247,13 @@
     <Property Name="Expr14" Type="DateTime" Precision="3" />
     <Property Name="Qty" Type="Int64" />
   </EntityType>
+  <EntityType Name="AutocompleteSuggestion">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int64" Nullable="false" />
+    <Property Name="Suggestion" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+  </EntityType>
   <Association Name="FK__MCKeyword__Keywo__52593CB8">
     <End Type="GiftChoiceModel.KeywordTbl" Role="KeywordTbl" Multiplicity="0..1" />
     <End Type="GiftChoiceModel.MCKeywordTbl" Role="MCKeywordTbl" Multiplicity="*" />
@@ -268,11 +278,4 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <EntityType Name="AutocompleteSuggestion">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="Int64" Nullable="false" />
-    <Property Name="Suggestion" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-  </EntityType>
 </Schema>

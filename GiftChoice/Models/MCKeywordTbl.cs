@@ -18,6 +18,9 @@ namespace GiftChoice.Models
         public Nullable<long> MainCateId { get; set; }
         public Nullable<long> KeywordId { get; set; }
         public Nullable<bool> Active { get; set; }
+        public Nullable<bool> Menu { get; set; }
+        public Nullable<bool> Fliter { get; set; }
+        public Nullable<bool> MenuFilter { get; set; }
     
         public virtual KeywordTbl KeywordTbl { get; set; }
         public virtual MainCateTbl MainCateTbl { get; set; }

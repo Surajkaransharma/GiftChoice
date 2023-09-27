@@ -308,7 +308,12 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
     var Keywordarr = [];
 
     $scope.SubmitMainCate = function () {
-
+        debugger
+        for (var i = 0; i < $scope.KeywordList.length; i++) {
+            if ($scope.KeywordList[i].Selected) {
+                Keywordarr.push($scope.KeywordList[i]);
+            }
+        }
         if ($("#MTitle").val() == "") {
             toastr["error"]("Enter Main Category Title");
             return;
@@ -321,11 +326,7 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
 
 
         debugger
-        for (var i = 0; i < $scope.KeywordList.length; i++) {
-            if ($scope.KeywordList[i].Selected) {
-                Keywordarr.push($scope.KeywordList[i]);
-            }
-        }
+    
         debugger
         upload({
             url: '/GiftDashBoard/SubmitMainCate',
