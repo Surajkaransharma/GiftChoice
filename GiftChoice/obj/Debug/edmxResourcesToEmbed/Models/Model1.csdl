@@ -209,8 +209,6 @@
     <Key>
       <PropertyRef Name="ProductId" />
       <PropertyRef Name="PKeywordId" />
-      <PropertyRef Name="Expr3" />
-      <PropertyRef Name="Expr9" />
     </Key>
     <Property Name="ProductId" Type="Int64" Nullable="false" />
     <Property Name="MainCateId" Type="Int64" />
@@ -228,7 +226,7 @@
     <Property Name="Expr1" Type="Int64" />
     <Property Name="KeywordId" Type="Int64" />
     <Property Name="Expr2" Type="Boolean" />
-    <Property Name="Expr3" Type="Int64" Nullable="false" />
+    <Property Name="Expr3" Type="Int64" />
     <Property Name="Keyword" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="KUrl" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="Expr4" Type="DateTime" Precision="3" />
@@ -236,7 +234,7 @@
     <Property Name="Expr6" Type="Boolean" />
     <Property Name="Expr7" Type="Int64" />
     <Property Name="Expr8" Type="Int64" />
-    <Property Name="Expr9" Type="Int64" Nullable="false" />
+    <Property Name="Expr9" Type="Int64" />
     <Property Name="MTitle" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="MUrl" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="Expr10" Type="Boolean" />

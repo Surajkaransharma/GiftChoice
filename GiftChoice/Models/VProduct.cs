@@ -30,7 +30,7 @@ namespace GiftChoice.Models
         public Nullable<long> Expr1 { get; set; }
         public Nullable<long> KeywordId { get; set; }
         public Nullable<bool> Expr2 { get; set; }
-        public long Expr3 { get; set; }
+        public Nullable<long> Expr3 { get; set; }
         public string Keyword { get; set; }
         public string KUrl { get; set; }
         public Nullable<System.DateTime> Expr4 { get; set; }
@@ -38,7 +38,7 @@ namespace GiftChoice.Models
         public Nullable<bool> Expr6 { get; set; }
         public Nullable<long> Expr7 { get; set; }
         public Nullable<long> Expr8 { get; set; }
-        public long Expr9 { get; set; }
+        public Nullable<long> Expr9 { get; set; }
         public string MTitle { get; set; }
         public string MUrl { get; set; }
         public Nullable<bool> Expr10 { get; set; }

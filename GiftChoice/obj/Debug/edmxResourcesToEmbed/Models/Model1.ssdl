@@ -181,8 +181,6 @@ warning 6002: The table/view 'giftchoice.dbo.VProduct' does not have a primary k
     <Key>
       <PropertyRef Name="ProductId" />
       <PropertyRef Name="PKeywordId" />
-      <PropertyRef Name="Expr3" />
-      <PropertyRef Name="Expr9" />
     </Key>
     <Property Name="ProductId" Type="bigint" Nullable="false" />
     <Property Name="MainCateId" Type="bigint" />
@@ -200,7 +198,7 @@ warning 6002: The table/view 'giftchoice.dbo.VProduct' does not have a primary k
     <Property Name="Expr1" Type="bigint" />
     <Property Name="KeywordId" Type="bigint" />
     <Property Name="Expr2" Type="bit" />
-    <Property Name="Expr3" Type="bigint" Nullable="false" />
+    <Property Name="Expr3" Type="bigint" />
     <Property Name="Keyword" Type="nvarchar(max)" />
     <Property Name="KUrl" Type="nvarchar(max)" />
     <Property Name="Expr4" Type="datetime" />
@@ -208,7 +206,7 @@ warning 6002: The table/view 'giftchoice.dbo.VProduct' does not have a primary k
     <Property Name="Expr6" Type="bit" />
     <Property Name="Expr7" Type="bigint" />
     <Property Name="Expr8" Type="bigint" />
-    <Property Name="Expr9" Type="bigint" Nullable="false" />
+    <Property Name="Expr9" Type="bigint" />
     <Property Name="MTitle" Type="nvarchar(max)" />
     <Property Name="MUrl" Type="nvarchar(max)" />
     <Property Name="Expr10" Type="bit" />

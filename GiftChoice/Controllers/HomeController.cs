@@ -116,28 +116,7 @@ namespace GiftChoice.Controllers
             {
                 var res =
 
-           db.VProducts.Where(m => (Keyword == "" ? true : m.ProductTitle.Contains(Keyword)) || (Keyword == "" ? true : m.Keyword.Contains(Keyword)) && m.Active == true).Select(m => new
-           {
-               m.ProductId,
-               m.MainCateId,
-               m.ProductTitle,
-               m.PLabel,
-               m.Price,
-               m.PUrl,
-               m.Qty,
-               m.Create_at,
-               m.Active,
-               m.Priority,
-               ProductImage = db.ProductImages.Where(i => i.ProductId == m.ProductId).Select(i => i.PImage).FirstOrDefault(),
-               Maincate = db.MainCateTbls.Where(p => p.MainCateId == m.MainCateId).Select(p => p.MTitle).FirstOrDefault(),
-               Submenu = db.PKeywordTbls.Where(s => s.ProductId == m.ProductId && s.Active == true).Select(s => new
-               {
-                   s.ProductId,
-                   s.KeywordId,
-                   s.PKeywordId,
-                   SubmenuTitle = db.KeywordTbls.Where(t => t.KeywordId == s.KeywordId && t.Active == true).Select(t => t.Keyword).FirstOrDefault()
-               })
-           }).OrderBy(x => Guid.NewGuid());
+           db.VProducts.Where(m => (Keyword == "" ? true : m.ProductTitle.Contains(Keyword)) || (Keyword == "" ? true : m.Keyword.Contains(Keyword)) && m.Active == true).GroupBy(m => m.ProductTitle).OrderBy(x => Guid.NewGuid());
                 return Json(res, JsonRequestBehavior.AllowGet);
             }
             else

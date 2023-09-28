@@ -186,8 +186,6 @@ warning 6002: The table/view 'giftchoice.dbo.VProduct' does not have a primary k
           <Key>
             <PropertyRef Name="ProductId" />
             <PropertyRef Name="PKeywordId" />
-            <PropertyRef Name="Expr3" />
-            <PropertyRef Name="Expr9" />
           </Key>
           <Property Name="ProductId" Type="bigint" Nullable="false" />
           <Property Name="MainCateId" Type="bigint" />
@@ -205,7 +203,7 @@ warning 6002: The table/view 'giftchoice.dbo.VProduct' does not have a primary k
           <Property Name="Expr1" Type="bigint" />
           <Property Name="KeywordId" Type="bigint" />
           <Property Name="Expr2" Type="bit" />
-          <Property Name="Expr3" Type="bigint" Nullable="false" />
+          <Property Name="Expr3" Type="bigint" />
           <Property Name="Keyword" Type="nvarchar(max)" />
           <Property Name="KUrl" Type="nvarchar(max)" />
           <Property Name="Expr4" Type="datetime" />
@@ -213,7 +211,7 @@ warning 6002: The table/view 'giftchoice.dbo.VProduct' does not have a primary k
           <Property Name="Expr6" Type="bit" />
           <Property Name="Expr7" Type="bigint" />
           <Property Name="Expr8" Type="bigint" />
-          <Property Name="Expr9" Type="bigint" Nullable="false" />
+          <Property Name="Expr9" Type="bigint" />
           <Property Name="MTitle" Type="nvarchar(max)" />
           <Property Name="MUrl" Type="nvarchar(max)" />
           <Property Name="Expr10" Type="bit" />
@@ -538,8 +536,6 @@ warning 6002: The table/view 'giftchoice.giftchoice.AutocompleteSuggestions' doe
           <Key>
             <PropertyRef Name="ProductId" />
             <PropertyRef Name="PKeywordId" />
-            <PropertyRef Name="Expr3" />
-            <PropertyRef Name="Expr9" />
           </Key>
           <Property Name="ProductId" Type="Int64" Nullable="false" />
           <Property Name="MainCateId" Type="Int64" />
@@ -557,7 +553,7 @@ warning 6002: The table/view 'giftchoice.giftchoice.AutocompleteSuggestions' doe
           <Property Name="Expr1" Type="Int64" />
           <Property Name="KeywordId" Type="Int64" />
           <Property Name="Expr2" Type="Boolean" />
-          <Property Name="Expr3" Type="Int64" Nullable="false" />
+          <Property Name="Expr3" Type="Int64" />
           <Property Name="Keyword" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="KUrl" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Expr4" Type="DateTime" Precision="3" />
@@ -565,7 +561,7 @@ warning 6002: The table/view 'giftchoice.giftchoice.AutocompleteSuggestions' doe
           <Property Name="Expr6" Type="Boolean" />
           <Property Name="Expr7" Type="Int64" />
           <Property Name="Expr8" Type="Int64" />
-          <Property Name="Expr9" Type="Int64" Nullable="false" />
+          <Property Name="Expr9" Type="Int64" />
           <Property Name="MTitle" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="MUrl" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Expr10" Type="Boolean" />

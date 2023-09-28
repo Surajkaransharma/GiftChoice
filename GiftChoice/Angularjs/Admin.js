@@ -318,7 +318,7 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
             toastr["error"]("Enter Main Category Title");
             return;
         }
-    
+
         if ($("#Priority").val() == "") {
             toastr["error"]("Enter Main Category Priority");
             return;
@@ -326,7 +326,7 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
 
 
         debugger
-    
+
         debugger
         upload({
             url: '/GiftDashBoard/SubmitMainCate',
@@ -372,6 +372,7 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
                 toastr["success"]("Main Category save successfully");
                 $scope.MainCate = null;
                 $scope.GetMainCate();
+                location.href = '/GiftDashBoard/AddMainCate';
             } else if ($scope.result.res === "2") {
                 toastr["error"]("Product already exist");
             }
@@ -389,6 +390,9 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
         for (var s = 0; s < $scope.KeywordList.length; s++) {
             var vallc1s = $scope.KeywordList[s].KeywordId;
             $('#Keyword_' + vallc1s).prop('checked', false);
+            //$('#Menu_' + vallc1s).removeAttr('checked', false).trigger("click");
+            //$('#MenuFilter_' + vallc1s).removeAttr('checked', false).trigger("click");
+            //$('#Fliter_' + vallc1s).removeAttr('checked', false).trigger("click");
 
         }
 
@@ -405,11 +409,23 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
         for (var i = 0; i < $scope.MainCate.Submenu.length; i++) {
             var vallc = $scope.MainCate.Submenu[i].KeywordId;
             $('#Keyword_' + vallc).prop('checked', true);
+            if ($scope.MainCate.Submenu[i].MenuFilter == 1) {
+             
+                $('#MenuFilter_' + vallc).attr('checked', true).trigger("click");
+            }  else if ($scope.MainCate.Submenu[i].Menu == 1) {
+                $('#Menu_' + vallc).attr('checked', true).trigger("click");
+
+            }
+            else if ($scope.MainCate.Submenu[i].Fliter == 1) {
+                $('#Fliter_' + vallc).attr('checked', true).trigger("click");
+
+            }
+
         }
 
 
         debugger
-        CKEDITOR.instances.ckeditor.setData($scope.Product.Description);
+       // CKEDITOR.instances.ckeditor.setData($scope.Product.Description);
         //ckeditor.replace('postBody');
         // $("#ckeditor").val($scope.Product.Description);
 
@@ -431,10 +447,19 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
             toastr["error"]("Enter Main Category Priority");
             return;
         }
-  
-        $.each($(".checkbox-input:checked"), function () {
-            Keywordarr.push({ 'KeywordId': $(this).val() });
-        });
+
+        //$.each($(".checkbox-input:checked"), function () {
+        //    Keywordarr.push({ 'KeywordId': $(this).val() });
+        //});
+        for (var i = 0; i < $scope.KeywordList.length; i++) {
+            var vallc = $scope.KeywordList[i].KeywordId;
+            var isChecked = $('#Keyword_' + vallc).prop('checked');
+            if (isChecked) {
+                Keywordarr.push($scope.KeywordList[i]);
+            }
+        }
+        debugger
+       
         upload({
             url: '/GiftDashBoard/UpdateMainCate',
             method: 'post',
@@ -474,6 +499,10 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
                 $scope.MainCate = null;
                 $scope.GetMainCate();
 
+/*                $scope.GetKeywordData();*/
+                //$('#edbtn').css('display', 'none');
+                //$('#btn').css('display', 'inline');
+                location.href = '/GiftDashBoard/AddMainCate';
             } else if ($scope.result.res === "2") {
                 toastr["error"]("Product already exist");
             }
@@ -765,12 +794,12 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
             toastr["error"]("Select Main Category");
             return;
         }
-   
+
         if ($("#Priority").val() == "") {
             toastr["error"]("Enter Banner Priority");
             return;
         }
-     
+
 
         debugger
         upload({
@@ -833,7 +862,7 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
             toastr["error"]("Enter Banner Priority");
             return;
         }
-     
+
         debugger
         upload({
             url: '/GiftDashBoard/UpdateBanner',

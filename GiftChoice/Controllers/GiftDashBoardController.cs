@@ -84,7 +84,7 @@ namespace GiftChoice.Controllers
             public Nullable<System.DateTime> Update_at { get; set; }
             public string MImage { get; set; }
             public HttpPostedFileBase Image { get; set; }
-        
+
             public Nullable<long> UserId { get; set; }
             public List<KeywordTbl> keywordTbls { get; set; }
         }
@@ -191,7 +191,7 @@ namespace GiftChoice.Controllers
                     db.SaveChanges();
 
                 }
-                var res = new { res = "1" , MainCateId = result.MainCateId };
+                var res = new { res = "1", MainCateId = result.MainCateId };
                 return Json(res, JsonRequestBehavior.AllowGet);
             }
             catch (Exception ex)
@@ -217,18 +217,21 @@ namespace GiftChoice.Controllers
                 }
 
 
-                var totoid = db.MCKeywordTbls.Where(p => p.MainCateId == model.MainCateId);
-                db.MCKeywordTbls.RemoveRange(totoid);
-                db.SaveChanges();
-
                 if (model.keywordTbls != null)
                 {
+                    var totoid = db.MCKeywordTbls.Where(p => p.MainCateId == model.MainCateId);
+                    db.MCKeywordTbls.RemoveRange(totoid);
+                    db.SaveChanges();
+
                     for (int i = 0; i < model.keywordTbls.Count; i++)
                     {
                         MCKeywordTbl mCKeyword = new MCKeywordTbl();
                         mCKeyword.MCkeywordId = db.MCKeywordTbls.DefaultIfEmpty().Max(r => r == null ? 0 : r.MCkeywordId) + 1;
                         mCKeyword.MainCateId = model.MainCateId;
                         mCKeyword.KeywordId = model.keywordTbls[i].KeywordId;
+                        mCKeyword.Menu = model.keywordTbls[i].Menu == "Menu" ? true : false;
+                        mCKeyword.Fliter = model.keywordTbls[i].Menu == "Fliter" ? true : false;
+                        mCKeyword.MenuFilter = model.keywordTbls[i].Menu == "MenuFilter" ? true : false;
                         mCKeyword.Active = true;
                         db.MCKeywordTbls.Add(mCKeyword);
                         db.SaveChanges();
@@ -265,6 +268,9 @@ namespace GiftChoice.Controllers
                        s.MainCateId,
                        s.KeywordId,
                        s.MCkeywordId,
+                       s.Menu,
+                       s.MenuFilter,
+                       s.Fliter,
                        SubmenuTitle = db.KeywordTbls.Where(t => t.KeywordId == s.KeywordId).Select(t => t.Keyword).FirstOrDefault()
                    })
                }).OrderBy(m => m.Priority);
@@ -298,7 +304,7 @@ namespace GiftChoice.Controllers
         }
 
 
-   
+
         public JsonResult GetKeywordData()
         {
             var res = db.KeywordTbls.Where(k => k.Active == true).Select(k => new { k.Keyword, k.Active, k.KeywordId });
@@ -519,7 +525,7 @@ namespace GiftChoice.Controllers
                     productmodel.Active = true;
                     productmodel.PUrl = model.ProductTitle.Replace(" ", "-");
                     productmodel.PDesc = model.PDesc;
-                    productmodel.PLabel = model.PLabel==null?"": model.PLabel;
+                    productmodel.PLabel = model.PLabel == null ? "" : model.PLabel;
                     productmodel.Price = model.Price;
                     productmodel.Qty = 1;
                     productmodel.Create_at = DateTime.Now;
@@ -726,7 +732,7 @@ namespace GiftChoice.Controllers
                     result.MainCateId = model.MainCateId;
                     result.ProductTitle = model.ProductTitle;
                     result.PUrl = model.ProductTitle.Replace(" ", "-");
-                    result.PLabel = model.PLabel==null?"":model.PLabel;
+                    result.PLabel = model.PLabel == null ? "" : model.PLabel;
                     result.Price = model.Price;
                     result.Update_at = DateTime.Now;
                     result.Priority = model.Priority;
@@ -1133,7 +1139,7 @@ namespace GiftChoice.Controllers
                 model.SizeId = db.SizeTbls.DefaultIfEmpty().Max(r => r == null ? 0 : r.SizeId) + 1;
 
 
-                model.SizeTitle = model.SizeTitle;              
+                model.SizeTitle = model.SizeTitle;
                 model.Create_at = DateTime.Now;
                 model.Update_at = DateTime.Now;
                 model.Active = true;
@@ -1210,29 +1216,30 @@ namespace GiftChoice.Controllers
 
                db.OrderMainTbls.Where(o => o.Active == true && o.Cancel == false).Select(m => new
                {
-                 
-                   m.RUserId,                 
+
+                   m.RUserId,
                    m.Active,
-                   m.Cancel,     
+                   m.Cancel,
                    m.MorderId,
                    m.TotalAmount,
                    m.Create_at,
-                   UserData = db.UserRegisters.Where(u => u.RUserId == m.RUserId).FirstOrDefault(),  
-                  OrderListData = db.OrderTbls.Where(p => p.MorderId == m.MorderId).Select(p => new {
-                      p.PPrice,
-                      p.PQty,
-                      p.ProductId,
-                      p.OrderId,
-                      p.MorderId,
-                      p.RUserId,
+                   UserData = db.UserRegisters.Where(u => u.RUserId == m.RUserId).FirstOrDefault(),
+                   OrderListData = db.OrderTbls.Where(p => p.MorderId == m.MorderId).Select(p => new
+                   {
+                       p.PPrice,
+                       p.PQty,
+                       p.ProductId,
+                       p.OrderId,
+                       p.MorderId,
+                       p.RUserId,
 
-                      ProductDetail = db.VProducts.Where(q => q.ProductId == p.ProductId).FirstOrDefault(),
-                      Productimage = db.ProductImages.Where(q => q.ProductId == p.ProductId == q.Active == true).Select(q => q.PImage),
+                       ProductDetail = db.VProducts.Where(q => q.ProductId == p.ProductId).FirstOrDefault(),
+                       Productimage = db.ProductImages.Where(q => q.ProductId == p.ProductId == q.Active == true).Select(q => q.PImage),
 
-                  })
-                  
-           
-               
+                   })
+
+
+
                });
             return Json(res, JsonRequestBehavior.AllowGet);
 
