@@ -122,16 +122,16 @@
                                 <nav>
                                     <ul>
                                         <li ng-repeat="n in NavbarMenuList">
-                                            <a href="/Home/shop?Main={{n.MTitle}}">{{n.MTitle}} <i ng-show="n.Submenu.length>0" class="fi-rs-angle-down"></i></a>
-                                            <ul class="sub-menu" ng-show="n.Submenu.length>0">
+                                            <a href="/Home/shop?Main={{n.BTitle}}">{{n.BTitle}} @*<i ng-show="n.Submenu.length>0" class="fi-rs-angle-down"></i>*@</a>
+                                            @*<ul class="sub-menu" ng-show="n.Submenu.length>0">
                                                 <li ng-repeat="s in n.Submenu"><a href="/Home/shop?Keyword={{s.SubmenuTitle.Keyword}}">{{s.SubmenuTitle.Keyword}}</a></li>
                                    
-                                            </ul>
+                                            </ul>*@
                                         </li>
 
                                         <li ng-show='NavbarMenuList.length>5' >    <a href="#">More Category <i class="fi-rs-angle-down"></i></a>
                                             <ul class="sub-menu more-category">
-                                               <li ng-repeat="s in ScondNavbarMenuList"><a href="/Home/shop?Main={{s.MUrl}}">{{s.MTitle}}</a></li>
+                                               <li ng-repeat="s in ScondNavbarMenuList"><a href="/Home/shop?Main={{s.BUrl}}">{{s.BTitle}}</a></li>
                                               
                                             </ul>
                                         </li>
@@ -197,21 +197,21 @@
                                 <li class="menu-item-has-children"><a href="/Home/Index">Home</a> </li>
 
                                 <li class="menu-item-has-children" ng-repeat="n in NavbarMenuList">
-                                    <span  ng-show="n.Submenu.length>0" class="menu-expand"></span><a href="/Home/shop?Main={{n.MUrl}}">{{n.MTitle}} </a>
-                                    <ul class="dropdown" ng-show="n.Submenu.length>0">
+                                    <span   class="menu-expand"></span><a href="/Home/shop?Main={{n.BUrl}}">{{n.BTitle}} </a>
+                                    @*<ul class="dropdown" ng-show="n.Submenu.length>0">
 
                                         <li ng-repeat="s in n.Submenu">
                                             <a href="/Home/shop/{{s.SubmenuTitle.KUrl}}">{{s.SubmenuTitle.Keyword}}</a>
                                         </li>
 
-                                    </ul>
+                                    </ul>*@
                                 </li>
 
                                 <li class="menu-item-has-children" ng-show="NavbarMenuList.length>5">
                                     
                                     <span class="menu-expand" ></span><a href="#">More Category</a>
                                     <ul class="dropdown">
-                                        <li ng-repeat="s in ScondNavbarMenuList"><a href="/Home/shop?Main={{s.MUrl}}">{{s.MTitle}}</a></li>
+                                        <li ng-repeat="s in ScondNavbarMenuList"><a href="/Home/shop?Main={{s.BUrl}}">{{s.BTitle}}</a></li>
 
                                     </ul>
                                 </li>

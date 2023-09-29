@@ -67,6 +67,12 @@ namespace GiftChoice.Controllers
         {
             return View();
         }
+
+        public ActionResult AddBannerMateCate()
+        {
+            return View();
+        }
+
         public ActionResult OrderList()
         {
             return View();
@@ -84,7 +90,7 @@ namespace GiftChoice.Controllers
             public Nullable<System.DateTime> Update_at { get; set; }
             public string MImage { get; set; }
             public HttpPostedFileBase Image { get; set; }
-
+            public string Menu { get; set; }
             public Nullable<long> UserId { get; set; }
             public List<KeywordTbl> keywordTbls { get; set; }
         }
@@ -298,6 +304,24 @@ namespace GiftChoice.Controllers
                        s.MCkeywordId,
                        SubmenuTitle = db.KeywordTbls.Where(t => t.KeywordId == s.KeywordId).Select(t => t.Keyword).FirstOrDefault()
                    })
+               });
+            return Json(res, JsonRequestBehavior.AllowGet);
+
+        }
+
+        public JsonResult GetBannerCategoryData()
+        {
+            db.Configuration.ProxyCreationEnabled = false;
+            var res =
+
+               db.BannerCateTbls.Select(m => new
+               {
+                   m.BannerCateId,
+                   m.BUrl,
+                   m.BTitle,
+                   m.Active,                  
+                   m.Priority,
+                  
                });
             return Json(res, JsonRequestBehavior.AllowGet);
 
@@ -1115,7 +1139,7 @@ namespace GiftChoice.Controllers
                 c.BannerId,
                 c.Priority,
                 c.BannerImage,
-                MainCate = db.MainCateTbls.Where(m => m.MainCateId == c.MainCateId).Select(m => m.MTitle).FirstOrDefault(),
+                MainCate = db.BannerCateTbls.Where(m => m.BannerCateId == c.MainCateId).Select(m => m.BTitle).FirstOrDefault(),
                 c.Active
             }).OrderBy(c => c.Priority);
             return Json(res, JsonRequestBehavior.AllowGet);
@@ -1244,5 +1268,96 @@ namespace GiftChoice.Controllers
             return Json(res, JsonRequestBehavior.AllowGet);
 
         }
+
+
+        /////// Banner CateBanner Category  
+
+        /////// Sixe Code start 
+
+        public JsonResult GetBannerCate()
+        {
+            var res = db.BannerCateTbls;
+            return Json(res, JsonRequestBehavior.AllowGet);
+
+        }
+
+        public JsonResult SubmitBannerCate(BannerCateTbl model)
+        {
+            try
+            {
+
+                model.BannerCateId = db.BannerCateTbls.DefaultIfEmpty().Max(r => r == null ? 0 : r.BannerCateId) + 1;
+
+
+                model.BTitle = model.BTitle;
+                model.BUrl = model.BTitle.Replace(" ","-");
+                model.Create_at = DateTime.Now;
+                model.Update_at = DateTime.Now;
+                model.Active = true;
+                model.Priority = model.Priority;
+                db.BannerCateTbls.Add(model);
+                db.SaveChanges();
+                var res = new { res = "1" };
+                return Json(res, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+
+                var res = new { res = "0" };
+                return Json(res, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        public JsonResult UpdateBannerCate(BannerCateTbl model)
+        {
+            try
+            {
+                var result = db.BannerCateTbls.FirstOrDefault(p => p.BannerCateId == model.BannerCateId);
+                if (result != null)
+                {
+                    result.BTitle = model.BTitle;
+                    result.BUrl = model.BTitle.Replace(" ", "-");
+                    result.Priority = model.Priority;
+                    db.SaveChanges();
+
+                }
+                var res = new { res = "1" };
+                return Json(res, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+
+                var res = new { res = "0" };
+                return Json(res, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        public JsonResult BannerActiveDeActive(int id)
+        {
+            try
+            {
+                var jb = db.BannerCateTbls.Where(c => c.BannerCateId == id).FirstOrDefault();
+                if (jb != null)
+                {
+
+                    jb.Active = jb.Active == true ? false : true;
+                    db.SaveChanges();
+                    var res = new { res = "1" };
+                    return Json(res, JsonRequestBehavior.AllowGet);
+                }
+                else
+                {
+                    var res = new { res = "2" };
+                    return Json(res, JsonRequestBehavior.AllowGet);
+                }
+            }
+            catch (Exception ex)
+            {
+                var res = new { res = "0" };
+                return Json(res, JsonRequestBehavior.AllowGet);
+            }
+
+        }
+
     }
 }

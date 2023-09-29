@@ -476,7 +476,8 @@ ul.scroll-menu {
 
 
 	.primary-menu .navbar .navbar-nav .dropdown-menu {
-		width: 14rem;
+	/*	width: 14rem;*/
+	width: auto;
 		border-radius: 10px;
 	}
 

@@ -2,6 +2,7 @@
 <Schema Namespace="GiftChoiceModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
   <EntityContainer Name="GiftChoiceEntities" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="AdminTbls" EntityType="GiftChoiceModel.AdminTbl" />
+    <EntitySet Name="BannerCateTbls" EntityType="GiftChoiceModel.BannerCateTbl" />
     <EntitySet Name="BannerTbls" EntityType="GiftChoiceModel.BannerTbl" />
     <EntitySet Name="KeywordTbls" EntityType="GiftChoiceModel.KeywordTbl" />
     <EntitySet Name="MainCateTbls" EntityType="GiftChoiceModel.MainCateTbl" />
@@ -36,6 +37,19 @@
     <Property Name="UserType" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="Active" Type="Boolean" Nullable="false" />
     <Property Name="Create_at" Type="DateTime" Nullable="false" Precision="0" />
+  </EntityType>
+  <EntityType Name="BannerCateTbl">
+    <Key>
+      <PropertyRef Name="BannerCateId" />
+    </Key>
+    <Property Name="BannerCateId" Type="Int64" Nullable="false" />
+    <Property Name="BTitle" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="BUrl" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Active" Type="Boolean" />
+    <Property Name="Priority" Type="Int64" />
+    <Property Name="Create_at" Type="DateTime" Precision="3" />
+    <Property Name="Update_at" Type="DateTime" Precision="3" />
+    <Property Name="UserId" Type="Int64" />
   </EntityType>
   <EntityType Name="BannerTbl">
     <Key>

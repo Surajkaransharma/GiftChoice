@@ -142,6 +142,9 @@
     <Compile Include="Models\AutocompleteSuggestion.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\BannerCateTbl.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\BannerTbl.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -1491,6 +1494,7 @@
     <Content Include="Views\GiftDashBoard\AddSize.cshtml" />
     <Content Include="Views\GiftChoiceWelcome\LoginGiftChoice.cshtml" />
     <Content Include="Views\GiftDashBoard\OrderList.cshtml" />
+    <Content Include="Views\GiftDashBoard\AddBannerMateCate.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

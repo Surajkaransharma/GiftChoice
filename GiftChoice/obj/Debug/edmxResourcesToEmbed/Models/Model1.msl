@@ -13,6 +13,20 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="BannerCateTbls">
+      <EntityTypeMapping TypeName="GiftChoiceModel.BannerCateTbl">
+        <MappingFragment StoreEntitySet="BannerCateTbl">
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="Update_at" ColumnName="Update_at" />
+          <ScalarProperty Name="Create_at" ColumnName="Create_at" />
+          <ScalarProperty Name="Priority" ColumnName="Priority" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+          <ScalarProperty Name="BUrl" ColumnName="BUrl" />
+          <ScalarProperty Name="BTitle" ColumnName="BTitle" />
+          <ScalarProperty Name="BannerCateId" ColumnName="BannerCateId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="BannerTbls">
       <EntityTypeMapping TypeName="GiftChoiceModel.BannerTbl">
         <MappingFragment StoreEntitySet="BannerTbl">

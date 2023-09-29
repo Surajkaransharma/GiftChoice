@@ -26,6 +26,7 @@ namespace GiftChoice.Models
         }
     
         public virtual DbSet<AdminTbl> AdminTbls { get; set; }
+        public virtual DbSet<BannerCateTbl> BannerCateTbls { get; set; }
         public virtual DbSet<BannerTbl> BannerTbls { get; set; }
         public virtual DbSet<KeywordTbl> KeywordTbls { get; set; }
         public virtual DbSet<MainCateTbl> MainCateTbls { get; set; }

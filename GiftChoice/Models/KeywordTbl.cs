@@ -28,6 +28,7 @@ namespace GiftChoice.Models
         public Nullable<bool> Active { get; set; }
         public Nullable<long> Priority { get; set; }
         public Nullable<long> UserId { get; set; }
+
         public string Menu { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<MCKeywordTbl> MCKeywordTbls { get; set; }

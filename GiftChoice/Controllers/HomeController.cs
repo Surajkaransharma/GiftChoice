@@ -317,31 +317,58 @@ namespace GiftChoice.Controllers
         }
 
 
+        //public JsonResult GetNavbarMenu()
+        //{
+        //    db.Configuration.ProxyCreationEnabled = false;
+        //    var res = new
+        //    {
+
+        //        NavbarMenuList = db.MainCateTbls.Where(m => m.Active == true).Select(m => new
+        //        {
+        //            m.MainCateId,
+        //            m.MUrl,
+        //            m.MTitle,
+        //            m.Priority,
+        //            Submenu = db.MCKeywordTbls.Where(s => s.MainCateId == m.MainCateId && s.Active == true).Select(s => new
+        //            {
+        //                s.MainCateId,
+        //                s.KeywordId,
+        //                s.MCkeywordId,
+        //                SubmenuTitle = db.KeywordTbls.Where(t => t.KeywordId == s.KeywordId).FirstOrDefault()
+        //            })
+        //        }).OrderBy(m => m.Priority).Take(6),
+        //        ScondNavbarMenuList = db.MainCateTbls.Where(m => m.Active == true).Select(m => new
+        //        {
+        //            m.MainCateId,
+        //            m.MUrl,
+        //            m.MTitle,
+        //            m.Priority,
+        //        }).OrderBy(m => m.Priority).Skip(6),
+        //    };
+
+        //    return Json(res, JsonRequestBehavior.AllowGet);
+
+        //}
+
         public JsonResult GetNavbarMenu()
         {
             db.Configuration.ProxyCreationEnabled = false;
             var res = new
             {
 
-                NavbarMenuList = db.MainCateTbls.Where(m => m.Active == true).Select(m => new
+                NavbarMenuList = db.BannerCateTbls.Where(m => m.Active == true).Select(m => new
                 {
-                    m.MainCateId,
-                    m.MUrl,
-                    m.MTitle,
+                    m.BannerCateId,
+                    m.BUrl,
+                    m.BTitle,
                     m.Priority,
-                    Submenu = db.MCKeywordTbls.Where(s => s.MainCateId == m.MainCateId && s.Active == true).Select(s => new
-                    {
-                        s.MainCateId,
-                        s.KeywordId,
-                        s.MCkeywordId,
-                        SubmenuTitle = db.KeywordTbls.Where(t => t.KeywordId == s.KeywordId).FirstOrDefault()
-                    })
+                   
                 }).OrderBy(m => m.Priority).Take(6),
-                ScondNavbarMenuList = db.MainCateTbls.Where(m => m.Active == true).Select(m => new
+                ScondNavbarMenuList = db.BannerCateTbls.Where(m => m.Active == true).Select(m => new
                 {
-                    m.MainCateId,
-                    m.MUrl,
-                    m.MTitle,
+                    m.BannerCateId,
+                    m.BUrl,
+                    m.BTitle,
                     m.Priority,
                 }).OrderBy(m => m.Priority).Skip(6),
             };

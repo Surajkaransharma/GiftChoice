@@ -1,6 +1,107 @@
 ﻿var app = angular.module("AdminApp", ['lr.upload']);
 app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function ($scope, upload, $http, $sce) {
 
+
+      //--------------Size Start->------------->---------------------->---------------------------->------->------------>---------->---
+
+    $scope.SubmitBannerCate = function () {
+        if ($("#BTitle").val() === "") {
+            toastr["error"]("Please Enter Banner Category");
+            return;
+        }
+        debugger
+        $http({
+            url: '/GiftDashBoard/SubmitBannerCate',
+            method: 'post',
+            data: $scope.BannerCate
+        }).then(function (d) {
+            $scope.result = d.data;
+            if ($scope.result.res === "1") {
+                toastr["success"]("Banner Category save successfully");
+                $scope.BannerCate = null;
+                $scope.GetBannerCate();
+
+            } else if ($scope.result.res === "2") {
+                toastr["error"]("Banner Category already exist");
+            }
+            else {
+                toastr["error"]("Banner Category not save");
+            }
+        }, function (error) {
+            toastr["error"]("Something Went Wrong");
+        });
+    };
+
+    $scope.GetBannerCatebyid = function (index) {
+        $('#btn').css('display', 'none');
+        $('#edbtn').css('display', 'inline');
+        $scope.BannerCate = $scope.BannerCateData[index];
+    };
+
+    $scope.RessetBannerCate = function () {
+        $('#btn').css('display', 'inline');
+        $('#edbtn').css('display', 'none');
+        $scope.BannerCate = null;
+    };
+
+    $scope.UpdateBannerCate = function () {
+
+        if ($("#BTitle").val() === "") {
+            toastr["error"]("Please Enter Banner Category");
+
+            return;
+        }
+        $http({
+            url: '/GiftDashBoard/UpdateBannerCate',
+            method: 'post',
+            data: $scope.BannerCate
+        }).then(function (d) {
+            $scope.result = d.data;
+            if ($scope.result.res === "1") {
+                toastr["success"]("Banner Category Update successfully");
+                $scope.BannerCate = null;
+                $scope.RessetBannerCate();
+                $scope.GetBannerCate();
+            }
+            else {
+                toastr["error"]("Banner Category not save");
+            }
+        }, function (error) {
+            toastr["error"]("Something Went Wrong");
+        });
+    };
+
+    $scope.BannerActiveDeActive = function (id) {
+        $http.get("/GiftDashBoard/BannerActiveDeActive?id=" + id).then(function (d) {
+            $scope.rees = d.data;
+            if ($scope.rees.res === "1") {
+                toastr["success"]("successful");
+                $scope.GetBannerCate();
+            }
+            else {
+                toastr["error"]("something went wrong   ");
+            }
+
+
+        }, function (error) {
+            alert(error.data);
+        });
+    };
+
+    $scope.GetBannerCate = function () {
+        $http.get("/GiftDashBoard/GetBannerCate").then(function (d) {
+            $scope.BannerCateData = d.data;
+            debugger
+        }, function (error) {
+            alert(error.data);
+        });
+    };
+
+      //--------------Size End->------------->---------------------->---------------------------->------->------------>---------->---
+
+
+
+
     ///////  Add Product Start 
 
     $scope.MainCateKeyword = function (MainCateId) {
@@ -646,6 +747,14 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
     $scope.GetMainCateData = function () {
         $http.get("/GiftDashBoard/GetMainCateData").then(function (d) {
             $scope.MainCateData = d.data;
+        }, function (error) {
+            alert(error.data);
+        });
+    };
+
+    $scope.GetBannerCategoryData = function () {
+        $http.get("/GiftDashBoard/GetBannerCategoryData").then(function (d) {
+            $scope.BannerCateData = d.data;
         }, function (error) {
             alert(error.data);
         });

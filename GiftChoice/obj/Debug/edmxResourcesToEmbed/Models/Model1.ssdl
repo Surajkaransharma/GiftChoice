@@ -11,6 +11,19 @@
     <Property Name="Active" Type="bit" Nullable="false" />
     <Property Name="Create_at" Type="date" Nullable="false" />
   </EntityType>
+  <EntityType Name="BannerCateTbl">
+    <Key>
+      <PropertyRef Name="BannerCateId" />
+    </Key>
+    <Property Name="BannerCateId" Type="bigint" Nullable="false" />
+    <Property Name="BTitle" Type="nvarchar(max)" />
+    <Property Name="BUrl" Type="nvarchar(max)" />
+    <Property Name="Active" Type="bit" />
+    <Property Name="Priority" Type="bigint" />
+    <Property Name="Create_at" Type="datetime" />
+    <Property Name="Update_at" Type="datetime" />
+    <Property Name="UserId" Type="bigint" />
+  </EntityType>
   <EntityType Name="BannerTbl">
     <Key>
       <PropertyRef Name="BannerId" />
@@ -252,6 +265,7 @@ warning 6002: The table/view 'giftchoice.giftchoice.AutocompleteSuggestions' doe
   </Association>
   <EntityContainer Name="GiftChoiceModelStoreContainer">
     <EntitySet Name="AdminTbl" EntityType="Self.AdminTbl" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="BannerCateTbl" EntityType="Self.BannerCateTbl" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="BannerTbl" EntityType="Self.BannerTbl" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="KeywordTbl" EntityType="Self.KeywordTbl" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="MainCateTbl" EntityType="Self.MainCateTbl" Schema="dbo" store:Type="Tables" />
