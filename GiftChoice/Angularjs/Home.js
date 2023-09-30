@@ -121,13 +121,13 @@ app.controller("HomeController", ['$scope', '$http', '$sce','orderByFilter', fun
                     var label = ui.item.label;
                     var value = ui.item.value;
 
-                    for (var i = 0; i < d.data.KeyWordList.length; i++) {
-                        if (label === d.data.KeyWordList[i].label) {
-                            //   window.location.href = '/Home/Shop?Keyword=' + d.data.KeyWordList[i].KUrl;
-                            $scope.KeyWords = d.data.KeyWordList[i].KUrl;
-                            $scope.SearchDataShop($scope.KeyWords);
-                        }
-                    }
+                    //for (var i = 0; i < d.data.KeyWordList.length; i++) {
+                    //    if (label === d.data.KeyWordList[i].label) {
+                    //        //   window.location.href = '/Home/Shop?Keyword=' + d.data.KeyWordList[i].KUrl;
+                    //        $scope.KeyWords = d.data.KeyWordList[i].KUrl;
+                           $scope.SearchDataShop();
+                    //    }
+                    //}
 
                     event.preventDefault();
                     $(this).val('');
@@ -144,7 +144,9 @@ app.controller("HomeController", ['$scope', '$http', '$sce','orderByFilter', fun
         });
 
     };
-    $scope.SearchDataShop = function (id) {
+    $scope.SearchDataShop = function () {
+        debugger
+        var id = $("#Keyword").val();
         $http({
             url: '/Home/SearchDataShop',
             method: 'POST',
@@ -164,7 +166,7 @@ app.controller("HomeController", ['$scope', '$http', '$sce','orderByFilter', fun
 
     };
     $scope.GetRandomKeywordMobile = function () {
-
+        debugger
         $("#MKeyword").addClass('ui-autocomplete-loader-center');
         $http.get("/Home/GetRandomKeyword?id=" + $scope.Keyword).then(function (d) {
           
@@ -176,12 +178,12 @@ app.controller("HomeController", ['$scope', '$http', '$sce','orderByFilter', fun
                     var label = ui.item.label;
                     var value = ui.item.value;
 
-                    for (var i = 0; i < d.data.KeyWordList.length; i++) {
-                        if (label === d.data.KeyWordList[i].label) {
-                            location.href = '/Home/Shop?Keyword=' + d.data.KeyWordList[i].KUrl;
-                            return;
-                        }
-                    }
+                    //for (var i = 0; i < d.data.KeyWordList.length; i++) {
+                    //    if (label === d.data.KeyWordList[i].label) {
+                    //        location.href = '/Home/Shop?Keyword=' + d.data.KeyWordList[i].KUrl;
+                    //        return;
+                    //    }
+                    //}
 
                     event.preventDefault();
                     $(this).val('');

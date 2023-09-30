@@ -2,6 +2,7 @@
 <Schema Namespace="GiftChoiceModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
   <EntityContainer Name="GiftChoiceEntities" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="AdminTbls" EntityType="GiftChoiceModel.AdminTbl" />
+    <EntitySet Name="BannerCateTbls" EntityType="GiftChoiceModel.BannerCateTbl" />
     <EntitySet Name="BannerTbls" EntityType="GiftChoiceModel.BannerTbl" />
     <EntitySet Name="KeywordTbls" EntityType="GiftChoiceModel.KeywordTbl" />
     <EntitySet Name="MainCateTbls" EntityType="GiftChoiceModel.MainCateTbl" />
@@ -16,6 +17,7 @@
     <EntitySet Name="SliderTbls" EntityType="GiftChoiceModel.SliderTbl" />
     <EntitySet Name="UserRegisters" EntityType="GiftChoiceModel.UserRegister" />
     <EntitySet Name="VProducts" EntityType="GiftChoiceModel.VProduct" />
+    <EntitySet Name="AutocompleteSuggestions" EntityType="GiftChoiceModel.AutocompleteSuggestion" />
     <AssociationSet Name="FK__MCKeyword__Keywo__52593CB8" Association="GiftChoiceModel.FK__MCKeyword__Keywo__52593CB8">
       <End Role="KeywordTbl" EntitySet="KeywordTbls" />
       <End Role="MCKeywordTbl" EntitySet="MCKeywordTbls" />
@@ -35,6 +37,19 @@
     <Property Name="UserType" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="Active" Type="Boolean" Nullable="false" />
     <Property Name="Create_at" Type="DateTime" Nullable="false" Precision="0" />
+  </EntityType>
+  <EntityType Name="BannerCateTbl">
+    <Key>
+      <PropertyRef Name="BannerCateId" />
+    </Key>
+    <Property Name="BannerCateId" Type="Int64" Nullable="false" />
+    <Property Name="BTitle" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="BUrl" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Active" Type="Boolean" />
+    <Property Name="Priority" Type="Int64" />
+    <Property Name="Create_at" Type="DateTime" Precision="3" />
+    <Property Name="Update_at" Type="DateTime" Precision="3" />
+    <Property Name="UserId" Type="Int64" />
   </EntityType>
   <EntityType Name="BannerTbl">
     <Key>
@@ -86,6 +101,9 @@
     <Property Name="MainCateId" Type="Int64" />
     <Property Name="KeywordId" Type="Int64" />
     <Property Name="Active" Type="Boolean" />
+    <Property Name="Menu" Type="Boolean" />
+    <Property Name="Fliter" Type="Boolean" />
+    <Property Name="MenuFilter" Type="Boolean" />
     <NavigationProperty Name="KeywordTbl" Relationship="GiftChoiceModel.FK__MCKeyword__Keywo__52593CB8" FromRole="MCKeywordTbl" ToRole="KeywordTbl" />
     <NavigationProperty Name="MainCateTbl" Relationship="GiftChoiceModel.FK__MCKeyword__MainC__534D60F1" FromRole="MCKeywordTbl" ToRole="MainCateTbl" />
   </EntityType>
@@ -205,8 +223,6 @@
     <Key>
       <PropertyRef Name="ProductId" />
       <PropertyRef Name="PKeywordId" />
-      <PropertyRef Name="Expr3" />
-      <PropertyRef Name="Expr9" />
     </Key>
     <Property Name="ProductId" Type="Int64" Nullable="false" />
     <Property Name="MainCateId" Type="Int64" />
@@ -224,7 +240,7 @@
     <Property Name="Expr1" Type="Int64" />
     <Property Name="KeywordId" Type="Int64" />
     <Property Name="Expr2" Type="Boolean" />
-    <Property Name="Expr3" Type="Int64" Nullable="false" />
+    <Property Name="Expr3" Type="Int64" />
     <Property Name="Keyword" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="KUrl" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="Expr4" Type="DateTime" Precision="3" />
@@ -232,7 +248,7 @@
     <Property Name="Expr6" Type="Boolean" />
     <Property Name="Expr7" Type="Int64" />
     <Property Name="Expr8" Type="Int64" />
-    <Property Name="Expr9" Type="Int64" Nullable="false" />
+    <Property Name="Expr9" Type="Int64" />
     <Property Name="MTitle" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="MUrl" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="Expr10" Type="Boolean" />
@@ -242,6 +258,13 @@
     <Property Name="Expr12" Type="DateTime" Precision="3" />
     <Property Name="Expr14" Type="DateTime" Precision="3" />
     <Property Name="Qty" Type="Int64" />
+  </EntityType>
+  <EntityType Name="AutocompleteSuggestion">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int64" Nullable="false" />
+    <Property Name="Suggestion" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
   </EntityType>
   <Association Name="FK__MCKeyword__Keywo__52593CB8">
     <End Type="GiftChoiceModel.KeywordTbl" Role="KeywordTbl" Multiplicity="0..1" />

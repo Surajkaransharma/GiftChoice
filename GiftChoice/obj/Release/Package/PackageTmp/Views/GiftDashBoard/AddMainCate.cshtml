@@ -26,7 +26,7 @@
 
         </div>
         <div class="row">
-            <div class="col-xl-4">
+            <div class="col-xl-5">
 
                 <div class="card">
                     <div class="card-body p-4">
@@ -92,19 +92,51 @@
 
                             <div class="col-md-12">
                                 <label for="input1" class="form-label">Priority</label>
-                                <input type="number"  id="Priority" class="form-control" ng-model="MainCate.Priority"  placeholder="Priority">
+                                <input type="number" id="Priority" class="form-control" ng-model="MainCate.Priority" placeholder="Priority">
                             </div>
                             <div class="col-md-12" ng-init="GetKeywordData()">
                                 <label for="input1" class="form-label">Select Keyword</label>
-                                <div class="" id="check_box">
-                                    <label class="checkbox-wrapper" ng-repeat="k in KeywordList">
-                                        <input type="checkbox" id="Keyword_{{k.KeywordId}}" class="checkbox-input" value="{{k.KeywordId}}" ng-model="k.Selected" ng-checked="" />
-                                        <span class="checkbox-tile">
-                                            <span class="checkbox-label">{{k.Keyword}}</span>
-                                        </span>
-                                    </label>
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>Keyword</th>
+                                            <th>Menu Show</th>
+                                            <th>Filter Show</th>
+                                            <th>Menu/Filter Show</th>
 
-                                </div>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="k in KeywordList">
+                                            <td>
+                                                <div class="" id="check_box">
+                                                    <label class="checkbox-wrapper">
+                                                        <input type="checkbox" id="Keyword_{{k.KeywordId}}" class="checkbox-input" value="{{k.KeywordId}}" ng-model="k.Selected" ng-checked="" />
+                                                        <span class="checkbox-tile">
+                                                            <span class="checkbox-label">{{k.Keyword}}</span>
+                                                        </span>
+                                                    </label>
+                                                </div>
+                                            </td>
+                                            <td> <input type="radio" ng-model="k.Menu" name="m_{{k.KeywordId}}" class="Menu" id="Menu_{{k.KeywordId}}" value="Menu" /> </td>
+                                            <td> <input type="radio" ng-model="k.Menu" name="m_{{k.KeywordId}}" class="Menu" id="Fliter_{{k.KeywordId}}" value="Fliter" ng-checked="true" /> </td>
+                                            <td> <input type="radio" ng-model="k.Menu" name="m_{{k.KeywordId}}" class="Menu" id="MenuFilter_{{k.KeywordId}}" value="MenuFilter" /> </td>
+
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                @*<div class="" id="check_box">
+                                                <label class="checkbox-wrapper" ng-repeat="k in KeywordList">
+                                                    <input type="checkbox" id="Keyword_{{k.KeywordId}}" class="checkbox-input" value="{{k.KeywordId}}" ng-model="k.Selected" ng-checked="" />
+                                                    <span class="checkbox-tile">
+                                                        <span class="checkbox-label">{{k.Keyword}}</span>
+                                                    </span>
+                                                </label>
+      
+
+                                            </div>*@
                             </div>
 
                             @*<div class="col-md-4">
@@ -129,7 +161,7 @@
                 </div>
 
             </div>
-            <div class="col-xl-8">
+            <div class="col-xl-7">
                 <div class="card">
                     <div class="card-body">
                         <div class="d-lg-flex align-items-center mb-4 gap-3">

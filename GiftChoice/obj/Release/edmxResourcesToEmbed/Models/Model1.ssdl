@@ -11,6 +11,19 @@
     <Property Name="Active" Type="bit" Nullable="false" />
     <Property Name="Create_at" Type="date" Nullable="false" />
   </EntityType>
+  <EntityType Name="BannerCateTbl">
+    <Key>
+      <PropertyRef Name="BannerCateId" />
+    </Key>
+    <Property Name="BannerCateId" Type="bigint" Nullable="false" />
+    <Property Name="BTitle" Type="nvarchar(max)" />
+    <Property Name="BUrl" Type="nvarchar(max)" />
+    <Property Name="Active" Type="bit" />
+    <Property Name="Priority" Type="bigint" />
+    <Property Name="Create_at" Type="datetime" />
+    <Property Name="Update_at" Type="datetime" />
+    <Property Name="UserId" Type="bigint" />
+  </EntityType>
   <EntityType Name="BannerTbl">
     <Key>
       <PropertyRef Name="BannerId" />
@@ -59,6 +72,9 @@
     <Property Name="MainCateId" Type="bigint" />
     <Property Name="KeywordId" Type="bigint" />
     <Property Name="Active" Type="bit" />
+    <Property Name="Menu" Type="bit" />
+    <Property Name="Fliter" Type="bit" />
+    <Property Name="MenuFilter" Type="bit" />
   </EntityType>
   <EntityType Name="OrderMainTbl">
     <Key>
@@ -178,8 +194,6 @@ warning 6002: The table/view 'giftchoice.dbo.VProduct' does not have a primary k
     <Key>
       <PropertyRef Name="ProductId" />
       <PropertyRef Name="PKeywordId" />
-      <PropertyRef Name="Expr3" />
-      <PropertyRef Name="Expr9" />
     </Key>
     <Property Name="ProductId" Type="bigint" Nullable="false" />
     <Property Name="MainCateId" Type="bigint" />
@@ -197,7 +211,7 @@ warning 6002: The table/view 'giftchoice.dbo.VProduct' does not have a primary k
     <Property Name="Expr1" Type="bigint" />
     <Property Name="KeywordId" Type="bigint" />
     <Property Name="Expr2" Type="bit" />
-    <Property Name="Expr3" Type="bigint" Nullable="false" />
+    <Property Name="Expr3" Type="bigint" />
     <Property Name="Keyword" Type="nvarchar(max)" />
     <Property Name="KUrl" Type="nvarchar(max)" />
     <Property Name="Expr4" Type="datetime" />
@@ -205,7 +219,7 @@ warning 6002: The table/view 'giftchoice.dbo.VProduct' does not have a primary k
     <Property Name="Expr6" Type="bit" />
     <Property Name="Expr7" Type="bigint" />
     <Property Name="Expr8" Type="bigint" />
-    <Property Name="Expr9" Type="bigint" Nullable="false" />
+    <Property Name="Expr9" Type="bigint" />
     <Property Name="MTitle" Type="nvarchar(max)" />
     <Property Name="MUrl" Type="nvarchar(max)" />
     <Property Name="Expr10" Type="bit" />
@@ -215,6 +229,15 @@ warning 6002: The table/view 'giftchoice.dbo.VProduct' does not have a primary k
     <Property Name="Expr12" Type="datetime" />
     <Property Name="Expr14" Type="datetime" />
     <Property Name="Qty" Type="bigint" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'giftchoice.giftchoice.AutocompleteSuggestions' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="AutocompleteSuggestions">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="bigint" Nullable="false" />
+    <Property Name="Suggestion" Type="nvarchar(max)" />
   </EntityType>
   <Association Name="FK__MCKeyword__Keywo__52593CB8">
     <End Role="KeywordTbl" Type="Self.KeywordTbl" Multiplicity="0..1" />
@@ -242,6 +265,7 @@ warning 6002: The table/view 'giftchoice.dbo.VProduct' does not have a primary k
   </Association>
   <EntityContainer Name="GiftChoiceModelStoreContainer">
     <EntitySet Name="AdminTbl" EntityType="Self.AdminTbl" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="BannerCateTbl" EntityType="Self.BannerCateTbl" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="BannerTbl" EntityType="Self.BannerTbl" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="KeywordTbl" EntityType="Self.KeywordTbl" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="MainCateTbl" EntityType="Self.MainCateTbl" Schema="dbo" store:Type="Tables" />
@@ -292,6 +316,12 @@ warning 6002: The table/view 'giftchoice.dbo.VProduct' does not have a primary k
     [VProduct].[Expr14] AS [Expr14], 
     [VProduct].[Qty] AS [Qty]
     FROM [dbo].[VProduct] AS [VProduct]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="AutocompleteSuggestions" EntityType="Self.AutocompleteSuggestions" store:Type="Views" store:Schema="giftchoice">
+      <DefiningQuery>SELECT 
+    [AutocompleteSuggestions].[ID] AS [ID], 
+    [AutocompleteSuggestions].[Suggestion] AS [Suggestion]
+    FROM [giftchoice].[AutocompleteSuggestions] AS [AutocompleteSuggestions]</DefiningQuery>
     </EntitySet>
     <AssociationSet Name="FK__MCKeyword__Keywo__52593CB8" Association="Self.FK__MCKeyword__Keywo__52593CB8">
       <End Role="KeywordTbl" EntitySet="KeywordTbl" />

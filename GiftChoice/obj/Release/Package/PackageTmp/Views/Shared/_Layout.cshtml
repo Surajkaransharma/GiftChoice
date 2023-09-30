@@ -41,7 +41,7 @@
                         <div class="col-xl-9 col-lg-9">
                             <div class="header-info">
                                 <ul>
-                                  <li><i class="fi-rs-marker"></i><a href="https://goo.gl/maps/kRtQzQX6ASj5CYfJ7">Bhilwara Furniture House Near Sitaram Ji Ki Bawri, Bhilwara,311001- Rajasthan, INDIA</a></li>
+                                    <li><i class="fi-rs-marker"></i><a href="https://goo.gl/maps/kRtQzQX6ASj5CYfJ7">Bhilwara Furniture House Near Sitaram Ji Ki Bawri, Bhilwara,311001- Rajasthan, INDIA</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -88,10 +88,12 @@
                             <a href="/Home/Index"><img src="~/Content/assets/imgs/resources/gift-choice-vertical.png" alt="logo"></a>
                         </div>
                         <div class="header-right">
-                            <div class="search-style-2" style="width: 75% !important">
+                            <div class="search-style-2">
 
-                       
-                                <input type="text" id="Keyword" placeholder="Search for items..." ng-model="Keyword" ng-change="GetRandomKeyword()" class="w-100">
+                                <form ng-submit="SearchDataShop()">
+
+                                    <input type="text" id="Keyword" placeholder="Search for items..." ng-model="Keyword" ng-change="GetRandomKeyword()" class="w-100">
+                                </form>
 
                             </div>
                             <div class="header-action-right">
@@ -122,17 +124,18 @@
                                 <nav>
                                     <ul>
                                         <li ng-repeat="n in NavbarMenuList">
-                                            <a href="/Home/shop?Main={{n.MUrl}}">{{n.MTitle}} <i ng-show="n.Submenu.length>0" class="fi-rs-angle-down"></i></a>
-                                            <ul class="sub-menu" ng-show="n.Submenu.length>0">
-                                                <li ng-repeat="s in n.Submenu"><a href="/Home/shop?Keyword={{s.SubmenuTitle.KUrl}}">{{s.SubmenuTitle.Keyword}}</a></li>
-                                   
-                                            </ul>
+                                            <a href="/Home/shop?Main={{n.MTitle}}">{{n.MTitle}} @*<i ng-show="n.Submenu.length>0" class="fi-rs-angle-down"></i>*@</a>
+                                            @*<ul class="sub-menu" ng-show="n.Submenu.length>0">
+                                                    <li ng-repeat="s in n.Submenu"><a href="/Home/shop?Keyword={{s.SubmenuTitle.Keyword}}">{{s.SubmenuTitle.Keyword}}</a></li>
+
+                                                </ul>*@
                                         </li>
 
-                                        <li ng-show='NavbarMenuList.length>5' >    <a href="#">More Category <i class="fi-rs-angle-down"></i></a>
+                                        <li ng-show='NavbarMenuList.length>5'>
+                                            <a href="#">More Category <i class="fi-rs-angle-down"></i></a>
                                             <ul class="sub-menu more-category">
-                                               <li ng-repeat="s in ScondNavbarMenuList"><a href="/Home/shop?Main={{s.MUrl}}">{{s.MTitle}}</a></li>
-                                              
+                                                <li ng-repeat="s in ScondNavbarMenuList"><a href="/Home/shop?Main={{s.MTitle}}">{{s.MTitle}}</a></li>
+
                                             </ul>
                                         </li>
                                         <li><a href="/Home/Contact">Contact Us</a></li>
@@ -164,11 +167,14 @@
             <div class="searchbar-section d-lg-none d-sm-block d-block pt-3 pb-3">
                 <div class="container-fluid">
                     <div class="search-style-3">
-                        <div class="mb-0">
-                         
+
+                        <form ng-submit="SearchDataShop()" class="mb-0">
+                  
                             <input type="text" placeholder="Search for items…" id="MKeyword" ng-model="Keyword" ng-change="GetRandomKeywordMobile()">
-                     
-                        </div>
+                            <button type="submit"><i class="fi-rs-search"></i></button>
+                        </form>
+
+
                     </div>
                 </div>
             </div>
@@ -197,21 +203,21 @@
                                 <li class="menu-item-has-children"><a href="/Home/Index">Home</a> </li>
 
                                 <li class="menu-item-has-children" ng-repeat="n in NavbarMenuList">
-                                    <span  ng-show="n.Submenu.length>0" class="menu-expand"></span><a href="/Home/shop?Main={{n.MUrl}}">{{n.MTitle}} </a>
-                                    <ul class="dropdown" ng-show="n.Submenu.length>0">
+                                    <span class="menu-expand"></span><a href="/Home/shop?Main={{n.MTitle}}">{{n.MTitle}} </a>
+                                    @*<ul class="dropdown" ng-show="n.Submenu.length>0">
 
-                                        <li ng-repeat="s in n.Submenu">
-                                            <a href="/Home/shop/{{s.SubmenuTitle.KUrl}}">{{s.SubmenuTitle.Keyword}}</a>
-                                        </li>
+                                            <li ng-repeat="s in n.Submenu">
+                                                <a href="/Home/shop/{{s.SubmenuTitle.KUrl}}">{{s.SubmenuTitle.Keyword}}</a>
+                                            </li>
 
-                                    </ul>
+                                        </ul>*@
                                 </li>
 
                                 <li class="menu-item-has-children" ng-show="NavbarMenuList.length>5">
-                                    
-                                    <span class="menu-expand" ></span><a href="#">More Category</a>
+
+                                    <span class="menu-expand"></span><a href="#">More Category</a>
                                     <ul class="dropdown">
-                                        <li ng-repeat="s in ScondNavbarMenuList"><a href="/Home/shop?Main={{s.MUrl}}">{{s.MTitle}}</a></li>
+                                        <li ng-repeat="s in ScondNavbarMenuList"><a href="/Home/shop?Main={{s.MTitle}}">{{s.MTitle}}</a></li>
 
                                     </ul>
                                 </li>

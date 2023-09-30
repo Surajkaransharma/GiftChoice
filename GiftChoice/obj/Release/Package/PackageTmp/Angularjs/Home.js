@@ -112,7 +112,7 @@ app.controller("HomeController", ['$scope', '$http', '$sce','orderByFilter', fun
 
         $("#Keyword").addClass('ui-autocomplete-loader-center');
         $http.get("/Home/GetRandomKeyword?id=" + $scope.Keyword).then(function (d) {
-            debugger
+            
             $("#Keyword").removeClass('ui-autocomplete-loader-center');
 
             $("#Keyword").autocomplete({
@@ -121,12 +121,13 @@ app.controller("HomeController", ['$scope', '$http', '$sce','orderByFilter', fun
                     var label = ui.item.label;
                     var value = ui.item.value;
 
-                    for (var i = 0; i < d.data.KeyWordList.length; i++) {
-                        if (label === d.data.KeyWordList[i].label) {
-                            location.href = '/Home/Shop?Keyword=' + d.data.KeyWordList[i].KUrl;
-                            return;
-                        }
-                    }
+                    //for (var i = 0; i < d.data.KeyWordList.length; i++) {
+                    //    if (label === d.data.KeyWordList[i].label) {
+                    //        //   window.location.href = '/Home/Shop?Keyword=' + d.data.KeyWordList[i].KUrl;
+                    //        $scope.KeyWords = d.data.KeyWordList[i].KUrl;
+                           $scope.SearchDataShop();
+                    //    }
+                    //}
 
                     event.preventDefault();
                     $(this).val('');
@@ -143,9 +144,29 @@ app.controller("HomeController", ['$scope', '$http', '$sce','orderByFilter', fun
         });
 
     };
+    $scope.SearchDataShop = function () {
+        debugger
+        var id = $("#Keyword").val();
+        $http({
+            url: '/Home/SearchDataShop',
+            method: 'POST',
+            data: {
+                Keyword: id
+             
+            }
+        }).then(function (d) {
+            debugger
+            $scope.result = d.data.Keywords;
+            debugger
+          
+            location.href = '/Home/Shop?Keyword=' + $scope.result;
+        }, function (error) {
+            alert(error.data);
+        });
 
+    };
     $scope.GetRandomKeywordMobile = function () {
-
+        debugger
         $("#MKeyword").addClass('ui-autocomplete-loader-center');
         $http.get("/Home/GetRandomKeyword?id=" + $scope.Keyword).then(function (d) {
           
@@ -157,12 +178,12 @@ app.controller("HomeController", ['$scope', '$http', '$sce','orderByFilter', fun
                     var label = ui.item.label;
                     var value = ui.item.value;
 
-                    for (var i = 0; i < d.data.KeyWordList.length; i++) {
-                        if (label === d.data.KeyWordList[i].label) {
-                            location.href = '/Home/Shop?Keyword=' + d.data.KeyWordList[i].KUrl;
-                            return;
-                        }
-                    }
+                    //for (var i = 0; i < d.data.KeyWordList.length; i++) {
+                    //    if (label === d.data.KeyWordList[i].label) {
+                    //        location.href = '/Home/Shop?Keyword=' + d.data.KeyWordList[i].KUrl;
+                    //        return;
+                    //    }
+                    //}
 
                     event.preventDefault();
                     $(this).val('');
@@ -412,9 +433,9 @@ app.controller("HomeController", ['$scope', '$http', '$sce','orderByFilter', fun
         });
     };
 
-    $scope.FilterProduct = function (Keyword, Main) {
+    $scope.FilterProduct = function () {
         debugger
-        $http.get("/Home/FilterProduct?Keyword=" + Keyword + '&Main=' + Main).then(function (d) {
+        $http.get("/Home/FilterProduct").then(function (d) {
             debugger
             $scope.ProductData = d.data;
         }, function (error) {

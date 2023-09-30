@@ -3,10 +3,6 @@
     ViewBag.Title = "AddBanner";
     Layout = "~/Views/Shared/_Admin.cshtml";
 }
-
-
-
-
 <style>
      img {
         width: 50px
@@ -37,11 +33,11 @@
 
                         <form class="row g-3" enctype="multipart/form-data">
                             <div class="col-md-12">
-                                <label for="input1" class="form-label">Select Main Category</label>
+                                <label for="input1" class="form-label">Select Banner Category</label>
 
-                                <select id="MainCateSelect" class="form-select" ng-init="GetMainCateData()" ng-model="Banner.MainCateId">
-                                    <option  ng-selected="true" value="-1">Select Main Category</option>
-                                    <option ng-repeat="m in MainCateData" value="{{m.MainCateId}}">{{m.MTitle}}</option>
+                                <select id="MainCateSelect" class="form-select" ng-init="GetBannerCategoryData()" ng-model="Banner.MainCateId">
+                                    <option ng-selected="true" value="-1">Select Banner Category</option>
+                                    <option ng-repeat="m in BannerCateData" value="{{m.BannerCateId}}">{{m.BTitle}}</option>
                                 </select>
 
 
@@ -138,7 +134,7 @@
                                 <thead class="table-light">
                                     <tr>
                                         <th>S.No.</th>
-                                        <th>Main Category Name</th>
+                                        <th>Banner Category Name</th>
                                         <th>Priority</th>
                                         <th>Image</th>
                                         <th>Active</th>
