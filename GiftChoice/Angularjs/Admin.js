@@ -238,11 +238,14 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
 
 
         debugger;
-        for (var i = 0; i < $scope.KeywordList.length; i++) {
-            if ($scope.KeywordList[i].Selected) {
-                Keywordarr.push($scope.KeywordList[i]);
-            }
-        }
+        //for (var i = 0; i < $scope.KeywordList.length; i++) {
+        //    if ($scope.KeywordList[i].Selected) {
+        //        Keywordarr.push($scope.KeywordList[i]);
+        //    }
+        //}
+        $.each($(".checkbox-input:checked"), function () {
+            Keywordarr.push({ 'KeywordId': $(this).val() });
+        });
         for (var i = 0; i < $scope.SizeList.length; i++) {
             if ($scope.SizeList[i].Selected) {
                 PSizeArr.push($scope.SizeList[i]);

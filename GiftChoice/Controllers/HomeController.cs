@@ -37,7 +37,7 @@ namespace GiftChoice.Controllers
             db.Configuration.ProxyCreationEnabled = false;
             var res =
 
-               db.MainCateTbls.Select(m => new
+               db.MainCateTbls.Where(m => m.Active == true).Select(m => new
                {
                    m.MainCateId,
                    m.MUrl,

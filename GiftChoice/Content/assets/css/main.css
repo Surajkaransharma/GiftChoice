@@ -10061,3 +10061,22 @@ span.fi-rs-apps {
 }
 }
 /*# sourceMappingURL=main.css.map */
+
+
+/* #New Updates Changes */
+.category-section .col {
+    width: 12.5%;
+    flex: unset !important;
+}
+
+@media only screen and (max-width : 992px) {
+    .category-section .col {
+        width: 33.33%;
+    }
+}
+
+@media only screen and (device-width : 768px) and (device-height : 1024px) and (orientation : portrait) {
+    .category-section .col {
+        width: 20%;
+    }
+}

@@ -328,97 +328,97 @@ app.controller("HomeController", ['$scope', '$http', '$sce','orderByFilter', fun
         $http.get("/Home/GetMainCateData").then(function (d) {
             $scope.MainCateData = d.data;
             debugger
-            setTimeout(() => {
-                $(".carausel-6-columns").each(function (key, item) {
-                    var id = $(this).attr("id");
-                    var sliderID = '#' + id;
-                    var appendArrowsClassName = '#' + id + '-arrows'
+            //setTimeout(() => {
+            //    $(".carausel-6-columns").each(function (key, item) {
+            //        var id = $(this).attr("id");
+            //        var sliderID = '#' + id;
+            //        var appendArrowsClassName = '#' + id + '-arrows'
 
-                    $(sliderID).slick({
-                        dots: false,
-                        infinite: true,
-                        speed: 400,
-                        arrows: true,
-                        autoplay: true,
-                        slidesToShow: 8,
-                        slidesToScroll: 2,
-                        loop: true,
-                        adaptiveHeight: true,
-                        responsive: [
-                            {
-                                breakpoint: 1025,
-                                settings: {
-                                    slidesToShow: 4,
-                                    slidesToScroll: 2,
-                                }
-                            },
-                            {
-                                breakpoint: 768,
-                                settings: {
-                                    slidesToShow: 3,
-                                    slidesToScroll: 2,
-                                }
-                            },
-                            {
-                                breakpoint: 480,
-                                settings: {
-                                    slidesToShow: 3,
-                                    slidesToScroll: 2
-                                }
-                            }
-                        ],
-                        prevArrow: '<span class="slider-btn slider-prev"><i class="fi-rs-angle-left"></i></span>',
-                        nextArrow: '<span class="slider-btn slider-next"><i class="fi-rs-angle-right"></i></span>',
-                        appendArrows: (appendArrowsClassName),
-                    });
-                });
+            //        $(sliderID).slick({
+            //            dots: false,
+            //            infinite: true,
+            //            speed: 400,
+            //            arrows: true,
+            //            autoplay: true,
+            //            slidesToShow: 8,
+            //            slidesToScroll: 2,
+            //            loop: true,
+            //            adaptiveHeight: true,
+            //            responsive: [
+            //                {
+            //                    breakpoint: 1025,
+            //                    settings: {
+            //                        slidesToShow: 4,
+            //                        slidesToScroll: 2,
+            //                    }
+            //                },
+            //                {
+            //                    breakpoint: 768,
+            //                    settings: {
+            //                        slidesToShow: 3,
+            //                        slidesToScroll: 2,
+            //                    }
+            //                },
+            //                {
+            //                    breakpoint: 480,
+            //                    settings: {
+            //                        slidesToShow: 3,
+            //                        slidesToScroll: 2
+            //                    }
+            //                }
+            //            ],
+            //            prevArrow: '<span class="slider-btn slider-prev"><i class="fi-rs-angle-left"></i></span>',
+            //            nextArrow: '<span class="slider-btn slider-next"><i class="fi-rs-angle-right"></i></span>',
+            //            appendArrows: (appendArrowsClassName),
+            //        });
+            //    });
 
-                $(".carausel-6-columns").each(function (key, item) {
-                    var id = $(this).attr("id");
-                    var sliderID = '#' + id;
-                    var appendArrowsClassName = '#' + id + '-arrows'
+            //    $(".carausel-6-columns").each(function (key, item) {
+            //        var id = $(this).attr("id");
+            //        var sliderID = '#' + id;
+            //        var appendArrowsClassName = '#' + id + '-arrows'
 
-                    $(sliderID).slick({
-                        dots: false,
-                        infinite: true,
-                        speed: 400,
-                        arrows: true,
-                        autoplay: true,
-                        slidesToShow: 8,
-                        slidesToScroll: 2,
-                        loop: true,
-                        adaptiveHeight: true,
-                        responsive: [
-                            {
-                                breakpoint: 1025,
-                                settings: {
-                                    slidesToShow: 4,
-                                    slidesToScroll: 2,
-                                }
-                            },
-                            {
-                                breakpoint: 768,
-                                settings: {
-                                    slidesToShow: 4,
-                                    slidesToScroll: 2,
-                                }
-                            },
-                            {
-                                breakpoint: 480,
-                                settings: {
-                                    slidesToShow: 4,
-                                    slidesToScroll: 2
-                                }
-                            }
-                        ],
-                        prevArrow: '<span class="slider-btn slider-prev"><i class="fi-rs-angle-left"></i></span>',
-                        nextArrow: '<span class="slider-btn slider-next"><i class="fi-rs-angle-right"></i></span>',
-                        appendArrows: (appendArrowsClassName),
-                    });
-                });
+            //        $(sliderID).slick({
+            //            dots: false,
+            //            infinite: true,
+            //            speed: 400,
+            //            arrows: true,
+            //            autoplay: true,
+            //            slidesToShow: 8,
+            //            slidesToScroll: 2,
+            //            loop: true,
+            //            adaptiveHeight: true,
+            //            responsive: [
+            //                {
+            //                    breakpoint: 1025,
+            //                    settings: {
+            //                        slidesToShow: 4,
+            //                        slidesToScroll: 2,
+            //                    }
+            //                },
+            //                {
+            //                    breakpoint: 768,
+            //                    settings: {
+            //                        slidesToShow: 4,
+            //                        slidesToScroll: 2,
+            //                    }
+            //                },
+            //                {
+            //                    breakpoint: 480,
+            //                    settings: {
+            //                        slidesToShow: 4,
+            //                        slidesToScroll: 2
+            //                    }
+            //                }
+            //            ],
+            //            prevArrow: '<span class="slider-btn slider-prev"><i class="fi-rs-angle-left"></i></span>',
+            //            nextArrow: '<span class="slider-btn slider-next"><i class="fi-rs-angle-right"></i></span>',
+            //            appendArrows: (appendArrowsClassName),
+            //        });
+            //    });
 
 
-            }, 100);
+            //}, 100);
         }, function (error) {
             alert(error.data);
         });
