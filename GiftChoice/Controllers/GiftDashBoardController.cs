@@ -73,6 +73,11 @@ namespace GiftChoice.Controllers
             return View();
         }
 
+        public ActionResult AddBannerCateProduct()
+        {
+            return View();
+        }
+
         public ActionResult OrderList()
         {
             return View();
@@ -493,6 +498,42 @@ namespace GiftChoice.Controllers
                        s.PSizeId,
                        SizeTitle = db.SizeTbls.Where(t => t.SizeId == s.SizeId && t.Active == true).Select(t => t.SizeTitle).FirstOrDefault()
                    })
+               });
+            return Json(res, JsonRequestBehavior.AllowGet);
+
+        }
+
+        public JsonResult GetAllProduct()
+        {
+            var res =
+
+               db.ProductTbls.Where(m => m.Active == true).Select(m => new
+               {
+                   m.ProductId,
+                   m.MainCateId,
+                   m.ProductTitle,
+                   m.PLabel,
+                   m.Price,
+                   m.PUrl,
+                   m.Active,
+                   m.PDesc,
+                   m.Priority,
+                   ProductImage = db.ProductImages.Where(i => i.ProductId == m.ProductId).Select(i => i.PImage),
+                   Maincate = db.MainCateTbls.Where(p => p.MainCateId == m.MainCateId).Select(p => p.MTitle).FirstOrDefault(),
+                   //Submenu = db.PKeywordTbls.Where(s => s.ProductId == m.ProductId && s.Active == true).Select(s => new
+                   //{
+                   //    s.ProductId,
+                   //    s.KeywordId,
+                   //    s.PKeywordId,
+                   //    SubmenuTitle = db.KeywordTbls.Where(t => t.KeywordId == s.KeywordId && t.Active == true).Select(t => t.Keyword).FirstOrDefault()
+                   //}),
+                   //PSizeList = db.PSizeTbls.Where(s => s.ProductId == m.ProductId && s.Active == true).Select(s => new
+                   //{
+                   //    s.ProductId,
+                   //    s.SizeId,
+                   //    s.PSizeId,
+                   //    SizeTitle = db.SizeTbls.Where(t => t.SizeId == s.SizeId && t.Active == true).Select(t => t.SizeTitle).FirstOrDefault()
+                   //})
                });
             return Json(res, JsonRequestBehavior.AllowGet);
 

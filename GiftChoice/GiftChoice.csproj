@@ -1773,6 +1773,7 @@
     <Content Include="Views\GiftChoiceWelcome\LoginGiftChoice.cshtml" />
     <Content Include="Views\GiftDashBoard\OrderList.cshtml" />
     <Content Include="Views\GiftDashBoard\AddBannerMateCate.cshtml" />
+    <Content Include="Views\GiftDashBoard\AddBannerCateProduct.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

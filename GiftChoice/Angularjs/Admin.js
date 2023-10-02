@@ -179,6 +179,13 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
             alert(error.data);
         });
     };
+    $scope.GetAllProduct = function () {
+        $http.get("/GiftDashBoard/GetAllProduct").then(function (d) {
+            $scope.ProductData = d.data;
+        }, function (error) {
+            alert(error.data);
+        });
+    };
 
     $scope.GetOrder = function () {
         $http.get("/GiftDashBoard/GetOrder").then(function (d) {
