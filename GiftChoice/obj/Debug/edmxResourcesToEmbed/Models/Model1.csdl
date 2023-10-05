@@ -2,8 +2,10 @@
 <Schema Namespace="GiftChoiceModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
   <EntityContainer Name="GiftChoiceEntities" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="AdminTbls" EntityType="GiftChoiceModel.AdminTbl" />
+    <EntitySet Name="BannerCateProductTbls" EntityType="GiftChoiceModel.BannerCateProductTbl" />
     <EntitySet Name="BannerCateTbls" EntityType="GiftChoiceModel.BannerCateTbl" />
     <EntitySet Name="BannerTbls" EntityType="GiftChoiceModel.BannerTbl" />
+    <EntitySet Name="BCKeywordTbls" EntityType="GiftChoiceModel.BCKeywordTbl" />
     <EntitySet Name="KeywordTbls" EntityType="GiftChoiceModel.KeywordTbl" />
     <EntitySet Name="MainCateTbls" EntityType="GiftChoiceModel.MainCateTbl" />
     <EntitySet Name="MCKeywordTbls" EntityType="GiftChoiceModel.MCKeywordTbl" />
@@ -38,6 +40,14 @@
     <Property Name="Active" Type="Boolean" Nullable="false" />
     <Property Name="Create_at" Type="DateTime" Nullable="false" Precision="0" />
   </EntityType>
+  <EntityType Name="BannerCateProductTbl">
+    <Key>
+      <PropertyRef Name="BCProductId" />
+    </Key>
+    <Property Name="BCProductId" Type="Int64" Nullable="false" />
+    <Property Name="BannerCateId" Type="Int64" Nullable="false" />
+    <Property Name="ProductId" Type="Int64" Nullable="false" />
+  </EntityType>
   <EntityType Name="BannerCateTbl">
     <Key>
       <PropertyRef Name="BannerCateId" />
@@ -63,6 +73,15 @@
     <Property Name="Active" Type="Boolean" />
     <Property Name="Create_at" Type="DateTime" Precision="3" />
     <Property Name="Update_at" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="BCKeywordTbl">
+    <Key>
+      <PropertyRef Name="BCkeywordId" />
+    </Key>
+    <Property Name="BCkeywordId" Type="Int64" Nullable="false" />
+    <Property Name="BannerCateId" Type="Int64" />
+    <Property Name="KeywordId" Type="Int64" />
+    <Property Name="Active" Type="Boolean" />
   </EntityType>
   <EntityType Name="KeywordTbl">
     <Key>

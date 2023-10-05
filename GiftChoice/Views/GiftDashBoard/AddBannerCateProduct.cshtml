@@ -36,7 +36,7 @@
                             <div class="col-md-12">
                                 <label for="input1" class="form-label">Select Banner Category</label>
 
-                                <select id="MainCateSelect" class="form-select" ng-init="GetBannerCategoryData()" ng-model="Banner.MainCateId">
+                                <select id="BannerCateSelect" class="form-select" ng-init="GetBannerCategoryData()" ng-model="Banner.BannerCateId"  ng-change="GetBannerCateProductByid()">
                                     <option ng-selected="true" value="-1">Select Banner Category</option>
                                     <option ng-repeat="m in BannerCateData" value="{{m.BannerCateId}}">{{m.BTitle}}</option>
                                 </select>
@@ -48,8 +48,7 @@
 
                             <div class="col-md-12">
                                 <div class="d-md-flex d-grid align-items-center gap-3">
-                                    <button type="button" id="btn" ng-click="SubmitBanner()" class="btn btn-primary px-4">Submit</button>
-                                    <button type="button" id="edbtn" ng-click="UpdateBanner()" style="display: none" class="btn btn-primary px-4">Update</button>
+                                    <button type="button" id="btn" ng-click="SubmitBannerCateProduct()" class="btn btn-primary px-4">Submit</button>
                                     <button type="button" class="btn btn-light px-4">Reset</button>
                                 </div>
                             </div>
@@ -83,23 +82,32 @@
                                         <th>Main Category Name</th>
                                         <th>Label</th>
                                         <th>Price</th>
-                                                                     
+
                                         <th>Image</th>
-                                      
+
 
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr ng-repeat="m in ProductData | filter:search">
                                         <td>{{$index+1}}</td>
-                                        <td><input type="checkbox" /> </td>
+                                        <td>
+
+
+                                            <input type="checkbox" id="ProductId_{{m.ProductId}}" class="checkbox-input" value="{{m.ProductId}}" ng-model="m.Selected" ng-checked="" />
+
+
+
+
+
+                                        </td>
                                         <td>{{m.ProductTitle}}</td>
                                         <td>{{m.Maincate}}</td>
                                         <td>{{m.PLabel}}</td>
                                         <td>{{m.Price}}</td>
-                                      
+
                                         <td><span ng-repeat="i in m.ProductImage"><img src="~/images/ProductImg/{{i}}"><br /></span> </td>
-                                 
+
                                     </tr>
                                 </tbody>
                             </table>

@@ -19,7 +19,7 @@ namespace GiftChoice.Models
         {
             this.MCKeywordTbls = new HashSet<MCKeywordTbl>();
         }
-    
+        public string Menu { get; set; }
         public long KeywordId { get; set; }
         public string Keyword { get; set; }
         public string KUrl { get; set; }
@@ -28,8 +28,7 @@ namespace GiftChoice.Models
         public Nullable<bool> Active { get; set; }
         public Nullable<long> Priority { get; set; }
         public Nullable<long> UserId { get; set; }
-
-        public string Menu { get; set; }
+    
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<MCKeywordTbl> MCKeywordTbls { get; set; }
     }

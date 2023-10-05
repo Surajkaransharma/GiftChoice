@@ -13,6 +13,15 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="BannerCateProductTbls">
+      <EntityTypeMapping TypeName="GiftChoiceModel.BannerCateProductTbl">
+        <MappingFragment StoreEntitySet="BannerCateProductTbl">
+          <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+          <ScalarProperty Name="BannerCateId" ColumnName="BannerCateId" />
+          <ScalarProperty Name="BCProductId" ColumnName="BCProductId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="BannerCateTbls">
       <EntityTypeMapping TypeName="GiftChoiceModel.BannerCateTbl">
         <MappingFragment StoreEntitySet="BannerCateTbl">
@@ -38,6 +47,16 @@
           <ScalarProperty Name="BUrl" ColumnName="BUrl" />
           <ScalarProperty Name="MainCateId" ColumnName="MainCateId" />
           <ScalarProperty Name="BannerId" ColumnName="BannerId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="BCKeywordTbls">
+      <EntityTypeMapping TypeName="GiftChoiceModel.BCKeywordTbl">
+        <MappingFragment StoreEntitySet="BCKeywordTbl">
+          <ScalarProperty Name="Active" ColumnName="Active" />
+          <ScalarProperty Name="KeywordId" ColumnName="KeywordId" />
+          <ScalarProperty Name="BannerCateId" ColumnName="BannerCateId" />
+          <ScalarProperty Name="BCkeywordId" ColumnName="BCkeywordId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

@@ -1,0 +1,156 @@
+﻿
+@{
+    ViewBag.Title = "Gifts";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<main class="main" ng-init="FilterProduct()">
+    <div class="page-header breadcrumb-wrap">
+        <div class="container">
+            <div class="breadcrumb">
+                <a href="/Home/Index" rel="nofollow">Home</a>
+                <span></span> Shop By Category
+            </div>
+        </div>
+    </div>
+
+    <section class="mt-50 mb-50">
+        <div class="container">
+            <div class="row flex-row-reverse">
+                <div class="col-lg-12">
+                    <div class="shop-product-fillter">
+                        <div class="totall-product">
+                            <p> Welcome to Gift Choice Bhilwara</p>
+                        </div>
+                        <div class="sort-by-product-area">
+                            <div class="sort-by-cover mr-10">
+                                <div class="sort-by-product-wrap">
+                                    <div class="sort-by" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample">
+                                        <span><i class="fa fa-filter fs-5" aria-hidden="true"></i>Filter</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="sort-by-cover">
+                                <div class="sort-by-product-wrap">
+                                    <div class="sort-by">
+                                        <span><i class="fi-rs-apps-sort"></i>Sort by:</span>
+                                    </div>
+                                    <div class="sort-by-dropdown-wrap">
+                                        <span> Featured <i class="fi-rs-angle-small-down"></i></span>
+                                    </div>
+                                </div>
+                                <div class="sort-by-dropdown">
+                                    <ul>
+                                        @*<li><a class="active" href="#">Featured</a></li>*@
+                                        <li><a ng-click="sortByPrice('asc')">Price: Low to High</a></li>
+                                        <li><a ng-click="sortByPrice('desc')">Price: High to Low</a></li>
+                                        @*<li><a ng-click="sortByReleaseDate('desc')">Release Date</a></li>*@
+
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row product-grid-4">
+                        <div class="col-lg-3 col-6 col-sm-4" ng-repeat="p in ProductData">
+                            <div class="product-cart-wrap mb-30">
+                                <div class="product-img-action-wrap">
+                                    <div class="product-img product-img-zoom">
+                                        <a href="/Home/Gift?url={{p.ProductDetails.PUrl}}">
+                                            <img class="default-img img-fluid" src="~/images/ProductImg/{{p.ProductDetails.ProductImage}}" loading="lazy" alt="product-image" loading="lazy" alt="">
+                                            <img class="hover-img img-fluid" src="~/images/ProductImg/{{p.ProductDetails.ProductImage}}" loading="lazy" alt="product-hover-image" loading="lazy" alt="">
+                                        </a>
+                                    </div>
+                                    <div class="product-badges product-badges-position product-badges-mrg" ng-show="p.ProductDetails.PLabel!=''">
+                                        <span class="hot">{{p.ProductDetails.PLabel}}</span>
+                                    </div>
+                                </div>
+                                <div class="product-content-wrap">
+                                    <h2 class="mt-2"><a href="/Home/Gift?url={{p.ProductDetails.PUrl}}">{{p.ProductDetails.ProductTitle}}</a></h2>
+                                    <div class="product-price">
+                                        <span><i class="fa fa-inr" aria-hidden="true"></i> {{p.ProductDetails.Price}}/-</span>
+                                    </div>
+                                    <div class="product-action-1 show">
+                                        <a aria-label="Add To Cart" class="action-btn hover-up" ng-click="addItemToCart($index)"><i class="fi-rs-shopping-bag-add"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <!--pagination-->
+                    @*<div class="pagination-area mt-15 mb-sm-5 mb-lg-0">
+                            <nav aria-label="Page navigation example">
+                                <ul class="pagination justify-content-start">
+                                    <li class="page-item active"><a class="page-link" href="#">01</a></li>
+                                    <li class="page-item"><a class="page-link" href="#">02</a></li>
+                                    <li class="page-item"><a class="page-link" href="#">03</a></li>
+                                    <li class="page-item"><a class="page-link dot" href="#">...</a></li>
+                                    <li class="page-item"><a class="page-link" href="#">16</a></li>
+                                    <li class="page-item"><a class="page-link" href="#"><i class="fi-rs-angle-double-small-right"></i></a></li>
+                                </ul>
+                            </nav>
+                        </div>*@
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="filter-section">
+        <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+            <div class="offcanvas-header border-bottom">
+                <h5 class="offcanvas-title" id="offcanvasExampleLabel">Filter Your Choice</h5>
+                <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            </div>
+            <div class="offcanvas-body">
+                <div class="primary-sidebar">
+                    <div class="sidebar-widget price_range range mb-20 p-3">
+                        <div class="list-group" ng-init="GetBannerCateData()">
+                            <div class="list-group-item mb-1 mt-1">
+                                <label class="fw-900">Select Category</label>
+                                <div class="custome-checkbox">
+                                    <div ng-repeat="m in MainCateData">
+
+                                        <input class="form-check-input" type="checkbox" name="checkbox" id="Main_{{m.BannerCateId}}" value="{{m.BannerCateId}}">
+                                        <label class="form-check-label" for="Main_{{m.BannerCateId}}"><span>{{m.BTitle}}</span></label>
+                                        <span ng-repeat="k in m.MCKeyword">
+                                            <input class="form-check-input" type="checkbox" name="checkbox" id="kMain_{{k.KeywordId}}" value="{{k.KeywordId}}">
+                                            <label class="form-check-label" for="kMain_{{k.KeywordId}}"><span>{{k.Keyword}}</span></label>
+                                        </span>
+
+                                    </div>
+                                    <br>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="sidebar-widget price_range range mb-20 p-3">
+                        <div class="list-group-item mb-1 mt-1">
+                            <label class="fw-900">Select Price</label>
+                            <div class="custome-checkbox">
+                                <div ng-repeat="r in priceRanges">
+                                    <input class="form-check-input" type="checkbox" name="checkbox" id="price_{{r.id}}" value="{{r.id}}" ng-model="r.Selected" ng-change="">
+                                    <label class="form-check-label" for="price_{{r.id}}">
+                                        <span>
+                                            <i class="fa fa-inr" aria-hidden="true"></i>{{r.minPrice}} - {{r.maxPrice}}
+                                        </span>
+                                    </label>
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </div>
+                    <div align="right">
+                        <a href="#" class="btn btn-sm btn-danger" ng-click="FClear()"> <i class="fa fa-trash" aria-hidden="true"></i>Clear Filter</a>
+                        <a class="btn btn-sm btn-default" ng-click="FilterProductData()" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample"><i class="fi-rs-filter mr-5"></i> Apply Fillter</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+
+

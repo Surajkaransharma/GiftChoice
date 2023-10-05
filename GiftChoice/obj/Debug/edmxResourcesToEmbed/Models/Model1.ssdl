@@ -11,6 +11,14 @@
     <Property Name="Active" Type="bit" Nullable="false" />
     <Property Name="Create_at" Type="date" Nullable="false" />
   </EntityType>
+  <EntityType Name="BannerCateProductTbl">
+    <Key>
+      <PropertyRef Name="BCProductId" />
+    </Key>
+    <Property Name="BCProductId" Type="bigint" Nullable="false" />
+    <Property Name="BannerCateId" Type="bigint" Nullable="false" />
+    <Property Name="ProductId" Type="bigint" Nullable="false" />
+  </EntityType>
   <EntityType Name="BannerCateTbl">
     <Key>
       <PropertyRef Name="BannerCateId" />
@@ -36,6 +44,15 @@
     <Property Name="Active" Type="bit" />
     <Property Name="Create_at" Type="datetime" />
     <Property Name="Update_at" Type="datetime" />
+  </EntityType>
+  <EntityType Name="BCKeywordTbl">
+    <Key>
+      <PropertyRef Name="BCkeywordId" />
+    </Key>
+    <Property Name="BCkeywordId" Type="bigint" Nullable="false" />
+    <Property Name="BannerCateId" Type="bigint" />
+    <Property Name="KeywordId" Type="bigint" />
+    <Property Name="Active" Type="bit" />
   </EntityType>
   <EntityType Name="KeywordTbl">
     <Key>
@@ -265,8 +282,10 @@ warning 6002: The table/view 'giftchoice.giftchoice.AutocompleteSuggestions' doe
   </Association>
   <EntityContainer Name="GiftChoiceModelStoreContainer">
     <EntitySet Name="AdminTbl" EntityType="Self.AdminTbl" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="BannerCateProductTbl" EntityType="Self.BannerCateProductTbl" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="BannerCateTbl" EntityType="Self.BannerCateTbl" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="BannerTbl" EntityType="Self.BannerTbl" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="BCKeywordTbl" EntityType="Self.BCKeywordTbl" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="KeywordTbl" EntityType="Self.KeywordTbl" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="MainCateTbl" EntityType="Self.MainCateTbl" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="MCKeywordTbl" EntityType="Self.MCKeywordTbl" Schema="dbo" store:Type="Tables" />
