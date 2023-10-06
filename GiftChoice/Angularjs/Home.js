@@ -60,6 +60,41 @@ app.controller("HomeController", ['$scope', '$http', '$sce','orderByFilter', fun
         //$scope.GetCart();
     };
 
+    $scope.GiftsaddItemToCart = function (index) {
+        debugger
+        debugger;
+
+        var selectedProduct = $scope.ProductData[index];
+        var productId = selectedProduct.ProductDetails.ProductId;
+
+        // Check if the product with the same productId is already in the cart
+        var productInCart = $scope.cart.find(function (item) {
+            return item.ProductId === productId;
+        });
+
+        if (!productInCart) {
+            // If the product is not in the cart, add it
+            $scope.cart.push(selectedProduct.ProductDetails);
+            localStorage.setItem('cart', JSON.stringify($scope.cart));
+            $scope.GetCart();
+            toastr["success"]("Product successfully added to the cart.");
+        } else {
+            // If the product is already in the cart, you can handle this case as needed.
+            // For example, you can display a message to the user.
+
+            toastr["error"]('This product is already in your cart.');
+            return;
+        }
+        //$scope.cart.push($scope.ProductData[index]);
+        ////$scope.cart =    $scope.ProductData[index];
+        ////$scope.cart.push({
+        ////    'name': $scope.name,
+        ////    'price': $scope.price
+        ////});
+        //localStorage.setItem('cart', JSON.stringify($scope.cart));
+        //$scope.GetCart();
+    };
+
     // Function to remove an item from the cart.
     $scope.removeItemFromCart = function (index) {
         $scope.cart.splice(index, 1);
