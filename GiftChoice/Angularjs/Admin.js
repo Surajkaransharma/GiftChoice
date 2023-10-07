@@ -331,6 +331,9 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
             alert(error.data);
         });
     };
+
+
+
     var PSizeArr = [];
     $scope.SubmitProduct = function () {
         debugger

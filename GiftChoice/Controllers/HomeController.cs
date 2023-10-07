@@ -69,11 +69,11 @@ namespace GiftChoice.Controllers
                    m.BannerCateId,
                    m.BUrl,
                    m.BTitle,
-                   m.Active,                
+                   m.Active,
                    m.Priority,
                    MCKeyword = db.BCKeywordTbls.Where(k => k.BannerCateId == m.BannerCateId && k.Active == true).Select(k => new
                    {
-                 
+
                        k.KeywordId,
                        k.BannerCateId,
                        Keyword = db.KeywordTbls.Where(p => p.KeywordId == k.KeywordId && p.Active == true).Select(p => p.Keyword).FirstOrDefault()
@@ -173,7 +173,7 @@ namespace GiftChoice.Controllers
                     LEFT JOIN ProductImage i ON p.ProductId = i.ProductId
                     LEFT JOIN PKeywordTbl k ON p.ProductId = k.ProductId
                     LEFT JOIN KeywordTbl kw ON k.KeywordId = kw.KeywordID
-                    WHERE  (p.ProductTitle LIKE '%" + Keyword + "%'  OR kw.Keyword LIKE '%" + Keyword + "%'  OR m.MTitle LIKE '%" + Keyword + "%' ) AND p.Active = 1) SELECT * FROM CTE WHERE RowNum = 1 ";
+                    WHERE  (p.ProductTitle LIKE '%" + Keyword + "%'  OR kw.Keyword LIKE '%" + Keyword + "%'  OR m.MTitle LIKE '%" + Keyword + "%' ) AND p.Active = 1) SELECT * FROM CTE WHERE RowNum = 1 ORDER BY NEWID()";
 
                     using (SqlCommand command = new SqlCommand(sqlQuery, connection))
                     {
@@ -709,7 +709,7 @@ namespace GiftChoice.Controllers
         }
         //, List<PriceTbl> priceTbls
         [JsonNetFilter]
-        public JsonResult FilterProductData(int[] Cid)
+        public JsonResult FilterProductData(int[] Cid, int[] Bid)
         {
             db.Configuration.ProxyCreationEnabled = false;
             if (Cid != null /*&& priceTbls != null*/)
@@ -753,6 +753,43 @@ namespace GiftChoice.Controllers
                 };
 
 
+                return Json(res, JsonRequestBehavior.AllowGet);
+            }
+            else if (Bid != null)
+            {
+                List<long> subid = new List<long>();
+
+                for (int i = 0; i < Bid.Length; i++)
+                {
+                    subid.Add(Bid[i]);
+                }
+
+                var res = new
+                {
+                    ProductList = db.BannerCateProductTbls.Where(m => subid.Contains(m.BannerCateId ?? 0)).Select(m => new
+                    {
+                        m.BannerCateId,
+                        m.BCProductId,
+                        m.ProductId,
+                        ProductDetails = db.ProductTbls.Where(p => p.ProductId == m.ProductId).Select(p => new
+                        {
+                            p.ProductId,
+                            p.MainCateId,
+                            p.ProductTitle,
+                            p.PLabel,
+                            p.Price,
+                            p.PUrl,
+                            p.Qty,
+                            p.Create_at,
+                            p.Active,
+                            p.Priority,
+
+                            ProductImage = db.ProductImages.Where(i => i.ProductId == p.ProductId).Select(i => i.PImage).FirstOrDefault(),
+                            Maincate = db.MainCateTbls.Where(q => q.MainCateId == p.MainCateId).Select(q => q.MTitle).FirstOrDefault(),
+                        }).FirstOrDefault(),
+
+                    }).OrderBy(x => Guid.NewGuid())
+                };
                 return Json(res, JsonRequestBehavior.AllowGet);
             }
 

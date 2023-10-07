@@ -52,7 +52,7 @@
                         </div>
                     </div>
                     <div class="row product-grid-4">
-                        <div class="col-lg-3 col-6 col-sm-4" ng-repeat="p in ProductData">
+                        <div class="col-lg-3 col-6 col-sm-4" ng-repeat="p in ProductData" ng-click="RecentViewData($index)">
                             <div class="product-cart-wrap mb-30">
                                 <div class="product-img-action-wrap">
                                     <div class="product-img product-img-zoom">
@@ -114,7 +114,7 @@
                                         <input class="form-check-input" type="checkbox" name="checkbox" id="Main_{{m.MainCateId}}" value="{{m.MainCateId}}">
                                         <label class="form-check-label" for="Main_{{m.MainCateId}}"><span>{{m.MTitle}}</span></label>
                                         <div ng-repeat="k in m.MCKeyword">
-                                            <input class="form-check-input" type="checkbox" name="checkbox" id="kMain_{{m.KeywordId}}" value="{{m.KeywordId}}">
+                                            <input class="form-check-input" type="checkbox" name="checkbox" id="kMain_{{k.KeywordId}}" value="{{m.MainCateId}}">
                                             <label class="form-check-label" for="kMain_{{k.KeywordId}}"><span>{{k.Keyword}}</span></label>
                                         </div>
 

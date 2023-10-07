@@ -1,5 +1,7 @@
 ﻿var app = angular.module("HomeApp", []);
-app.controller("HomeController", ['$scope', '$http', '$sce','orderByFilter', function ($scope, $http, $sce, orderBy) {
+app.controller("HomeController", ['$scope', '$http', '$sce', 'orderByFilter', function ($scope, $http, $sce, orderBy) {
+
+
 
     $http.get("/Home/GetNavbarMenu").then(function (d) {
         $scope.NavbarMenuList = d.data.NavbarMenuList;
@@ -9,7 +11,35 @@ app.controller("HomeController", ['$scope', '$http', '$sce','orderByFilter', fun
     }, function (error) {
         alert(error.data);
     });
+    $scope.RecentViewGifts = [];
+    $scope.RecentViewData = function (index) {
+        debugger
 
+        var selectedProduct = $scope.ProductData[index];
+        var productId = selectedProduct.ProductId;
+
+
+        var productInCart = $scope.RecentViewGifts.find(function (item) {
+            return item.ProductId === productId;
+        });
+
+        if (!productInCart) {
+            // If the product is not in the cart, add it
+            $scope.RecentViewGifts.push(selectedProduct);
+            localStorage.setItem('RecentViewGifts', JSON.stringify($scope.RecentViewGifts));
+            $scope.GetRecentViewGifts();
+
+        }
+
+    };
+    $scope.GetRecentViewGifts = function () {
+        debugger
+      
+
+        $scope.RecentViewGifts = JSON.parse(localStorage.getItem('RecentViewGifts')) || [];
+
+     
+    };
     $scope.cart = [];
     //$scope.CartItem = JSON.parse(localStorage.getItem('cart'));
     $scope.GetCart = function () {
@@ -59,6 +89,7 @@ app.controller("HomeController", ['$scope', '$http', '$sce','orderByFilter', fun
         //localStorage.setItem('cart', JSON.stringify($scope.cart));
         //$scope.GetCart();
     };
+
 
     $scope.GiftsaddItemToCart = function (index) {
         debugger
@@ -147,7 +178,7 @@ app.controller("HomeController", ['$scope', '$http', '$sce','orderByFilter', fun
 
         $("#Keyword").addClass('ui-autocomplete-loader-center');
         $http.get("/Home/GetRandomKeyword?id=" + $scope.Keyword).then(function (d) {
-            
+
             $("#Keyword").removeClass('ui-autocomplete-loader-center');
 
             $("#Keyword").autocomplete({
@@ -160,7 +191,7 @@ app.controller("HomeController", ['$scope', '$http', '$sce','orderByFilter', fun
                     //    if (label === d.data.KeyWordList[i].label) {
                     //        //   window.location.href = '/Home/Shop?Keyword=' + d.data.KeyWordList[i].KUrl;
                     //        $scope.KeyWords = d.data.KeyWordList[i].KUrl;
-                           $scope.SearchDataShop();
+                    $scope.SearchDataShop();
                     //    }
                     //}
 
@@ -187,13 +218,13 @@ app.controller("HomeController", ['$scope', '$http', '$sce','orderByFilter', fun
             method: 'POST',
             data: {
                 Keyword: id
-             
+
             }
         }).then(function (d) {
             debugger
             $scope.result = d.data.Keywords;
             debugger
-          
+
             location.href = '/Home/Shop?Keyword=' + $scope.result;
         }, function (error) {
             alert(error.data);
@@ -204,7 +235,7 @@ app.controller("HomeController", ['$scope', '$http', '$sce','orderByFilter', fun
         debugger
         $("#MKeyword").addClass('ui-autocomplete-loader-center');
         $http.get("/Home/GetRandomKeyword?id=" + $scope.Keyword).then(function (d) {
-          
+
             $("#MKeyword").removeClass('ui-autocomplete-loader-center');
 
             $("#MKeyword").autocomplete({
@@ -331,13 +362,22 @@ app.controller("HomeController", ['$scope', '$http', '$sce','orderByFilter', fun
     //    $scope.propertyName = propertyName;
     //    $scope.ProductData = orderBy($scope.ProductData, $scope.propertyName, $scope.reverse);
     //};
-    $scope.FilterProductData = function () {
-    debugger;
-     
+    $scope.FilterProductData = function (id) {
+        debugger;
+
         var Cid = [];
-        $.each($(".form-check-input:checked"), function () {
-            Cid.push(parseInt($(this).val()));
-        });
+        var Bid = [];
+        if (id == 0) {
+            $.each($(".form-check-input:checked"), function () {
+                Bid.push(parseInt($(this).val()));
+            });
+        } else {
+
+            $.each($(".form-check-input:checked"), function () {
+                Cid.push(parseInt($(this).val()));
+            });
+        }
+
         var priceTblarr = [];
         for (var i = 0; i < $scope.priceRanges.length; i++) {
             if ($scope.priceRanges[i].Selected) {
@@ -350,8 +390,10 @@ app.controller("HomeController", ['$scope', '$http', '$sce','orderByFilter', fun
             method: 'post',
             data: {
                 Cid: Cid,
+                Bid: Bid
             }
         }).then(function (d) {
+            debugger
             $scope.ProductData = d.data.ProductList;
             $('.offcanvas').removeClass('show');
         }), function (error) {
@@ -489,7 +531,7 @@ app.controller("HomeController", ['$scope', '$http', '$sce','orderByFilter', fun
     };
 
     $scope.priceRanges = [
-        { id : 1 , minPrice: 0, maxPrice: 300, selected: false },
+        { id: 1, minPrice: 0, maxPrice: 300, selected: false },
         { id: 2, minPrice: 300, maxPrice: 500, selected: false },
         { id: 3, minPrice: 500, maxPrice: 700, selected: false },
         { id: 4, minPrice: 700, maxPrice: 1000, selected: false },
@@ -497,7 +539,7 @@ app.controller("HomeController", ['$scope', '$http', '$sce','orderByFilter', fun
         { id: 6, minPrice: 1300, maxPrice: 1500, selected: false },
 
     ];
- 
+
 
     $scope.BannerList = function () {
         debugger
@@ -667,10 +709,10 @@ app.controller("HomeController", ['$scope', '$http', '$sce','orderByFilter', fun
 
 
     $scope.AddOrder = function () {
-           
+
         if ($("#Name").val() === "") {
             toastr["error"]("Please Enter Name");
-       
+
             return;
         }
 
@@ -699,7 +741,7 @@ app.controller("HomeController", ['$scope', '$http', '$sce','orderByFilter', fun
             $scope.result = d.data;
             debugger
             if ($scope.result.res === "1") {
-             
+
                 $scope.cart = [];
                 localStorage.removeItem('cart');
 
