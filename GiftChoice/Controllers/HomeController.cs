@@ -34,7 +34,7 @@ namespace GiftChoice.Controllers
 
         public JsonResult GetMainCateData()
         {
-            db.Configuration.ProxyCreationEnabled = false;
+
             var res =
 
                db.MainCateTbls.Where(m => m.Active == true).Select(m => new
@@ -44,16 +44,7 @@ namespace GiftChoice.Controllers
                    m.MTitle,
                    m.Active,
                    m.MImage,
-                   m.Priority,
-                   MCKeyword = db.MCKeywordTbls.Where(k => k.MainCateId == m.MainCateId && k.Active == true).Select(k => new
-                   {
-                       k.Menu,
-                       k.MenuFilter,
-                       k.Fliter,
-                       k.KeywordId,
-                       k.MainCateId,
-                       Keyword = db.KeywordTbls.Where(p => p.KeywordId == k.KeywordId && p.Active == true).Select(p => p.Keyword).FirstOrDefault()
-                   }),
+                  m.Priority,               
                }).OrderBy(m => m.Priority);
             return Json(res, JsonRequestBehavior.AllowGet);
 
@@ -118,13 +109,7 @@ namespace GiftChoice.Controllers
                    m.Qty,
                    ProductImage = db.ProductImages.Where(i => i.ProductId == m.ProductId).Select(i => i.PImage).FirstOrDefault(),
                    Maincate = db.MainCateTbls.Where(p => p.MainCateId == m.MainCateId).Select(p => p.MTitle).FirstOrDefault(),
-                   Submenu = db.PKeywordTbls.Where(s => s.ProductId == m.ProductId && s.Active == true).Select(s => new
-                   {
-                       s.ProductId,
-                       s.KeywordId,
-                       s.PKeywordId,
-                       SubmenuTitle = db.KeywordTbls.Where(t => t.KeywordId == s.KeywordId && t.Active == true).Select(t => t.Keyword).FirstOrDefault()
-                   })
+                 
                }).OrderBy(x => Guid.NewGuid()).Take(8);
             return Json(res, JsonRequestBehavior.AllowGet);
 
@@ -331,13 +316,13 @@ namespace GiftChoice.Controllers
                    ProductImage = db.ProductImages.Where(i => i.ProductId == m.ProductId).Select(i => i.PImage).FirstOrDefault(),
                    AllProductImage = db.ProductImages.Where(i => i.ProductId == m.ProductId).Select(i => i.PImage),
                    Maincate = db.MainCateTbls.Where(p => p.MainCateId == m.MainCateId).FirstOrDefault(),
-                   Submenu = db.PKeywordTbls.Where(s => s.ProductId == m.ProductId && s.Active == true).Select(s => new
-                   {
-                       s.ProductId,
-                       s.KeywordId,
-                       s.PKeywordId,
-                       SubmenuTitle = db.KeywordTbls.Where(t => t.KeywordId == s.KeywordId && t.Active == true).Select(t => t.Keyword).FirstOrDefault()
-                   }),
+                   //Submenu = db.PKeywordTbls.Where(s => s.ProductId == m.ProductId && s.Active == true).Select(s => new
+                   //{
+                   //    s.ProductId,
+                   //    s.KeywordId,
+                   //    s.PKeywordId,
+                   //    SubmenuTitle = db.KeywordTbls.Where(t => t.KeywordId == s.KeywordId && t.Active == true).Select(t => t.Keyword).FirstOrDefault()
+                   //}),
                    PSizeList = db.PSizeTbls.Where(s => s.ProductId == m.ProductId && s.Active == true).Select(s => new
                    {
                        s.ProductId,
