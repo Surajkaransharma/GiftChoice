@@ -2,25 +2,92 @@
 app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function ($scope, upload, $http, $sce) {
 
 
-      //--------------Size Start->------------->---------------------->---------------------------->------->------------>---------->---
+    var BannerCateProductArr = [];
+    $scope.SubmitBannerCateProduct = function () {
+        if ($("#BannerCateSelect option:selected").val() == "-1" || $("#BannerCateSelect option:selected").val() == "") {
+            toastr["error"]("Select Banner Category");
+            return;
+        }
 
+        $.each($(".checkbox-input:checked"), function () {
+            BannerCateProductArr.push({ 'ProductId': $(this).val() });
+        });
+        debugger
+        $http({
+            url: '/GiftDashBoard/SubmitBannerCateProduct',
+            method: 'post',
+            data: {
+                BannerCateId: $scope.Banner.BannerCateId,
+                BannerCateProductArrData: BannerCateProductArr
+            }
+        }).then(function (d) {
+            $scope.result = d.data;
+            if ($scope.result.res === "1") {
+                toastr["success"]("Banner Category save successfully");
+                window.location.href = '/GiftDashBoard/AddBannerCateProduct';
+
+            } else if ($scope.result.res === "2") {
+                toastr["error"]("Banner Category already exist");
+            }
+            else {
+                toastr["error"]("Banner Category not save");
+            }
+        }, function (error) {
+            toastr["error"]("Something Went Wrong");
+        });
+    };
+
+    $scope.GetBannerCateProductByid = function () {
+        $scope.BannerCateId = $("#BannerCateSelect option:selected").val();
+        for (var i = 0; i < $scope.ProductData.length; i++) {
+            var vallc = $scope.ProductData[i].ProductId;
+            $('#ProductId_' + vallc).prop('checked', false);
+
+
+        }
+        if ($scope.BannerCateId  != "-1") {
+            $http.get("/GiftDashBoard/GetBannerCateProductByid?id=" + $scope.BannerCateId).then(function (d) {
+                $scope.result = d.data;
+                debugger
+                for (var i = 0; i < $scope.result.length; i++) {
+                    var vallc = $scope.result[i].ProductId;
+                    $('#ProductId_' + vallc).prop('checked', true);
+
+
+                }
+            }, function (error) {
+                alert(error.data);
+            });
+        }
+
+    };
+      //--------------Size Start->------------->---------------------->---------------------------->------->------------>---------->---
+    var BKeywordarr = [];
     $scope.SubmitBannerCate = function () {
         if ($("#BTitle").val() === "") {
             toastr["error"]("Please Enter Banner Category");
             return;
         }
+        for (var i = 0; i < $scope.KeywordList.length; i++) {
+            if ($scope.KeywordList[i].Selected) {
+                BKeywordarr.push($scope.KeywordList[i]);
+            }
+        }
         debugger
         $http({
             url: '/GiftDashBoard/SubmitBannerCate',
             method: 'post',
-            data: $scope.BannerCate
+            data: {
+                BTitle: $scope.BannerCate.BTitle,
+                Priority: $scope.BannerCate.Priority,
+                keywordsTbl: BKeywordarr
+            }
         }).then(function (d) {
             $scope.result = d.data;
             if ($scope.result.res === "1") {
-                toastr["success"]("Banner Category save successfully");
-                $scope.BannerCate = null;
-                $scope.GetBannerCate();
-
+                toastr["success"]("Banner Category save successfully");           
+           
+                window.location.href = '/GiftDashBoard/AddBannerMateCate';
             } else if ($scope.result.res === "2") {
                 toastr["error"]("Banner Category already exist");
             }
@@ -35,7 +102,21 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
     $scope.GetBannerCatebyid = function (index) {
         $('#btn').css('display', 'none');
         $('#edbtn').css('display', 'inline');
+
+        for (var s = 0; s < $scope.KeywordList.length; s++) {
+            var vallc1s = $scope.KeywordList[s].KeywordId;
+            $('#Keyword_' + vallc1s).prop('checked', false);           
+
+        }
+
         $scope.BannerCate = $scope.BannerCateData[index];
+
+        for (var i = 0; i < $scope.BannerCate.Submenu.length; i++) {
+            var vallc = $scope.BannerCate.Submenu[i].KeywordId;
+            $('#Keyword_' + vallc).prop('checked', true);
+         
+
+        }
     };
 
     $scope.RessetBannerCate = function () {
@@ -45,23 +126,38 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
     };
 
     $scope.UpdateBannerCate = function () {
-
+        debugger
         if ($("#BTitle").val() === "") {
             toastr["error"]("Please Enter Banner Category");
 
             return;
         }
+
+        $.each($(".checkbox-input:checked"), function () {
+            BKeywordarr.push({ 'KeywordId': $(this).val() });
+        });
         $http({
             url: '/GiftDashBoard/UpdateBannerCate',
             method: 'post',
-            data: $scope.BannerCate
+            data: {
+                BannerCateId: $scope.BannerCate.BannerCateId,
+                BTitle: $scope.BannerCate.BTitle,
+                Priority: $scope.BannerCate.Priority,
+                keywordsTbl: BKeywordarr
+            }
         }).then(function (d) {
             $scope.result = d.data;
             if ($scope.result.res === "1") {
                 toastr["success"]("Banner Category Update successfully");
-                $scope.BannerCate = null;
-                $scope.RessetBannerCate();
-                $scope.GetBannerCate();
+                window.location.href = '/GiftDashBoard/AddBannerMateCate';
+                //$scope.BannerCate = null;
+                //$scope.RessetBannerCate();
+                //$scope.GetBannerCate();
+                //for (var s = 0; s < $scope.KeywordList.length; s++) {
+                //    var vallc1s = $scope.KeywordList[s].KeywordId;
+                //    $('#Keyword_' + vallc1s).prop('checked', false);
+
+                //}
             }
             else {
                 toastr["error"]("Banner Category not save");
@@ -179,6 +275,13 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
             alert(error.data);
         });
     };
+    $scope.GetAllProduct = function () {
+        $http.get("/GiftDashBoard/GetAllProduct").then(function (d) {
+            $scope.ProductData = d.data;
+        }, function (error) {
+            alert(error.data);
+        });
+    };
 
     $scope.GetOrder = function () {
         $http.get("/GiftDashBoard/GetOrder").then(function (d) {
@@ -228,6 +331,9 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
             alert(error.data);
         });
     };
+
+
+
     var PSizeArr = [];
     $scope.SubmitProduct = function () {
         debugger

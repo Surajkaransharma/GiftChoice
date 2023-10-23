@@ -26,9 +26,69 @@
     <script src="~/Angularjs/angular.min.js"></script>
     <script src="~/Angularjs/Home.js"></script>
 
-    <link href="https://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css" rel="stylesheet">
+    @*<link rel="stylesheet" href="https://code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+        <link rel="stylesheet" href="/resources/demos/style.css">*@
     <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
     <script src="https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+    <style>
+        .ui-corner-all {
+            -moz-border-radius: 4px 4px 4px 4px;
+        }
+
+        .ui-widget-content {
+            border: 5px solid black;
+         
+            background-color: white;
+        }
+
+        .ui-widget {
+            font-family: "Spartan", sans-serif;
+            font-size: 15px;
+            font-weight: 700;
+        }
+
+        .ui-menu {
+            display: block;
+            float: left;
+            list-style: none outside none;
+            margin: 0;
+            padding: 2px;
+        }
+
+        .ui-autocomplete {
+            cursor: default;
+            position: absolute;
+        }
+
+        .ui-menu .ui-menu-item {
+            clear: left;
+            float: left;
+            margin: 0;
+            padding: 0;
+            width: 100%;
+        }
+/*
+            .ui-menu .ui-menu-item a {
+                display: block;
+                padding: 3px 3px 3px 3px;
+                text-decoration: none;
+                cursor: pointer;
+                background-color: Green;
+            }*/
+
+               /* .ui-menu .ui-menu-item a:hover {
+                    display: block;
+                    padding: 3px 3px 3px 3px;
+                    text-decoration: none;
+                    color: White;
+                    cursor: pointer;
+                    background-color: ButtonText;
+                }*/
+
+/*        .ui-widget-content a {
+            color: #222222;
+        }*/
+    </style>
 </head>
 <body ng-app="HomeApp" ng-controller="HomeController">
     <div>
@@ -92,7 +152,7 @@
 
                                 <form ng-submit="SearchDataShop()">
 
-                                    <input type="text" id="Keyword" placeholder="Search for items..." ng-model="Keyword" ng-change="GetRandomKeyword()" class="w-100">
+                                    <input type="text" id="Keyword" placeholder="Search for items..." style="max-width : 700px" ng-model="Keyword" ng-change="GetRandomKeyword()" class="w-100">
                                 </form>
 
                             </div>

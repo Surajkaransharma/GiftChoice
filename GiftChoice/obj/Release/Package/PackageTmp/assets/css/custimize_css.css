@@ -622,7 +622,7 @@
 
 
 #check_box .checkbox-label {
-    color: #707070;
+    color: #000;
     transition: 0.375s ease;
     text-align: center;
 }

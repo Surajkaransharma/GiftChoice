@@ -1,5 +1,7 @@
 ﻿
 @{
+    /**/
+
     ViewBag.Title = "AddMainCate";
     Layout = "~/Views/Shared/_Admin.cshtml";
 }
@@ -128,15 +130,15 @@
                                     </tbody>
                                 </table>
                                 @*<div class="" id="check_box">
-                                                <label class="checkbox-wrapper" ng-repeat="k in KeywordList">
-                                                    <input type="checkbox" id="Keyword_{{k.KeywordId}}" class="checkbox-input" value="{{k.KeywordId}}" ng-model="k.Selected" ng-checked="" />
-                                                    <span class="checkbox-tile">
-                                                        <span class="checkbox-label">{{k.Keyword}}</span>
-                                                    </span>
-                                                </label>
-      
+                                        <label class="checkbox-wrapper" ng-repeat="k in KeywordList">
+                                            <input type="checkbox" id="Keyword_{{k.KeywordId}}" class="checkbox-input" value="{{k.KeywordId}}" ng-model="k.Selected" ng-checked="" />
+                                            <span class="checkbox-tile">
+                                                <span class="checkbox-label">{{k.Keyword}}</span>
+                                            </span>
+                                        </label>
 
-                                            </div>*@
+
+                                    </div>*@
                             </div>
 
                             @*<div class="col-md-4">
@@ -186,9 +188,7 @@
                                         <th>Priority</th>
                                         <th>Image</th>
                                         <th>Active</th>
-
                                         <th>Action</th>
-
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -201,8 +201,6 @@
                                         <td><img src="~/images/MainCate/{{m.MImage}}" style="width:50px"></td>
                                         <td><a><i class="bx bxs-pencil" ng-click="GetMainCatebyid($index)"></i></a></td>
                                     </tr>
-
-
                                 </tbody>
                             </table>
                         </div>

@@ -77,7 +77,7 @@ namespace GiftChoice.Controllers
         public JsonResult BannerList()
         {
 
-            var res = db.BannerTbls.Select(c => new
+            var res = db.BannerTbls.Where(c => c.Active == true).Select(c => new
             {
                 c.MainCateId,
                 c.BannerId,

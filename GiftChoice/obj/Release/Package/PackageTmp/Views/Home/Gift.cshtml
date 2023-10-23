@@ -11,7 +11,7 @@
         <div class="container">
             <div class="breadcrumb">
                 <a href="/Home/Index" rel="nofollow">Home</a>
-                <a href="/Home/shop?Main={{Product.Maincate.MUrl}}"> <span>{{Product.Maincate.MTitle}}</span></a>
+                <a href="/Home/shop?Main={{Product.Maincate.MTitle}}"> <span>{{Product.Maincate.MTitle}}</span></a>
                 <span> {{Product.ProductTitle}}</span>
             </div>
         </div>
@@ -34,16 +34,16 @@
                                         <figure class="border-radius-10" ng-repeat="i in Product.AllProductImage">
                                             <img src="~/images/ProductImg/{{i}}" alt="product image" class="img-fluid" loading="lazy">
                                         </figure>
-                                     
+
                                     </div>
                                     <!-- Main Image -->
                                     <!-- Small Image -->
                                     <div class="slider-nav-thumbnails pl-15 pr-15" ng-show="Product.AllProductImage.length>1">
-                                        <div ng-repeat="i in Product.AllProductImage" ng-show="i!=null" >
-                                        <img src="~/images/ProductImg/{{i}}" ng-show="i!=null" class="img-fluid" loading="lazy" alt="product image">
+                                        <div ng-repeat="i in Product.AllProductImage" ng-show="i!=null">
+                                            <img src="~/images/ProductImg/{{i}}" ng-show="i!=null" class="img-fluid" loading="lazy" alt="product image">
                                         </div>
                                         <div><img src="~/images/ProductImg/{{i}}" ng-show="i!=null" class="img-fluid" loading="lazy" alt="product image"></div>
-                                      
+
                                     </div>
                                     <!-- Small Image -->
                                 </div>
@@ -64,56 +64,54 @@
 
                                     <div class="description mb-20">
                                         <p align="justify" id="desc" class="fs-7">
-                                     </p>
+                                        </p>
 
                                     </div>
 
                                     @*<div class="social-icons single-share mb-20">
-                                        <ul class="text-grey-5 d-inline-block">
-                                            <li><strong class="mr-10">Share this:</strong></li>
-                                            <li class="social-facebook"><a href="#"><img src="assets/imgs/theme/icons/icon-facebook.svg" alt=""></a></li>
-                                            <li class="social-twitter"> <a href="#"><img src="assets/imgs/theme/icons/icon-twitter.svg" alt=""></a></li>
-                                            <li class="social-instagram"><a href="#"><img src="assets/imgs/theme/icons/icon-instagram.svg" alt=""></a></li>
-                                            <li class="social-linkedin"><a href="#"><img src="assets/imgs/theme/icons/icon-pinterest.svg" alt=""></a></li>
-                                        </ul>
-                                    </div>*@
+                        <ul class="text-grey-5 d-inline-block">
+                            <li><strong class="mr-10">Share this:</strong></li>
+                            <li class="social-facebook"><a href="#"><img src="assets/imgs/theme/icons/icon-facebook.svg" alt=""></a></li>
+                            <li class="social-twitter"> <a href="#"><img src="assets/imgs/theme/icons/icon-twitter.svg" alt=""></a></li>
+                            <li class="social-instagram"><a href="#"><img src="assets/imgs/theme/icons/icon-instagram.svg" alt=""></a></li>
+                            <li class="social-linkedin"><a href="#"><img src="assets/imgs/theme/icons/icon-pinterest.svg" alt=""></a></li>
+                        </ul>
+                    </div>*@
 
                                     <div class="attr-detail attr-size mb-30" ng-show="Product.PSizeList.length>0">
                                         <strong class="mr-10">Size</strong>
                                         <ul class="list-filter size-filter font-small">
                                             <li ng-repeat="s in Product.PSizeList" style="margin-left:5px;"><a href="#">{{s.SizeTitle}}</a> </li>
-                                          
+
                                         </ul>
                                     </div>
 
                                     <div class="detail-extralink">
                                         @*<div class="detail-qty border radius">
-                                            <a href="#" class="qty-down"><i class="fi-rs-angle-small-down"></i></a>
-                                            <span class="qty-val">1</span>
-                                            <a href="#" class="qty-up"><i class="fi-rs-angle-small-up"></i></a>
-                                        </div>*@
-                                        <a class="button button-add-to-cart text-white"  ng-click="GiftAddItemToCart(Product.ProductId)"  role="button">Add To Cart</a>
+                            <a href="#" class="qty-down"><i class="fi-rs-angle-small-down"></i></a>
+                            <span class="qty-val">1</span>
+                            <a href="#" class="qty-up"><i class="fi-rs-angle-small-up"></i></a>
+                        </div>*@
+                                        <a class="button button-add-to-cart text-white" ng-click="GiftAddItemToCart(Product.ProductId)" role="button">Add To Cart</a>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <!-- Product Section End -->
-                        <!-- Related Product Start -->
-                        <div class="row mt-60">
+                        <div class="row mt-60" ng-show="RecentViewGifts.length>0">
                             <div class="col-12">
-                                <h3 class="section-title style-1 mb-30">Related products</h3>
+                                <h3 class="section-title style-1 mb-30">Recent Gift</h3>
                             </div>
-                            <div class="row product-grid-4" ng-init="GetSmillerProduct(@ViewBag.id)">
-                                <div class="col-lg-3 col-6 col-sm-4" ng-repeat="q in ProductData">
+                            <div class="row product-grid-4" ng-init="GetRecentViewGifts()">
+                                <div class="col-lg-3 col-6 col-sm-4" ng-repeat="q in RecentViewGifts">
                                     <div class="product-cart-wrap mb-30">
                                         <div class="product-img-action-wrap">
                                             <div class="product-img product-img-zoom">
                                                 <a href="/Home/Gift?url={{q.PUrl}}">
-                                                    <img class="default-img img-fluid" src="~/images/ProductImg/{{q.ProductImage}}" loading="lazy" alt="product-image" >
-                                                    <img class="hover-img img-fluid"  src="~/images/ProductImg/{{q.ProductImage}}" loading="lazy" alt="product-hover-image" >
+                                                    <img class="default-img img-fluid" src="~/images/ProductImg/{{q.ProductImage}}" loading="lazy" alt="product-image">
+                                                    <img class="hover-img img-fluid" src="~/images/ProductImg/{{q.ProductImage}}" loading="lazy" alt="product-hover-image">
                                                 </a>
                                             </div>
-                                            <div class="product-badges product-badges-position product-badges-mrg"  ng-show="q.PLabel!=''">
+                                            <div class="product-badges product-badges-position product-badges-mrg" ng-show="q.PLabel!=''">
                                                 <span class="hot">{{q.PLabel}}</span>
                                             </div>
                                         </div>
@@ -123,12 +121,46 @@
                                                 <span><i class="fa fa-inr" aria-hidden="true"></i> {{q.Price}}/-</span>
                                             </div>
                                             <div class="product-action-1 show">
-                                                <a aria-label="Add To Cart" class="action-btn hover-up"  ng-click="addItemToCart($index)"><i class="fi-rs-shopping-bag-add"></i></a>
+                                                <a aria-label="Add To Cart" class="action-btn hover-up" ng-click="addItemToCart($index)"><i class="fi-rs-shopping-bag-add"></i></a>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                              
+
+                            </div>
+                        </div>
+                        <!-- Product Section End -->
+                        <!-- Related Product Start -->
+                        <div class="row mt-60">
+                            <div class="col-12">
+                                <h3 class="section-title style-1 mb-30">Related Gifts</h3>
+                            </div>
+                            <div class="row product-grid-4" ng-init="GetSmillerProduct(@ViewBag.id)">
+                                <div class="col-lg-3 col-6 col-sm-4" ng-repeat="q in ProductData" ng-click="RecentViewData($index)">
+                                    <div class="product-cart-wrap mb-30">
+                                        <div class="product-img-action-wrap">
+                                            <div class="product-img product-img-zoom">
+                                                <a href="/Home/Gift?url={{q.PUrl}}">
+                                                    <img class="default-img img-fluid" src="~/images/ProductImg/{{q.ProductImage}}" loading="lazy" alt="product-image">
+                                                    <img class="hover-img img-fluid" src="~/images/ProductImg/{{q.ProductImage}}" loading="lazy" alt="product-hover-image">
+                                                </a>
+                                            </div>
+                                            <div class="product-badges product-badges-position product-badges-mrg" ng-show="q.PLabel!=''">
+                                                <span class="hot">{{q.PLabel}}</span>
+                                            </div>
+                                        </div>
+                                        <div class="product-content-wrap">
+                                            <h2><a href="/Home/Gift?url={{q.PUrl}}">{{q.ProductTitle}}</a></h2>
+                                            <div class="product-price">
+                                                <span><i class="fa fa-inr" aria-hidden="true"></i> {{q.Price}}/-</span>
+                                            </div>
+                                            <div class="product-action-1 show">
+                                                <a aria-label="Add To Cart" class="action-btn hover-up" ng-click="addItemToCart($index)"><i class="fi-rs-shopping-bag-add"></i></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
                             </div>
                         </div>
                         <!-- Related Product Start -->

@@ -32,15 +32,29 @@
                             <div class="col-md-12">
                                 <label for="input1" class="form-label">Banner Category Title</label>
                                 <input type="text" class="form-control" id="BTitle" ng-model="BannerCate.BTitle" placeholder="Banner Category">
-                              
+
                             </div>
-                           
+
 
                             <div class="col-md-12">
                                 <label for="input1" class="form-label">Priority</label>
                                 <input type="number" id="Priority" class="form-control" ng-model="BannerCate.Priority" placeholder="Priority">
                             </div>
-                         
+                            <div class="col-md-12" ng-init="GetKeywordData()">
+                                <label for="input1" class="form-label">Select Keyword</label>
+
+                                <div class="" id="check_box">
+                                    <label class="checkbox-wrapper" ng-repeat="k in KeywordList">
+                                        <input type="checkbox" id="Keyword_{{k.KeywordId}}" class="checkbox-input" value="{{k.KeywordId}}" ng-model="k.Selected" ng-checked="" />
+                                        <span class="checkbox-tile">
+                                            <span class="checkbox-label">{{k.Keyword}}</span>
+                                        </span>
+                                    </label>
+
+
+                                </div>
+                            </div>
+
 
                             <div class="col-md-12">
                                 <div class="d-md-flex d-grid align-items-center gap-3">
@@ -75,23 +89,20 @@
                                     <tr>
                                         <th>S.No.</th>
                                         <th>Banner Category Name</th>
-                                       
+                                        <th>Keyword</th>
                                         <th>Priority</th>
-                                       
                                         <th>Active</th>
-
                                         <th>Action</th>
-
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr ng-repeat="m in BannerCateData">
                                         <td>{{$index+1}}</td>
                                         <td>{{m.BTitle}}</td>
-                                       
+                                        <td><span ng-repeat="n in m.Submenu">{{n.SubmenuTitle}},</span></td>
                                         <td>{{m.Priority}}</td>
                                         <td><a ng-click="BannerActiveDeActive(m.BannerCateId)"> <span class="badge {{m.Active==1? 'bg-success' : 'bg-danger'}}">{{m.Active==1?'Active':'Deactive'}}</span></a> </td>
-                                     
+
                                         <td><a><i class="bx bxs-pencil" ng-click="GetBannerCatebyid($index)"></i></a></td>
                                     </tr>
 

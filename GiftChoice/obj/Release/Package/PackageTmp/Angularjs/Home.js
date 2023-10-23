@@ -1,5 +1,7 @@
 ﻿var app = angular.module("HomeApp", []);
-app.controller("HomeController", ['$scope', '$http', '$sce','orderByFilter', function ($scope, $http, $sce, orderBy) {
+app.controller("HomeController", ['$scope', '$http', '$sce', 'orderByFilter', function ($scope, $http, $sce, orderBy) {
+
+
 
     $http.get("/Home/GetNavbarMenu").then(function (d) {
         $scope.NavbarMenuList = d.data.NavbarMenuList;
@@ -9,7 +11,35 @@ app.controller("HomeController", ['$scope', '$http', '$sce','orderByFilter', fun
     }, function (error) {
         alert(error.data);
     });
+    $scope.RecentViewGifts = [];
+    $scope.RecentViewData = function (index) {
+        debugger
 
+        var selectedProduct = $scope.ProductData[index];
+        var productId = selectedProduct.ProductId;
+
+
+        var productInCart = $scope.RecentViewGifts.find(function (item) {
+            return item.ProductId === productId;
+        });
+
+        if (!productInCart) {
+            // If the product is not in the cart, add it
+            $scope.RecentViewGifts.push(selectedProduct);
+            localStorage.setItem('RecentViewGifts', JSON.stringify($scope.RecentViewGifts));
+            $scope.GetRecentViewGifts();
+
+        }
+
+    };
+    $scope.GetRecentViewGifts = function () {
+        debugger
+      
+
+        $scope.RecentViewGifts = JSON.parse(localStorage.getItem('RecentViewGifts')) || [];
+
+     
+    };
     $scope.cart = [];
     //$scope.CartItem = JSON.parse(localStorage.getItem('cart'));
     $scope.GetCart = function () {
@@ -40,6 +70,42 @@ app.controller("HomeController", ['$scope', '$http', '$sce','orderByFilter', fun
         if (!productInCart) {
             // If the product is not in the cart, add it
             $scope.cart.push(selectedProduct);
+            localStorage.setItem('cart', JSON.stringify($scope.cart));
+            $scope.GetCart();
+            toastr["success"]("Product successfully added to the cart.");
+        } else {
+            // If the product is already in the cart, you can handle this case as needed.
+            // For example, you can display a message to the user.
+
+            toastr["error"]('This product is already in your cart.');
+            return;
+        }
+        //$scope.cart.push($scope.ProductData[index]);
+        ////$scope.cart =    $scope.ProductData[index];
+        ////$scope.cart.push({
+        ////    'name': $scope.name,
+        ////    'price': $scope.price
+        ////});
+        //localStorage.setItem('cart', JSON.stringify($scope.cart));
+        //$scope.GetCart();
+    };
+
+
+    $scope.GiftsaddItemToCart = function (index) {
+        debugger
+        debugger;
+
+        var selectedProduct = $scope.ProductData[index];
+        var productId = selectedProduct.ProductDetails.ProductId;
+
+        // Check if the product with the same productId is already in the cart
+        var productInCart = $scope.cart.find(function (item) {
+            return item.ProductId === productId;
+        });
+
+        if (!productInCart) {
+            // If the product is not in the cart, add it
+            $scope.cart.push(selectedProduct.ProductDetails);
             localStorage.setItem('cart', JSON.stringify($scope.cart));
             $scope.GetCart();
             toastr["success"]("Product successfully added to the cart.");
@@ -112,7 +178,7 @@ app.controller("HomeController", ['$scope', '$http', '$sce','orderByFilter', fun
 
         $("#Keyword").addClass('ui-autocomplete-loader-center');
         $http.get("/Home/GetRandomKeyword?id=" + $scope.Keyword).then(function (d) {
-            
+
             $("#Keyword").removeClass('ui-autocomplete-loader-center');
 
             $("#Keyword").autocomplete({
@@ -125,7 +191,7 @@ app.controller("HomeController", ['$scope', '$http', '$sce','orderByFilter', fun
                     //    if (label === d.data.KeyWordList[i].label) {
                     //        //   window.location.href = '/Home/Shop?Keyword=' + d.data.KeyWordList[i].KUrl;
                     //        $scope.KeyWords = d.data.KeyWordList[i].KUrl;
-                           $scope.SearchDataShop();
+                    $scope.SearchDataShop();
                     //    }
                     //}
 
@@ -152,13 +218,13 @@ app.controller("HomeController", ['$scope', '$http', '$sce','orderByFilter', fun
             method: 'POST',
             data: {
                 Keyword: id
-             
+
             }
         }).then(function (d) {
             debugger
             $scope.result = d.data.Keywords;
             debugger
-          
+
             location.href = '/Home/Shop?Keyword=' + $scope.result;
         }, function (error) {
             alert(error.data);
@@ -169,7 +235,7 @@ app.controller("HomeController", ['$scope', '$http', '$sce','orderByFilter', fun
         debugger
         $("#MKeyword").addClass('ui-autocomplete-loader-center');
         $http.get("/Home/GetRandomKeyword?id=" + $scope.Keyword).then(function (d) {
-          
+
             $("#MKeyword").removeClass('ui-autocomplete-loader-center');
 
             $("#MKeyword").autocomplete({
@@ -296,13 +362,22 @@ app.controller("HomeController", ['$scope', '$http', '$sce','orderByFilter', fun
     //    $scope.propertyName = propertyName;
     //    $scope.ProductData = orderBy($scope.ProductData, $scope.propertyName, $scope.reverse);
     //};
-    $scope.FilterProductData = function () {
-    debugger;
-     
+    $scope.FilterProductData = function (id) {
+        debugger;
+
         var Cid = [];
-        $.each($(".form-check-input:checked"), function () {
-            Cid.push(parseInt($(this).val()));
-        });
+        var Bid = [];
+        if (id == 0) {
+            $.each($(".form-check-input:checked"), function () {
+                Bid.push(parseInt($(this).val()));
+            });
+        } else {
+
+            $.each($(".form-check-input:checked"), function () {
+                Cid.push(parseInt($(this).val()));
+            });
+        }
+
         var priceTblarr = [];
         for (var i = 0; i < $scope.priceRanges.length; i++) {
             if ($scope.priceRanges[i].Selected) {
@@ -315,8 +390,10 @@ app.controller("HomeController", ['$scope', '$http', '$sce','orderByFilter', fun
             method: 'post',
             data: {
                 Cid: Cid,
+                Bid: Bid
             }
         }).then(function (d) {
+            debugger
             $scope.ProductData = d.data.ProductList;
             $('.offcanvas').removeClass('show');
         }), function (error) {
@@ -328,101 +405,111 @@ app.controller("HomeController", ['$scope', '$http', '$sce','orderByFilter', fun
         $http.get("/Home/GetMainCateData").then(function (d) {
             $scope.MainCateData = d.data;
             debugger
-            setTimeout(() => {
-                $(".carausel-6-columns").each(function (key, item) {
-                    var id = $(this).attr("id");
-                    var sliderID = '#' + id;
-                    var appendArrowsClassName = '#' + id + '-arrows'
+            //setTimeout(() => {
+            //    $(".carausel-6-columns").each(function (key, item) {
+            //        var id = $(this).attr("id");
+            //        var sliderID = '#' + id;
+            //        var appendArrowsClassName = '#' + id + '-arrows'
 
-                    $(sliderID).slick({
-                        dots: false,
-                        infinite: true,
-                        speed: 400,
-                        arrows: true,
-                        autoplay: true,
-                        slidesToShow: 8,
-                        slidesToScroll: 2,
-                        loop: true,
-                        adaptiveHeight: true,
-                        responsive: [
-                            {
-                                breakpoint: 1025,
-                                settings: {
-                                    slidesToShow: 4,
-                                    slidesToScroll: 2,
-                                }
-                            },
-                            {
-                                breakpoint: 768,
-                                settings: {
-                                    slidesToShow: 3,
-                                    slidesToScroll: 2,
-                                }
-                            },
-                            {
-                                breakpoint: 480,
-                                settings: {
-                                    slidesToShow: 3,
-                                    slidesToScroll: 2
-                                }
-                            }
-                        ],
-                        prevArrow: '<span class="slider-btn slider-prev"><i class="fi-rs-angle-left"></i></span>',
-                        nextArrow: '<span class="slider-btn slider-next"><i class="fi-rs-angle-right"></i></span>',
-                        appendArrows: (appendArrowsClassName),
-                    });
-                });
+            //        $(sliderID).slick({
+            //            dots: false,
+            //            infinite: true,
+            //            speed: 400,
+            //            arrows: true,
+            //            autoplay: true,
+            //            slidesToShow: 8,
+            //            slidesToScroll: 2,
+            //            loop: true,
+            //            adaptiveHeight: true,
+            //            responsive: [
+            //                {
+            //                    breakpoint: 1025,
+            //                    settings: {
+            //                        slidesToShow: 4,
+            //                        slidesToScroll: 2,
+            //                    }
+            //                },
+            //                {
+            //                    breakpoint: 768,
+            //                    settings: {
+            //                        slidesToShow: 3,
+            //                        slidesToScroll: 2,
+            //                    }
+            //                },
+            //                {
+            //                    breakpoint: 480,
+            //                    settings: {
+            //                        slidesToShow: 3,
+            //                        slidesToScroll: 2
+            //                    }
+            //                }
+            //            ],
+            //            prevArrow: '<span class="slider-btn slider-prev"><i class="fi-rs-angle-left"></i></span>',
+            //            nextArrow: '<span class="slider-btn slider-next"><i class="fi-rs-angle-right"></i></span>',
+            //            appendArrows: (appendArrowsClassName),
+            //        });
+            //    });
 
-                $(".carausel-6-columns").each(function (key, item) {
-                    var id = $(this).attr("id");
-                    var sliderID = '#' + id;
-                    var appendArrowsClassName = '#' + id + '-arrows'
+            //    $(".carausel-6-columns").each(function (key, item) {
+            //        var id = $(this).attr("id");
+            //        var sliderID = '#' + id;
+            //        var appendArrowsClassName = '#' + id + '-arrows'
 
-                    $(sliderID).slick({
-                        dots: false,
-                        infinite: true,
-                        speed: 400,
-                        arrows: true,
-                        autoplay: true,
-                        slidesToShow: 8,
-                        slidesToScroll: 2,
-                        loop: true,
-                        adaptiveHeight: true,
-                        responsive: [
-                            {
-                                breakpoint: 1025,
-                                settings: {
-                                    slidesToShow: 4,
-                                    slidesToScroll: 2,
-                                }
-                            },
-                            {
-                                breakpoint: 768,
-                                settings: {
-                                    slidesToShow: 4,
-                                    slidesToScroll: 2,
-                                }
-                            },
-                            {
-                                breakpoint: 480,
-                                settings: {
-                                    slidesToShow: 4,
-                                    slidesToScroll: 2
-                                }
-                            }
-                        ],
-                        prevArrow: '<span class="slider-btn slider-prev"><i class="fi-rs-angle-left"></i></span>',
-                        nextArrow: '<span class="slider-btn slider-next"><i class="fi-rs-angle-right"></i></span>',
-                        appendArrows: (appendArrowsClassName),
-                    });
-                });
+            //        $(sliderID).slick({
+            //            dots: false,
+            //            infinite: true,
+            //            speed: 400,
+            //            arrows: true,
+            //            autoplay: true,
+            //            slidesToShow: 8,
+            //            slidesToScroll: 2,
+            //            loop: true,
+            //            adaptiveHeight: true,
+            //            responsive: [
+            //                {
+            //                    breakpoint: 1025,
+            //                    settings: {
+            //                        slidesToShow: 4,
+            //                        slidesToScroll: 2,
+            //                    }
+            //                },
+            //                {
+            //                    breakpoint: 768,
+            //                    settings: {
+            //                        slidesToShow: 4,
+            //                        slidesToScroll: 2,
+            //                    }
+            //                },
+            //                {
+            //                    breakpoint: 480,
+            //                    settings: {
+            //                        slidesToShow: 4,
+            //                        slidesToScroll: 2
+            //                    }
+            //                }
+            //            ],
+            //            prevArrow: '<span class="slider-btn slider-prev"><i class="fi-rs-angle-left"></i></span>',
+            //            nextArrow: '<span class="slider-btn slider-next"><i class="fi-rs-angle-right"></i></span>',
+            //            appendArrows: (appendArrowsClassName),
+            //        });
+            //    });
 
 
-            }, 100);
+            //}, 100);
         }, function (error) {
             alert(error.data);
         });
     };
+
+    $scope.GetBannerCateData = function () {
+        $http.get("/Home/GetBannerCateData").then(function (d) {
+            $scope.MainCateData = d.data;
+            debugger
+        }, function (error) {
+            alert(error.data);
+        });
+    };
+
     $scope.GetProduct = function () {
         debugger
         $http.get("/Home/GetProduct").then(function (d) {
@@ -444,7 +531,7 @@ app.controller("HomeController", ['$scope', '$http', '$sce','orderByFilter', fun
     };
 
     $scope.priceRanges = [
-        { id : 1 , minPrice: 0, maxPrice: 300, selected: false },
+        { id: 1, minPrice: 0, maxPrice: 300, selected: false },
         { id: 2, minPrice: 300, maxPrice: 500, selected: false },
         { id: 3, minPrice: 500, maxPrice: 700, selected: false },
         { id: 4, minPrice: 700, maxPrice: 1000, selected: false },
@@ -452,7 +539,7 @@ app.controller("HomeController", ['$scope', '$http', '$sce','orderByFilter', fun
         { id: 6, minPrice: 1300, maxPrice: 1500, selected: false },
 
     ];
- 
+
 
     $scope.BannerList = function () {
         debugger
@@ -622,10 +709,10 @@ app.controller("HomeController", ['$scope', '$http', '$sce','orderByFilter', fun
 
 
     $scope.AddOrder = function () {
-           
+
         if ($("#Name").val() === "") {
             toastr["error"]("Please Enter Name");
-       
+
             return;
         }
 
@@ -654,7 +741,7 @@ app.controller("HomeController", ['$scope', '$http', '$sce','orderByFilter', fun
             $scope.result = d.data;
             debugger
             if ($scope.result.res === "1") {
-             
+
                 $scope.cart = [];
                 localStorage.removeItem('cart');
 
