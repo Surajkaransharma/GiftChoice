@@ -595,6 +595,9 @@ app.controller("HomeController", ['$scope', '$http', '$sce', 'orderByFilter', fu
         $http.get("/Home/GetProductByid?id=" + id).then(function (d) {
             debugger
             $scope.Product = d.data;
+            //$scope.idd = $scope.Product.MainCateId;
+
+            $scope.GetSmillerProduct($scope.Product.ProductId, $scope.Product.MainCateId);
 
             $('#desc').html($scope.Product.PDesc);
 
@@ -687,15 +690,15 @@ app.controller("HomeController", ['$scope', '$http', '$sce', 'orderByFilter', fu
                 });
 
 
-            }, 100);
+            }, 10);
 
         }, function (error) {
             alert(error.data);
         });
     };
-    $scope.GetSmillerProduct = function (id) {
+    $scope.GetSmillerProduct = function (id,idd) {
         debugger
-        $http.get("/Home/GetSmillerProduct?id=" + id).then(function (d) {
+        $http.get("/Home/GetSmillerProduct?id=" + id + '&idd=' + idd).then(function (d) {
             debugger
             $scope.ProductData = d.data;
 
@@ -745,7 +748,7 @@ app.controller("HomeController", ['$scope', '$http', '$sce', 'orderByFilter', fu
                 $scope.cart = [];
                 localStorage.removeItem('cart');
 
-                window.location.href = "/Home/thankyou"
+                window.location.href = "/Home/thankyou";
             }
         }, function (error) {
             toastr["error"]("Something Went Wrong");

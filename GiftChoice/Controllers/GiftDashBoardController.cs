@@ -807,7 +807,7 @@ namespace GiftChoice.Controllers
                     {
                         List<ProductImage> productImage = db.ProductImages.Where(c => c.ProductId == result.ProductId).ToList();
 
-                        if (productImage.Count() >= 1)
+                        if (productImage != null)
                         {
                             var Pimageid = productImage[0].PImageId;
                             ProductImage pimagearr = db.ProductImages.Where(c => c.PImageId == Pimageid).FirstOrDefault();
@@ -836,7 +836,7 @@ namespace GiftChoice.Controllers
                     {
                         List<ProductImage> productImage = db.ProductImages.Where(c => c.ProductId == result.ProductId).ToList();
 
-                        if (productImage.Count() >= 2)
+                        if (productImage != null)
                         {
                             var Pimageid = productImage[1].PImageId;
                             ProductImage pimagearr = db.ProductImages.Where(c => c.PImageId == Pimageid).FirstOrDefault();
@@ -863,7 +863,7 @@ namespace GiftChoice.Controllers
                     {
                         List<ProductImage> productImage = db.ProductImages.Where(c => c.ProductId == result.ProductId).ToList();
 
-                        if (productImage.Count() >= 3)
+                        if (productImage != null)
                         {
                             var Pimageid = productImage[2].PImageId;
                             ProductImage pimagearr = db.ProductImages.Where(c => c.PImageId == Pimageid).FirstOrDefault();
@@ -890,7 +890,7 @@ namespace GiftChoice.Controllers
                     {
                         List<ProductImage> productImage = db.ProductImages.Where(c => c.ProductId == result.ProductId).ToList();
 
-                        if (productImage.Count() >= 4)
+                        if (productImage != null)
                         {
                             var Pimageid = productImage[3].PImageId;
                             ProductImage pimagearr = db.ProductImages.Where(c => c.PImageId == Pimageid).FirstOrDefault();
@@ -917,7 +917,7 @@ namespace GiftChoice.Controllers
                     {
                         List<ProductImage> productImage = db.ProductImages.Where(c => c.ProductId == result.ProductId).ToList();
 
-                        if (productImage.Count() >= 3)
+                        if (productImage != null)
                         {
                             var Pimageid = productImage[4].PImageId;
                             ProductImage pimagearr = db.ProductImages.Where(c => c.PImageId == Pimageid).FirstOrDefault();

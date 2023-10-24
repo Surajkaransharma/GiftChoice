@@ -335,12 +335,12 @@ namespace GiftChoice.Controllers
 
         }
         [JsonNetFilter]
-        public JsonResult GetSmillerProduct(int id)
+        public JsonResult GetSmillerProduct(int id,int idd)
         {
             db.Configuration.ProxyCreationEnabled = false;
             var res =
 
-               db.ProductTbls.Where(p => p.ProductId != id && p.Active == true).Select(m => new
+               db.ProductTbls.Where(p => p.ProductId != id && p.MainCateId == idd && p.Active == true).Select(m => new
                {
                    m.ProductId,
                    m.MainCateId,

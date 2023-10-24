@@ -53,7 +53,7 @@
                                 <div class="detail-info">
                                     <h2 class="title-detail"> {{Product.ProductTitle}}</h2>
                                     <div class="pro-details-brand">
-                                        <span><a href="/Home/shop?Main={{Product.Maincate.MUrl}}">{{Product.Maincate.MTitle}}</a></span>
+                                        <span><a href="/Home/shop?Main={{Product.Maincate.MTitle}}">{{Product.Maincate.MTitle}}</a></span>
                                     </div>
 
                                     <div class="clearfix product-price-cover border-0 mb-0">
@@ -135,7 +135,7 @@
                             <div class="col-12">
                                 <h3 class="section-title style-1 mb-30">Related Gifts</h3>
                             </div>
-                            <div class="row product-grid-4" ng-init="GetSmillerProduct(@ViewBag.id)">
+                            <div class="row product-grid-4" >
                                 <div class="col-lg-3 col-6 col-sm-4" ng-repeat="q in ProductData" ng-click="RecentViewData($index)">
                                     <div class="product-cart-wrap mb-30">
                                         <div class="product-img-action-wrap">
