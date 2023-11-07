@@ -1,6 +1,8 @@
 ﻿using GiftChoice.Models;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
+using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
 using System.Web;
@@ -467,11 +469,11 @@ namespace GiftChoice.Controllers
         /////// Keyword Code End 
         //// Product Code 
 
-        public JsonResult GetProduct()
+        public JsonResult GetProduct(int id)
         {
             var res =
 
-               db.ProductTbls.Select(m => new
+               db.ProductTbls.Where(m => id == -2 ? true : m.MainCateId == id && m.Active == true).Select(m => new
                {
                    m.ProductId,
                    m.MainCateId,
@@ -503,6 +505,7 @@ namespace GiftChoice.Controllers
 
         }
 
+   
         public JsonResult GetAllProduct()
         {
             var res =
@@ -566,7 +569,41 @@ namespace GiftChoice.Controllers
 
         }
 
+        private void VaryQualityLevel(Stream stream, string fname)
+        {
 
+
+
+            //  size 
+            System.Drawing.Image photo = new Bitmap(stream);
+            //Bitmap bmp1 = new Bitmap(photo, 119, 83);
+
+            Bitmap bmp1 = new Bitmap(photo, 3000, 3000);
+            // without size
+            //  Bitmap bmp1 = new Bitmap(stream);
+            ImageCodecInfo jgpEncoder = GetEncoder(ImageFormat.Jpeg);
+            System.Drawing.Imaging.Encoder myEncoder = System.Drawing.Imaging.Encoder.Quality;
+            EncoderParameters myEncoderParameters = new EncoderParameters(1);
+            EncoderParameter myEncoderParameter = new EncoderParameter(myEncoder, 30L);
+            myEncoderParameters.Param[0] = myEncoderParameter;
+            bmp1.Save(Server.MapPath("~/images/ProductImg/" + fname), jgpEncoder, myEncoderParameters);
+            bmp1.Dispose();
+
+        }
+        private ImageCodecInfo GetEncoder(ImageFormat format)
+        {
+            ImageCodecInfo[] codecs = ImageCodecInfo.GetImageDecoders();
+
+            foreach (ImageCodecInfo codec in codecs)
+            {
+                if (codec.FormatID == format.Guid)
+                {
+                    return codec;
+                }
+            }
+            return null;
+
+        }
 
         public JsonResult SubmitProduct(ProductTblmodel model)
         {
@@ -604,6 +641,7 @@ namespace GiftChoice.Controllers
                         ProductImage productImage = new ProductImage();
                         productImage.PImageId = db.ProductImages.DefaultIfEmpty().Max(r => r == null ? 0 : r.PImageId) + 1;
                         string extensionstuimg = Path.GetExtension(model.Image1.FileName);
+                   //     VaryQualityLevel(model.Image1.InputStream, productImage.PImageId + extensionstuimg);
                         model.Image1.SaveAs(Server.MapPath("~/images/ProductImg/" + productImage.PImageId + extensionstuimg));
                         productImage.PImage = productImage.PImageId + extensionstuimg;
                         productImage.ProductId = productmodel.ProductId;
@@ -616,6 +654,7 @@ namespace GiftChoice.Controllers
                         ProductImage productImage = new ProductImage();
                         productImage.PImageId = db.ProductImages.DefaultIfEmpty().Max(r => r == null ? 0 : r.PImageId) + 1;
                         string extensionstuimg = Path.GetExtension(model.Image2.FileName);
+                      //  VaryQualityLevel(model.Image1.InputStream, productImage.PImageId + extensionstuimg);
                         model.Image2.SaveAs(Server.MapPath("~/images/ProductImg/" + productImage.PImageId + extensionstuimg));
                         productImage.PImage = productImage.PImageId + extensionstuimg;
                         productImage.ProductId = productmodel.ProductId;
@@ -812,7 +851,9 @@ namespace GiftChoice.Controllers
                             var Pimageid = productImage[0].PImageId;
                             ProductImage pimagearr = db.ProductImages.Where(c => c.PImageId == Pimageid).FirstOrDefault();
                             string extensionstuimg = Path.GetExtension(model.Image1.FileName);
+                          
                             model.Image1.SaveAs(Server.MapPath("~/images/ProductImg/" + pimagearr.PImageId + extensionstuimg));
+                         //   VaryQualityLevel(model.Image1.InputStream, Pimageid + extensionstuimg);
                             pimagearr.PImage = pimagearr.PImageId + extensionstuimg;
                             db.SaveChanges();
                         }

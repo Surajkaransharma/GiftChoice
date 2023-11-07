@@ -34,11 +34,11 @@ app.controller("HomeController", ['$scope', '$http', '$sce', 'orderByFilter', fu
     };
     $scope.GetRecentViewGifts = function () {
         debugger
-      
+
 
         $scope.RecentViewGifts = JSON.parse(localStorage.getItem('RecentViewGifts')) || [];
 
-     
+
     };
     $scope.cart = [];
     //$scope.CartItem = JSON.parse(localStorage.getItem('cart'));
@@ -342,6 +342,11 @@ app.controller("HomeController", ['$scope', '$http', '$sce', 'orderByFilter', fu
             $('#price_' + id).prop('checked', false);
 
         }
+
+        var Cid = [];
+        var priceTblarr = [];
+        $scope.minPrice = 0;
+        $scope.maxPrice = 0;
     };
     $scope.sortByReleaseDate = function (order) {
         $scope.ProductData.sort(function (a, b) {
@@ -384,12 +389,20 @@ app.controller("HomeController", ['$scope', '$http', '$sce', 'orderByFilter', fu
                 priceTblarr.push($scope.priceRanges[i]);
             }
         }
+        $scope.minPrice = 0;
+        $scope.maxPrice = 0;
+        $scope.firstItem = priceTblarr[0]; // First item
+        $scope.minPrice = $scope.firstItem.minPrice;
+        $scope.lastItem = priceTblarr[priceTblarr.length - 1];
+        $scope.maxPrice = $scope.lastItem.maxPrice;
         debugger
         $http({
             url: '/Home/FilterProductData',
             method: 'post',
             data: {
                 Cid: Cid,
+                maxprice: $scope.maxPrice,
+                minprice: $scope.minPrice,
                 Bid: Bid
             }
         }).then(function (d) {
@@ -696,7 +709,7 @@ app.controller("HomeController", ['$scope', '$http', '$sce', 'orderByFilter', fu
             alert(error.data);
         });
     };
-    $scope.GetSmillerProduct = function (id,idd) {
+    $scope.GetSmillerProduct = function (id, idd) {
         debugger
         $http.get("/Home/GetSmillerProduct?id=" + id + '&idd=' + idd).then(function (d) {
             debugger

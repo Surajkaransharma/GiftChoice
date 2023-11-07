@@ -44,7 +44,7 @@ namespace GiftChoice.Controllers
                    m.MTitle,
                    m.Active,
                    m.MImage,
-                  m.Priority,               
+                   m.Priority,
                }).OrderBy(m => m.Priority);
             return Json(res, JsonRequestBehavior.AllowGet);
 
@@ -109,7 +109,7 @@ namespace GiftChoice.Controllers
                    m.Qty,
                    ProductImage = db.ProductImages.Where(i => i.ProductId == m.ProductId).Select(i => i.PImage).FirstOrDefault(),
                    Maincate = db.MainCateTbls.Where(p => p.MainCateId == m.MainCateId).Select(p => p.MTitle).FirstOrDefault(),
-                 
+
                }).OrderBy(x => Guid.NewGuid()).Take(8);
             return Json(res, JsonRequestBehavior.AllowGet);
 
@@ -335,7 +335,7 @@ namespace GiftChoice.Controllers
 
         }
         [JsonNetFilter]
-        public JsonResult GetSmillerProduct(int id,int idd)
+        public JsonResult GetSmillerProduct(int id, int idd)
         {
             db.Configuration.ProxyCreationEnabled = false;
             var res =
@@ -694,7 +694,7 @@ namespace GiftChoice.Controllers
         }
         //, List<PriceTbl> priceTbls
         [JsonNetFilter]
-        public JsonResult FilterProductData(int[] Cid, int[] Bid)
+        public JsonResult FilterProductData(int[] Cid, int[] Bid, Double maxprice, Double minprice)
         {
             db.Configuration.ProxyCreationEnabled = false;
             if (Cid != null /*&& priceTbls != null*/)
@@ -719,7 +719,10 @@ namespace GiftChoice.Controllers
                 {
                     //&& priceTbls.Any(priceRange => p.Price >= priceRange.minPrice && p.Price <= priceRange.maxPrice)
                     ProductList =
-               db.ProductTbls.Where(p => p.Active == true && subid.Contains(p.MainCateId ?? 0)).Select(m => new
+               db.ProductTbls.Where(p => p.Active == true && subid.Contains(p.MainCateId ?? 0) &&
+               (minprice == 0 ? true : p.Price >= minprice) &&
+               (maxprice == 0 ? true : p.Price <= maxprice)
+               ).Select(m => new
                {
                    m.ProductId,
                    m.MainCateId,
@@ -782,22 +785,24 @@ namespace GiftChoice.Controllers
             {
                 var res = new
                 {
-                    ProductList = db.ProductTbls.Where(m => m.Active == true).Select(m => new
-                    {
-                        m.ProductId,
-                        m.MainCateId,
-                        m.ProductTitle,
-                        m.PLabel,
-                        m.Price,
-                        m.PUrl,
-                        m.Active,
-                        m.Priority,
-                        m.Create_at,
-                        m.Qty,
-                        ProductImage = db.ProductImages.Where(i => i.ProductId == m.ProductId).Select(i => i.PImage).FirstOrDefault(),
-                        Maincate = db.MainCateTbls.Where(p => p.MainCateId == m.MainCateId).Select(p => p.MTitle).FirstOrDefault(),
+                    ProductList = db.ProductTbls.Where(m => m.Active == true &&
+               (minprice == 0 ? true : m.Price >= minprice) &&
+               (maxprice == 0 ? true : m.Price <= maxprice)).Select(m => new
+               {
+                   m.ProductId,
+                   m.MainCateId,
+                   m.ProductTitle,
+                   m.PLabel,
+                   m.Price,
+                   m.PUrl,
+                   m.Active,
+                   m.Priority,
+                   m.Create_at,
+                   m.Qty,
+                   ProductImage = db.ProductImages.Where(i => i.ProductId == m.ProductId).Select(i => i.PImage).FirstOrDefault(),
+                   Maincate = db.MainCateTbls.Where(p => p.MainCateId == m.MainCateId).Select(p => p.MTitle).FirstOrDefault(),
 
-                    }).OrderBy(x => Guid.NewGuid())
+               }).OrderBy(x => Guid.NewGuid())
                 };
 
 
