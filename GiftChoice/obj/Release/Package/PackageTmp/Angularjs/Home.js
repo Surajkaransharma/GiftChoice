@@ -96,7 +96,7 @@ app.controller("HomeController", ['$scope', '$http', '$sce', 'orderByFilter', fu
         debugger;
 
         var selectedProduct = $scope.ProductData[index];
-        var productId = selectedProduct.ProductDetails.ProductId;
+        var productId = selectedProduct.ProductId;
 
         // Check if the product with the same productId is already in the cart
         var productInCart = $scope.cart.find(function (item) {
@@ -105,7 +105,7 @@ app.controller("HomeController", ['$scope', '$http', '$sce', 'orderByFilter', fu
 
         if (!productInCart) {
             // If the product is not in the cart, add it
-            $scope.cart.push(selectedProduct.ProductDetails);
+            $scope.cart.push(selectedProduct);
             localStorage.setItem('cart', JSON.stringify($scope.cart));
             $scope.GetCart();
             toastr["success"]("Product successfully added to the cart.");
@@ -373,12 +373,12 @@ app.controller("HomeController", ['$scope', '$http', '$sce', 'orderByFilter', fu
         var Cid = [];
         var Bid = [];
         if (id == 0) {
-            $.each($(".form-check-input:checked"), function () {
+            $.each($(".bid:checked"), function () {
                 Bid.push(parseInt($(this).val()));
             });
         } else {
 
-            $.each($(".form-check-input:checked"), function () {
+            $.each($(".cid:checked"), function () {
                 Cid.push(parseInt($(this).val()));
             });
         }
@@ -391,10 +391,13 @@ app.controller("HomeController", ['$scope', '$http', '$sce', 'orderByFilter', fu
         }
         $scope.minPrice = 0;
         $scope.maxPrice = 0;
-        $scope.firstItem = priceTblarr[0]; // First item
-        $scope.minPrice = $scope.firstItem.minPrice;
-        $scope.lastItem = priceTblarr[priceTblarr.length - 1];
-        $scope.maxPrice = $scope.lastItem.maxPrice;
+        if (priceTblarr.length != 0) {
+
+            $scope.firstItem = priceTblarr[0]; // First item
+            $scope.minPrice = $scope.firstItem.minPrice;
+            $scope.lastItem = priceTblarr[priceTblarr.length - 1];
+            $scope.maxPrice = $scope.lastItem.maxPrice;
+        }
         debugger
         $http({
             url: '/Home/FilterProductData',

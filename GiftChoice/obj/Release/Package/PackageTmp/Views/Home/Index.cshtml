@@ -9,7 +9,7 @@
     <section ng-init="SliderList()" class="carousel-slider-main text-center border-top border-bottom bg-white">
         <div class="owl-carousel owl-carousel-slider ">
             <div ng-repeat="s in SliderListData" class="item">
-                <a href="/Home/shop?Main={{s.MTitle}}"><img class="img-fluid img-responsive" src="~/images/SliderImg/{{s.SliderImage}}" alt="First slide"></a>
+                <a href="/Home/shop?Main={{s.MainCate}}"><img class="img-fluid img-responsive" src="~/images/SliderImg/{{s.SliderImage}}" alt="First slide"></a>
             </div>
         </div>
     </section>
