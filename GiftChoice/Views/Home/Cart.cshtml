@@ -19,7 +19,7 @@
     <section class="mt-50 mb-50 cart-section">
         <div class="container" ng-init="GetCart()">
             <div class="row">
-                <div class="col-12">
+                <div class="col-12" ng-show="cart.length>0">
                     <h1>Shopping Cart</h1>
                     @*<ul>
                         <li ng-repeat="i in cart track by $index">

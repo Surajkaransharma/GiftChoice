@@ -27,11 +27,12 @@ app.controller("HomeController", ['$scope', '$http', '$sce', 'orderByFilter', fu
             // If the product is not in the cart, add it
             $scope.RecentViewGifts.push(selectedProduct);
             localStorage.setItem('RecentViewGifts', JSON.stringify($scope.RecentViewGifts));
-            $scope.GetRecentViewGifts();
 
         }
+            $scope.GetRecentViewGifts();
 
     };
+
     $scope.GetRecentViewGifts = function () {
         debugger
 
@@ -90,6 +91,40 @@ app.controller("HomeController", ['$scope', '$http', '$sce', 'orderByFilter', fu
         //$scope.GetCart();
     };
 
+    $scope.RecentViewaddItemToCart = function (index) {
+        debugger
+        debugger;
+
+        var selectedProduct = $scope.RecentViewGifts[index];
+        var productId = selectedProduct.ProductId;
+
+        // Check if the product with the same productId is already in the cart
+        var productInCart = $scope.cart.find(function (item) {
+            return item.ProductId === productId;
+        });
+
+        if (!productInCart) {
+            // If the product is not in the cart, add it
+            $scope.cart.push(selectedProduct);
+            localStorage.setItem('cart', JSON.stringify($scope.cart));
+            $scope.GetCart();
+            toastr["success"]("Product successfully added to the cart.");
+        } else {
+            // If the product is already in the cart, you can handle this case as needed.
+            // For example, you can display a message to the user.
+
+            toastr["error"]('This product is already in your cart.');
+            return;
+        }
+        //$scope.cart.push($scope.ProductData[index]);
+        ////$scope.cart =    $scope.ProductData[index];
+        ////$scope.cart.push({
+        ////    'name': $scope.name,
+        ////    'price': $scope.price
+        ////});
+        //localStorage.setItem('cart', JSON.stringify($scope.cart));
+        //$scope.GetCart();
+    };
 
     $scope.GiftsaddItemToCart = function (index) {
         debugger

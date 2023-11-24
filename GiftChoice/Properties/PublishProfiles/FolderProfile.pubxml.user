@@ -30,7 +30,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>08/23/2023 11:37:52</publishTime>
     </File>
     <File Include="Angularjs/Home.js">
-      <publishTime>11/18/2023 16:42:24</publishTime>
+      <publishTime>11/24/2023 11:05:56</publishTime>
     </File>
     <File Include="Angularjs/LoginJs.js">
       <publishTime>09/14/2023 11:45:42</publishTime>
@@ -3168,10 +3168,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/06/2018 11:03:48</publishTime>
     </File>
     <File Include="bin/GiftChoice.dll">
-      <publishTime>11/23/2023 14:06:07</publishTime>
+      <publishTime>11/24/2023 11:19:48</publishTime>
     </File>
     <File Include="bin/GiftChoice.pdb">
-      <publishTime>11/23/2023 14:06:07</publishTime>
+      <publishTime>11/24/2023 11:19:48</publishTime>
     </File>
     <File Include="bin/Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll">
       <publishTime>05/24/2018 13:38:22</publishTime>
@@ -4851,7 +4851,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>05/09/2023 10:30:56</publishTime>
     </File>
     <File Include="Views/Home/Cart.cshtml">
-      <publishTime>09/25/2023 11:24:16</publishTime>
+      <publishTime>11/24/2023 11:14:31</publishTime>
     </File>
     <File Include="Views/Home/checkout.cshtml">
       <publishTime>09/14/2023 18:15:31</publishTime>
@@ -4887,7 +4887,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>10/24/2023 13:54:30</publishTime>
     </File>
     <File Include="Views/Shared/_Layout.cshtml">
-      <publishTime>11/21/2023 16:43:58</publishTime>
+      <publishTime>11/24/2023 11:16:27</publishTime>
     </File>
     <File Include="Views/Web.config">
       <publishTime>08/23/2023 11:33:33</publishTime>

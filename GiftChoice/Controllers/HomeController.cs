@@ -401,6 +401,7 @@ namespace GiftChoice.Controllers
                    m.Price,
                    m.PUrl,
                    m.Create_at,
+                   m.Qty,
                    m.Active,
                    m.Priority,
                    ProductImage = db.ProductImages.Where(i => i.ProductId == m.ProductId).Select(i => i.PImage).FirstOrDefault(),
