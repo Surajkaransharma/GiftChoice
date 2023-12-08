@@ -487,25 +487,25 @@
     /*-----------------------
         Magnific Popup
     ------------------------*/
-    $('.img-popup').magnificPopup({
-        type: 'image',
-        gallery: {
-            enabled: true
-        }
-    });
+    // $('.img-popup').magnificPopup({
+    //     type: 'image',
+    //     gallery: {
+    //         enabled: true
+    //     }
+    // });
 
-    $('.btn-close').on('click', function(e) {
-        $('.zoomContainer').remove();
-    });
+    // $('.btn-close').on('click', function(e) {
+    //     $('.zoomContainer').remove();
+    // });
 
-    $('#quickViewModal').on('show.bs.modal', function (e) {
-        $(document).click(function (e) {
-            var modalDialog = $('.modal-dialog');
-            if (!modalDialog.is(e.target) && modalDialog.has(e.target).length === 0) {
-                $('.zoomContainer').remove();
-            }
-        });
-    });
+    // $('#quickViewModal').on('show.bs.modal', function (e) {
+    //     $(document).click(function (e) {
+    //         var modalDialog = $('.modal-dialog');
+    //         if (!modalDialog.is(e.target) && modalDialog.has(e.target).length === 0) {
+    //             $('.zoomContainer').remove();
+    //         }
+    //     });
+    // });
 
     /*---------------------
         Select active
@@ -672,17 +672,17 @@
 
     /*-----Modal----*/
 
-    $('.modal').on('shown.bs.modal', function (e) {
-        $('.product-image-slider').slick('setPosition');
-        $('.slider-nav-thumbnails').slick('setPosition');
+    // $('.modal').on('shown.bs.modal', function (e) {
+    //     $('.product-image-slider').slick('setPosition');
+    //     $('.slider-nav-thumbnails').slick('setPosition');
 
-        $('.product-image-slider .slick-active img').elevateZoom({
-            zoomType: "inner",
-            cursor: "crosshair",
-            zoomWindowFadeIn: 500,
-            zoomWindowFadeOut: 750
-        });
-    })
+    //     $('.product-image-slider .slick-active img').elevateZoom({
+    //         zoomType: "inner",
+    //         cursor: "crosshair",
+    //         zoomWindowFadeIn: 500,
+    //         zoomWindowFadeOut: 750
+    //     });
+    // })
 
     /*--- VSticker ----*/
     $('#news-flash').vTicker({

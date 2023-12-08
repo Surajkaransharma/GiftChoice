@@ -35,27 +35,53 @@ namespace GiftChoice.Controllers
         public JsonResult GetMainCateData()
         {
 
-            var res =
+            int MainId = Convert.ToInt32(Session["Main2ID"]);
+            Session.Remove("Main2ID");
 
-               db.MainCateTbls.Where(m => m.Active == true).Select(m => new
-               {
-                   m.MainCateId,
-                   m.MUrl,
-                   m.MTitle,
-                   m.Active,
-                   m.MImage,
-                   m.Priority,
-               }).OrderBy(m => m.Priority);
-            return Json(res, JsonRequestBehavior.AllowGet);
+            if (MainId != 0)
+            {
+                var res = db.MainCateTbls.Where(m => m.Active == true && m.MainCateId == MainId).Select(m => new
+                {
+                    m.MainCateId,
+                    m.MUrl,
+                    m.MTitle,
+                    m.Active,
+                    m.MImage,
+                    m.Priority,
+                    MCKeyword = db.MCKeywordTbls.Where(k => k.MainCateId == m.MainCateId && k.Active == true).Select(k => new
+                    {
+
+                        k.KeywordId,
+                        k.MainCateId,
+                        Keyword = db.KeywordTbls.Where(p => p.KeywordId == k.KeywordId && p.Active == true).Select(p => p.Keyword).FirstOrDefault()
+                    }),
+                }).OrderBy(m => m.Priority);
+                return Json(res, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                var res = db.MainCateTbls.Where(m => m.Active == true).Select(m => new
+                {
+                    m.MainCateId,
+                    m.MUrl,
+                    m.MTitle,
+                    m.Active,
+                    m.MImage,
+                    m.Priority,
+                }).OrderBy(m => m.Priority);
+                return Json(res, JsonRequestBehavior.AllowGet);
+            }       
 
         }
 
         public JsonResult GetBannerCateData()
         {
+            int Search = Convert.ToInt32(Session["Search"]);
+            Session.Remove("Search");
 
             var res =
 
-               db.BannerCateTbls.Where(m => m.Active == true).Select(m => new
+               db.BannerCateTbls.Where(m => m.BannerCateId == Search && m.Active == true).Select(m => new
                {
                    m.BannerCateId,
                    m.BUrl,
@@ -110,7 +136,7 @@ namespace GiftChoice.Controllers
                    ProductImage = db.ProductImages.Where(i => i.ProductId == m.ProductId).Select(i => i.PImage).FirstOrDefault(),
                    Maincate = db.MainCateTbls.Where(p => p.MainCateId == m.MainCateId).Select(p => p.MTitle).FirstOrDefault(),
 
-               }).OrderBy(x => Guid.NewGuid()).Take(8);
+               }).OrderBy(x => Guid.NewGuid()).Take(4);
             return Json(res, JsonRequestBehavior.AllowGet);
 
         }
@@ -138,7 +164,9 @@ namespace GiftChoice.Controllers
             int Main = Convert.ToInt32(Session["Main"]);
 
             int Search = Convert.ToInt32(Session["Search"]);
-            Session.Clear();
+
+            Session.Remove("SearchKeyword");
+            Session.Remove("Main");
 
 
 
@@ -221,9 +249,7 @@ namespace GiftChoice.Controllers
                      {
                          bannerCateProduct.BannerCateId,
                          bannerCateProduct.BCProductId,
-                        product.ProductId,
-
-
+                         product.ProductId,
                          product.MainCateId,
                          product.ProductTitle,
                          product.PLabel,
@@ -233,7 +259,6 @@ namespace GiftChoice.Controllers
                          product.Create_at,
                          product.Active,
                          product.Priority,
-
                          ProductImage = db.ProductImages
                                  .Where(i => i.ProductId == product.ProductId)
                                  .Select(i => i.PImage)
@@ -245,30 +270,30 @@ namespace GiftChoice.Controllers
                                  .FirstOrDefault(),
 
                      }).ToList();
-           //db.BannerCateProductTbls.Where(m =>
-           //(Search == 0 ? true : m.BannerCateId == Search)).Select(m => new
-           //{
-           //    m.BannerCateId,
-           //    m.BCProductId,
-           //    m.ProductId,
-           //    ProductDetails = db.ProductTbls.Where(p => p.ProductId == m.ProductId).Select(p => new
-           //    {
-           //        p.ProductId,
-           //        p.MainCateId,
-           //        p.ProductTitle,
-           //        p.PLabel,
-           //        p.Price,
-           //        p.PUrl,
-           //        p.Qty,
-           //        p.Create_at,
-           //        p.Active,
-           //        p.Priority,
+                //db.BannerCateProductTbls.Where(m =>
+                //(Search == 0 ? true : m.BannerCateId == Search)).Select(m => new
+                //{
+                //    m.BannerCateId,
+                //    m.BCProductId,
+                //    m.ProductId,
+                //    ProductDetails = db.ProductTbls.Where(p => p.ProductId == m.ProductId).Select(p => new
+                //    {
+                //        p.ProductId,
+                //        p.MainCateId,
+                //        p.ProductTitle,
+                //        p.PLabel,
+                //        p.Price,
+                //        p.PUrl,
+                //        p.Qty,
+                //        p.Create_at,
+                //        p.Active,
+                //        p.Priority,
 
                 //        ProductImage = db.ProductImages.Where(i => i.ProductId == p.ProductId).Select(i => i.PImage).FirstOrDefault(),
                 //        Maincate = db.MainCateTbls.Where(q => q.MainCateId == p.MainCateId).Select(q => q.MTitle).FirstOrDefault(),
                 //    }).FirstOrDefault(),
 
-            //}).OrderBy(x => Guid.NewGuid());
+                //}).OrderBy(x => Guid.NewGuid());
                 return Json(res, JsonRequestBehavior.AllowGet);
             }
             else
@@ -368,14 +393,14 @@ namespace GiftChoice.Controllers
                    ProductImage = db.ProductImages.Where(i => i.ProductId == m.ProductId).Select(i => i.PImage).FirstOrDefault(),
                    AllProductImage = db.ProductImages.Where(i => i.ProductId == m.ProductId).Select(i => i.PImage),
                    Maincate = db.MainCateTbls.Where(p => p.MainCateId == m.MainCateId).FirstOrDefault(),
-                   //Submenu = db.PKeywordTbls.Where(s => s.ProductId == m.ProductId && s.Active == true).Select(s => new
-                   //{
-                   //    s.ProductId,
-                   //    s.KeywordId,
-                   //    s.PKeywordId,
-                   //    SubmenuTitle = db.KeywordTbls.Where(t => t.KeywordId == s.KeywordId && t.Active == true).Select(t => t.Keyword).FirstOrDefault()
-                   //}),
-                   PSizeList = db.PSizeTbls.Where(s => s.ProductId == m.ProductId && s.Active == true).Select(s => new
+           //Submenu = db.PKeywordTbls.Where(s => s.ProductId == m.ProductId && s.Active == true).Select(s => new
+           //{
+           //    s.ProductId,
+           //    s.KeywordId,
+           //    s.PKeywordId,
+           //    SubmenuTitle = db.KeywordTbls.Where(t => t.KeywordId == s.KeywordId && t.Active == true).Select(t => t.Keyword).FirstOrDefault()
+           //}),
+           PSizeList = db.PSizeTbls.Where(s => s.ProductId == m.ProductId && s.Active == true).Select(s => new
                    {
                        s.ProductId,
                        s.SizeId,
@@ -443,6 +468,8 @@ namespace GiftChoice.Controllers
 
             ViewBag.Main = Main == "" ? 0 : db.MainCateTbls.Where(m => m.MTitle == Main).Select(m => m.MainCateId).FirstOrDefault();
             Session["Main"] = ViewBag.Main;
+            Session["Main2ID"] = ViewBag.Main;
+
 
 
 
@@ -818,7 +845,7 @@ namespace GiftChoice.Controllers
                                    {
                                        bannerCateProduct.BannerCateId,
                                        bannerCateProduct.BCProductId,
-                                   product.ProductId,
+                                       product.ProductId,
 
                                        product.MainCateId,
                                        product.ProductTitle,

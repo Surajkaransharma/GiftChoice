@@ -113,10 +113,10 @@
 
                                         <input class="form-check-input bid" type="checkbox" name="checkbox" id="Main_{{m.BannerCateId}}" value="{{m.BannerCateId}}">
                                         <label class="form-check-label" for="Main_{{m.BannerCateId}}"><span>{{m.BTitle}}</span></label>
-                                        <span ng-repeat="k in m.MCKeyword">
+                                        <div ng-repeat="k in m.MCKeyword">
                                             <input class="form-check-input bid" type="checkbox" name="checkbox" id="kMain_{{k.KeywordId}}" value="{{m.BannerCateId}}">
                                             <label class="form-check-label" for="kMain_{{k.KeywordId}}"><span>{{k.Keyword}}</span></label>
-                                        </span>
+                                        </div>
 
                                     </div>
                                     <br>

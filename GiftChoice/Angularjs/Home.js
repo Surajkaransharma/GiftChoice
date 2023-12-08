@@ -372,6 +372,7 @@ app.controller("HomeController", ['$scope', '$http', '$sce', 'orderByFilter', fu
             $('#Main_' + vallc1s).prop('checked', false);
 
         }
+
         for (var i = 0; i < $scope.priceRanges.length; i++) {
             var id = $scope.priceRanges[i].id;
             $('#price_' + id).prop('checked', false);
