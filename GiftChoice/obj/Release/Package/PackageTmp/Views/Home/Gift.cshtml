@@ -3,7 +3,45 @@
     ViewBag.Title = "Gift";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<style>
+    #profile-description {
+        max-width: 400px;
+        margin-top: 50px;
+        position: relative;
+    }
 
+        #profile-description .text {
+            /*   width: 660px;  */
+            margin-bottom: 5px;
+            color: #777;
+            padding: 0 15px;
+            position: relative;
+            font-family: Arial;
+            font-size: 14px;
+            display: block;
+        }
+
+        #profile-description .show-more {
+            /*   width: 690px;  */
+            color: #777;
+            position: relative;
+            font-size: 12px;
+            padding-top: 5px;
+            height: 20px;
+            text-align: center;
+            background: #f1f1f1;
+            cursor: pointer;
+        }
+
+            #profile-description .show-more:hover {
+                color: #1779dd;
+            }
+
+        #profile-description .show-more-height {
+            height: 65px;
+            overflow: hidden;
+        }
+</style>
 <main class="main" ng-init="GetProductByid(@ViewBag.id)">
 
     <!-- Breadcrumb Section Start -->
@@ -61,22 +99,16 @@
                                             <ins><span class="text-brand"><i class="fa fa-inr" aria-hidden="true"></i>{{Product.Price}}/-</span></ins>
                                         </div>
                                     </div>
+                                    <div id="profile-description">
 
-                                    <div class="description mb-20">
-                                        <p align="justify" id="desc" class="fs-7">
-                                        </p>
+                                        <div class="description mb-20 text show-more-height">
+                                            <p align="justify" id="desc" class="fs-7">
+                                            </p>
 
+                                        </div>
                                     </div>
-
-                                    @*<div class="social-icons single-share mb-20">
-                        <ul class="text-grey-5 d-inline-block">
-                            <li><strong class="mr-10">Share this:</strong></li>
-                            <li class="social-facebook"><a href="#"><img src="assets/imgs/theme/icons/icon-facebook.svg" alt=""></a></li>
-                            <li class="social-twitter"> <a href="#"><img src="assets/imgs/theme/icons/icon-twitter.svg" alt=""></a></li>
-                            <li class="social-instagram"><a href="#"><img src="assets/imgs/theme/icons/icon-instagram.svg" alt=""></a></li>
-                            <li class="social-linkedin"><a href="#"><img src="assets/imgs/theme/icons/icon-pinterest.svg" alt=""></a></li>
-                        </ul>
-                    </div>*@
+                                    <div class="show-more">(Show More)</div>
+                           
 
                                     <div class="attr-detail attr-size mb-30" ng-show="Product.PSizeList.length>0">
                                         <strong class="mr-10">Size</strong>
@@ -86,12 +118,7 @@
                                         </ul>
                                     </div>
 
-                                    <div class="detail-extralink">
-                                        @*<div class="detail-qty border radius">
-                            <a href="#" class="qty-down"><i class="fi-rs-angle-small-down"></i></a>
-                            <span class="qty-val">1</span>
-                            <a href="#" class="qty-up"><i class="fi-rs-angle-small-up"></i></a>
-                        </div>*@
+                                    <div class="detail-extralink">                                     
                                         <a class="button button-add-to-cart text-white" ng-click="GiftAddItemToCart(Product.ProductId)" role="button">Add To Cart</a>
                                     </div>
                                 </div>
@@ -135,7 +162,7 @@
                             <div class="col-12">
                                 <h3 class="section-title style-1 mb-30">Related Gifts</h3>
                             </div>
-                            <div class="row product-grid-4" >
+                            <div class="row product-grid-4">
                                 <div class="col-lg-3 col-6 col-sm-4" ng-repeat="q in ProductData" ng-click="RecentViewData($index)">
                                     <div class="product-cart-wrap mb-30">
                                         <div class="product-img-action-wrap">
@@ -170,5 +197,20 @@
             </div>
         </div>
     </section>
+
+    <script src="~/Content/assets/js/vendor/jquery-3.6.0.min.js"></script>
+
+    <script>
+        $(".show-more").click(function () {
+            if ($(".text").hasClass("show-more-height")) {
+                $(this).text("(Show Less)");
+            } else {
+                $(this).text("(Show More)");
+            }
+
+            $(".text").toggleClass("show-more-height");
+        });
+    </script>
 </main>
+
 <!-- Main Section End -->

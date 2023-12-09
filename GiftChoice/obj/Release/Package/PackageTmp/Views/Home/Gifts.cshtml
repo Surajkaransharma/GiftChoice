@@ -107,16 +107,16 @@
                     <div class="sidebar-widget price_range range mb-20 p-3">
                         <div class="list-group" ng-init="GetBannerCateData()">
                             <div class="list-group-item mb-1 mt-1">
-                                <label class="fw-900">Select Category</label>
+                                <label class="fw-900">{{MainCateData[0].BTitle}}</label>
                                 <div class="custome-checkbox">
                                     <div ng-repeat="m in MainCateData">
 
-                                        <input class="form-check-input bid" type="checkbox" name="checkbox" id="Main_{{m.BannerCateId}}" value="{{m.BannerCateId}}">
-                                        <label class="form-check-label" for="Main_{{m.BannerCateId}}"><span>{{m.BTitle}}</span></label>
-                                        <span ng-repeat="k in m.MCKeyword">
-                                            <input class="form-check-input bid" type="checkbox" name="checkbox" id="kMain_{{k.KeywordId}}" value="{{m.BannerCateId}}">
+                                        @*<input class="form-check-input bid" type="checkbox" name="checkbox" id="Main_{{m.BannerCateId}}" value="{{m.BannerCateId}}">
+                                        <label class="form-check-label" for="Main_{{m.BannerCateId}}"><span>{{m.BTitle}}</span></label>*@
+                                        <div ng-repeat="k in m.MCKeyword">
+                                            <input class="form-check-input bid" type="checkbox" name="checkbox" id="kMain_{{k.KeywordId}}" value="{{k.KeywordId}}">
                                             <label class="form-check-label" for="kMain_{{k.KeywordId}}"><span>{{k.Keyword}}</span></label>
-                                        </span>
+                                        </div>
 
                                     </div>
                                     <br>

@@ -10,6 +10,10 @@
     img {
         width: 50px
     }
+    .box1 {
+        inline-size: 150px !important;
+        overflow-wrap: break-word !important;
+    }
 </style>
 
 <script src="~/Angularjs/Admin.js"></script>
@@ -157,8 +161,8 @@
                                 <thead class="table-light">
                                     <tr>
                                         <th>S.No.</th>
-                                        <th>Product Title</th>
-                                        <th>Main Category Name</th>
+                                        <th class="box1">Product Title</th>
+                                        <th class="box1">Main Category Name</th>
                                         <th>Label</th>
                                         <th>Price</th>
                                         <th>Priority</th>
@@ -172,8 +176,8 @@
                                 <tbody>
                                     <tr ng-repeat="m in ProductData">
                                         <td>{{$index+1}}</td>
-                                        <td>{{m.ProductTitle}}</td>
-                                        <td>{{m.Maincate}}</td>
+                                        <td style="white-space:normal" class="box1">{{m.ProductTitle}}</td>
+                                        <td style="white-space:normal" class="box1">{{m.Maincate}}</td>
                                         <td>{{m.PLabel}}</td>
                                         <td>{{m.Price}}</td>
                                         <td>{{m.Priority}}</td>

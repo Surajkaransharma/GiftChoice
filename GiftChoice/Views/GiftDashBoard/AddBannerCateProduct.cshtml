@@ -9,7 +9,7 @@
         width: 50px
     }
     .box1 {
-        inline-size: 100px !important;
+        inline-size: 150px !important;
         overflow-wrap: break-word !important;
     }
 </style>
@@ -66,8 +66,8 @@
                     <div class="card-body">
                         <div class="d-lg-flex align-items-center mb-4 gap-3">
                             <div class="position-relative">
-                                <input type="text" class="form-control ps-5 radius-30" ng-model="search" placeholder="Search here...">
-                                <span class="position-absolute top-50 product-show translate-middle-y"><i class="bx bx-search"></i></span>
+                                @*<input type="text" class="form-control ps-5 radius-30" ng-model="search" placeholder="Search here...">
+                                <span class="position-absolute top-50 product-show translate-middle-y"><i class="bx bx-search"></i></span>*@
                             </div>
                             @*  <div class="ms-auto"><a href="javascript:;" class="btn btn-primary radius-30 mt-2 mt-lg-0" data-bs-toggle="modal" data-bs-target="#createcompany"><i class="bx bxs-plus-square"></i>Add New Company</a></div>*@
 
@@ -96,18 +96,12 @@
                                     <tr ng-repeat="m in ProductData | filter:search">
                                         <td>{{$index+1}}</td>
                                         <td>
-
-
                                             <input type="checkbox" id="ProductId_{{m.ProductId}}" class="checkbox-input" value="{{m.ProductId}}" ng-model="m.Selected" ng-checked="" />
-
-
-
-
 
                                         </td>
                                         <td class="box1" style="white-space:normal">{{m.ProductTitle}}</td>
                                         <td class="box1" style="white-space:normal">{{m.Maincate}}</td>
-                                        <td>{{m.PLabel}}</td>
+                                        <td style="width: 150px">{{m.PLabel}}</td>
                                         <td>{{m.Price}}</td>
 
                                         <td><span ng-repeat="i in m.ProductImage"><img src="~/images/ProductImg/{{i}}"><br /></span> </td>

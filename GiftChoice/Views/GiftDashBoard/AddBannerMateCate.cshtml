@@ -4,7 +4,12 @@
     Layout = "~/Views/Shared/_Admin.cshtml";
 }
 
-
+<style>
+    .box1 {
+        inline-size: 100px !important;
+        overflow-wrap: break-word !important;
+    }
+</style>
 <script src="~/Angularjs/Admin.js"></script>
 <div class="page-wrapper" ng-app="AdminApp" ng-controller="AdminController">
     <div class="page-content">
@@ -89,7 +94,7 @@
                                     <tr>
                                         <th>S.No.</th>
                                         <th>Banner Category Name</th>
-                                        <th>Keyword</th>
+                                        <th class="box1" >Keyword</th>
                                         <th>Priority</th>
                                         <th>Active</th>
                                         <th>Action</th>
@@ -99,7 +104,7 @@
                                     <tr ng-repeat="m in BannerCateData">
                                         <td>{{$index+1}}</td>
                                         <td>{{m.BTitle}}</td>
-                                        <td><span ng-repeat="n in m.Submenu">{{n.SubmenuTitle}},</span></td>
+                                        <td class="box1" style="white-space:normal"><span ng-repeat="n in m.Submenu">{{n.SubmenuTitle}},</span></td>
                                         <td>{{m.Priority}}</td>
                                         <td><a ng-click="BannerActiveDeActive(m.BannerCateId)"> <span class="badge {{m.Active==1? 'bg-success' : 'bg-danger'}}">{{m.Active==1?'Active':'Deactive'}}</span></a> </td>
 

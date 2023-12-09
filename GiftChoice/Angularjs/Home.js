@@ -576,7 +576,10 @@ app.controller("HomeController", ['$scope', '$http', '$sce', 'orderByFilter', fu
         debugger
         $http.get("/Home/FilterProduct").then(function (d) {
             debugger
+
+
             $scope.ProductData = d.data;
+            debugger
         }, function (error) {
             alert(error.data);
         });
