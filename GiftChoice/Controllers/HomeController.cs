@@ -846,7 +846,6 @@ namespace GiftChoice.Controllers
                                        bannerCateProduct.BannerCateId,
                                        bannerCateProduct.BCProductId,
                                        product.ProductId,
-
                                        product.MainCateId,
                                        product.ProductTitle,
                                        product.PLabel,
