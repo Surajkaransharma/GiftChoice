@@ -20,77 +20,21 @@
     <!-- Font Awasome Intro -->
     <link rel="stylesheet" href="~/Content/assets/css/font-awasome/font-awesome.css">
     <link rel="stylesheet" href="~/Content/assets/css/font-awasome/font-awesome.min.css">
-    <link href="~/Content/assets/owl-carousel/owl.theme.css" rel="stylesheet" />
-    <link href="~/Content/assets/owl-carousel/owl.carousel.css" rel="stylesheet" />
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;400;500&display=swap" rel="stylesheet">
+
+    <!-- Amination Link -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+
+    <!-- Angular Js Links-->
     <link href="~/Angularjs/toast-alert/toastr.css" rel="stylesheet" />
     <script src="~/Angularjs/angular.min.js"></script>
     <script src="~/Angularjs/Home.js"></script>
 
-
-    @*<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
-    <script src="https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>*@
-    <style>
-        .ui-corner-all {
-            -moz-border-radius: 4px 4px 4px 4px;
-        }
-
-        .ui-widget-content {
-            border: 5px solid black;
-         
-            background-color: white;
-        }
-
-        .ui-widget {
-            font-family: "Spartan", sans-serif;
-            font-size: 15px;
-            font-weight: 700;
-        }
-
-        .ui-menu {
-            display: block;
-            float: left;
-            list-style: none outside none;
-            margin: 0;
-            padding: 2px;
-        }
-
-        .ui-autocomplete {
-            cursor: default;
-            position: absolute;
-        }
-
-        .ui-menu .ui-menu-item {
-            clear: left;
-            float: left;
-            margin: 0;
-            padding: 0;
-            width: 100%;
-        }
-/*
-            .ui-menu .ui-menu-item a {
-                display: block;
-                padding: 3px 3px 3px 3px;
-                text-decoration: none;
-                cursor: pointer;
-                background-color: Green;
-            }*/
-
-               /* .ui-menu .ui-menu-item a:hover {
-                    display: block;
-                    padding: 3px 3px 3px 3px;
-                    text-decoration: none;
-                    color: White;
-                    cursor: pointer;
-                    background-color: ButtonText;
-                }*/
-
-/*        .ui-widget-content a {
-            color: #222222;
-        }*/
-    </style>
-
-    <!-- Amination Link -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
 </head>
 <body ng-app="HomeApp" ng-controller="HomeController">
     <div>
@@ -231,7 +175,7 @@
                     <div class="search-style-3">
 
                         <form ng-submit="SearchDataShop()" class="mb-0">
-                  
+
                             <input type="text" placeholder="Search for items…" id="MKeyword" ng-model="Keyword" ng-change="GetRandomKeywordMobile()">
                             <button type="submit"><i class="fi-rs-search"></i></button>
                         </form>
@@ -404,7 +348,7 @@
                     </div>
                     <div class="col-lg-6">
                         <p class="text-lg-end text-start font-sm text-muted mb-0">
-                            Designed by <a href="/Home/Index" target="_blank">Gift Choice Bhilwara</a>. All rights reserved
+                            Designed by <a href="#" target="_blank">Friends Fix It</a>. All rights reserved
                         </p>
                     </div>
                 </div>
@@ -433,12 +377,17 @@
     <script src="~/Content/assets/js/plugins/scrollup.js"></script>
     <script src="~/Content/assets/js/plugins/jquery.vticker-min.js"></script>
     <script src="~/Content/assets/js/plugins/jquery.theia.sticky.js"></script>
-    <!-- <script src="~/Content/assets/js/plugins/jquery.elevatezoom.js"></script> -->
-    <script src="~/Content/assets/owl-carousel/owl.carousel.js"></script>
-    <script src="~/Angularjs/toast-alert/toastr.js"></script>
+    <script src="~/Content/assets/js/plugins/jquery.elevatezoom.js"></script>
+
     <!-- Template  JS -->
     <script src="~/Content/assets/js/main.js"></script>
     <script src="~/Content/assets/js/shop.js"></script>
+
+    <!-- AOS Animation -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init();
+    </script>
 
 </body>
 </html>

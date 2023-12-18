@@ -70,93 +70,49 @@
     });
 
     /*Carausel 6 columns*/
-    //$(".carausel-6-columns").each(function(key, item) {
-    //    var id=$(this).attr("id");
-    //    var sliderID='#'+id;
-    //    var appendArrowsClassName = '#'+id+'-arrows'
+    $(".carausel-6-columns").each(function(key, item) {
+        var id=$(this).attr("id");
+        var sliderID='#'+id;
+        var appendArrowsClassName = '#'+id+'-arrows'
 
-    //    $(sliderID).slick({
-    //        dots: false,
-    //        infinite: true,
-    //        speed: 1000,
-    //        arrows: true,
-    //        autoplay: true,
-    //        slidesToShow: 8,
-    //        slidesToScroll: 1,
-    //        loop: true,
-    //        adaptiveHeight: true,
-    //        responsive: [
-    //            {
-    //                breakpoint: 1025,
-    //                settings: {
-    //                    slidesToShow: 4,
-    //                    slidesToScroll: 1,
-    //                }
-    //            },
-    //            {
-    //                breakpoint: 768,
-    //                settings: {
-    //                    slidesToShow: 3,
-    //                    slidesToScroll: 1,
-    //                }
-    //            },
-    //            {
-    //                breakpoint: 480,
-    //                settings: {
-    //                    slidesToShow: 4,
-    //                    slidesToScroll: 1
-    //                }
-    //            }
-    //        ],
-    //        prevArrow: '<span class="slider-btn slider-prev"><i class="fi-rs-angle-left"></i></span>',
-    //        nextArrow: '<span class="slider-btn slider-next"><i class="fi-rs-angle-right"></i></span>',
-    //        appendArrows:  (appendArrowsClassName),
-    //    });
-    //});
-
-    //$(".carausel-6-columns").each(function(key, item) {
-    //    var id=$(this).attr("id");
-    //    var sliderID='#'+id;
-    //    var appendArrowsClassName = '#'+id+'-arrows'
-
-    //    $(sliderID).slick({
-    //        dots: false,
-    //        infinite: true,
-    //        speed: 1000,
-    //        arrows: true,
-    //        autoplay: true,
-    //        slidesToShow: 8,
-    //        slidesToScroll: 1,
-    //        loop: true,
-    //        adaptiveHeight: true,
-    //        responsive: [
-    //            {
-    //                breakpoint: 1025,
-    //                settings: {
-    //                    slidesToShow: 4,
-    //                    slidesToScroll: 1,
-    //                }
-    //            },
-    //            {
-    //                breakpoint: 768,
-    //                settings: {
-    //                    slidesToShow: 4,
-    //                    slidesToScroll: 1,
-    //                }
-    //            },
-    //            {
-    //                breakpoint: 480,
-    //                settings: {
-    //                    slidesToShow: 4,
-    //                    slidesToScroll: 1
-    //                }
-    //            }
-    //        ],
-    //        prevArrow: '<span class="slider-btn slider-prev"><i class="fi-rs-angle-left"></i></span>',
-    //        nextArrow: '<span class="slider-btn slider-next"><i class="fi-rs-angle-right"></i></span>',
-    //        appendArrows:  (appendArrowsClassName),
-    //    });
-    //});
+        $(sliderID).slick({
+            dots: false,
+            infinite: false,
+            speed: 1000,
+            arrows: true,
+            autoplay: true,
+            slidesToShow: 1,
+            slidesToScroll: 1,
+            loop: false,
+            adaptiveHeight: true,
+            responsive: [
+                {
+                    breakpoint: 1025,
+                    settings: {
+                        slidesToShow: 1,
+                        slidesToScroll: 1,
+                    }
+                },
+                {
+                    breakpoint: 768,
+                    settings: {
+                        slidesToShow: 1,
+                        slidesToScroll: 1,
+                    }
+                },
+                {
+                    breakpoint: 480,
+                    settings: {
+                        slidesToShow: 1,
+                        slidesToScroll: 1
+                    }
+                }
+            ],
+            prevArrow: '<span class="slider-btn slider-prev"><i class="fi-rs-angle-left"></i></span>',
+            nextArrow: '<span class="slider-btn slider-next"><i class="fi-rs-angle-right"></i></span>',
+            appendArrows:  (appendArrowsClassName),
+        });
+    });
 
     /*Carausel 4 columns*/
     $(".carausel-4-columns").each(function(key, item) {
@@ -487,25 +443,25 @@
     /*-----------------------
         Magnific Popup
     ------------------------*/
-    // $('.img-popup').magnificPopup({
-    //     type: 'image',
-    //     gallery: {
-    //         enabled: true
-    //     }
-    // });
+    $('.img-popup').magnificPopup({
+        type: 'image',
+        gallery: {
+            enabled: true
+        }
+    });
 
-    // $('.btn-close').on('click', function(e) {
-    //     $('.zoomContainer').remove();
-    // });
+    $('.btn-close').on('click', function(e) {
+        $('.zoomContainer').remove();
+    });
 
-    // $('#quickViewModal').on('show.bs.modal', function (e) {
-    //     $(document).click(function (e) {
-    //         var modalDialog = $('.modal-dialog');
-    //         if (!modalDialog.is(e.target) && modalDialog.has(e.target).length === 0) {
-    //             $('.zoomContainer').remove();
-    //         }
-    //     });
-    // });
+    $('#quickViewModal').on('show.bs.modal', function (e) {
+        $(document).click(function (e) {
+            var modalDialog = $('.modal-dialog');
+            if (!modalDialog.is(e.target) && modalDialog.has(e.target).length === 0) {
+                $('.zoomContainer').remove();
+            }
+        });
+    });
 
     /*---------------------
         Select active
@@ -672,17 +628,17 @@
 
     /*-----Modal----*/
 
-    // $('.modal').on('shown.bs.modal', function (e) {
-    //     $('.product-image-slider').slick('setPosition');
-    //     $('.slider-nav-thumbnails').slick('setPosition');
+    $('.modal').on('shown.bs.modal', function (e) {
+        $('.product-image-slider').slick('setPosition');
+        $('.slider-nav-thumbnails').slick('setPosition');
 
-    //     $('.product-image-slider .slick-active img').elevateZoom({
-    //         zoomType: "inner",
-    //         cursor: "crosshair",
-    //         zoomWindowFadeIn: 500,
-    //         zoomWindowFadeOut: 750
-    //     });
-    // })
+        $('.product-image-slider .slick-active img').elevateZoom({
+            zoomType: "inner",
+            cursor: "crosshair",
+            zoomWindowFadeIn: 500,
+            zoomWindowFadeOut: 750
+        });
+    })
 
     /*--- VSticker ----*/
     $('#news-flash').vTicker({
@@ -695,3 +651,20 @@
 
 })(jQuery);
 
+
+// View More & Less
+    function myFunction() {
+      var dots = document.getElementById("dots");
+      var moreText = document.getElementById("more");
+      var btnText = document.getElementById("myBtn");
+    
+      if (dots.style.display === "none") {
+        dots.style.display = "inline";
+        btnText.innerHTML = "Read more"; 
+        moreText.style.display = "none";
+      } else {
+        dots.style.display = "none";
+        btnText.innerHTML = "Read less"; 
+        moreText.style.display = "inline";
+      }
+    }
