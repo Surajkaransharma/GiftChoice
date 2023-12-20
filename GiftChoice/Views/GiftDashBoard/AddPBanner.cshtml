@@ -1,12 +1,11 @@
 ﻿
 @{
-    /**/
-
-    ViewBag.Title = "AddMainCate";
+    ViewBag.Title = "AddPBanner";
     Layout = "~/Views/Shared/_Admin.cshtml";
 }
+
 <style>
-    .img64 img {
+    img {
         width: 50px
     }
 </style>
@@ -14,7 +13,7 @@
 <div class="page-wrapper" ng-app="AdminApp" ng-controller="AdminController">
     <div class="page-content">
         <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
-            <div class="breadcrumb-title pe-3">Main Category</div>
+            <div class="breadcrumb-title pe-3">Banner</div>
             <div class="ps-3">
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb mb-0 p-0">
@@ -28,21 +27,39 @@
 
         </div>
         <div class="row">
-            <div class="col-xl-5">
+            <div class="col-xl-4">
 
                 <div class="card">
                     <div class="card-body p-4">
 
                         <form class="row g-3" enctype="multipart/form-data">
                             <div class="col-md-12">
-                                <label for="input1" class="form-label">Main Category Title</label>
-                                <input type="text" class="form-control" id="MTitle" ng-model="MainCate.MTitle" placeholder="Main Category">
-                                @*<input type="hidden" class="form-control" id="imgcode" ng-model="MainCate.MImage" placeholder="Main Category">*@
-                                @*<div id="imageContainer"></div>*@
+                                <label for="input1" class="form-label">Select Banner Position</label>
+
+                                @*<select id="MainCateSelect" class="form-select" ng-init="GetBannerCategoryData()" ng-model="Banner.MainCateId">
+                <option ng-selected="true" value="-1">Select Banner Category</option>
+                <option ng-repeat="m in BannerCateData" value="{{m.BannerCateId}}">{{m.BTitle}}</option>
+            </select>*@
+                                <select id="MainCateSelect" class="form-select" ng-model="PBanner.BannerCateId">
+                                    <option ng-selected="true" value="-1">Select Banner Position</option>
+                                    <option value="Top Banner">Top Banner</option>
+                                    <option value="Center Banner">Center Banner</option>
+
+
+
+                                </select>
+
+
                             </div>
                             <div class="col-md-12">
+                                <label for="input1" class="form-label">Banner Title</label>
+                                <input type="text" class="form-control" id="BTitle" ng-model="BannerCate.BTitle" placeholder="Banner Title">
 
-                                <label for="inputFirstName" class="form-label">Image <span style="color:#ff0000;font-weight:bolder;">880 * 880</span></label>
+                            </div>
+
+                            <div class="col-md-12">
+
+                                <label for="inputFirstName" class="form-label">Image <span style="color:#ff0000;font-weight:bolder;"></span></label>
 
                                 <section id="image-section">
                                     <div id="uploadArea" class="upload-area">
@@ -66,7 +83,7 @@
                                             <p class="drop-zoon__paragraph">Drop your file here or Click to browse</p>
                                             <span id="loadingText" class="drop-zoon__loading-text">Please Wait</span>
                                             <img src="" alt="Preview Image" id="previewImage" class="drop-zoon__preview-image" draggable="false">
-                                            <input type="file" id="fileInput" upload-file="MainCate.Image" class="drop-zoon__file-input" multiple>
+                                            <input type="file" id="fileInput" upload-file="Banner.Image" class="drop-zoon__file-input" multiple>
                                         </div>
                                         <!-- End Drop Zoon -->
                                         <!-- File Details -->
@@ -94,67 +111,29 @@
 
                             <div class="col-md-12">
                                 <label for="input1" class="form-label">Priority</label>
-                                <input type="number" id="Priority" class="form-control" ng-model="MainCate.Priority" placeholder="Priority">
+                                <input type="number" class="form-control" ng-model="Banner.Priority" id="Priority" placeholder="Priority">
                             </div>
+
                             <div class="col-md-12" ng-init="GetKeywordData()">
                                 <label for="input1" class="form-label">Select Keyword</label>
-                                <table class="table">
-                                    <thead>
-                                        <tr>
-                                            <th>Keyword</th>
-                                            <th>Menu Show</th>
-                                            <th>Filter Show</th>
-                                            <th>Menu/Filter Show</th>
 
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr ng-repeat="k in KeywordList">
-                                            <td>
-                                                <div class="" id="check_box">
-                                                    <label class="checkbox-wrapper">
-                                                        <input type="checkbox" id="Keyword_{{k.KeywordId}}" class="checkbox-input" value="{{k.KeywordId}}" ng-model="k.Selected" ng-checked="" />
-                                                        <span class="checkbox-tile">
-                                                            <span class="checkbox-label">{{k.Keyword}}</span>
-                                                        </span>
-                                                    </label>
-                                                </div>
-                                            </td>
-                                            <td> <input type="radio" ng-model="k.Menu" name="m_{{k.KeywordId}}" class="Menu" id="Menu_{{k.KeywordId}}" value="Menu" /> </td>
-                                            <td> <input type="radio" ng-model="k.Menu" name="m_{{k.KeywordId}}" class="Menu" id="Fliter_{{k.KeywordId}}" value="Fliter" ng-checked="true" /> </td>
-                                            <td> <input type="radio" ng-model="k.Menu" name="m_{{k.KeywordId}}" class="Menu" id="MenuFilter_{{k.KeywordId}}" value="MenuFilter" /> </td>
+                                <div class="" id="check_box">
+                                    <label class="checkbox-wrapper" ng-repeat="k in KeywordList">
+                                        <input type="checkbox" id="Keyword_{{k.KeywordId}}" class="checkbox-input" value="{{k.KeywordId}}" ng-model="k.Selected" ng-checked="" />
+                                        <span class="checkbox-tile">
+                                            <span class="checkbox-label">{{k.Keyword}}</span>
+                                        </span>
+                                    </label>
 
 
-
-                                        </tr>
-                                    </tbody>
-                                </table>
-                                @*<div class="" id="check_box">
-                                        <label class="checkbox-wrapper" ng-repeat="k in KeywordList">
-                                            <input type="checkbox" id="Keyword_{{k.KeywordId}}" class="checkbox-input" value="{{k.KeywordId}}" ng-model="k.Selected" ng-checked="" />
-                                            <span class="checkbox-tile">
-                                                <span class="checkbox-label">{{k.Keyword}}</span>
-                                            </span>
-                                        </label>
-
-
-                                    </div>*@
+                                </div>
                             </div>
 
-                            @*<div class="col-md-4">
-                                    <label for="input9" class="form-label">State</label>
-                                    <select id="input9" class="form-select">
-                                        <option selected="">Choose...</option>
-                                        <option>One</option>
-                                        <option>Two</option>
-                                        <option>Three</option>
-                                    </select>
-                                </div>*@
 
                             <div class="col-md-12">
                                 <div class="d-md-flex d-grid align-items-center gap-3">
-                                    <button type="button" id="btn" ng-click="SubmitMainCate()" class="btn btn-primary px-4">Submit</button>
-                                    <button type="button" id="edbtn" ng-click="UpdateMainCate()" style="display: none" class="btn btn-primary px-4">Update</button>
+                                    <button type="button" id="btn" ng-click="SubmitBanner()" class="btn btn-primary px-4">Submit</button>
+                                    <button type="button" id="edbtn" ng-click="UpdateBanner()" style="display: none" class="btn btn-primary px-4">Update</button>
                                     <button type="button" class="btn btn-light px-4" onClick="refreshPage()">Reset</button>
                                 </div>
                             </div>
@@ -163,7 +142,7 @@
                 </div>
 
             </div>
-            <div class="col-xl-7">
+            <div class="col-xl-8">
                 <div class="card">
                     <div class="card-body">
                         <div class="d-lg-flex align-items-center mb-4 gap-3">
@@ -179,28 +158,30 @@
 
                         </div>
                         <div class="table-responsive">
-                            <table class="table mb-0 table-bordered" ng-init="GetMainCate()">
+                            <table class="table mb-0 table-bordered" ng-init="BannerList()">
                                 <thead class="table-light">
                                     <tr>
                                         <th>S.No.</th>
-                                        <th>Main Category Name</th>
-                                        <th>Keyword</th>
+                                        <th>Banner Category Name</th>
                                         <th>Priority</th>
                                         <th>Image</th>
                                         <th>Active</th>
+
                                         <th>Action</th>
+
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr ng-repeat="m in MainCateData">
+                                    <tr ng-repeat="m in BannerListData">
                                         <td>{{$index+1}}</td>
-                                        <td>{{m.MTitle}}</td>
-                                        <td style="white-space: normal"><span ng-repeat="n in m.Submenu">{{n.SubmenuTitle}},</span></td>
+                                        <td>{{m.MainCate}}</td>
                                         <td>{{m.Priority}}</td>
-                                        <td><a ng-click="MainCateActiveDeActive(m.MainCateId)"> <span class="badge {{m.Active==1? 'bg-success' : 'bg-danger'}}">{{m.Active==1?'Active':'Deactive'}}</span></a> </td>
-                                        <td><img src="~/images/MainCate/{{m.MImage}}" style="width:50px"></td>
-                                        <td><a><i class="bx bxs-pencil" ng-click="GetMainCatebyid($index)"></i></a></td>
+                                        <td><img src="~/images/BannerImage/{{m.BannerImage}}"></td>
+                                        <td><a ng-click="ADBanner(m.BannerId)"> <span class="badge {{m.Active==1? 'bg-success' : 'bg-danger'}}">{{m.Active==1?'Active':'Deactive'}}</span></a> </td>
+                                        <td><a><i class="bx bxs-pencil" ng-click="GetBannerDetail($index)"></i></a></td>
                                     </tr>
+
+
                                 </tbody>
                             </table>
                         </div>
@@ -223,7 +204,7 @@
     const loadingText = document.querySelector('#loadingText');
 
     // Slect File Input
-    const fileInput = document.querySelector('input[type="file"]');
+    const fileInput = document.querySelector('#fileInput');
 
     // Select Preview Image
     const previewImage = document.querySelector('#previewImage');
@@ -317,83 +298,83 @@
         image.src = URL.createObjectURL(file);
 
         image.onload = function () {
-            //if (image.naturalWidth === 880 && image.naturalHeight === 880) {
-            // If File Is Passed from the (File Validation) Function
-            if (fileValidate(fileType, fileSize)) {
+            if (image.naturalWidth != 1920 && image.naturalHeight != 700) {
+                // If File Is Passed from the (File Validation) Function
+                if (fileValidate(fileType, fileSize)) {
 
-                // Add Class (drop-zoon--Uploaded) on (drop-zoon)
-                dropZoon.classList.add('drop-zoon--Uploaded');
+                    // Add Class (drop-zoon--Uploaded) on (drop-zoon)
+                    dropZoon.classList.add('drop-zoon--Uploaded');
 
-                // Show Loading-text
-                loadingText.style.display = "block";
-                // Hide Preview Image
-                previewImage.style.display = 'none';
+                    // Show Loading-text
+                    loadingText.style.display = "block";
+                    // Hide Preview Image
+                    previewImage.style.display = 'none';
 
-                // Remove Class (uploaded-file--open) From (uploadedFile)
-                uploadedFile.classList.remove('uploaded-file--open');
-                // Remove Class (uploaded-file__info--active) from (uploadedFileInfo)
-                uploadedFileInfo.classList.remove('uploaded-file__info--active');
+                    // Remove Class (uploaded-file--open) From (uploadedFile)
+                    uploadedFile.classList.remove('uploaded-file--open');
+                    // Remove Class (uploaded-file__info--active) from (uploadedFileInfo)
+                    uploadedFileInfo.classList.remove('uploaded-file__info--active');
 
-                // After File Reader Loaded
-                fileReader.addEventListener('load', function () {
-                    // After Half Second
+                    // After File Reader Loaded
+                    fileReader.addEventListener('load', function () {
+                        // After Half Second
 
 
-                    setTimeout(function () {
-                        // Add Class (upload-area--open) On (uploadArea)
-                        uploadArea.classList.add('upload-area--open');
+                        setTimeout(function () {
+                            // Add Class (upload-area--open) On (uploadArea)
+                            uploadArea.classList.add('upload-area--open');
 
-                        // Hide Loading-text (please-wait) Element
-                        loadingText.style.display = "none";
-                        // Show Preview Image
-                        previewImage.style.display = 'block';
+                            // Hide Loading-text (please-wait) Element
+                            loadingText.style.display = "none";
+                            // Show Preview Image
+                            previewImage.style.display = 'block';
 
-                        // Add Class (file-details--open) On (fileDetails)
-                        fileDetails.classList.add('file-details--open');
-                        // Add Class (uploaded-file--open) On (uploadedFile)
-                        uploadedFile.classList.add('uploaded-file--open');
-                        // Add Class (uploaded-file__info--active) On (uploadedFileInfo)
-                        uploadedFileInfo.classList.add('uploaded-file__info--active');
-                    }, 500); // 0.5s
+                            // Add Class (file-details--open) On (fileDetails)
+                            fileDetails.classList.add('file-details--open');
+                            // Add Class (uploaded-file--open) On (uploadedFile)
+                            uploadedFile.classList.add('uploaded-file--open');
+                            // Add Class (uploaded-file__info--active) On (uploadedFileInfo)
+                            uploadedFileInfo.classList.add('uploaded-file__info--active');
+                        }, 500); // 0.5s
 
-                    // Add The (fileReader) Result Inside (previewImage) Source
-                    previewImage.setAttribute('src', fileReader.result);
+                        // Add The (fileReader) Result Inside (previewImage) Source
+                        previewImage.setAttribute('src', fileReader.result);
 
-                    //const base64Data = fileReader.result.split(',')[1];
-                    //$("#imgcode").val(base64Data)
-                    //// Now you have the base64 encoded image data in base64Data variable
-                    //console.log('Base64 Encoded Image Data:', base64Data);
+                        //const base64Data = fileReader.result.split(',')[1];
+                        //$("#imgcode").val(base64Data)
+                        //// Now you have the base64 encoded image data in base64Data variable
+                        //console.log('Base64 Encoded Image Data:', base64Data);
 
-                    // Replace with your actual base64 data
+                        // Replace with your actual base64 data
 
-                    // Create a new Image element
-                    //const decodedImage = new Image();
+                        // Create a new Image element
+                        //const decodedImage = new Image();
 
-                    //// Set the src attribute to the base64 data
-                    //decodedImage.src = 'data:image/jpeg;base64,' + base64Data;
+                        //// Set the src attribute to the base64 data
+                        //decodedImage.src = 'data:image/jpeg;base64,' + base64Data;
 
-                    //// Add the image to a container element
-                    //const imageContainer = document.querySelector('#imageContainer'); // Replace with your container element's ID
-                    //imageContainer.appendChild(decodedImage);
+                        //// Add the image to a container element
+                        //const imageContainer = document.querySelector('#imageContainer'); // Replace with your container element's ID
+                        //imageContainer.appendChild(decodedImage);
 
-                    // Add File Name Inside Uploaded File Name
-                    uploadedFileName.innerHTML = file.name;
+                        // Add File Name Inside Uploaded File Name
+                        uploadedFileName.innerHTML = file.name;
 
-                    // Call Function progressMove();
-                    progressMove();
-                });
+                        // Call Function progressMove();
+                        progressMove();
+                    });
 
-                // Read (file) As Data Url
-                fileReader.readAsDataURL(file);
-            } else { // Else
+                    // Read (file) As Data Url
+                    fileReader.readAsDataURL(file);
+                } else { // Else
 
-                this; // (this) Represent The fileValidate(fileType, fileSize) Function
+                    this; // (this) Represent The fileValidate(fileType, fileSize) Function
 
-            };
-            //} else {
-            //    alert('Please make sure your image has dimensions of 880*880 pixels.');
-            //    return false;
-            //}
+                };
+            } else {
+                alert('Please make sure your image has dimensions of 1920*700 pixels.');
+                return false;
+            }
         };
 
     };
@@ -453,3 +434,5 @@
 
     // :)
 </script>
+
+

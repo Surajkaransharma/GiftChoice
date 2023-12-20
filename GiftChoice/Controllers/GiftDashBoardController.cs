@@ -80,6 +80,11 @@ namespace GiftChoice.Controllers
             return View();
         }
 
+        public ActionResult AddPBanner()
+        {
+            return View();
+        }
+
         public ActionResult OrderList()
         {
             return View();
