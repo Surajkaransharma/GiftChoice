@@ -1703,6 +1703,22 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
             toastr["error"]("Something Went Wrong");
         });
     };
+    $scope.BannerProductActiveDeActive = function (id) {
+        $http.get("/GiftDashBoard/BannerProductActiveDeActive?id=" + id).then(function (d) {
+            $scope.rees = d.data;
+            if ($scope.rees.res === "1") {
+                toastr["success"]("successful");
+                $scope.GetProduct();
+            }
+            else {
+                toastr["error"]("something went wrong   ");
+            }
+
+
+        }, function (error) {
+            alert(error.data);
+        });
+    };
 
        //-------------- add Banner in Product End ->------------->---------------------->---------------------------->------->------------>---------->---
 
