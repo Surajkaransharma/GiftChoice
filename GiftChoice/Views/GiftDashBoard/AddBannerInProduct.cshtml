@@ -1,0 +1,209 @@
+﻿
+@{
+    ViewBag.Title = "AddBannerInProduct";
+    Layout = "~/Views/Shared/_Admin.cshtml";
+}
+
+<style>
+    img {
+        width: 50px
+    }
+
+    .box1 {
+        inline-size: 150px !important;
+        overflow-wrap: break-word !important;
+    }
+</style>
+<script src="~/Angularjs/Admin.js"></script>
+
+
+
+<div class="page-wrapper" ng-app="AdminApp" ng-controller="AdminController">
+    <div class="page-content">
+        <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
+            <div class="breadcrumb-title pe-3">Banner Product  </div>
+            <div class="ps-3">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb mb-0 p-0">
+                        <li class="breadcrumb-item">
+                            <a href="javascript:;"><i class="bx bx-home-alt"></i></a>
+                        </li>
+                        <li class="breadcrumb-item active" aria-current="page">Form</li>
+                    </ol>
+                </nav>
+            </div>
+
+        </div>
+        <div class="row">
+            <div class="col-xl-12">
+
+                <div class="card">
+                    <div class="card-body p-4">
+
+                        <form class="row g-3" enctype="multipart/form-data">
+                            <div class="col-md-3" ng-init="GetBannerInProduct()">
+                                <label for="input1" class="form-label">Select Banner Title</label>
+
+                                <select id="MainCate" class="form-select" ng-model="Product.MainCateId" onchange="angular.element(this).scope().GetBannerPInKeyword(this.value)">
+                                    <option ng-selected="true" value="-1">Select Main Category</option>
+                                    <option ng-repeat="m in GetBannerInProductData" value="{{m.MainCateId}}">{{m.MTitle}}</option>
+                                </select>
+
+
+                            </div>
+                            <div class="col-md-4">
+                                <label for="input1" class="form-label">Product Title</label>
+                                <input type="text" id="Producttitle" class="form-control" ng-model="Product.ProductTitle" placeholder="Product Title">
+                            </div>
+                            <div class="col-md-2">
+                                <label for="input1" class="form-label">Label</label>
+                                <input type="text" class="form-control" ng-model="Product.PLabel" id="" placeholder="Label">
+                            </div>
+
+                            @*<div class="col-md-2">
+                                    <label for="input1" class="form-label">Priority</label>
+                                    <input type="number" class="form-control" ng-model="Product.Priority" id="" placeholder="Priority">
+                                </div>*@
+
+                            <div class="col-md-2">
+                                <label for="input1" class="form-label">Price</label>
+                                <input type="number" class="form-control" ng-model="Product.Price" id="" placeholder="Price">
+                            </div>
+                            <div class="col-md-12" ng-init="GetKeywordData()">
+                                <label for="input1" class="form-label">Select Keyword</label>
+                                <div class="" id="check_box">
+                                    <label class="checkbox-wrapper" ng-repeat="k in KeywordList">
+                                        <input type="checkbox" id="Keyword_{{k.KeywordId}}" class="checkbox-input" value="{{k.KeywordId}}" ng-model="k.Selected" ng-checked="" />
+                                        <span class="checkbox-tile">
+                                            <span class="checkbox-label">{{k.Keyword}}</span>
+                                        </span>
+                                    </label>
+
+                                </div>
+                            </div>
+                            <div class="col-md-12" ng-init="GetSizeData()">
+                                <label for="input1" class="form-label">Select Size</label>
+                                <div class="" id="check_box">
+                                    <label class="checkbox-wrapper" ng-repeat="s in SizeList">
+                                        <input type="checkbox" id="Size_{{s.SizeId}}" class="checkbox-Size" value="{{s.SizeId}}" ng-model="s.Selected" ng-checked="" />
+                                        <span class="checkbox-tile">
+                                            <span class="checkbox-label">{{s.SizeTitle}}</span>
+                                        </span>
+                                    </label>
+
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <label for="input1" class="form-label">Description</label>
+                                <textarea class="ckeditor" id="ckeditor"></textarea>
+                            </div>
+                            <div class="col-md-12">
+                                <label for="input1" class="form-label">Description</label>
+                                <textarea class="ckeditor" id="editor1"></textarea>
+                            </div>
+                            <script>
+                                $('.editor1').each(function () {
+                                    CKEDITOR.replace($(this).prop('id'));
+                                });
+                            </script>
+                            <div class="col-md-2">
+                                <label for="input1" class="form-label">Image 1</label>
+
+                                <input type="file" id="image1" class="form-control" upload-file="Product.Image1">
+                            </div>
+
+                            <div class="col-md-2">
+                                <label for="input1" class="form-label">Image 2</label>
+                                <input type="file" class="form-control" upload-file="Product.Image2" id="">
+                            </div>
+
+                            <div class="col-md-2">
+                                <label for="input1" class="form-label">Image 3</label>
+                                <input type="file" class="form-control" upload-file="Product.Image3" id="">
+                            </div>
+                            <div class="col-md-2">
+                                <label for="input1" class="form-label">Image 4</label>
+                                <input type="file" class="form-control" upload-file="Product.Image4" id="">
+                            </div>
+                            <div class="col-md-2">
+                                <label for="input1" class="form-label">Image 5</label>
+                                <input type="file" class="form-control" upload-file="Product.Image5" id="">
+                            </div>
+                            <div class="col-md-12">
+                                <div class="d-md-flex d-grid align-items-center gap-3">
+                                    <button type="button" id="btn" ng-click="SubmitBannerProduct()" class="btn btn-primary px-4">Submit</button>
+                                    <button type="button" id="edbtn" style="display: none" ng-click="UpdateProductData()" class="btn btn-primary px-4">Update</button>
+                                    <button type="button" class="btn btn-light px-4" onClick="refreshPage()">Reset</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-xl-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="d-lg-flex align-items-center mb-4 gap-3">
+                            @*<div class="position-relative">
+                                    <input type="text" class="form-control ps-5 radius-30" ng-model="search" placeholder="Search here...">
+                                    <span class="position-absolute top-50 product-show translate-middle-y"><i class="bx bx-search"></i></span>
+                                </div>*@
+                            @*  <div class="ms-auto"><a href="javascript:;" class="btn btn-primary radius-30 mt-2 mt-lg-0" data-bs-toggle="modal" data-bs-target="#createcompany"><i class="bx bxs-plus-square"></i>Add New Company</a></div>*@
+
+                            <div class="col-md-3" ng-init="GetMainCateData()">
+                                <label for="input1" class="form-label">Select Main Category</label>
+
+                                <select id="MainCate" class="form-select" onchange="angular.element(this).scope().GetProduct(this.value)">
+                                    <option ng-selected="true" value="-1">Select Main Category</option>
+                                    <option value="-2">All Product</option>
+                                    <option ng-repeat="m in MainCateData" value="{{m.MainCateId}}">{{m.MTitle}}</option>
+                                </select>
+
+
+                            </div>
+
+
+
+                        </div>
+                        <div class="table-responsive" ng-show="ProductData.length>0">
+                            <table class="table mb-0 table-bordered">
+                                <thead class="table-light">
+                                    <tr>
+                                        <th>S.No.</th>
+                                        <th class="box1">Product Title</th>
+                                        <th class="box1">Main Category Name</th>
+                                        <th>Label</th>
+                                        <th>Price</th>
+                                        <th>Priority</th>
+                                        <th>Keywords</th>
+                                        <th>Size</th>
+                                        <th>Image</th>
+                                        <th>Active</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="m in ProductData">
+                                        <td>{{$index+1}}</td>
+                                        <td style="white-space:normal" class="box1">{{m.ProductTitle}}</td>
+                                        <td style="white-space:normal" class="box1">{{m.Maincate}}</td>
+                                        <td>{{m.PLabel}}</td>
+                                        <td>{{m.Price}}</td>
+                                        <td>{{m.Priority}}</td>
+                                        <td><span ng-repeat="n in m.Submenu">{{n.SubmenuTitle}},<br /></span></td>
+                                        <td><span ng-repeat="n in m.PSizeList">{{n.SizeTitle}},<br /></span></td>
+                                        <td><span ng-repeat="i in m.ProductImage"><img src="~/images/ProductImg/{{i}}"><br /></span> </td>
+                                        <td><a ng-click="ProductActiveDeActive(m.ProductId)"> <span class="badge {{m.Active==1? 'bg-success' : 'bg-danger'}}">{{m.Active==1?'Active':'Deactive'}}</span></a> </td>
+                                        <td><a><i class="bx bxs-pencil" ng-click="GetProductbyid($index)"></i></a></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="~/assets/ckeditor/ckeditor.js"></script>

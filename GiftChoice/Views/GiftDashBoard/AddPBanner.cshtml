@@ -50,7 +50,7 @@
                             </div>
                             <div class="col-md-12">
                                 <label for="input1" class="form-label">Banner Title</label>
-                                <input type="text" class="form-control" id="BTitle" ng-model="BannerProdcutT.BTitle" placeholder="Banner Title">
+                                <input type="text" class="form-control" id="MTitle" ng-model="BannerProdcutT.MTitle" placeholder="Banner Title">
 
                             </div>
 
@@ -130,7 +130,7 @@
                             <div class="col-md-12">
                                 <div class="d-md-flex d-grid align-items-center gap-3">
                                     <button type="button" id="btn" ng-click="SubmitBannerProdcutT()" class="btn btn-primary px-4">Submit</button>
-                                    <button type="button" id="edbtn" ng-click="UpdateBanner()" style="display: none" class="btn btn-primary px-4">Update</button>
+                                    <button type="button" id="edbtn" ng-click="UpdateBannerProdcutT()" style="display: none" class="btn btn-primary px-4">Update</button>
                                     <button type="button" class="btn btn-light px-4" onClick="refreshPage()">Reset</button>
                                 </div>
                             </div>
@@ -159,7 +159,9 @@
                                 <thead class="table-light">
                                     <tr>
                                         <th>S.No.</th>
-                                        <th>Banner Category Name</th>
+                                        <th>Banner Title</th>
+                                        <th>Position</th>
+                                        <th>KeyWord</th>
                                         <th>Priority</th>
                                         <th>Image</th>
                                         <th>Active</th>
@@ -169,13 +171,15 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr ng-repeat="m in BannerListData">
+                                    <tr ng-repeat="m in GetBannerProdcutTData">
                                         <td>{{$index+1}}</td>
-                                        <td>{{m.MainCate}}</td>
+                                        <td>{{m.MTitle}}</td>
+                                        <td>{{m.Position}}</td>
+                                        <td style="white-space: normal"><span ng-repeat="n in m.Submenu">{{n.SubmenuTitle}},</span></td>
                                         <td>{{m.Priority}}</td>
-                                        <td><img src="~/images/BannerImage/{{m.BannerImage}}"></td>
-                                        <td><a ng-click="ADBanner(m.BannerId)"> <span class="badge {{m.Active==1? 'bg-success' : 'bg-danger'}}">{{m.Active==1?'Active':'Deactive'}}</span></a> </td>
-                                        <td><a><i class="bx bxs-pencil" ng-click="GetBannerDetail($index)"></i></a></td>
+                                        <td><img src="~/images/BannerPTImage/{{m.MImage}}"></td>
+                                        <td><a ng-click="BannerProdcutTActiveDeActive(m.MainCateId)"> <span class="badge {{m.Active==1? 'bg-success' : 'bg-danger'}}">{{m.Active==1?'Active':'Deactive'}}</span></a> </td>
+                                        <td><a><i class="bx bxs-pencil" ng-click="GetBannerProdcutTid($index)"></i></a></td>
                                     </tr>
 
 
@@ -295,7 +299,7 @@
         image.src = URL.createObjectURL(file);
 
         image.onload = function () {
-            if (image.naturalWidth != 1920 && image.naturalHeight != 700) {
+          //  if (image.naturalWidth != 1920 && image.naturalHeight != 700) {
                 // If File Is Passed from the (File Validation) Function
                 if (fileValidate(fileType, fileSize)) {
 
@@ -368,10 +372,10 @@
                     this; // (this) Represent The fileValidate(fileType, fileSize) Function
 
                 };
-            } else {
-                alert('Please make sure your image has dimensions of 1920*700 pixels.');
-                return false;
-            }
+            //} else {
+            //    alert('Please make sure your image has dimensions of 1920*700 pixels.');
+            //    return false;
+            //}
         };
 
     };

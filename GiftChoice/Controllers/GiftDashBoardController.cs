@@ -7,6 +7,7 @@ using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Razor.Tokenizer.Symbols;
 
 namespace GiftChoice.Controllers
 {
@@ -61,6 +62,11 @@ namespace GiftChoice.Controllers
             return View();
         }
 
+        public ActionResult AddBannerInProduct()
+        {
+            return View();
+        }
+
         public ActionResult AddSlider()
         {
             return View();
@@ -93,6 +99,7 @@ namespace GiftChoice.Controllers
 
         public class MainCateTblModel
         {
+            public string Menu { get; set; }
             public string Position { get; set; }
 
             public long MainCateId { get; set; }
@@ -104,7 +111,7 @@ namespace GiftChoice.Controllers
             public Nullable<System.DateTime> Update_at { get; set; }
             public string MImage { get; set; }
             public HttpPostedFileBase Image { get; set; }
-            public string Menu { get; set; }
+           
             public Nullable<long> UserId { get; set; }
             public List<KeywordTbl> keywordTbls { get; set; }
         }
@@ -1796,7 +1803,7 @@ namespace GiftChoice.Controllers
                     for (int i = 0; i < model.keywordTbls.Count; i++)
                     {
                         BPTKeywordTbl mCKeyword = new BPTKeywordTbl();
-                        mCKeyword.MainCateId = db.BPTKeywordTbls.DefaultIfEmpty().Max(r => r == null ? 0 : r.MCkeywordId) + 1;
+                        mCKeyword.MCkeywordId = db.BPTKeywordTbls.DefaultIfEmpty().Max(r => r == null ? 0 : r.MCkeywordId) + 1;
                         mCKeyword.MainCateId = model.MainCateId;
               
                         mCKeyword.KeywordId = model.keywordTbls[i].KeywordId;
@@ -1868,8 +1875,8 @@ namespace GiftChoice.Controllers
                 }
 
 
-                var totoid = db.BannerPTTbls.Where(p => p.MainCateId == model.MainCateId);
-                db.BannerPTTbls.RemoveRange(totoid);
+                var totoid = db.BPTKeywordTbls.Where(p => p.MainCateId == model.MainCateId);
+                db.BPTKeywordTbls.RemoveRange(totoid);
                 db.SaveChanges();
                 if (model.keywordTbls != null)
                 {
@@ -1953,6 +1960,581 @@ namespace GiftChoice.Controllers
         }
 
         //--------------Banner Product End->------------->---------------------->---------------------------->------->------------>---------->---
+
+        //-------------- Add Banner in Product->------------->---------------------->---------------------------->------->------------>---------->---
+
+        public JsonResult GetBannerInProduct()
+        {
+            var res =
+
+               db.BannerPTTbls.Select(m => new
+               {
+                   m.MainCateId,
+                   m.MUrl,
+                   m.MTitle,
+                   m.Active,
+                   m.MImage,
+                   m.Position,
+                   m.Priority,
+                   Submenu = db.BPTKeywordTbls.Where(s => s.MainCateId == m.MainCateId && s.Active == true).Select(s => new
+                   {
+                       s.MainCateId,
+                       s.KeywordId,
+                       s.MCkeywordId,
+                       SubmenuTitle = db.KeywordTbls.Where(t => t.KeywordId == s.KeywordId).Select(t => t.Keyword).FirstOrDefault()
+                   })
+               }).OrderBy(m => m.Priority);
+            return Json(res, JsonRequestBehavior.AllowGet);
+
+        }
+
+        public JsonResult GetBannerPInKeyword(int MainCateId)
+        {
+            var res = db.BPTKeywordTbls.Where(k => k.MainCateId == MainCateId &&  k.Active == true).Select(k => new 
+            { 
+                k.MainCateId,
+                k.Active,
+                k.KeywordId,
+                Keyword = db.KeywordTbls.Where(p => p.KeywordId == k.KeywordId).Select(m => m.Keyword).FirstOrDefault(),
+            });
+            return Json(res, JsonRequestBehavior.AllowGet);
+
+        }
+
+        private void BannerProductVaryQualityLevel(Stream stream, string fname)
+        {
+            //  size 
+            System.Drawing.Image photo = new Bitmap(stream);
+            //Bitmap bmp1 = new Bitmap(photo, 119, 83);
+
+            Bitmap bmp1 = new Bitmap(photo, 550, 550);
+            // without size
+            //  Bitmap bmp1 = new Bitmap(stream);
+            ImageCodecInfo jgpEncoder = GetEncoder(ImageFormat.Jpeg);
+            System.Drawing.Imaging.Encoder myEncoder = System.Drawing.Imaging.Encoder.Quality;
+            EncoderParameters myEncoderParameters = new EncoderParameters(1);
+            EncoderParameter myEncoderParameter = new EncoderParameter(myEncoder, 30L);
+            myEncoderParameters.Param[0] = myEncoderParameter;
+            bmp1.Save(Server.MapPath("~/images/ProductImg/" + fname), jgpEncoder, myEncoderParameters);
+            bmp1.Dispose();
+
+        }
+
+        public JsonResult SubmitBannerProduct(ProductTblmodel model)
+        {
+
+            try
+            {
+                ProductTbl productmodel = new ProductTbl();
+
+                ProductTbl result = db.ProductTbls.Where(c => c.ProductTitle == model.ProductTitle).FirstOrDefault();
+                if (result != null)
+                {
+                    var res = new { res = "-1" };
+                    return Json(res, JsonRequestBehavior.AllowGet);
+                }
+                else
+                {
+                    productmodel.ProductId = db.ProductTbls.DefaultIfEmpty().Max(r => r == null ? 0 : r.ProductId) + 1;
+
+                    productmodel.MainCateId = model.MainCateId;
+                    productmodel.ProductTitle = model.ProductTitle;
+                    productmodel.Active = true;
+                    productmodel.PUrl = model.ProductTitle.Replace(" ", "-");
+                    productmodel.PDesc = model.PDesc;
+                    productmodel.PLabel = model.PLabel == null ? "" : model.PLabel;
+                    productmodel.Price = model.Price;
+                    productmodel.Qty = 1;
+                    productmodel.Create_at = DateTime.Now;
+                    productmodel.Update_at = DateTime.Now;
+                    productmodel.Priority = model.Priority;
+                    db.ProductTbls.Add(productmodel);
+                    db.SaveChanges();
+
+                    if (model.Image1 != null)
+                    {
+                        ProductImage productImage = new ProductImage();
+                        productImage.PImageId = db.ProductImages.DefaultIfEmpty().Max(r => r == null ? 0 : r.PImageId) + 1;
+                        string extensionstuimg = Path.GetExtension(model.Image1.FileName);
+                        model.Image1.SaveAs(Server.MapPath("~/images/ProductImg/" + productImage.PImageId + extensionstuimg));
+                        ProductVaryQualityLevel(model.Image1.InputStream, productImage.PImageId + extensionstuimg);
+
+                        productImage.PImage = productImage.PImageId + extensionstuimg;
+                        productImage.ProductId = productmodel.ProductId;
+                        productImage.Active = true;
+                        db.ProductImages.Add(productImage);
+                        db.SaveChanges();
+                    }
+                    if (model.Image2 != null)
+                    {
+                        ProductImage productImage = new ProductImage();
+                        productImage.PImageId = db.ProductImages.DefaultIfEmpty().Max(r => r == null ? 0 : r.PImageId) + 1;
+                        string extensionstuimg = Path.GetExtension(model.Image2.FileName);
+                        //  VaryQualityLevel(model.Image1.InputStream, productImage.PImageId + extensionstuimg);
+                        model.Image2.SaveAs(Server.MapPath("~/images/ProductImg/" + productImage.PImageId + extensionstuimg));
+                        ProductVaryQualityLevel(model.Image2.InputStream, productImage.PImageId + extensionstuimg);
+
+                        productImage.PImage = productImage.PImageId + extensionstuimg;
+                        productImage.ProductId = productmodel.ProductId;
+                        productImage.Active = true;
+                        db.ProductImages.Add(productImage);
+                        db.SaveChanges();
+                    }
+                    if (model.Image3 != null)
+                    {
+                        ProductImage productImage = new ProductImage();
+                        productImage.PImageId = db.ProductImages.DefaultIfEmpty().Max(r => r == null ? 0 : r.PImageId) + 1;
+                        string extensionstuimg = Path.GetExtension(model.Image3.FileName);
+                        model.Image3.SaveAs(Server.MapPath("~/images/ProductImg/" + productImage.PImageId + extensionstuimg));
+                        ProductVaryQualityLevel(model.Image3.InputStream, productImage.PImageId + extensionstuimg);
+
+                        productImage.PImage = productImage.PImageId + extensionstuimg;
+                        productImage.ProductId = productmodel.ProductId;
+                        productImage.Active = true;
+                        db.ProductImages.Add(productImage);
+                        db.SaveChanges();
+                    }
+                    if (model.Image4 != null)
+                    {
+                        ProductImage productImage = new ProductImage();
+                        productImage.PImageId = db.ProductImages.DefaultIfEmpty().Max(r => r == null ? 0 : r.PImageId) + 1;
+                        string extensionstuimg = Path.GetExtension(model.Image4.FileName);
+                        model.Image4.SaveAs(Server.MapPath("~/images/ProductImg/" + productImage.PImageId + extensionstuimg));
+                        ProductVaryQualityLevel(model.Image4.InputStream, productImage.PImageId + extensionstuimg);
+
+                        productImage.PImage = productImage.PImageId + extensionstuimg;
+                        productImage.ProductId = productmodel.ProductId;
+                        productImage.Active = true;
+                        db.ProductImages.Add(productImage);
+                        db.SaveChanges();
+                    }
+                    if (model.Image5 != null)
+                    {
+                        ProductImage productImage = new ProductImage();
+                        productImage.PImageId = db.ProductImages.DefaultIfEmpty().Max(r => r == null ? 0 : r.PImageId) + 1;
+                        string extensionstuimg = Path.GetExtension(model.Image5.FileName);
+                        model.Image5.SaveAs(Server.MapPath("~/images/ProductImg/" + productImage.PImageId + extensionstuimg));
+                        ProductVaryQualityLevel(model.Image5.InputStream, productImage.PImageId + extensionstuimg);
+
+                        productImage.PImage = productImage.PImageId + extensionstuimg;
+                        productImage.ProductId = productmodel.ProductId;
+                        productImage.Active = true;
+                        db.ProductImages.Add(productImage);
+                        db.SaveChanges();
+                    }
+
+                    var res = new { res = "1", ProductId = productmodel.ProductId };
+                    return Json(res, JsonRequestBehavior.AllowGet);
+                }
+            }
+            catch (Exception ex)
+            {
+                var md = ex.Message;
+                var res = new { res = "0" };
+                return Json(res, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+
+        public JsonResult BannerProductArrayData(ProductTblmodel model)
+        {
+
+            try
+            {
+
+                ProductTbl result = db.ProductTbls.Where(c => c.ProductId == model.ProductId).FirstOrDefault();
+
+                if (result != null)
+                {
+                    result.PDesc = model.PDesc;
+                    db.SaveChanges();
+                }
+
+
+                if (model.KeywordTbls != null)
+                {
+                    for (int i = 0; i < model.KeywordTbls.Count; i++)
+                    {
+                        PKeywordTbl pKeyword = new PKeywordTbl();
+                        pKeyword.PKeywordId = db.PKeywordTbls.DefaultIfEmpty().Max(r => r == null ? 0 : r.PKeywordId) + 1;
+                        pKeyword.ProductId = model.ProductId;
+                        pKeyword.Active = true;
+                        pKeyword.KeywordId = model.KeywordTbls[i].KeywordId;
+                        db.PKeywordTbls.Add(pKeyword);
+                        db.SaveChanges();
+
+                    }
+                }
+
+                if (model.SizeTbls != null)
+                {
+                    for (int i = 0; i < model.SizeTbls.Count; i++)
+                    {
+                        PSizeTbl pSizeTbl = new PSizeTbl();
+                        pSizeTbl.PSizeId = db.PSizeTbls.DefaultIfEmpty().Max(r => r == null ? 0 : r.PSizeId) + 1;
+                        pSizeTbl.ProductId = model.ProductId;
+                        pSizeTbl.Active = true;
+                        pSizeTbl.SizeId = model.SizeTbls[i].SizeId;
+                        db.PSizeTbls.Add(pSizeTbl);
+                        db.SaveChanges();
+
+                    }
+                }
+                var res = new { res = "1", };
+                return Json(res, JsonRequestBehavior.AllowGet);
+
+            }
+            catch (Exception ex)
+            {
+                var md = ex.Message;
+                var res = new { res = "0" };
+                return Json(res, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        public JsonResult BannerProductActiveDeActive(int id)
+        {
+            try
+            {
+                var jb = db.ProductTbls.Where(c => c.ProductId == id).FirstOrDefault();
+                if (jb != null)
+                {
+
+                    jb.Active = jb.Active == true ? false : true;
+                    db.SaveChanges();
+                    var res = new { res = "1" };
+                    return Json(res, JsonRequestBehavior.AllowGet);
+                }
+                else
+                {
+                    var res = new { res = "2" };
+                    return Json(res, JsonRequestBehavior.AllowGet);
+                }
+            }
+            catch (Exception ex)
+            {
+                var res = new { res = "0" };
+                return Json(res, JsonRequestBehavior.AllowGet);
+            }
+
+        }
+
+        public JsonResult BannerUpdateProductData(ProductTblmodel model)
+        {
+            try
+            {
+
+                ProductTbl result = db.ProductTbls.Where(c => c.ProductId == model.ProductId).FirstOrDefault();
+                if (result != null)
+                {
+
+
+                    result.MainCateId = model.MainCateId;
+                    result.ProductTitle = model.ProductTitle;
+                    result.PUrl = model.ProductTitle.Replace(" ", "-");
+                    result.PLabel = model.PLabel == null ? "" : model.PLabel;
+                    result.Price = model.Price;
+                    result.Update_at = DateTime.Now;
+                    result.Priority = model.Priority;
+                    db.SaveChanges();
+
+                    if (model.Image1 != null)
+                    {
+                        List<ProductImage> productImage = db.ProductImages.Where(c => c.ProductId == result.ProductId).ToList();
+
+                        if (productImage != null)
+                        {
+                            var Pimageid = productImage[0].PImageId;
+                            ProductImage pimagearr = db.ProductImages.Where(c => c.PImageId == Pimageid).FirstOrDefault();
+                            string extensionstuimg = Path.GetExtension(model.Image1.FileName);
+
+                            model.Image1.SaveAs(Server.MapPath("~/images/ProductImg/" + pimagearr.PImageId + extensionstuimg));
+                            ProductVaryQualityLevel(model.Image1.InputStream, Pimageid + extensionstuimg);
+                            pimagearr.PImage = pimagearr.PImageId + extensionstuimg;
+                            db.SaveChanges();
+                        }
+                        else
+                        {
+                            ProductImage productImage1 = new ProductImage();
+                            productImage1.PImageId = db.ProductImages.DefaultIfEmpty().Max(r => r == null ? 0 : r.PImageId) + 1;
+                            string extensionstuimg = Path.GetExtension(model.Image1.FileName);
+                            model.Image1.SaveAs(Server.MapPath("~/images/ProductImg/" + productImage1.PImageId + extensionstuimg));
+                            ProductVaryQualityLevel(model.Image1.InputStream, productImage1.PImageId + extensionstuimg);
+                            productImage1.PImage = productImage1.PImageId + extensionstuimg;
+                            productImage1.ProductId = result.ProductId;
+                            productImage1.Active = true;
+                            db.ProductImages.Add(productImage1);
+                            db.SaveChanges();
+                        }
+
+                    }
+
+
+                    if (model.Image2 != null)
+                    {
+                        List<ProductImage> productImage = db.ProductImages.Where(c => c.ProductId == result.ProductId).ToList();
+
+                        if (productImage != null)
+                        {
+                            var Pimageid = productImage[1].PImageId;
+                            ProductImage pimagearr = db.ProductImages.Where(c => c.PImageId == Pimageid).FirstOrDefault();
+                            string extensionstuimg = Path.GetExtension(model.Image2.FileName);
+                            model.Image2.SaveAs(Server.MapPath("~/images/ProductImg/" + pimagearr.PImageId + extensionstuimg));
+                            ProductVaryQualityLevel(model.Image2.InputStream, Pimageid + extensionstuimg);
+                            pimagearr.PImage = pimagearr.PImageId + extensionstuimg;
+                            db.SaveChanges();
+                        }
+                        else
+                        {
+                            ProductImage productImage1 = new ProductImage();
+                            productImage1.PImageId = db.ProductImages.DefaultIfEmpty().Max(r => r == null ? 0 : r.PImageId) + 1;
+                            string extensionstuimg = Path.GetExtension(model.Image2.FileName);
+                            model.Image2.SaveAs(Server.MapPath("~/images/ProductImg/" + productImage1.PImageId + extensionstuimg));
+                            ProductVaryQualityLevel(model.Image2.InputStream, productImage1.PImageId + extensionstuimg);
+                            productImage1.PImage = productImage1.PImageId + extensionstuimg;
+                            productImage1.ProductId = result.ProductId;
+                            productImage1.Active = true;
+                            db.ProductImages.Add(productImage1);
+                            db.SaveChanges();
+                        }
+
+                    }
+                    if (model.Image3 != null)
+                    {
+                        List<ProductImage> productImage = db.ProductImages.Where(c => c.ProductId == result.ProductId).ToList();
+
+                        if (productImage != null)
+                        {
+                            var Pimageid = productImage[2].PImageId;
+                            ProductImage pimagearr = db.ProductImages.Where(c => c.PImageId == Pimageid).FirstOrDefault();
+                            string extensionstuimg = Path.GetExtension(model.Image3.FileName);
+                            model.Image3.SaveAs(Server.MapPath("~/images/ProductImg/" + pimagearr.PImageId + extensionstuimg));
+                            ProductVaryQualityLevel(model.Image3.InputStream, pimagearr.PImageId + extensionstuimg);
+                            pimagearr.PImage = pimagearr.PImageId + extensionstuimg;
+                            db.SaveChanges();
+                        }
+                        else
+                        {
+                            ProductImage productImage1 = new ProductImage();
+                            productImage1.PImageId = db.ProductImages.DefaultIfEmpty().Max(r => r == null ? 0 : r.PImageId) + 1;
+                            string extensionstuimg = Path.GetExtension(model.Image3.FileName);
+                            model.Image3.SaveAs(Server.MapPath("~/images/ProductImg/" + productImage1.PImageId + extensionstuimg));
+                            ProductVaryQualityLevel(model.Image3.InputStream, productImage1.PImageId + extensionstuimg);
+                            productImage1.PImage = productImage1.PImageId + extensionstuimg;
+                            productImage1.ProductId = result.ProductId;
+                            productImage1.Active = true;
+                            db.ProductImages.Add(productImage1);
+                            db.SaveChanges();
+                        }
+
+                    }
+                    if (model.Image4 != null)
+                    {
+                        List<ProductImage> productImage = db.ProductImages.Where(c => c.ProductId == result.ProductId).ToList();
+
+                        if (productImage != null)
+                        {
+                            var Pimageid = productImage[3].PImageId;
+                            ProductImage pimagearr = db.ProductImages.Where(c => c.PImageId == Pimageid).FirstOrDefault();
+                            string extensionstuimg = Path.GetExtension(model.Image4.FileName);
+                            model.Image4.SaveAs(Server.MapPath("~/images/ProductImg/" + pimagearr.PImageId + extensionstuimg));
+                            ProductVaryQualityLevel(model.Image1.InputStream, pimagearr.PImageId + extensionstuimg);
+                            pimagearr.PImage = pimagearr.PImageId + extensionstuimg;
+                            db.SaveChanges();
+                        }
+                        else
+                        {
+                            ProductImage productImage1 = new ProductImage();
+                            productImage1.PImageId = db.ProductImages.DefaultIfEmpty().Max(r => r == null ? 0 : r.PImageId) + 1;
+                            string extensionstuimg = Path.GetExtension(model.Image4.FileName);
+                            model.Image4.SaveAs(Server.MapPath("~/images/ProductImg/" + productImage1.PImageId + extensionstuimg));
+                            ProductVaryQualityLevel(model.Image1.InputStream, productImage1.PImageId + extensionstuimg);
+                            productImage1.PImage = productImage1.PImageId + extensionstuimg;
+                            productImage1.ProductId = result.ProductId;
+                            productImage1.Active = true;
+                            db.ProductImages.Add(productImage1);
+                            db.SaveChanges();
+                        }
+
+                    }
+                    if (model.Image5 != null)
+                    {
+                        List<ProductImage> productImage = db.ProductImages.Where(c => c.ProductId == result.ProductId).ToList();
+
+                        if (productImage != null)
+                        {
+                            var Pimageid = productImage[4].PImageId;
+                            ProductImage pimagearr = db.ProductImages.Where(c => c.PImageId == Pimageid).FirstOrDefault();
+                            string extensionstuimg = Path.GetExtension(model.Image5.FileName);
+                            model.Image5.SaveAs(Server.MapPath("~/images/ProductImg/" + pimagearr.PImageId + extensionstuimg));
+                            ProductVaryQualityLevel(model.Image1.InputStream, pimagearr.PImageId + extensionstuimg);
+                            pimagearr.PImage = pimagearr.PImageId + extensionstuimg;
+                            db.SaveChanges();
+                        }
+                        else
+                        {
+                            ProductImage productImage1 = new ProductImage();
+                            productImage1.PImageId = db.ProductImages.DefaultIfEmpty().Max(r => r == null ? 0 : r.PImageId) + 1;
+                            string extensionstuimg = Path.GetExtension(model.Image5.FileName);
+                            model.Image5.SaveAs(Server.MapPath("~/images/ProductImg/" + productImage1.PImageId + extensionstuimg));
+                            ProductVaryQualityLevel(model.Image1.InputStream, productImage1.PImageId + extensionstuimg);
+                            productImage1.PImage = productImage1.PImageId + extensionstuimg;
+                            productImage1.ProductId = result.ProductId;
+                            productImage1.Active = true;
+                            db.ProductImages.Add(productImage1);
+                            db.SaveChanges();
+                        }
+
+                    }
+
+                    //   ProductImage productImage = new ProductImage();
+                    //List<ProductImage> productImage = db.ProductImages.Where(c => c.ProductId == model.ProductId).ToList();
+
+                    //for (int i = 0; i < productImage.Count(); i++)
+                    //{
+                    //    if (i == 0)
+                    //    {
+                    //        if (model.Image1 != null)
+                    //        {
+
+                    //            var Pimageid = productImage[i].PImageId;
+                    //            ProductImage pimagearr = db.ProductImages.Where(c => c.PImageId == Pimageid).FirstOrDefault();
+                    //            string extensionstuimg = Path.GetExtension(model.Image1.FileName);
+                    //            model.Image1.SaveAs(Server.MapPath("~/images/ProductImg/" + pimagearr.PImageId + extensionstuimg));
+                    //            pimagearr.PImage = pimagearr.PImageId + extensionstuimg;
+                    //            db.SaveChanges();
+                    //        }
+                    //    }
+                    //    else if (i == 1)
+                    //    {
+                    //        if (model.Image2 != null)
+                    //        {
+                    //            var Pimageid = productImage[i].PImageId;
+                    //            ProductImage pimagearr = db.ProductImages.Where(c => c.PImageId == Pimageid).FirstOrDefault();
+                    //            string extensionstuimg = Path.GetExtension(model.Image2.FileName);
+                    //            model.Image2.SaveAs(Server.MapPath("~/images/ProductImg/" + pimagearr.PImageId + extensionstuimg));
+                    //            pimagearr.PImage = pimagearr.PImageId + extensionstuimg;
+                    //            db.SaveChanges();
+                    //        }
+                    //    }
+                    //    else if (i == 2)
+                    //    {
+                    //        if (model.Image3 != null)
+                    //        {
+                    //            var Pimageid = productImage[i].PImageId;
+                    //            ProductImage pimagearr = db.ProductImages.Where(c => c.PImageId == Pimageid).FirstOrDefault();
+
+                    //            string extensionstuimg = Path.GetExtension(model.Image3.FileName);
+                    //            model.Image3.SaveAs(Server.MapPath("~/images/ProductImg/" + pimagearr.PImageId + extensionstuimg));
+                    //            pimagearr.PImage = pimagearr.PImageId + extensionstuimg;
+                    //            db.SaveChanges();
+                    //        }
+                    //    }
+                    //    else if (i == 3)
+                    //    {
+                    //        if (model.Image4 != null)
+                    //        {
+                    //            var Pimageid = productImage[i].PImageId;
+                    //            ProductImage pimagearr = db.ProductImages.Where(c => c.PImageId == Pimageid).FirstOrDefault();
+
+                    //            string extensionstuimg = Path.GetExtension(model.Image4.FileName);
+                    //            model.Image4.SaveAs(Server.MapPath("~/images/ProductImg/" + pimagearr.PImageId + extensionstuimg));
+                    //            pimagearr.PImage = pimagearr.PImageId + extensionstuimg;
+                    //            db.SaveChanges();
+                    //        }
+                    //    }
+                    //    else if (i == 4)
+                    //    {
+                    //        if (model.Image5 != null)
+                    //        {
+                    //            var Pimageid = productImage[i].PImageId;
+                    //            ProductImage pimagearr = db.ProductImages.Where(c => c.PImageId == Pimageid).FirstOrDefault();
+
+                    //            string extensionstuimg = Path.GetExtension(model.Image5.FileName);
+                    //            model.Image5.SaveAs(Server.MapPath("~/images/ProductImg/" + pimagearr.PImageId + extensionstuimg));
+                    //            pimagearr.PImage = pimagearr.PImageId + extensionstuimg;
+                    //            db.SaveChanges();
+                    //        }
+                    //    }
+
+                    //}
+                }
+                var res = new { res = "1", ProductId = result.ProductId };
+                return Json(res, JsonRequestBehavior.AllowGet);
+
+            }
+            catch (Exception ex)
+            {
+                var md = ex.Message;
+                var res = new { res = "0" };
+                return Json(res, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        public JsonResult BannerUpdateProductArrayData(ProductTblmodel model)
+        {
+
+            try
+            {
+
+                ProductTbl result = db.ProductTbls.Where(c => c.ProductId == model.ProductId).FirstOrDefault();
+
+                if (result != null)
+                {
+                    result.PDesc = model.PDesc;
+                    db.SaveChanges();
+
+                    var totoid = db.PKeywordTbls.Where(p => p.ProductId == model.ProductId);
+                    db.PKeywordTbls.RemoveRange(totoid);
+                    db.SaveChanges();
+                    if (model.KeywordTbls != null)
+                    {
+                        for (int i = 0; i < model.KeywordTbls.Count; i++)
+                        {
+                            PKeywordTbl pKeyword = new PKeywordTbl();
+                            pKeyword.PKeywordId = db.PKeywordTbls.DefaultIfEmpty().Max(r => r == null ? 0 : r.PKeywordId) + 1;
+                            pKeyword.ProductId = model.ProductId;
+                            pKeyword.Active = true;
+                            pKeyword.KeywordId = model.KeywordTbls[i].KeywordId;
+                            db.PKeywordTbls.Add(pKeyword);
+                            db.SaveChanges();
+
+                        }
+                    }
+
+                    var Sizeid = db.PSizeTbls.Where(p => p.ProductId == model.ProductId);
+                    db.PSizeTbls.RemoveRange(Sizeid);
+                    db.SaveChanges();
+                    if (model.SizeTbls != null)
+                    {
+                        for (int i = 0; i < model.SizeTbls.Count; i++)
+                        {
+                            PSizeTbl pSizeTbl = new PSizeTbl();
+                            pSizeTbl.PSizeId = db.PSizeTbls.DefaultIfEmpty().Max(r => r == null ? 0 : r.PSizeId) + 1;
+                            pSizeTbl.ProductId = model.ProductId;
+                            pSizeTbl.Active = true;
+                            pSizeTbl.SizeId = model.SizeTbls[i].SizeId;
+                            db.PSizeTbls.Add(pSizeTbl);
+                            db.SaveChanges();
+
+                        }
+                    }
+                }
+
+
+                var res = new { res = "1", };
+                return Json(res, JsonRequestBehavior.AllowGet);
+
+            }
+            catch (Exception ex)
+            {
+                var md = ex.Message;
+                var res = new { res = "0" };
+                return Json(res, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        //-------------- Add Banner in Product End->------------->---------------------->---------------------------->------->------------>---------->---
 
     }
 }

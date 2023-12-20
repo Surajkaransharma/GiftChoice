@@ -88,8 +88,6 @@ warning 6002: The table/view 'giftchoice.dbo.BannerProductTbl' does not have a p
     <Property Name="KeywordId" Type="bigint" />
     <Property Name="Active" Type="bit" />
   </EntityType>
-  <!--Errors Found During Generation:
-warning 6002: The table/view 'giftchoice.dbo.BPKeywordTbl' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
   <EntityType Name="BPKeywordTbl">
     <Key>
       <PropertyRef Name="PKeywordId" />
@@ -99,8 +97,6 @@ warning 6002: The table/view 'giftchoice.dbo.BPKeywordTbl' does not have a prima
     <Property Name="KeywordId" Type="bigint" />
     <Property Name="Active" Type="bit" />
   </EntityType>
-  <!--Errors Found During Generation:
-warning 6002: The table/view 'giftchoice.dbo.BPTKeywordTbl' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
   <EntityType Name="BPTKeywordTbl">
     <Key>
       <PropertyRef Name="MCkeywordId" />
@@ -357,6 +353,8 @@ warning 6002: The table/view 'giftchoice.giftchoice.AutocompleteSuggestions' doe
     <EntitySet Name="BannerCateTbl" EntityType="Self.BannerCateTbl" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="BannerTbl" EntityType="Self.BannerTbl" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="BCKeywordTbl" EntityType="Self.BCKeywordTbl" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="BPKeywordTbl" EntityType="Self.BPKeywordTbl" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="BPTKeywordTbl" EntityType="Self.BPTKeywordTbl" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="KeywordTbl" EntityType="Self.KeywordTbl" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="MainCateTbl" EntityType="Self.MainCateTbl" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="MCKeywordTbl" EntityType="Self.MCKeywordTbl" Schema="dbo" store:Type="Tables" />
@@ -397,22 +395,6 @@ warning 6002: The table/view 'giftchoice.giftchoice.AutocompleteSuggestions' doe
     [BannerProductTbl].[UserID] AS [UserID], 
     [BannerProductTbl].[Qty] AS [Qty]
     FROM [dbo].[BannerProductTbl] AS [BannerProductTbl]</DefiningQuery>
-    </EntitySet>
-    <EntitySet Name="BPKeywordTbl" EntityType="Self.BPKeywordTbl" store:Type="Tables" store:Schema="dbo">
-      <DefiningQuery>SELECT 
-    [BPKeywordTbl].[PKeywordId] AS [PKeywordId], 
-    [BPKeywordTbl].[ProductId] AS [ProductId], 
-    [BPKeywordTbl].[KeywordId] AS [KeywordId], 
-    [BPKeywordTbl].[Active] AS [Active]
-    FROM [dbo].[BPKeywordTbl] AS [BPKeywordTbl]</DefiningQuery>
-    </EntitySet>
-    <EntitySet Name="BPTKeywordTbl" EntityType="Self.BPTKeywordTbl" store:Type="Tables" store:Schema="dbo">
-      <DefiningQuery>SELECT 
-    [BPTKeywordTbl].[MCkeywordId] AS [MCkeywordId], 
-    [BPTKeywordTbl].[MainCateId] AS [MainCateId], 
-    [BPTKeywordTbl].[KeywordId] AS [KeywordId], 
-    [BPTKeywordTbl].[Active] AS [Active]
-    FROM [dbo].[BPTKeywordTbl] AS [BPTKeywordTbl]</DefiningQuery>
     </EntitySet>
     <EntitySet Name="VProduct" EntityType="Self.VProduct" store:Type="Views" store:Schema="dbo">
       <DefiningQuery>SELECT 

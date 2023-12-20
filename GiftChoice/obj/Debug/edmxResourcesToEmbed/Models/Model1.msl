@@ -60,6 +60,26 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="BPKeywordTbls">
+      <EntityTypeMapping TypeName="GiftChoiceModel.BPKeywordTbl">
+        <MappingFragment StoreEntitySet="BPKeywordTbl">
+          <ScalarProperty Name="Active" ColumnName="Active" />
+          <ScalarProperty Name="KeywordId" ColumnName="KeywordId" />
+          <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+          <ScalarProperty Name="PKeywordId" ColumnName="PKeywordId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="BPTKeywordTbls">
+      <EntityTypeMapping TypeName="GiftChoiceModel.BPTKeywordTbl">
+        <MappingFragment StoreEntitySet="BPTKeywordTbl">
+          <ScalarProperty Name="Active" ColumnName="Active" />
+          <ScalarProperty Name="KeywordId" ColumnName="KeywordId" />
+          <ScalarProperty Name="MainCateId" ColumnName="MainCateId" />
+          <ScalarProperty Name="MCkeywordId" ColumnName="MCkeywordId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="KeywordTbls">
       <EntityTypeMapping TypeName="GiftChoiceModel.KeywordTbl">
         <MappingFragment StoreEntitySet="KeywordTbl">
@@ -268,26 +288,6 @@
           <ScalarProperty Name="ProductTitle" ColumnName="ProductTitle" />
           <ScalarProperty Name="MainCateId" ColumnName="MainCateId" />
           <ScalarProperty Name="ProductId" ColumnName="ProductId" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="BPKeywordTbls">
-      <EntityTypeMapping TypeName="GiftChoiceModel.BPKeywordTbl">
-        <MappingFragment StoreEntitySet="BPKeywordTbl">
-          <ScalarProperty Name="Active" ColumnName="Active" />
-          <ScalarProperty Name="KeywordId" ColumnName="KeywordId" />
-          <ScalarProperty Name="ProductId" ColumnName="ProductId" />
-          <ScalarProperty Name="PKeywordId" ColumnName="PKeywordId" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="BPTKeywordTbls">
-      <EntityTypeMapping TypeName="GiftChoiceModel.BPTKeywordTbl">
-        <MappingFragment StoreEntitySet="BPTKeywordTbl">
-          <ScalarProperty Name="Active" ColumnName="Active" />
-          <ScalarProperty Name="KeywordId" ColumnName="KeywordId" />
-          <ScalarProperty Name="MainCateId" ColumnName="MainCateId" />
-          <ScalarProperty Name="MCkeywordId" ColumnName="MCkeywordId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

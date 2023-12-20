@@ -6,6 +6,8 @@
     <EntitySet Name="BannerCateTbls" EntityType="GiftChoiceModel.BannerCateTbl" />
     <EntitySet Name="BannerTbls" EntityType="GiftChoiceModel.BannerTbl" />
     <EntitySet Name="BCKeywordTbls" EntityType="GiftChoiceModel.BCKeywordTbl" />
+    <EntitySet Name="BPKeywordTbls" EntityType="GiftChoiceModel.BPKeywordTbl" />
+    <EntitySet Name="BPTKeywordTbls" EntityType="GiftChoiceModel.BPTKeywordTbl" />
     <EntitySet Name="KeywordTbls" EntityType="GiftChoiceModel.KeywordTbl" />
     <EntitySet Name="MainCateTbls" EntityType="GiftChoiceModel.MainCateTbl" />
     <EntitySet Name="MCKeywordTbls" EntityType="GiftChoiceModel.MCKeywordTbl" />
@@ -21,8 +23,6 @@
     <EntitySet Name="BannerPTTbls" EntityType="GiftChoiceModel.BannerPTTbl" />
     <EntitySet Name="BannerProductImages" EntityType="GiftChoiceModel.BannerProductImage" />
     <EntitySet Name="BannerProductTbls" EntityType="GiftChoiceModel.BannerProductTbl" />
-    <EntitySet Name="BPKeywordTbls" EntityType="GiftChoiceModel.BPKeywordTbl" />
-    <EntitySet Name="BPTKeywordTbls" EntityType="GiftChoiceModel.BPTKeywordTbl" />
     <EntitySet Name="VProducts" EntityType="GiftChoiceModel.VProduct" />
     <EntitySet Name="AutocompleteSuggestions" EntityType="GiftChoiceModel.AutocompleteSuggestion" />
     <AssociationSet Name="FK__MCKeyword__Keywo__52593CB8" Association="GiftChoiceModel.FK__MCKeyword__Keywo__52593CB8">
@@ -85,6 +85,24 @@
     </Key>
     <Property Name="BCkeywordId" Type="Int64" Nullable="false" />
     <Property Name="BannerCateId" Type="Int64" />
+    <Property Name="KeywordId" Type="Int64" />
+    <Property Name="Active" Type="Boolean" />
+  </EntityType>
+  <EntityType Name="BPKeywordTbl">
+    <Key>
+      <PropertyRef Name="PKeywordId" />
+    </Key>
+    <Property Name="PKeywordId" Type="Int64" Nullable="false" />
+    <Property Name="ProductId" Type="Int64" />
+    <Property Name="KeywordId" Type="Int64" />
+    <Property Name="Active" Type="Boolean" />
+  </EntityType>
+  <EntityType Name="BPTKeywordTbl">
+    <Key>
+      <PropertyRef Name="MCkeywordId" />
+    </Key>
+    <Property Name="MCkeywordId" Type="Int64" Nullable="false" />
+    <Property Name="MainCateId" Type="Int64" />
     <Property Name="KeywordId" Type="Int64" />
     <Property Name="Active" Type="Boolean" />
   </EntityType>
@@ -287,24 +305,6 @@
     <Property Name="Update_at" Type="DateTime" Precision="3" />
     <Property Name="UserID" Type="Int64" />
     <Property Name="Qty" Type="Int64" />
-  </EntityType>
-  <EntityType Name="BPKeywordTbl">
-    <Key>
-      <PropertyRef Name="PKeywordId" />
-    </Key>
-    <Property Name="PKeywordId" Type="Int64" Nullable="false" />
-    <Property Name="ProductId" Type="Int64" />
-    <Property Name="KeywordId" Type="Int64" />
-    <Property Name="Active" Type="Boolean" />
-  </EntityType>
-  <EntityType Name="BPTKeywordTbl">
-    <Key>
-      <PropertyRef Name="MCkeywordId" />
-    </Key>
-    <Property Name="MCkeywordId" Type="Int64" Nullable="false" />
-    <Property Name="MainCateId" Type="Int64" />
-    <Property Name="KeywordId" Type="Int64" />
-    <Property Name="Active" Type="Boolean" />
   </EntityType>
   <EntityType Name="VProduct">
     <Key>

@@ -30,6 +30,8 @@ namespace GiftChoice.Models
         public virtual DbSet<BannerCateTbl> BannerCateTbls { get; set; }
         public virtual DbSet<BannerTbl> BannerTbls { get; set; }
         public virtual DbSet<BCKeywordTbl> BCKeywordTbls { get; set; }
+        public virtual DbSet<BPKeywordTbl> BPKeywordTbls { get; set; }
+        public virtual DbSet<BPTKeywordTbl> BPTKeywordTbls { get; set; }
         public virtual DbSet<KeywordTbl> KeywordTbls { get; set; }
         public virtual DbSet<MainCateTbl> MainCateTbls { get; set; }
         public virtual DbSet<MCKeywordTbl> MCKeywordTbls { get; set; }
@@ -45,8 +47,6 @@ namespace GiftChoice.Models
         public virtual DbSet<BannerPTTbl> BannerPTTbls { get; set; }
         public virtual DbSet<BannerProductImage> BannerProductImages { get; set; }
         public virtual DbSet<BannerProductTbl> BannerProductTbls { get; set; }
-        public virtual DbSet<BPKeywordTbl> BPKeywordTbls { get; set; }
-        public virtual DbSet<BPTKeywordTbl> BPTKeywordTbls { get; set; }
         public virtual DbSet<VProduct> VProducts { get; set; }
         public virtual DbSet<AutocompleteSuggestion> AutocompleteSuggestions { get; set; }
     }

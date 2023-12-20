@@ -279,6 +279,7 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
             });
         }
     };
+
     $scope.GetAllProduct = function () {
         $http.get("/GiftDashBoard/GetAllProduct").then(function (d) {
             $scope.ProductData = d.data;
@@ -319,6 +320,7 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
             alert(error.data);
         });
     };
+
     $scope.ProductOrderCompelete = function (id) {
         $http.get("/GiftDashBoard/ProductOrderCompelete?id=" + id).then(function (d) {
             $scope.rees = d.data;
@@ -1268,6 +1270,7 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
 
     $scope.GetBannerProdcutT = function () {
         $http.get("/GiftDashBoard/GetBannerProdcutT").then(function (d) {
+            debugger
             $scope.GetBannerProdcutTData = d.data;
         }, function (error) {
             alert(error.data);
@@ -1308,9 +1311,9 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
 
                     $scope.BannerProdcutTKeywordArray($scope.result.MainCateId);
                 }
-                toastr["success"]("Banner Save Successfully");
-                $scope.BannerProdcutT = null;
-                $scope.GetBannerProdcutT();
+                //toastr["success"]("Banner Save Successfully");
+                //$scope.BannerProdcutT = null;
+                //$scope.GetBannerProdcutT();
 
             } else if ($scope.result.res === "2") {
                 toastr["error"]("Already Exist Position");
@@ -1340,7 +1343,7 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
             if ($scope.result.res === "1") {
                 toastr["success"]("Banner save successfully");
                 $scope.MainCate = null;
-                $scope.GetMainCate();
+
                 location.href = '/GiftDashBoard/AddPBanner';
             }
         }, function (error) {
@@ -1371,22 +1374,12 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
         dropZoon.classList.add('drop-zoon--Uploaded');
         loadingText.style.display = "none";
         $('#previewImage').css('display', 'block');
-        previewImage.setAttribute("src", "/images/MainCate/" + $scope.BannerProdcutT.MImage);
+        previewImage.setAttribute("src", "/images/BannerPTImage/" + $scope.BannerProdcutT.MImage);
         debugger
         for (var i = 0; i < $scope.BannerProdcutT.Submenu.length; i++) {
             var vallc = $scope.BannerProdcutT.Submenu[i].KeywordId;
             $('#Keyword_' + vallc).prop('checked', true);
-            if ($scope.BannerProdcutT.Submenu[i].MenuFilter == 1) {
-
-                $('#MenuFilter_' + vallc).attr('checked', true).trigger("click");
-            } else if ($scope.BannerProdcutT.Submenu[i].Menu == 1) {
-                $('#Menu_' + vallc).attr('checked', true).trigger("click");
-
-            }
-            else if ($scope.BannerProdcutT.Submenu[i].Fliter == 1) {
-                $('#Fliter_' + vallc).attr('checked', true).trigger("click");
-
-            }
+          
 
         }
 
@@ -1438,8 +1431,8 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
 
                     $scope.UpdateBannerProdcutTKeywordArray($scope.result.MainCateId);
                 }
-                $scope.BannerProdcutT = null;
-                $scope.GetBannerProdcutT();
+                //$scope.BannerProdcutT = null;
+                //$scope.GetBannerProdcutT();
             }
         }, function (error) {
             toastr["error"]("Something Went Wrong");
@@ -1460,8 +1453,8 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
             $scope.result = d.data;
             if ($scope.result.res === "1") {
                 toastr["success"]("Banner Update successfully");
-                $scope.BannerProdcutT = null;
-                $scope.GetBannerProdcutT();
+                //$scope.BannerProdcutT = null;
+                //$scope.GetBannerProdcutT();
 
                 /*                $scope.GetKeywordData();*/
                 //$('#edbtn').css('display', 'none');
@@ -1490,6 +1483,228 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
 
     };
        //--------------Banner Product end->------------->---------------------->---------------------------->------->------------>---------->---
+
+       //-------------- add Banner in Product ->------------->---------------------->---------------------------->------->------------>---------->---
+
+    $scope.GetBannerInProduct = function () {
+        $http.get("/GiftDashBoard/GetBannerInProduct").then(function (d) {
+            debugger
+            $scope.GetBannerInProductData = d.data;
+        }, function (error) {
+            alert(error.data);
+        });
+    };
+
+    $scope.GetBannerPInKeyword = function (MainCateId) {
+        debugger;
+     
+            for (var s = 0; s < $scope.KeywordList.length; s++) {
+                var vallc1s = $scope.KeywordList[s].KeywordId;
+                $('#Keyword_' + vallc1s).prop('checked', false);
+
+            }
+            var id = parseInt(MainCateId);
+            var dataArray = [];
+            dataArray = $scope.GetBannerInProductData;
+            var dataArray2 = dataArray.filter(item => item.MainCateId === id);
+
+            if (dataArray2.length > 0) {
+                var submenu = dataArray2[0].Submenu;
+
+                if (submenu && submenu.length > 0) {
+                    for (var i = 0; i < submenu.length; i++) {
+                        for (var k = 0; k < $scope.KeywordList.length; k++) {
+                            if ($scope.KeywordList[k].KeywordId == submenu[i].KeywordId) {
+                                var vallc = submenu[i].KeywordId;
+                                $('#Keyword_' + vallc).prop('checked', true);
+                            }
+                        }
+                    }
+                }
+            }
+       
+       
+    };
+    var PSizeArr = [];
+    $scope.SubmitBannerProduct = function () {
+        debugger
+        var editorText = CKEDITOR.instances.ckeditor.getData();
+        $scope.Description = editorText;
+
+        var editorText2 = CKEDITOR.instances.editor1.getData();
+        $scope.Description2 = editorText2;
+
+
+        debugger;
+        //for (var i = 0; i < $scope.KeywordList.length; i++) {
+        //    if ($scope.KeywordList[i].Selected) {
+        //        Keywordarr.push($scope.KeywordList[i]);
+        //    }
+        //}
+        $.each($(".checkbox-input:checked"), function () {
+            Keywordarr.push({ 'KeywordId': $(this).val() });
+        });
+        for (var i = 0; i < $scope.SizeList.length; i++) {
+            if ($scope.SizeList[i].Selected) {
+                PSizeArr.push($scope.SizeList[i]);
+            }
+        }
+
+        debugger;
+        upload({
+            url: '/GiftDashBoard/SubmitBannerProduct',
+            method: 'post',
+            data: $scope.Product
+        }).then(function (d) {
+            $scope.result = d.data;
+            if ($scope.result.res === "1") {
+                debugger
+                $scope.BannerProductArrayData($scope.result.ProductId);
+                //toastr["success"]("Product save successfully");
+                //$scope.Product = null;
+                //$scope.GetProduct();
+
+            } else if ($scope.result.res === "-1") {
+                toastr["error"]("Product already exist");
+            }
+            else {
+                toastr["error"]("Product not save");
+            }
+        }, function (error) {
+            toastr["error"]("Something Went Wrong");
+        });
+    };
+
+    $scope.BannerProductArrayData = function (id) {
+        debugger;
+        $http({
+            url: '/GiftDashBoard/BannerProductArrayData',
+            method: 'post',
+            data: {
+                ProductId: id,
+                PDesc: $scope.Description,
+                PDesc2: $scope.Description2,
+                KeywordTbls: Keywordarr,
+                SizeTbls: PSizeArr
+            }
+        }).then(function (d) {
+            $scope.result = d.data;
+            if ($scope.result.res === "1") {
+
+                toastr["success"]("Product save successfully");
+                $('#MainCate').val("-1").trigger('change');
+                location.href = '/GiftDashBoard/AddBannerInProduct';
+                $scope.Product = null;
+                //    $scope.GetProduct();
+            } else if ($scope.result.res === "2") {
+                toastr["error"]("Product already exist");
+            }
+        }, function (error) {
+            toastr["error"]("Something Went Wrong");
+        });
+    };
+
+
+    $scope.BannerUpdateProductData = function () {
+        debugger
+        var editorText = CKEDITOR.instances.ckeditor.getData();
+        $scope.Description = editorText;
+
+        var editorText2 = CKEDITOR.instances.editor1.getData();
+        $scope.Description2 = editorText2;
+
+
+
+        //if (MainCate.val() === "-1" || MainCate.val() === "") {
+        //    toastr["error"]("Please Select Main Category");
+        //    MainCate.focus();
+        //    return;
+        //}
+
+        //var Producttitle = angular.element(document.getElementById("Producttitle"));
+        //if (Producttitle.val() === "") {
+        //    toastr["error"]("Please Enter Product Name");
+        //    Producttitle.focus();
+        //    return;
+        //}
+        //$scope.image1 = $('#image1').val();
+        //if ($scope.image1 == "" || $scope.image1 == undefined) {
+        //    toastr["error"]("Please Select Image");
+        //    $('#image1').focus;
+        //    return;
+        //}
+
+        debugger;
+        //for (var i = 0; i < $scope.KeywordList.length; i++) {
+        //    if ($scope.KeywordList[i].Selected) {
+        //        Keywordarr.push($scope.KeywordList[i]);
+        //    }
+        //}
+        $.each($(".checkbox-input:checked"), function () {
+            Keywordarr.push({ 'KeywordId': $(this).val() });
+        });
+        $.each($(".checkbox-Size:checked"), function () {
+            PSizeArr.push({ 'SizeId': $(this).val() });
+        });
+        delete $scope.Product.PDesc;
+        delete $scope.Product.PDesc2;
+
+        debugger;
+        upload({
+            url: '/GiftDashBoard/BannerUpdateProductData',
+            method: 'post',
+            data: $scope.Product
+        }).then(function (d) {
+            $scope.result = d.data;
+            if ($scope.result.res === "1") {
+                debugger
+                $scope.BannerUpdateProductArrayData($scope.result.ProductId);
+                //toastr["success"]("Product save successfully");
+                //$scope.Product = null;
+                //$scope.GetProduct();
+
+            } else if ($scope.result.res === "-1") {
+                toastr["error"]("Product already exist");
+            }
+            else {
+                toastr["error"]("Product not save");
+            }
+        }, function (error) {
+            toastr["error"]("Something Went Wrong");
+        });
+    };
+
+    $scope.BannerUpdateProductArrayData = function (id) {
+        debugger;
+        $http({
+            url: '/GiftDashBoard/BannerUpdateProductArrayData',
+            method: 'post',
+            data: {
+                ProductId: id,
+                PDesc: $scope.Description,
+                PDesc2: $scope.Description2,
+                KeywordTbls: Keywordarr,
+                SizeTbls: PSizeArr
+
+            }
+        }).then(function (d) {
+            $scope.result = d.data;
+            if ($scope.result.res === "1") {
+
+                toastr["success"]("Product Update successfully");
+                $('#MainCate').val("-1").trigger('change');
+                location.href = '/GiftDashBoard/AddBannerInProduct';
+                $scope.Product = null;
+                //    $scope.GetProduct();
+            } else if ($scope.result.res === "2") {
+                toastr["error"]("Product already exist");
+            }
+        }, function (error) {
+            toastr["error"]("Something Went Wrong");
+        });
+    };
+
+       //-------------- add Banner in Product End ->------------->---------------------->---------------------------->------->------------>---------->---
 
 }]).directive('uploadFile', ['$parse', function ($parse) {
     return {

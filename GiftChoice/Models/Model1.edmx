@@ -93,8 +93,6 @@ warning 6002: The table/view 'giftchoice.dbo.BannerProductTbl' does not have a p
           <Property Name="KeywordId" Type="bigint" />
           <Property Name="Active" Type="bit" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'giftchoice.dbo.BPKeywordTbl' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="BPKeywordTbl">
           <Key>
             <PropertyRef Name="PKeywordId" />
@@ -104,8 +102,6 @@ warning 6002: The table/view 'giftchoice.dbo.BPKeywordTbl' does not have a prima
           <Property Name="KeywordId" Type="bigint" />
           <Property Name="Active" Type="bit" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'giftchoice.dbo.BPTKeywordTbl' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="BPTKeywordTbl">
           <Key>
             <PropertyRef Name="MCkeywordId" />
@@ -362,6 +358,8 @@ warning 6002: The table/view 'giftchoice.giftchoice.AutocompleteSuggestions' doe
           <EntitySet Name="BannerCateTbl" EntityType="Self.BannerCateTbl" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="BannerTbl" EntityType="Self.BannerTbl" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="BCKeywordTbl" EntityType="Self.BCKeywordTbl" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BPKeywordTbl" EntityType="Self.BPKeywordTbl" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BPTKeywordTbl" EntityType="Self.BPTKeywordTbl" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="KeywordTbl" EntityType="Self.KeywordTbl" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MainCateTbl" EntityType="Self.MainCateTbl" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MCKeywordTbl" EntityType="Self.MCKeywordTbl" Schema="dbo" store:Type="Tables" />
@@ -402,22 +400,6 @@ warning 6002: The table/view 'giftchoice.giftchoice.AutocompleteSuggestions' doe
     [BannerProductTbl].[UserID] AS [UserID], 
     [BannerProductTbl].[Qty] AS [Qty]
     FROM [dbo].[BannerProductTbl] AS [BannerProductTbl]</DefiningQuery>
-          </EntitySet>
-          <EntitySet Name="BPKeywordTbl" EntityType="Self.BPKeywordTbl" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [BPKeywordTbl].[PKeywordId] AS [PKeywordId], 
-    [BPKeywordTbl].[ProductId] AS [ProductId], 
-    [BPKeywordTbl].[KeywordId] AS [KeywordId], 
-    [BPKeywordTbl].[Active] AS [Active]
-    FROM [dbo].[BPKeywordTbl] AS [BPKeywordTbl]</DefiningQuery>
-          </EntitySet>
-          <EntitySet Name="BPTKeywordTbl" EntityType="Self.BPTKeywordTbl" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [BPTKeywordTbl].[MCkeywordId] AS [MCkeywordId], 
-    [BPTKeywordTbl].[MainCateId] AS [MainCateId], 
-    [BPTKeywordTbl].[KeywordId] AS [KeywordId], 
-    [BPTKeywordTbl].[Active] AS [Active]
-    FROM [dbo].[BPTKeywordTbl] AS [BPTKeywordTbl]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="VProduct" EntityType="Self.VProduct" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
@@ -482,6 +464,8 @@ warning 6002: The table/view 'giftchoice.giftchoice.AutocompleteSuggestions' doe
           <EntitySet Name="BannerCateTbls" EntityType="GiftChoiceModel.BannerCateTbl" />
           <EntitySet Name="BannerTbls" EntityType="GiftChoiceModel.BannerTbl" />
           <EntitySet Name="BCKeywordTbls" EntityType="GiftChoiceModel.BCKeywordTbl" />
+          <EntitySet Name="BPKeywordTbls" EntityType="GiftChoiceModel.BPKeywordTbl" />
+          <EntitySet Name="BPTKeywordTbls" EntityType="GiftChoiceModel.BPTKeywordTbl" />
           <EntitySet Name="KeywordTbls" EntityType="GiftChoiceModel.KeywordTbl" />
           <EntitySet Name="MainCateTbls" EntityType="GiftChoiceModel.MainCateTbl" />
           <EntitySet Name="MCKeywordTbls" EntityType="GiftChoiceModel.MCKeywordTbl" />
@@ -497,8 +481,6 @@ warning 6002: The table/view 'giftchoice.giftchoice.AutocompleteSuggestions' doe
           <EntitySet Name="BannerPTTbls" EntityType="GiftChoiceModel.BannerPTTbl" />
           <EntitySet Name="BannerProductImages" EntityType="GiftChoiceModel.BannerProductImage" />
           <EntitySet Name="BannerProductTbls" EntityType="GiftChoiceModel.BannerProductTbl" />
-          <EntitySet Name="BPKeywordTbls" EntityType="GiftChoiceModel.BPKeywordTbl" />
-          <EntitySet Name="BPTKeywordTbls" EntityType="GiftChoiceModel.BPTKeywordTbl" />
           <EntitySet Name="VProducts" EntityType="GiftChoiceModel.VProduct" />
           <EntitySet Name="AutocompleteSuggestions" EntityType="GiftChoiceModel.AutocompleteSuggestion" />
           <AssociationSet Name="FK__MCKeyword__Keywo__52593CB8" Association="GiftChoiceModel.FK__MCKeyword__Keywo__52593CB8">
@@ -561,6 +543,24 @@ warning 6002: The table/view 'giftchoice.giftchoice.AutocompleteSuggestions' doe
           </Key>
           <Property Name="BCkeywordId" Type="Int64" Nullable="false" />
           <Property Name="BannerCateId" Type="Int64" />
+          <Property Name="KeywordId" Type="Int64" />
+          <Property Name="Active" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="BPKeywordTbl">
+          <Key>
+            <PropertyRef Name="PKeywordId" />
+          </Key>
+          <Property Name="PKeywordId" Type="Int64" Nullable="false" />
+          <Property Name="ProductId" Type="Int64" />
+          <Property Name="KeywordId" Type="Int64" />
+          <Property Name="Active" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="BPTKeywordTbl">
+          <Key>
+            <PropertyRef Name="MCkeywordId" />
+          </Key>
+          <Property Name="MCkeywordId" Type="Int64" Nullable="false" />
+          <Property Name="MainCateId" Type="Int64" />
           <Property Name="KeywordId" Type="Int64" />
           <Property Name="Active" Type="Boolean" />
         </EntityType>
@@ -764,24 +764,6 @@ warning 6002: The table/view 'giftchoice.giftchoice.AutocompleteSuggestions' doe
           <Property Name="UserID" Type="Int64" />
           <Property Name="Qty" Type="Int64" />
         </EntityType>
-        <EntityType Name="BPKeywordTbl">
-          <Key>
-            <PropertyRef Name="PKeywordId" />
-          </Key>
-          <Property Name="PKeywordId" Type="Int64" Nullable="false" />
-          <Property Name="ProductId" Type="Int64" />
-          <Property Name="KeywordId" Type="Int64" />
-          <Property Name="Active" Type="Boolean" />
-        </EntityType>
-        <EntityType Name="BPTKeywordTbl">
-          <Key>
-            <PropertyRef Name="MCkeywordId" />
-          </Key>
-          <Property Name="MCkeywordId" Type="Int64" Nullable="false" />
-          <Property Name="MainCateId" Type="Int64" />
-          <Property Name="KeywordId" Type="Int64" />
-          <Property Name="Active" Type="Boolean" />
-        </EntityType>
         <EntityType Name="VProduct">
           <Key>
             <PropertyRef Name="ProductId" />
@@ -915,6 +897,26 @@ warning 6002: The table/view 'giftchoice.giftchoice.AutocompleteSuggestions' doe
                 <ScalarProperty Name="KeywordId" ColumnName="KeywordId" />
                 <ScalarProperty Name="BannerCateId" ColumnName="BannerCateId" />
                 <ScalarProperty Name="BCkeywordId" ColumnName="BCkeywordId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BPKeywordTbls">
+            <EntityTypeMapping TypeName="GiftChoiceModel.BPKeywordTbl">
+              <MappingFragment StoreEntitySet="BPKeywordTbl">
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="KeywordId" ColumnName="KeywordId" />
+                <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+                <ScalarProperty Name="PKeywordId" ColumnName="PKeywordId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BPTKeywordTbls">
+            <EntityTypeMapping TypeName="GiftChoiceModel.BPTKeywordTbl">
+              <MappingFragment StoreEntitySet="BPTKeywordTbl">
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="KeywordId" ColumnName="KeywordId" />
+                <ScalarProperty Name="MainCateId" ColumnName="MainCateId" />
+                <ScalarProperty Name="MCkeywordId" ColumnName="MCkeywordId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1126,26 +1128,6 @@ warning 6002: The table/view 'giftchoice.giftchoice.AutocompleteSuggestions' doe
                 <ScalarProperty Name="ProductTitle" ColumnName="ProductTitle" />
                 <ScalarProperty Name="MainCateId" ColumnName="MainCateId" />
                 <ScalarProperty Name="ProductId" ColumnName="ProductId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="BPKeywordTbls">
-            <EntityTypeMapping TypeName="GiftChoiceModel.BPKeywordTbl">
-              <MappingFragment StoreEntitySet="BPKeywordTbl">
-                <ScalarProperty Name="Active" ColumnName="Active" />
-                <ScalarProperty Name="KeywordId" ColumnName="KeywordId" />
-                <ScalarProperty Name="ProductId" ColumnName="ProductId" />
-                <ScalarProperty Name="PKeywordId" ColumnName="PKeywordId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="BPTKeywordTbls">
-            <EntityTypeMapping TypeName="GiftChoiceModel.BPTKeywordTbl">
-              <MappingFragment StoreEntitySet="BPTKeywordTbl">
-                <ScalarProperty Name="Active" ColumnName="Active" />
-                <ScalarProperty Name="KeywordId" ColumnName="KeywordId" />
-                <ScalarProperty Name="MainCateId" ColumnName="MainCateId" />
-                <ScalarProperty Name="MCkeywordId" ColumnName="MCkeywordId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

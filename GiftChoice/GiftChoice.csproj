@@ -2534,6 +2534,7 @@
     <Content Include="Views\GiftDashBoard\AddPBanner.cshtml" />
     <Content Include="Views\Home\BannerGifts.cshtml" />
     <Content Include="Views\Home\TopProduct.cshtml" />
+    <Content Include="Views\GiftDashBoard\AddBannerInProduct.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
