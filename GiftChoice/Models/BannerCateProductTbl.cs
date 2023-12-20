@@ -15,7 +15,7 @@ namespace GiftChoice.Models
     public partial class BannerCateProductTbl
     {
         public long BCProductId { get; set; }
-        public long? BannerCateId { get; set; }
+        public long BannerCateId { get; set; }
         public long ProductId { get; set; }
     }
 }

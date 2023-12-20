@@ -18,6 +18,11 @@
     <EntitySet Name="SizeTbls" EntityType="GiftChoiceModel.SizeTbl" />
     <EntitySet Name="SliderTbls" EntityType="GiftChoiceModel.SliderTbl" />
     <EntitySet Name="UserRegisters" EntityType="GiftChoiceModel.UserRegister" />
+    <EntitySet Name="BannerPTTbls" EntityType="GiftChoiceModel.BannerPTTbl" />
+    <EntitySet Name="BannerProductImages" EntityType="GiftChoiceModel.BannerProductImage" />
+    <EntitySet Name="BannerProductTbls" EntityType="GiftChoiceModel.BannerProductTbl" />
+    <EntitySet Name="BPKeywordTbls" EntityType="GiftChoiceModel.BPKeywordTbl" />
+    <EntitySet Name="BPTKeywordTbls" EntityType="GiftChoiceModel.BPTKeywordTbl" />
     <EntitySet Name="VProducts" EntityType="GiftChoiceModel.VProduct" />
     <EntitySet Name="AutocompleteSuggestions" EntityType="GiftChoiceModel.AutocompleteSuggestion" />
     <AssociationSet Name="FK__MCKeyword__Keywo__52593CB8" Association="GiftChoiceModel.FK__MCKeyword__Keywo__52593CB8">
@@ -237,6 +242,69 @@
     <Property Name="Pincode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="Active" Type="Boolean" />
     <Property Name="Create_at" Type="DateTime" Precision="0" />
+  </EntityType>
+  <EntityType Name="BannerPTTbl">
+    <Key>
+      <PropertyRef Name="MainCateId" />
+    </Key>
+    <Property Name="MainCateId" Type="Int64" Nullable="false" />
+    <Property Name="MTitle" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Position" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="MUrl" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Active" Type="Boolean" />
+    <Property Name="Priority" Type="Int64" />
+    <Property Name="MImage" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Create_at" Type="DateTime" Precision="3" />
+    <Property Name="Update_at" Type="DateTime" Precision="3" />
+    <Property Name="UserId" Type="Int64" />
+  </EntityType>
+  <EntityType Name="BannerProductImage">
+    <Key>
+      <PropertyRef Name="PImageId" />
+    </Key>
+    <Property Name="PImageId" Type="Int64" Nullable="false" />
+    <Property Name="ProductId" Type="Int64" />
+    <Property Name="PImage" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Active" Type="Boolean" />
+    <Property Name="Create_at" Type="DateTime" Precision="3" />
+    <Property Name="Update_at" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="BannerProductTbl">
+    <Key>
+      <PropertyRef Name="ProductId" />
+    </Key>
+    <Property Name="ProductId" Type="Int64" Nullable="false" />
+    <Property Name="MainCateId" Type="Int64" />
+    <Property Name="ProductTitle" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Price" Type="Double" />
+    <Property Name="PUrl" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="PLabel" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="PDesc" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="PDesc1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Priority" Type="Int64" />
+    <Property Name="Active" Type="Boolean" />
+    <Property Name="Create_at" Type="DateTime" Precision="3" />
+    <Property Name="Update_at" Type="DateTime" Precision="3" />
+    <Property Name="UserID" Type="Int64" />
+    <Property Name="Qty" Type="Int64" />
+  </EntityType>
+  <EntityType Name="BPKeywordTbl">
+    <Key>
+      <PropertyRef Name="PKeywordId" />
+    </Key>
+    <Property Name="PKeywordId" Type="Int64" Nullable="false" />
+    <Property Name="ProductId" Type="Int64" />
+    <Property Name="KeywordId" Type="Int64" />
+    <Property Name="Active" Type="Boolean" />
+  </EntityType>
+  <EntityType Name="BPTKeywordTbl">
+    <Key>
+      <PropertyRef Name="MCkeywordId" />
+    </Key>
+    <Property Name="MCkeywordId" Type="Int64" Nullable="false" />
+    <Property Name="MainCateId" Type="Int64" />
+    <Property Name="KeywordId" Type="Int64" />
+    <Property Name="Active" Type="Boolean" />
   </EntityType>
   <EntityType Name="VProduct">
     <Key>

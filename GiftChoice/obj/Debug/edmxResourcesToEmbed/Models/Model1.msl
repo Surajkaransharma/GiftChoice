@@ -223,6 +223,74 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="BannerPTTbls">
+      <EntityTypeMapping TypeName="GiftChoiceModel.BannerPTTbl">
+        <MappingFragment StoreEntitySet="BannerPTTbl">
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="Update_at" ColumnName="Update_at" />
+          <ScalarProperty Name="Create_at" ColumnName="Create_at" />
+          <ScalarProperty Name="MImage" ColumnName="MImage" />
+          <ScalarProperty Name="Priority" ColumnName="Priority" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+          <ScalarProperty Name="MUrl" ColumnName="MUrl" />
+          <ScalarProperty Name="Position" ColumnName="Position" />
+          <ScalarProperty Name="MTitle" ColumnName="MTitle" />
+          <ScalarProperty Name="MainCateId" ColumnName="MainCateId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="BannerProductImages">
+      <EntityTypeMapping TypeName="GiftChoiceModel.BannerProductImage">
+        <MappingFragment StoreEntitySet="BannerProductImage">
+          <ScalarProperty Name="Update_at" ColumnName="Update_at" />
+          <ScalarProperty Name="Create_at" ColumnName="Create_at" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+          <ScalarProperty Name="PImage" ColumnName="PImage" />
+          <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+          <ScalarProperty Name="PImageId" ColumnName="PImageId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="BannerProductTbls">
+      <EntityTypeMapping TypeName="GiftChoiceModel.BannerProductTbl">
+        <MappingFragment StoreEntitySet="BannerProductTbl">
+          <ScalarProperty Name="Qty" ColumnName="Qty" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="Update_at" ColumnName="Update_at" />
+          <ScalarProperty Name="Create_at" ColumnName="Create_at" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+          <ScalarProperty Name="Priority" ColumnName="Priority" />
+          <ScalarProperty Name="PDesc1" ColumnName="PDesc1" />
+          <ScalarProperty Name="PDesc" ColumnName="PDesc" />
+          <ScalarProperty Name="PLabel" ColumnName="PLabel" />
+          <ScalarProperty Name="PUrl" ColumnName="PUrl" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="ProductTitle" ColumnName="ProductTitle" />
+          <ScalarProperty Name="MainCateId" ColumnName="MainCateId" />
+          <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="BPKeywordTbls">
+      <EntityTypeMapping TypeName="GiftChoiceModel.BPKeywordTbl">
+        <MappingFragment StoreEntitySet="BPKeywordTbl">
+          <ScalarProperty Name="Active" ColumnName="Active" />
+          <ScalarProperty Name="KeywordId" ColumnName="KeywordId" />
+          <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+          <ScalarProperty Name="PKeywordId" ColumnName="PKeywordId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="BPTKeywordTbls">
+      <EntityTypeMapping TypeName="GiftChoiceModel.BPTKeywordTbl">
+        <MappingFragment StoreEntitySet="BPTKeywordTbl">
+          <ScalarProperty Name="Active" ColumnName="Active" />
+          <ScalarProperty Name="KeywordId" ColumnName="KeywordId" />
+          <ScalarProperty Name="MainCateId" ColumnName="MainCateId" />
+          <ScalarProperty Name="MCkeywordId" ColumnName="MCkeywordId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="VProducts">
       <EntityTypeMapping TypeName="GiftChoiceModel.VProduct">
         <MappingFragment StoreEntitySet="VProduct">

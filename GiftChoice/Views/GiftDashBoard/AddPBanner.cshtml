@@ -1,7 +1,9 @@
 ﻿
 @{
-    ViewBag.Title = "AddPBanner";
-    Layout = "~/Views/Shared/_Admin.cshtml";
+                /**/
+
+                ViewBag.Title = "AddPBanner";
+                Layout = "~/Views/Shared/_Admin.cshtml";
 }
 
 <style>
@@ -37,23 +39,18 @@
                                 <label for="input1" class="form-label">Select Banner Position</label>
 
                                 @*<select id="MainCateSelect" class="form-select" ng-init="GetBannerCategoryData()" ng-model="Banner.MainCateId">
-                <option ng-selected="true" value="-1">Select Banner Category</option>
-                <option ng-repeat="m in BannerCateData" value="{{m.BannerCateId}}">{{m.BTitle}}</option>
-            </select>*@
-                                <select id="MainCateSelect" class="form-select" ng-model="PBanner.BannerCateId">
+                                        <option ng-selected="true" value="-1">Select Banner Category</option>
+                                        <option ng-repeat="m in BannerCateData" value="{{m.BannerCateId}}">{{m.BTitle}}</option>
+                                    </select>*@
+                                <select id="MainCateSelect" class="form-select" ng-model="BannerProdcutT.Position">
                                     <option ng-selected="true" value="-1">Select Banner Position</option>
                                     <option value="Top Banner">Top Banner</option>
                                     <option value="Center Banner">Center Banner</option>
-
-
-
                                 </select>
-
-
                             </div>
                             <div class="col-md-12">
                                 <label for="input1" class="form-label">Banner Title</label>
-                                <input type="text" class="form-control" id="BTitle" ng-model="BannerCate.BTitle" placeholder="Banner Title">
+                                <input type="text" class="form-control" id="BTitle" ng-model="BannerProdcutT.BTitle" placeholder="Banner Title">
 
                             </div>
 
@@ -83,7 +80,7 @@
                                             <p class="drop-zoon__paragraph">Drop your file here or Click to browse</p>
                                             <span id="loadingText" class="drop-zoon__loading-text">Please Wait</span>
                                             <img src="" alt="Preview Image" id="previewImage" class="drop-zoon__preview-image" draggable="false">
-                                            <input type="file" id="fileInput" upload-file="Banner.Image" class="drop-zoon__file-input" multiple>
+                                            <input type="file" id="fileInput" upload-file="BannerProdcutT.Image" class="drop-zoon__file-input" multiple>
                                         </div>
                                         <!-- End Drop Zoon -->
                                         <!-- File Details -->
@@ -111,7 +108,7 @@
 
                             <div class="col-md-12">
                                 <label for="input1" class="form-label">Priority</label>
-                                <input type="number" class="form-control" ng-model="Banner.Priority" id="Priority" placeholder="Priority">
+                                <input type="number" class="form-control" ng-model="BannerProdcutT.Priority" id="Priority" placeholder="Priority">
                             </div>
 
                             <div class="col-md-12" ng-init="GetKeywordData()">
@@ -132,7 +129,7 @@
 
                             <div class="col-md-12">
                                 <div class="d-md-flex d-grid align-items-center gap-3">
-                                    <button type="button" id="btn" ng-click="SubmitBanner()" class="btn btn-primary px-4">Submit</button>
+                                    <button type="button" id="btn" ng-click="SubmitBannerProdcutT()" class="btn btn-primary px-4">Submit</button>
                                     <button type="button" id="edbtn" ng-click="UpdateBanner()" style="display: none" class="btn btn-primary px-4">Update</button>
                                     <button type="button" class="btn btn-light px-4" onClick="refreshPage()">Reset</button>
                                 </div>
@@ -158,7 +155,7 @@
 
                         </div>
                         <div class="table-responsive">
-                            <table class="table mb-0 table-bordered" ng-init="BannerList()">
+                            <table class="table mb-0 table-bordered" ng-init="GetBannerProdcutT()">
                                 <thead class="table-light">
                                     <tr>
                                         <th>S.No.</th>

@@ -93,6 +93,8 @@ namespace GiftChoice.Controllers
 
         public class MainCateTblModel
         {
+            public string Position { get; set; }
+
             public long MainCateId { get; set; }
             public string MTitle { get; set; }
             public string MUrl { get; set; }
@@ -290,6 +292,33 @@ namespace GiftChoice.Controllers
             }
         }
 
+        public JsonResult MainCateActiveDeActive(int id)
+        {
+            try
+            {
+                var jb = db.MainCateTbls.Where(c => c.MainCateId == id).FirstOrDefault();
+                if (jb != null)
+                {
+
+                    jb.Active = jb.Active == true ? false : true;
+                    db.SaveChanges();
+                    var res = new { res = "1" };
+                    return Json(res, JsonRequestBehavior.AllowGet);
+                }
+                else
+                {
+                    var res = new { res = "2" };
+                    return Json(res, JsonRequestBehavior.AllowGet);
+                }
+            }
+            catch (Exception ex)
+            {
+                var res = new { res = "0" };
+                return Json(res, JsonRequestBehavior.AllowGet);
+            }
+
+        }
+
         public JsonResult GetMainCate()
         {
             var res =
@@ -377,32 +406,7 @@ namespace GiftChoice.Controllers
         }
 
 
-        public JsonResult MainCateActiveDeActive(int id)
-        {
-            try
-            {
-                var jb = db.MainCateTbls.Where(c => c.MainCateId == id).FirstOrDefault();
-                if (jb != null)
-                {
-
-                    jb.Active = jb.Active == true ? false : true;
-                    db.SaveChanges();
-                    var res = new { res = "1" };
-                    return Json(res, JsonRequestBehavior.AllowGet);
-                }
-                else
-                {
-                    var res = new { res = "2" };
-                    return Json(res, JsonRequestBehavior.AllowGet);
-                }
-            }
-            catch (Exception ex)
-            {
-                var res = new { res = "0" };
-                return Json(res, JsonRequestBehavior.AllowGet);
-            }
-
-        }
+   
 
 
         /////// Keyword Code start 
@@ -1733,6 +1737,222 @@ namespace GiftChoice.Controllers
 
         }
 
+        //--------------Banner Product->------------->---------------------->---------------------------->------->------------>---------->---
+
+        public JsonResult SubmitBannerProdcutT(MainCateTblModel model)
+        {
+            try
+            {
+                BannerPTTbl mainCateTbl = new BannerPTTbl();
+                mainCateTbl.MainCateId = db.BannerPTTbls.DefaultIfEmpty().Max(r => r == null ? 0 : r.MainCateId) + 1;
+
+
+                mainCateTbl.MTitle = model.MTitle;
+                mainCateTbl.MUrl = model.MTitle.Replace(" ", "-");
+                if (model.Image != null)
+                {
+                    string extensionstuimg = Path.GetExtension(model.Image.FileName);
+                    model.Image.SaveAs(Server.MapPath("~/images/BannerPTImage/" + mainCateTbl.MainCateId + "" + extensionstuimg));
+                 //   MainCateVaryQualityLevel(model.Image.InputStream, mainCateTbl.MainCateId + extensionstuimg);
+                    mainCateTbl.MImage = mainCateTbl.MainCateId + "" + extensionstuimg;
+                }
+                mainCateTbl.Create_at = DateTime.Now;
+                mainCateTbl.Position = model.Position;
+                mainCateTbl.Update_at = DateTime.Now;
+                mainCateTbl.Active = true;
+                mainCateTbl.Priority = model.Priority;
+                db.BannerPTTbls.Add(mainCateTbl);
+                db.SaveChanges();
+                var res = new { res = "1", MainCateId = mainCateTbl.MainCateId };
+                return Json(res, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+
+                var res = new { res = "0" };
+                return Json(res, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+
+        public JsonResult BannerProdcutTKeywordArray(MainCateTblModel model)
+        {
+
+            try
+            {
+
+                BannerPTTbl result = db.BannerPTTbls.Where(c => c.MainCateId == model.MainCateId).FirstOrDefault();
+
+                if (result == null)
+                {
+                    var res1 = new { res = "0" };
+                    return Json(res1, JsonRequestBehavior.AllowGet);
+                }
+
+
+                if (model.keywordTbls != null)
+                {
+                 
+                    for (int i = 0; i < model.keywordTbls.Count; i++)
+                    {
+                        BPTKeywordTbl mCKeyword = new BPTKeywordTbl();
+                        mCKeyword.MainCateId = db.BPTKeywordTbls.DefaultIfEmpty().Max(r => r == null ? 0 : r.MCkeywordId) + 1;
+                        mCKeyword.MainCateId = model.MainCateId;
+              
+                        mCKeyword.KeywordId = model.keywordTbls[i].KeywordId;
+                        mCKeyword.Active = true;
+                        db.BPTKeywordTbls.Add(mCKeyword);
+                        db.SaveChanges();
+
+                    }
+                }
+
+                var res = new { res = "1", };
+                return Json(res, JsonRequestBehavior.AllowGet);
+
+            }
+            catch (Exception ex)
+            {
+                var md = ex.Message;
+                var res = new { res = "0" };
+                return Json(res, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+    
+
+        public JsonResult UpdateBannerProdcutT(MainCateTblModel model)
+        {
+            try
+            {
+                var result = db.BannerPTTbls.FirstOrDefault(p => p.MainCateId == model.MainCateId);
+                if (result != null)
+                {
+                    if (model.Image != null)
+                    {
+                        string extensionstuimg = Path.GetExtension(model.Image.FileName);
+                        model.Image.SaveAs(Server.MapPath("~/images/BannerPTImage/" + result.MainCateId + "" + extensionstuimg));                  
+                        result.MImage = result.MainCateId + "" + extensionstuimg;
+                    }
+                    result.MTitle = model.MTitle;
+                    result.Position = model.Position;
+                    result.MUrl = result.MTitle.Replace(" ", "-");
+                    result.Priority = model.Priority;
+                    result.Update_at = DateTime.Now;
+                    db.SaveChanges();
+
+                }
+                var res = new { res = "1", MainCateId = result.MainCateId };
+                return Json(res, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+
+                var res = new { res = "0" };
+                return Json(res, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        public JsonResult UpdateBannerProdcutTKeywordArray(MainCateTblModel model)
+        {
+
+            try
+            {
+
+                BannerPTTbl result = db.BannerPTTbls.Where(c => c.MainCateId == model.MainCateId).FirstOrDefault();
+
+                if (result == null)
+                {
+                    var res1 = new { res = "0" };
+                    return Json(res1, JsonRequestBehavior.AllowGet);
+                }
+
+
+                var totoid = db.BannerPTTbls.Where(p => p.MainCateId == model.MainCateId);
+                db.BannerPTTbls.RemoveRange(totoid);
+                db.SaveChanges();
+                if (model.keywordTbls != null)
+                {
+
+                    for (int i = 0; i < model.keywordTbls.Count; i++)
+                    {
+                        BPTKeywordTbl mCKeyword = new BPTKeywordTbl();
+                        mCKeyword.MCkeywordId = db.BPTKeywordTbls.DefaultIfEmpty().Max(r => r == null ? 0 : r.MCkeywordId) + 1;
+                        mCKeyword.MainCateId = model.MainCateId;
+                        mCKeyword.KeywordId = model.keywordTbls[i].KeywordId;
+                  
+                        mCKeyword.Active = true;
+                        db.BPTKeywordTbls.Add(mCKeyword);
+                        db.SaveChanges();
+
+                    }
+                }
+
+                var res = new { res = "1", };
+                return Json(res, JsonRequestBehavior.AllowGet);
+
+            }
+            catch (Exception ex)
+            {
+                var md = ex.Message;
+                var res = new { res = "0" };
+                return Json(res, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        public JsonResult BannerProdcutTActiveDeActive(int id)
+        {
+            try
+            {
+                var jb = db.BannerPTTbls.Where(c => c.MainCateId == id).FirstOrDefault();
+                if (jb != null)
+                {
+
+                    jb.Active = jb.Active == true ? false : true;
+                    db.SaveChanges();
+                    var res = new { res = "1" };
+                    return Json(res, JsonRequestBehavior.AllowGet);
+                }
+                else
+                {
+                    var res = new { res = "2" };
+                    return Json(res, JsonRequestBehavior.AllowGet);
+                }
+            }
+            catch (Exception ex)
+            {
+                var res = new { res = "0" };
+                return Json(res, JsonRequestBehavior.AllowGet);
+            }
+
+        }
+
+        public JsonResult GetBannerProdcutT()
+        {
+            var res =
+
+               db.BannerPTTbls.Select(m => new
+               {
+                   m.MainCateId,
+                   m.MUrl,
+                   m.MTitle,
+                   m.Active,
+                   m.MImage,
+                   m.Position,
+                   m.Priority,
+                   Submenu = db.BPTKeywordTbls.Where(s => s.MainCateId == m.MainCateId && s.Active == true).Select(s => new
+                   {
+                       s.MainCateId,
+                       s.KeywordId,
+                       s.MCkeywordId,                     
+                       SubmenuTitle = db.KeywordTbls.Where(t => t.KeywordId == s.KeywordId).Select(t => t.Keyword).FirstOrDefault()
+                   })
+               }).OrderBy(m => m.Priority);
+            return Json(res, JsonRequestBehavior.AllowGet);
+
+        }
+
+        //--------------Banner Product End->------------->---------------------->---------------------------->------->------------>---------->---
 
     }
 }

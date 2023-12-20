@@ -32,6 +32,40 @@
     <Property Name="Update_at" Type="datetime" />
     <Property Name="UserId" Type="bigint" />
   </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'giftchoice.dbo.BannerProductImage' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="BannerProductImage">
+    <Key>
+      <PropertyRef Name="PImageId" />
+    </Key>
+    <Property Name="PImageId" Type="bigint" Nullable="false" />
+    <Property Name="ProductId" Type="bigint" />
+    <Property Name="PImage" Type="nvarchar(max)" />
+    <Property Name="Active" Type="bit" />
+    <Property Name="Create_at" Type="datetime" />
+    <Property Name="Update_at" Type="datetime" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'giftchoice.dbo.BannerProductTbl' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="BannerProductTbl">
+    <Key>
+      <PropertyRef Name="ProductId" />
+    </Key>
+    <Property Name="ProductId" Type="bigint" Nullable="false" />
+    <Property Name="MainCateId" Type="bigint" />
+    <Property Name="ProductTitle" Type="nvarchar(max)" />
+    <Property Name="Price" Type="float" />
+    <Property Name="PUrl" Type="nvarchar(max)" />
+    <Property Name="PLabel" Type="nvarchar(max)" />
+    <Property Name="PDesc" Type="nvarchar(max)" />
+    <Property Name="PDesc1" Type="nvarchar(max)" />
+    <Property Name="Priority" Type="bigint" />
+    <Property Name="Active" Type="bit" />
+    <Property Name="Create_at" Type="datetime" />
+    <Property Name="Update_at" Type="datetime" />
+    <Property Name="UserID" Type="bigint" />
+    <Property Name="Qty" Type="bigint" />
+  </EntityType>
   <EntityType Name="BannerTbl">
     <Key>
       <PropertyRef Name="BannerId" />
@@ -51,6 +85,28 @@
     </Key>
     <Property Name="BCkeywordId" Type="bigint" Nullable="false" />
     <Property Name="BannerCateId" Type="bigint" />
+    <Property Name="KeywordId" Type="bigint" />
+    <Property Name="Active" Type="bit" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'giftchoice.dbo.BPKeywordTbl' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="BPKeywordTbl">
+    <Key>
+      <PropertyRef Name="PKeywordId" />
+    </Key>
+    <Property Name="PKeywordId" Type="bigint" Nullable="false" />
+    <Property Name="ProductId" Type="bigint" />
+    <Property Name="KeywordId" Type="bigint" />
+    <Property Name="Active" Type="bit" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'giftchoice.dbo.BPTKeywordTbl' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="BPTKeywordTbl">
+    <Key>
+      <PropertyRef Name="MCkeywordId" />
+    </Key>
+    <Property Name="MCkeywordId" Type="bigint" Nullable="false" />
+    <Property Name="MainCateId" Type="bigint" />
     <Property Name="KeywordId" Type="bigint" />
     <Property Name="Active" Type="bit" />
   </EntityType>
@@ -205,6 +261,21 @@
     <Property Name="Active" Type="bit" />
     <Property Name="Create_at" Type="date" />
   </EntityType>
+  <EntityType Name="BannerPTTbl">
+    <Key>
+      <PropertyRef Name="MainCateId" />
+    </Key>
+    <Property Name="MainCateId" Type="bigint" Nullable="false" />
+    <Property Name="MTitle" Type="nvarchar(max)" />
+    <Property Name="Position" Type="nvarchar(max)" />
+    <Property Name="MUrl" Type="nvarchar(max)" />
+    <Property Name="Active" Type="bit" />
+    <Property Name="Priority" Type="bigint" />
+    <Property Name="MImage" Type="nvarchar(max)" />
+    <Property Name="Create_at" Type="datetime" />
+    <Property Name="Update_at" Type="datetime" />
+    <Property Name="UserId" Type="bigint" />
+  </EntityType>
   <!--Errors Found During Generation:
 warning 6002: The table/view 'giftchoice.dbo.VProduct' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
   <EntityType Name="VProduct">
@@ -298,6 +369,51 @@ warning 6002: The table/view 'giftchoice.giftchoice.AutocompleteSuggestions' doe
     <EntitySet Name="SizeTbl" EntityType="Self.SizeTbl" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="SliderTbl" EntityType="Self.SliderTbl" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="UserRegister" EntityType="Self.UserRegister" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="BannerPTTbl" EntityType="Self.BannerPTTbl" Schema="giftchoice" store:Type="Tables" />
+    <EntitySet Name="BannerProductImage" EntityType="Self.BannerProductImage" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [BannerProductImage].[PImageId] AS [PImageId], 
+    [BannerProductImage].[ProductId] AS [ProductId], 
+    [BannerProductImage].[PImage] AS [PImage], 
+    [BannerProductImage].[Active] AS [Active], 
+    [BannerProductImage].[Create_at] AS [Create_at], 
+    [BannerProductImage].[Update_at] AS [Update_at]
+    FROM [dbo].[BannerProductImage] AS [BannerProductImage]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="BannerProductTbl" EntityType="Self.BannerProductTbl" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [BannerProductTbl].[ProductId] AS [ProductId], 
+    [BannerProductTbl].[MainCateId] AS [MainCateId], 
+    [BannerProductTbl].[ProductTitle] AS [ProductTitle], 
+    [BannerProductTbl].[Price] AS [Price], 
+    [BannerProductTbl].[PUrl] AS [PUrl], 
+    [BannerProductTbl].[PLabel] AS [PLabel], 
+    [BannerProductTbl].[PDesc] AS [PDesc], 
+    [BannerProductTbl].[PDesc1] AS [PDesc1], 
+    [BannerProductTbl].[Priority] AS [Priority], 
+    [BannerProductTbl].[Active] AS [Active], 
+    [BannerProductTbl].[Create_at] AS [Create_at], 
+    [BannerProductTbl].[Update_at] AS [Update_at], 
+    [BannerProductTbl].[UserID] AS [UserID], 
+    [BannerProductTbl].[Qty] AS [Qty]
+    FROM [dbo].[BannerProductTbl] AS [BannerProductTbl]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="BPKeywordTbl" EntityType="Self.BPKeywordTbl" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [BPKeywordTbl].[PKeywordId] AS [PKeywordId], 
+    [BPKeywordTbl].[ProductId] AS [ProductId], 
+    [BPKeywordTbl].[KeywordId] AS [KeywordId], 
+    [BPKeywordTbl].[Active] AS [Active]
+    FROM [dbo].[BPKeywordTbl] AS [BPKeywordTbl]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="BPTKeywordTbl" EntityType="Self.BPTKeywordTbl" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [BPTKeywordTbl].[MCkeywordId] AS [MCkeywordId], 
+    [BPTKeywordTbl].[MainCateId] AS [MainCateId], 
+    [BPTKeywordTbl].[KeywordId] AS [KeywordId], 
+    [BPTKeywordTbl].[Active] AS [Active]
+    FROM [dbo].[BPTKeywordTbl] AS [BPTKeywordTbl]</DefiningQuery>
+    </EntitySet>
     <EntitySet Name="VProduct" EntityType="Self.VProduct" store:Type="Views" store:Schema="dbo">
       <DefiningQuery>SELECT 
     [VProduct].[ProductId] AS [ProductId], 
