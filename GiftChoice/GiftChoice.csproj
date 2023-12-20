@@ -14,7 +14,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>GiftChoice</RootNamespace>
     <AssemblyName>GiftChoice</AssemblyName>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>true</UseIISExpress>
     <Use64BitIISExpress />
@@ -2408,6 +2408,12 @@
     <Content Include="images\ProductImg\997.jpg" />
     <Content Include="images\ProductImg\998.jpg" />
     <Content Include="images\ProductImg\999.jpg" />
+    <Content Include="images\SliderImg\1.jpg" />
+    <Content Include="images\SliderImg\2.JPG" />
+    <Content Include="images\SliderImg\3.jpg" />
+    <Content Include="images\SliderImg\4.jpg" />
+    <Content Include="images\SliderImg\5.jpg" />
+    <Content Include="images\SliderImg\6.jpg" />
     <Content Include="Models\Model1.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Model1.Context.cs</LastGenOutput>
@@ -2510,10 +2516,12 @@
     <Content Include="Views\GiftDashBoard\AddBannerMateCate.cshtml" />
     <Content Include="Views\GiftDashBoard\AddBannerCateProduct.cshtml" />
     <Content Include="Views\Home\Gifts.cshtml" />
+    <Content Include="Views\GiftDashBoard\AddPBanner.cshtml" />
+    <Content Include="Views\Home\BannerGifts.cshtml" />
+    <Content Include="Views\Home\TopProduct.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="images\SliderImg\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

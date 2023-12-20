@@ -334,24 +334,24 @@ app.controller("HomeController", ['$scope', '$http', '$sce', 'orderByFilter', fu
 
             debugger
             $scope.SliderListData = d.data;
-            setTimeout(() => {
-                var mainslider = $(".owl-carousel-slider");
-                if (mainslider.length > 0) {
-                    mainslider.owlCarousel({
-                        items: 1,
-                        dots: false,
-                        lazyLoad: true,
-                        pagination: true,
-                        autoPlay: 4000,
-                        loop: true,
-                        singleItem: true,
-                        navigation: true,
-                        stopOnHover: true,
-                        nav: true,
-                        navigationText: ["<i class='fa fa-arrow-left'></i>", "<i class='fa fa-arrow-right'></i>"]
-                    });
-                }
-            }, 10);
+            //setTimeout(() => {
+            //    var mainslider = $(".home-slider");
+            //    if (mainslider.length > 0) {
+            //        mainslider.owlCarousel({
+            //            items: 1,
+            //            dots: false,
+            //            lazyLoad: true,
+            //            pagination: true,
+            //            autoPlay: 4000,
+            //            loop: true,
+            //            singleItem: true,
+            //            navigation: true,
+            //            stopOnHover: true,
+            //            nav: true,
+            //            navigationText: ["<i class='fa fa-arrow-left'></i>", "<i class='fa fa-arrow-right'></i>"]
+            //        });
+            //    }
+            //}, 10);
         }, function (error) {
             alert(error.data);
         });
