@@ -1266,7 +1266,7 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
         }
     };
 
-        //--------------Banner Product->------------->---------------------->---------------------------->------->------------>---------->---
+    //--------------Banner Product->------------->---------------------->---------------------------->------->------------>---------->---
 
     $scope.GetBannerProdcutT = function () {
         $http.get("/GiftDashBoard/GetBannerProdcutT").then(function (d) {
@@ -1379,7 +1379,7 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
         for (var i = 0; i < $scope.BannerProdcutT.Submenu.length; i++) {
             var vallc = $scope.BannerProdcutT.Submenu[i].KeywordId;
             $('#Keyword_' + vallc).prop('checked', true);
-          
+
 
         }
 
@@ -1460,7 +1460,7 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
                 //$('#edbtn').css('display', 'none');
                 //$('#btn').css('display', 'inline');
                 location.href = '/GiftDashBoard/AddPBanner';
-            } 
+            }
         }, function (error) {
             toastr["error"]("Something Went Wrong");
         });
@@ -1479,12 +1479,12 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
 
         }, function (error) {
             alert(error.data);
-            });
+        });
 
     };
-       //--------------Banner Product end->------------->---------------------->---------------------------->------->------------>---------->---
+    //--------------Banner Product end->------------->---------------------->---------------------------->------->------------>---------->---
 
-       //-------------- add Banner in Product ->------------->---------------------->---------------------------->------->------------>---------->---
+    //-------------- add Banner in Product ->------------->---------------------->---------------------------->------->------------>---------->---
 
     $scope.GetBannerInProduct = function () {
         $http.get("/GiftDashBoard/GetBannerInProduct").then(function (d) {
@@ -1497,33 +1497,33 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
 
     $scope.GetBannerPInKeyword = function (MainCateId) {
         debugger;
-     
-            for (var s = 0; s < $scope.KeywordList.length; s++) {
-                var vallc1s = $scope.KeywordList[s].KeywordId;
-                $('#Keyword_' + vallc1s).prop('checked', false);
 
-            }
-            var id = parseInt(MainCateId);
-            var dataArray = [];
-            dataArray = $scope.GetBannerInProductData;
-            var dataArray2 = dataArray.filter(item => item.MainCateId === id);
+        for (var s = 0; s < $scope.KeywordList.length; s++) {
+            var vallc1s = $scope.KeywordList[s].KeywordId;
+            $('#Keyword_' + vallc1s).prop('checked', false);
 
-            if (dataArray2.length > 0) {
-                var submenu = dataArray2[0].Submenu;
+        }
+        var id = parseInt(MainCateId);
+        var dataArray = [];
+        dataArray = $scope.GetBannerInProductData;
+        var dataArray2 = dataArray.filter(item => item.MainCateId === id);
 
-                if (submenu && submenu.length > 0) {
-                    for (var i = 0; i < submenu.length; i++) {
-                        for (var k = 0; k < $scope.KeywordList.length; k++) {
-                            if ($scope.KeywordList[k].KeywordId == submenu[i].KeywordId) {
-                                var vallc = submenu[i].KeywordId;
-                                $('#Keyword_' + vallc).prop('checked', true);
-                            }
+        if (dataArray2.length > 0) {
+            var submenu = dataArray2[0].Submenu;
+
+            if (submenu && submenu.length > 0) {
+                for (var i = 0; i < submenu.length; i++) {
+                    for (var k = 0; k < $scope.KeywordList.length; k++) {
+                        if ($scope.KeywordList[k].KeywordId == submenu[i].KeywordId) {
+                            var vallc = submenu[i].KeywordId;
+                            $('#Keyword_' + vallc).prop('checked', true);
                         }
                     }
                 }
             }
-       
-       
+        }
+
+
     };
     var PSizeArr = [];
     $scope.SubmitBannerProduct = function () {
@@ -1720,7 +1720,7 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
         });
     };
 
-       //-------------- add Banner in Product End ->------------->---------------------->---------------------------->------->------------>---------->---
+    //-------------- add Banner in Product End ->------------->---------------------->---------------------------->------->------------>---------->---
 
 }]).directive('uploadFile', ['$parse', function ($parse) {
     return {
