@@ -1525,6 +1525,7 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
 
 
     };
+
     var PSizeArr = [];
     $scope.SubmitBannerProduct = function () {
         debugger
@@ -1583,9 +1584,9 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
             data: {
                 ProductId: id,
                 PDesc: $scope.Description,
-                PDesc2: $scope.Description2,
+                PDesc1: $scope.Description2,
                 KeywordTbls: Keywordarr,
-                SizeTbls: PSizeArr
+                BPSizeTbl: PSizeArr
             }
         }).then(function (d) {
             $scope.result = d.data;
@@ -1647,7 +1648,7 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
             PSizeArr.push({ 'SizeId': $(this).val() });
         });
         delete $scope.Product.PDesc;
-        delete $scope.Product.PDesc2;
+        delete $scope.Product.PDesc1;
 
         debugger;
         upload({
@@ -1682,9 +1683,9 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
             data: {
                 ProductId: id,
                 PDesc: $scope.Description,
-                PDesc2: $scope.Description2,
+                PDesc1: $scope.Description2,
                 KeywordTbls: Keywordarr,
-                SizeTbls: PSizeArr
+                BPSizeTbl: PSizeArr
 
             }
         }).then(function (d) {
@@ -1703,6 +1704,7 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
             toastr["error"]("Something Went Wrong");
         });
     };
+
     $scope.BannerProductActiveDeActive = function (id) {
         $http.get("/GiftDashBoard/BannerProductActiveDeActive?id=" + id).then(function (d) {
             $scope.rees = d.data;
@@ -1718,6 +1720,58 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
         }, function (error) {
             alert(error.data);
         });
+    };
+
+    $scope.GetBannerProduct = function (id) {
+        debugger
+        if (id != "-1" && id != undefined) {
+
+            $http.get("/GiftDashBoard/GetBannerProduct?id=" + id).then(function (d) {
+                $scope.ProductData = d.data;
+            }, function (error) {
+                alert(error.data);
+            });
+        }
+    };
+
+    $scope.GetBannerProductbyid = function (index) {
+        $('#btn').css('display', 'none');
+        $('#edbtn').css('display', 'inline');
+        debugger
+
+        for (var s = 0; s < $scope.KeywordList.length; s++) {
+            var vallc1s = $scope.KeywordList[s].KeywordId;
+            $('#Keyword_' + vallc1s).prop('checked', false);
+
+        }
+
+
+        $scope.Product = $scope.ProductData[index];
+
+        CKEDITOR.instances.ckeditor.setData($scope.Product.PDesc);
+        CKEDITOR.instances.editor1.setData($scope.Product.PDesc1);
+
+        //const previewImage = document.querySelector('#previewImage');
+        //$('#previewImage').css('display', 'block');
+        //previewImage.setAttribute("src", "/images/MainCate/" + $scope.MainCate.MImage);
+        debugger
+        for (var i = 0; i < $scope.Product.Submenu.length; i++) {
+            var vallc = $scope.Product.Submenu[i].KeywordId;
+            $('#Keyword_' + vallc).prop('checked', true);
+        }
+        for (var i = 0; i < $scope.Product.PSizeList.length; i++) {
+            var vallc = $scope.Product.PSizeList[i].SizeId;
+            $('#Size_' + vallc).prop('checked', true);
+        }
+
+        debugger
+
+        //ckeditor.replace('postBody');
+        // $("#ckeditor").val($scope.Product.Description);
+
+
+        debugger
+        $('html, body').animate({ scrollTop: 0 }, '300');
     };
 
     //-------------- add Banner in Product End ->------------->---------------------->---------------------------->------->------------>---------->---

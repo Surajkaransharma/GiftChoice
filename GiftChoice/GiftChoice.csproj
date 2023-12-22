@@ -165,6 +165,9 @@
     <Compile Include="Models\BPKeywordTbl.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\BPSizeTbl.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\BPTKeywordTbl.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
