@@ -1486,8 +1486,8 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
 
     //-------------- add Banner in Product ->------------->---------------------->---------------------------->------->------------>---------->---
 
-    $scope.GetBannerInProduct = function () {
-        $http.get("/GiftDashBoard/GetBannerInProduct").then(function (d) {
+    $scope.GetBannerInProduct = function (id) {
+        $http.get("/GiftDashBoard/GetBannerInProduct?id=" + id).then(function (d) {
             debugger
             $scope.GetBannerInProductData = d.data;
         }, function (error) {
@@ -1528,12 +1528,13 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
 
     var PSizeArr = [];
     $scope.SubmitBannerProduct = function () {
-        debugger
+        debugger;
+
         var editorText = CKEDITOR.instances.ckeditor.getData();
         $scope.Description = editorText;
 
-        var editorText2 = CKEDITOR.instances.editor1.getData();
-        $scope.Description2 = editorText2;
+        //var editorText2 = CKEDITOR.instances.editor1.getData();
+        //$scope.Description2 = editorText2;
 
 
         debugger;
@@ -1583,8 +1584,7 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
             method: 'post',
             data: {
                 ProductId: id,
-                PDesc: $scope.Description,
-                PDesc1: $scope.Description2,
+                PDesc1: $scope.Description,
                 KeywordTbls: Keywordarr,
                 BPSizeTbl: PSizeArr
             }
@@ -1611,8 +1611,8 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
         var editorText = CKEDITOR.instances.ckeditor.getData();
         $scope.Description = editorText;
 
-        var editorText2 = CKEDITOR.instances.editor1.getData();
-        $scope.Description2 = editorText2;
+        //var editorText2 = CKEDITOR.instances.editor1.getData();
+        //$scope.Description2 = editorText2;
 
 
 
@@ -1647,7 +1647,7 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
         $.each($(".checkbox-Size:checked"), function () {
             PSizeArr.push({ 'SizeId': $(this).val() });
         });
-        delete $scope.Product.PDesc;
+/*        delete $scope.Product.PDesc;*/
         delete $scope.Product.PDesc1;
 
         debugger;
@@ -1682,7 +1682,6 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
             method: 'post',
             data: {
                 ProductId: id,
-                PDesc: $scope.Description,
                 PDesc1: $scope.Description2,
                 KeywordTbls: Keywordarr,
                 BPSizeTbl: PSizeArr
@@ -1748,8 +1747,8 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
 
         $scope.Product = $scope.ProductData[index];
 
-        CKEDITOR.instances.ckeditor.setData($scope.Product.PDesc);
-        CKEDITOR.instances.editor1.setData($scope.Product.PDesc1);
+/*        CKEDITOR.instances.ckeditor.setData($scope.Product.PDesc);*/
+        CKEDITOR.instances.ckeditor.setData($scope.Product.PDesc1);
 
         //const previewImage = document.querySelector('#previewImage');
         //$('#previewImage').css('display', 'block');

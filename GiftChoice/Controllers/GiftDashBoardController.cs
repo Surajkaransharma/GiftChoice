@@ -111,7 +111,7 @@ namespace GiftChoice.Controllers
             public Nullable<System.DateTime> Update_at { get; set; }
             public string MImage { get; set; }
             public HttpPostedFileBase Image { get; set; }
-           
+
             public Nullable<long> UserId { get; set; }
             public List<KeywordTbl> keywordTbls { get; set; }
         }
@@ -413,7 +413,7 @@ namespace GiftChoice.Controllers
         }
 
 
-   
+
 
 
         /////// Keyword Code start 
@@ -542,7 +542,7 @@ namespace GiftChoice.Controllers
 
         }
 
-   
+
         public JsonResult GetAllProduct()
         {
             var res =
@@ -695,7 +695,7 @@ namespace GiftChoice.Controllers
                         ProductImage productImage = new ProductImage();
                         productImage.PImageId = db.ProductImages.DefaultIfEmpty().Max(r => r == null ? 0 : r.PImageId) + 1;
                         string extensionstuimg = Path.GetExtension(model.Image2.FileName);
-                      //  VaryQualityLevel(model.Image1.InputStream, productImage.PImageId + extensionstuimg);
+                        //  VaryQualityLevel(model.Image1.InputStream, productImage.PImageId + extensionstuimg);
                         model.Image2.SaveAs(Server.MapPath("~/images/ProductImg/" + productImage.PImageId + extensionstuimg));
                         ProductVaryQualityLevel(model.Image2.InputStream, productImage.PImageId + extensionstuimg);
 
@@ -900,7 +900,7 @@ namespace GiftChoice.Controllers
                             var Pimageid = productImage[0].PImageId;
                             ProductImage pimagearr = db.ProductImages.Where(c => c.PImageId == Pimageid).FirstOrDefault();
                             string extensionstuimg = Path.GetExtension(model.Image1.FileName);
-                          
+
                             model.Image1.SaveAs(Server.MapPath("~/images/ProductImg/" + pimagearr.PImageId + extensionstuimg));
                             ProductVaryQualityLevel(model.Image1.InputStream, Pimageid + extensionstuimg);
                             pimagearr.PImage = pimagearr.PImageId + extensionstuimg;
@@ -1736,7 +1736,7 @@ namespace GiftChoice.Controllers
             {
 
 
-                var res = db.BannerCateProductTbls.Where(c => c.BannerCateId == id); 
+                var res = db.BannerCateProductTbls.Where(c => c.BannerCateId == id);
                 return Json(res, JsonRequestBehavior.AllowGet);
 
             }
@@ -1754,6 +1754,23 @@ namespace GiftChoice.Controllers
         {
             try
             {
+                var result = db.BannerPTTbls.Where(p => p.Position == model.Position && p.Position != "Multiple Banner").Count();
+
+                if (model.Position == "Small Banner" && result > 3)
+                {
+
+                    var res1 = new { res = "0", Position = "Small Banner" };
+                    return Json(res1, JsonRequestBehavior.AllowGet);
+
+                }
+                else if (model.Position == "Design Banner" && result > 4)
+                {
+                    var res1 = new { res = "0", Position = "Design Banner" };
+                    return Json(res1, JsonRequestBehavior.AllowGet);
+
+                }
+
+
                 BannerPTTbl mainCateTbl = new BannerPTTbl();
                 mainCateTbl.MainCateId = db.BannerPTTbls.DefaultIfEmpty().Max(r => r == null ? 0 : r.MainCateId) + 1;
 
@@ -1764,7 +1781,7 @@ namespace GiftChoice.Controllers
                 {
                     string extensionstuimg = Path.GetExtension(model.Image.FileName);
                     model.Image.SaveAs(Server.MapPath("~/images/BannerPTImage/" + mainCateTbl.MainCateId + "" + extensionstuimg));
-                 //   MainCateVaryQualityLevel(model.Image.InputStream, mainCateTbl.MainCateId + extensionstuimg);
+                    //   MainCateVaryQualityLevel(model.Image.InputStream, mainCateTbl.MainCateId + extensionstuimg);
                     mainCateTbl.MImage = mainCateTbl.MainCateId + "" + extensionstuimg;
                 }
                 mainCateTbl.Create_at = DateTime.Now;
@@ -1803,13 +1820,13 @@ namespace GiftChoice.Controllers
 
                 if (model.keywordTbls != null)
                 {
-                 
+
                     for (int i = 0; i < model.keywordTbls.Count; i++)
                     {
                         BPTKeywordTbl mCKeyword = new BPTKeywordTbl();
                         mCKeyword.MCkeywordId = db.BPTKeywordTbls.DefaultIfEmpty().Max(r => r == null ? 0 : r.MCkeywordId) + 1;
                         mCKeyword.MainCateId = model.MainCateId;
-              
+
                         mCKeyword.KeywordId = model.keywordTbls[i].KeywordId;
                         mCKeyword.Active = true;
                         db.BPTKeywordTbls.Add(mCKeyword);
@@ -1830,7 +1847,7 @@ namespace GiftChoice.Controllers
             }
         }
 
-    
+
 
         public JsonResult UpdateBannerProdcutT(MainCateTblModel model)
         {
@@ -1842,7 +1859,7 @@ namespace GiftChoice.Controllers
                     if (model.Image != null)
                     {
                         string extensionstuimg = Path.GetExtension(model.Image.FileName);
-                        model.Image.SaveAs(Server.MapPath("~/images/BannerPTImage/" + result.MainCateId + "" + extensionstuimg));                  
+                        model.Image.SaveAs(Server.MapPath("~/images/BannerPTImage/" + result.MainCateId + "" + extensionstuimg));
                         result.MImage = result.MainCateId + "" + extensionstuimg;
                     }
                     result.MTitle = model.MTitle;
@@ -1891,7 +1908,7 @@ namespace GiftChoice.Controllers
                         mCKeyword.MCkeywordId = db.BPTKeywordTbls.DefaultIfEmpty().Max(r => r == null ? 0 : r.MCkeywordId) + 1;
                         mCKeyword.MainCateId = model.MainCateId;
                         mCKeyword.KeywordId = model.keywordTbls[i].KeywordId;
-                  
+
                         mCKeyword.Active = true;
                         db.BPTKeywordTbls.Add(mCKeyword);
                         db.SaveChanges();
@@ -1955,7 +1972,7 @@ namespace GiftChoice.Controllers
                    {
                        s.MainCateId,
                        s.KeywordId,
-                       s.MCkeywordId,                     
+                       s.MCkeywordId,
                        SubmenuTitle = db.KeywordTbls.Where(t => t.KeywordId == s.KeywordId).Select(t => t.Keyword).FirstOrDefault()
                    })
                }).OrderBy(m => m.Priority);
@@ -1967,11 +1984,11 @@ namespace GiftChoice.Controllers
 
         //-------------- Add Banner in Product->------------->---------------------->---------------------------->------->------------>---------->---
 
-        public JsonResult GetBannerInProduct()
+        public JsonResult GetBannerInProduct(string id)
         {
             var res =
 
-               db.BannerPTTbls.Select(m => new
+               db.BannerPTTbls.Where(m => m.Position == id).Select(m => new
                {
                    m.MainCateId,
                    m.MUrl,
@@ -1994,8 +2011,8 @@ namespace GiftChoice.Controllers
 
         public JsonResult GetBannerPInKeyword(int MainCateId)
         {
-            var res = db.BPTKeywordTbls.Where(k => k.MainCateId == MainCateId &&  k.Active == true).Select(k => new 
-            { 
+            var res = db.BPTKeywordTbls.Where(k => k.MainCateId == MainCateId && k.Active == true).Select(k => new
+            {
                 k.MainCateId,
                 k.Active,
                 k.KeywordId,
@@ -2046,7 +2063,6 @@ namespace GiftChoice.Controllers
                     productmodel.Active = true;
                     productmodel.PUrl = model.ProductTitle.Replace(" ", "-");
                     productmodel.PDesc = model.PDesc;
-                    productmodel.PDesc1 = model.PDesc1;
                     productmodel.PLabel = model.PLabel == null ? "" : model.PLabel;
                     productmodel.Price = model.Price;
                     productmodel.Qty = 1;
@@ -2146,7 +2162,6 @@ namespace GiftChoice.Controllers
 
                 if (result != null)
                 {
-                    result.PDesc = model.PDesc;
                     result.PDesc1 = model.PDesc1;
                     db.SaveChanges();
                 }
@@ -2388,7 +2403,7 @@ namespace GiftChoice.Controllers
 
                     }
 
-                  
+
                 }
                 var res = new { res = "1", ProductId = result.ProductId };
                 return Json(res, JsonRequestBehavior.AllowGet);
