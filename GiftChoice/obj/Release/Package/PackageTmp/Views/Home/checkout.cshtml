@@ -17,80 +17,84 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-6">
-                    <div class="order_review">
-                        <div class="mb-25">
-                            <h4>Billing Details</h4>
+                    <div data-aos="zoom-in">
+                        <div class="order_review">
+                            <div class="mb-25">
+                                <h4>Billing Details</h4>
+                            </div>
+                            <form method="post">
+                                <div class="form-group">
+                                    <input type="text" required="" id="Name" name="fname" placeholder="Enter Full Name *">
+                                </div>
+                                <div class="form-group">
+                                    <input type="number" required="" id="MobileNo" name="mnumber" placeholder="Enter Mobile Number *">
+                                </div>
+                                <div class="form-group">
+                                    <input required="" type="email" name="email" id="Email" placeholder="Enter Email address">
+                                </div>
+                                <div class="form-group">
+                                    <input required="" type="text" name="city" id="City" placeholder="City / Town *">
+                                </div>
+                                <div class="form-group">
+                                    <input required="" type="text" name="state" id="State" placeholder="State / County *">
+                                </div>
+                                <div class="form-group">
+                                    <input required="" type="text" name="zipcode" id="zipcode" placeholder="Postcode / ZIP *">
+                                </div>
+                                <div class="form-group mb-0">
+                                    <textarea rows="3" placeholder="Enter Address" id="Address"></textarea>
+                                </div>
+                            </form>
                         </div>
-                        <form method="post">
-                            <div class="form-group">
-                                <input type="text" required="" id="Name" name="fname" placeholder="Enter Full Name *">
-                            </div>
-                            <div class="form-group">
-                                <input type="number" required="" id="MobileNo" name="mnumber" placeholder="Enter Mobile Number *">
-                            </div>
-                            <div class="form-group">
-                                <input required="" type="email" name="email" id="Email" placeholder="Enter Email address">
-                            </div>
-                            <div class="form-group">
-                                <input required="" type="text" name="city" id="City" placeholder="City / Town *">
-                            </div>
-                            <div class="form-group">
-                                <input required="" type="text" name="state" id="State" placeholder="State / County *">
-                            </div>
-                            <div class="form-group">
-                                <input required="" type="text" name="zipcode" id="zipcode" placeholder="Postcode / ZIP *">
-                            </div>
-                            <div class="form-group mb-0">
-                                <textarea rows="3" placeholder="Enter Address" id="Address"></textarea>
-                            </div>
-                        </form>
                     </div>
                 </div>
                 <div class="col-md-6">
-                    <div class="order_review" ng-init="GetCart()">
-                        <div class="mb-20">
-                            <h4>Your Orders</h4>
-                        </div>
-                        <div class="table-responsive order_table text-center">
-                            <table class="table">
-                                <thead>
-                                    <tr>
-                                        <th>#</th>
-                                        <th colspan="2">Product</th>
-                                        <th>Total</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr ng-repeat="i in cart track by $index">
-                                        <td>{{$index+1}}</td>
+                    <div data-aos="zoom-in">
+                        <div class="order_review" ng-init="GetCart()">
+                            <div class="mb-20">
+                                <h4>Your Orders</h4>
+                            </div>
+                            <div class="table-responsive order_table text-center">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th colspan="2">Product</th>
+                                            <th>Total</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="i in cart track by $index">
+                                            <td>{{$index+1}}</td>
 
-                                        <td class="image product-thumbnail">
-                                            <a href="#">
-                                                <img src="~/images/ProductImg/{{i.ProductImage}}" alt="#" class="img-fluid rounded-3">
-                                            </a>
-                                        </td>
+                                            <td class="image product-thumbnail">
+                                                <a href="#">
+                                                    <img src="~/images/ProductImg/{{i.ProductImage}}" alt="#" class="img-fluid rounded-3">
+                                                </a>
+                                            </td>
 
-                                        <td>
-                                            <h5>
-                                                <a href="#">{{i.ProductTitle}}</a>
-                                            </h5>
-                                            <span class="product-qty"> <i class="fa fa-inr" aria-hidden="true"></i>{{i.Price}} x{{i.Qty}}</span>
-                                        </td>
+                                            <td>
+                                                <h5>
+                                                    <a href="#">{{i.ProductTitle}}</a>
+                                                </h5>
+                                                <span class="product-qty"> <i class="fa fa-inr" aria-hidden="true"></i>{{i.Price}} x{{i.Qty}}</span>
+                                            </td>
 
-                                        <td><i class="fa fa-inr" aria-hidden="true"></i>{{i.Price*i.Qty}}</td>
-                                    </tr>
-                           
-                                    <tr>
-                                        <td colspan="2">Total Payble Amount</td>
-                                        <td colspan="2" class="product-subtotal">
-                                            <span class="font-xl text-brand fw-600"><i class="fa fa-inr" aria-hidden="true"></i>{{TotalAmount}}</span>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                        <div class="text-end">
-                            <a ng-click="AddOrder()" class="btn btn-fill-out btn-block">Place Order</a>
+                                            <td><i class="fa fa-inr" aria-hidden="true"></i>{{i.Price*i.Qty}}</td>
+                                        </tr>
+
+                                        <tr>
+                                            <td colspan="2">Total Payble Amount</td>
+                                            <td colspan="2" class="product-subtotal">
+                                                <span class="font-xl text-brand fw-600"><i class="fa fa-inr" aria-hidden="true"></i>{{TotalAmount}}</span>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="text-end">
+                                <a ng-click="AddOrder()" class="btn btn-fill-out btn-block">Place Order</a>
+                            </div>
                         </div>
                     </div>
                 </div>

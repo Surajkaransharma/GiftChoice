@@ -15,20 +15,20 @@ namespace GiftChoice.Models
 using System;
     using System.Collections.Generic;
     
-public partial class AdminTbl
+public partial class BSubKTbl
 {
 
-    public int UserId { get; set; }
+    public long BKSubId { get; set; }
 
-    public string UserName { get; set; }
+    public Nullable<long> BSubId { get; set; }
 
-    public string UPassword { get; set; }
+    public Nullable<long> KeyWordId { get; set; }
 
-    public string UserType { get; set; }
+    public Nullable<long> MainCateId { get; set; }
 
-    public bool Active { get; set; }
+    public Nullable<long> Priority { get; set; }
 
-    public System.DateTime Create_at { get; set; }
+    public Nullable<bool> Active { get; set; }
 
 }
 

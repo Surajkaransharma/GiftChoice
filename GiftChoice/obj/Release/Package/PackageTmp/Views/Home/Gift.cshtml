@@ -3,7 +3,7 @@
     ViewBag.Title = "Gift";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<style>
+@*<style>
     #profile-description {
         max-width: 400px;
         margin-top: 50px;
@@ -41,7 +41,7 @@
             height: 65px;
             overflow: hidden;
         }
-</style>
+</style>*@
 <main class="main" ng-init="GetProductByid(@ViewBag.id)">
 
     <!-- Breadcrumb Section Start -->
@@ -55,144 +55,140 @@
         </div>
     </div>
     <!-- Breadcrumb Section End -->
+    <!--<section class="mt-50 mb-50">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="product-detail accordion-detail">-->
+    <!-- Product Section Start -->
+    <!--<div class="row mb-50">
+        <div class="col-lg-6 col-sm-12 col-xs-12">
+            <div class="detail-gallery">-->
+    <!-- Main Image -->
+    <!--<div class="product-image-slider">
+        <figure class="border-radius-10" ng-repeat="i in Product.AllProductImage">
+            <img src="~/images/ProductImg/{{i}}" alt="product image" class="img-fluid" loading="lazy">
+        </figure>
 
-    <section class="mt-50 mb-50">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="product-detail accordion-detail">
+    </div>-->
+    <!-- Main Image -->
+    <!-- Small Image -->
+    <!--<div class="slider-nav-thumbnails pl-15 pr-15" ng-show="Product.AllProductImage.length>1">
+        <div ng-repeat="i in Product.AllProductImage" ng-show="i!=null">
+            <img src="~/images/ProductImg/{{i}}" ng-show="i!=null" class="img-fluid" loading="lazy" alt="product image">
+        </div>
+        <div><img src="~/images/ProductImg/{{i}}" ng-show="i!=null" class="img-fluid" loading="lazy" alt="product image"></div>
 
-                        <!-- Product Section Start -->
-                        <div class="row mb-50">
-                            <div class="col-lg-6 col-sm-12 col-xs-12">
-                                <div class="detail-gallery">
+    </div>-->
+    <!-- Small Image -->
+    <!--</div>
 
-                                    <!-- Main Image -->
-                                    <div class="product-image-slider">
-                                        <figure class="border-radius-10" ng-repeat="i in Product.AllProductImage">
-                                            <img src="~/images/ProductImg/{{i}}" alt="product image" class="img-fluid" loading="lazy">
-                                        </figure>
+        </div>
+        <div class="col-lg-6 col-sm-12 col-xs-12">
+            <div class="detail-info">
+                <h2 class="title-detail"> {{Product.ProductTitle}}</h2>
+                <div class="pro-details-brand">
+                    <span><a href="/Home/shop?Main={{Product.Maincate.MTitle}}">{{Product.Maincate.MTitle}}</a></span>
+                </div>
 
-                                    </div>
-                                    <!-- Main Image -->
-                                    <!-- Small Image -->
-                                    <div class="slider-nav-thumbnails pl-15 pr-15" ng-show="Product.AllProductImage.length>1">
-                                        <div ng-repeat="i in Product.AllProductImage" ng-show="i!=null">
-                                            <img src="~/images/ProductImg/{{i}}" ng-show="i!=null" class="img-fluid" loading="lazy" alt="product image">
-                                        </div>
-                                        <div><img src="~/images/ProductImg/{{i}}" ng-show="i!=null" class="img-fluid" loading="lazy" alt="product image"></div>
+                <div class="clearfix product-price-cover border-0 mb-0">
+                    <div class="product-price primary-color float-left">
+                        <ins><span class="text-brand"><i class="fa fa-inr" aria-hidden="true"></i>{{Product.Price}}/-</span></ins>
+                    </div>
+                </div>
+                <div id="profile-description">
 
-                                    </div>
-                                    <!-- Small Image -->
-                                </div>
-
-                            </div>
-                            <div class="col-lg-6 col-sm-12 col-xs-12">
-                                <div class="detail-info">
-                                    <h2 class="title-detail"> {{Product.ProductTitle}}</h2>
-                                    <div class="pro-details-brand">
-                                        <span><a href="/Home/shop?Main={{Product.Maincate.MTitle}}">{{Product.Maincate.MTitle}}</a></span>
-                                    </div>
-
-                                    <div class="clearfix product-price-cover border-0 mb-0">
-                                        <div class="product-price primary-color float-left">
-                                            <ins><span class="text-brand"><i class="fa fa-inr" aria-hidden="true"></i>{{Product.Price}}/-</span></ins>
-                                        </div>
-                                    </div>
-                                    <div id="profile-description">
-
-                                        <div class="description mb-20 text show-more-height">
-                                            <p align="justify" id="desc" class="fs-7">
-                                            </p>
-
-                                        </div>
-                                    </div>
-                                    <div class="show-more">(Show More)</div>
-                           
-
-                                    <div class="attr-detail attr-size mb-30" ng-show="Product.PSizeList.length>0">
-                                        <strong class="mr-10">Size</strong>
-                                        <ul class="list-filter size-filter font-small">
-                                            <li ng-repeat="s in Product.PSizeList" style="margin-left:5px;"><a href="#">{{s.SizeTitle}}</a> </li>
-
-                                        </ul>
-                                    </div>
-
-                                    <div class="detail-extralink">                                     
-                                        <a class="button button-add-to-cart text-white" ng-click="GiftAddItemToCart(Product.ProductId)" role="button">Add To Cart</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row mt-60" ng-show="RecentViewGifts.length>0">
-                            <div class="col-12">
-                                <h3 class="section-title style-1 mb-30">Recent Views</h3>
-                            </div>
-                            <div class="row product-grid-4" ng-init="GetRecentViewGifts()">
-                                <div class="col-lg-3 col-6 col-sm-4" ng-repeat="q in RecentViewGifts">
-                                    <div class="product-cart-wrap mb-30">
-                                        <div class="product-img-action-wrap">
-                                            <div class="product-img product-img-zoom">
-                                                <a href="/Home/Gift?url={{q.PUrl}}">
-                                                    <img class="default-img img-fluid" src="~/images/ProductImg/{{q.ProductImage}}" loading="lazy" alt="product-image">
-                                                    <img class="hover-img img-fluid" src="~/images/ProductImg/{{q.ProductImage}}" loading="lazy" alt="product-hover-image">
-                                                </a>
-                                            </div>
-                                            <div class="product-badges product-badges-position product-badges-mrg" ng-show="q.PLabel!=''">
-                                                <span class="hot">{{q.PLabel}}</span>
-                                            </div>
-                                        </div>
-                                        <div class="product-content-wrap">
-                                            <h2><a href="/Home/Gift?url={{q.PUrl}}">{{q.ProductTitle}}</a></h2>
-                                            <div class="product-price">
-                                                <span><i class="fa fa-inr" aria-hidden="true"></i> {{q.Price}}/-</span>
-                                            </div>
-                                            <div class="product-action-1 show">
-                                                <a aria-label="Add To Cart" class="action-btn hover-up" ng-click="RecentViewaddItemToCart($index)"><i class="fi-rs-shopping-bag-add"></i></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                            </div>
-                        </div>
-                        <!-- Product Section End -->
-                        <!-- Related Product Start -->
-                        <div class="row mt-60">
-                            <div class="col-12">
-                                <h3 class="section-title style-1 mb-30">Related Gifts</h3>
-                            </div>
-                            <div class="row product-grid-4">
-                                <div class="col-lg-3 col-6 col-sm-4" ng-repeat="q in ProductData" ng-click="RecentViewData($index)">
-                                    <div class="product-cart-wrap mb-30">
-                                        <div class="product-img-action-wrap">
-                                            <div class="product-img">
-                                                <a href="/Home/Gift?url={{q.PUrl}}">
-                                                    <img class="default-img img-fluid" src="~/images/ProductImg/{{q.ProductImage}}" loading="lazy" alt="product-image">
-                                                    <img class="hover-img img-fluid" src="~/images/ProductImg/{{q.ProductImage}}" loading="lazy" alt="product-hover-image">
-                                                </a>
-                                            </div>
-                                            <div class="product-badges product-badges-position product-badges-mrg" ng-show="q.PLabel!=''">
-                                                <span class="hot">{{q.PLabel}}</span>
-                                            </div>
-                                        </div>
-                                        <div class="product-content-wrap">
-                                            <h2><a href="/Home/Gift?url={{q.PUrl}}">{{q.ProductTitle}}</a></h2>
-                                            <div class="product-price">
-                                                <span><i class="fa fa-inr" aria-hidden="true"></i> {{q.Price}}/-</span>
-                                            </div>
-                                            <div class="product-action-1 show">
-                                                <a aria-label="Add To Cart" class="action-btn hover-up" ng-click="addItemToCart($index)"><i class="fi-rs-shopping-bag-add"></i></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                            </div>
-                        </div>
-                        <!-- Related Product Start -->
+                    <div class="description mb-20 text show-more-height">
+                        <p align="justify" id="desc" class="fs-7">
+                        </p>
 
                     </div>
+                </div>
+                <div class="show-more">(Show More)</div>
+
+
+                <div class="attr-detail attr-size mb-30" ng-show="Product.PSizeList.length>0">
+                    <strong class="mr-10">Size</strong>
+                    <ul class="list-filter size-filter font-small">
+                        <li ng-repeat="s in Product.PSizeList" style="margin-left:5px;"><a href="#">{{s.SizeTitle}}</a> </li>
+
+                    </ul>
+                </div>
+
+                <div class="detail-extralink">
+                    <a class="button button-add-to-cart text-white" ng-click="GiftAddItemToCart(Product.ProductId)" role="button">Add To Cart</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row mt-60" ng-show="RecentViewGifts.length>0">
+        <div class="col-12">
+            <h3 class="section-title style-1 mb-30">Recent Views</h3>
+        </div>
+        <div class="row product-grid-4" ng-init="GetRecentViewGifts()">
+            <div class="col-lg-3 col-6 col-sm-4" ng-repeat="q in RecentViewGifts">
+                <div class="product-cart-wrap mb-30">
+                    <div class="product-img-action-wrap">
+                        <div class="product-img product-img-zoom">
+                            <a href="/Home/Gift?url={{q.PUrl}}">
+                                <img class="default-img img-fluid" src="~/images/ProductImg/{{q.ProductImage}}" loading="lazy" alt="product-image">
+                                <img class="hover-img img-fluid" src="~/images/ProductImg/{{q.ProductImage}}" loading="lazy" alt="product-hover-image">
+                            </a>
+                        </div>
+                        <div class="product-badges product-badges-position product-badges-mrg" ng-show="q.PLabel!=''">
+                            <span class="hot">{{q.PLabel}}</span>
+                        </div>
+                    </div>
+                    <div class="product-content-wrap">
+                        <h2><a href="/Home/Gift?url={{q.PUrl}}">{{q.ProductTitle}}</a></h2>
+                        <div class="product-price">
+                            <span><i class="fa fa-inr" aria-hidden="true"></i> {{q.Price}}/-</span>
+                        </div>
+                        <div class="product-action-1 show">
+                            <a aria-label="Add To Cart" class="action-btn hover-up" ng-click="RecentViewaddItemToCart($index)"><i class="fi-rs-shopping-bag-add"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>-->
+    <!-- Product Section End -->
+    <!-- Related Product Start -->
+    <!--<div class="row mt-60">
+        <div class="col-12">
+            <h3 class="section-title style-1 mb-30">Related Gifts</h3>
+        </div>
+        <div class="row product-grid-4">
+            <div class="col-lg-3 col-6 col-sm-4" ng-repeat="q in ProductData" ng-click="RecentViewData($index)">
+                <div class="product-cart-wrap mb-30">
+                    <div class="product-img-action-wrap">
+                        <div class="product-img">
+                            <a href="/Home/Gift?url={{q.PUrl}}">
+                                <img class="default-img img-fluid" src="~/images/ProductImg/{{q.ProductImage}}" loading="lazy" alt="product-image">
+                                <img class="hover-img img-fluid" src="~/images/ProductImg/{{q.ProductImage}}" loading="lazy" alt="product-hover-image">
+                            </a>
+                        </div>
+                        <div class="product-badges product-badges-position product-badges-mrg" ng-show="q.PLabel!=''">
+                            <span class="hot">{{q.PLabel}}</span>
+                        </div>
+                    </div>
+                    <div class="product-content-wrap">
+                        <h2><a href="/Home/Gift?url={{q.PUrl}}">{{q.ProductTitle}}</a></h2>
+                        <div class="product-price">
+                            <span><i class="fa fa-inr" aria-hidden="true"></i> {{q.Price}}/-</span>
+                        </div>
+                        <div class="product-action-1 show">
+                            <a aria-label="Add To Cart" class="action-btn hover-up" ng-click="addItemToCart($index)"><i class="fi-rs-shopping-bag-add"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>-->
+    <!-- Related Product Start -->
+    <!--</div>
                 </div>
             </div>
         </div>
@@ -210,7 +206,335 @@
 
             $(".text").toggleClass("show-more-height");
         });
-    </script>
+    </script>-->
+
+
+    <section class="mt-30 mb-50">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="product-detail accordion-detail">
+
+                        <!-- Product Section Start -->
+                        <div class="row mb-50">
+                            <div class="col-lg-6 col-sm-12 col-xs-12">
+                                <div class="detail-gallery">
+
+                                    <!-- Main Image -->
+                                    <div data-aos="zoom-in">
+                                        <div class="product-image-slider">
+                                            <figure class="border-radius-10">
+                                                <img src="https://dummyimage.com/1100x1200/ccc/000" alt="product image" class="img-fluid" loading="lazy">
+                                            </figure>
+                                            <figure class="border-radius-10">
+                                                <img src="https://dummyimage.com/1100x1200/ccc/000" alt="product image" class="img-fluid" loading="lazy">
+                                            </figure>
+                                            <figure class="border-radius-10">
+                                                <img src="https://dummyimage.com/1100x1200/ccc/000" alt="product image" class="img-fluid" loading="lazy">
+                                            </figure>
+                                            <figure class="border-radius-10">
+                                                <img src="https://dummyimage.com/1100x1200/ccc/000" alt="product image" class="img-fluid" loading="lazy">
+                                            </figure>
+                                            <figure class="border-radius-10">
+                                                <img src="https://dummyimage.com/1100x1200/ccc/000" alt="product image" class="img-fluid" loading="lazy">
+                                            </figure>
+                                            <figure class="border-radius-10">
+                                                <img src="https://dummyimage.com/1100x1200/ccc/000" alt="product image" class="img-fluid" loading="lazy">
+                                            </figure>
+                                            <figure class="border-radius-10">
+                                                <img src="https://dummyimage.com/1100x1200/ccc/000" alt="product image" class="img-fluid" loading="lazy">
+                                            </figure>
+                                        </div>
+                                    </div>
+                                    <!-- Main Image -->
+                                    <!-- Small Image -->
+                                    <div data-aos="zoom-in">
+                                        <div class="slider-nav-thumbnails pl-15 pr-15">
+                                            <div><img src="https://dummyimage.com/400x400/ccc/000" class="img-fluid" loading="lazy" alt="product image"></div>
+                                            <div><img src="https://dummyimage.com/400x400/ccc/000" class="img-fluid" loading="lazy" alt="product image"></div>
+                                            <div><img src="https://dummyimage.com/400x400/ccc/000" class="img-fluid" loading="lazy" alt="product image"></div>
+                                            <div><img src="https://dummyimage.com/400x400/ccc/000" class="img-fluid" loading="lazy" alt="product image"></div>
+                                            <div><img src="https://dummyimage.com/400x400/ccc/000" class="img-fluid" loading="lazy" alt="product image"></div>
+                                            <div><img src="https://dummyimage.com/400x400/ccc/000" class="img-fluid" loading="lazy" alt="product image"></div>
+                                            <div><img src="https://dummyimage.com/400x400/ccc/000" class="img-fluid" loading="lazy" alt="product image"></div>
+                                        </div>
+                                    </div>
+                                    <!-- Small Image -->
+                                </div>
+
+                            </div>
+                            <div class="col-lg-6 col-sm-12 col-xs-12">
+                                <div class="detail-info">
+                                    <div data-aos="zoom-in">
+                                        <span class="badge bg-success mb-2 animate__flash">Same Day Delivery</span>
+                                        <h2 class="title-detail">Product Name Here</h2>
+                                        <div class="pro-details-brand">
+                                            <span><a href="shop-by-categories.html">Product Category</a></span>
+                                        </div>
+                                    </div>
+
+                                    <div data-aos="zoom-in">
+                                        <div class="clearfix product-price-cover border-0 mb-0">
+                                            <div class="product-price primary-color float-left">
+                                                <ins><span class="text-brand"><i class="fa fa-inr" aria-hidden="true"></i>120.00/-</span></ins>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div data-aos="zoom-in">
+                                        <div class="description mb-20">
+                                            <p align="justify" class="fs-7">
+                                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloremque nam iste perspiciatis commodi temporibus sunt iure inventore quasi a illo.
+                                                <span id="dots">...</span>
+                                                <span id="more">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quibusdam excepturi et iure itaque assumenda. Ipsa illum saepe laboriosam? Sapiente obcaecati ea soluta nesciunt, eos vero illum dicta numquam similique laborum!</span>
+                                                <strong onclick="myFunction()" id="myBtn" class="text-brand cursor">Read more</strong>
+                                            </p>
+                                            <table class="font-md mb-30 mt-20">
+                                                <tbody>
+                                                    <tr class="stand-up">
+                                                        <th>Stand Up</th>
+                                                        <td>
+                                                            <p>35″L x 24″W x 37-45″H(front to back wheel)</p>
+                                                        </td>
+                                                    </tr>
+                                                    <tr class="folded-wo-wheels">
+                                                        <th>Folded (w/o wheels)</th>
+                                                        <td>
+                                                            <p>32.5″L x 18.5″W x 16.5″H</p>
+                                                        </td>
+                                                    </tr>
+                                                    <tr class="folded-w-wheels">
+                                                        <th>Folded (w/ wheels)</th>
+                                                        <td>
+                                                            <p>32.5″L x 24″W x 18.5″H</p>
+                                                        </td>
+                                                    </tr>
+                                                    <tr class="weight-wo-wheels">
+                                                        <th>Weight (w/o wheels)</th>
+                                                        <td>
+                                                            <p>20 LBS</p>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+
+                                    <div data-aos="zoom-in">
+                                        <div class="social-icons single-share mb-20">
+                                            <ul class="text-grey-5 d-inline-block">
+                                                <li><strong class="mr-10">Share this:</strong></li>
+                                                <li class="social-facebook"><a href="#"><img src="assets/imgs/theme/icons/icon-facebook.svg" alt=""></a></li>
+                                                <li class="social-twitter"> <a href="#"><img src="assets/imgs/theme/icons/icon-twitter.svg" alt=""></a></li>
+                                                <li class="social-instagram"><a href="#"><img src="assets/imgs/theme/icons/icon-instagram.svg" alt=""></a></li>
+                                                <li class="social-linkedin"><a href="#"><img src="assets/imgs/theme/icons/icon-pinterest.svg" alt=""></a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+
+                                    <div data-aos="zoom-in">
+                                        <div class="attr-detail attr-size mb-30">
+                                            <strong class="mr-10">Size</strong>
+                                            <ul class="list-filter size-filter font-small">
+                                                <li><a href="#">S</a></li>
+                                                <li class="active"><a href="#">M</a></li>
+                                                <li><a href="#">L</a></li>
+                                                <li><a href="#">XL</a></li>
+                                                <li><a href="#">XXL</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+
+                                    <div data-aos="zoom-in">
+                                        <div class="detail-extralink">
+                                            <div class="detail-qty border radius">
+                                                <a href="#" class="qty-down"><i class="fi-rs-angle-small-down"></i></a>
+                                                <span class="qty-val">1</span>
+                                                <a href="#" class="qty-up"><i class="fi-rs-angle-small-up"></i></a>
+                                            </div>
+                                            <a class="button button-add-to-cart text-white" href="cart.asp" role="button">Add To Cart</a>
+                                            <a class="button btn-danger button-add-to-cart filter-button animate__bounceIn" href="#" target="_blank" role="button">See Video</a>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Product Section End -->
+                        <!-- Related Product Start -->
+                        <div class="row mt-60">
+                            <div class="col-12">
+                                <h3 class="section-title style-1 mb-30">Related products</h3>
+                            </div>
+                            <div class="row product-grid-4 g-1 gx-1">
+                                <div class="col-lg-3 col-6 col-sm-4">
+                                    <div data-aos="zoom-in">
+                                        <div class="product-cart-wrap">
+                                            <div class="product-img-action-wrap">
+                                                <div class="product-img product-img-zoom">
+                                                    <a href="product-detail.html">
+                                                        <img class="default-img img-fluid" src="https://dummyimage.com/500x500/ccc/000" loading="lazy" alt="product-image" loading="lazy" alt="">
+                                                        <img class="hover-img img-fluid" src="https://dummyimage.com/500x500/000/fff" loading="lazy" alt="product-hover-image" loading="lazy" alt="">
+                                                    </a>
+                                                </div>
+                                                <div class="product-badges product-badges-position product-badges-mrg">
+                                                    <span class="hot">New Launch</span>
+                                                </div>
+                                            </div>
+                                            <div class="product-content-wrap">
+                                                <h2 class="mt-2"><a href="product-detail.html">Product Name Here</a></h2>
+                                                <div class="product-price">
+                                                    <span><i class="fa fa-inr" aria-hidden="true"></i> 200.00/-</span>
+                                                </div>
+                                                <div class="product-action-1 show">
+                                                    <a aria-label="Add To Cart" class="action-btn hover-up" href="cart.html"><i class="fi-rs-shopping-bag-add"></i></a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-6 col-sm-4">
+                                    <div data-aos="zoom-in">
+                                        <div class="product-cart-wrap">
+                                            <div class="product-img-action-wrap">
+                                                <div class="product-img product-img-zoom">
+                                                    <a href="product-detail.html">
+                                                        <img class="default-img img-fluid" src="https://dummyimage.com/500x500/ccc/000" loading="lazy" alt="product-image" loading="lazy" alt="">
+                                                        <img class="hover-img img-fluid" src="https://dummyimage.com/500x500/000/fff" loading="lazy" alt="product-hover-image" loading="lazy" alt="">
+                                                    </a>
+                                                </div>
+                                                <div class="product-badges product-badges-position product-badges-mrg">
+                                                    <span class="hot">New Launch</span>
+                                                </div>
+                                            </div>
+                                            <div class="product-content-wrap">
+                                                <h2 class="mt-2"><a href="product-detail.html">Product Name Here</a></h2>
+                                                <div class="product-price">
+                                                    <span><i class="fa fa-inr" aria-hidden="true"></i> 200.00/-</span>
+                                                </div>
+                                                <div class="product-action-1 show">
+                                                    <a aria-label="Add To Cart" class="action-btn hover-up" href="cart.html"><i class="fi-rs-shopping-bag-add"></i></a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-6 col-sm-4">
+                                    <div data-aos="zoom-in">
+                                        <div class="product-cart-wrap">
+                                            <div class="product-img-action-wrap">
+                                                <div class="product-img product-img-zoom">
+                                                    <a href="product-detail.html">
+                                                        <img class="default-img img-fluid" src="https://dummyimage.com/500x500/ccc/000" loading="lazy" alt="product-image" loading="lazy" alt="">
+                                                        <img class="hover-img img-fluid" src="https://dummyimage.com/500x500/000/fff" loading="lazy" alt="product-hover-image" loading="lazy" alt="">
+                                                    </a>
+                                                </div>
+                                                <div class="product-badges product-badges-position product-badges-mrg">
+                                                    <span class="hot">New Launch</span>
+                                                </div>
+                                            </div>
+                                            <div class="product-content-wrap">
+                                                <h2 class="mt-2"><a href="product-detail.html">Product Name Here</a></h2>
+                                                <div class="product-price">
+                                                    <span><i class="fa fa-inr" aria-hidden="true"></i> 200.00/-</span>
+                                                </div>
+                                                <div class="product-action-1 show">
+                                                    <a aria-label="Add To Cart" class="action-btn hover-up" href="cart.html"><i class="fi-rs-shopping-bag-add"></i></a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-6 col-sm-4">
+                                    <div data-aos="zoom-in">
+                                        <div class="product-cart-wrap">
+                                            <div class="product-img-action-wrap">
+                                                <div class="product-img product-img-zoom">
+                                                    <a href="product-detail.html">
+                                                        <img class="default-img img-fluid" src="https://dummyimage.com/500x500/ccc/000" loading="lazy" alt="product-image" loading="lazy" alt="">
+                                                        <img class="hover-img img-fluid" src="https://dummyimage.com/500x500/000/fff" loading="lazy" alt="product-hover-image" loading="lazy" alt="">
+                                                    </a>
+                                                </div>
+                                                <div class="product-badges product-badges-position product-badges-mrg">
+                                                    <span class="hot">New Launch</span>
+                                                </div>
+                                            </div>
+                                            <div class="product-content-wrap">
+                                                <h2 class="mt-2"><a href="product-detail.html">Product Name Here</a></h2>
+                                                <div class="product-price">
+                                                    <span><i class="fa fa-inr" aria-hidden="true"></i> 200.00/-</span>
+                                                </div>
+                                                <div class="product-action-1 show">
+                                                    <a aria-label="Add To Cart" class="action-btn hover-up" href="cart.html"><i class="fi-rs-shopping-bag-add"></i></a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Related Product Start -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Design Banner Start -->
+    <section class="p-0 section-padding bg-light">
+        <div class="container pt-4 pb-4">
+            <div class="row g-1">
+                <div class="col-lg-6 col-sm-12 col-12">
+                    <div class="row g-1">
+                        <div class="col-lg-8 col-sm-8 col-7">
+                            <div data-aos="zoom-in">
+                                <div class="image image-1">
+                                    <a href="banner-category.html">
+                                        <img src="https://dummyimage.com/800x900/ccc/fff" alt="banner-image" class="img-fluid">
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-sm-4 col-5">
+                            <div data-aos="zoom-in">
+                                <div class="image image-2">
+                                    <a href="banner-category.html">
+                                        <img src="https://dummyimage.com/400x900/ccc/fff" alt="banner-image" class="img-fluid">
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-6 col-sm-12 col-12">
+                    <div class="row g-1">
+                        <div class="col-lg-12 col-sm-12 col-6">
+                            <div data-aos="zoom-in">
+                                <div class="image image-3">
+                                    <a href="banner-category.html">
+                                        <img src="https://dummyimage.com/600x220/ccc/fff" alt="banner-image" class="img-fluid">
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-12 col-sm-12 col-6">
+                            <div data-aos="zoom-in">
+                                <div class="image image-4">
+                                    <a href="banner-category.html">
+                                        <img src="https://dummyimage.com/600x220/ccc/fff" alt="banner-image" class="img-fluid">
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Design Banner End -->
+
 </main>
 
 <!-- Main Section End -->

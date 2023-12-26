@@ -32,6 +32,38 @@
     <Property Name="Update_at" Type="datetime" />
     <Property Name="UserId" Type="bigint" />
   </EntityType>
+  <EntityType Name="BannerProductImage">
+    <Key>
+      <PropertyRef Name="PImageId" />
+    </Key>
+    <Property Name="PImageId" Type="bigint" Nullable="false" />
+    <Property Name="ProductId" Type="bigint" />
+    <Property Name="PImage" Type="nvarchar(max)" />
+    <Property Name="Active" Type="bit" />
+    <Property Name="Create_at" Type="datetime" />
+    <Property Name="Update_at" Type="datetime" />
+  </EntityType>
+  <EntityType Name="BannerProductTbl">
+    <Key>
+      <PropertyRef Name="ProductId" />
+    </Key>
+    <Property Name="ProductId" Type="bigint" Nullable="false" />
+    <Property Name="MainCateId" Type="bigint" />
+    <Property Name="ProductTitle" Type="nvarchar(max)" />
+    <Property Name="Price" Type="float" />
+    <Property Name="PUrl" Type="nvarchar(max)" />
+    <Property Name="PLabel" Type="nvarchar(max)" />
+    <Property Name="PDesc" Type="nvarchar(max)" />
+    <Property Name="PDesc1" Type="nvarchar(max)" />
+    <Property Name="Priority" Type="bigint" />
+    <Property Name="Active" Type="bit" />
+    <Property Name="Create_at" Type="datetime" />
+    <Property Name="Update_at" Type="datetime" />
+    <Property Name="UserID" Type="bigint" />
+    <Property Name="Qty" Type="bigint" />
+    <Property Name="VideoUrl" Type="nvarchar(max)" />
+    <Property Name="SameDay" Type="bit" />
+  </EntityType>
   <EntityType Name="BannerTbl">
     <Key>
       <PropertyRef Name="BannerId" />
@@ -53,6 +85,56 @@
     <Property Name="BannerCateId" Type="bigint" />
     <Property Name="KeywordId" Type="bigint" />
     <Property Name="Active" Type="bit" />
+  </EntityType>
+  <EntityType Name="BPKeywordTbl">
+    <Key>
+      <PropertyRef Name="PKeywordId" />
+    </Key>
+    <Property Name="PKeywordId" Type="bigint" Nullable="false" />
+    <Property Name="ProductId" Type="bigint" />
+    <Property Name="KeywordId" Type="bigint" />
+    <Property Name="Active" Type="bit" />
+  </EntityType>
+  <EntityType Name="BPSizeTbl">
+    <Key>
+      <PropertyRef Name="BPSizeId" />
+    </Key>
+    <Property Name="BPSizeId" Type="int" Nullable="false" />
+    <Property Name="SizeId" Type="int" />
+    <Property Name="ProductId" Type="bigint" />
+    <Property Name="Active" Type="bit" />
+  </EntityType>
+  <EntityType Name="BPTKeywordTbl">
+    <Key>
+      <PropertyRef Name="MCkeywordId" />
+    </Key>
+    <Property Name="MCkeywordId" Type="bigint" Nullable="false" />
+    <Property Name="MainCateId" Type="bigint" />
+    <Property Name="KeywordId" Type="bigint" />
+    <Property Name="Active" Type="bit" />
+  </EntityType>
+  <EntityType Name="BSubKTbl">
+    <Key>
+      <PropertyRef Name="BKSubId" />
+    </Key>
+    <Property Name="BKSubId" Type="bigint" Nullable="false" />
+    <Property Name="BSubId" Type="bigint" />
+    <Property Name="KeyWordId" Type="bigint" />
+    <Property Name="MainCateId" Type="bigint" />
+    <Property Name="Priority" Type="bigint" />
+    <Property Name="Active" Type="bit" />
+  </EntityType>
+  <EntityType Name="BSubTitleTbl">
+    <Key>
+      <PropertyRef Name="BSubId" />
+    </Key>
+    <Property Name="BSubId" Type="bigint" Nullable="false" />
+    <Property Name="MainCateId" Type="bigint" />
+    <Property Name="SubTitle" Type="nvarchar(max)" />
+    <Property Name="Priority" Type="bigint" />
+    <Property Name="Active" Type="bit" />
+    <Property Name="Create_at" Type="datetime" />
+    <Property Name="Update_at" Type="datetime" />
   </EntityType>
   <EntityType Name="KeywordTbl">
     <Key>
@@ -205,6 +287,21 @@
     <Property Name="Active" Type="bit" />
     <Property Name="Create_at" Type="date" />
   </EntityType>
+  <EntityType Name="BannerPTTbl">
+    <Key>
+      <PropertyRef Name="MainCateId" />
+    </Key>
+    <Property Name="MainCateId" Type="bigint" Nullable="false" />
+    <Property Name="MTitle" Type="nvarchar(max)" />
+    <Property Name="Position" Type="nvarchar(max)" />
+    <Property Name="MUrl" Type="nvarchar(max)" />
+    <Property Name="Active" Type="bit" />
+    <Property Name="Priority" Type="bigint" />
+    <Property Name="MImage" Type="nvarchar(max)" />
+    <Property Name="Create_at" Type="datetime" />
+    <Property Name="Update_at" Type="datetime" />
+    <Property Name="UserId" Type="bigint" />
+  </EntityType>
   <!--Errors Found During Generation:
 warning 6002: The table/view 'giftchoice.dbo.VProduct' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
   <EntityType Name="VProduct">
@@ -284,8 +381,15 @@ warning 6002: The table/view 'giftchoice.giftchoice.AutocompleteSuggestions' doe
     <EntitySet Name="AdminTbl" EntityType="Self.AdminTbl" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="BannerCateProductTbl" EntityType="Self.BannerCateProductTbl" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="BannerCateTbl" EntityType="Self.BannerCateTbl" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="BannerProductImage" EntityType="Self.BannerProductImage" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="BannerProductTbl" EntityType="Self.BannerProductTbl" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="BannerTbl" EntityType="Self.BannerTbl" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="BCKeywordTbl" EntityType="Self.BCKeywordTbl" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="BPKeywordTbl" EntityType="Self.BPKeywordTbl" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="BPSizeTbl" EntityType="Self.BPSizeTbl" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="BPTKeywordTbl" EntityType="Self.BPTKeywordTbl" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="BSubKTbl" EntityType="Self.BSubKTbl" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="BSubTitleTbl" EntityType="Self.BSubTitleTbl" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="KeywordTbl" EntityType="Self.KeywordTbl" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="MainCateTbl" EntityType="Self.MainCateTbl" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="MCKeywordTbl" EntityType="Self.MCKeywordTbl" Schema="dbo" store:Type="Tables" />
@@ -298,6 +402,7 @@ warning 6002: The table/view 'giftchoice.giftchoice.AutocompleteSuggestions' doe
     <EntitySet Name="SizeTbl" EntityType="Self.SizeTbl" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="SliderTbl" EntityType="Self.SliderTbl" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="UserRegister" EntityType="Self.UserRegister" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="BannerPTTbl" EntityType="Self.BannerPTTbl" Schema="giftchoice" store:Type="Tables" />
     <EntitySet Name="VProduct" EntityType="Self.VProduct" store:Type="Views" store:Schema="dbo">
       <DefiningQuery>SELECT 
     [VProduct].[ProductId] AS [ProductId], 

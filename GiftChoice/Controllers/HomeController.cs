@@ -557,6 +557,15 @@ namespace GiftChoice.Controllers
         }
 
 
+        public ActionResult BannerGifts()
+        {
+            return View();
+        }
+        public ActionResult TopProduct()
+        {
+            return View();
+        }
+
         public JsonResult GetNavbarMenu()
         {
             db.Configuration.ProxyCreationEnabled = false;

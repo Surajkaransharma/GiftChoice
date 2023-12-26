@@ -171,6 +171,12 @@
     <Compile Include="Models\BPTKeywordTbl.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\BSubKTbl.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\BSubTitleTbl.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\JsonNetFilterAttribute.cs" />
     <Compile Include="Models\KeywordTbl.cs">
       <DependentUpon>Model1.tt</DependentUpon>
@@ -1323,9 +1329,6 @@
     <Content Include="Content\assets\js\vendor\jquery-3.6.0.min.js" />
     <Content Include="Content\assets\js\vendor\jquery-migrate-3.3.0.min.js" />
     <Content Include="Content\assets\js\vendor\modernizr-3.6.0.min.js" />
-    <Content Include="Content\assets\owl-carousel\owl.carousel.css" />
-    <Content Include="Content\assets\owl-carousel\owl.carousel.js" />
-    <Content Include="Content\assets\owl-carousel\owl.theme.css" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -2428,10 +2431,6 @@
     <Content Include="images\ProductImg\999.jpg" />
     <Content Include="images\SliderImg\1.jpg" />
     <Content Include="images\SliderImg\2.JPG" />
-    <Content Include="images\SliderImg\3.jpg" />
-    <Content Include="images\SliderImg\4.jpg" />
-    <Content Include="images\SliderImg\5.jpg" />
-    <Content Include="images\SliderImg\6.jpg" />
     <Content Include="Models\Model1.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Model1.Context.cs</LastGenOutput>
@@ -2538,6 +2537,7 @@
     <Content Include="Views\Home\BannerGifts.cshtml" />
     <Content Include="Views\Home\TopProduct.cshtml" />
     <Content Include="Views\GiftDashBoard\AddBannerInProduct.cshtml" />
+    <Content Include="Views\GiftDashBoard\AddBannerQAndAnswer.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

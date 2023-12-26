@@ -11,6 +11,8 @@
     <EntitySet Name="BPKeywordTbls" EntityType="GiftChoiceModel.BPKeywordTbl" />
     <EntitySet Name="BPSizeTbls" EntityType="GiftChoiceModel.BPSizeTbl" />
     <EntitySet Name="BPTKeywordTbls" EntityType="GiftChoiceModel.BPTKeywordTbl" />
+    <EntitySet Name="BSubKTbls" EntityType="GiftChoiceModel.BSubKTbl" />
+    <EntitySet Name="BSubTitleTbls" EntityType="GiftChoiceModel.BSubTitleTbl" />
     <EntitySet Name="KeywordTbls" EntityType="GiftChoiceModel.KeywordTbl" />
     <EntitySet Name="MainCateTbls" EntityType="GiftChoiceModel.MainCateTbl" />
     <EntitySet Name="MCKeywordTbls" EntityType="GiftChoiceModel.MCKeywordTbl" />
@@ -96,6 +98,8 @@
     <Property Name="Update_at" Type="DateTime" Precision="3" />
     <Property Name="UserID" Type="Int64" />
     <Property Name="Qty" Type="Int64" />
+    <Property Name="VideoUrl" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="SameDay" Type="Boolean" />
   </EntityType>
   <EntityType Name="BannerTbl">
     <Key>
@@ -145,6 +149,29 @@
     <Property Name="MainCateId" Type="Int64" />
     <Property Name="KeywordId" Type="Int64" />
     <Property Name="Active" Type="Boolean" />
+  </EntityType>
+  <EntityType Name="BSubKTbl">
+    <Key>
+      <PropertyRef Name="BKSubId" />
+    </Key>
+    <Property Name="BKSubId" Type="Int64" Nullable="false" />
+    <Property Name="BSubId" Type="Int64" />
+    <Property Name="KeyWordId" Type="Int64" />
+    <Property Name="MainCateId" Type="Int64" />
+    <Property Name="Priority" Type="Int64" />
+    <Property Name="Active" Type="Boolean" />
+  </EntityType>
+  <EntityType Name="BSubTitleTbl">
+    <Key>
+      <PropertyRef Name="BSubId" />
+    </Key>
+    <Property Name="BSubId" Type="Int64" Nullable="false" />
+    <Property Name="MainCateId" Type="Int64" />
+    <Property Name="SubTitle" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Priority" Type="Int64" />
+    <Property Name="Active" Type="Boolean" />
+    <Property Name="Create_at" Type="DateTime" Precision="3" />
+    <Property Name="Update_at" Type="DateTime" Precision="3" />
   </EntityType>
   <EntityType Name="KeywordTbl">
     <Key>

@@ -1,12 +1,11 @@
 ﻿
 @{
-    /**/
-
-    ViewBag.Title = "AddMainCate";
+    ViewBag.Title = "AddBannerQAndAnswer";
     Layout = "~/Views/Shared/_Admin.cshtml";
 }
+
 <style>
-    .img64 img {
+    img {
         width: 50px
     }
 </style>
@@ -14,7 +13,7 @@
 <div class="page-wrapper" ng-app="AdminApp" ng-controller="AdminController">
     <div class="page-content">
         <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
-            <div class="breadcrumb-title pe-3">Main Category</div>
+            <div class="breadcrumb-title pe-3">Banner</div>
             <div class="ps-3">
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb mb-0 p-0">
@@ -28,133 +27,63 @@
 
         </div>
         <div class="row">
-            <div class="col-xl-5">
+            <div class="col-xl-4">
 
                 <div class="card">
                     <div class="card-body p-4">
 
                         <form class="row g-3" enctype="multipart/form-data">
                             <div class="col-md-12">
-                                <label for="input1" class="form-label">Main Category Title</label>
-                                <input type="text" class="form-control" id="MTitle" ng-model="MainCate.MTitle" placeholder="Main Category">
-                                @*<input type="hidden" class="form-control" id="imgcode" ng-model="MainCate.MImage" placeholder="Main Category">*@
-                                @*<div id="imageContainer"></div>*@
+                                <label for="input1" class="form-label">Select Banner Position</label>
+                                <select id="MainCateSelect" class="form-select" onchange="angular.element(this).scope().GetBannerInProduct(this.value)" ng-model="BSubTitleTbl.Position">
+                                    <option ng-selected="true" value="-1">Select Banner Position</option>
+                                    <option value="Small Banner">Small Banner</option>
+                                    <option value="Design Banner">Design Banner</option>
+                                    <option value="Multiple Banner">Multiple Banner</option>
+
+                                </select>
+
+
+                            </div>
+                            <div class="col-md-12" ng-init="GetBannerInProduct()">
+                                <label for="input1" class="form-label">Select Banner Title</label>
+
+                                <select id="MainCate" class="form-select" ng-model="BSubTitleTbl.MainCateId" onchange="angular.element(this).scope().GetBannerPInKeyword(this.value)">
+                                    <option ng-selected="true" value="-1">Select Banner Title</option>
+                                    <option ng-repeat="m in GetBannerInProductData" value="{{m.MainCateId}}">{{m.MTitle}}</option>
+                                </select>
+
+
                             </div>
                             <div class="col-md-12">
-
-                                <label for="inputFirstName" class="form-label">Image <span style="color:#ff0000;font-weight:bolder;">880 * 880</span></label>
-
-                                <section id="image-section">
-                                    <div id="uploadArea" class="upload-area">
-                                        <!-- Header -->
-                                        <div class="upload-area__header" style="display:none">
-                                            <h1 class="upload-area__title">Upload your file</h1>
-                                            <p class="upload-area__paragraph">
-                                                File should be an image
-                                                <strong class="upload-area__tooltip">
-                                                    Like
-                                                    <span class="upload-area__tooltip-data"></span>
-                                                </strong>
-                                            </p>
-                                        </div>
-                                        <!-- End Header -->
-                                        <!-- Drop Zoon -->
-                                        <div id="dropZoon" class="upload-area__drop-zoon drop-zoon">
-                                            <span class="drop-zoon__icon">
-                                                <i class='bx bxs-file-image'></i>
-                                            </span>
-                                            <p class="drop-zoon__paragraph">Drop your file here or Click to browse</p>
-                                            <span id="loadingText" class="drop-zoon__loading-text">Please Wait</span>
-                                            <img src="" alt="Preview Image" id="previewImage" class="drop-zoon__preview-image" draggable="false">
-                                            <input type="file" id="fileInput" upload-file="MainCate.Image" class="drop-zoon__file-input" multiple>
-                                        </div>
-                                        <!-- End Drop Zoon -->
-                                        <!-- File Details -->
-                                        <div id="fileDetails" class="upload-area__file-details file-details" style="display: none">
-                                            <h3 class="file-details__title">Uploaded File</h3>
-
-                                            <div id="uploadedFile" class="uploaded-file">
-                                                <div class="uploaded-file__icon-container">
-                                                    <i class='bx bxs-file-blank uploaded-file__icon'></i>
-                                                    <span class="uploaded-file__icon-text"></span>
-
-                                                </div>
-
-                                                <div id="uploadedFileInfo" class="uploaded-file__info">
-                                                    <span class="uploaded-file__name">Proejct 1</span>
-                                                    <span class="uploaded-file__counter">0%</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <!-- End File Details -->
-                                    </div>
-                                </section>
-
+                                <label for="input1" class="form-label">Sub Title</label>
+                                <input type="text" class="form-control" ng-model="BSubTitleTbl.SubTitle" id="SubTitle" placeholder="Sub Title">
                             </div>
-
                             <div class="col-md-12">
                                 <label for="input1" class="form-label">Priority</label>
-                                <input type="number" id="Priority" class="form-control" ng-model="MainCate.Priority" placeholder="Priority">
+                                <input type="number" class="form-control" ng-model="BSubTitleTbl.Priority" id="Priority" placeholder="Priority">
                             </div>
-                            <div class="col-md-12" ng-init="GetKeywordData()">
+
+                            @*<div class="col-md-12" ng-init="GetKeywordData()">
                                 <label for="input1" class="form-label">Select Keyword</label>
-                                <table class="table">
-                                    <thead>
-                                        <tr>
-                                            <th>Keyword</th>
-                                            <th>Menu Show</th>
-                                            <th>Filter Show</th>
-                                            <th>Menu/Filter Show</th>
 
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr ng-repeat="k in KeywordList">
-                                            <td>
-                                                <div class="" id="check_box">
-                                                    <label class="checkbox-wrapper">
-                                                        <input type="checkbox" id="Keyword_{{k.KeywordId}}" class="checkbox-input" value="{{k.KeywordId}}" ng-model="k.Selected" ng-checked="" />
-                                                        <span class="checkbox-tile">
-                                                            <span class="checkbox-label">{{k.Keyword}}</span>
-                                                        </span>
-                                                    </label>
-                                                </div>
-                                            </td>
-                                            <td> <input type="radio" ng-model="k.Menu" name="m_{{k.KeywordId}}" class="Menu" id="Menu_{{k.KeywordId}}" value="Menu" /> </td>
-                                            <td> <input type="radio" ng-model="k.Menu" name="m_{{k.KeywordId}}" class="Menu" id="Fliter_{{k.KeywordId}}" value="Fliter" ng-checked="true" /> </td>
-                                            <td> <input type="radio" ng-model="k.Menu" name="m_{{k.KeywordId}}" class="Menu" id="MenuFilter_{{k.KeywordId}}" value="MenuFilter" /> </td>
+                                <div class="" id="check_box">
+                                    <label class="checkbox-wrapper" ng-repeat="k in KeywordList">
+                                        <input type="checkbox" id="Keyword_{{k.KeywordId}}" class="checkbox-input" value="{{k.KeywordId}}" ng-model="k.Selected" ng-checked="" />
+                                        <span class="checkbox-tile">
+                                            <span class="checkbox-label">{{k.Keyword}}</span>
+                                        </span>
+                                    </label>
 
 
+                                </div>
+                            </div>*@
 
-                                        </tr>
-                                    </tbody>
-                                </table>
-                                @*<div class="" id="check_box">
-                                        <label class="checkbox-wrapper" ng-repeat="k in KeywordList">
-                                            <input type="checkbox" id="Keyword_{{k.KeywordId}}" class="checkbox-input" value="{{k.KeywordId}}" ng-model="k.Selected" ng-checked="" />
-                                            <span class="checkbox-tile">
-                                                <span class="checkbox-label">{{k.Keyword}}</span>
-                                            </span>
-                                        </label>
-
-
-                                    </div>*@
-                            </div>
-
-                            @*<div class="col-md-4">
-                                    <label for="input9" class="form-label">State</label>
-                                    <select id="input9" class="form-select">
-                                        <option selected="">Choose...</option>
-                                        <option>One</option>
-                                        <option>Two</option>
-                                        <option>Three</option>
-                                    </select>
-                                </div>*@
 
                             <div class="col-md-12">
                                 <div class="d-md-flex d-grid align-items-center gap-3">
-                                    <button type="button" id="btn" ng-click="SubmitMainCate()" class="btn btn-primary px-4">Submit</button>
-                                    <button type="button" id="edbtn" ng-click="UpdateMainCate()" style="display: none" class="btn btn-primary px-4">Update</button>
+                                    <button type="button" id="btn" ng-click="SubmitBannerSubCateTitle()" class="btn btn-primary px-4">Submit</button>
+                                    <button type="button" id="edbtn" ng-click="UpdateBannerSubCateTitle()" style="display: none" class="btn btn-primary px-4">Update</button>
                                     <button type="button" class="btn btn-light px-4" onClick="refreshPage()">Reset</button>
                                 </div>
                             </div>
@@ -163,7 +92,7 @@
                 </div>
 
             </div>
-            <div class="col-xl-7">
+            <div class="col-xl-8">
                 <div class="card">
                     <div class="card-body">
                         <div class="d-lg-flex align-items-center mb-4 gap-3">
@@ -179,28 +108,34 @@
 
                         </div>
                         <div class="table-responsive">
-                            <table class="table mb-0 table-bordered" ng-init="GetMainCate()">
+                            <table class="table mb-0 table-bordered" ng-init="GetBannerProdcutT()">
                                 <thead class="table-light">
                                     <tr>
                                         <th>S.No.</th>
-                                        <th>Main Category Name</th>
-                                        <th>Keyword</th>
+                                        <th>Banner Title</th>
+                                        <th>Position</th>
+                                        <th>KeyWord</th>
                                         <th>Priority</th>
                                         <th>Image</th>
                                         <th>Active</th>
+
                                         <th>Action</th>
+
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr ng-repeat="m in MainCateData">
+                                    <tr ng-repeat="m in GetBannerProdcutTData">
                                         <td>{{$index+1}}</td>
                                         <td>{{m.MTitle}}</td>
+                                        <td>{{m.Position}}</td>
                                         <td style="white-space: normal"><span ng-repeat="n in m.Submenu">{{n.SubmenuTitle}},</span></td>
                                         <td>{{m.Priority}}</td>
-                                        <td><a ng-click="MainCateActiveDeActive(m.MainCateId)"> <span class="badge {{m.Active==1? 'bg-success' : 'bg-danger'}}">{{m.Active==1?'Active':'Deactive'}}</span></a> </td>
-                                        <td><img src="~/images/MainCate/{{m.MImage}}" style="width:50px"></td>
-                                        <td><a><i class="bx bxs-pencil" ng-click="GetMainCatebyid($index)"></i></a></td>
+                                        <td><img src="~/images/BannerPTImage/{{m.MImage}}"></td>
+                                        <td><a ng-click="BannerProdcutTActiveDeActive(m.MainCateId)"> <span class="badge {{m.Active==1? 'bg-success' : 'bg-danger'}}">{{m.Active==1?'Active':'Deactive'}}</span></a> </td>
+                                        <td><a><i class="bx bxs-pencil" ng-click="GetBannerProdcutTid($index)"></i></a></td>
                                     </tr>
+
+
                                 </tbody>
                             </table>
                         </div>
@@ -211,8 +146,6 @@
     </div>
 </div>
 <script>
-
-
     // Select Upload-Area
     const uploadArea = document.querySelector('#uploadArea')
 
@@ -223,7 +156,7 @@
     const loadingText = document.querySelector('#loadingText');
 
     // Slect File Input
-    const fileInput = document.querySelector('input[type="file"]');
+    const fileInput = document.querySelector('#fileInput');
 
     // Select Preview Image
     const previewImage = document.querySelector('#previewImage');
@@ -317,7 +250,7 @@
         image.src = URL.createObjectURL(file);
 
         image.onload = function () {
-            //if (image.naturalWidth === 880 && image.naturalHeight === 880) {
+            //  if (image.naturalWidth != 1920 && image.naturalHeight != 700) {
             // If File Is Passed from the (File Validation) Function
             if (fileValidate(fileType, fileSize)) {
 
@@ -391,7 +324,7 @@
 
             };
             //} else {
-            //    alert('Please make sure your image has dimensions of 880*880 pixels.');
+            //    alert('Please make sure your image has dimensions of 1920*700 pixels.');
             //    return false;
             //}
         };
@@ -451,5 +384,11 @@
         };
     };
 
-    // :)
-</script>
+    // :)</script>
+
+
+
+
+
+
+

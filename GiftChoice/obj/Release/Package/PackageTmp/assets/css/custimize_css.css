@@ -324,7 +324,7 @@
     padding: 0.3125rem;
     border-radius: 10px;
     display: none;
-    z-index: 1000;
+    z-index: 1;
     transition: opacity 300ms ease-in-out;
 }
 
