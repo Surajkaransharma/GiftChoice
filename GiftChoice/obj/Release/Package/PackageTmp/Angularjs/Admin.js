@@ -1773,6 +1773,231 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
 
     //-------------- add Banner in Product End ->------------->---------------------->---------------------------->------->------------>---------->---
 
+    //-------------- Submit Banner Sub Cate Title Start ->------------->---------------------->---------------------------->------->------------>---------->---
+
+
+    $scope.GetBannerProdcutT = function () {
+        $http.get("/GiftDashBoard/GetBannerProdcutT").then(function (d) {
+            debugger
+            $scope.GetBannerProdcutTData = d.data;
+        }, function (error) {
+            alert(error.data);
+        });
+    };
+
+    //var BPKeywordarr = [];
+
+    $scope.SubmitBannerSubCateTitle = function () {
+        debugger
+        //for (var i = 0; i < $scope.KeywordList.length; i++) {
+        //    if ($scope.KeywordList[i].Selected) {
+        //        BPKeywordarr.push($scope.KeywordList[i]);
+        //    }
+        //}
+        if ($("#SubTitle").val() == "") {
+            toastr["error"]("Enter Sub Title");
+            return;
+        }
+
+        if ($("#Priority").val() == "") {
+            toastr["error"]("Enter Sub Priority");
+            return;
+        }
+
+
+        $http({
+            url: '/GiftDashBoard/SubmitBannerSubCateTitle',
+            method: 'post',
+            data: $scope.BSubTitleTbl
+        }).then(function (d) {
+            $scope.result = d.data;
+            if ($scope.result.res === "1") {
+                //if (Keywordarr != null) {
+
+                //    $scope.BannerProdcutTKeywordArray($scope.result.MainCateId);
+                //}
+                toastr["success"]("Banner Save Successfully");
+                $scope.BSubTitleTbl = null;
+                $scope.GetBannerSubCateTitle();
+
+            } else if ($scope.result.res === "2") {
+                toastr["error"]("Already Exist Position");
+            }
+            else {
+                toastr["error"]("Banner not save");
+            }
+        }, function (error) {
+            toastr["error"]("Something Went Wrong");
+        });
+    };
+
+
+
+    //$scope.BannerProdcutTKeywordArray = function (id) {
+    //    debugger;
+    //    $http({
+    //        url: '/GiftDashBoard/BannerProdcutTKeywordArray',
+    //        method: 'post',
+    //        data: {
+    //            MainCateId: id,
+    //            keywordTbls: BPKeywordarr,
+    //        }
+    //    }).then(function (d) {
+    //        debugger
+    //        $scope.result = d.data;
+    //        if ($scope.result.res === "1") {
+    //            toastr["success"]("Banner save successfully");
+    //            $scope.MainCate = null;
+
+    //            location.href = '/GiftDashBoard/AddPBanner';
+    //        }
+    //    }, function (error) {
+    //        toastr["error"]("Something Went Wrong");
+    //    });
+    //};
+
+
+    $scope.GetBannerSubCateTitleById = function (index) {
+
+
+        $('#btn').css('display', 'none');
+        $('#edbtn').css('display', 'inline');
+
+        $scope.BSubTitleTbl = $scope.GetBannerSubCateTitleData[index];
+        debugger
+
+        //for (var s = 0; s < $scope.KeywordList.length; s++) {
+        //    var vallc1s = $scope.KeywordList[s].KeywordId;
+        //    $('#Keyword_' + vallc1s).prop('checked', false);
+        //
+
+        //}
+
+
+      
+        debugger
+        //for (var i = 0; i < $scope.BannerProdcutT.Submenu.length; i++) {
+        //    var vallc = $scope.BannerProdcutT.Submenu[i].KeywordId;
+        //    $('#Keyword_' + vallc).prop('checked', true);
+
+
+        //}
+
+
+        debugger
+        // CKEDITOR.instances.ckeditor.setData($scope.Product.Description);
+        //ckeditor.replace('postBody');
+        // $("#ckeditor").val($scope.Product.Description);
+
+
+        debugger
+        $('html, body').animate({ scrollTop: 0 }, '300');
+    };
+
+
+    $scope.UpdateBannerSubCateTitle = function () {
+        debugger
+        var maincate = angular.element(document.getElementById("SubTitle"));
+        if (maincate.val() === "") {
+            toastr["error"]("Please Enter Sub Title");
+            maincate.focus();
+            return;
+        }
+        if ($("#Priority").val() == "") {
+            toastr["error"]("Enter Sub Title Priority");
+            return;
+        }
+
+        //$.each($(".checkbox-input:checked"), function () {
+        //    Keywordarr.push({ 'KeywordId': $(this).val() });
+        //});
+        //for (var i = 0; i < $scope.KeywordList.length; i++) {
+        //    var vallc = $scope.KeywordList[i].KeywordId;
+        //    var isChecked = $('#Keyword_' + vallc).prop('checked');
+        //    if (isChecked) {
+        //        BPKeywordarr.push($scope.KeywordList[i]);
+        //    }
+        //}
+        debugger
+
+        $http({
+            url: '/GiftDashBoard/UpdateBannerSubCateTitle',
+            method: 'post',
+            data: $scope.BSubTitleTbl
+        }).then(function (d) {
+            $scope.result = d.data;
+            if ($scope.result.res === "1") {
+                toastr["success"]("Banner Sub Title Update successfully");
+                //if (Keywordarr !== null) {
+
+                //    $scope.UpdateBannerProdcutTKeywordArray($scope.result.MainCateId);
+                //}
+                $scope.BSubTitleTbl = null;
+                $scope.GetBannerSubCateTitle();
+                $('#edbtn').css('display', 'none');
+                $('#btn').css('display', 'inline');
+            }
+        }, function (error) {
+            toastr["error"]("Something Went Wrong");
+        });
+    };
+
+    //$scope.UpdateBannerProdcutTKeywordArray = function (id) {
+    //    debugger;
+    //    $http({
+    //        url: '/GiftDashBoard/UpdateBannerProdcutTKeywordArray',
+    //        method: 'post',
+    //        data: {
+    //            MainCateId: id,
+    //            keywordTbls: BPKeywordarr,
+    //        }
+    //    }).then(function (d) {
+    //        debugger
+    //        $scope.result = d.data;
+    //        if ($scope.result.res === "1") {
+    //            toastr["success"]("Banner Update successfully");
+    //            //$scope.BannerProdcutT = null;
+    //            //$scope.GetBannerProdcutT();
+
+    //            /*                $scope.GetKeywordData();*/
+    //            //$('#edbtn').css('display', 'none');
+    //            //$('#btn').css('display', 'inline');
+    //            location.href = '/GiftDashBoard/AddPBanner';
+    //        }
+    //    }, function (error) {
+    //        toastr["error"]("Something Went Wrong");
+    //    });
+    //};
+
+    $scope.BannerSubTitleActiveDeActive = function (id) {
+        $http.get("/GiftDashBoard/BannerSubTitleActiveDeActive?id=" + id).then(function (d) {
+            $scope.rees = d.data;
+            if ($scope.rees.res === "1") {
+                toastr["success"]("successful");
+                $scope.GetBannerSubCateTitle();
+            }
+            else {
+                toastr["error"]("something went wrong   ");
+            }
+
+
+        }, function (error) {
+            alert(error.data);
+        });
+
+    };
+
+    $scope.GetBannerSubCateTitle = function () {
+        $http.get("/GiftDashBoard/GetBannerSubCateTitle").then(function (d) {
+            debugger
+            $scope.GetBannerSubCateTitleData = d.data;
+        }, function (error) {
+            alert(error.data);
+        });
+    };
+     //-------------- Submit Banner Sub Cate Title End ->------------->---------------------->---------------------------->------->------------>---------->---
+
+
 }]).directive('uploadFile', ['$parse', function ($parse) {
     return {
         restrict: 'A',

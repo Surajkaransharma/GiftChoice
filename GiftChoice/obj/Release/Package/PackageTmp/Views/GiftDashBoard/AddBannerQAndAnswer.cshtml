@@ -35,7 +35,7 @@
                         <form class="row g-3" enctype="multipart/form-data">
                             <div class="col-md-12">
                                 <label for="input1" class="form-label">Select Banner Position</label>
-                                <select id="MainCateSelect" class="form-select" onchange="angular.element(this).scope().GetBannerInProduct(this.value)" ng-model="BannerProdcutT.Position">
+                                <select id="MainCateSelect" class="form-select" onchange="angular.element(this).scope().GetBannerInProduct(this.value)" ng-model="BSubTitleTbl.Position">
                                     <option ng-selected="true" value="-1">Select Banner Position</option>
                                     <option value="Small Banner">Small Banner</option>
                                     <option value="Design Banner">Design Banner</option>
@@ -48,7 +48,7 @@
                             <div class="col-md-12" ng-init="GetBannerInProduct()">
                                 <label for="input1" class="form-label">Select Banner Title</label>
 
-                                <select id="MainCate" class="form-select" ng-model="Product.MainCateId" onchange="angular.element(this).scope().GetBannerPInKeyword(this.value)">
+                                <select id="MainCate" class="form-select" ng-model="BSubTitleTbl.MainCateId" onchange="angular.element(this).scope().GetBannerPInKeyword(this.value)">
                                     <option ng-selected="true" value="-1">Select Banner Title</option>
                                     <option ng-repeat="m in GetBannerInProductData" value="{{m.MainCateId}}">{{m.MTitle}}</option>
                                 </select>
@@ -57,14 +57,14 @@
                             </div>
                             <div class="col-md-12">
                                 <label for="input1" class="form-label">Sub Title</label>
-                                <input type="number" class="form-control" ng-model="BannerProdcutT.SubTitle" id="Priority" placeholder="Sub Title">
+                                <input type="text" class="form-control" ng-model="BSubTitleTbl.SubTitle" id="SubTitle" placeholder="Sub Title">
                             </div>
                             <div class="col-md-12">
                                 <label for="input1" class="form-label">Priority</label>
-                                <input type="number" class="form-control" ng-model="BannerProdcutT.Priority" id="Priority" placeholder="Priority">
+                                <input type="number" class="form-control" ng-model="BSubTitleTbl.Priority" id="Priority" placeholder="Priority">
                             </div>
 
-                            <div class="col-md-12" ng-init="GetKeywordData()">
+                            @*<div class="col-md-12" ng-init="GetKeywordData()">
                                 <label for="input1" class="form-label">Select Keyword</label>
 
                                 <div class="" id="check_box">
@@ -77,13 +77,13 @@
 
 
                                 </div>
-                            </div>
+                            </div>*@
 
 
                             <div class="col-md-12">
                                 <div class="d-md-flex d-grid align-items-center gap-3">
-                                    <button type="button" id="btn" ng-click="SubmitBannerProdcutT()" class="btn btn-primary px-4">Submit</button>
-                                    <button type="button" id="edbtn" ng-click="UpdateBannerProdcutT()" style="display: none" class="btn btn-primary px-4">Update</button>
+                                    <button type="button" id="btn" ng-click="SubmitBannerSubCateTitle()" class="btn btn-primary px-4">Submit</button>
+                                    <button type="button" id="edbtn" ng-click="UpdateBannerSubCateTitle()" style="display: none" class="btn btn-primary px-4">Update</button>
                                     <button type="button" class="btn btn-light px-4" onClick="refreshPage()">Reset</button>
                                 </div>
                             </div>
@@ -96,10 +96,10 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="d-lg-flex align-items-center mb-4 gap-3">
-                            <div class="position-relative">
+                            @*<div class="position-relative">
                                 <input type="text" class="form-control ps-5 radius-30" ng-model="search" placeholder="Search here...">
                                 <span class="position-absolute top-50 product-show translate-middle-y"><i class="bx bx-search"></i></span>
-                            </div>
+                            </div>*@
                             @*  <div class="ms-auto"><a href="javascript:;" class="btn btn-primary radius-30 mt-2 mt-lg-0" data-bs-toggle="modal" data-bs-target="#createcompany"><i class="bx bxs-plus-square"></i>Add New Company</a></div>*@
 
 
@@ -108,15 +108,17 @@
 
                         </div>
                         <div class="table-responsive">
-                            <table class="table mb-0 table-bordered" ng-init="GetBannerProdcutT()">
+                            <table class="table mb-0 table-bordered" ng-init="GetBannerSubCateTitle()">
                                 <thead class="table-light">
                                     <tr>
                                         <th>S.No.</th>
                                         <th>Banner Title</th>
-                                        <th>Position</th>
-                                        <th>KeyWord</th>
+                                        <th>Sub Title</th>
+
+                                        @*<th>Position</th>*@
+                                        @*<th>KeyWord</th>*@
                                         <th>Priority</th>
-                                        <th>Image</th>
+                                        @*<th>Image</th>*@
                                         <th>Active</th>
 
                                         <th>Action</th>
@@ -124,15 +126,17 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr ng-repeat="m in GetBannerProdcutTData">
+                                    <tr ng-repeat="m in GetBannerSubCateTitleData">
                                         <td>{{$index+1}}</td>
-                                        <td>{{m.MTitle}}</td>
-                                        <td>{{m.Position}}</td>
-                                        <td style="white-space: normal"><span ng-repeat="n in m.Submenu">{{n.SubmenuTitle}},</span></td>
+                                        <td>{{m.bMainTitle.MTitle}}</td>
+
+                                        <td>{{m.SubTitle}}</td>
+                                        @*<td>{{m.Position}}</td>*@
+                                        @*<td style="white-space: normal"><span ng-repeat="n in m.Submenu">{{n.SubmenuTitle}},</span></td>*@
                                         <td>{{m.Priority}}</td>
-                                        <td><img src="~/images/BannerPTImage/{{m.MImage}}"></td>
-                                        <td><a ng-click="BannerProdcutTActiveDeActive(m.MainCateId)"> <span class="badge {{m.Active==1? 'bg-success' : 'bg-danger'}}">{{m.Active==1?'Active':'Deactive'}}</span></a> </td>
-                                        <td><a><i class="bx bxs-pencil" ng-click="GetBannerProdcutTid($index)"></i></a></td>
+                                        @*<td><img src="~/images/BannerPTImage/{{m.MImage}}"></td>*@
+                                        <td><a ng-click="BannerSubTitleActiveDeActive(m.BSubId)"> <span class="badge {{m.Active==1? 'bg-success' : 'bg-danger'}}">{{m.Active==1?'Active':'Deactive'}}</span></a> </td>
+                                        <td><a><i class="bx bxs-pencil" ng-click="GetBannerSubCateTitleById($index)"></i></a></td>
                                     </tr>
 
 

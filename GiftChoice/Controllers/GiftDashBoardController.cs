@@ -2570,7 +2570,7 @@ namespace GiftChoice.Controllers
                 if (result != null)
                 {
 
-                    var res1 = new { res = "0" };
+                    var res1 = new { res = "2" };
                     return Json(res1, JsonRequestBehavior.AllowGet);
 
                 }
@@ -2596,6 +2596,77 @@ namespace GiftChoice.Controllers
             }
         }
 
+
+        public JsonResult GetBannerSubCateTitle()
+        {
+            var res =
+
+               db.BSubTitleTbls.Select(m => new
+               {
+                   m.MainCateId,
+                   m.SubTitle,
+                   m.BSubId,
+                   bMainTitle = db.BannerPTTbls.Where(b => b.MainCateId == m.MainCateId).FirstOrDefault(),
+                   m.Active,
+                   m.Priority,
+                  
+               });
+            return Json(res, JsonRequestBehavior.AllowGet);
+
+        }
+
+        public JsonResult UpdateBannerSubCateTitle(BSubTitleTblmodel model)
+        {
+            try
+            {
+                var result = db.BSubTitleTbls.FirstOrDefault(p => p.BSubId == model.BSubId);
+                if (result != null)
+                {
+                  
+                    result.SubTitle = model.SubTitle;
+                    result.MainCateId = model.MainCateId;
+                    result.Priority = model.Priority;
+                    result.Update_at = DateTime.Now;
+                    db.SaveChanges();
+
+                }
+                var res = new { res = "1"};
+                return Json(res, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+
+                var res = new { res = "0" };
+                return Json(res, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        public JsonResult BannerSubTitleActiveDeActive(int id)
+        {
+            try
+            {
+                var jb = db.BSubTitleTbls.Where(c => c.BSubId == id).FirstOrDefault();
+                if (jb != null)
+                {
+
+                    jb.Active = jb.Active == true ? false : true;
+                    db.SaveChanges();
+                    var res = new { res = "1" };
+                    return Json(res, JsonRequestBehavior.AllowGet);
+                }
+                else
+                {
+                    var res = new { res = "2" };
+                    return Json(res, JsonRequestBehavior.AllowGet);
+                }
+            }
+            catch (Exception ex)
+            {
+                var res = new { res = "0" };
+                return Json(res, JsonRequestBehavior.AllowGet);
+            }
+
+        }
 
 
         //-------------- Submit Banner Sub Cate Title End ->------------->---------------------->---------------------------->------->------------>---------->---
