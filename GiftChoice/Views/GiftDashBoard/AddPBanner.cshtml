@@ -114,7 +114,7 @@
                             </div>
                             <div class="col-md-12">
                                 <label for="input1" class="form-label">Do You Want any query on this banner ? </label>
-                                <input type="checkbox" ng-model="BannerProdcutT.ModelQuery" id="ModelQuery" >
+                                <input type="checkbox" ng-model="BannerProdcutT.ModelQuery1" id="ModelQuery" >
                             </div>
                             @*<div class="col-md-12" ng-init="GetKeywordData()">
                                     <label for="input1" class="form-label">Select Keyword</label>
@@ -166,7 +166,8 @@
                                         <th>S.No.</th>
                                         <th>Banner Title</th>
                                         <th>Position</th>
-                                        <th>KeyWord</th>
+                                        @*<th>KeyWord</th>*@
+                                        <th>Model Popup</th>
                                         <th>Priority</th>
                                         <th>Image</th>
                                         <th>Active</th>
@@ -180,7 +181,9 @@
                                         <td>{{$index+1}}</td>
                                         <td>{{m.MTitle}}</td>
                                         <td>{{m.Position}}</td>
-                                        <td style="white-space: normal"><span ng-repeat="n in m.Submenu">{{n.SubmenuTitle}},</span></td>
+                                        @*<td style="white-space: normal"><span ng-repeat="n in m.Submenu">{{n.SubmenuTitle}},</span></td>*@
+                                        <td> <span class="badge {{m.ModelQuery1==1? 'bg-success' : 'bg-danger'}}">{{m.ModelQuery1==1?'Active':'Deactive'}}</span> </td>
+
                                         <td>{{m.Priority}}</td>
                                         <td><img src="~/images/BannerPTImage/{{m.MImage}}"></td>
                                         <td><a ng-click="BannerProdcutTActiveDeActive(m.MainCateId)"> <span class="badge {{m.Active==1? 'bg-success' : 'bg-danger'}}">{{m.Active==1?'Active':'Deactive'}}</span></a> </td>

@@ -12,11 +12,16 @@ namespace GiftChoice.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class BPSizeTbl
+    public partial class QueryTbl
     {
-        public int BPSizeId { get; set; }
-        public Nullable<int> SizeId { get; set; }
-        public Nullable<long> ProductId { get; set; }
+        public int QId { get; set; }
+        public Nullable<int> MainCateId { get; set; }
+        public string AskQues1 { get; set; }
+        public string Answer { get; set; }
+        public Nullable<bool> Priority { get; set; }
         public Nullable<bool> Active { get; set; }
+        public Nullable<bool> ModelQuery2 { get; set; }
+        public Nullable<System.DateTime> Create_at { get; set; }
+        public Nullable<System.DateTime> Update_at { get; set; }
     }
 }

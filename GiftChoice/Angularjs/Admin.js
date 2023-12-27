@@ -1357,14 +1357,14 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
         $('#edbtn').css('display', 'inline');
         debugger
 
-        for (var s = 0; s < $scope.KeywordList.length; s++) {
-            var vallc1s = $scope.KeywordList[s].KeywordId;
-            $('#Keyword_' + vallc1s).prop('checked', false);
-            //$('#Menu_' + vallc1s).removeAttr('checked', false).trigger("click");
-            //$('#MenuFilter_' + vallc1s).removeAttr('checked', false).trigger("click");
-            //$('#Fliter_' + vallc1s).removeAttr('checked', false).trigger("click");
+        //for (var s = 0; s < $scope.KeywordList.length; s++) {
+        //    var vallc1s = $scope.KeywordList[s].KeywordId;
+        //    $('#Keyword_' + vallc1s).prop('checked', false);
+        //    //$('#Menu_' + vallc1s).removeAttr('checked', false).trigger("click");
+        //    //$('#MenuFilter_' + vallc1s).removeAttr('checked', false).trigger("click");
+        //    //$('#Fliter_' + vallc1s).removeAttr('checked', false).trigger("click");
 
-        }
+        //}
 
 
         $scope.BannerProdcutT = $scope.GetBannerProdcutTData[index];
@@ -1376,12 +1376,12 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
         $('#previewImage').css('display', 'block');
         previewImage.setAttribute("src", "/images/BannerPTImage/" + $scope.BannerProdcutT.MImage);
         debugger
-        for (var i = 0; i < $scope.BannerProdcutT.Submenu.length; i++) {
-            var vallc = $scope.BannerProdcutT.Submenu[i].KeywordId;
-            $('#Keyword_' + vallc).prop('checked', true);
+        //for (var i = 0; i < $scope.BannerProdcutT.Submenu.length; i++) {
+        //    var vallc = $scope.BannerProdcutT.Submenu[i].KeywordId;
+        //    $('#Keyword_' + vallc).prop('checked', true);
 
 
-        }
+        //}
 
 
         debugger
@@ -1411,13 +1411,13 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
         //$.each($(".checkbox-input:checked"), function () {
         //    Keywordarr.push({ 'KeywordId': $(this).val() });
         //});
-        for (var i = 0; i < $scope.KeywordList.length; i++) {
-            var vallc = $scope.KeywordList[i].KeywordId;
-            var isChecked = $('#Keyword_' + vallc).prop('checked');
-            if (isChecked) {
-                BPKeywordarr.push($scope.KeywordList[i]);
-            }
-        }
+        //for (var i = 0; i < $scope.KeywordList.length; i++) {
+        //    var vallc = $scope.KeywordList[i].KeywordId;
+        //    var isChecked = $('#Keyword_' + vallc).prop('checked');
+        //    if (isChecked) {
+        //        BPKeywordarr.push($scope.KeywordList[i]);
+        //    }
+        //}
         debugger
 
         upload({

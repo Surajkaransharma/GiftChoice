@@ -119,7 +119,7 @@ namespace GiftChoice.Controllers
             public Nullable<System.DateTime> Update_at { get; set; }
             public string MImage { get; set; }
             public HttpPostedFileBase Image { get; set; }
-
+            public Nullable<bool> ModelQuery1 { get; set; }
             public Nullable<long> UserId { get; set; }
             public List<KeywordTbl> keywordTbls { get; set; }
         }
@@ -1797,6 +1797,7 @@ namespace GiftChoice.Controllers
                 }
                 mainCateTbl.Create_at = DateTime.Now;
                 mainCateTbl.Position = model.Position;
+                mainCateTbl.ModelQuery1 = model.ModelQuery1;
                 mainCateTbl.Update_at = DateTime.Now;
                 mainCateTbl.Active = true;
                 mainCateTbl.Priority = model.Priority;
@@ -1875,7 +1876,7 @@ namespace GiftChoice.Controllers
                     }
                     result.MTitle = model.MTitle;
                     result.Position = model.Position;
-
+                    result.ModelQuery1 = model.ModelQuery1;
                     result.MUrl = result.MTitle.Replace(" ", "-");
                     result.Priority = model.Priority;
                     result.Update_at = DateTime.Now;
@@ -1979,6 +1980,7 @@ namespace GiftChoice.Controllers
                    m.Active,
                    m.MImage,
                    m.Position,
+                   m.ModelQuery1,
                    m.Priority,
                    Submenu = db.BPTKeywordTbls.Where(s => s.MainCateId == m.MainCateId && s.Active == true).Select(s => new
                    {

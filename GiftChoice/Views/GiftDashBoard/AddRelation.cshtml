@@ -1,5 +1,7 @@
 ﻿
 @{
+    /**/
+
     ViewBag.Title = "AddRelation";
     Layout = "~/Views/Shared/_Admin.cshtml";
 }
@@ -20,7 +22,7 @@
                         <li class="breadcrumb-item">
                             <a href="javascript:;"><i class="bx bx-home-alt"></i></a>
                         </li>
-                        <li class="breadcrumb-item active" aria-current="page">Add Relation Form</li>
+                        <li class="breadcrumb-item active" aria-current="page">Add Query Form</li>
                     </ol>
                 </nav>
             </div>
@@ -35,7 +37,7 @@
                         <form class="row g-3" enctype="multipart/form-data">
                             <div class="col-md-12">
                                 <label for="input1" class="form-label">Select Banner Position</label>
-                                <select id="MainCateSelect" class="form-select" onchange="angular.element(this).scope().GetBannerInProduct(this.value)" ng-model="BSubTitleTbl.Position">
+                                <select id="MainCateSelect" class="form-select" onchange="angular.element(this).scope().GetBannerInProduct(this.value)" ng-model="QueryTbl.Position">
                                     <option ng-selected="true" value="-1">Select Banner Position</option>
                                     <option value="Small Banner">Small Banner</option>
                                     <option value="Design Banner">Design Banner</option>
@@ -48,7 +50,7 @@
                             <div class="col-md-12" ng-init="GetBannerInProduct()">
                                 <label for="input1" class="form-label">Select Banner Title</label>
 
-                                <select id="MainCate" class="form-select" ng-model="BSubTitleTbl.MainCateId" onchange="angular.element(this).scope().GetBannerPInKeyword(this.value)">
+                                <select id="MainCate" class="form-select" ng-model="QueryTbl.MainCateId" onchange="angular.element(this).scope().GetBannerPInKeyword(this.value)">
                                     <option ng-selected="true" value="-1">Select Banner Title</option>
                                     <option ng-repeat="m in GetBannerInProductData" value="{{m.MainCateId}}">{{m.MTitle}}</option>
                                 </select>
@@ -57,38 +59,38 @@
                             </div>
                             <div class="col-md-12">
                                 <label for="input1" class="form-label">Ask Question ?</label>
-                                <input type="text" class="form-control" ng-model="BSubTitleTbl.RelationTitle" id="Relation" placeholder="Add Relation Title">
+                                <input type="text" class="form-control" ng-model="Querymodel.AskQues1" id="AskQues1" placeholder="Ask Question ?">
                             </div>
                             <div class="col-md-12">
                                 <label for="input1" class="form-label">Add Answer</label>
-                                <input type="text" class="form-control" ng-model="BSubTitleTbl.RelationTitle" id="Relation" placeholder="Add Relation Title">
+                                <input type="text" class="form-control" ng-model="QueryTbl.Answer" id="Answer" placeholder="Answer">
                             </div>
                             <div class="col-md-12">
                                 <label for="input1" class="form-label">Add Answer</label>
-                                <input type="text" class="form-control" ng-model="BSubTitleTbl.RelationTitle" id="Relation" placeholder="Add Relation Title">
+                                <input type="text" class="form-control" ng-model="QueryTbl.Answer" id="Relation" placeholder="Answer">
                             </div>
                             <div class="col-md-12">
                                 <button type="button" id="btn" class="btn btn-primary px-4">Add More Answer</button>
                             </div>
                             <div class="col-md-12">
                                 <label for="input1" class="form-label">Want To Add 2ND Query Popup ?</label>
-                                <input type="checkbox"  ng-model="BSubTitleTbl.Priority" id="Priority" placeholder="Priority">
+                                <input type="checkbox" ng-model="QueryTbl.ModelQuery2" id="ModelQuery2" placeholder="ModelQuery2">
                             </div>
 
                             @*<div class="col-md-12" ng-init="GetKeywordData()">
-            <label for="input1" class="form-label">Select Keyword</label>
+                                    <label for="input1" class="form-label">Select Keyword</label>
 
-            <div class="" id="check_box">
-                <label class="checkbox-wrapper" ng-repeat="k in KeywordList">
-                    <input type="checkbox" id="Keyword_{{k.KeywordId}}" class="checkbox-input" value="{{k.KeywordId}}" ng-model="k.Selected" ng-checked="" />
-                    <span class="checkbox-tile">
-                        <span class="checkbox-label">{{k.Keyword}}</span>
-                    </span>
-                </label>
+                                    <div class="" id="check_box">
+                                        <label class="checkbox-wrapper" ng-repeat="k in KeywordList">
+                                            <input type="checkbox" id="Keyword_{{k.KeywordId}}" class="checkbox-input" value="{{k.KeywordId}}" ng-model="k.Selected" ng-checked="" />
+                                            <span class="checkbox-tile">
+                                                <span class="checkbox-label">{{k.Keyword}}</span>
+                                            </span>
+                                        </label>
 
 
-            </div>
-        </div>*@
+                                    </div>
+                                </div>*@
 
 
                             <div class="col-md-12">
@@ -124,10 +126,12 @@
                                     <tr>
                                         <th>S.No.</th>
                                         <th>Banner Title</th>
-                                        <th>Sub Title</th>
+                                        <th>Ask Question ?</th>
+                                        <th>Answer</th>
 
                                         @*<th>Position</th>*@
                                         @*<th>KeyWord</th>*@
+                                        <th>2nd Model</th>
                                         <th>Priority</th>
                                         @*<th>Image</th>*@
                                         <th>Active</th>
@@ -141,7 +145,10 @@
                                         <td>{{$index+1}}</td>
                                         <td>{{m.bMainTitle.MTitle}}</td>
 
-                                        <td>{{m.SubTitle}}</td>
+                                        <td>Ask Question ?</td>
+                                        <td>Answer</td>
+                                        <td> <span class="badge {{m.ModelQuery2==1? 'bg-success' : 'bg-danger'}}">{{m.ModelQuery2==1?'Active':'Deactive'}}</span> </td>
+
                                         @*<td>{{m.Position}}</td>*@
                                         @*<td style="white-space: normal"><span ng-repeat="n in m.Submenu">{{n.SubmenuTitle}},</span></td>*@
                                         <td>{{m.Priority}}</td>

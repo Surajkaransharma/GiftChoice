@@ -26,6 +26,7 @@
     <EntitySet Name="SliderTbls" EntityType="GiftChoiceModel.SliderTbl" />
     <EntitySet Name="UserRegisters" EntityType="GiftChoiceModel.UserRegister" />
     <EntitySet Name="BannerPTTbls" EntityType="GiftChoiceModel.BannerPTTbl" />
+    <EntitySet Name="QueryTbls" EntityType="GiftChoiceModel.QueryTbl" />
     <EntitySet Name="VProducts" EntityType="GiftChoiceModel.VProduct" />
     <EntitySet Name="AutocompleteSuggestions" EntityType="GiftChoiceModel.AutocompleteSuggestion" />
     <AssociationSet Name="FK__MCKeyword__Keywo__52593CB8" Association="GiftChoiceModel.FK__MCKeyword__Keywo__52593CB8">
@@ -172,6 +173,9 @@
     <Property Name="Active" Type="Boolean" />
     <Property Name="Create_at" Type="DateTime" Precision="3" />
     <Property Name="Update_at" Type="DateTime" Precision="3" />
+    <Property Name="QueryId" Type="Int32" />
+    <Property Name="KeywordTitle" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="AskQues2" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
   </EntityType>
   <EntityType Name="KeywordTbl">
     <Key>
@@ -342,6 +346,21 @@
     <Property Name="Create_at" Type="DateTime" Precision="3" />
     <Property Name="Update_at" Type="DateTime" Precision="3" />
     <Property Name="UserId" Type="Int64" />
+    <Property Name="ModelQuery1" Type="Boolean" />
+  </EntityType>
+  <EntityType Name="QueryTbl">
+    <Key>
+      <PropertyRef Name="QId" />
+    </Key>
+    <Property Name="QId" Type="Int32" Nullable="false" />
+    <Property Name="MainCateId" Type="Int32" />
+    <Property Name="AskQues1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Answer" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Priority" Type="Boolean" />
+    <Property Name="Active" Type="Boolean" />
+    <Property Name="ModelQuery2" Type="Boolean" />
+    <Property Name="Create_at" Type="DateTime" Precision="3" />
+    <Property Name="Update_at" Type="DateTime" Precision="3" />
   </EntityType>
   <EntityType Name="VProduct">
     <Key>

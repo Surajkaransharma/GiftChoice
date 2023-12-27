@@ -135,6 +135,9 @@
     <Property Name="Active" Type="bit" />
     <Property Name="Create_at" Type="datetime" />
     <Property Name="Update_at" Type="datetime" />
+    <Property Name="QueryId" Type="int" />
+    <Property Name="KeywordTitle" Type="nvarchar(max)" />
+    <Property Name="AskQues2" Type="nvarchar(max)" />
   </EntityType>
   <EntityType Name="KeywordTbl">
     <Key>
@@ -301,6 +304,21 @@
     <Property Name="Create_at" Type="datetime" />
     <Property Name="Update_at" Type="datetime" />
     <Property Name="UserId" Type="bigint" />
+    <Property Name="ModelQuery1" Type="bit" />
+  </EntityType>
+  <EntityType Name="QueryTbl">
+    <Key>
+      <PropertyRef Name="QId" />
+    </Key>
+    <Property Name="QId" Type="int" Nullable="false" />
+    <Property Name="MainCateId" Type="int" />
+    <Property Name="AskQues1" Type="nvarchar(max)" />
+    <Property Name="Answer" Type="nvarchar(max)" />
+    <Property Name="Priority" Type="bit" />
+    <Property Name="Active" Type="bit" />
+    <Property Name="ModelQuery2" Type="bit" />
+    <Property Name="Create_at" Type="datetime" />
+    <Property Name="Update_at" Type="datetime" />
   </EntityType>
   <!--Errors Found During Generation:
 warning 6002: The table/view 'giftchoice.dbo.VProduct' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -403,6 +421,7 @@ warning 6002: The table/view 'giftchoice.giftchoice.AutocompleteSuggestions' doe
     <EntitySet Name="SliderTbl" EntityType="Self.SliderTbl" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="UserRegister" EntityType="Self.UserRegister" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="BannerPTTbl" EntityType="Self.BannerPTTbl" Schema="giftchoice" store:Type="Tables" />
+    <EntitySet Name="QueryTbl" EntityType="Self.QueryTbl" Schema="giftchoice" store:Type="Tables" />
     <EntitySet Name="VProduct" EntityType="Self.VProduct" store:Type="Views" store:Schema="dbo">
       <DefiningQuery>SELECT 
     [VProduct].[ProductId] AS [ProductId], 

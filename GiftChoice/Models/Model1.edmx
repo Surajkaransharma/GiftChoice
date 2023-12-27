@@ -140,6 +140,9 @@
           <Property Name="Active" Type="bit" />
           <Property Name="Create_at" Type="datetime" />
           <Property Name="Update_at" Type="datetime" />
+          <Property Name="QueryId" Type="int" />
+          <Property Name="KeywordTitle" Type="nvarchar(max)" />
+          <Property Name="AskQues2" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="KeywordTbl">
           <Key>
@@ -306,6 +309,21 @@
           <Property Name="Create_at" Type="datetime" />
           <Property Name="Update_at" Type="datetime" />
           <Property Name="UserId" Type="bigint" />
+          <Property Name="ModelQuery1" Type="bit" />
+        </EntityType>
+        <EntityType Name="QueryTbl">
+          <Key>
+            <PropertyRef Name="QId" />
+          </Key>
+          <Property Name="QId" Type="int" Nullable="false" />
+          <Property Name="MainCateId" Type="int" />
+          <Property Name="AskQues1" Type="nvarchar(max)" />
+          <Property Name="Answer" Type="nvarchar(max)" />
+          <Property Name="Priority" Type="bit" />
+          <Property Name="Active" Type="bit" />
+          <Property Name="ModelQuery2" Type="bit" />
+          <Property Name="Create_at" Type="datetime" />
+          <Property Name="Update_at" Type="datetime" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'giftchoice.dbo.VProduct' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -408,6 +426,7 @@ warning 6002: The table/view 'giftchoice.giftchoice.AutocompleteSuggestions' doe
           <EntitySet Name="SliderTbl" EntityType="Self.SliderTbl" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserRegister" EntityType="Self.UserRegister" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="BannerPTTbl" EntityType="Self.BannerPTTbl" Schema="giftchoice" store:Type="Tables" />
+          <EntitySet Name="QueryTbl" EntityType="Self.QueryTbl" Schema="giftchoice" store:Type="Tables" />
           <EntitySet Name="VProduct" EntityType="Self.VProduct" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [VProduct].[ProductId] AS [ProductId], 
@@ -491,6 +510,7 @@ warning 6002: The table/view 'giftchoice.giftchoice.AutocompleteSuggestions' doe
           <EntitySet Name="SliderTbls" EntityType="GiftChoiceModel.SliderTbl" />
           <EntitySet Name="UserRegisters" EntityType="GiftChoiceModel.UserRegister" />
           <EntitySet Name="BannerPTTbls" EntityType="GiftChoiceModel.BannerPTTbl" />
+          <EntitySet Name="QueryTbls" EntityType="GiftChoiceModel.QueryTbl" />
           <EntitySet Name="VProducts" EntityType="GiftChoiceModel.VProduct" />
           <EntitySet Name="AutocompleteSuggestions" EntityType="GiftChoiceModel.AutocompleteSuggestion" />
           <AssociationSet Name="FK__MCKeyword__Keywo__52593CB8" Association="GiftChoiceModel.FK__MCKeyword__Keywo__52593CB8">
@@ -637,6 +657,9 @@ warning 6002: The table/view 'giftchoice.giftchoice.AutocompleteSuggestions' doe
           <Property Name="Active" Type="Boolean" />
           <Property Name="Create_at" Type="DateTime" Precision="3" />
           <Property Name="Update_at" Type="DateTime" Precision="3" />
+          <Property Name="QueryId" Type="Int32" />
+          <Property Name="KeywordTitle" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="AskQues2" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="KeywordTbl">
           <Key>
@@ -807,6 +830,21 @@ warning 6002: The table/view 'giftchoice.giftchoice.AutocompleteSuggestions' doe
           <Property Name="Create_at" Type="DateTime" Precision="3" />
           <Property Name="Update_at" Type="DateTime" Precision="3" />
           <Property Name="UserId" Type="Int64" />
+          <Property Name="ModelQuery1" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="QueryTbl">
+          <Key>
+            <PropertyRef Name="QId" />
+          </Key>
+          <Property Name="QId" Type="Int32" Nullable="false" />
+          <Property Name="MainCateId" Type="Int32" />
+          <Property Name="AskQues1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Answer" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Priority" Type="Boolean" />
+          <Property Name="Active" Type="Boolean" />
+          <Property Name="ModelQuery2" Type="Boolean" />
+          <Property Name="Create_at" Type="DateTime" Precision="3" />
+          <Property Name="Update_at" Type="DateTime" Precision="3" />
         </EntityType>
         <EntityType Name="VProduct">
           <Key>
@@ -1023,6 +1061,9 @@ warning 6002: The table/view 'giftchoice.giftchoice.AutocompleteSuggestions' doe
           <EntitySetMapping Name="BSubTitleTbls">
             <EntityTypeMapping TypeName="GiftChoiceModel.BSubTitleTbl">
               <MappingFragment StoreEntitySet="BSubTitleTbl">
+                <ScalarProperty Name="AskQues2" ColumnName="AskQues2" />
+                <ScalarProperty Name="KeywordTitle" ColumnName="KeywordTitle" />
+                <ScalarProperty Name="QueryId" ColumnName="QueryId" />
                 <ScalarProperty Name="Update_at" ColumnName="Update_at" />
                 <ScalarProperty Name="Create_at" ColumnName="Create_at" />
                 <ScalarProperty Name="Active" ColumnName="Active" />
@@ -1199,6 +1240,7 @@ warning 6002: The table/view 'giftchoice.giftchoice.AutocompleteSuggestions' doe
           <EntitySetMapping Name="BannerPTTbls">
             <EntityTypeMapping TypeName="GiftChoiceModel.BannerPTTbl">
               <MappingFragment StoreEntitySet="BannerPTTbl">
+                <ScalarProperty Name="ModelQuery1" ColumnName="ModelQuery1" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
                 <ScalarProperty Name="Update_at" ColumnName="Update_at" />
                 <ScalarProperty Name="Create_at" ColumnName="Create_at" />
@@ -1209,6 +1251,21 @@ warning 6002: The table/view 'giftchoice.giftchoice.AutocompleteSuggestions' doe
                 <ScalarProperty Name="Position" ColumnName="Position" />
                 <ScalarProperty Name="MTitle" ColumnName="MTitle" />
                 <ScalarProperty Name="MainCateId" ColumnName="MainCateId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="QueryTbls">
+            <EntityTypeMapping TypeName="GiftChoiceModel.QueryTbl">
+              <MappingFragment StoreEntitySet="QueryTbl">
+                <ScalarProperty Name="Update_at" ColumnName="Update_at" />
+                <ScalarProperty Name="Create_at" ColumnName="Create_at" />
+                <ScalarProperty Name="ModelQuery2" ColumnName="ModelQuery2" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="Priority" ColumnName="Priority" />
+                <ScalarProperty Name="Answer" ColumnName="Answer" />
+                <ScalarProperty Name="AskQues1" ColumnName="AskQues1" />
+                <ScalarProperty Name="MainCateId" ColumnName="MainCateId" />
+                <ScalarProperty Name="QId" ColumnName="QId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
