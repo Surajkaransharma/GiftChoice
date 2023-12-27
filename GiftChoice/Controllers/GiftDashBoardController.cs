@@ -2563,7 +2563,7 @@ namespace GiftChoice.Controllers
 
             public Nullable<System.DateTime> Update_at { get; set; }
 
-            
+
 
         }
         public JsonResult SubmitBannerSubCateTitle(BSubTitleTblmodel model)
@@ -2583,7 +2583,7 @@ namespace GiftChoice.Controllers
                 BSubTitleTbl mainCateTbl = new BSubTitleTbl();
                 mainCateTbl.BSubId = db.BSubTitleTbls.DefaultIfEmpty().Max(r => r == null ? 0 : r.BSubId) + 1;
                 mainCateTbl.MainCateId = model.MainCateId;
-                mainCateTbl.SubTitle = model.SubTitle;               
+                mainCateTbl.SubTitle = model.SubTitle;
                 mainCateTbl.Create_at = DateTime.Now;
                 mainCateTbl.Update_at = DateTime.Now;
                 mainCateTbl.Active = true;
@@ -2614,8 +2614,14 @@ namespace GiftChoice.Controllers
                    bMainTitle = db.BannerPTTbls.Where(b => b.MainCateId == m.MainCateId).FirstOrDefault(),
                    m.Active,
                    m.Priority,
-                  
+
                });
+            return Json(res, JsonRequestBehavior.AllowGet);
+
+        }
+        public JsonResult GetBannerToQuery(int id)
+        {
+            var res = db.QueryTbls.Where(m => m.MainCateId == id && m.Active == true).ToList();
             return Json(res, JsonRequestBehavior.AllowGet);
 
         }
@@ -2627,7 +2633,7 @@ namespace GiftChoice.Controllers
                 var result = db.BSubTitleTbls.FirstOrDefault(p => p.BSubId == model.BSubId);
                 if (result != null)
                 {
-                  
+
                     result.SubTitle = model.SubTitle;
                     result.MainCateId = model.MainCateId;
                     result.Priority = model.Priority;
@@ -2635,7 +2641,7 @@ namespace GiftChoice.Controllers
                     db.SaveChanges();
 
                 }
-                var res = new { res = "1"};
+                var res = new { res = "1" };
                 return Json(res, JsonRequestBehavior.AllowGet);
             }
             catch (Exception ex)
@@ -2677,6 +2683,139 @@ namespace GiftChoice.Controllers
         //-------------- Submit Banner Sub Cate Title End ->------------->---------------------->---------------------------->------->------------>---------->---
 
 
+        //-------------- Submit Query model Start ->------------->---------------------->---------------------------->------->------------>---------->---
+
+
+        public class QueryTblmodel
+        {
+            public int QId { get; set; }
+            public Nullable<int> MainCateId { get; set; }
+            public string AskQues1 { get; set; }
+            public string Answer { get; set; }
+            public Nullable<bool> Priority { get; set; }
+            public Nullable<bool> Active { get; set; }
+            public Nullable<bool> ModelQuery2 { get; set; }
+            public Nullable<System.DateTime> Create_at { get; set; }
+            public Nullable<System.DateTime> Update_at { get; set; }
+
+            public List<AnswerArr> AnswerArrs { get; set; }
+        }
+
+        public class AnswerArr
+        {
+            public string Answer { get; set; }
+
+        }
+
+        public JsonResult SubmitQuerymodel(QueryTblmodel query, List<AnswerArr> answerArrs)
+        {
+            try
+            {
+                var result = db.QueryTbls.Where(p => p.AskQues1 == query.AskQues1).FirstOrDefault();
+
+                if (result != null)
+                {
+
+                    var res1 = new { res = "2" };
+                    return Json(res1, JsonRequestBehavior.AllowGet);
+
+                }
+
+                for (int i = 0; i < answerArrs.Count; i++)
+                {
+
+                    QueryTbl queryTbl = new QueryTbl();
+                    queryTbl.QId = db.QueryTbls.DefaultIfEmpty().Max(r => r == null ? 0 : r.QId) + 1;
+                    queryTbl.MainCateId = query.MainCateId;
+                    queryTbl.AskQues1 = query.AskQues1;
+                    queryTbl.Answer = answerArrs[i].Answer;
+                    queryTbl.ModelQuery2 = query.ModelQuery2;
+                    queryTbl.Create_at = DateTime.Now;
+                    queryTbl.Update_at = DateTime.Now;
+                    queryTbl.Active = true;
+                    queryTbl.Priority = query.Priority;
+                    db.QueryTbls.Add(queryTbl);
+                    db.SaveChanges();
+                }
+
+                var res = new { res = "1" };
+                return Json(res, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+
+                var res = new { res = "0" };
+                return Json(res, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        public JsonResult GetQuerymodel()
+        {
+            var res =
+
+               db.QueryTbls.Select(m => new
+               {
+                   m.MainCateId,
+                   m.AskQues1,
+                   m.QId,
+                   m.ModelQuery2,
+                   m.Answer,
+                   bMainTitle = db.BannerPTTbls.Where(b => b.MainCateId == m.MainCateId).FirstOrDefault(),
+                   m.Active,
+                   m.Priority,
+
+               });
+            return Json(res, JsonRequestBehavior.AllowGet);
+
+        }
+
+
+        public JsonResult UpdateQuerymodel(QueryTblmodel query, List<AnswerArr> answerArrs)
+        {
+
+            try
+            {
+
+
+                List<QueryTbl> result = db.QueryTbls.Where(c => c.MainCateId == query.MainCateId).ToList();
+                if (result == null)
+                {
+                    var res = new { res = "-1" };
+                    return Json(res, JsonRequestBehavior.AllowGet);
+                }
+                else
+                {
+
+                    var totoid = db.QueryTbls.Where(p => p.MainCateId == query.MainCateId);
+                    db.QueryTbls.RemoveRange(totoid);
+                    db.SaveChanges();
+                    for (int i = 0; i < answerArrs.Count; i++)
+                    {
+
+                        QueryTbl queryTbl = new QueryTbl();
+                        queryTbl.QId = db.QueryTbls.DefaultIfEmpty().Max(r => r == null ? 0 : r.QId) + 1;
+                        queryTbl.MainCateId = query.MainCateId;
+                        queryTbl.AskQues1 = query.AskQues1;
+                        queryTbl.Answer = answerArrs[i].Answer;
+                        queryTbl.ModelQuery2 = query.ModelQuery2;
+                        queryTbl.Create_at = DateTime.Now;
+                        queryTbl.Update_at = DateTime.Now;
+                        queryTbl.Active = true;
+                        queryTbl.Priority = query.Priority;
+                        db.QueryTbls.Add(queryTbl);
+                        db.SaveChanges();
+                    }
+                    var res = new { res = "1" };
+                    return Json(res, JsonRequestBehavior.AllowGet);
+                }
+            }
+            catch (Exception ex)
+            {
+                var md = ex.Message;
+                var res = new { res = "0" };
+                return Json(res, JsonRequestBehavior.AllowGet);
+            }
+        }
 
     }
 }

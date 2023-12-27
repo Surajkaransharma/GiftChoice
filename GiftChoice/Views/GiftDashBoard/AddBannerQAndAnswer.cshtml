@@ -47,10 +47,10 @@
 
 
                             </div>
-                            <div class="col-md-12" ng-init="GetBannerInProduct()">
+                            <div class="col-md-12">
                                 <label for="input1" class="form-label">Select Banner Title</label>
 
-                                <select id="MainCate" class="form-select" ng-model="BSubTitleTbl.MainCateId" onchange="angular.element(this).scope().GetBannerPInKeyword(this.value)">
+                                <select id="MainCate" class="form-select" ng-model="BSubTitleTbl.MainCateId" onchange="angular.element(this).scope().GetBannerToQuery(this.value)">
                                     <option ng-selected="true" value="-1">Select Banner Title</option>
                                     <option ng-repeat="m in GetBannerInProductData" value="{{m.MainCateId}}">{{m.MTitle}}</option>
                                 </select>
@@ -58,21 +58,11 @@
 
                             </div>
                             <div class="col-md-12">
-                                <label for="input1" class="form-label">Select Relation</label>
+                                <label for="input1" class="form-label">Select Answer</label>
 
-                                <select id="MainCate" class="form-select" ng-model="BSubTitleTbl.MainCateId" onchange="angular.element(this).scope().GetBannerPInKeyword(this.value)">
-                                    <option ng-selected="true" value="-1">Select Relation Title</option>
-                                    <option ng-repeat="m in GetBannerInProductData" value="{{m.MainCateId}}">{{m.MTitle}}</option>
-                                </select>
-
-
-                            </div>
-                            <div class="col-md-12">
-                                <label for="input1" class="form-label">Select Ask Question ?</label>
-
-                                <select id="MainCate" class="form-select" ng-model="BSubTitleTbl.MainCateId" onchange="angular.element(this).scope().GetBannerPInKeyword(this.value)">
-                                    <option ng-selected="true" value="-1">Select Relation Title</option>
-                                    <option ng-repeat="m in GetBannerInProductData" value="{{m.MainCateId}}">{{m.MTitle}}</option>
+                                <select id="MainCate" class="form-select" ng-model="BSubTitleTbl.QId">
+                                    <option ng-selected="true" value="-1">Select Ask Question</option>
+                                    <option ng-repeat="m in GetBannerToQueryData" value="{{m.QId}}">{{m.Answer}}</option>
                                 </select>
 
 
@@ -85,22 +75,27 @@
                                 <label for="input1" class="form-label">Ask Question ?</label>
                                 <input type="text" class="form-control" ng-model="BSubTitleTbl.AskQues2" id="AskQues2" placeholder="Enter Ask Question ?">
                             </div>
-                            <div class="col-md-12">
-                                <label for="input1" class="form-label">Sub Title</label>
-                                <input type="text" class="form-control" ng-model="BSubTitleTbl.SubTitle" id="SubTitle" placeholder="Sub Title">
+                            <div class="col-md-12" ng-repeat="m in SubTitleArr">
+                                <div class="row">
+                                    <div class="col-md-10">
+
+                                        <label for="input1" class="form-label">Add Answer</label>
+                                        <input type="text" class="form-control" ng-model="m.SubTitle" id="Answer" placeholder="Answer">
+                                    </div>
+                                    <div class="col-md-2">
+
+                                        <i class="bx bxs-trash" style="font-size: 20px; margin-top: 32px" ng-click="SubTitleRemove($index)"></i>
+                                    </div>
+                                </div>
                             </div>
                             <div class="col-md-12">
-                                <label for="input1" class="form-label">Sub Title</label>
-                                <input type="text" class="form-control" ng-model="BSubTitleTbl.SubTitle" id="SubTitle" placeholder="Sub Title">
-                            </div>
-                            <div class="col-md-12">
-                                <button type="button" id="btn" class="btn btn-primary px-4">Add Sub Title</button>
+                                <button type="button" id="btn" ng-click="AddMoreSubTitle()" class="btn btn-primary px-4">Add Sub Title</button>
 
                             </div>
                             @*<div class="col-md-12">
-                                    <label for="input1" class="form-label">Priority</label>
-                                    <input type="number" class="form-control" ng-model="BSubTitleTbl.Priority" id="Priority" placeholder="Priority">
-                                </div>*@
+            <label for="input1" class="form-label">Priority</label>
+            <input type="number" class="form-control" ng-model="BSubTitleTbl.Priority" id="Priority" placeholder="Priority">
+        </div>*@
 
                             <div class="col-md-12" ng-init="GetKeywordData()">
                                 <label for="input1" class="form-label">Select Keyword</label>

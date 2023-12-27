@@ -34,11 +34,11 @@
                 <div class="card">
                     <div class="card-body p-4">
 
-                        <form class="row g-3" enctype="multipart/form-data">
+                        <form class="row g-3">
                             <div class="col-md-12">
                                 <label for="input1" class="form-label">Select Banner Position</label>
-                                <select id="MainCateSelect" class="form-select" onchange="angular.element(this).scope().GetBannerInProduct(this.value)" ng-model="QueryTbl.Position">
-                                    <option ng-selected="true" value="-1">Select Banner Position</option>
+                                <select id="MainCateSelect" class="form-select" onchange="angular.element(this).scope().GetBannerInProduct(this.value)" ng-model="Querymodel.Position">
+                                    <option ng-selected="true" value="">Select Banner Position</option>
                                     <option value="Small Banner">Small Banner</option>
                                     <option value="Design Banner">Design Banner</option>
                                     <option value="Multiple Banner">Multiple Banner</option>
@@ -50,8 +50,8 @@
                             <div class="col-md-12" ng-init="GetBannerInProduct()">
                                 <label for="input1" class="form-label">Select Banner Title</label>
 
-                                <select id="MainCate" class="form-select" ng-model="QueryTbl.MainCateId" onchange="angular.element(this).scope().GetBannerPInKeyword(this.value)">
-                                    <option ng-selected="true" value="-1">Select Banner Title</option>
+                                <select id="MainCate" class="form-select" ng-model="Querymodel.MainCateId" onchange="angular.element(this).scope().GetBannerPInKeyword(this.value)">
+                                    <option ng-selected="true" value="">Select Banner Title</option>
                                     <option ng-repeat="m in GetBannerInProductData" value="{{m.MainCateId}}">{{m.MTitle}}</option>
                                 </select>
 
@@ -61,20 +61,26 @@
                                 <label for="input1" class="form-label">Ask Question ?</label>
                                 <input type="text" class="form-control" ng-model="Querymodel.AskQues1" id="AskQues1" placeholder="Ask Question ?">
                             </div>
-                            <div class="col-md-12">
-                                <label for="input1" class="form-label">Add Answer</label>
-                                <input type="text" class="form-control" ng-model="QueryTbl.Answer" id="Answer" placeholder="Answer">
+
+                            <div class="col-md-12" ng-repeat="m in AnswerArr">
+                                <div class="row">
+                                    <div class="col-md-10">
+
+                                        <label for="input1" class="form-label">Add Answer</label>
+                                        <input type="text" class="form-control" ng-model="m.Answer" id="Answer" placeholder="Answer">
+                                    </div>
+                                    <div class="col-md-2">
+
+                                        <i class="bx bxs-trash" style="font-size: 20px; margin-top: 32px" ng-click="AnswerRemove($index)"></i>
+                                    </div>
+                                </div>
                             </div>
                             <div class="col-md-12">
-                                <label for="input1" class="form-label">Add Answer</label>
-                                <input type="text" class="form-control" ng-model="QueryTbl.Answer" id="Relation" placeholder="Answer">
-                            </div>
-                            <div class="col-md-12">
-                                <button type="button" id="btn" class="btn btn-primary px-4">Add More Answer</button>
+                                <button type="button" id="AddMore" ng-click="AddMoreAnswer()" class="btn btn-primary px-4">Add More Answer</button>
                             </div>
                             <div class="col-md-12">
                                 <label for="input1" class="form-label">Want To Add 2ND Query Popup ?</label>
-                                <input type="checkbox" ng-model="QueryTbl.ModelQuery2" id="ModelQuery2" placeholder="ModelQuery2">
+                                <input type="checkbox" ng-model="Querymodel.ModelQuery2" id="ModelQuery2" placeholder="ModelQuery2">
                             </div>
 
                             @*<div class="col-md-12" ng-init="GetKeywordData()">
@@ -95,8 +101,8 @@
 
                             <div class="col-md-12">
                                 <div class="d-md-flex d-grid align-items-center gap-3">
-                                    <button type="button" id="btn" ng-click="SubmitBannerSubCateTitle()" class="btn btn-primary px-4">Submit</button>
-                                    <button type="button" id="edbtn" ng-click="UpdateBannerSubCateTitle()" style="display: none" class="btn btn-primary px-4">Update</button>
+                                    <button type="button" id="btn" ng-click="SubmitQuerymodel()" class="btn btn-primary px-4">Submit</button>
+                                    <button type="button" id="edbtn" ng-click="UpdateQuerymodel()" style="display: none" class="btn btn-primary px-4">Update</button>
                                     <button type="button" class="btn btn-light px-4" onClick="refreshPage()">Reset</button>
                                 </div>
                             </div>
@@ -121,7 +127,7 @@
 
                         </div>
                         <div class="table-responsive">
-                            <table class="table mb-0 table-bordered" ng-init="GetBannerSubCateTitle()">
+                            <table class="table mb-0 table-bordered" ng-init="GetQuerymodel()">
                                 <thead class="table-light">
                                     <tr>
                                         <th>S.No.</th>
@@ -132,7 +138,7 @@
                                         @*<th>Position</th>*@
                                         @*<th>KeyWord</th>*@
                                         <th>2nd Model</th>
-                                        <th>Priority</th>
+                                        <th>@*Priority*@</th>
                                         @*<th>Image</th>*@
                                         <th>Active</th>
 
@@ -141,20 +147,20 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr ng-repeat="m in GetBannerSubCateTitleData">
+                                    <tr ng-repeat="m in GetQuerymodelData">
                                         <td>{{$index+1}}</td>
                                         <td>{{m.bMainTitle.MTitle}}</td>
 
-                                        <td>Ask Question ?</td>
-                                        <td>Answer</td>
+                                        <td>{{m.AskQues1}}</td>
+                                        <td>{{m.Answer}}</td>
                                         <td> <span class="badge {{m.ModelQuery2==1? 'bg-success' : 'bg-danger'}}">{{m.ModelQuery2==1?'Active':'Deactive'}}</span> </td>
 
                                         @*<td>{{m.Position}}</td>*@
                                         @*<td style="white-space: normal"><span ng-repeat="n in m.Submenu">{{n.SubmenuTitle}},</span></td>*@
-                                        <td>{{m.Priority}}</td>
+                                        <td>@*{{m.Priority}}*@</td>
                                         @*<td><img src="~/images/BannerPTImage/{{m.MImage}}"></td>*@
-                                        <td><a ng-click="BannerSubTitleActiveDeActive(m.BSubId)"> <span class="badge {{m.Active==1? 'bg-success' : 'bg-danger'}}">{{m.Active==1?'Active':'Deactive'}}</span></a> </td>
-                                        <td><a><i class="bx bxs-pencil" ng-click="GetBannerSubCateTitleById($index)"></i></a></td>
+                                        <td><a ng-click="QuerymodelActiveDeActive(m.BSubId)"> <span class="badge {{m.Active==1? 'bg-success' : 'bg-danger'}}">{{m.Active==1?'Active':'Deactive'}}</span></a> </td>
+                                        <td><a><i class="bx bxs-pencil" ng-click="GetQuerymodelById(m.MainCateId)"></i></a></td>
                                     </tr>
 
 
