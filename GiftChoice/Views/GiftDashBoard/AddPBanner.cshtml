@@ -22,7 +22,7 @@
                         <li class="breadcrumb-item">
                             <a href="javascript:;"><i class="bx bx-home-alt"></i></a>
                         </li>
-                        <li class="breadcrumb-item active" aria-current="page">Form</li>
+                        <li class="breadcrumb-item active" aria-current="page">Banner Form</li>
                     </ol>
                 </nav>
             </div>
@@ -107,25 +107,29 @@
 
                             </div>
 
+
                             <div class="col-md-12">
                                 <label for="input1" class="form-label">Priority</label>
                                 <input type="number" class="form-control" ng-model="BannerProdcutT.Priority" id="Priority" placeholder="Priority">
                             </div>
-
-                            <div class="col-md-12" ng-init="GetKeywordData()">
-                                <label for="input1" class="form-label">Select Keyword</label>
-
-                                <div class="" id="check_box">
-                                    <label class="checkbox-wrapper" ng-repeat="k in KeywordList">
-                                        <input type="checkbox" id="Keyword_{{k.KeywordId}}" class="checkbox-input" value="{{k.KeywordId}}" ng-model="k.Selected" ng-checked="" />
-                                        <span class="checkbox-tile">
-                                            <span class="checkbox-label">{{k.Keyword}}</span>
-                                        </span>
-                                    </label>
-
-
-                                </div>
+                            <div class="col-md-12">
+                                <label for="input1" class="form-label">Do You Want any query on this banner ? </label>
+                                <input type="checkbox" ng-model="BannerProdcutT.ModelQuery" id="ModelQuery" >
                             </div>
+                            @*<div class="col-md-12" ng-init="GetKeywordData()">
+                                    <label for="input1" class="form-label">Select Keyword</label>
+
+                                    <div class="" id="check_box">
+                                        <label class="checkbox-wrapper" ng-repeat="k in KeywordList">
+                                            <input type="checkbox" id="Keyword_{{k.KeywordId}}" class="checkbox-input" value="{{k.KeywordId}}" ng-model="k.Selected" ng-checked="" />
+                                            <span class="checkbox-tile">
+                                                <span class="checkbox-label">{{k.Keyword}}</span>
+                                            </span>
+                                        </label>
+
+
+                                    </div>
+                                </div>*@
 
 
                             <div class="col-md-12">
@@ -144,10 +148,10 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="d-lg-flex align-items-center mb-4 gap-3">
-                            <div class="position-relative">
-                                <input type="text" class="form-control ps-5 radius-30" ng-model="search" placeholder="Search here...">
-                                <span class="position-absolute top-50 product-show translate-middle-y"><i class="bx bx-search"></i></span>
-                            </div>
+                            @*<div class="position-relative">
+                                    <input type="text" class="form-control ps-5 radius-30" ng-model="search" placeholder="Search here...">
+                                    <span class="position-absolute top-50 product-show translate-middle-y"><i class="bx bx-search"></i></span>
+                                </div>*@
                             @*  <div class="ms-auto"><a href="javascript:;" class="btn btn-primary radius-30 mt-2 mt-lg-0" data-bs-toggle="modal" data-bs-target="#createcompany"><i class="bx bxs-plus-square"></i>Add New Company</a></div>*@
 
 

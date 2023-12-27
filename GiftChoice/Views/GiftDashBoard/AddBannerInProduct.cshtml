@@ -53,11 +53,31 @@
 
 
                             </div>
-                            <div class="col-md-3" >
+                            <div class="col-md-3">
                                 <label for="input1" class="form-label">Select Banner Title</label>
 
-                                <select id="MainCate" class="form-select" ng-model="Product.MainCateId" onchange="angular.element(this).scope().GetBannerPInKeyword(this.value)">
+                                <select id="MainCate" class="form-select" ng-model="Product.MainCateId" @*onchange="angular.element(this).scope().GetBannerPInKeyword(this.value)"*@>
                                     <option ng-selected="true" value="-1">Select Banner Title</option>
+                                    <option ng-repeat="m in GetBannerInProductData" value="{{m.MainCateId}}">{{m.MTitle}}</option>
+                                </select>
+
+
+                            </div>
+                            <div class="col-md-3">
+                                <label for="input1" class="form-label">Select Relation</label>
+
+                                <select id="MainCate" class="form-select" ng-model="BSubTitleTbl.MainCateId" onchange="angular.element(this).scope().GetBannerPInKeyword(this.value)">
+                                    <option ng-selected="true" value="-1">Select Relation Title</option>
+                                    <option ng-repeat="m in GetBannerInProductData" value="{{m.MainCateId}}">{{m.MTitle}}</option>
+                                </select>
+
+
+                            </div>
+                            <div class="col-md-3">
+                                <label for="input1" class="form-label">Select KeyWord Title</label>
+
+                                <select id="MainCate" class="form-select" ng-model="BSubTitleTbl.MainCateId" onchange="angular.element(this).scope().GetBannerPInKeyword(this.value)">
+                                    <option ng-selected="true" value="-1">Select Sub Title</option>
                                     <option ng-repeat="m in GetBannerInProductData" value="{{m.MainCateId}}">{{m.MTitle}}</option>
                                 </select>
 
@@ -87,7 +107,7 @@
                             </div>
                             <div class="col-md-2">
                                 <label for="input1" class="form-label">Same Day Deliver</label>
-                                <input type="checkbox"  ng-model="Product.SameDay" id="" placeholder="">
+                                <input type="checkbox" ng-model="Product.SameDay" id="" placeholder="">
                             </div>
                             <div class="col-md-12" ng-init="GetKeywordData()">
                                 <label for="input1" class="form-label">Select Keyword</label>
@@ -171,7 +191,7 @@
                                 </div>*@
                             @*  <div class="ms-auto"><a href="javascript:;" class="btn btn-primary radius-30 mt-2 mt-lg-0" data-bs-toggle="modal" data-bs-target="#createcompany"><i class="bx bxs-plus-square"></i>Add New Company</a></div>*@
 
-                            <div class="col-md-3" >
+                            <div class="col-md-3">
                                 <label for="input1" class="form-label">Select Banner Title</label>
 
                                 <select id="MainCate" class="form-select" onchange="angular.element(this).scope().GetBannerProduct(this.value)">

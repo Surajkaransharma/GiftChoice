@@ -2538,6 +2538,7 @@
     <Content Include="Views\Home\TopProduct.cshtml" />
     <Content Include="Views\GiftDashBoard\AddBannerInProduct.cshtml" />
     <Content Include="Views\GiftDashBoard\AddBannerQAndAnswer.cshtml" />
+    <Content Include="Views\GiftDashBoard\AddRelation.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

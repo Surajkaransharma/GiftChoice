@@ -51,7 +51,10 @@ namespace GiftChoice.Controllers
             return View();
         }
 
-
+        public ActionResult AddRelation()
+        {
+            return View();
+        }
         public ActionResult AddKeyword()
         {
             return View();
