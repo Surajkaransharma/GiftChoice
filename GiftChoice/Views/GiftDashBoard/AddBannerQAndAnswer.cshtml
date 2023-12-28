@@ -60,7 +60,7 @@
                             <div class="col-md-12">
                                 <label for="input1" class="form-label">Select Answer</label>
 
-                                <select id="MainCate" class="form-select" ng-model="BSubTitleTbl.QId">
+                                <select id="MainCate" class="form-select" ng-model="BSubTitleTbl.QueryId">
                                     <option ng-selected="true" value="-1">Select Ask Question</option>
                                     <option ng-repeat="m in GetBannerToQueryData" value="{{m.QId}}">{{m.Answer}}</option>
                                 </select>
@@ -75,7 +75,7 @@
                                 <label for="input1" class="form-label">Ask Question ?</label>
                                 <input type="text" class="form-control" ng-model="BSubTitleTbl.AskQues2" id="AskQues2" placeholder="Enter Ask Question ?">
                             </div>
-                            <div class="col-md-12" ng-repeat="m in SubTitleArr">
+                            @*<div class="col-md-12" ng-repeat="m in SubTitleArr">
                                 <div class="row">
                                     <div class="col-md-10">
 
@@ -91,13 +91,13 @@
                             <div class="col-md-12">
                                 <button type="button" id="btn" ng-click="AddMoreSubTitle()" class="btn btn-primary px-4">Add Sub Title</button>
 
-                            </div>
+                            </div>*@
                             @*<div class="col-md-12">
-            <label for="input1" class="form-label">Priority</label>
-            <input type="number" class="form-control" ng-model="BSubTitleTbl.Priority" id="Priority" placeholder="Priority">
-        </div>*@
+                                    <label for="input1" class="form-label">Priority</label>
+                                    <input type="number" class="form-control" ng-model="BSubTitleTbl.Priority" id="Priority" placeholder="Priority">
+                                </div>*@
 
-                            <div class="col-md-12" ng-init="GetKeywordData()">
+                            @*<div class="col-md-12" ng-init="GetKeywordData()">
                                 <label for="input1" class="form-label">Select Keyword</label>
 
                                 <div class="" id="check_box">
@@ -110,7 +110,7 @@
 
 
                                 </div>
-                            </div>
+                            </div>*@
 
 
                             <div class="col-md-12">
@@ -149,11 +149,11 @@
                                         <th>1st Ask Question ?</th>
                                         <th>Keyword Title</th>
                                         <th>2nd Ask Question ?</th>
-                                        <th>Answer</th>
+                                        @*<th>Answer</th>*@
 
                                         @*<th>Position</th>*@
                                         @*<th>KeyWord</th>*@
-                                        <th>Priority</th>
+                                        @*<th>Priority</th>*@
                                         @*<th>Image</th>*@
                                         <th>Active</th>
 
@@ -165,14 +165,14 @@
                                     <tr ng-repeat="m in GetBannerSubCateTitleData">
                                         <td>{{$index+1}}</td>
                                         <td>{{m.bMainTitle.MTitle}}</td>
-                                        <td>1st Ask Question ?</td>
-                                        <td>Keyword Title</td>
-                                        <td>2nd Ask Question ?</td>
-                                        <td>Answer</td>
+                                        <td>{{m.QueryTitle.AskQues1}}</td>
+                                        <td>{{m.KeywordTitle}}</td>
+                                        <td>{{m.AskQues2}}</td>
+                                        @*<td>Answer</td>*@
                                         @*<td>{{m.SubTitle}}</td>*@
                                         @*<td>{{m.Position}}</td>*@
                                         @*<td style="white-space: normal"><span ng-repeat="n in m.Submenu">{{n.SubmenuTitle}},</span></td>*@
-                                        <td>{{m.Priority}}</td>
+                                        @*<td>{{m.Priority}}</td>*@
                                         @*<td><img src="~/images/BannerPTImage/{{m.MImage}}"></td>*@
                                         <td><a ng-click="BannerSubTitleActiveDeActive(m.BSubId)"> <span class="badge {{m.Active==1? 'bg-success' : 'bg-danger'}}">{{m.Active==1?'Active':'Deactive'}}</span></a> </td>
                                         <td><a><i class="bx bxs-pencil" ng-click="GetBannerSubCateTitleById($index)"></i></a></td>

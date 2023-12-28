@@ -1815,15 +1815,15 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
         //        BPKeywordarr.push($scope.KeywordList[i]);
         //    }
         //}
-        if ($("#SubTitle").val() == "") {
-            toastr["error"]("Enter Sub Title");
-            return;
-        }
+        //if ($("#SubTitle").val() == "") {
+        //    toastr["error"]("Enter Sub Title");
+        //    return;
+        //}
 
-        if ($("#Priority").val() == "") {
-            toastr["error"]("Enter Sub Priority");
-            return;
-        }
+        //if ($("#Priority").val() == "") {
+        //    toastr["error"]("Enter Sub Priority");
+        //    return;
+        //}
 
 
         $http({
@@ -2163,6 +2163,26 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
 
 
     //-------------- Submit Query model End ->------------->---------------------->---------------------------->------->------------>---------->---
+
+
+
+     //-------------- Submit Query model Start ->------------->---------------------->---------------------------->------->------------>---------->---
+
+    $scope.GetQueryToKeyword = function (id) {
+        debugger
+        if (id != "-1" && id != "") {
+
+            $http.get("/GiftDashBoard/GetQueryToKeyword?id=" + id).then(function (d) {
+                debugger
+                $scope.GetQueryToKeywordData = d.data;
+            }, function (error) {
+                alert(error.data);
+            });
+        }
+    };
+
+     //-------------- Submit Query model End ->------------->---------------------->---------------------------->------->------------>---------->---
+
 
 }]).directive('uploadFile', ['$parse', function ($parse) {
     return {

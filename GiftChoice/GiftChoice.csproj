@@ -2542,6 +2542,7 @@
     <Content Include="Views\GiftDashBoard\AddBannerInProduct.cshtml" />
     <Content Include="Views\GiftDashBoard\AddBannerQAndAnswer.cshtml" />
     <Content Include="Views\GiftDashBoard\AddRelation.cshtml" />
+    <Content Include="Views\GiftDashBoard\AddQueryKeyword.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

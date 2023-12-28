@@ -54,7 +54,14 @@ namespace GiftChoice.Controllers
         public ActionResult AddRelation()
         {
             return View();
+        
         }
+
+        public ActionResult AddQueryKeyword()
+        {
+            return View();
+        }
+
         public ActionResult AddKeyword()
         {
             return View();
@@ -2548,20 +2555,16 @@ namespace GiftChoice.Controllers
 
         public partial class BSubTitleTblmodel
         {
-
             public long BSubId { get; set; }
-
             public Nullable<long> MainCateId { get; set; }
-
             public string SubTitle { get; set; }
-
             public Nullable<long> Priority { get; set; }
-
             public Nullable<bool> Active { get; set; }
-
             public Nullable<System.DateTime> Create_at { get; set; }
-
             public Nullable<System.DateTime> Update_at { get; set; }
+            public Nullable<int> QueryId { get; set; }
+            public string KeywordTitle { get; set; }
+            public string AskQues2 { get; set; }
 
 
 
@@ -2570,7 +2573,7 @@ namespace GiftChoice.Controllers
         {
             try
             {
-                var result = db.BSubTitleTbls.Where(p => p.SubTitle == model.SubTitle).FirstOrDefault();
+                var result = db.BSubTitleTbls.Where(p => p.KeywordTitle == model.KeywordTitle).FirstOrDefault();
 
                 if (result != null)
                 {
@@ -2583,7 +2586,9 @@ namespace GiftChoice.Controllers
                 BSubTitleTbl mainCateTbl = new BSubTitleTbl();
                 mainCateTbl.BSubId = db.BSubTitleTbls.DefaultIfEmpty().Max(r => r == null ? 0 : r.BSubId) + 1;
                 mainCateTbl.MainCateId = model.MainCateId;
-                mainCateTbl.SubTitle = model.SubTitle;
+                mainCateTbl.QueryId = model.QueryId;
+                mainCateTbl.AskQues2 = model.AskQues2;
+                mainCateTbl.KeywordTitle = model.KeywordTitle;                
                 mainCateTbl.Create_at = DateTime.Now;
                 mainCateTbl.Update_at = DateTime.Now;
                 mainCateTbl.Active = true;
@@ -2611,11 +2616,15 @@ namespace GiftChoice.Controllers
                    m.MainCateId,
                    m.SubTitle,
                    m.BSubId,
+                   m.AskQues2,
+                   m.QueryId,
+                   m.KeywordTitle,
+                   QueryTitle = db.QueryTbls.Where(q => q.QId == m.QueryId).FirstOrDefault(),
                    bMainTitle = db.BannerPTTbls.Where(b => b.MainCateId == m.MainCateId).FirstOrDefault(),
                    m.Active,
                    m.Priority,
 
-               });
+               }); ; ;
             return Json(res, JsonRequestBehavior.AllowGet);
 
         }
@@ -2816,6 +2825,16 @@ namespace GiftChoice.Controllers
                 return Json(res, JsonRequestBehavior.AllowGet);
             }
         }
+        //-------------- Submit Query model Start ->------------->---------------------->---------------------------->------->------------>---------->---
+
+        public JsonResult GetQueryToKeyword(int id)
+        {
+            var res = db.BSubTitleTbls.Where(m => m.QueryId == id && m.Active == true).ToList();
+            return Json(res, JsonRequestBehavior.AllowGet);
+
+        }
+
+        //-------------- Submit Query model end ->------------->---------------------->---------------------------->------->------------>---------->---
 
     }
 }
