@@ -5,7 +5,7 @@
 }
 
 
-<main class="main">
+<main class="main" ng-init="OpenModelInBanner()">
 
     <!-- Page Breadcrumb Start -->
     <div class="page-header breadcrumb-wrap">
@@ -458,39 +458,38 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <div class="title">
-                        <h5>Welcome To Banner Category</h5>
+                        <h5>Welcome To Banner {{GetBannerAsk1Data[0].BannerTitle. MTitle}}</h5>
                     </div>
                 </div>
                 <div class="modal-body p-4">
                     <div class="content page-1">
-                        <h5>Select the Option Below Mention</h5>
+                        <h5>{{GetBannerAsk1Data[0].AskQues1}}</h5>
                         <div class="selection mt-3">
-                            <ul class="list-filter size-filter font-small text-capitalize">
-                                <li class="active">
-                                    <a href="#">Selection 1</a>
-                                </li>
-                                <li class="">
-                                    <a href="#">Selection 2</a>
-                                </li>
-                                <li class="">
-                                    <a href="#">Selection 3</a>
-                                </li>
-                                <li class="">
-                                    <a href="#">Selection 4</a>
-                                </li>
-                                <li class="">
-                                    <a href="#">Selection 5</a>
-                                </li>
-                                <li class="">
-                                    <a href="#">View all</a>
-                                </li>
-                            </ul>
+                            <div class="list-filter size-filter font-small text-capitalize" ng-show="GetBannerAsk2Data==null">
+                                <span ng-repeat="b in GetBannerAsk1Data">
+                                    <input type="radio" name="radio" id="AskQues1_{{b.QId}}" value="{{b.QId}}" /> {{b.Answer}}
+                                </span>
+                            </div>
+                            <div class="list-filter size-filter font-small text-capitalize">
+                                <span ng-repeat="b in GetBannerAsk2Data">
+                                    <span ng-repeat="k in b.AnswerList">
+
+                                    <input type="radio" name="radio" id="AskQues1_{{k.QId}}" value="{{k.BSubDId}}" /> {{k.kSubTitle}}
+                                    </span>
+                                </span>
+                            </div>
+                            @*<ul class="list-filter size-filter font-small text-capitalize">
+                                    <li   class="active">
+                                        <a href="#">{{b.Answer}}</a>
+                                    </li>
+
+                                </ul>*@
                         </div>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <a href="index.html" type="button" class="btn-danger btn-sm">Back To Home</a>
-                    <a href="#" type="button" class="btn btn-primary btn-sm">Continue</a>
+                    <a href="/Home/index" type="button" class="btn-danger btn-sm">Back To Home</a>
+                    <a href="#" type="button" class="btn btn-primary btn-sm" ng-click="ContinueAskQues1()">Continue</a>
                 </div>
             </div>
         </div>

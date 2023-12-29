@@ -1,7 +1,9 @@
 ﻿
 @{
-    ViewBag.Title = "AddBannerInProduct";
-    Layout = "~/Views/Shared/_Admin.cshtml";
+                /**/
+
+                ViewBag.Title = "AddBannerInProduct";
+                Layout = "~/Views/Shared/_Admin.cshtml";
 }
 
 <style>
@@ -56,7 +58,7 @@
                             <div class="col-md-3">
                                 <label for="input1" class="form-label">Select Banner Title</label>
 
-                                <select id="MainCate" class="form-select" ng-model="Product.MainCateId" @*onchange="angular.element(this).scope().GetBannerPInKeyword(this.value)"*@>
+                                <select id="MainCate" class="form-select" ng-model="Product.MainCateId" onchange="angular.element(this).scope().GetBannerToQuery(this.value)">
                                     <option ng-selected="true" value="-1">Select Banner Title</option>
                                     <option ng-repeat="m in GetBannerInProductData" value="{{m.MainCateId}}">{{m.MTitle}}</option>
                                 </select>
@@ -66,9 +68,9 @@
                             <div class="col-md-3">
                                 <label for="input1" class="form-label">Select Relation</label>
 
-                                <select id="MainCate" class="form-select" ng-model="BSubTitleTbl.MainCateId" onchange="angular.element(this).scope().GetBannerPInKeyword(this.value)">
+                                <select id="MainCate" class="form-select" ng-model="BSubTitleTbl.MainCateId"  onchange="angular.element(this).scope().GetSubTitleList(this.value)">
                                     <option ng-selected="true" value="-1">Select Relation Title</option>
-                                    <option ng-repeat="m in GetBannerInProductData" value="{{m.MainCateId}}">{{m.MTitle}}</option>
+                                    <option ng-repeat="m in GetBannerToQueryData" value="{{m.QId}}">{{m.Answer}}</option>
                                 </select>
 
 
@@ -76,9 +78,10 @@
                             <div class="col-md-3">
                                 <label for="input1" class="form-label">Select KeyWord Title</label>
 
-                                <select id="MainCate" class="form-select" ng-model="BSubTitleTbl.MainCateId" onchange="angular.element(this).scope().GetBannerPInKeyword(this.value)">
-                                    <option ng-selected="true" value="-1">Select Sub Title</option>
-                                    <option ng-repeat="m in GetBannerInProductData" value="{{m.MainCateId}}">{{m.MTitle}}</option>
+                                <select id="MainCate" class="form-select" ng-model="BSubTitleTbl.MainCateId" onchange="angular.element(this).scope().GetQueryKeywordlist(this.value)">
+                                    <option ng-selected="true" value="-1">Select KeyWord Title</option>
+                                    <option ng-repeat="m in GetSubTitleListData" value="{{m.BSubDId}}">{{m.kSubTitle}}</option>
+                                    @*<option ng-repeat="m in GetBannerInProductData" value="{{m.MainCateId}}">{{m.MTitle}}</option>*@
                                 </select>
 
 
@@ -93,9 +96,9 @@
                             </div>
 
                             @*<div class="col-md-2">
-            <label for="input1" class="form-label">Priority</label>
-            <input type="number" class="form-control" ng-model="Product.Priority" id="" placeholder="Priority">
-        </div>*@
+                                    <label for="input1" class="form-label">Priority</label>
+                                    <input type="number" class="form-control" ng-model="Product.Priority" id="" placeholder="Priority">
+                                </div>*@
 
                             <div class="col-md-2">
                                 <label for="input1" class="form-label">Price</label>
@@ -142,10 +145,10 @@
                                 <textarea class="ckeditor" id="ckeditor"></textarea>
                             </div>
                             @*<script>
-            $('.editor1').each(function () {
-                CKEDITOR.replace($(this).prop('id'));
-            });
-        </script>*@
+                                    $('.editor1').each(function () {
+                                        CKEDITOR.replace($(this).prop('id'));
+                                    });
+                                </script>*@
                             <div class="col-md-2">
                                 <label for="input1" class="form-label">Image 1</label>
 

@@ -50,6 +50,7 @@ namespace GiftChoice.Models
         public virtual DbSet<SliderTbl> SliderTbls { get; set; }
         public virtual DbSet<UserRegister> UserRegisters { get; set; }
         public virtual DbSet<BannerPTTbl> BannerPTTbls { get; set; }
+        public virtual DbSet<BSubTitleDetailTbl> BSubTitleDetailTbls { get; set; }
         public virtual DbSet<QueryTbl> QueryTbls { get; set; }
         public virtual DbSet<VProduct> VProducts { get; set; }
         public virtual DbSet<AutocompleteSuggestion> AutocompleteSuggestions { get; set; }

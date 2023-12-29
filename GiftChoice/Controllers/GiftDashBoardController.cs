@@ -2043,6 +2043,25 @@ namespace GiftChoice.Controllers
 
         }
 
+        public JsonResult GetSubTitleList(int id)
+        {
+            var res = db.BSubTitleDetailTbls.Where(k => k.QueryId == id).Select(k => new
+            {
+                k.MainCateId,
+                k.kSubTitle,
+                k.BSubDId,
+                Keywordlist =  db.BPTKeywordTbls.Where(s => s.BSubDId == k.BSubDId && s.Active == true).Select(s => new
+                {
+                    s.MainCateId,
+                    s.KeywordId,
+                    s.MCkeywordId,
+                    SubmenuTitle = db.KeywordTbls.Where(t => t.KeywordId == s.KeywordId && t.Active == true).Select(t => t.Keyword).FirstOrDefault()
+                }),
+            });
+            return Json(res, JsonRequestBehavior.AllowGet);
+
+        }
+
         private void BannerProductVaryQualityLevel(Stream stream, string fname)
         {
             //  size 
@@ -2830,6 +2849,79 @@ namespace GiftChoice.Controllers
         public JsonResult GetQueryToKeyword(int id)
         {
             var res = db.BSubTitleTbls.Where(m => m.QueryId == id && m.Active == true).ToList();
+            return Json(res, JsonRequestBehavior.AllowGet);
+
+        }
+
+        public JsonResult GetKeywordToAskQuestion(int id)
+        {
+            var res = db.BSubTitleTbls.Where(m => m.BSubId == id && m.Active == true).FirstOrDefault();
+            return Json(res, JsonRequestBehavior.AllowGet);
+
+        }
+
+        public JsonResult SubmitQueryAnswerKeyword(BSubTitleDetailTbl model, List<KeywordTbl> keywordsTbl)
+        {
+            try
+            {
+
+                model.BSubDId = db.BSubTitleDetailTbls.DefaultIfEmpty().Max(r => r == null ? 0 : r.BSubDId) + 1;
+                model.MainCateId = model.MainCateId;
+                model.kSubTitle = model.kSubTitle;      
+                db.BSubTitleDetailTbls.Add(model);
+                db.SaveChanges();
+
+                if (keywordsTbl != null)
+                {
+
+                    for (int i = 0; i < keywordsTbl.Count; i++)
+                    {
+                        BPTKeywordTbl BPTKeyword = new BPTKeywordTbl();
+                        BPTKeyword.MCkeywordId = db.BPTKeywordTbls.DefaultIfEmpty().Max(r => r == null ? 0 : r.MCkeywordId) + 1;
+                        BPTKeyword.BSubDId = model.BSubDId;
+                        BPTKeyword.BSubId = model.BSubId;
+                        BPTKeyword.QueryId = model.QueryId;
+                        BPTKeyword.KeywordId = keywordsTbl[i].KeywordId;
+                        BPTKeyword.MainCateId = model.MainCateId;
+                        BPTKeyword.Active = true;
+                        db.BPTKeywordTbls.Add(BPTKeyword);
+                        db.SaveChanges();
+
+                    }
+                }
+
+                var res = new { res = "1" };
+                return Json(res, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+
+                var res = new { res = "0" };
+                return Json(res, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        public JsonResult GetQueryAnswerKeyword()
+        {
+            var res = db.BSubTitleDetailTbls.Select(p => new
+            {
+                p.MainCateId,
+                p.QueryId,
+                p.BSubDId,
+                p.BSubId,
+                p.kSubTitle,
+                
+                bMainTitle = db.BannerPTTbls.Where(b => b.MainCateId == p.MainCateId).FirstOrDefault(),
+                QueryTitle1 = db.QueryTbls.Where(q => q.MainCateId == p.MainCateId).FirstOrDefault(),
+                QueryTitle = db.BSubTitleTbls.Where(q => q.BSubId == p.BSubId).FirstOrDefault(),
+                KeywordList = db.BPTKeywordTbls.Where(k => k.BSubId == p.BSubId).Select(s => new
+                {
+                    s.MCkeywordId,
+                    s.KeywordId,
+                    s.BSubDId,
+                    SubmenuTitle = db.KeywordTbls.Where(t => t.KeywordId == s.KeywordId && t.Active == true).Select(t => t.Keyword).FirstOrDefault()
+                }),
+            });
             return Json(res, JsonRequestBehavior.AllowGet);
 
         }

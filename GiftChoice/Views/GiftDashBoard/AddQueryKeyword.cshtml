@@ -68,7 +68,7 @@
                             </div>
                             <div class="col-md-12">
                                 <label for="input1" class="form-label">Add Keyword Title</label>
-                                <select id="MainCate" class="form-select" ng-model="BSubTitleTbl.QueryId">
+                                <select id="MainCate" class="form-select" ng-model="BSubTitleTbl.BSubId" onchange="angular.element(this).scope().GetKeywordToAskQuestion(this.value)">
                                     <option ng-selected="true" value="-1">Select Ask Question</option>
                                     <option ng-repeat="m in GetQueryToKeywordData" value="{{m.BSubId}}">{{m.KeywordTitle}}</option>
                                 </select>
@@ -76,16 +76,16 @@
                             </div>
                             <div class="col-md-12">
                                 <label for="input1" class="form-label">Ask Question ?</label>
-                                <select id="MainCate" class="form-select" ng-model="BSubTitleTbl.QueryId">
-                                    <option ng-selected="true" value="-1">Select Ask Question</option>
-                                    <option ng-repeat="m in GetBannerToQueryData" value="{{m.QId}}">{{m.Answer}}</option>
-                                </select>
-                                @*<input type="text" class="form-control" ng-model="BSubTitleTbl.AskQues2" id="AskQues2" placeholder="Enter Ask Question ?">*@
+                                @*<select id="MainCate" class="form-select" ng-model="BSubTitleTbl.QueryId">
+                                        <option ng-selected="true" value="-1">Select Ask Question</option>
+                                        <option ng-repeat="m in GetBannerToQueryData" value="{{m.QId}}">{{m.Answer}}</option>
+                                    </select>*@
+                                <input type="text" class="form-control" ng-model="GetKeywordToAskQuestionData.AskQues2" id="AskQues2" placeholder="Enter Ask Question ?" disabled>
                             </div>
                             <div class="col-md-12">
 
                                 <label for="input1" class="form-label">Answer</label>
-                                <input type="text" class="form-control" ng-model="BSubTitleTbl.SubTitle" id="Answer" placeholder="Answer">
+                                <input type="text" class="form-control" ng-model="BSubTitleTbl.kSubTitle" id="Answer" placeholder="Answer">
                             </div>
                             @*<div class="col-md-12" ng-repeat="m in SubTitleArr">
                                     <div class="row">
@@ -110,25 +110,25 @@
                                 </div>*@
 
                             <div class="col-md-12" ng-init="GetKeywordData()">
-                                    <label for="input1" class="form-label">Select Keyword</label>
+                                <label for="input1" class="form-label">Select Keyword</label>
 
-                                    <div class="" id="check_box">
-                                        <label class="checkbox-wrapper" ng-repeat="k in KeywordList">
-                                            <input type="checkbox" id="Keyword_{{k.KeywordId}}" class="checkbox-input" value="{{k.KeywordId}}" ng-model="k.Selected" ng-checked="" />
-                                            <span class="checkbox-tile">
-                                                <span class="checkbox-label">{{k.Keyword}}</span>
-                                            </span>
-                                        </label>
+                                <div class="" id="check_box">
+                                    <label class="checkbox-wrapper" ng-repeat="k in KeywordList">
+                                        <input type="checkbox" id="Keyword_{{k.KeywordId}}" class="checkbox-input" value="{{k.KeywordId}}" ng-model="k.Selected" ng-checked="" />
+                                        <span class="checkbox-tile">
+                                            <span class="checkbox-label">{{k.Keyword}}</span>
+                                        </span>
+                                    </label>
 
 
-                                    </div>
                                 </div>
+                            </div>
 
 
                             <div class="col-md-12">
                                 <div class="d-md-flex d-grid align-items-center gap-3">
-                                    <button type="button" id="btn" ng-click="SubmitBannerSubCateTitle()" class="btn btn-primary px-4">Submit</button>
-                                    <button type="button" id="edbtn" ng-click="UpdateBannerSubCateTitle()" style="display: none" class="btn btn-primary px-4">Update</button>
+                                    <button type="button" id="btn" ng-click="SubmitQueryAnswerKeyword()" class="btn btn-primary px-4">Submit</button>
+                                    <button type="button" id="edbtn" ng-click="UpdateQueryAnswerKeyword()" style="display: none" class="btn btn-primary px-4">Update</button>
                                     <button type="button" class="btn btn-light px-4" onClick="refreshPage()">Reset</button>
                                 </div>
                             </div>
@@ -153,40 +153,42 @@
 
                         </div>
                         <div class="table-responsive">
-                            <table class="table mb-0 table-bordered" ng-init="GetBannerSubCateTitle()">
+                            <table class="table mb-0 table-bordered" ng-init="GetQueryAnswerKeyword()">
                                 <thead class="table-light">
                                     <tr>
                                         <th>S.No.</th>
                                         <th>Banner Title</th>
                                         <th>1st Ask Question ?</th>
+                                        <th>Answer</th>
+
                                         <th>Keyword Title</th>
                                         <th>2nd Ask Question ?</th>
-                                        @*<th>Answer</th>*@
-
+                                        <th>Answer</th>
                                         @*<th>Position</th>*@
-                                        @*<th>KeyWord</th>*@
+                                        <th>KeyWord</th>
                                         @*<th>Priority</th>*@
                                         @*<th>Image</th>*@
-                                        <th>Active</th>
-
+                                        @*<th>Active</th>*@
                                         <th>Action</th>
-
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr ng-repeat="m in GetBannerSubCateTitleData">
+                                    <tr ng-repeat="m in GetQueryAnswerKeywordData">
                                         <td>{{$index+1}}</td>
                                         <td>{{m.bMainTitle.MTitle}}</td>
-                                        <td>{{m.QueryTitle.AskQues1}}</td>
-                                        <td>{{m.KeywordTitle}}</td>
-                                        <td>{{m.AskQues2}}</td>
+                                        <td>{{m.QueryTitle1.AskQues1}}</td>
+                                        <td>{{m.QueryTitle1.Answer}}</td>
+
+                                        <td>{{m.QueryTitle.KeywordTitle}}</td>
+                                        <td>{{m.QueryTitle.AskQues2}}</td>
+                                        <td>{{m.kSubTitle}}</td>
                                         @*<td>Answer</td>*@
                                         @*<td>{{m.SubTitle}}</td>*@
                                         @*<td>{{m.Position}}</td>*@
-                                        @*<td style="white-space: normal"><span ng-repeat="n in m.Submenu">{{n.SubmenuTitle}},</span></td>*@
+                                        <td style="white-space: normal"><span ng-repeat="n in m.KeywordList">{{n.SubmenuTitle}},</span></td>
                                         @*<td>{{m.Priority}}</td>*@
                                         @*<td><img src="~/images/BannerPTImage/{{m.MImage}}"></td>*@
-                                        <td><a ng-click="BannerSubTitleActiveDeActive(m.BSubId)"> <span class="badge {{m.Active==1? 'bg-success' : 'bg-danger'}}">{{m.Active==1?'Active':'Deactive'}}</span></a> </td>
+                                        @*<td><a ng-click="BannerSubTitleActiveDeActive(m.BSubId)"> <span class="badge {{m.Active==1? 'bg-success' : 'bg-danger'}}">{{m.Active==1?'Active':'Deactive'}}</span></a> </td>*@
                                         <td><a><i class="bx bxs-pencil" ng-click="GetBannerSubCateTitleById($index)"></i></a></td>
                                     </tr>
 

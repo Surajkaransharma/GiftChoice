@@ -117,6 +117,9 @@
     <EntitySetMapping Name="BPTKeywordTbls">
       <EntityTypeMapping TypeName="GiftChoiceModel.BPTKeywordTbl">
         <MappingFragment StoreEntitySet="BPTKeywordTbl">
+          <ScalarProperty Name="QueryId" ColumnName="QueryId" />
+          <ScalarProperty Name="BSubDId" ColumnName="BSubDId" />
+          <ScalarProperty Name="BSubId" ColumnName="BSubId" />
           <ScalarProperty Name="Active" ColumnName="Active" />
           <ScalarProperty Name="KeywordId" ColumnName="KeywordId" />
           <ScalarProperty Name="MainCateId" ColumnName="MainCateId" />
@@ -329,6 +332,17 @@
           <ScalarProperty Name="Position" ColumnName="Position" />
           <ScalarProperty Name="MTitle" ColumnName="MTitle" />
           <ScalarProperty Name="MainCateId" ColumnName="MainCateId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="BSubTitleDetailTbls">
+      <EntityTypeMapping TypeName="GiftChoiceModel.BSubTitleDetailTbl">
+        <MappingFragment StoreEntitySet="BSubTitleDetailTbl">
+          <ScalarProperty Name="kSubTitle" ColumnName="kSubTitle" />
+          <ScalarProperty Name="BSubId" ColumnName="BSubId" />
+          <ScalarProperty Name="QueryId" ColumnName="QueryId" />
+          <ScalarProperty Name="MainCateId" ColumnName="MainCateId" />
+          <ScalarProperty Name="BSubDId" ColumnName="BSubDId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

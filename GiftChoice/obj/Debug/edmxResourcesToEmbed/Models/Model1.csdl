@@ -26,6 +26,7 @@
     <EntitySet Name="SliderTbls" EntityType="GiftChoiceModel.SliderTbl" />
     <EntitySet Name="UserRegisters" EntityType="GiftChoiceModel.UserRegister" />
     <EntitySet Name="BannerPTTbls" EntityType="GiftChoiceModel.BannerPTTbl" />
+    <EntitySet Name="BSubTitleDetailTbls" EntityType="GiftChoiceModel.BSubTitleDetailTbl" />
     <EntitySet Name="QueryTbls" EntityType="GiftChoiceModel.QueryTbl" />
     <EntitySet Name="VProducts" EntityType="GiftChoiceModel.VProduct" />
     <EntitySet Name="AutocompleteSuggestions" EntityType="GiftChoiceModel.AutocompleteSuggestion" />
@@ -150,6 +151,9 @@
     <Property Name="MainCateId" Type="Int64" />
     <Property Name="KeywordId" Type="Int64" />
     <Property Name="Active" Type="Boolean" />
+    <Property Name="BSubId" Type="Int32" />
+    <Property Name="BSubDId" Type="Int32" />
+    <Property Name="QueryId" Type="Int32" />
   </EntityType>
   <EntityType Name="BSubKTbl">
     <Key>
@@ -347,6 +351,16 @@
     <Property Name="Update_at" Type="DateTime" Precision="3" />
     <Property Name="UserId" Type="Int64" />
     <Property Name="ModelQuery1" Type="Boolean" />
+  </EntityType>
+  <EntityType Name="BSubTitleDetailTbl">
+    <Key>
+      <PropertyRef Name="BSubDId" />
+    </Key>
+    <Property Name="BSubDId" Type="Int32" Nullable="false" />
+    <Property Name="MainCateId" Type="Int32" />
+    <Property Name="QueryId" Type="Int32" />
+    <Property Name="BSubId" Type="Int32" />
+    <Property Name="kSubTitle" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
   </EntityType>
   <EntityType Name="QueryTbl">
     <Key>

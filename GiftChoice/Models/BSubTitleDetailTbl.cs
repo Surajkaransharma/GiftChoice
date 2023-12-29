@@ -12,14 +12,12 @@ namespace GiftChoice.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class BPTKeywordTbl
+    public partial class BSubTitleDetailTbl
     {
-        public long MCkeywordId { get; set; }
-        public Nullable<long> MainCateId { get; set; }
-        public Nullable<long> KeywordId { get; set; }
-        public Nullable<bool> Active { get; set; }
-        public Nullable<int> BSubId { get; set; }
-        public Nullable<int> BSubDId { get; set; }
+        public int BSubDId { get; set; }
+        public Nullable<int> MainCateId { get; set; }
         public Nullable<int> QueryId { get; set; }
+        public Nullable<int> BSubId { get; set; }
+        public string kSubTitle { get; set; }
     }
 }

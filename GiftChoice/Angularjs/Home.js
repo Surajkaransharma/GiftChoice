@@ -29,7 +29,7 @@ app.controller("HomeController", ['$scope', '$http', '$sce', 'orderByFilter', fu
             localStorage.setItem('RecentViewGifts', JSON.stringify($scope.RecentViewGifts));
 
         }
-            $scope.GetRecentViewGifts();
+        $scope.GetRecentViewGifts();
 
     };
 
@@ -245,6 +245,7 @@ app.controller("HomeController", ['$scope', '$http', '$sce', 'orderByFilter', fu
         });
 
     };
+
     $scope.SearchDataShop = function () {
         debugger
         var id = $("#Keyword").val();
@@ -266,6 +267,7 @@ app.controller("HomeController", ['$scope', '$http', '$sce', 'orderByFilter', fu
         });
 
     };
+
     $scope.GetRandomKeywordMobile = function () {
         debugger
         $("#MKeyword").addClass('ui-autocomplete-loader-center');
@@ -328,6 +330,7 @@ app.controller("HomeController", ['$scope', '$http', '$sce', 'orderByFilter', fu
         });
 
     };
+
     $scope.SliderList = function () {
         debugger
         $http.get("/Home/SliderList").then(function (d) {
@@ -809,5 +812,62 @@ app.controller("HomeController", ['$scope', '$http', '$sce', 'orderByFilter', fu
             toastr["error"]("Something Went Wrong");
         });
     };
+
+
+    $scope.GetSmallBanner = function () {
+        debugger
+        $http.get("/Home/GetSmallBanner").then(function (d) {
+            $scope.GetSmallBannerData = d.data.SmallBanner;
+            debugger
+        }, function (error) {
+            alert(error.data);
+        });
+    };
+    $scope.OpenModelInBanner = function () {
+        debugger
+        var urlParams = new URLSearchParams(window.location.search);
+
+        // Get the value of the "CartData" parameter
+        var banner = urlParams.get('Banner');
+        debugger
+        $http.get("/Home/GetBannerAsk1?banner=" + banner).then(function (d) {
+            $scope.GetBannerAsk1Data = d.data;
+            debugger
+
+            setTimeout(() => {
+                $('#modalId').modal("toggle");
+            }, 100);
+
+        }, function (error) {
+            alert(error.data);
+        });
+
+
+    };
+
+    $scope.ContinueAskQues1 = function () {
+        debugger
+
+        for (var i = 0; i < $scope.GetBannerAsk1Data.length; i++) {
+
+            if ($("#AskQues1_" + $scope.GetBannerAsk1Data[i].QId).is(":checked")) {
+                $scope.QId = parseInt($scope.GetBannerAsk1Data[i].QId);
+            }
+        }
+
+        $http.get("/Home/ContinueAskQues1?QId=" + $scope.QId).then(function (d) {
+            $scope.GetBannerAsk2Data = d.data;
+            debugger
+
+        
+
+        }, function (error) {
+            alert(error.data);
+        });
+
+
+    };
+
+
 
 }]);
