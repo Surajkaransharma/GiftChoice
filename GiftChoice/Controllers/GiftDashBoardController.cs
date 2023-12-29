@@ -2909,12 +2909,11 @@ namespace GiftChoice.Controllers
                 p.QueryId,
                 p.BSubDId,
                 p.BSubId,
-                p.kSubTitle,
-                
+                p.kSubTitle,                
                 bMainTitle = db.BannerPTTbls.Where(b => b.MainCateId == p.MainCateId).FirstOrDefault(),
                 QueryTitle1 = db.QueryTbls.Where(q => q.MainCateId == p.MainCateId).FirstOrDefault(),
                 QueryTitle = db.BSubTitleTbls.Where(q => q.BSubId == p.BSubId).FirstOrDefault(),
-                KeywordList = db.BPTKeywordTbls.Where(k => k.BSubId == p.BSubId).Select(s => new
+                KeywordList = db.BPTKeywordTbls.Where(k => k.BSubDId == p.BSubDId).Select(s => new
                 {
                     s.MCkeywordId,
                     s.KeywordId,

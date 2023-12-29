@@ -991,7 +991,28 @@ namespace GiftChoice.Controllers
             return Json(res, JsonRequestBehavior.AllowGet);
 
         }
+        public JsonResult ContinueAskQues2(int BSubDId)
+        {
+            var res = db.BSubTitleDetailTbls.Where(m => m.BSubDId == BSubDId).Select(m => new
+            {
+                m.QueryId,
+                m.BSubDId,
+                m.kSubTitle,
+                m.MainCateId,
+                BannerTitle = db.BannerPTTbls.Where(b => b.MainCateId == m.MainCateId).FirstOrDefault(),
+                AnswerList = db.BSubTitleDetailTbls.Where(a => a.QueryId == m.QueryId),
+                KeywordList = db.BPTKeywordTbls.Where(s => s.BSubDId == m.BSubDId && s.Active == true).Select(s => new
+                {
+                    s.QueryId,
+                    s.KeywordId,
+                    SubmenuTitle = db.KeywordTbls.Where(t => t.KeywordId == s.KeywordId && t.Active == true).Select(t => t.Keyword).FirstOrDefault()
+                }),
 
+            }).FirstOrDefault();
+
+            return Json(res, JsonRequestBehavior.AllowGet);
+
+        }
 
     }
 }

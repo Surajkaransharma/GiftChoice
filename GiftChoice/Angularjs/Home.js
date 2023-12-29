@@ -868,6 +868,29 @@ app.controller("HomeController", ['$scope', '$http', '$sce', 'orderByFilter', fu
 
     };
 
+    $scope.ContinueAskQues2 = function () {
+        debugger
 
+        for (var i = 0; i < $scope.GetBannerAsk2Data.length; i++) {
+            for (var k = 0; k < $scope.GetBannerAsk2Data[i].AnswerList.length; k++) {
+                if ($("#AskQues2_" + $scope.GetBannerAsk2Data[i].AnswerList[k].BSubDId).is(":checked")) {
+                    $scope.BSubDId = parseInt($scope.GetBannerAsk2Data[i].AnswerList[k].BSubDId);
+                }
+            }
+           
+        }
+
+        $http.get("/Home/ContinueAskQues2?BSubDId=" + $scope.BSubDId).then(function (d) {
+            $scope.GetContinueAskQues2Data = d.data;
+            debugger
+
+
+
+        }, function (error) {
+            alert(error.data);
+        });
+
+
+    };
 
 }]);
