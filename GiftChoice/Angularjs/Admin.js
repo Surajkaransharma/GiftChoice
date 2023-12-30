@@ -2124,7 +2124,7 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
         //    return;
         //}
 
-
+        debugger
         $http({
             url: '/GiftDashBoard/UpdateQuerymodel',
             method: 'post',

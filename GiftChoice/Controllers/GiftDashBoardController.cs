@@ -54,7 +54,7 @@ namespace GiftChoice.Controllers
         public ActionResult AddRelation()
         {
             return View();
-        
+
         }
 
         public ActionResult AddQueryKeyword()
@@ -2050,7 +2050,7 @@ namespace GiftChoice.Controllers
                 k.MainCateId,
                 k.kSubTitle,
                 k.BSubDId,
-                Keywordlist =  db.BPTKeywordTbls.Where(s => s.BSubDId == k.BSubDId && s.Active == true).Select(s => new
+                Keywordlist = db.BPTKeywordTbls.Where(s => s.BSubDId == k.BSubDId && s.Active == true).Select(s => new
                 {
                     s.MainCateId,
                     s.KeywordId,
@@ -2607,7 +2607,7 @@ namespace GiftChoice.Controllers
                 mainCateTbl.MainCateId = model.MainCateId;
                 mainCateTbl.QueryId = model.QueryId;
                 mainCateTbl.AskQues2 = model.AskQues2;
-                mainCateTbl.KeywordTitle = model.KeywordTitle;                
+                mainCateTbl.KeywordTitle = model.KeywordTitle;
                 mainCateTbl.Create_at = DateTime.Now;
                 mainCateTbl.Update_at = DateTime.Now;
                 mainCateTbl.Active = true;
@@ -2819,19 +2819,22 @@ namespace GiftChoice.Controllers
                     db.SaveChanges();
                     for (int i = 0; i < answerArrs.Count; i++)
                     {
+                        if (query.MainCateId != null)
+                        {
 
-                        QueryTbl queryTbl = new QueryTbl();
-                        queryTbl.QId = db.QueryTbls.DefaultIfEmpty().Max(r => r == null ? 0 : r.QId) + 1;
-                        queryTbl.MainCateId = query.MainCateId;
-                        queryTbl.AskQues1 = query.AskQues1;
-                        queryTbl.Answer = answerArrs[i].Answer;
-                        queryTbl.ModelQuery2 = query.ModelQuery2;
-                        queryTbl.Create_at = DateTime.Now;
-                        queryTbl.Update_at = DateTime.Now;
-                        queryTbl.Active = true;
-                        queryTbl.Priority = query.Priority;
-                        db.QueryTbls.Add(queryTbl);
-                        db.SaveChanges();
+                            QueryTbl queryTbl = new QueryTbl();
+                            queryTbl.QId = db.QueryTbls.DefaultIfEmpty().Max(r => r == null ? 0 : r.QId) + 1;
+                            queryTbl.MainCateId = query.MainCateId;
+                            queryTbl.AskQues1 = query.AskQues1;
+                            queryTbl.Answer = answerArrs[i].Answer;
+                            queryTbl.ModelQuery2 = query.ModelQuery2;
+                            queryTbl.Create_at = DateTime.Now;
+                            queryTbl.Update_at = DateTime.Now;
+                            queryTbl.Active = true;
+                            queryTbl.Priority = query.Priority;
+                            db.QueryTbls.Add(queryTbl);
+                            db.SaveChanges();
+                        }
                     }
                     var res = new { res = "1" };
                     return Json(res, JsonRequestBehavior.AllowGet);
@@ -2867,7 +2870,7 @@ namespace GiftChoice.Controllers
 
                 model.BSubDId = db.BSubTitleDetailTbls.DefaultIfEmpty().Max(r => r == null ? 0 : r.BSubDId) + 1;
                 model.MainCateId = model.MainCateId;
-                model.kSubTitle = model.kSubTitle;      
+                model.kSubTitle = model.kSubTitle;
                 db.BSubTitleDetailTbls.Add(model);
                 db.SaveChanges();
 
@@ -2909,7 +2912,7 @@ namespace GiftChoice.Controllers
                 p.QueryId,
                 p.BSubDId,
                 p.BSubId,
-                p.kSubTitle,                
+                p.kSubTitle,
                 bMainTitle = db.BannerPTTbls.Where(b => b.MainCateId == p.MainCateId).FirstOrDefault(),
                 QueryTitle1 = db.QueryTbls.Where(q => q.MainCateId == p.MainCateId).FirstOrDefault(),
                 QueryTitle = db.BSubTitleTbls.Where(q => q.BSubId == p.BSubId).FirstOrDefault(),

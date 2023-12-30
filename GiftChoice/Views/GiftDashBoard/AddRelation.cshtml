@@ -50,7 +50,7 @@
                             <div class="col-md-12" ng-init="GetBannerInProduct()">
                                 <label for="input1" class="form-label">Select Banner Title</label>
 
-                                <select id="MainCate" class="form-select" ng-model="Querymodel.MainCateId" onchange="angular.element(this).scope().GetBannerPInKeyword(this.value)">
+                                <select id="MainCate" class="form-select" ng-model="Querymodel.MainCateId" >
                                     <option ng-selected="true" value="">Select Banner Title</option>
                                     <option ng-repeat="m in GetBannerInProductData" value="{{m.MainCateId}}">{{m.MTitle}}</option>
                                 </select>
@@ -138,7 +138,7 @@
                                         @*<th>Position</th>*@
                                         @*<th>KeyWord</th>*@
                                         <th>2nd Model</th>
-                                        <th>@*Priority*@</th>
+                                        @*<th>Priority</th>*@
                                         @*<th>Image</th>*@
                                         <th>Active</th>
 
@@ -157,7 +157,7 @@
 
                                         @*<td>{{m.Position}}</td>*@
                                         @*<td style="white-space: normal"><span ng-repeat="n in m.Submenu">{{n.SubmenuTitle}},</span></td>*@
-                                        <td>@*{{m.Priority}}*@</td>
+                                        @*<td>{{m.Priority}}</td>*@
                                         @*<td><img src="~/images/BannerPTImage/{{m.MImage}}"></td>*@
                                         <td><a ng-click="QuerymodelActiveDeActive(m.BSubId)"> <span class="badge {{m.Active==1? 'bg-success' : 'bg-danger'}}">{{m.Active==1?'Active':'Deactive'}}</span></a> </td>
                                         <td><a><i class="bx bxs-pencil" ng-click="GetQuerymodelById(m.MainCateId)"></i></a></td>
