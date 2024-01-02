@@ -1281,11 +1281,11 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
 
     $scope.SubmitBannerProdcutT = function () {
         debugger
-        for (var i = 0; i < $scope.KeywordList.length; i++) {
-            if ($scope.KeywordList[i].Selected) {
-                BPKeywordarr.push($scope.KeywordList[i]);
-            }
-        }
+        //for (var i = 0; i < $scope.KeywordList.length; i++) {
+        //    if ($scope.KeywordList[i].Selected) {
+        //        BPKeywordarr.push($scope.KeywordList[i]);
+        //    }
+        //}
         if ($("#MTitle").val() == "") {
             toastr["error"]("Enter Banner Title");
             return;
@@ -1357,14 +1357,14 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
         $('#edbtn').css('display', 'inline');
         debugger
 
-        for (var s = 0; s < $scope.KeywordList.length; s++) {
-            var vallc1s = $scope.KeywordList[s].KeywordId;
-            $('#Keyword_' + vallc1s).prop('checked', false);
-            //$('#Menu_' + vallc1s).removeAttr('checked', false).trigger("click");
-            //$('#MenuFilter_' + vallc1s).removeAttr('checked', false).trigger("click");
-            //$('#Fliter_' + vallc1s).removeAttr('checked', false).trigger("click");
+        //for (var s = 0; s < $scope.KeywordList.length; s++) {
+        //    var vallc1s = $scope.KeywordList[s].KeywordId;
+        //    $('#Keyword_' + vallc1s).prop('checked', false);
+        //    //$('#Menu_' + vallc1s).removeAttr('checked', false).trigger("click");
+        //    //$('#MenuFilter_' + vallc1s).removeAttr('checked', false).trigger("click");
+        //    //$('#Fliter_' + vallc1s).removeAttr('checked', false).trigger("click");
 
-        }
+        //}
 
 
         $scope.BannerProdcutT = $scope.GetBannerProdcutTData[index];
@@ -1376,12 +1376,12 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
         $('#previewImage').css('display', 'block');
         previewImage.setAttribute("src", "/images/BannerPTImage/" + $scope.BannerProdcutT.MImage);
         debugger
-        for (var i = 0; i < $scope.BannerProdcutT.Submenu.length; i++) {
-            var vallc = $scope.BannerProdcutT.Submenu[i].KeywordId;
-            $('#Keyword_' + vallc).prop('checked', true);
+        //for (var i = 0; i < $scope.BannerProdcutT.Submenu.length; i++) {
+        //    var vallc = $scope.BannerProdcutT.Submenu[i].KeywordId;
+        //    $('#Keyword_' + vallc).prop('checked', true);
 
 
-        }
+        //}
 
 
         debugger
@@ -1411,13 +1411,13 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
         //$.each($(".checkbox-input:checked"), function () {
         //    Keywordarr.push({ 'KeywordId': $(this).val() });
         //});
-        for (var i = 0; i < $scope.KeywordList.length; i++) {
-            var vallc = $scope.KeywordList[i].KeywordId;
-            var isChecked = $('#Keyword_' + vallc).prop('checked');
-            if (isChecked) {
-                BPKeywordarr.push($scope.KeywordList[i]);
-            }
-        }
+        //for (var i = 0; i < $scope.KeywordList.length; i++) {
+        //    var vallc = $scope.KeywordList[i].KeywordId;
+        //    var isChecked = $('#Keyword_' + vallc).prop('checked');
+        //    if (isChecked) {
+        //        BPKeywordarr.push($scope.KeywordList[i]);
+        //    }
+        //}
         debugger
 
         upload({
@@ -1495,7 +1495,23 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
         });
     };
 
-    $scope.GetBannerPInKeyword = function (MainCateId) {
+    $scope.GetSubTitleList = function (id) {
+        debugger
+        if (id != "-1" && id != "") {
+
+            $http.get("/GiftDashBoard/GetSubTitleList?id=" + id).then(function (d) {
+                debugger
+                $scope.GetSubTitleListData = d.data;
+            }, function (error) {
+                alert(error.data);
+            });
+        }
+    };
+
+
+
+
+    $scope.GetQueryKeywordlist = function (BSubId) {
         debugger;
 
         for (var s = 0; s < $scope.KeywordList.length; s++) {
@@ -1503,13 +1519,13 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
             $('#Keyword_' + vallc1s).prop('checked', false);
 
         }
-        var id = parseInt(MainCateId);
+        var id = parseInt(BSubId);
         var dataArray = [];
-        dataArray = $scope.GetBannerInProductData;
-        var dataArray2 = dataArray.filter(item => item.MainCateId === id);
+        dataArray = $scope.GetSubTitleListData;
+        var dataArray2 = dataArray.filter(item => item.BSubDId === id);
 
         if (dataArray2.length > 0) {
-            var submenu = dataArray2[0].Submenu;
+            var submenu = dataArray2[0].Keywordlist;
 
             if (submenu && submenu.length > 0) {
                 for (var i = 0; i < submenu.length; i++) {
@@ -1529,6 +1545,8 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
     var PSizeArr = [];
     $scope.SubmitBannerProduct = function () {
         debugger
+             
+
         var editorText = CKEDITOR.instances.ckeditor.getData();
         $scope.Description = editorText;
 
@@ -1542,6 +1560,9 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
         //        Keywordarr.push($scope.KeywordList[i]);
         //    }
         //}
+        //var Keywordarr = [];
+        //var PSizeArr = [];
+
         $.each($(".checkbox-input:checked"), function () {
             Keywordarr.push({ 'KeywordId': $(this).val() });
         });
@@ -1592,9 +1613,32 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
             if ($scope.result.res === "1") {
 
                 toastr["success"]("Product save successfully");
-                $('#MainCate').val("-1").trigger('change');
-                location.href = '/GiftDashBoard/AddBannerInProduct';
-                $scope.Product = null;
+                //$('#MainCate').val("-1").trigger('change');
+                //  location.href = '/GiftDashBoard/AddBannerInProduct';
+                $scope.Product.ProductTitle = null;
+                $scope.Product.PLabel = null;
+                $scope.Product.Price = null;
+                $scope.Product.VideoUrl = null;
+                $scope.Product.SameDay = false;
+                $scope.Product.PDesc = null;
+                $scope.Product.Image1 = null;
+                $scope.Product.Image2 = null;
+                $scope.Product.Image3 = null;
+                $scope.Product.Image4 = null;
+                $scope.Product.Image5 = null;
+                document.getElementById('image1').value = '';
+                document.getElementById('image2').value = '';
+                document.getElementById('image3').value = '';
+                document.getElementById('image4').value = '';
+                document.getElementById('image5').value = '';
+
+                CKEDITOR.instances.ckeditor.setData('');
+
+
+
+                $scope.GetSizeData();
+                /* $scope.GetKeywordData();*/
+
                 //    $scope.GetProduct();
             } else if ($scope.result.res === "2") {
                 toastr["error"]("Product already exist");
@@ -1745,7 +1789,7 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
 
         $scope.Product = $scope.ProductData[index];
 
-/*        CKEDITOR.instances.ckeditor.setData($scope.Product.PDesc);*/
+        /*        CKEDITOR.instances.ckeditor.setData($scope.Product.PDesc);*/
         CKEDITOR.instances.ckeditor.setData($scope.Product.PDesc1);
 
         //const previewImage = document.querySelector('#previewImage');
@@ -1775,6 +1819,16 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
 
     //-------------- Submit Banner Sub Cate Title Start ->------------->---------------------->---------------------------->------->------------>---------->---
 
+    $scope.SubTitleArr = [];
+    $scope.AddMoreSubTitle = function () {
+        $scope.SubTitleArr.push({
+            'SubTitle': ''
+        });
+    }
+    $scope.SubTitleRemove = function (index) {
+        $scope.SubTitleArr.splice(index, 1);
+    }
+
 
     $scope.GetBannerProdcutT = function () {
         $http.get("/GiftDashBoard/GetBannerProdcutT").then(function (d) {
@@ -1784,7 +1838,18 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
             alert(error.data);
         });
     };
+    $scope.GetBannerToQuery = function (id) {
+        debugger
+        if (id != "-1" && id != "") {
 
+            $http.get("/GiftDashBoard/GetBannerToQuery?id=" + id).then(function (d) {
+                debugger
+                $scope.GetBannerToQueryData = d.data;
+            }, function (error) {
+                alert(error.data);
+            });
+        }
+    };
     //var BPKeywordarr = [];
 
     $scope.SubmitBannerSubCateTitle = function () {
@@ -1794,13 +1859,26 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
         //        BPKeywordarr.push($scope.KeywordList[i]);
         //    }
         //}
-        if ($("#SubTitle").val() == "") {
-            toastr["error"]("Enter Sub Title");
+        //if ($("#SubTitle").val() == "") {
+        //    toastr["error"]("Enter Sub Title");
+        //    return;
+        //}
+
+        //if ($("#Priority").val() == "") {
+        //    toastr["error"]("Enter Sub Priority");
+        //    return;
+        //}
+
+        if ($("#AskQues2").val() === "") {
+            toastr["error"]("Please Enter Ask Question ?");
             return;
         }
-
-        if ($("#Priority").val() == "") {
-            toastr["error"]("Enter Sub Priority");
+        if ($("#KeywordTitle").val() === "") {
+            toastr["error"]("Please Enter Keyword Title");
+            return;
+        }
+        if ($("#MainCate").val() == "" || $("#MainCate").val() == "-1") {
+            toastr["error"]("Enter Banner Title");
             return;
         }
 
@@ -1874,7 +1952,7 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
         //}
 
 
-      
+
         debugger
         //for (var i = 0; i < $scope.BannerProdcutT.Submenu.length; i++) {
         //    var vallc = $scope.BannerProdcutT.Submenu[i].KeywordId;
@@ -1897,16 +1975,29 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
 
     $scope.UpdateBannerSubCateTitle = function () {
         debugger
-        var maincate = angular.element(document.getElementById("SubTitle"));
-        if (maincate.val() === "") {
-            toastr["error"]("Please Enter Sub Title");
-            maincate.focus();
+        if ($("#AskQues2").val() === "") {
+            toastr["error"]("Please Enter Ask Question ?");
             return;
         }
-        if ($("#Priority").val() == "") {
-            toastr["error"]("Enter Sub Title Priority");
+        if ($("#KeywordTitle").val() === "") {
+            toastr["error"]("Please Enter Keyword Title");
             return;
         }
+        if ($("#MainCate").val() == "" || $("#MainCate").val() == "-1") {
+            toastr["error"]("Enter Banner Title");
+            return;
+        }
+
+        //var maincate = angular.element(document.getElementById("SubTitle"));
+        //if (maincate.val() === "") {
+        //    toastr["error"]("Please Enter Sub Title");
+        //    maincate.focus();
+        //    return;
+        //}
+        //if ($("#Priority").val() == "") {
+        //    toastr["error"]("Enter Sub Title Priority");
+        //    return;
+        //}
 
         //$.each($(".checkbox-input:checked"), function () {
         //    Keywordarr.push({ 'KeywordId': $(this).val() });
@@ -1995,7 +2086,255 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
             alert(error.data);
         });
     };
-     //-------------- Submit Banner Sub Cate Title End ->------------->---------------------->---------------------------->------->------------>---------->---
+    //-------------- Submit Banner Sub Cate Title End ->------------->---------------------->---------------------------->------->------------>---------->---
+
+
+    //-------------- Submit Query model Start ->------------->---------------------->---------------------------->------->------------>---------->---
+
+    $scope.AnswerArr = [];
+    $scope.AddMoreAnswer = function () {
+        $scope.AnswerArr.push({
+            'Answer': ''
+        });
+    }
+    $scope.AnswerRemove = function (index) {
+        $scope.AnswerArr.splice(index, 1);
+    }
+
+    var BKeywordarr = [];
+    $scope.SubmitQuerymodel = function () {
+        if ($("#AskQues1").val() === "") {
+            toastr["error"]("Please Enter Ask Question ?");
+            return;
+        }
+        if ($("#MainCate").val() == "" || $("#MainCate").val() == "-1") {
+            toastr["error"]("Enter Banner Title");
+            return;
+        }
+
+        debugger
+        //  $scope.Querymodel.push({'AnswerArr': $scope.AnswerArr });
+
+        debugger
+        $http({
+            url: '/GiftDashBoard/SubmitQuerymodel',
+            method: 'post',
+            data: {
+                query: $scope.Querymodel,
+                answerArrs: $scope.AnswerArr
+            }
+        }).then(function (d) {
+            $scope.result = d.data;
+            if ($scope.result.res === "1") {
+                toastr["success"]("Banner Category save successfully");
+                $scope.GetQuerymodel();
+                $scope.Querymodel = null;
+                $scope.AnswerArr = [];
+            } else if ($scope.result.res === "2") {
+                toastr["error"]("Banner Category already exist");
+            }
+            else {
+                toastr["error"]("Banner Category not save");
+            }
+        }, function (error) {
+            toastr["error"]("Something Went Wrong");
+        });
+    };
+
+    $scope.GetQuerymodelById = function (index) {
+        $('#btn').css('display', 'none');
+        $('#edbtn').css('display', 'inline');
+
+        //for (var s = 0; s < $scope.KeywordList.length; s++) {
+        //    var vallc1s = $scope.KeywordList[s].KeywordId;
+        //    $('#Keyword_' + vallc1s).prop('checked', false);
+
+        //}
+
+        debugger
+        $scope.Querymodeldata = $scope.GetQuerymodelData.filter(item => item.MainCateId === index);
+        $scope.Querymodel = {};
+        $scope.Querymodel.AskQues1 = $scope.Querymodeldata[0].AskQues1;
+        $scope.Querymodel.ModelQuery2 = $scope.Querymodeldata[0].ModelQuery2;
+
+        $scope.AnswerArr = $scope.Querymodeldata;
+
+
+
+        //$scope.Querymodel = $scope.GetQuerymodelData.filter(item => filterArray.includes(item.MainCateId));
+
+
+
+
+    };
+
+    $scope.RessetBannerCate = function () {
+        $('#btn').css('display', 'inline');
+        $('#edbtn').css('display', 'none');
+        $scope.BannerCate = null;
+    };
+
+    $scope.UpdateQuerymodel = function () {
+        debugger
+        //if ($("#BTitle").val() === "") {
+        //    toastr["error"]("Please Enter Banner Category");
+
+        //    return;
+        //}
+        if ($("#AskQues1").val() === "") {
+            toastr["error"]("Please Enter Ask Question ?");
+            return;
+        }
+        if ($("#MainCate").val() == "" || $("#MainCate").val() == "-1") {
+            toastr["error"]("Enter Banner Title");
+            return;
+        }
+
+        debugger
+        $http({
+            url: '/GiftDashBoard/UpdateQuerymodel',
+            method: 'post',
+            data: {
+                query: $scope.Querymodel,
+                answerArrs: $scope.AnswerArr
+            }
+        }).then(function (d) {
+            $scope.result = d.data;
+            if ($scope.result.res === "1") {
+                toastr["success"]("Banner Category Update successfully");
+                $scope.GetQuerymodel();
+                $scope.Querymodel = null;
+                $scope.AnswerArr = [];
+
+            }
+            else {
+                toastr["error"]("Banner Category not save");
+            }
+        }, function (error) {
+            toastr["error"]("Something Went Wrong");
+        });
+    };
+
+    $scope.BannerActiveDeActive = function (id) {
+        $http.get("/GiftDashBoard/BannerActiveDeActive?id=" + id).then(function (d) {
+            $scope.rees = d.data;
+            if ($scope.rees.res === "1") {
+                toastr["success"]("successful");
+                $scope.GetBannerCate();
+            }
+            else {
+                toastr["error"]("something went wrong   ");
+            }
+
+
+        }, function (error) {
+            alert(error.data);
+        });
+    };
+
+    $scope.GetQuerymodel = function () {
+        $http.get("/GiftDashBoard/GetQuerymodel").then(function (d) {
+            $scope.GetQuerymodelData = d.data;
+            debugger
+        }, function (error) {
+            alert(error.data);
+        });
+    };
+
+
+
+
+    //-------------- Submit Query model End ->------------->---------------------->---------------------------->------->------------>---------->---
+
+
+
+    //-------------- Submit Query keyword model Start ->------------->---------------------->---------------------------->------->------------>---------->---
+
+    $scope.GetQueryToKeyword = function (id) {
+        debugger
+        if (id != "-1" && id != "") {
+
+            $http.get("/GiftDashBoard/GetQueryToKeyword?id=" + id).then(function (d) {
+                debugger
+                $scope.GetQueryToKeywordData = d.data;
+            }, function (error) {
+                alert(error.data);
+            });
+        }
+    };
+
+
+    $scope.GetKeywordToAskQuestion = function (id) {
+        debugger
+        if (id != "-1" && id != "") {
+
+            $http.get("/GiftDashBoard/GetKeywordToAskQuestion?id=" + id).then(function (d) {
+                debugger
+                $scope.GetKeywordToAskQuestionData = d.data;
+            }, function (error) {
+                alert(error.data);
+            });
+        }
+    };
+
+    $scope.GetQueryAnswerKeyword = function (id) {
+        debugger
+
+
+        $http.get("/GiftDashBoard/GetQueryAnswerKeyword?id=" + id).then(function (d) {
+            debugger
+            $scope.GetQueryAnswerKeywordData = d.data;
+        }, function (error) {
+            alert(error.data);
+        });
+
+    };
+
+    $scope.SubmitQueryAnswerKeyword = function () {
+        //if ($("#AskQues1").val() === "") {
+        //    toastr["error"]("Please Enter Ask Question ?");
+        //    return;
+        //}
+
+        debugger
+        //  $scope.Querymodel.push({'AnswerArr': $scope.AnswerArr });
+        var BPKeywordarr = [];
+        for (var i = 0; i < $scope.KeywordList.length; i++) {
+            if ($scope.KeywordList[i].Selected) {
+                BPKeywordarr.push($scope.KeywordList[i]);
+            }
+        }
+        debugger
+        $http({
+            url: '/GiftDashBoard/SubmitQueryAnswerKeyword',
+            method: 'post',
+            data: {
+                model: $scope.BSubTitleTbl,
+                keywordsTbl: BPKeywordarr
+            }
+        }).then(function (d) {
+            $scope.result = d.data;
+            if ($scope.result.res === "1") {
+                toastr["success"]("Banner Category save successfully");
+                $scope.GetQueryAnswerKeyword();
+                $scope.Querymodel = null;
+                $scope.AnswerArr = [];
+                $scope.GetKeywordData();
+            } else if ($scope.result.res === "2") {
+                toastr["error"]("Banner Category already exist");
+            }
+            else {
+                toastr["error"]("Banner Category not save");
+            }
+        }, function (error) {
+            toastr["error"]("Something Went Wrong");
+        });
+    };
+
+
+
+
+    //-------------- Submit Query keyword model End ->------------->---------------------->---------------------------->------->------------>---------->---
 
 
 }]).directive('uploadFile', ['$parse', function ($parse) {

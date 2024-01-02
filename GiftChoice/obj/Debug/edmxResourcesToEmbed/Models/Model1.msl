@@ -51,6 +51,9 @@
     <EntitySetMapping Name="BannerProductTbls">
       <EntityTypeMapping TypeName="GiftChoiceModel.BannerProductTbl">
         <MappingFragment StoreEntitySet="BannerProductTbl">
+          <ScalarProperty Name="BSubDId" ColumnName="BSubDId" />
+          <ScalarProperty Name="BSubId" ColumnName="BSubId" />
+          <ScalarProperty Name="QueryId" ColumnName="QueryId" />
           <ScalarProperty Name="SameDay" ColumnName="SameDay" />
           <ScalarProperty Name="VideoUrl" ColumnName="VideoUrl" />
           <ScalarProperty Name="Qty" ColumnName="Qty" />

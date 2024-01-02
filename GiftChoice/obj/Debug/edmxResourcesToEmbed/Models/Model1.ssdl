@@ -63,6 +63,9 @@
     <Property Name="Qty" Type="bigint" />
     <Property Name="VideoUrl" Type="nvarchar(max)" />
     <Property Name="SameDay" Type="bit" />
+    <Property Name="QueryId" Type="int" />
+    <Property Name="BSubId" Type="int" />
+    <Property Name="BSubDId" Type="int" />
   </EntityType>
   <EntityType Name="BannerTbl">
     <Key>

@@ -60,7 +60,7 @@
                             <div class="col-md-12">
                                 <label for="input1" class="form-label">Select Answer</label>
 
-                                <select id="MainCate" class="form-select" ng-model="BSubTitleTbl.QueryId">
+                                <select id="QueryId" class="form-select" ng-model="BSubTitleTbl.QueryId">
                                     <option ng-selected="true" value="-1">Select Ask Question</option>
                                     <option ng-repeat="m in GetBannerToQueryData" value="{{m.QId}}">{{m.Answer}}</option>
                                 </select>

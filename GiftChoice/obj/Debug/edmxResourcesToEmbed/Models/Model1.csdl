@@ -102,6 +102,9 @@
     <Property Name="Qty" Type="Int64" />
     <Property Name="VideoUrl" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="SameDay" Type="Boolean" />
+    <Property Name="QueryId" Type="Int32" />
+    <Property Name="BSubId" Type="Int32" />
+    <Property Name="BSubDId" Type="Int32" />
   </EntityType>
   <EntityType Name="BannerTbl">
     <Key>

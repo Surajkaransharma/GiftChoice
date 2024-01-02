@@ -79,36 +79,19 @@
 
     <!-- Slider End -->
     <!-- Small Banner Start -->
-    <section class="p-0 banners section-padding bg-light">
+    <section class="p-0 banners section-padding bg-light"  ng-init="GetSmallBanner()">
         <div class="container pt-4 pb-4">
             <div class="row g-2 gx-3 justify-content-start m-nowrap">
-                <div class="col-lg-4 col-sm-4 col-7">
+                <div class="col-lg-4 col-sm-4 col-7"   ng-repeat="b in GetSmallBannerData">
                     <div data-aos="zoom-in">
                         <div class="banner-img mb-0 rounded-3">
-                            <a href="banner-category.html">
-                                <img src="https://dummyimage.com/600x250/ccc/fff.jpg" loading="lazy" alt="advertisement-image" class="img-fluid rounded-3 w-100 border-light border">
+                            <a href="/Home/BannerGifts?Banner={{b.MainCateId}}">
+                                <img src="~/images/BannerPTImage/{{b.MImage}}" loading="lazy" alt="advertisement-image" class="img-fluid rounded-3 w-100 border-light border">
                             </a>
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-4 col-sm-4 col-7">
-                    <div data-aos="zoom-in">
-                        <div class="banner-img mb-0 rounded-3">
-                            <a href="banner-category.html">
-                                <img src="https://dummyimage.com/600x250/ccc/fff.jpg" loading="lazy" alt="advertisement-image" class="img-fluid rounded-3 w-100 border-light border">
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-sm-4 col-7">
-                    <div data-aos="zoom-in">
-                        <div class="banner-img mb-0 rounded-3">
-                            <a href="banner-category.html">
-                                <img src="https://dummyimage.com/600x250/ccc/fff.jpg" loading="lazy" alt="advertisement-image" class="img-fluid rounded-3 w-100 border-light border">
-                            </a>
-                        </div>
-                    </div>
-                </div>
+             
             </div>
         </div>
     </section>

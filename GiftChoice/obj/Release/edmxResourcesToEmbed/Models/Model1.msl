@@ -51,6 +51,9 @@
     <EntitySetMapping Name="BannerProductTbls">
       <EntityTypeMapping TypeName="GiftChoiceModel.BannerProductTbl">
         <MappingFragment StoreEntitySet="BannerProductTbl">
+          <ScalarProperty Name="BSubDId" ColumnName="BSubDId" />
+          <ScalarProperty Name="BSubId" ColumnName="BSubId" />
+          <ScalarProperty Name="QueryId" ColumnName="QueryId" />
           <ScalarProperty Name="SameDay" ColumnName="SameDay" />
           <ScalarProperty Name="VideoUrl" ColumnName="VideoUrl" />
           <ScalarProperty Name="Qty" ColumnName="Qty" />
@@ -117,6 +120,9 @@
     <EntitySetMapping Name="BPTKeywordTbls">
       <EntityTypeMapping TypeName="GiftChoiceModel.BPTKeywordTbl">
         <MappingFragment StoreEntitySet="BPTKeywordTbl">
+          <ScalarProperty Name="QueryId" ColumnName="QueryId" />
+          <ScalarProperty Name="BSubDId" ColumnName="BSubDId" />
+          <ScalarProperty Name="BSubId" ColumnName="BSubId" />
           <ScalarProperty Name="Active" ColumnName="Active" />
           <ScalarProperty Name="KeywordId" ColumnName="KeywordId" />
           <ScalarProperty Name="MainCateId" ColumnName="MainCateId" />
@@ -139,6 +145,9 @@
     <EntitySetMapping Name="BSubTitleTbls">
       <EntityTypeMapping TypeName="GiftChoiceModel.BSubTitleTbl">
         <MappingFragment StoreEntitySet="BSubTitleTbl">
+          <ScalarProperty Name="AskQues2" ColumnName="AskQues2" />
+          <ScalarProperty Name="KeywordTitle" ColumnName="KeywordTitle" />
+          <ScalarProperty Name="QueryId" ColumnName="QueryId" />
           <ScalarProperty Name="Update_at" ColumnName="Update_at" />
           <ScalarProperty Name="Create_at" ColumnName="Create_at" />
           <ScalarProperty Name="Active" ColumnName="Active" />
@@ -315,6 +324,7 @@
     <EntitySetMapping Name="BannerPTTbls">
       <EntityTypeMapping TypeName="GiftChoiceModel.BannerPTTbl">
         <MappingFragment StoreEntitySet="BannerPTTbl">
+          <ScalarProperty Name="ModelQuery1" ColumnName="ModelQuery1" />
           <ScalarProperty Name="UserId" ColumnName="UserId" />
           <ScalarProperty Name="Update_at" ColumnName="Update_at" />
           <ScalarProperty Name="Create_at" ColumnName="Create_at" />
@@ -325,6 +335,32 @@
           <ScalarProperty Name="Position" ColumnName="Position" />
           <ScalarProperty Name="MTitle" ColumnName="MTitle" />
           <ScalarProperty Name="MainCateId" ColumnName="MainCateId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="BSubTitleDetailTbls">
+      <EntityTypeMapping TypeName="GiftChoiceModel.BSubTitleDetailTbl">
+        <MappingFragment StoreEntitySet="BSubTitleDetailTbl">
+          <ScalarProperty Name="kSubTitle" ColumnName="kSubTitle" />
+          <ScalarProperty Name="BSubId" ColumnName="BSubId" />
+          <ScalarProperty Name="QueryId" ColumnName="QueryId" />
+          <ScalarProperty Name="MainCateId" ColumnName="MainCateId" />
+          <ScalarProperty Name="BSubDId" ColumnName="BSubDId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="QueryTbls">
+      <EntityTypeMapping TypeName="GiftChoiceModel.QueryTbl">
+        <MappingFragment StoreEntitySet="QueryTbl">
+          <ScalarProperty Name="Update_at" ColumnName="Update_at" />
+          <ScalarProperty Name="Create_at" ColumnName="Create_at" />
+          <ScalarProperty Name="ModelQuery2" ColumnName="ModelQuery2" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+          <ScalarProperty Name="Priority" ColumnName="Priority" />
+          <ScalarProperty Name="Answer" ColumnName="Answer" />
+          <ScalarProperty Name="AskQues1" ColumnName="AskQues1" />
+          <ScalarProperty Name="MainCateId" ColumnName="MainCateId" />
+          <ScalarProperty Name="QId" ColumnName="QId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

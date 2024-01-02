@@ -1,5 +1,7 @@
 ﻿
 @{
+    /**/
+
     ViewBag.Title = "AddBannerQAndAnswer";
     Layout = "~/Views/Shared/_Admin.cshtml";
 }
@@ -20,7 +22,7 @@
                         <li class="breadcrumb-item">
                             <a href="javascript:;"><i class="bx bx-home-alt"></i></a>
                         </li>
-                        <li class="breadcrumb-item active" aria-current="page">Form</li>
+                        <li class="breadcrumb-item active" aria-current="page">Query Keyword Form</li>
                     </ol>
                 </nav>
             </div>
@@ -45,10 +47,10 @@
 
 
                             </div>
-                            <div class="col-md-12" ng-init="GetBannerInProduct()">
+                            <div class="col-md-12">
                                 <label for="input1" class="form-label">Select Banner Title</label>
 
-                                <select id="MainCate" class="form-select" ng-model="BSubTitleTbl.MainCateId" onchange="angular.element(this).scope().GetBannerPInKeyword(this.value)">
+                                <select id="MainCate" class="form-select" ng-model="BSubTitleTbl.MainCateId" onchange="angular.element(this).scope().GetBannerToQuery(this.value)">
                                     <option ng-selected="true" value="-1">Select Banner Title</option>
                                     <option ng-repeat="m in GetBannerInProductData" value="{{m.MainCateId}}">{{m.MTitle}}</option>
                                 </select>
@@ -56,13 +58,44 @@
 
                             </div>
                             <div class="col-md-12">
-                                <label for="input1" class="form-label">Sub Title</label>
-                                <input type="text" class="form-control" ng-model="BSubTitleTbl.SubTitle" id="SubTitle" placeholder="Sub Title">
+                                <label for="input1" class="form-label">Select Answer</label>
+
+                                <select id="QueryId" class="form-select" ng-model="BSubTitleTbl.QueryId">
+                                    <option ng-selected="true" value="-1">Select Ask Question</option>
+                                    <option ng-repeat="m in GetBannerToQueryData" value="{{m.QId}}">{{m.Answer}}</option>
+                                </select>
+
+
                             </div>
                             <div class="col-md-12">
-                                <label for="input1" class="form-label">Priority</label>
-                                <input type="number" class="form-control" ng-model="BSubTitleTbl.Priority" id="Priority" placeholder="Priority">
+                                <label for="input1" class="form-label">Add Keyword Title</label>
+                                <input type="text" class="form-control" ng-model="BSubTitleTbl.KeywordTitle" id="KeywordTitle" placeholder="Enter Keyword Title">
                             </div>
+                            <div class="col-md-12">
+                                <label for="input1" class="form-label">Ask Question ?</label>
+                                <input type="text" class="form-control" ng-model="BSubTitleTbl.AskQues2" id="AskQues2" placeholder="Enter Ask Question ?">
+                            </div>
+                            @*<div class="col-md-12" ng-repeat="m in SubTitleArr">
+                                <div class="row">
+                                    <div class="col-md-10">
+
+                                        <label for="input1" class="form-label">Add Answer</label>
+                                        <input type="text" class="form-control" ng-model="m.SubTitle" id="Answer" placeholder="Answer">
+                                    </div>
+                                    <div class="col-md-2">
+
+                                        <i class="bx bxs-trash" style="font-size: 20px; margin-top: 32px" ng-click="SubTitleRemove($index)"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <button type="button" id="btn" ng-click="AddMoreSubTitle()" class="btn btn-primary px-4">Add Sub Title</button>
+
+                            </div>*@
+                            @*<div class="col-md-12">
+                                    <label for="input1" class="form-label">Priority</label>
+                                    <input type="number" class="form-control" ng-model="BSubTitleTbl.Priority" id="Priority" placeholder="Priority">
+                                </div>*@
 
                             @*<div class="col-md-12" ng-init="GetKeywordData()">
                                 <label for="input1" class="form-label">Select Keyword</label>
@@ -97,9 +130,9 @@
                     <div class="card-body">
                         <div class="d-lg-flex align-items-center mb-4 gap-3">
                             @*<div class="position-relative">
-                                <input type="text" class="form-control ps-5 radius-30" ng-model="search" placeholder="Search here...">
-                                <span class="position-absolute top-50 product-show translate-middle-y"><i class="bx bx-search"></i></span>
-                            </div>*@
+                                    <input type="text" class="form-control ps-5 radius-30" ng-model="search" placeholder="Search here...">
+                                    <span class="position-absolute top-50 product-show translate-middle-y"><i class="bx bx-search"></i></span>
+                                </div>*@
                             @*  <div class="ms-auto"><a href="javascript:;" class="btn btn-primary radius-30 mt-2 mt-lg-0" data-bs-toggle="modal" data-bs-target="#createcompany"><i class="bx bxs-plus-square"></i>Add New Company</a></div>*@
 
 
@@ -113,11 +146,14 @@
                                     <tr>
                                         <th>S.No.</th>
                                         <th>Banner Title</th>
-                                        <th>Sub Title</th>
+                                        <th>1st Ask Question ?</th>
+                                        <th>Keyword Title</th>
+                                        <th>2nd Ask Question ?</th>
+                                        @*<th>Answer</th>*@
 
                                         @*<th>Position</th>*@
                                         @*<th>KeyWord</th>*@
-                                        <th>Priority</th>
+                                        @*<th>Priority</th>*@
                                         @*<th>Image</th>*@
                                         <th>Active</th>
 
@@ -129,11 +165,14 @@
                                     <tr ng-repeat="m in GetBannerSubCateTitleData">
                                         <td>{{$index+1}}</td>
                                         <td>{{m.bMainTitle.MTitle}}</td>
-
-                                        <td>{{m.SubTitle}}</td>
+                                        <td>{{m.QueryTitle.AskQues1}}</td>
+                                        <td>{{m.KeywordTitle}}</td>
+                                        <td>{{m.AskQues2}}</td>
+                                        @*<td>Answer</td>*@
+                                        @*<td>{{m.SubTitle}}</td>*@
                                         @*<td>{{m.Position}}</td>*@
                                         @*<td style="white-space: normal"><span ng-repeat="n in m.Submenu">{{n.SubmenuTitle}},</span></td>*@
-                                        <td>{{m.Priority}}</td>
+                                        @*<td>{{m.Priority}}</td>*@
                                         @*<td><img src="~/images/BannerPTImage/{{m.MImage}}"></td>*@
                                         <td><a ng-click="BannerSubTitleActiveDeActive(m.BSubId)"> <span class="badge {{m.Active==1? 'bg-success' : 'bg-danger'}}">{{m.Active==1?'Active':'Deactive'}}</span></a> </td>
                                         <td><a><i class="bx bxs-pencil" ng-click="GetBannerSubCateTitleById($index)"></i></a></td>
@@ -149,6 +188,7 @@
         </div>
     </div>
 </div>
+
 <script>
     // Select Upload-Area
     const uploadArea = document.querySelector('#uploadArea')

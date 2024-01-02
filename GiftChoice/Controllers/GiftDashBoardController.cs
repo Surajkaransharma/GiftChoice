@@ -624,7 +624,11 @@ namespace GiftChoice.Controllers
             public string VideoUrl { get; set; }
 
             public Nullable<bool> SameDay { get; set; }
+            public Nullable<int> QueryId { get; set; }
 
+            public Nullable<int> BSubId { get; set; }
+
+            public Nullable<int> BSubDId { get; set; }
 
 
         }
@@ -682,6 +686,7 @@ namespace GiftChoice.Controllers
                     productmodel.ProductId = db.ProductTbls.DefaultIfEmpty().Max(r => r == null ? 0 : r.ProductId) + 1;
 
                     productmodel.MainCateId = model.MainCateId;
+
                     productmodel.ProductTitle = model.ProductTitle;
                     productmodel.Active = true;
                     productmodel.PUrl = model.ProductTitle.Replace(" ", "-");
@@ -1352,6 +1357,7 @@ namespace GiftChoice.Controllers
                     }
                     rws.MainCateId = model.MainCateId;
                     rws.Priority = model.Priority;
+
                     rws.BUrl = db.BannerCateTbls.Where(m => m.BannerCateId == model.MainCateId).Select(m => m.BUrl).FirstOrDefault();
                     rws.Active = true;
                     rws.Create_at = DateTime.Now;
@@ -2099,6 +2105,10 @@ namespace GiftChoice.Controllers
                     productmodel.ProductId = db.BannerProductTbls.DefaultIfEmpty().Max(r => r == null ? 0 : r.ProductId) + 1;
 
                     productmodel.MainCateId = model.MainCateId;
+                    productmodel.QueryId = model.QueryId;
+                    productmodel.BSubId = db.BSubTitleDetailTbls.Where(q => q.BSubDId == model.BSubDId).Select(q => q.BSubId).FirstOrDefault();
+                    productmodel.BSubDId = model.BSubDId;
+
                     productmodel.ProductTitle = model.ProductTitle;
                     productmodel.Active = true;
                     productmodel.VideoUrl = model.VideoUrl;
@@ -2290,6 +2300,9 @@ namespace GiftChoice.Controllers
 
 
                     result.MainCateId = model.MainCateId;
+                    result.QueryId = model.QueryId;
+                    result.BSubId = db.BSubTitleDetailTbls.Where(q => q.BSubDId == model.BSubDId).Select(q => q.BSubId).FirstOrDefault();
+                    result.BSubDId = model.BSubDId;
                     result.ProductTitle = model.ProductTitle;
                     result.VideoUrl = model.VideoUrl;
                     result.SameDay = model.SameDay;
@@ -2594,13 +2607,13 @@ namespace GiftChoice.Controllers
             {
                 var result = db.BSubTitleTbls.Where(p => p.KeywordTitle == model.KeywordTitle).FirstOrDefault();
 
-                if (result != null)
-                {
+                //if (result != null)
+                //{
 
-                    var res1 = new { res = "2" };
-                    return Json(res1, JsonRequestBehavior.AllowGet);
+                //    var res1 = new { res = "2" };
+                //    return Json(res1, JsonRequestBehavior.AllowGet);
 
-                }
+                //}
 
                 BSubTitleTbl mainCateTbl = new BSubTitleTbl();
                 mainCateTbl.BSubId = db.BSubTitleTbls.DefaultIfEmpty().Max(r => r == null ? 0 : r.BSubId) + 1;
@@ -2731,6 +2744,8 @@ namespace GiftChoice.Controllers
 
         public class AnswerArr
         {
+            public int QId { get; set; }
+
             public string Answer { get; set; }
 
         }
@@ -2814,26 +2829,44 @@ namespace GiftChoice.Controllers
                 else
                 {
 
-                    var totoid = db.QueryTbls.Where(p => p.MainCateId == query.MainCateId);
-                    db.QueryTbls.RemoveRange(totoid);
-                    db.SaveChanges();
+
                     for (int i = 0; i < answerArrs.Count; i++)
                     {
                         if (query.MainCateId != null)
                         {
 
-                            QueryTbl queryTbl = new QueryTbl();
-                            queryTbl.QId = db.QueryTbls.DefaultIfEmpty().Max(r => r == null ? 0 : r.QId) + 1;
-                            queryTbl.MainCateId = query.MainCateId;
-                            queryTbl.AskQues1 = query.AskQues1;
-                            queryTbl.Answer = answerArrs[i].Answer;
-                            queryTbl.ModelQuery2 = query.ModelQuery2;
-                            queryTbl.Create_at = DateTime.Now;
-                            queryTbl.Update_at = DateTime.Now;
-                            queryTbl.Active = true;
-                            queryTbl.Priority = query.Priority;
-                            db.QueryTbls.Add(queryTbl);
-                            db.SaveChanges();
+                            int querID = answerArrs[i].QId;
+                            var QueryTblmodel = db.QueryTbls.Where(c => c.QId == querID && c.MainCateId == query.MainCateId).FirstOrDefault();
+                            if (QueryTblmodel != null)
+                            {
+
+                                //QueryTbl queryTbl = new QueryTbl();
+                                //queryTbl.QId = db.QueryTbls.DefaultIfEmpty().Max(r => r == null ? 0 : r.QId) + 1;
+                                //queryTbl.MainCateId = query.MainCateId;
+                                QueryTblmodel.AskQues1 = query.AskQues1;
+                                QueryTblmodel.Answer = answerArrs[i].Answer;
+                                QueryTblmodel.ModelQuery2 = query.ModelQuery2;
+                                QueryTblmodel.Create_at = DateTime.Now;
+                                QueryTblmodel.Update_at = DateTime.Now;
+                                QueryTblmodel.Active = true;
+                                db.SaveChanges();
+                            }
+                            else
+                            {
+
+                                QueryTbl queryTbl = new QueryTbl();
+                                queryTbl.QId = db.QueryTbls.DefaultIfEmpty().Max(r => r == null ? 0 : r.QId) + 1;
+                                queryTbl.MainCateId = query.MainCateId;
+                                queryTbl.AskQues1 = query.AskQues1;
+                                queryTbl.Answer = answerArrs[i].Answer;
+                                queryTbl.ModelQuery2 = query.ModelQuery2;
+                                queryTbl.Create_at = DateTime.Now;
+                                queryTbl.Update_at = DateTime.Now;
+                                queryTbl.Active = true;
+                                queryTbl.Priority = query.Priority;
+                                db.QueryTbls.Add(queryTbl);
+                                db.SaveChanges();
+                            }
                         }
                     }
                     var res = new { res = "1" };

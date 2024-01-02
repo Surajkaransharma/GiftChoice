@@ -1,9 +1,9 @@
 ﻿
 @{
-                /**/
+    /**/
 
-                ViewBag.Title = "AddBannerInProduct";
-                Layout = "~/Views/Shared/_Admin.cshtml";
+    ViewBag.Title = "AddBannerInProduct";
+    Layout = "~/Views/Shared/_Admin.cshtml";
 }
 
 <style>
@@ -66,10 +66,10 @@
 
                             </div>
                             <div class="col-md-3">
-                                <label for="input1" class="form-label">Select Relation</label>
+                                <label for="input1" class="form-label">Select Query</label>
 
-                                <select id="MainCate" class="form-select" ng-model="Product.QueryCateId"  onchange="angular.element(this).scope().GetSubTitleList(this.value)">
-                                    <option ng-selected="true" value="-1">Select Relation Title</option>
+                                <select id="MainCate" class="form-select" ng-model="Product.QueryId" onchange="angular.element(this).scope().GetSubTitleList(this.value)">
+                                    <option ng-selected="true" value="-1">Select Query Title</option>
                                     <option ng-repeat="m in GetBannerToQueryData" value="{{m.QId}}">{{m.Answer}}</option>
                                 </select>
 
@@ -78,7 +78,7 @@
                             <div class="col-md-3">
                                 <label for="input1" class="form-label">Select KeyWord Title</label>
 
-                                <select id="MainCate" class="form-select" ng-model="Product.SubnCateId" onchange="angular.element(this).scope().GetQueryKeywordlist(this.value)">
+                                <select id="MainCate" class="form-select" ng-model="Product.BSubDId" onchange="angular.element(this).scope().GetQueryKeywordlist(this.value)">
                                     <option ng-selected="true" value="-1">Select KeyWord Title</option>
                                     <option ng-repeat="m in GetSubTitleListData" value="{{m.BSubDId}}">{{m.kSubTitle}}</option>
                                     @*<option ng-repeat="m in GetBannerInProductData" value="{{m.MainCateId}}">{{m.MTitle}}</option>*@
@@ -157,20 +157,20 @@
 
                             <div class="col-md-2">
                                 <label for="input1" class="form-label">Image 2</label>
-                                <input type="file" class="form-control" upload-file="Product.Image2" id="">
+                                <input type="file" class="form-control" upload-file="Product.Image2" id="image2">
                             </div>
 
                             <div class="col-md-2">
                                 <label for="input1" class="form-label">Image 3</label>
-                                <input type="file" class="form-control" upload-file="Product.Image3" id="">
+                                <input type="file" class="form-control" upload-file="Product.Image3" id="image3">
                             </div>
                             <div class="col-md-2">
                                 <label for="input1" class="form-label">Image 4</label>
-                                <input type="file" class="form-control" upload-file="Product.Image4" id="">
+                                <input type="file" class="form-control" upload-file="Product.Image4" id="image4">
                             </div>
                             <div class="col-md-2">
                                 <label for="input1" class="form-label">Image 5</label>
-                                <input type="file" class="form-control" upload-file="Product.Image5" id="">
+                                <input type="file" class="form-control" upload-file="Product.Image5" id="image5">
                             </div>
                             <div class="col-md-12">
                                 <div class="d-md-flex d-grid align-items-center gap-3">
@@ -215,7 +215,7 @@
                                     <tr>
                                         <th>S.No.</th>
                                         <th class="box1">Product Title</th>
-                                        <th class="box1">Main Category Name</th>
+                                        <th class="box1">Banner Title</th>
                                         <th>Label</th>
                                         <th>See Video</th>
                                         <th>Same Day</th>
@@ -236,9 +236,9 @@
                                         <td style="white-space:normal" class="box1">{{m.ProductTitle}}</td>
                                         <td style="white-space:normal" class="box1">{{m.Maincate}}</td>
                                         <td>{{m.PLabel}}</td>
-                                        <td>{{m.VideoUrl}}</td>
+                                        <td style="white-space:normal" class="box1">{{m.VideoUrl}}</td>
                                         <td>
-                                            <span class="badge {{m.SameDay==1? 'bg-success' : 'bg-danger'}}">{{m.SameDay==1?'Active':'Deactive'}}</span></a>
+                                            <span class="badge {{m.SameDay==1? 'bg-success' : 'bg-danger'}}">{{m.SameDay==1?'open':'Close'}}</span></a>
                                         </td>
 
                                         <td>{{m.Price}}</td>

@@ -1,5 +1,7 @@
 ﻿
 @{
+    /**/
+
     ViewBag.Title = "AddBannerInProduct";
     Layout = "~/Views/Shared/_Admin.cshtml";
 }
@@ -53,12 +55,33 @@
 
 
                             </div>
-                            <div class="col-md-3" >
+                            <div class="col-md-3">
                                 <label for="input1" class="form-label">Select Banner Title</label>
 
-                                <select id="MainCate" class="form-select" ng-model="Product.MainCateId" onchange="angular.element(this).scope().GetBannerPInKeyword(this.value)">
+                                <select id="MainCate" class="form-select" ng-model="Product.MainCateId" onchange="angular.element(this).scope().GetBannerToQuery(this.value)">
                                     <option ng-selected="true" value="-1">Select Banner Title</option>
                                     <option ng-repeat="m in GetBannerInProductData" value="{{m.MainCateId}}">{{m.MTitle}}</option>
+                                </select>
+
+
+                            </div>
+                            <div class="col-md-3">
+                                <label for="input1" class="form-label">Select Query</label>
+
+                                <select id="MainCate" class="form-select" ng-model="Product.QueryId" onchange="angular.element(this).scope().GetSubTitleList(this.value)">
+                                    <option ng-selected="true" value="-1">Select Query Title</option>
+                                    <option ng-repeat="m in GetBannerToQueryData" value="{{m.QId}}">{{m.Answer}}</option>
+                                </select>
+
+
+                            </div>
+                            <div class="col-md-3">
+                                <label for="input1" class="form-label">Select KeyWord Title</label>
+
+                                <select id="MainCate" class="form-select" ng-model="Product.BSubDId" onchange="angular.element(this).scope().GetQueryKeywordlist(this.value)">
+                                    <option ng-selected="true" value="-1">Select KeyWord Title</option>
+                                    <option ng-repeat="m in GetSubTitleListData" value="{{m.BSubDId}}">{{m.kSubTitle}}</option>
+                                    @*<option ng-repeat="m in GetBannerInProductData" value="{{m.MainCateId}}">{{m.MTitle}}</option>*@
                                 </select>
 
 
@@ -73,9 +96,9 @@
                             </div>
 
                             @*<div class="col-md-2">
-            <label for="input1" class="form-label">Priority</label>
-            <input type="number" class="form-control" ng-model="Product.Priority" id="" placeholder="Priority">
-        </div>*@
+                                    <label for="input1" class="form-label">Priority</label>
+                                    <input type="number" class="form-control" ng-model="Product.Priority" id="" placeholder="Priority">
+                                </div>*@
 
                             <div class="col-md-2">
                                 <label for="input1" class="form-label">Price</label>
@@ -87,7 +110,7 @@
                             </div>
                             <div class="col-md-2">
                                 <label for="input1" class="form-label">Same Day Deliver</label>
-                                <input type="checkbox"  ng-model="Product.SameDay" id="" placeholder="">
+                                <input type="checkbox" ng-model="Product.SameDay" id="" placeholder="">
                             </div>
                             <div class="col-md-12" ng-init="GetKeywordData()">
                                 <label for="input1" class="form-label">Select Keyword</label>
@@ -122,10 +145,10 @@
                                 <textarea class="ckeditor" id="ckeditor"></textarea>
                             </div>
                             @*<script>
-            $('.editor1').each(function () {
-                CKEDITOR.replace($(this).prop('id'));
-            });
-        </script>*@
+                                    $('.editor1').each(function () {
+                                        CKEDITOR.replace($(this).prop('id'));
+                                    });
+                                </script>*@
                             <div class="col-md-2">
                                 <label for="input1" class="form-label">Image 1</label>
 
@@ -134,20 +157,20 @@
 
                             <div class="col-md-2">
                                 <label for="input1" class="form-label">Image 2</label>
-                                <input type="file" class="form-control" upload-file="Product.Image2" id="">
+                                <input type="file" class="form-control" upload-file="Product.Image2" id="image2">
                             </div>
 
                             <div class="col-md-2">
                                 <label for="input1" class="form-label">Image 3</label>
-                                <input type="file" class="form-control" upload-file="Product.Image3" id="">
+                                <input type="file" class="form-control" upload-file="Product.Image3" id="image3">
                             </div>
                             <div class="col-md-2">
                                 <label for="input1" class="form-label">Image 4</label>
-                                <input type="file" class="form-control" upload-file="Product.Image4" id="">
+                                <input type="file" class="form-control" upload-file="Product.Image4" id="image4">
                             </div>
                             <div class="col-md-2">
                                 <label for="input1" class="form-label">Image 5</label>
-                                <input type="file" class="form-control" upload-file="Product.Image5" id="">
+                                <input type="file" class="form-control" upload-file="Product.Image5" id="image5">
                             </div>
                             <div class="col-md-12">
                                 <div class="d-md-flex d-grid align-items-center gap-3">
@@ -171,7 +194,7 @@
                                 </div>*@
                             @*  <div class="ms-auto"><a href="javascript:;" class="btn btn-primary radius-30 mt-2 mt-lg-0" data-bs-toggle="modal" data-bs-target="#createcompany"><i class="bx bxs-plus-square"></i>Add New Company</a></div>*@
 
-                            <div class="col-md-3" >
+                            <div class="col-md-3">
                                 <label for="input1" class="form-label">Select Banner Title</label>
 
                                 <select id="MainCate" class="form-select" onchange="angular.element(this).scope().GetBannerProduct(this.value)">
@@ -192,7 +215,7 @@
                                     <tr>
                                         <th>S.No.</th>
                                         <th class="box1">Product Title</th>
-                                        <th class="box1">Main Category Name</th>
+                                        <th class="box1">Banner Title</th>
                                         <th>Label</th>
                                         <th>See Video</th>
                                         <th>Same Day</th>
@@ -213,9 +236,9 @@
                                         <td style="white-space:normal" class="box1">{{m.ProductTitle}}</td>
                                         <td style="white-space:normal" class="box1">{{m.Maincate}}</td>
                                         <td>{{m.PLabel}}</td>
-                                        <td>{{m.VideoUrl}}</td>
+                                        <td style="white-space:normal" class="box1">{{m.VideoUrl}}</td>
                                         <td>
-                                            <span class="badge {{m.SameDay==1? 'bg-success' : 'bg-danger'}}">{{m.SameDay==1?'Active':'Deactive'}}</span></a>
+                                            <span class="badge {{m.SameDay==1? 'bg-success' : 'bg-danger'}}">{{m.SameDay==1?'open':'Close'}}</span></a>
                                         </td>
 
                                         <td>{{m.Price}}</td>
