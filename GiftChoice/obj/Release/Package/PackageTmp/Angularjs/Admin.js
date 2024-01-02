@@ -1545,7 +1545,7 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
     var PSizeArr = [];
     $scope.SubmitBannerProduct = function () {
         debugger
-             
+
 
         var editorText = CKEDITOR.instances.ckeditor.getData();
         $scope.Description = editorText;
@@ -2335,6 +2335,139 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
 
 
     //-------------- Submit Query keyword model End ->------------->---------------------->---------------------------->------->------------>---------->---
+
+
+    //-------------- Submit Festival Banner Start ->------------->---------------------->---------------------------->------->------------>---------->---
+
+
+
+    $scope.SubmitFestivalBanner = function () {
+        debugger
+        //$scope.slideimg = $('#input-file-now').val();
+        //if ($scope.slideimg == "" || $scope.slideimg == undefined) {
+        //    toastr["error"]("Please Select Image");
+        //    $('#input-file-now').focus;
+        //    return;
+        //}
+        //if ($('#priority').val() == "") {
+        //    toastr["error"]("Please Enter Priority");
+        //    $('#priority').focus;
+        //    return;
+        //}
+
+        debugger
+        upload({
+            url: '/GiftDashBoard/SubmitFestivalBanner',
+            method: 'post',
+            data: $scope.FestivalBanner
+        }).then(function (d) {
+            $scope.result = d.data;
+
+            if ($scope.result.res === "1") {
+                toastr["success"]("Festival Banner Saved Successfully");
+                $scope.FestivalBanner = null;
+                $scope.GetFestivalBanner();
+
+
+            }
+            else if ($scope.result.res === "-1") {
+                toastr["error"]("Already Exist");
+            }
+            else {
+                toastr["error"]("Something Went Worng");
+            }
+        }, function (error) {
+            alert(error.data);
+        });
+    };
+
+    $scope.GetFestivalBanner = function () {
+        debugger
+        $http.get("/GiftDashBoard/GetFestivalBanner").then(function (d) {
+
+            debugger
+            $scope.GetFestivalBannerData = d.data;
+
+        }, function (error) {
+            alert(error.data);
+        });
+    };
+    $scope.GetFestivalBannerByid = function (index) {
+        $('#edbtn').css('display', 'block');
+        $('#btn').css('display', 'none');
+        debugger
+        $scope.FestivalBanner = $scope.GetFestivalBannerData[index];
+        const previewImage = document.querySelector('#previewImage');
+        const loadingText = document.querySelector('#loadingText');
+        const dropZoon = document.querySelector('#dropZoon');
+        dropZoon.classList.add('drop-zoon--Uploaded');
+        loadingText.style.display = "none";
+        $('#previewImage').css('display', 'block');
+        previewImage.setAttribute("src", "/images/FestivalBanner/" + $scope.FestivalBanner.FBImage);
+
+    };
+    $scope.UpdateFestivalBanner = function () {
+        //$scope.slideimg = $('#input-file-now').val();
+        //if ($scope.slideimg == "" || $scope.slideimg == undefined) {
+        //    toastr["error"]("Please Select Image");
+        //    $('#input-file-now').focus;
+        //    return;
+        //}
+        //if ($('#priority').val() == "") {
+        //    toastr["error"]("Please Enter Priority");
+        //    $('#priority').focus;
+        //    return;
+        //}
+
+        debugger
+        upload({
+            url: '/GiftDashBoard/UpdateFestivalBanner',
+            method: 'post',
+            data: $scope.FestivalBanner
+        }).then(function (d) {
+            $scope.result = d.data;
+
+            if ($scope.result.res === "1") {
+                toastr["success"]("Festival Banner Update Successfully");
+                $scope.FestivalBanner = null;
+                $('#update').css('display', 'none');
+                $('#submit').css('display', 'block');
+                $scope.GetFestivalBanner();
+            }
+            else if ($scope.result.res === "-1") {
+                toastr["error"]("Priority is Already Exist");
+            }
+            else {
+                toastr["error"]("Something Went Worng");
+            }
+        }, function (error) {
+            alert(error.data);
+        });
+    };
+    $scope.FestivalBannerActiveDeActive = function (id) {
+
+        debugger
+        $http.get("/GiftDashBoard/FestivalBannerActiveDeActive?id=" + id).then(function (d) {
+            debugger
+            $scope.rees = d.data;
+
+
+            if ($scope.rees.res === "1") {
+                toastr["success"]("successful");
+                $scope.GetFestivalBanner();
+            }
+            else {
+                toastr["error"]("something went wrong   ");
+            }
+
+
+        }, function (error) {
+            alert(error.data);
+        });
+    };
+
+
+    //-------------- Submit Festival Banner End ->------------->---------------------->---------------------------->------->------------>---------->---
 
 
 }]).directive('uploadFile', ['$parse', function ($parse) {

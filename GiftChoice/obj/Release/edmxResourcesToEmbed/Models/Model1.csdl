@@ -38,6 +38,7 @@
       <End Role="MainCateTbl" EntitySet="MainCateTbls" />
       <End Role="MCKeywordTbl" EntitySet="MCKeywordTbls" />
     </AssociationSet>
+    <EntitySet Name="FestivalBannerTbls" EntityType="GiftChoiceModel.FestivalBannerTbl" />
   </EntityContainer>
   <EntityType Name="AdminTbl">
     <Key>
@@ -450,4 +451,19 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <EntityType Name="FestivalBannerTbl">
+    <Key>
+      <PropertyRef Name="FBannerId" />
+    </Key>
+    <Property Name="FBannerId" Type="Int64" Nullable="false" />
+    <Property Name="FBTitle" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="FBPosition" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="FBUrl" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Active" Type="Boolean" />
+    <Property Name="Priority" Type="Int64" />
+    <Property Name="FBImage" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Create_at" Type="DateTime" Precision="3" />
+    <Property Name="Update_at" Type="DateTime" Precision="3" />
+    <Property Name="UserId" Type="Int64" />
+  </EntityType>
 </Schema>

@@ -412,5 +412,21 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="FestivalBannerTbls">
+      <EntityTypeMapping TypeName="GiftChoiceModel.FestivalBannerTbl">
+        <MappingFragment StoreEntitySet="FestivalBannerTbl">
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="Update_at" ColumnName="Update_at" />
+          <ScalarProperty Name="Create_at" ColumnName="Create_at" />
+          <ScalarProperty Name="FBImage" ColumnName="FBImage" />
+          <ScalarProperty Name="Priority" ColumnName="Priority" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+          <ScalarProperty Name="FBUrl" ColumnName="FBUrl" />
+          <ScalarProperty Name="FBPosition" ColumnName="FBPosition" />
+          <ScalarProperty Name="FBTitle" ColumnName="FBTitle" />
+          <ScalarProperty Name="FBannerId" ColumnName="FBannerId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

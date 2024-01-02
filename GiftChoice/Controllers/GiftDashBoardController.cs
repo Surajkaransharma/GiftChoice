@@ -51,6 +51,12 @@ namespace GiftChoice.Controllers
             return View();
         }
 
+
+        public ActionResult FestivalBanner()
+        {
+            return View();
+        }
+
         public ActionResult AddRelation()
         {
             return View();
@@ -2962,6 +2968,119 @@ namespace GiftChoice.Controllers
         }
 
         //-------------- Submit Query model end ->------------->---------------------->---------------------------->------->------------>---------->---
+
+
+        //-------------- Submit Festival Banner Start ->------------->---------------------->---------------------------->------->------------>---------->---
+
+
+        public JsonResult SubmitFestivalBanner(FestivalBannerTbl model)
+        {
+            // public HttpPostedFileBase Image { get; set; }
+            try
+            {
+                FestivalBannerTbl rws = new FestivalBannerTbl();
+
+                FestivalBannerTbl result = db.FestivalBannerTbls.FirstOrDefault();
+                if (result != null)
+                {
+                    var res = new { res = "-1" };
+                    return Json(res, JsonRequestBehavior.AllowGet);
+                }
+                else
+                {
+                    rws.FBannerId = db.FestivalBannerTbls.DefaultIfEmpty().Max(r => r == null ? 0 : r.FBannerId) + 1;
+
+                    if (model.Image != null)
+                    {
+                        string extensionstuimg = Path.GetExtension(model.Image.FileName);
+                        model.Image.SaveAs(Server.MapPath("~/images/FestivalBanner/" + rws.FBannerId + "" + extensionstuimg));
+                        rws.FBImage = rws.FBannerId + "" + extensionstuimg;
+                    }
+                    rws.FBTitle = model.FBTitle;
+                    rws.Priority = 1;
+                    rws.FBPosition = model.FBPosition;
+                    rws.FBUrl = model.FBUrl;
+                    rws.Active = true;
+                    db.FestivalBannerTbls.Add(rws);
+                    db.SaveChanges();
+                    var res = new { res = "1" };
+                    return Json(res, JsonRequestBehavior.AllowGet);
+                }
+            }
+            catch (Exception ex)
+            {
+                var md = ex.Message;
+                var res = new { res = "0" };
+                return Json(res, JsonRequestBehavior.AllowGet);
+            }
+        }
+        public JsonResult UpdateFestivalBanner(FestivalBannerTbl model)
+        {
+            // public HttpPostedFileBase Image { get; set; }
+            try
+            {
+
+
+                //FestivalBannerTbl result = db.FestivalBannerTbls.Where(c => c.FBannerId != model.FBannerId && c.Priority == model.Priority).FirstOrDefault();
+                //if (result != null)
+                //{
+                //    var res = new { res = "-1" };
+                //    return Json(res, JsonRequestBehavior.AllowGet);
+                //}
+                //else
+                //{
+                var rws = db.FestivalBannerTbls.Where(r => r.FBannerId == model.FBannerId).FirstOrDefault();
+
+                if (model.Image != null)
+                {
+                    string extensionstuimg = Path.GetExtension(model.Image.FileName);
+                    model.Image.SaveAs(Server.MapPath("~/images/FestivalBanner/" + model.FBannerId + "" + extensionstuimg));
+                    rws.FBImage = model.FBannerId + "" + extensionstuimg;
+                }
+
+                //rws.Priority = model.Priority;
+                rws.FBTitle = model.FBTitle;
+                rws.FBPosition = model.FBPosition;
+                rws.FBUrl = model.FBUrl;
+                db.SaveChanges();
+                var res = new { res = "1" };
+                return Json(res, JsonRequestBehavior.AllowGet);
+                //}
+            }
+            catch (Exception ex)
+            {
+                var md = ex.Message;
+                var res = new { res = "0" };
+                return Json(res, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        public JsonResult FestivalBannerActiveDeActive(int id)
+        {
+            var jb = db.FestivalBannerTbls.Where(c => c.FBannerId == id).FirstOrDefault();
+            if (jb != null)
+            {
+                jb.Active = jb.Active == true ? false : true;
+                db.SaveChanges();
+                var res = new { res = "1" };
+                return Json(res, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                var res = new { res = "2" };
+                return Json(res, JsonRequestBehavior.AllowGet);
+            }
+
+        }
+        public JsonResult GetFestivalBanner()
+        {
+
+            var res = db.FestivalBannerTbls;
+            return Json(res, JsonRequestBehavior.AllowGet);
+        }
+        //-------------- Submit Festival Banner End ->------------->---------------------->---------------------------->------->------------>---------->---
+
+
 
     }
 }

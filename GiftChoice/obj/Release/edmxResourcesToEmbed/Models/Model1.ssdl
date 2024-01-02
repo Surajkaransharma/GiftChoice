@@ -322,6 +322,21 @@
     <Property Name="BSubId" Type="int" />
     <Property Name="kSubTitle" Type="nvarchar(max)" />
   </EntityType>
+  <EntityType Name="FestivalBannerTbl">
+    <Key>
+      <PropertyRef Name="FBannerId" />
+    </Key>
+    <Property Name="FBannerId" Type="bigint" Nullable="false" />
+    <Property Name="FBTitle" Type="nvarchar(max)" />
+    <Property Name="FBPosition" Type="nvarchar(max)" />
+    <Property Name="FBUrl" Type="nvarchar(max)" />
+    <Property Name="Active" Type="bit" />
+    <Property Name="Priority" Type="bigint" />
+    <Property Name="FBImage" Type="nvarchar(max)" />
+    <Property Name="Create_at" Type="datetime" />
+    <Property Name="Update_at" Type="datetime" />
+    <Property Name="UserId" Type="bigint" />
+  </EntityType>
   <EntityType Name="QueryTbl">
     <Key>
       <PropertyRef Name="QId" />
@@ -438,6 +453,7 @@ warning 6002: The table/view 'giftchoice.giftchoice.AutocompleteSuggestions' doe
     <EntitySet Name="UserRegister" EntityType="Self.UserRegister" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="BannerPTTbl" EntityType="Self.BannerPTTbl" Schema="giftchoice" store:Type="Tables" />
     <EntitySet Name="BSubTitleDetailTbl" EntityType="Self.BSubTitleDetailTbl" Schema="giftchoice" store:Type="Tables" />
+    <EntitySet Name="FestivalBannerTbl" EntityType="Self.FestivalBannerTbl" Schema="giftchoice" store:Type="Tables" />
     <EntitySet Name="QueryTbl" EntityType="Self.QueryTbl" Schema="giftchoice" store:Type="Tables" />
     <EntitySet Name="VProduct" EntityType="Self.VProduct" store:Type="Views" store:Schema="dbo">
       <DefiningQuery>SELECT 

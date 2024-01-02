@@ -180,6 +180,9 @@
     <Compile Include="Models\BSubTitleTbl.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\FestivalBannerTbl.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\JsonNetFilterAttribute.cs" />
     <Compile Include="Models\KeywordTbl.cs">
       <DependentUpon>Model1.tt</DependentUpon>
@@ -2546,10 +2549,12 @@
     <Content Include="Views\GiftDashBoard\AddBannerQAndAnswer.cshtml" />
     <Content Include="Views\GiftDashBoard\AddRelation.cshtml" />
     <Content Include="Views\GiftDashBoard\AddQueryKeyword.cshtml" />
+    <Content Include="Views\GiftDashBoard\FestivalBanner.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="images\BannerPTImage\" />
+    <Folder Include="images\FestivalBanner\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
