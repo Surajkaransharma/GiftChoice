@@ -10,6 +10,7 @@
     img {
         width: 50px
     }
+
     .box1 {
         inline-size: 150px !important;
         overflow-wrap: break-word !important;
@@ -46,6 +47,16 @@
                                 <select id="MainCate" class="form-select" ng-model="Product.MainCateId" onchange="angular.element(this).scope().MainCateKeyword(this.value)">
                                     <option ng-selected="true" value="-1">Select Main Category</option>
                                     <option ng-repeat="m in MainCateData" value="{{m.MainCateId}}">{{m.MTitle}}</option>
+                                </select>
+
+
+                            </div>
+                            <div class="col-md-2" ng-init="GetLabelProduct()">
+                                <label for="input1" class="form-label">Select Main Category</label>
+
+                                <select id="LabelId" class="form-select" ng-model="Product.LabelId">
+                                    <option ng-selected="true" value="">Select Label</option>
+                                    <option ng-repeat="m in LabelProductData" value="{{m.LabelId}}">{{m.LTitle}}</option>
                                 </select>
 
 
@@ -144,9 +155,9 @@
                             <div class="col-md-3" ng-init="GetMainCateData()">
                                 <label for="input1" class="form-label">Select Main Category</label>
 
-                                <select id="MainCate" class="form-select"  onchange="angular.element(this).scope().GetProduct(this.value)">
+                                <select id="MainCate" class="form-select" onchange="angular.element(this).scope().GetProduct(this.value)">
                                     <option ng-selected="true" value="-1">Select Main Category</option>
-                                    <option  value="-2">All Product</option>
+                                    <option value="-2">All Product</option>
                                     <option ng-repeat="m in MainCateData" value="{{m.MainCateId}}">{{m.MTitle}}</option>
                                 </select>
 
@@ -157,12 +168,14 @@
 
                         </div>
                         <div class="table-responsive" ng-show="ProductData.length>0">
-                            <table class="table mb-0 table-bordered" >
+                            <table class="table mb-0 table-bordered">
                                 <thead class="table-light">
                                     <tr>
                                         <th>S.No.</th>
                                         <th class="box1">Product Title</th>
                                         <th class="box1">Main Category Name</th>
+                                        <th class="box1">Label Product</th>
+
                                         <th>Label</th>
                                         <th>Price</th>
                                         <th>Priority</th>
@@ -178,6 +191,8 @@
                                         <td>{{$index+1}}</td>
                                         <td style="white-space:normal" class="box1">{{m.ProductTitle}}</td>
                                         <td style="white-space:normal" class="box1">{{m.Maincate}}</td>
+                                        <td style="white-space:normal" class="box1">{{m.labelTitle}}</td>
+
                                         <td>{{m.PLabel}}</td>
                                         <td>{{m.Price}}</td>
                                         <td>{{m.Priority}}</td>

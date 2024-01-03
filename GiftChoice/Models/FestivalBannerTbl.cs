@@ -15,6 +15,7 @@ namespace GiftChoice.Models
 
     public partial class FestivalBannerTbl
     {
+        public HttpPostedFileBase Image { get; set; }
         public long FBannerId { get; set; }
         public string FBTitle { get; set; }
         public string FBPosition { get; set; }
@@ -25,7 +26,5 @@ namespace GiftChoice.Models
         public Nullable<System.DateTime> Create_at { get; set; }
         public Nullable<System.DateTime> Update_at { get; set; }
         public Nullable<long> UserId { get; set; }
-
-        public HttpPostedFileBase Image { get; set; }
     }
 }

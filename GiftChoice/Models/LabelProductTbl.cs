@@ -11,18 +11,16 @@ namespace GiftChoice.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.Web;
-
-    public partial class BannerTbl
+    
+    public partial class LabelProductTbl
     {
-        public HttpPostedFileBase Image { get; set; }
-        public long BannerId { get; set; }
-        public Nullable<long> MainCateId { get; set; }
-        public string BUrl { get; set; }
-        public string BannerImage { get; set; }
-        public Nullable<long> Priority { get; set; }
+        public long LabelId { get; set; }
+        public string LTitle { get; set; }
+        public string LUrl { get; set; }
         public Nullable<bool> Active { get; set; }
+        public Nullable<long> Priority { get; set; }
         public Nullable<System.DateTime> Create_at { get; set; }
         public Nullable<System.DateTime> Update_at { get; set; }
+        public Nullable<long> UserId { get; set; }
     }
 }

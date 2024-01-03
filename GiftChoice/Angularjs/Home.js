@@ -833,10 +833,12 @@ app.controller("HomeController", ['$scope', '$http', '$sce', 'orderByFilter', fu
         $http.get("/Home/GetBannerAsk1?banner=" + banner).then(function (d) {
             $scope.GetBannerAsk1Data = d.data;
             debugger
+            if ($scope.GetBannerAsk1Data[0].BannerTitle.ModelQuery1 == true) {
 
-            setTimeout(() => {
-                $('#modalId').modal("toggle");
-            }, 100);
+                setTimeout(() => {
+                    $('#modalId').modal("toggle");
+                }, 100);
+            }
 
         }, function (error) {
             alert(error.data);
@@ -859,7 +861,7 @@ app.controller("HomeController", ['$scope', '$http', '$sce', 'orderByFilter', fu
             $scope.GetBannerAsk2Data = d.data;
             debugger
 
-        
+
 
         }, function (error) {
             alert(error.data);
@@ -877,7 +879,7 @@ app.controller("HomeController", ['$scope', '$http', '$sce', 'orderByFilter', fu
                     $scope.BSubDId = parseInt($scope.GetBannerAsk2Data[i].AnswerList[k].BSubDId);
                 }
             }
-           
+
         }
 
         $http.get("/Home/ContinueAskQues2?BSubDId=" + $scope.BSubDId).then(function (d) {

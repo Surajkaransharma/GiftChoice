@@ -494,35 +494,14 @@
                             </div>
                         </div>
                     </div>
-                    @*<div class="content page-1">
-                            <h5>{{GetBannerAsk1Data[0].AskQues1}}</h5>
-                            <div class="selection mt-3">
-                                <div class="list-filter size-filter font-small text-capitalize" ng-show="GetBannerAsk2Data==null">
-                                    <span ng-repeat="b in GetBannerAsk1Data">
-                                        <input type="radio" name="radio" id="AskQues1_{{b.QId}}" value="{{b.QId}}" /> {{b.Answer}}
-                                    </span>
-                                </div>
-                                <div class="list-filter size-filter font-small text-capitalize">
-                                    <span ng-repeat="b in GetBannerAsk2Data">
-                                        <span ng-repeat="k in b.AnswerList">
-
-                                            <input type="radio" name="radio" id="AskQues1_{{k.QId}}" value="{{k.BSubDId}}" /> {{k.kSubTitle}}
-                                        </span>
-                                    </span>
-                                </div>
-                                <ul class="list-filter size-filter font-small text-capitalize">
-                                        <li   class="active">
-                                            <a href="#">{{b.Answer}}</a>
-                                        </li>
-
-                                    </ul>
-                            </div>
-                        </div>*@
+                
                 </div>
                 <div class="modal-footer">
                     <a href="/Home/index" type="button" class="btn-danger btn-sm">Back To Home</a>
                     <a href="#" type="button" class="btn btn-primary btn-sm" ng-show="GetBannerAsk2Data==null" ng-click="ContinueAskQues1()">Continue</a>
-                    <a href="#" type="button" class="btn btn-primary btn-sm" ng-show="GetBannerAsk2Data!=null" ng-click="ContinueAskQues2()">Continue</a>
+                    <a href="#" type="button" class="btn btn-primary btn-sm" ng-show="GetBannerAsk2Data!=null"  ng-click="ContinueAskQues2()">Continue</a>
+                    <a href="#" type="button" class="btn btn-primary btn-sm"  data-bs-toggle="modal" data-bs-target="#modalId">Continue</a>
+
 
                 </div>
             </div>

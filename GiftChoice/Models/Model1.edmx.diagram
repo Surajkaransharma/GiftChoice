@@ -37,6 +37,7 @@
         <AssociationConnector Association="GiftChoiceModel.FK__MCKeyword__Keywo__52593CB8" />
         <AssociationConnector Association="GiftChoiceModel.FK__MCKeyword__MainC__534D60F1" />
         <EntityTypeShape EntityType="GiftChoiceModel.FestivalBannerTbl" Width="1.5" PointX="11.375" PointY="15.75" />
+        <EntityTypeShape EntityType="GiftChoiceModel.LabelProductTbl" Width="1.5" PointX="15.375" PointY="12.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

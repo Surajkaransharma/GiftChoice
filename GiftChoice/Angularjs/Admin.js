@@ -2470,6 +2470,138 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
     //-------------- Submit Festival Banner End ->------------->---------------------->---------------------------->------->------------>---------->---
 
 
+
+
+    //-------------- Submit  Label Product  Start ->------------->---------------------->---------------------------->------->------------>---------->---
+
+
+
+    $scope.SubmitLabelProduct = function () {
+        debugger
+        //$scope.slideimg = $('#input-file-now').val();
+        //if ($scope.slideimg == "" || $scope.slideimg == undefined) {
+        //    toastr["error"]("Please Select Image");
+        //    $('#input-file-now').focus;
+        //    return;
+        //}
+        //if ($('#priority').val() == "") {
+        //    toastr["error"]("Please Enter Priority");
+        //    $('#priority').focus;
+        //    return;
+        //}
+
+        debugger
+        $http({
+            url: '/GiftDashBoard/SubmitLabelProduct',
+            method: 'post',
+            data: $scope.LabelProduct
+        }).then(function (d) {
+            $scope.result = d.data;
+
+            if ($scope.result.res === "1") {
+                toastr["success"]("Label Product Saved Successfully");
+                $scope.LabelProduct = null;
+                $scope.GetLabelProduct();
+
+
+            }
+            else if ($scope.result.res === "-1") {
+                toastr["error"]("Already Exist");
+            }
+            else {
+                toastr["error"]("Something Went Worng");
+            }
+        }, function (error) {
+            alert(error.data);
+        });
+    };
+
+    $scope.GetLabelProduct = function () {
+        debugger
+        $http.get("/GiftDashBoard/GetLabelProduct").then(function (d) {
+
+            debugger
+            $scope.LabelProductData = d.data;
+
+        }, function (error) {
+            alert(error.data);
+        });
+    };
+    $scope.GetLabelProductByid = function (index) {
+        debugger
+        $('#edbtn').css('display', 'block');
+        $('#btn').css('display', 'none');
+        debugger
+        $scope.LabelProduct = $scope.LabelProductData[index];     
+
+    };
+    $scope.UpdateLabelProduct = function () {
+        //$scope.slideimg = $('#input-file-now').val();
+        //if ($scope.slideimg == "" || $scope.slideimg == undefined) {
+        //    toastr["error"]("Please Select Image");
+        //    $('#input-file-now').focus;
+        //    return;
+        //}
+        //if ($('#priority').val() == "") {
+        //    toastr["error"]("Please Enter Priority");
+        //    $('#priority').focus;
+        //    return;
+        //}
+
+        debugger
+        $http({
+            url: '/GiftDashBoard/UpdateLabelProduct',
+            method: 'post',
+            data: $scope.LabelProduct
+        }).then(function (d) {
+            $scope.result = d.data;
+
+            if ($scope.result.res === "1") {
+                toastr["success"](" Label Product  Update Successfully");
+                $scope.LabelProduct = null;
+                $('#edbtn').css('display', 'none');
+                $('#btn').css('display', 'block');
+                $scope.GetLabelProduct();
+            }
+            else if ($scope.result.res === "-1") {
+                toastr["error"]("Priority is Already Exist");
+            }
+            else {
+                toastr["error"]("Something Went Worng");
+            }
+        }, function (error) {
+            alert(error.data);
+        });
+    };
+    $scope.LabelProductActiveDeActive = function (id) {
+
+        debugger
+        $http.get("/GiftDashBoard/LabelProductActiveDeActive?id=" + id).then(function (d) {
+            debugger
+            $scope.rees = d.data;
+
+
+            if ($scope.rees.res === "1") {
+                toastr["success"]("successful");
+                $scope.GetLabelProduct();
+            }
+            else {
+                toastr["error"]("something went wrong");
+            }
+
+
+        }, function (error) {
+            alert(error.data);
+        });
+    };
+
+
+    //-------------- Submit Label Product End ->------------->---------------------->---------------------------->------->------------>---------->---
+
+
+
+
+
 }]).directive('uploadFile', ['$parse', function ($parse) {
     return {
         restrict: 'A',

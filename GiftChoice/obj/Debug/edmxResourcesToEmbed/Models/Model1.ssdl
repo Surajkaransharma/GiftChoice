@@ -158,6 +158,19 @@
     <Property Name="Priority" Type="bigint" />
     <Property Name="UserId" Type="bigint" />
   </EntityType>
+  <EntityType Name="LabelProductTbl">
+    <Key>
+      <PropertyRef Name="LabelId" />
+    </Key>
+    <Property Name="LabelId" Type="bigint" Nullable="false" />
+    <Property Name="LTitle" Type="nvarchar(max)" />
+    <Property Name="LUrl" Type="nvarchar(max)" />
+    <Property Name="Active" Type="bit" />
+    <Property Name="Priority" Type="bigint" />
+    <Property Name="Create_at" Type="datetime" />
+    <Property Name="Update_at" Type="datetime" />
+    <Property Name="UserId" Type="bigint" />
+  </EntityType>
   <EntityType Name="MainCateTbl">
     <Key>
       <PropertyRef Name="MainCateId" />
@@ -247,6 +260,7 @@
     <Property Name="Update_at" Type="datetime" />
     <Property Name="UserID" Type="bigint" />
     <Property Name="Qty" Type="bigint" />
+    <Property Name="LabelId" Type="int" />
   </EntityType>
   <EntityType Name="PSizeTbl">
     <Key>
@@ -440,6 +454,7 @@ warning 6002: The table/view 'giftchoice.giftchoice.AutocompleteSuggestions' doe
     <EntitySet Name="BSubKTbl" EntityType="Self.BSubKTbl" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="BSubTitleTbl" EntityType="Self.BSubTitleTbl" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="KeywordTbl" EntityType="Self.KeywordTbl" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="LabelProductTbl" EntityType="Self.LabelProductTbl" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="MainCateTbl" EntityType="Self.MainCateTbl" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="MCKeywordTbl" EntityType="Self.MCKeywordTbl" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="OrderMainTbl" EntityType="Self.OrderMainTbl" Schema="dbo" store:Type="Tables" />

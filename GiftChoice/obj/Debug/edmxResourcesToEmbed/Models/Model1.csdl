@@ -39,6 +39,7 @@
       <End Role="MCKeywordTbl" EntitySet="MCKeywordTbls" />
     </AssociationSet>
     <EntitySet Name="FestivalBannerTbls" EntityType="GiftChoiceModel.FestivalBannerTbl" />
+    <EntitySet Name="LabelProductTbls" EntityType="GiftChoiceModel.LabelProductTbl" />
   </EntityContainer>
   <EntityType Name="AdminTbl">
     <Key>
@@ -291,6 +292,7 @@
     <Property Name="Update_at" Type="DateTime" Precision="3" />
     <Property Name="UserID" Type="Int64" />
     <Property Name="Qty" Type="Int64" />
+    <Property Name="LabelId" Type="Int32" />
   </EntityType>
   <EntityType Name="PSizeTbl">
     <Key>
@@ -462,6 +464,19 @@
     <Property Name="Active" Type="Boolean" />
     <Property Name="Priority" Type="Int64" />
     <Property Name="FBImage" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Create_at" Type="DateTime" Precision="3" />
+    <Property Name="Update_at" Type="DateTime" Precision="3" />
+    <Property Name="UserId" Type="Int64" />
+  </EntityType>
+  <EntityType Name="LabelProductTbl">
+    <Key>
+      <PropertyRef Name="LabelId" />
+    </Key>
+    <Property Name="LabelId" Type="Int64" Nullable="false" />
+    <Property Name="LTitle" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="LUrl" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Active" Type="Boolean" />
+    <Property Name="Priority" Type="Int64" />
     <Property Name="Create_at" Type="DateTime" Precision="3" />
     <Property Name="Update_at" Type="DateTime" Precision="3" />
     <Property Name="UserId" Type="Int64" />

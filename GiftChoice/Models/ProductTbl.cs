@@ -27,5 +27,6 @@ namespace GiftChoice.Models
         public Nullable<System.DateTime> Update_at { get; set; }
         public Nullable<long> UserID { get; set; }
         public Nullable<long> Qty { get; set; }
+        public Nullable<int> LabelId { get; set; }
     }
 }

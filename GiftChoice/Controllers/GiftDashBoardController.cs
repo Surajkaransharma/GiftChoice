@@ -46,6 +46,11 @@ namespace GiftChoice.Controllers
             return View();
         }
 
+        public ActionResult AddLabelProduct()
+        {
+            return View();
+        }
+
         public ActionResult AddSize()
         {
             return View();
@@ -541,7 +546,9 @@ namespace GiftChoice.Controllers
                    m.PUrl,
                    m.Active,
                    m.PDesc,
+                   m.LabelId,
                    m.Priority,
+                   labelTitle = db.LabelProductTbls.Where(q => q.LabelId == m.LabelId).Select(q => q.LTitle).FirstOrDefault(),
                    ProductImage = db.ProductImages.Where(i => i.ProductId == m.ProductId).Select(i => i.PImage),
                    Maincate = db.MainCateTbls.Where(p => p.MainCateId == m.MainCateId).Select(p => p.MTitle).FirstOrDefault(),
                    Submenu = db.PKeywordTbls.Where(s => s.ProductId == m.ProductId && s.Active == true).Select(s => new
@@ -603,6 +610,8 @@ namespace GiftChoice.Controllers
 
         public partial class ProductTblmodel
         {
+            public Nullable<int> LabelId { get; set; }
+
             public long ProductId { get; set; }
             public Nullable<long> MainCateId { get; set; }
             public string ProductTitle { get; set; }
@@ -694,6 +703,7 @@ namespace GiftChoice.Controllers
                     productmodel.MainCateId = model.MainCateId;
 
                     productmodel.ProductTitle = model.ProductTitle;
+                    productmodel.LabelId = model.LabelId;
                     productmodel.Active = true;
                     productmodel.PUrl = model.ProductTitle.Replace(" ", "-");
                     productmodel.PDesc = model.PDesc;
@@ -914,6 +924,7 @@ namespace GiftChoice.Controllers
 
                     result.MainCateId = model.MainCateId;
                     result.ProductTitle = model.ProductTitle;
+                    result.LabelId = model.LabelId;
                     result.PUrl = model.ProductTitle.Replace(" ", "-");
                     result.PLabel = model.PLabel == null ? "" : model.PLabel;
                     result.Price = model.Price;
@@ -3076,6 +3087,92 @@ namespace GiftChoice.Controllers
         {
 
             var res = db.FestivalBannerTbls;
+            return Json(res, JsonRequestBehavior.AllowGet);
+        }
+        //-------------- Submit Festival Banner End ->------------->---------------------->---------------------------->------->------------>---------->---
+
+
+        //-------------- Submit  Label Product  Start ->------------->---------------------->---------------------------->------->------------>---------->---
+
+
+        public JsonResult SubmitLabelProduct(LabelProductTbl model)
+        {
+            try
+            {
+                LabelProductTbl rws = new LabelProductTbl();
+
+                var result = db.LabelProductTbls.Count();
+                if (result >= 3)
+                {
+                    var res = new { res = "-1" };
+                    return Json(res, JsonRequestBehavior.AllowGet);
+                }
+                else
+                {
+                    rws.LabelId = db.LabelProductTbls.DefaultIfEmpty().Max(r => r == null ? 0 : r.LabelId) + 1;
+
+                 
+                    rws.LTitle = model.LTitle;
+                    rws.Priority = model.Priority;
+                    rws.Active = true;
+                    db.LabelProductTbls.Add(rws);
+                    db.SaveChanges();
+                    var res = new { res = "1" };
+                    return Json(res, JsonRequestBehavior.AllowGet);
+                }
+            }
+            catch (Exception ex)
+            {
+                var md = ex.Message;
+                var res = new { res = "0" };
+                return Json(res, JsonRequestBehavior.AllowGet);
+            }
+        }
+        public JsonResult UpdateLabelProduct(LabelProductTbl model)
+        {
+
+            try
+            {
+
+
+                var rws = db.LabelProductTbls.Where(r => r.LabelId == model.LabelId).FirstOrDefault();
+
+                rws.Priority = model.Priority;
+                rws.LTitle = model.LTitle;
+                db.SaveChanges();
+                var res = new { res = "1" };
+                return Json(res, JsonRequestBehavior.AllowGet);
+                //}
+            }
+            catch (Exception ex)
+            {
+                var md = ex.Message;
+                var res = new { res = "0" };
+                return Json(res, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        public JsonResult LabelProductActiveDeActive(int id)
+        {
+            var jb = db.LabelProductTbls.Where(c => c.LabelId == id).FirstOrDefault();
+            if (jb != null)
+            {
+                jb.Active = jb.Active == true ? false : true;
+                db.SaveChanges();
+                var res = new { res = "1" };
+                return Json(res, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                var res = new { res = "2" };
+                return Json(res, JsonRequestBehavior.AllowGet);
+            }
+
+        }
+        public JsonResult GetLabelProduct()
+        {
+
+            var res = db.LabelProductTbls;
             return Json(res, JsonRequestBehavior.AllowGet);
         }
         //-------------- Submit Festival Banner End ->------------->---------------------->---------------------------->------->------------>---------->---
