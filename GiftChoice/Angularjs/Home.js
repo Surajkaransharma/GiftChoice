@@ -895,4 +895,28 @@ app.controller("HomeController", ['$scope', '$http', '$sce', 'orderByFilter', fu
 
     };
 
+    $scope.modelTofilterBannerProduct = function () {
+        debugger
+        var Keywordarr = [];
+        for (var i = 0; i < $scope.GetContinueAskQues2Data.KeywordList.length; i++) {
+            if ($scope.GetContinueAskQues2Data.KeywordList[i].Selected) {
+                Keywordarr.push($scope.GetContinueAskQues2Data.KeywordList[i].KeywordId);
+            }
+        }
+        $http({
+            url: '/Home/modelTofilterBannerProduct',
+            method: 'post',
+            data: {
+                PBanner: Keywordarr
+            }
+        }).then(function (d) {
+            $scope.ProductData = d.data.ProductList;
+            $('#modalId').modal("toggle");
+
+        }, function (error) {
+            toastr["error"]("Something Went Wrong");
+        });
+
+    };
+
 }]);

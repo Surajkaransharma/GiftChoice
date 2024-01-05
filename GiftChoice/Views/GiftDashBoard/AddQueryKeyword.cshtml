@@ -169,7 +169,7 @@
                                         @*<th>Priority</th>*@
                                         @*<th>Image</th>*@
                                         @*<th>Active</th>*@
-                                        @*<th>Action</th>*@
+                                        <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -189,7 +189,7 @@
                                         @*<td>{{m.Priority}}</td>*@
                                         @*<td><img src="~/images/BannerPTImage/{{m.MImage}}"></td>*@
                                         @*<td><a ng-click="BannerSubTitleActiveDeActive(m.BSubId)"> <span class="badge {{m.Active==1? 'bg-success' : 'bg-danger'}}">{{m.Active==1?'Active':'Deactive'}}</span></a> </td>*@
-                                        @*<td><a><i class="bx bxs-pencil" ng-click="GetBannerSubCateTitleById($index)"></i></a></td>*@
+                                        <td><a><i class="bx bxs-pencil" ng-click="GetBannerSubCateTitleById($index)"></i></a></td>
                                     </tr>
 
 

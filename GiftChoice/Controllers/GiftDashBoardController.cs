@@ -2495,12 +2495,9 @@ namespace GiftChoice.Controllers
 
         public JsonResult BannerUpdateProductArrayData(ProductTblmodel model)
         {
-
             try
             {
-
                 BannerProductTbl result = db.BannerProductTbls.Where(c => c.ProductId == model.ProductId).FirstOrDefault();
-
                 if (result != null)
                 {
                     result.PDesc = model.PDesc;

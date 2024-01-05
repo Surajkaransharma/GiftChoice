@@ -971,6 +971,7 @@ namespace GiftChoice.Controllers
 
         public JsonResult ContinueAskQues1(int QId)
         {
+            Session["QueryId"] = QId;
             var res = db.BSubTitleTbls.Where(m => m.QueryId == QId).Select(m => new
             {
                 m.QueryId,
@@ -982,7 +983,7 @@ namespace GiftChoice.Controllers
                 KeyList = db.BPTKeywordTbls.Where(s => s.QueryId == m.QueryId && s.Active == true).Select(s => new
                 {
                     s.QueryId,
-                    s.KeywordId,                    
+                    s.KeywordId,
                     SubmenuTitle = db.KeywordTbls.Where(t => t.KeywordId == s.KeywordId && t.Active == true).Select(t => t.Keyword).FirstOrDefault()
                 }),
 
@@ -993,6 +994,7 @@ namespace GiftChoice.Controllers
         }
         public JsonResult ContinueAskQues2(int BSubDId)
         {
+            Session["BSubDId"] = BSubDId;
             var res = db.BSubTitleDetailTbls.Where(m => m.BSubDId == BSubDId).Select(m => new
             {
                 m.QueryId,
@@ -1013,6 +1015,56 @@ namespace GiftChoice.Controllers
             return Json(res, JsonRequestBehavior.AllowGet);
 
         }
+
+        [JsonNetFilter]
+        public JsonResult modelTofilterBannerProduct(int[] PBanner)
+        {
+            db.Configuration.ProxyCreationEnabled = false;
+
+            List<long> subid = new List<long>();
+
+            for (int i = 0; i < PBanner.Length; i++)
+            {
+                subid.Add(PBanner[i]);
+            }
+
+            var res = new
+            {
+                ProductList = (from bannerCateProduct in db.BPKeywordTbls
+                               join product in db.BannerProductTbls on bannerCateProduct.ProductId equals product.ProductId
+                               where subid.Contains(bannerCateProduct.KeywordId ?? 0)
+                               orderby Guid.NewGuid()
+                               select new
+                               {
+                                   bannerCateProduct.PKeywordId,
+                                   bannerCateProduct.KeywordId,
+                                   product.ProductId,
+                                   product.MainCateId,
+                                   product.ProductTitle,
+                                   product.PLabel,
+                                   product.Price,
+                                   product.PUrl,
+                                   product.Qty,
+                                   product.Create_at,
+                                   product.Active,
+                                   product.Priority,
+                                   ProductImage = db.BannerProductImages
+                                           .Where(i => i.ProductId == product.ProductId)
+                                           .Select(i => i.PImage)
+                                           .FirstOrDefault(),
+                                   Maincate = db.MainCateTbls
+                                           .Where(q => q.MainCateId == product.MainCateId)
+                                           .Select(q => q.MTitle)
+                                           .FirstOrDefault(),
+
+                               }).ToList()
+            };
+            return Json(res, JsonRequestBehavior.AllowGet);
+        }
+
+
+
+
 
     }
 }
