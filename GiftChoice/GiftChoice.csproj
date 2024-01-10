@@ -18,10 +18,10 @@
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>true</UseIISExpress>
     <Use64BitIISExpress />
-    <IISExpressSSLPort />
-    <IISExpressAnonymousAuthentication />
-    <IISExpressWindowsAuthentication />
-    <IISExpressUseClassicPipelineMode />
+    <IISExpressSSLPort>27138</IISExpressSSLPort>
+    <IISExpressAnonymousAuthentication>enabled</IISExpressAnonymousAuthentication>
+    <IISExpressWindowsAuthentication>disabled</IISExpressWindowsAuthentication>
+    <IISExpressUseClassicPipelineMode>false</IISExpressUseClassicPipelineMode>
     <UseGlobalApplicationHostFile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
@@ -1353,7 +1353,9 @@
     <Content Include="images\BannerImage\2.jpg" />
     <Content Include="images\BannerImage\3.jpg" />
     <Content Include="images\BannerImage\4.jpg" />
+    <Content Include="images\BannerPTImage\3.jpg" />
     <Content Include="images\check_img.png" />
+    <Content Include="images\FestivalBanner\1.png" />
     <Content Include="images\gift-choice-vertical.png" />
     <Content Include="images\MainCate\10.jpg" />
     <Content Include="images\MainCate\11.jpg" />
@@ -2557,8 +2559,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="images\BannerPTImage\" />
-    <Folder Include="images\FestivalBanner\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

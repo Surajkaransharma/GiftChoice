@@ -337,24 +337,97 @@ app.controller("HomeController", ['$scope', '$http', '$sce', 'orderByFilter', fu
 
             debugger
             $scope.SliderListData = d.data;
-            //setTimeout(() => {
-            //    var mainslider = $(".home-slider");
-            //    if (mainslider.length > 0) {
-            //        mainslider.owlCarousel({
-            //            items: 1,
-            //            dots: false,
-            //            lazyLoad: true,
-            //            pagination: true,
-            //            autoPlay: 4000,
-            //            loop: true,
-            //            singleItem: true,
-            //            navigation: true,
-            //            stopOnHover: true,
-            //            nav: true,
-            //            navigationText: ["<i class='fa fa-arrow-left'></i>", "<i class='fa fa-arrow-right'></i>"]
-            //        });
-            //    }
-            //}, 10);
+            setTimeout(() => {
+                var mainslider = $(".home-slider");
+                if (mainslider.length > 0) {
+                    mainslider.owlCarousel({
+                        items: 1,
+                        dots: false,
+                        lazyLoad: true,
+                        pagination: true,
+                        autoPlay: 4000,
+                        loop: true,
+                        singleItem: true,
+                        navigation: true,
+                        stopOnHover: true,
+                        nav: true,
+                        navigationText: ["<i class='fa fa-arrow-left'></i>", "<i class='fa fa-arrow-right'></i>"]
+                    });
+                }
+            }, 10);
+        }, function (error) {
+            alert(error.data);
+        });
+    };
+    $scope.GetFestivalBanner = function () {
+        debugger
+        $http.get("/Home/GetFestivalBanner").then(function (d) {
+
+            debugger
+            $scope.FestivalBannerData = d.data;
+
+        }, function (error) {
+            alert(error.data);
+        });
+    };
+    $scope.GetLabelProduct = function () {
+        debugger
+        $http.get("/Home/GetLabelProduct").then(function (d) {
+
+            debugger
+            $scope.TopsellingProduct = d.data.TopsellingProduct;
+            $scope.NewProduct = d.data.NewProduct;
+            $scope.NewArivals = d.data.NewArivals;
+            setTimeout(() => {
+
+                /*Carausel 6 columns*/
+                $(".carausel-6-columns").each(function (key, item) {
+                    var id = $(this).attr("id");
+                    var sliderID = '#' + id;
+                    var appendArrowsClassName = '#' + id + '-arrows'
+
+                    $(sliderID).slick({
+                        dots: false,
+                        infinite: false,
+                        speed: 1000,
+                        arrows: true,
+                        autoplay: true,
+                        slidesToShow: 1,
+                        slidesToScroll: 1,
+                        loop: false,
+                        adaptiveHeight: true,
+                        responsive: [
+                            {
+                                breakpoint: 1025,
+                                settings: {
+                                    slidesToShow: 1,
+                                    slidesToScroll: 1,
+                                }
+                            },
+                            {
+                                breakpoint: 768,
+                                settings: {
+                                    slidesToShow: 1,
+                                    slidesToScroll: 1,
+                                }
+                            },
+                            {
+                                breakpoint: 480,
+                                settings: {
+                                    slidesToShow: 1,
+                                    slidesToScroll: 1
+                                }
+                            }
+                        ],
+                        prevArrow: '<span class="slider-btn slider-prev"><i class="fi-rs-angle-left"></i></span>',
+                        nextArrow: '<span class="slider-btn slider-next"><i class="fi-rs-angle-right"></i></span>',
+                        appendArrows: (appendArrowsClassName),
+                    });
+                });
+
+        }, 10);
+
+
         }, function (error) {
             alert(error.data);
         });
@@ -661,7 +734,6 @@ app.controller("HomeController", ['$scope', '$http', '$sce', 'orderByFilter', fu
 
             setTimeout(() => {
 
-                //Load functions
 
                 $('.product-image-slider').slick({
                     slidesToShow: 1,
@@ -704,50 +776,6 @@ app.controller("HomeController", ['$scope', '$http', '$sce', 'orderByFilter', fu
                         zoomWindowFadeOut: 750
                     });
                 });
-                //Elevate Zoom
-                if ($(".product-image-slider").length) {
-                    $('.product-image-slider .slick-active img').elevateZoom({
-                        zoomType: "inner",
-                        cursor: "crosshair",
-                        zoomWindowFadeIn: 500,
-                        zoomWindowFadeOut: 750
-                    });
-                }
-                //Filter color/Size
-                $('.list-filter').each(function () {
-                    $(this).find('a').on('click', function (event) {
-                        event.preventDefault();
-                        $(this).parent().siblings().removeClass('active');
-                        $(this).parent().toggleClass('active');
-                        $(this).parents('.attr-detail').find('.current-size').text($(this).text());
-                        $(this).parents('.attr-detail').find('.current-color').text($(this).attr('data-color'));
-                    });
-                });
-                //Qty Up-Down
-                $('.detail-qty').each(function () {
-                    var qtyval = parseInt($(this).find('.qty-val').text(), 10);
-                    $('.qty-up').on('click', function (event) {
-                        event.preventDefault();
-                        qtyval = qtyval + 1;
-                        $(this).prev().text(qtyval);
-                    });
-                    $('.qty-down').on('click', function (event) {
-                        event.preventDefault();
-                        qtyval = qtyval - 1;
-                        if (qtyval > 1) {
-                            $(this).next().text(qtyval);
-                        } else {
-                            qtyval = 1;
-                            $(this).next().text(qtyval);
-                        }
-                    });
-                });
-
-                $('.dropdown-menu .cart_list').on('click', function (event) {
-                    event.stopPropagation();
-                });
-
-
             }, 10);
 
         }, function (error) {

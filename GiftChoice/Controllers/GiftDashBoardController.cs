@@ -2951,6 +2951,53 @@ namespace GiftChoice.Controllers
             }
         }
 
+        public JsonResult UpdateQueryAnswerKeyword(BSubTitleDetailTbl model, List<KeywordTbl> keywordsTbl)
+        {
+            try
+            {
+
+                var result = db.BSubTitleDetailTbls.Where(s => s.BSubDId == model.BSubDId).FirstOrDefault();
+                if (result != null)
+                {
+
+                    model.MainCateId = model.MainCateId;
+                    model.kSubTitle = model.kSubTitle;
+                    db.SaveChanges();
+                }
+                var totoid = db.BPTKeywordTbls.Where(p => p.BSubDId == model.BSubDId);
+                db.BPTKeywordTbls.RemoveRange(totoid);
+                db.SaveChanges();
+                if (keywordsTbl != null)
+                {
+
+                    for (int i = 0; i < keywordsTbl.Count; i++)
+                    {
+                        BPTKeywordTbl BPTKeyword = new BPTKeywordTbl();
+                        BPTKeyword.MCkeywordId = db.BPTKeywordTbls.DefaultIfEmpty().Max(r => r == null ? 0 : r.MCkeywordId) + 1;
+                        BPTKeyword.BSubDId = model.BSubDId;
+                        BPTKeyword.BSubId = model.BSubId;
+                        BPTKeyword.QueryId = model.QueryId;
+                        BPTKeyword.KeywordId = keywordsTbl[i].KeywordId;
+                        BPTKeyword.MainCateId = model.MainCateId;
+                        BPTKeyword.Active = true;
+                        db.BPTKeywordTbls.Add(BPTKeyword);
+                        db.SaveChanges();
+
+                    }
+                }
+
+                var res = new { res = "1" };
+                return Json(res, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+
+                var res = new { res = "0" };
+                return Json(res, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+
         public JsonResult GetQueryAnswerKeyword()
         {
             var res = db.BSubTitleDetailTbls.Select(p => new
@@ -3108,7 +3155,7 @@ namespace GiftChoice.Controllers
                 {
                     rws.LabelId = db.LabelProductTbls.DefaultIfEmpty().Max(r => r == null ? 0 : r.LabelId) + 1;
 
-                 
+
                     rws.LTitle = model.LTitle;
                     rws.Priority = model.Priority;
                     rws.Active = true;

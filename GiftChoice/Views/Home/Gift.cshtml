@@ -267,16 +267,17 @@
                                 <div class="detail-info">
                                     <div data-aos="zoom-in">
                                         <span class="badge bg-success mb-2 animate__flash">Same Day Delivery</span>
-                                        <h2 class="title-detail">Product Name Here</h2>
+                                        <h2 class="title-detail">{{Product.ProductTitle}}</h2>
                                         <div class="pro-details-brand">
-                                            <span><a href="shop-by-categories.html">Product Category</a></span>
+                                            <span><a href="/Home/shop?Main={{Product.Maincate.MTitle}}">{{Product.Maincate.MTitle}}</a></span>
+                                            
                                         </div>
                                     </div>
 
                                     <div data-aos="zoom-in">
                                         <div class="clearfix product-price-cover border-0 mb-0">
                                             <div class="product-price primary-color float-left">
-                                                <ins><span class="text-brand"><i class="fa fa-inr" aria-hidden="true"></i>120.00/-</span></ins>
+                                                <ins><span class="text-brand"><i class="fa fa-inr" aria-hidden="true"></i>{{Product.Price}}/-</span></ins>
                                             </div>
                                         </div>
                                     </div>

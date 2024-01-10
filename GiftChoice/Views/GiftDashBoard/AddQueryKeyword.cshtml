@@ -36,7 +36,7 @@
                         <form class="row g-3" enctype="multipart/form-data">
                             <div class="col-md-12">
                                 <label for="input1" class="form-label">Select Banner Position</label>
-                                <select id="MainCateSelect" class="form-select" onchange="angular.element(this).scope().GetBannerInProduct(this.value)" ng-model="BSubTitleTbl.Position">
+                                <select id="Position" class="form-select" onchange="angular.element(this).scope().GetBannerInProduct(this.value)" ng-model="BSubTitleTbl.Position">
                                     <option ng-selected="true" value="-1">Select Banner Position</option>
                                     <option value="Small Banner">Small Banner</option>
                                     <option value="Design Banner">Design Banner</option>
@@ -59,7 +59,7 @@
                             <div class="col-md-12">
                                 <label for="input1" class="form-label">Select Answer</label>
 
-                                <select id="MainCate" class="form-select" ng-model="BSubTitleTbl.QueryId" onchange="angular.element(this).scope().GetQueryToKeyword(this.value)">
+                                <select id="QueryId" class="form-select" ng-model="BSubTitleTbl.QueryId" onchange="angular.element(this).scope().GetQueryToKeyword(this.value)">
                                     <option ng-selected="true" value="-1">Select Ask Question</option>
                                     <option ng-repeat="m in GetBannerToQueryData" value="{{m.QId}}">{{m.Answer}}</option>
                                 </select>
@@ -68,7 +68,7 @@
                             </div>
                             <div class="col-md-12">
                                 <label for="input1" class="form-label">Add Keyword Title</label>
-                                <select id="MainCate" class="form-select" ng-model="BSubTitleTbl.BSubId" onchange="angular.element(this).scope().GetKeywordToAskQuestion(this.value)">
+                                <select id="BSubId" class="form-select" ng-model="BSubTitleTbl.BSubId" onchange="angular.element(this).scope().GetKeywordToAskQuestion(this.value)">
                                     <option ng-selected="true" value="-1">Select Ask Question</option>
                                     <option ng-repeat="m in GetQueryToKeywordData" value="{{m.BSubId}}">{{m.KeywordTitle}}</option>
                                 </select>
@@ -85,7 +85,7 @@
                             <div class="col-md-12">
 
                                 <label for="input1" class="form-label">Answer</label>
-                                <input type="text" class="form-control" ng-model="BSubTitleTbl.kSubTitle" id="Answer" placeholder="Answer">
+                                <input type="text" class="form-control" ng-model="BSubTitleTbl.kSubTitle" id="kSubTitle" placeholder="Answer">
                             </div>
                             @*<div class="col-md-12" ng-repeat="m in SubTitleArr">
                                     <div class="row">
@@ -189,7 +189,7 @@
                                         @*<td>{{m.Priority}}</td>*@
                                         @*<td><img src="~/images/BannerPTImage/{{m.MImage}}"></td>*@
                                         @*<td><a ng-click="BannerSubTitleActiveDeActive(m.BSubId)"> <span class="badge {{m.Active==1? 'bg-success' : 'bg-danger'}}">{{m.Active==1?'Active':'Deactive'}}</span></a> </td>*@
-                                        <td><a><i class="bx bxs-pencil" ng-click="GetBannerSubCateTitleById($index)"></i></a></td>
+                                        <td><a><i class="bx bxs-pencil" ng-click="GetQueryAnswerKeywordById($index)"></i></a></td>
                                     </tr>
 
 

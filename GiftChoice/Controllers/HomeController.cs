@@ -14,6 +14,7 @@ namespace GiftChoice.Controllers
         GiftChoiceEntities db = new GiftChoiceEntities();
         public ActionResult Index()
         {
+            ViewBag.silderData = db.SliderTbls.Where(c => c.Active == true).OrderBy(c => c.Priority);
             return View();
         }
         public JsonResult SliderList()
@@ -29,6 +30,12 @@ namespace GiftChoice.Controllers
                 MainCate = db.MainCateTbls.Where(m => m.MainCateId == c.MainCateId).Select(m => m.MTitle).FirstOrDefault(),
                 c.Active
             }).OrderBy(c => c.Priority);
+            return Json(res, JsonRequestBehavior.AllowGet);
+        }
+        public JsonResult GetFestivalBanner()
+        {
+
+            var res = db.FestivalBannerTbls.Where(c => c.Active == true).OrderBy(c => c.Priority).FirstOrDefault();
             return Json(res, JsonRequestBehavior.AllowGet);
         }
 
@@ -136,7 +143,67 @@ namespace GiftChoice.Controllers
                    ProductImage = db.ProductImages.Where(i => i.ProductId == m.ProductId).Select(i => i.PImage).FirstOrDefault(),
                    Maincate = db.MainCateTbls.Where(p => p.MainCateId == m.MainCateId).Select(p => p.MTitle).FirstOrDefault(),
 
-               }).OrderBy(x => Guid.NewGuid()).Take(4);
+               }).OrderBy(x => Guid.NewGuid()).Take(8);
+            return Json(res, JsonRequestBehavior.AllowGet);
+
+        }
+        [JsonNetFilter]
+        public JsonResult GetLabelProduct()
+        {
+            db.Configuration.ProxyCreationEnabled = false;
+            var res =
+                new
+                {
+                    TopsellingProduct = db.ProductTbls.Where(m => m.Active == true && m.LabelId == 1).Select(m => new
+                    {
+                        m.ProductId,
+                        m.MainCateId,
+                        m.ProductTitle,
+                        m.PLabel,
+                        m.Price,
+                        m.PUrl,
+                        m.Active,
+                        m.Create_at,
+                        m.Priority,
+                        m.Qty,
+                        ProductImage = db.ProductImages.Where(i => i.ProductId == m.ProductId).Select(i => i.PImage).FirstOrDefault(),
+                        Maincate = db.MainCateTbls.Where(p => p.MainCateId == m.MainCateId).Select(p => p.MTitle).FirstOrDefault(),
+
+                    }).OrderBy(x => Guid.NewGuid()).Take(8),
+                    NewProduct = db.ProductTbls.Where(m => m.Active == true && m.LabelId == 2).Select(m => new
+                    {
+                        m.ProductId,
+                        m.MainCateId,
+                        m.ProductTitle,
+                        m.PLabel,
+                        m.Price,
+                        m.PUrl,
+                        m.Active,
+                        m.Create_at,
+                        m.Priority,
+                        m.Qty,
+                        ProductImage = db.ProductImages.Where(i => i.ProductId == m.ProductId).Select(i => i.PImage).FirstOrDefault(),
+                        Maincate = db.MainCateTbls.Where(p => p.MainCateId == m.MainCateId).Select(p => p.MTitle).FirstOrDefault(),
+
+                    }).OrderBy(x => Guid.NewGuid()).Take(8),
+                    NewArivals = db.ProductTbls.Where(m => m.Active == true && m.LabelId == 3).Select(m => new
+                    {
+                        m.ProductId,
+                        m.MainCateId,
+                        m.ProductTitle,
+                        m.PLabel,
+                        m.Price,
+                        m.PUrl,
+                        m.Active,
+                        m.Create_at,
+                        m.Priority,
+                        m.Qty,
+                        ProductImage = db.ProductImages.Where(i => i.ProductId == m.ProductId).Select(i => i.PImage).FirstOrDefault(),
+                        Maincate = db.MainCateTbls.Where(p => p.MainCateId == m.MainCateId).Select(p => p.MTitle).FirstOrDefault(),
+
+                    }).OrderBy(x => Guid.NewGuid()).Take(8),
+
+                };
             return Json(res, JsonRequestBehavior.AllowGet);
 
         }
