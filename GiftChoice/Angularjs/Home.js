@@ -856,9 +856,9 @@ app.controller("HomeController", ['$scope', '$http', '$sce', 'orderByFilter', fu
         var urlParams = new URLSearchParams(window.location.search);
 
         // Get the value of the "CartData" parameter
-        var banner = urlParams.get('Banner');
+        $scope.banner = urlParams.get('Banner');
         debugger
-        $http.get("/Home/GetBannerAsk1?banner=" + banner).then(function (d) {
+        $http.get("/Home/GetBannerAsk1?banner=" + $scope.banner).then(function (d) {
             $scope.GetBannerAsk1Data = d.data;
             debugger
             if ($scope.GetBannerAsk1Data[0].BannerTitle.ModelQuery1 == true) {
@@ -926,16 +926,17 @@ app.controller("HomeController", ['$scope', '$http', '$sce', 'orderByFilter', fu
     $scope.modelTofilterBannerProduct = function () {
         debugger
         var Keywordarr = [];
-        for (var i = 0; i < $scope.GetContinueAskQues2Data.KeywordList.length; i++) {
-            if ($scope.GetContinueAskQues2Data.KeywordList[i].Selected) {
-                Keywordarr.push($scope.GetContinueAskQues2Data.KeywordList[i].KeywordId);
+        for (var i = 0; i < $scope.GetBannerAsk1Data.length; i++) {
+            if ($scope.GetBannerAsk1Data[i].Selected) {
+                Keywordarr.push($scope.GetBannerAsk1Data[i].QId);
             }
         }
         $http({
             url: '/Home/modelTofilterBannerProduct',
             method: 'post',
             data: {
-                PBanner: Keywordarr
+                PBanner: Keywordarr,
+                BannerId: $scope.banner
             }
         }).then(function (d) {
             $scope.ProductData = d.data.ProductList;

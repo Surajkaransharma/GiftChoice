@@ -28,5 +28,6 @@ namespace GiftChoice.Models
         public Nullable<long> UserID { get; set; }
         public Nullable<long> Qty { get; set; }
         public Nullable<int> LabelId { get; set; }
+        public string TableDesc { get; set; }
     }
 }

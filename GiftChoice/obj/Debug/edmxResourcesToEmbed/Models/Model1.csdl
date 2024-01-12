@@ -14,6 +14,7 @@
     <EntitySet Name="BSubKTbls" EntityType="GiftChoiceModel.BSubKTbl" />
     <EntitySet Name="BSubTitleTbls" EntityType="GiftChoiceModel.BSubTitleTbl" />
     <EntitySet Name="KeywordTbls" EntityType="GiftChoiceModel.KeywordTbl" />
+    <EntitySet Name="LabelProductTbls" EntityType="GiftChoiceModel.LabelProductTbl" />
     <EntitySet Name="MainCateTbls" EntityType="GiftChoiceModel.MainCateTbl" />
     <EntitySet Name="MCKeywordTbls" EntityType="GiftChoiceModel.MCKeywordTbl" />
     <EntitySet Name="OrderMainTbls" EntityType="GiftChoiceModel.OrderMainTbl" />
@@ -26,7 +27,9 @@
     <EntitySet Name="SliderTbls" EntityType="GiftChoiceModel.SliderTbl" />
     <EntitySet Name="UserRegisters" EntityType="GiftChoiceModel.UserRegister" />
     <EntitySet Name="BannerPTTbls" EntityType="GiftChoiceModel.BannerPTTbl" />
+    <EntitySet Name="BannerQueryListTbls" EntityType="GiftChoiceModel.BannerQueryListTbl" />
     <EntitySet Name="BSubTitleDetailTbls" EntityType="GiftChoiceModel.BSubTitleDetailTbl" />
+    <EntitySet Name="FestivalBannerTbls" EntityType="GiftChoiceModel.FestivalBannerTbl" />
     <EntitySet Name="QueryTbls" EntityType="GiftChoiceModel.QueryTbl" />
     <EntitySet Name="VProducts" EntityType="GiftChoiceModel.VProduct" />
     <EntitySet Name="AutocompleteSuggestions" EntityType="GiftChoiceModel.AutocompleteSuggestion" />
@@ -38,8 +41,6 @@
       <End Role="MainCateTbl" EntitySet="MainCateTbls" />
       <End Role="MCKeywordTbl" EntitySet="MCKeywordTbls" />
     </AssociationSet>
-    <EntitySet Name="FestivalBannerTbls" EntityType="GiftChoiceModel.FestivalBannerTbl" />
-    <EntitySet Name="LabelProductTbls" EntityType="GiftChoiceModel.LabelProductTbl" />
   </EntityContainer>
   <EntityType Name="AdminTbl">
     <Key>
@@ -200,6 +201,19 @@
     <Property Name="UserId" Type="Int64" />
     <NavigationProperty Name="MCKeywordTbls" Relationship="GiftChoiceModel.FK__MCKeyword__Keywo__52593CB8" FromRole="KeywordTbl" ToRole="MCKeywordTbl" />
   </EntityType>
+  <EntityType Name="LabelProductTbl">
+    <Key>
+      <PropertyRef Name="LabelId" />
+    </Key>
+    <Property Name="LabelId" Type="Int64" Nullable="false" />
+    <Property Name="LTitle" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="LUrl" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Active" Type="Boolean" />
+    <Property Name="Priority" Type="Int64" />
+    <Property Name="Create_at" Type="DateTime" Precision="3" />
+    <Property Name="Update_at" Type="DateTime" Precision="3" />
+    <Property Name="UserId" Type="Int64" />
+  </EntityType>
   <EntityType Name="MainCateTbl">
     <Key>
       <PropertyRef Name="MainCateId" />
@@ -293,6 +307,7 @@
     <Property Name="UserID" Type="Int64" />
     <Property Name="Qty" Type="Int64" />
     <Property Name="LabelId" Type="Int32" />
+    <Property Name="TableDesc" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
   </EntityType>
   <EntityType Name="PSizeTbl">
     <Key>
@@ -358,6 +373,15 @@
     <Property Name="UserId" Type="Int64" />
     <Property Name="ModelQuery1" Type="Boolean" />
   </EntityType>
+  <EntityType Name="BannerQueryListTbl">
+    <Key>
+      <PropertyRef Name="BannerQueryListId" />
+    </Key>
+    <Property Name="BannerQueryListId" Type="Int32" Nullable="false" />
+    <Property Name="QueryId" Type="Int32" />
+    <Property Name="BMainCateId" Type="Int32" />
+    <Property Name="ProductId" Type="Int64" />
+  </EntityType>
   <EntityType Name="BSubTitleDetailTbl">
     <Key>
       <PropertyRef Name="BSubDId" />
@@ -367,6 +391,21 @@
     <Property Name="QueryId" Type="Int32" />
     <Property Name="BSubId" Type="Int32" />
     <Property Name="kSubTitle" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="FestivalBannerTbl">
+    <Key>
+      <PropertyRef Name="FBannerId" />
+    </Key>
+    <Property Name="FBannerId" Type="Int64" Nullable="false" />
+    <Property Name="FBTitle" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="FBPosition" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="FBUrl" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Active" Type="Boolean" />
+    <Property Name="Priority" Type="Int64" />
+    <Property Name="FBImage" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Create_at" Type="DateTime" Precision="3" />
+    <Property Name="Update_at" Type="DateTime" Precision="3" />
+    <Property Name="UserId" Type="Int64" />
   </EntityType>
   <EntityType Name="QueryTbl">
     <Key>
@@ -453,32 +492,4 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <EntityType Name="FestivalBannerTbl">
-    <Key>
-      <PropertyRef Name="FBannerId" />
-    </Key>
-    <Property Name="FBannerId" Type="Int64" Nullable="false" />
-    <Property Name="FBTitle" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="FBPosition" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="FBUrl" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="Active" Type="Boolean" />
-    <Property Name="Priority" Type="Int64" />
-    <Property Name="FBImage" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="Create_at" Type="DateTime" Precision="3" />
-    <Property Name="Update_at" Type="DateTime" Precision="3" />
-    <Property Name="UserId" Type="Int64" />
-  </EntityType>
-  <EntityType Name="LabelProductTbl">
-    <Key>
-      <PropertyRef Name="LabelId" />
-    </Key>
-    <Property Name="LabelId" Type="Int64" Nullable="false" />
-    <Property Name="LTitle" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="LUrl" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="Active" Type="Boolean" />
-    <Property Name="Priority" Type="Int64" />
-    <Property Name="Create_at" Type="DateTime" Precision="3" />
-    <Property Name="Update_at" Type="DateTime" Precision="3" />
-    <Property Name="UserId" Type="Int64" />
-  </EntityType>
 </Schema>

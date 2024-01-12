@@ -61,18 +61,18 @@
                                     <div class="product-img-action-wrap">
                                         <div class="product-img product-img-zoom">
                                             <a href="product-detail.html">
-                                                <img class="default-img img-fluid" src="https://dummyimage.com/500x500/ccc/000" loading="lazy" alt="product-image" loading="lazy" alt="">
-                                                <img class="hover-img img-fluid" src="https://dummyimage.com/500x500/000/fff" loading="lazy" alt="product-hover-image" loading="lazy" alt="">
+                                                <img class="default-img img-fluid" src="~/images/ProductImg/{{p.ProductImage}}" loading="lazy" alt="product-image" loading="lazy" alt="">
+                                                <img class="hover-img img-fluid" src="~/images/ProductImg/{{p.ProductImage}}" loading="lazy" alt="product-hover-image" loading="lazy" alt="">
                                             </a>
                                         </div>
                                         <div class="product-badges product-badges-position product-badges-mrg">
-                                            <span class="hot">New Launch</span>
+                                            <span class="hot">{{p.PLabel}}</span>
                                         </div>
                                     </div>
                                     <div class="product-content-wrap">
                                         <h2 class="mt-2"><a href="product-detail.html">{{p.ProductTitle}}</a></h2>
                                         <div class="product-price">
-                                            <span><i class="fa fa-inr" aria-hidden="true"></i> 200.00/-</span>
+                                            <span><i class="fa fa-inr" aria-hidden="true"></i> {{p.Price}}/-</span>
                                         </div>
                                         <div class="product-action-1 show">
                                             <a aria-label="Add To Cart" class="action-btn hover-up" href="cart.html"><i class="fi-rs-shopping-bag-add"></i></a>
@@ -100,31 +100,14 @@
                 </div>
                 <div class="modal-body p-4">
                     <div class="content page-1">
-                        <h5 ng-show="GetBannerAsk2Data==null">{{GetBannerAsk1Data[0].AskQues1}}</h5>
-                        <h5 ng-show="GetBannerAsk2Data!=null">{{GetBannerAsk2Data[0].AskQues2}}</h5>
-
+                        <h5 >{{GetBannerAsk1Data[0].AskQues1}}</h5>
                         <div class="selection mt-3">
                             <div class="radio-button-style">
                                 <span ng-repeat="b in GetBannerAsk1Data" ng-show="GetBannerAsk2Data==null">
 
-                                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="AskQues1_{{b.QId}}" value="{{b.QId}}">
+                                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="AskQues1_{{b.QId}}" value="{{b.QId}}" ng-model="b.Selected">
                                     <label class="form-check-label mb-0" for="AskQues1_{{b.QId}}">{{b.Answer}}</label>
-                                </span>
-                                <span ng-repeat="b in GetBannerAsk2Data" ng-show="GetContinueAskQues2Data.KeywordList==null">
-                                    <span ng-repeat="k in b.AnswerList">
-                                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="AskQues2_{{k.BSubDId}}" value="{{k.BSubDId}}">
-                                        <label class="form-check-label mb-0" for="AskQues2_{{k.BSubDId}}"> {{k.kSubTitle}}</label>
-                                    </span>
-                                </span>
-
-                                <div class="checkbox-button-style">
-                                    <span ng-repeat="b in GetContinueAskQues2Data.KeywordList">
-
-                                        <input class="form-check-input" type="checkbox" name="inlineCheckboxOptions" id="AskQues3_{{b.KeywordId}}" ng-model="b.Selected" value="{{b.KeywordId}}">
-                                        <label class="form-check-label mb-0" for="AskQues3_{{b.KeywordId}}"> {{b.SubmenuTitle}}</label>
-                                    </span>
-                                </div>
-
+                                </span>                           
 
 
 
@@ -135,12 +118,9 @@
                 </div>
                 <div class="modal-footer">
                     <a href="/Home/index" type="button" class="btn-danger btn-sm">Back To Home</a>
-                    <a href="#" type="button" class="btn btn-primary btn-sm" ng-show="GetBannerAsk2Data==null" ng-click="ContinueAskQues1()">Continue</a>
-                    <a href="#" type="button" class="btn btn-primary btn-sm" ng-show="GetBannerAsk2Data!=null && GetContinueAskQues2Data.KeywordList==null" ng-click="ContinueAskQues2()">Continue</a>
-                    <a href="#" type="button" class="btn btn-primary btn-sm" ng-show="GetBannerAsk2Data!=null && GetContinueAskQues2Data.KeywordList!=null" ng-click="modelTofilterBannerProduct()" >Continue</a>
+                    <a href="#" type="button" class="btn btn-primary btn-sm"  ng-click="modelTofilterBannerProduct()">Continue</a>
 
-                    @*<a href="#" type="button" class="btn btn-primary btn-sm"  data-bs-toggle="modal" data-bs-target="#modalId">Continue</a>*@
-
+             
 
                 </div>
             </div>

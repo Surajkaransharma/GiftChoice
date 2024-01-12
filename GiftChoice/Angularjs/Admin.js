@@ -1565,7 +1565,7 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
         //var PSizeArr = [];
 
         $.each($(".checkbox-input:checked"), function () {
-            Keywordarr.push({ 'KeywordId': $(this).val() });
+            Keywordarr.push({ 'QueryId': $(this).val() });
         });
         for (var i = 0; i < $scope.SizeList.length; i++) {
             if ($scope.SizeList[i].Selected) {
@@ -1606,7 +1606,7 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
             data: {
                 ProductId: id,
                 PDesc1: $scope.Description,
-                KeywordTbls: Keywordarr,
+                bannerQueryListTbls: Keywordarr,
                 BPSizeTbl: PSizeArr
             }
         }).then(function (d) {
@@ -1686,7 +1686,7 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
         //    }
         //}
         $.each($(".checkbox-input:checked"), function () {
-            Keywordarr.push({ 'KeywordId': $(this).val() });
+            Keywordarr.push({ 'QueryId': $(this).val() });
         });
         $.each($(".checkbox-Size:checked"), function () {
             PSizeArr.push({ 'SizeId': $(this).val() });
@@ -1726,7 +1726,7 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
             data: {
                 ProductId: id,
                 PDesc1: $scope.Description,
-                KeywordTbls: Keywordarr,
+                bannerQueryListTbls: Keywordarr,
                 BPSizeTbl: PSizeArr
 
             }
@@ -1781,14 +1781,18 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
         $('#edbtn').css('display', 'inline');
         debugger
 
-        for (var s = 0; s < $scope.KeywordList.length; s++) {
-            var vallc1s = $scope.KeywordList[s].KeywordId;
+        $scope.Product = $scope.ProductData[index];
+
+
+        $scope.GetBannerToQuery($scope.Product.MainCateId);
+
+        for (var s = 0; s < $scope.GetBannerToQueryData.length; s++) {
+            var vallc1s = $scope.GetBannerToQueryData[s].QId;
             $('#Keyword_' + vallc1s).prop('checked', false);
 
         }
 
 
-        $scope.Product = $scope.ProductData[index];
 
         /*        CKEDITOR.instances.ckeditor.setData($scope.Product.PDesc);*/
         CKEDITOR.instances.ckeditor.setData($scope.Product.PDesc1);
@@ -1798,7 +1802,7 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
         //previewImage.setAttribute("src", "/images/MainCate/" + $scope.MainCate.MImage);
         debugger
         for (var i = 0; i < $scope.Product.Submenu.length; i++) {
-            var vallc = $scope.Product.Submenu[i].KeywordId;
+            var vallc = $scope.Product.Submenu[i].QueryId;
             $('#Keyword_' + vallc).prop('checked', true);
         }
         for (var i = 0; i < $scope.Product.PSizeList.length; i++) {

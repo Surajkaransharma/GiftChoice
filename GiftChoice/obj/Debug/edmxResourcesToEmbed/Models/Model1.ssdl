@@ -261,6 +261,7 @@
     <Property Name="UserID" Type="bigint" />
     <Property Name="Qty" Type="bigint" />
     <Property Name="LabelId" Type="int" />
+    <Property Name="TableDesc" Type="nvarchar(max)" />
   </EntityType>
   <EntityType Name="PSizeTbl">
     <Key>
@@ -325,6 +326,15 @@
     <Property Name="Update_at" Type="datetime" />
     <Property Name="UserId" Type="bigint" />
     <Property Name="ModelQuery1" Type="bit" />
+  </EntityType>
+  <EntityType Name="BannerQueryListTbl">
+    <Key>
+      <PropertyRef Name="BannerQueryListId" />
+    </Key>
+    <Property Name="BannerQueryListId" Type="int" Nullable="false" />
+    <Property Name="QueryId" Type="int" />
+    <Property Name="BMainCateId" Type="int" />
+    <Property Name="ProductId" Type="bigint" />
   </EntityType>
   <EntityType Name="BSubTitleDetailTbl">
     <Key>
@@ -467,6 +477,7 @@ warning 6002: The table/view 'giftchoice.giftchoice.AutocompleteSuggestions' doe
     <EntitySet Name="SliderTbl" EntityType="Self.SliderTbl" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="UserRegister" EntityType="Self.UserRegister" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="BannerPTTbl" EntityType="Self.BannerPTTbl" Schema="giftchoice" store:Type="Tables" />
+    <EntitySet Name="BannerQueryListTbl" EntityType="Self.BannerQueryListTbl" Schema="giftchoice" store:Type="Tables" />
     <EntitySet Name="BSubTitleDetailTbl" EntityType="Self.BSubTitleDetailTbl" Schema="giftchoice" store:Type="Tables" />
     <EntitySet Name="FestivalBannerTbl" EntityType="Self.FestivalBannerTbl" Schema="giftchoice" store:Type="Tables" />
     <EntitySet Name="QueryTbl" EntityType="Self.QueryTbl" Schema="giftchoice" store:Type="Tables" />

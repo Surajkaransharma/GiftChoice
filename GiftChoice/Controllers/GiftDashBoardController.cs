@@ -633,6 +633,8 @@ namespace GiftChoice.Controllers
             public HttpPostedFileBase Image4 { get; set; }
             public HttpPostedFileBase Image5 { get; set; }
             public List<KeywordTbl> KeywordTbls { get; set; }
+            public List<BannerQueryListTbl> bannerQueryListTbls { get; set; }
+
             public List<SizeTbl> SizeTbls { get; set; }
             public List<BPSizeTbl> BPSizeTbl { get; set; }
 
@@ -707,6 +709,7 @@ namespace GiftChoice.Controllers
                     productmodel.Active = true;
                     productmodel.PUrl = model.ProductTitle.Replace(" ", "-");
                     productmodel.PDesc = model.PDesc;
+                    
                     productmodel.PLabel = model.PLabel == null ? "" : model.PLabel;
                     productmodel.Price = model.Price;
                     productmodel.Qty = 1;
@@ -2238,20 +2241,35 @@ namespace GiftChoice.Controllers
                 }
 
 
-                if (model.KeywordTbls != null)
+                if (model.bannerQueryListTbls != null)
                 {
-                    for (int i = 0; i < model.KeywordTbls.Count; i++)
+                    for (int i = 0; i < model.bannerQueryListTbls.Count; i++)
                     {
-                        BPKeywordTbl pKeyword = new BPKeywordTbl();
-                        pKeyword.PKeywordId = db.BPKeywordTbls.DefaultIfEmpty().Max(r => r == null ? 0 : r.PKeywordId) + 1;
-                        pKeyword.ProductId = model.ProductId;
-                        pKeyword.Active = true;
-                        pKeyword.KeywordId = model.KeywordTbls[i].KeywordId;
-                        db.BPKeywordTbls.Add(pKeyword);
+                        BannerQueryListTbl pKeyword = new BannerQueryListTbl();
+                        pKeyword.BannerQueryListId = db.BannerQueryListTbls.DefaultIfEmpty().Max(r => r == null ? 0 : r.BannerQueryListId) + 1;
+                        pKeyword.BMainCateId = Convert.ToInt32(result.MainCateId);
+                        pKeyword.ProductId = result.ProductId;                     
+                        pKeyword.QueryId = model.bannerQueryListTbls[i].QueryId;
+                        db.BannerQueryListTbls.Add(pKeyword);
                         db.SaveChanges();
 
                     }
                 }
+
+                //if (model.KeywordTbls != null)
+                //{
+                //    for (int i = 0; i < model.KeywordTbls.Count; i++)
+                //    {
+                //        BPKeywordTbl pKeyword = new BPKeywordTbl();
+                //        pKeyword.PKeywordId = db.BPKeywordTbls.DefaultIfEmpty().Max(r => r == null ? 0 : r.PKeywordId) + 1;
+                //        pKeyword.ProductId = model.ProductId;
+                //        pKeyword.Active = true;
+                //        pKeyword.KeywordId = model.KeywordTbls[i].KeywordId;
+                //        db.BPKeywordTbls.Add(pKeyword);
+                //        db.SaveChanges();
+
+                //    }
+                //}
 
                 if (model.BPSizeTbl != null)
                 {
@@ -2504,24 +2522,40 @@ namespace GiftChoice.Controllers
                     result.PDesc1 = model.PDesc1;
 
                     db.SaveChanges();
-
-                    var totoid = db.BPKeywordTbls.Where(p => p.ProductId == model.ProductId);
-                    db.BPKeywordTbls.RemoveRange(totoid);
+                    var totoid = db.BannerQueryListTbls.Where(p => p.ProductId == model.ProductId);
+                    db.BannerQueryListTbls.RemoveRange(totoid);
                     db.SaveChanges();
-                    if (model.KeywordTbls != null)
+                    if (model.bannerQueryListTbls != null)
                     {
-                        for (int i = 0; i < model.KeywordTbls.Count; i++)
+                        for (int i = 0; i < model.bannerQueryListTbls.Count; i++)
                         {
-                            BPKeywordTbl pKeyword = new BPKeywordTbl();
-                            pKeyword.PKeywordId = db.BPKeywordTbls.DefaultIfEmpty().Max(r => r == null ? 0 : r.PKeywordId) + 1;
-                            pKeyword.ProductId = model.ProductId;
-                            pKeyword.Active = true;
-                            pKeyword.KeywordId = model.KeywordTbls[i].KeywordId;
-                            db.BPKeywordTbls.Add(pKeyword);
+                            BannerQueryListTbl pKeyword = new BannerQueryListTbl();
+                            pKeyword.BannerQueryListId = db.BannerQueryListTbls.DefaultIfEmpty().Max(r => r == null ? 0 : r.BannerQueryListId) + 1;
+                            pKeyword.BMainCateId = Convert.ToInt32(result.MainCateId);
+                            pKeyword.ProductId = result.ProductId;
+                            pKeyword.QueryId = model.bannerQueryListTbls[i].QueryId;
+                            db.BannerQueryListTbls.Add(pKeyword);
                             db.SaveChanges();
 
                         }
                     }
+                    //var totoid = db.BPKeywordTbls.Where(p => p.ProductId == model.ProductId);
+                    //db.BPKeywordTbls.RemoveRange(totoid);
+                    //db.SaveChanges();
+                    //if (model.KeywordTbls != null)
+                    //{
+                    //    for (int i = 0; i < model.KeywordTbls.Count; i++)
+                    //    {
+                    //        BPKeywordTbl pKeyword = new BPKeywordTbl();
+                    //        pKeyword.PKeywordId = db.BPKeywordTbls.DefaultIfEmpty().Max(r => r == null ? 0 : r.PKeywordId) + 1;
+                    //        pKeyword.ProductId = model.ProductId;
+                    //        pKeyword.Active = true;
+                    //        pKeyword.KeywordId = model.KeywordTbls[i].KeywordId;
+                    //        db.BPKeywordTbls.Add(pKeyword);
+                    //        db.SaveChanges();
+
+                    //    }
+                    //}
 
                     var Sizeid = db.BPSizeTbls.Where(p => p.ProductId == model.ProductId);
                     db.BPSizeTbls.RemoveRange(Sizeid);
@@ -2575,13 +2609,20 @@ namespace GiftChoice.Controllers
                    m.Priority,
                    ProductImage = db.BannerProductImages.Where(i => i.ProductId == m.ProductId).Select(i => i.PImage),
                    Maincate = db.BannerPTTbls.Where(p => p.MainCateId == m.MainCateId).Select(p => p.MTitle).FirstOrDefault(),
-                   Submenu = db.BPKeywordTbls.Where(s => s.ProductId == m.ProductId && s.Active == true).Select(s => new
+                   Submenu = db.BannerQueryListTbls.Where(s => s.ProductId == m.ProductId).Select(s => new
                    {
                        s.ProductId,
-                       s.KeywordId,
-                       s.PKeywordId,
-                       SubmenuTitle = db.KeywordTbls.Where(t => t.KeywordId == s.KeywordId && t.Active == true).Select(t => t.Keyword).FirstOrDefault()
+                       s.QueryId,
+                       s.BannerQueryListId,
+                       SubmenuTitle = db.QueryTbls.Where(t => t.QId == s.QueryId && t.Active == true).Select(t => t.Answer).FirstOrDefault()
                    }),
+                   //Submenu = db.BPKeywordTbls.Where(s => s.ProductId == m.ProductId && s.Active == true).Select(s => new
+                   //{
+                   //    s.ProductId,
+                   //    s.KeywordId,
+                   //    s.PKeywordId,
+                   //    SubmenuTitle = db.KeywordTbls.Where(t => t.KeywordId == s.KeywordId && t.Active == true).Select(t => t.Keyword).FirstOrDefault()
+                   //}),
                    PSizeList = db.BPSizeTbls.Where(s => s.ProductId == m.ProductId && s.Active == true).Select(s => new
                    {
                        s.ProductId,

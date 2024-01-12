@@ -1,47 +1,49 @@
 ﻿
 @{
+    /**/
+
     ViewBag.Title = "Gift";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 @*<style>
-    #profile-description {
-        max-width: 400px;
-        margin-top: 50px;
-        position: relative;
-    }
-
-        #profile-description .text {
-            /*   width: 660px;  */
-            margin-bottom: 5px;
-            color: #777;
-            padding: 0 15px;
+        #profile-description {
+            max-width: 400px;
+            margin-top: 50px;
             position: relative;
-            font-family: Arial;
-            font-size: 14px;
-            display: block;
         }
 
-        #profile-description .show-more {
-            /*   width: 690px;  */
-            color: #777;
-            position: relative;
-            font-size: 12px;
-            padding-top: 5px;
-            height: 20px;
-            text-align: center;
-            background: #f1f1f1;
-            cursor: pointer;
-        }
-
-            #profile-description .show-more:hover {
-                color: #1779dd;
+            #profile-description .text {
+                /*   width: 660px;  */
+                margin-bottom: 5px;
+                color: #777;
+                padding: 0 15px;
+                position: relative;
+                font-family: Arial;
+                font-size: 14px;
+                display: block;
             }
 
-        #profile-description .show-more-height {
-            height: 65px;
-            overflow: hidden;
-        }
-</style>*@
+            #profile-description .show-more {
+                /*   width: 690px;  */
+                color: #777;
+                position: relative;
+                font-size: 12px;
+                padding-top: 5px;
+                height: 20px;
+                text-align: center;
+                background: #f1f1f1;
+                cursor: pointer;
+            }
+
+                #profile-description .show-more:hover {
+                    color: #1779dd;
+                }
+
+            #profile-description .show-more-height {
+                height: 65px;
+                overflow: hidden;
+            }
+    </style>*@
 <main class="main" ng-init="GetProductByid(@ViewBag.id)">
 
     <!-- Breadcrumb Section Start -->
@@ -223,42 +225,23 @@
                                     <!-- Main Image -->
                                     <div data-aos="zoom-in">
                                         <div class="product-image-slider">
-                                            <figure class="border-radius-10">
-                                                <img src="https://dummyimage.com/1100x1200/ccc/000" alt="product image" class="img-fluid" loading="lazy">
+                                            <figure class="border-radius-10" ng-repeat="i in Product.AllProductImage">
+                                                <img src="~/images/ProductImg/{{i}}" alt="product image" class="img-fluid" loading="lazy">
                                             </figure>
-                                            <figure class="border-radius-10">
-                                                <img src="https://dummyimage.com/1100x1200/ccc/000" alt="product image" class="img-fluid" loading="lazy">
-                                            </figure>
-                                            <figure class="border-radius-10">
-                                                <img src="https://dummyimage.com/1100x1200/ccc/000" alt="product image" class="img-fluid" loading="lazy">
-                                            </figure>
-                                            <figure class="border-radius-10">
-                                                <img src="https://dummyimage.com/1100x1200/ccc/000" alt="product image" class="img-fluid" loading="lazy">
-                                            </figure>
-                                            <figure class="border-radius-10">
-                                                <img src="https://dummyimage.com/1100x1200/ccc/000" alt="product image" class="img-fluid" loading="lazy">
-                                            </figure>
-                                            <figure class="border-radius-10">
-                                                <img src="https://dummyimage.com/1100x1200/ccc/000" alt="product image" class="img-fluid" loading="lazy">
-                                            </figure>
-                                            <figure class="border-radius-10">
-                                                <img src="https://dummyimage.com/1100x1200/ccc/000" alt="product image" class="img-fluid" loading="lazy">
-                                            </figure>
+
                                         </div>
                                     </div>
                                     <!-- Main Image -->
                                     <!-- Small Image -->
                                     <div data-aos="zoom-in">
-                                        <div class="slider-nav-thumbnails pl-15 pr-15">
-                                            <div><img src="https://dummyimage.com/400x400/ccc/000" class="img-fluid" loading="lazy" alt="product image"></div>
-                                            <div><img src="https://dummyimage.com/400x400/ccc/000" class="img-fluid" loading="lazy" alt="product image"></div>
-                                            <div><img src="https://dummyimage.com/400x400/ccc/000" class="img-fluid" loading="lazy" alt="product image"></div>
-                                            <div><img src="https://dummyimage.com/400x400/ccc/000" class="img-fluid" loading="lazy" alt="product image"></div>
-                                            <div><img src="https://dummyimage.com/400x400/ccc/000" class="img-fluid" loading="lazy" alt="product image"></div>
-                                            <div><img src="https://dummyimage.com/400x400/ccc/000" class="img-fluid" loading="lazy" alt="product image"></div>
-                                            <div><img src="https://dummyimage.com/400x400/ccc/000" class="img-fluid" loading="lazy" alt="product image"></div>
+                                        <div class="slider-nav-thumbnails pl-15 pr-15" ng-show="Product.AllProductImage.length>1">
+                                            <div ng-repeat="i in Product.AllProductImage" ng-show="i!=null">
+                                                <img src="~/images/ProductImg/{{i}}" ng-show="i!=null" class="img-fluid" loading="lazy" alt="product image">
+                                            </div>
+                                            <div><img src="~/images/ProductImg/{{i}}" ng-show="i!=null" class="img-fluid" loading="lazy" alt="product image"></div>
                                         </div>
                                     </div>
+
                                     <!-- Small Image -->
                                 </div>
 
@@ -270,7 +253,7 @@
                                         <h2 class="title-detail">{{Product.ProductTitle}}</h2>
                                         <div class="pro-details-brand">
                                             <span><a href="/Home/shop?Main={{Product.Maincate.MTitle}}">{{Product.Maincate.MTitle}}</a></span>
-                                            
+
                                         </div>
                                     </div>
 
@@ -283,6 +266,14 @@
                                     </div>
 
                                     <div data-aos="zoom-in">
+                                        <div id="profile-description">
+
+                                            <div class="description mb-20 text show-more-height">
+                                                <p align="justify" id="desc" class="fs-7">
+                                                </p>
+
+                                            </div>
+                                        </div>
                                         <div class="description mb-20">
                                             <p align="justify" class="fs-7">
                                                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloremque nam iste perspiciatis commodi temporibus sunt iure inventore quasi a illo.
@@ -290,58 +281,27 @@
                                                 <span id="more">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quibusdam excepturi et iure itaque assumenda. Ipsa illum saepe laboriosam? Sapiente obcaecati ea soluta nesciunt, eos vero illum dicta numquam similique laborum!</span>
                                                 <strong onclick="myFunction()" id="myBtn" class="text-brand cursor">Read more</strong>
                                             </p>
-                                            <table class="font-md mb-30 mt-20">
-                                                <tbody>
-                                                    <tr class="stand-up">
-                                                        <th>Stand Up</th>
-                                                        <td>
-                                                            <p>35″L x 24″W x 37-45″H(front to back wheel)</p>
-                                                        </td>
-                                                    </tr>
-                                                    <tr class="folded-wo-wheels">
-                                                        <th>Folded (w/o wheels)</th>
-                                                        <td>
-                                                            <p>32.5″L x 18.5″W x 16.5″H</p>
-                                                        </td>
-                                                    </tr>
-                                                    <tr class="folded-w-wheels">
-                                                        <th>Folded (w/ wheels)</th>
-                                                        <td>
-                                                            <p>32.5″L x 24″W x 18.5″H</p>
-                                                        </td>
-                                                    </tr>
-                                                    <tr class="weight-wo-wheels">
-                                                        <th>Weight (w/o wheels)</th>
-                                                        <td>
-                                                            <p>20 LBS</p>
-                                                        </td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
                                         </div>
                                     </div>
 
-                                    <div data-aos="zoom-in">
-                                        <div class="social-icons single-share mb-20">
-                                            <ul class="text-grey-5 d-inline-block">
-                                                <li><strong class="mr-10">Share this:</strong></li>
-                                                <li class="social-facebook"><a href="#"><img src="assets/imgs/theme/icons/icon-facebook.svg" alt=""></a></li>
-                                                <li class="social-twitter"> <a href="#"><img src="assets/imgs/theme/icons/icon-twitter.svg" alt=""></a></li>
-                                                <li class="social-instagram"><a href="#"><img src="assets/imgs/theme/icons/icon-instagram.svg" alt=""></a></li>
-                                                <li class="social-linkedin"><a href="#"><img src="assets/imgs/theme/icons/icon-pinterest.svg" alt=""></a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
+                                    @*<div data-aos="zoom-in">
+                                            <div class="social-icons single-share mb-20">
+                                                <ul class="text-grey-5 d-inline-block">
+                                                    <li><strong class="mr-10">Share this:</strong></li>
+                                                    <li class="social-facebook"><a href="#"><img src="assets/imgs/theme/icons/icon-facebook.svg" alt=""></a></li>
+                                                    <li class="social-twitter"> <a href="#"><img src="assets/imgs/theme/icons/icon-twitter.svg" alt=""></a></li>
+                                                    <li class="social-instagram"><a href="#"><img src="assets/imgs/theme/icons/icon-instagram.svg" alt=""></a></li>
+                                                    <li class="social-linkedin"><a href="#"><img src="assets/imgs/theme/icons/icon-pinterest.svg" alt=""></a></li>
+                                                </ul>
+                                            </div>
+                                        </div>*@
 
                                     <div data-aos="zoom-in">
-                                        <div class="attr-detail attr-size mb-30">
+                                        <div class="attr-detail attr-size mb-30" ng-show="Product.PSizeList.length>0">
                                             <strong class="mr-10">Size</strong>
                                             <ul class="list-filter size-filter font-small">
-                                                <li><a href="#">S</a></li>
-                                                <li class="active"><a href="#">M</a></li>
-                                                <li><a href="#">L</a></li>
-                                                <li><a href="#">XL</a></li>
-                                                <li><a href="#">XXL</a></li>
+                                                <li ng-repeat="s in Product.PSizeList" style="margin-left:5px;"><a href="#">{{s.SizeTitle}}</a> </li>
+
                                             </ul>
                                         </div>
                                     </div>

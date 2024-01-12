@@ -38,6 +38,7 @@ namespace GiftChoice.Models
         public virtual DbSet<BSubKTbl> BSubKTbls { get; set; }
         public virtual DbSet<BSubTitleTbl> BSubTitleTbls { get; set; }
         public virtual DbSet<KeywordTbl> KeywordTbls { get; set; }
+        public virtual DbSet<LabelProductTbl> LabelProductTbls { get; set; }
         public virtual DbSet<MainCateTbl> MainCateTbls { get; set; }
         public virtual DbSet<MCKeywordTbl> MCKeywordTbls { get; set; }
         public virtual DbSet<OrderMainTbl> OrderMainTbls { get; set; }
@@ -50,11 +51,11 @@ namespace GiftChoice.Models
         public virtual DbSet<SliderTbl> SliderTbls { get; set; }
         public virtual DbSet<UserRegister> UserRegisters { get; set; }
         public virtual DbSet<BannerPTTbl> BannerPTTbls { get; set; }
+        public virtual DbSet<BannerQueryListTbl> BannerQueryListTbls { get; set; }
         public virtual DbSet<BSubTitleDetailTbl> BSubTitleDetailTbls { get; set; }
+        public virtual DbSet<FestivalBannerTbl> FestivalBannerTbls { get; set; }
         public virtual DbSet<QueryTbl> QueryTbls { get; set; }
         public virtual DbSet<VProduct> VProducts { get; set; }
         public virtual DbSet<AutocompleteSuggestion> AutocompleteSuggestions { get; set; }
-        public virtual DbSet<FestivalBannerTbl> FestivalBannerTbls { get; set; }
-        public virtual DbSet<LabelProductTbl> LabelProductTbls { get; set; }
     }
 }

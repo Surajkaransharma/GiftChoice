@@ -156,10 +156,12 @@ namespace GiftChoice.Controllers
                 {
                     TopsellingProduct = db.ProductTbls.Where(m => m.Active == true && m.LabelId == 1).Select(m => new
                     {
+                        Toplabel = db.LabelProductTbls.Where(l => l.LabelId == 1).Select(l => l.LTitle).FirstOrDefault(),
                         m.ProductId,
                         m.MainCateId,
                         m.ProductTitle,
                         m.PLabel,
+                        m.PDesc,
                         m.Price,
                         m.PUrl,
                         m.Active,
@@ -169,12 +171,15 @@ namespace GiftChoice.Controllers
                         ProductImage = db.ProductImages.Where(i => i.ProductId == m.ProductId).Select(i => i.PImage).FirstOrDefault(),
                         Maincate = db.MainCateTbls.Where(p => p.MainCateId == m.MainCateId).Select(p => p.MTitle).FirstOrDefault(),
 
-                    }).OrderBy(x => Guid.NewGuid()).Take(8),
+                    }).OrderBy(x => Guid.NewGuid()).Take(10),
                     NewProduct = db.ProductTbls.Where(m => m.Active == true && m.LabelId == 2).Select(m => new
                     {
+                        Toplabel = db.LabelProductTbls.Where(l => l.LabelId == 1).Select(l => l.LTitle).FirstOrDefault(),
                         m.ProductId,
                         m.MainCateId,
                         m.ProductTitle,
+                        m.PDesc,
+
                         m.PLabel,
                         m.Price,
                         m.PUrl,
@@ -185,14 +190,17 @@ namespace GiftChoice.Controllers
                         ProductImage = db.ProductImages.Where(i => i.ProductId == m.ProductId).Select(i => i.PImage).FirstOrDefault(),
                         Maincate = db.MainCateTbls.Where(p => p.MainCateId == m.MainCateId).Select(p => p.MTitle).FirstOrDefault(),
 
-                    }).OrderBy(x => Guid.NewGuid()).Take(8),
+                    }).OrderBy(x => Guid.NewGuid()).Take(10),
                     NewArivals = db.ProductTbls.Where(m => m.Active == true && m.LabelId == 3).Select(m => new
                     {
+                        Toplabel = db.LabelProductTbls.Where(l => l.LabelId == 1).Select(l => l.LTitle).FirstOrDefault(),
                         m.ProductId,
                         m.MainCateId,
                         m.ProductTitle,
                         m.PLabel,
                         m.Price,
+                        m.PDesc,
+
                         m.PUrl,
                         m.Active,
                         m.Create_at,
@@ -201,7 +209,7 @@ namespace GiftChoice.Controllers
                         ProductImage = db.ProductImages.Where(i => i.ProductId == m.ProductId).Select(i => i.PImage).FirstOrDefault(),
                         Maincate = db.MainCateTbls.Where(p => p.MainCateId == m.MainCateId).Select(p => p.MTitle).FirstOrDefault(),
 
-                    }).OrderBy(x => Guid.NewGuid()).Take(8),
+                    }).OrderBy(x => Guid.NewGuid()).Take(10),
 
                 };
             return Json(res, JsonRequestBehavior.AllowGet);
@@ -1084,50 +1092,92 @@ namespace GiftChoice.Controllers
         }
 
         [JsonNetFilter]
-        public JsonResult modelTofilterBannerProduct(int[] PBanner)
+        public JsonResult modelTofilterBannerProduct(int[] PBanner, int BannerId)
         {
             db.Configuration.ProxyCreationEnabled = false;
 
-            List<long> subid = new List<long>();
-
-            for (int i = 0; i < PBanner.Length; i++)
+            if (PBanner != null)
             {
-                subid.Add(PBanner[i]);
+
+                List<long> subid = new List<long>();
+
+                for (int i = 0; i < PBanner.Length; i++)
+                {
+                    subid.Add(PBanner[i]);
+                }
+
+                var res = new
+                {
+                    ProductList = (from bannerCateProduct in db.BannerQueryListTbls
+                                   join product in db.BannerProductTbls on bannerCateProduct.ProductId equals product.ProductId
+                                   where subid.Contains(bannerCateProduct.QueryId ?? 0) && product.MainCateId == BannerId
+                                   orderby Guid.NewGuid()
+                                   select new
+                                   {
+                                       bannerCateProduct.BannerQueryListId,
+                                       bannerCateProduct.QueryId,
+                                       product.ProductId,
+                                       product.MainCateId,
+                                       product.ProductTitle,
+                                       product.PLabel,
+                                       product.Price,
+                                       product.PUrl,
+                                       product.Qty,
+                                       product.Create_at,
+                                       product.Active,
+                                       product.Priority,
+                                       ProductImage = db.BannerProductImages
+                                               .Where(i => i.ProductId == product.ProductId)
+                                               .Select(i => i.PImage)
+                                               .FirstOrDefault(),
+                                       Maincate = db.MainCateTbls
+                                               .Where(q => q.MainCateId == product.MainCateId)
+                                               .Select(q => q.MTitle)
+                                               .FirstOrDefault(),
+
+                                   }).ToList()
+                };
+                return Json(res, JsonRequestBehavior.AllowGet);
+
             }
-
-            var res = new
+            else
             {
-                ProductList = (from bannerCateProduct in db.BPKeywordTbls
-                               join product in db.BannerProductTbls on bannerCateProduct.ProductId equals product.ProductId
-                               where subid.Contains(bannerCateProduct.KeywordId ?? 0)
-                               orderby Guid.NewGuid()
-                               select new
-                               {
-                                   bannerCateProduct.PKeywordId,
-                                   bannerCateProduct.KeywordId,
-                                   product.ProductId,
-                                   product.MainCateId,
-                                   product.ProductTitle,
-                                   product.PLabel,
-                                   product.Price,
-                                   product.PUrl,
-                                   product.Qty,
-                                   product.Create_at,
-                                   product.Active,
-                                   product.Priority,
-                                   ProductImage = db.BannerProductImages
-                                           .Where(i => i.ProductId == product.ProductId)
-                                           .Select(i => i.PImage)
-                                           .FirstOrDefault(),
-                                   Maincate = db.MainCateTbls
-                                           .Where(q => q.MainCateId == product.MainCateId)
-                                           .Select(q => q.MTitle)
-                                           .FirstOrDefault(),
 
-                               }).ToList()
-            };
-            return Json(res, JsonRequestBehavior.AllowGet);
+                var res = new
+                {
+                    ProductList = (from bannerCateProduct in db.BannerQueryListTbls
+                                   join product in db.BannerProductTbls on bannerCateProduct.ProductId equals product.ProductId
+                                   where product.MainCateId == BannerId
+                                   orderby Guid.NewGuid()
+                                   select new
+                                   {
+                                       bannerCateProduct.BannerQueryListId,
+                                       bannerCateProduct.QueryId,
+                                       product.ProductId,
+                                       product.MainCateId,
+                                       product.ProductTitle,
+                                       product.PLabel,
+                                       product.Price,
+                                       product.PUrl,
+                                       product.Qty,
+                                       product.Create_at,
+                                       product.Active,
+                                       product.Priority,
+                                       ProductImage = db.BannerProductImages
+                                               .Where(i => i.ProductId == product.ProductId)
+                                               .Select(i => i.PImage)
+                                               .FirstOrDefault(),
+                                       Maincate = db.MainCateTbls
+                                               .Where(q => q.MainCateId == product.MainCateId)
+                                               .Select(q => q.MTitle)
+                                               .FirstOrDefault(),
+
+                                   }).ToList()
+                };
+                return Json(res, JsonRequestBehavior.AllowGet);
+            }
         }
+
 
 
 
