@@ -370,29 +370,20 @@
     </section>
     <!-- Top Products End -->
     <!-- Multiple Banner Start -->
-    <section class="p-0 section-padding bg-light">
+    <section class="p-0 section-padding bg-light" ng-show="MultipleBannerData.length>0" ng-init="GetMultipleBanner()">
         <div class="container pt-4 pb-4">
             <div class="row g-1 gx-1">
-                <div class="col-lg-6 col-6 col-sm-6">
+                <div class="col-lg-6 col-6 col-sm-6" ng-repeat="m in MultipleBannerData">
                     <div data-aos="zoom-in">
                         <div class="big-banner">
-                            <a href="banner-category.html">
+                            <a href="/Home/BannerGifts?Banner={{m.MainCateId}}">
                                
-                                <img src="https://dummyimage.com/950x350/ccc/fff.jpg" alt="banner-image" class="img-fluid">
+                                <img src="~/images/BannerPTImage/{{m.MImage}}" alt="banner-image" class="img-fluid">
                             </a>
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-6 col-6 col-sm-6">
-                    <div data-aos="zoom-in">
-                        <div class="big-banner">
-                            <a href="banner-category.html">
-                                <img src="https://dummyimage.com/950x350/ccc/fff.jpg" alt="banner-image" class="img-fluid">
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
+           </div>
         </div>
     </section>
     <!-- Multiple Banner End -->

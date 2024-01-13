@@ -488,6 +488,50 @@ namespace GiftChoice.Controllers
             return Json(res, JsonRequestBehavior.AllowGet);
 
         }
+
+        [JsonNetFilter]
+        public JsonResult GetBProductByid(int id)
+        {
+            db.Configuration.ProxyCreationEnabled = false;
+            var res =
+
+               db.BannerProductTbls.Where(p => p.ProductId == id).Select(m => new
+               {
+                   m.ProductId,
+                   m.MainCateId,
+                   m.ProductTitle,
+                   m.PLabel,
+                   m.Price,
+                   m.Create_at,
+                   m.VideoUrl,
+                   m.PUrl,
+                   m.PDesc,
+                   m.Qty,
+                   m.SameDay,
+                   m.PDesc1,
+                   m.Active,
+                   m.Priority,
+                   ProductImage = db.ProductImages.Where(i => i.ProductId == m.ProductId).Select(i => i.PImage).FirstOrDefault(),
+                   AllProductImage = db.ProductImages.Where(i => i.ProductId == m.ProductId).Select(i => i.PImage),
+                   Maincate = db.MainCateTbls.Where(p => p.MainCateId == m.MainCateId).FirstOrDefault(),
+                   //Submenu = db.PKeywordTbls.Where(s => s.ProductId == m.ProductId && s.Active == true).Select(s => new
+                   //{
+                   //    s.ProductId,
+                   //    s.KeywordId,
+                   //    s.PKeywordId,
+                   //    SubmenuTitle = db.KeywordTbls.Where(t => t.KeywordId == s.KeywordId && t.Active == true).Select(t => t.Keyword).FirstOrDefault()
+                   //}),
+                   PSizeList = db.PSizeTbls.Where(s => s.ProductId == m.ProductId && s.Active == true).Select(s => new
+                   {
+                       s.ProductId,
+                       s.SizeId,
+                       s.PSizeId,
+                       SizeTitle = db.SizeTbls.Where(t => t.SizeId == s.SizeId && t.Active == true).Select(t => t.SizeTitle).FirstOrDefault()
+                   })
+               }).FirstOrDefault();
+            return Json(res, JsonRequestBehavior.AllowGet);
+
+        }
         [JsonNetFilter]
         public JsonResult GetSmillerProduct(int id, int idd)
         {
@@ -530,6 +574,14 @@ namespace GiftChoice.Controllers
         public ActionResult Gift(string url)
         {
             ViewBag.id = db.ProductTbls.Where(p => p.PUrl == url).Select(p => p.ProductId).FirstOrDefault();
+            ViewBag.Message = "Your contact page.";
+
+            return View();
+        }
+
+        public ActionResult BGift(string url)
+        {
+            ViewBag.id = db.BannerProductTbls.Where(p => p.PUrl == url).Select(p => p.ProductId).FirstOrDefault();
             ViewBag.Message = "Your contact page.";
 
             return View();
@@ -1013,7 +1065,7 @@ namespace GiftChoice.Controllers
         }
 
 
-        ///////// Get Small Bannner
+        ///////// Get Small Bannner Design Banner Multiple Banner
 
 
         public JsonResult GetSmallBanner()
@@ -1028,6 +1080,33 @@ namespace GiftChoice.Controllers
             return Json(res, JsonRequestBehavior.AllowGet);
 
         }
+
+        public JsonResult GetDesignBanner()
+        {
+            var res = new
+            {
+
+                DesignBanner = db.BannerPTTbls.Where(m => m.Active == true && m.Position == "Design Banner").OrderBy(m => m.Priority).Take(4),
+
+            };
+
+            return Json(res, JsonRequestBehavior.AllowGet);
+
+        }
+        public JsonResult GetMultipleBanner()
+        {
+            var res = new
+            {
+
+                MultipleBanner = db.BannerPTTbls.Where(m => m.Active == true && m.Position == "Multiple Banner").OrderBy(m => m.Priority),
+
+            };
+
+            return Json(res, JsonRequestBehavior.AllowGet);
+
+        }
+
+
 
         public JsonResult GetBannerAsk1(int banner)
         {

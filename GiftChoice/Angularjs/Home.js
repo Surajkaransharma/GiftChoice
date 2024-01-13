@@ -782,6 +782,68 @@ app.controller("HomeController", ['$scope', '$http', '$sce', 'orderByFilter', fu
             alert(error.data);
         });
     };
+
+    $scope.GetBProductByid = function (id) {
+        debugger
+        $http.get("/Home/GetBProductByid?id=" + id).then(function (d) {
+            debugger
+            $scope.Product = d.data;
+            //$scope.idd = $scope.Product.MainCateId;
+
+            $scope.GetSmillerProduct($scope.Product.ProductId, $scope.Product.MainCateId);
+
+            $('#desc').html($scope.Product.PDesc1);
+
+            setTimeout(() => {
+
+
+                $('.product-image-slider').slick({
+                    slidesToShow: 1,
+                    slidesToScroll: 1,
+                    arrows: false,
+                    fade: false,
+                    asNavFor: '.slider-nav-thumbnails',
+                });
+
+                $('.slider-nav-thumbnails').slick({
+                    slidesToShow: 5,
+                    slidesToScroll: 1,
+                    asNavFor: '.product-image-slider',
+                    dots: false,
+                    focusOnSelect: true,
+                    prevArrow: '<button type="button" class="slick-prev"><i class="fi-rs-angle-left"></i></button>',
+                    nextArrow: '<button type="button" class="slick-next"><i class="fi-rs-angle-right"></i></button>'
+                });
+
+                // Remove active class from all thumbnail slides
+                $('.slider-nav-thumbnails .slick-slide').removeClass('slick-active');
+
+                // Set active class to first thumbnail slides
+                $('.slider-nav-thumbnails .slick-slide').eq(0).addClass('slick-active');
+
+                // On before slide change match active thumbnail to current slide
+                $('.product-image-slider').on('beforeChange', function (event, slick, currentSlide, nextSlide) {
+                    var mySlideNumber = nextSlide;
+                    $('.slider-nav-thumbnails .slick-slide').removeClass('slick-active');
+                    $('.slider-nav-thumbnails .slick-slide').eq(mySlideNumber).addClass('slick-active');
+                });
+
+                $('.product-image-slider').on('beforeChange', function (event, slick, currentSlide, nextSlide) {
+                    var img = $(slick.$slides[nextSlide]).find("img");
+                    $('.zoomWindowContainer,.zoomContainer').remove();
+                    $(img).elevateZoom({
+                        zoomType: "inner",
+                        cursor: "crosshair",
+                        zoomWindowFadeIn: 500,
+                        zoomWindowFadeOut: 750
+                    });
+                });
+            }, 10);
+
+        }, function (error) {
+            alert(error.data);
+        });
+    };
     $scope.GetSmillerProduct = function (id, idd) {
         debugger
         $http.get("/Home/GetSmillerProduct?id=" + id + '&idd=' + idd).then(function (d) {
@@ -846,6 +908,24 @@ app.controller("HomeController", ['$scope', '$http', '$sce', 'orderByFilter', fu
         debugger
         $http.get("/Home/GetSmallBanner").then(function (d) {
             $scope.GetSmallBannerData = d.data.SmallBanner;
+            debugger
+        }, function (error) {
+            alert(error.data);
+        });
+    };
+    $scope.GetDesignBanner = function () {
+        debugger
+        $http.get("/Home/GetDesignBanner").then(function (d) {
+            $scope.DesignBannerData = d.data.DesignBanner;
+            debugger
+        }, function (error) {
+            alert(error.data);
+        });
+    };
+    $scope.GetMultipleBanner = function () {
+        debugger
+        $http.get("/Home/GetMultipleBanner").then(function (d) {
+            $scope.MultipleBannerData = d.data.MultipleBanner;
             debugger
         }, function (error) {
             alert(error.data);

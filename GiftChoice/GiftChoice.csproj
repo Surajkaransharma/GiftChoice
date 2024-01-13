@@ -17,7 +17,8 @@
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>true</UseIISExpress>
-    <Use64BitIISExpress>false</Use64BitIISExpress>
+    <Use64BitIISExpress>
+    </Use64BitIISExpress>
     <IISExpressSSLPort>27138</IISExpressSSLPort>
     <IISExpressAnonymousAuthentication>enabled</IISExpressAnonymousAuthentication>
     <IISExpressWindowsAuthentication>disabled</IISExpressWindowsAuthentication>
@@ -2559,6 +2560,7 @@
     <Content Include="Views\GiftDashBoard\AddQueryKeyword.cshtml" />
     <Content Include="Views\GiftDashBoard\FestivalBanner.cshtml" />
     <Content Include="Views\GiftDashBoard\AddLabelProduct.cshtml" />
+    <Content Include="Views\Home\BGift.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

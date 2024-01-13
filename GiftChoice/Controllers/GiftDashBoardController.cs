@@ -2518,7 +2518,6 @@ namespace GiftChoice.Controllers
                 BannerProductTbl result = db.BannerProductTbls.Where(c => c.ProductId == model.ProductId).FirstOrDefault();
                 if (result != null)
                 {
-                    result.PDesc = model.PDesc;
                     result.PDesc1 = model.PDesc1;
 
                     db.SaveChanges();
