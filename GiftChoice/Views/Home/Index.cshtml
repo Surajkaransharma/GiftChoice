@@ -8,29 +8,17 @@
 
     <!-- Slider Start -->
     <div data-aos="zoom-in">
-        <section class="p-0 home-slider">
+        <section class="p-0 home-slider" ng-init="SliderList()">
             <div id="carouselId" class="carousel slide" data-bs-ride="carousel">
                 <div class="carousel-inner" role="listbox">
-                    <div class="carousel-item active">
-                        <a href="shop-by-categories.html">
-                            <img src="https://dummyimage.com/1920x500/ccc/fff.jpg" class="w-100 d-block img-fluid" loading="lazy"  alt="corporates-gifts">
+             
+                    <div ng-repeat="s in SliderListData" class="carousel-item {{$index==0?'active':''}} " >
+                        <a href="/Home/shop?Main={{s.MainCate}}">
+                            <img src="~/images/SliderImg/{{s.SliderImage}}" class="w-100 d-block img-fluid" loading="lazy" alt="corporates-gifts">
                         </a>
                     </div>
-                    <div class="carousel-item">
-                        <a href="shop-by-categories.html">
-                            <img src="https://dummyimage.com/1920x500/ccc/fff.jpg" class="w-100 d-block img-fluid" loading="lazy"  alt="intirior-wall-decore-gifts">
-                        </a>
-                    </div>
-                    <div class="carousel-item">
-                        <a href="shop-by-categories.html">
-                            <img src="https://dummyimage.com/1920x500/ccc/fff.jpg" class="w-100 d-block img-fluid" loading="lazy"  alt="personalized-gifts-for-him">
-                        </a>
-                    </div>
-                    <div class="carousel-item">
-                        <a href="shop-by-categories.html">
-                            <img src="https://dummyimage.com/1920x500/ccc/fff.jpg" class="w-100 d-block img-fluid" loading="lazy"  alt="personalized-gifts-for-her">
-                        </a>
-                    </div>
+
+                 
                 </div>
                 <button class="carousel-control-prev" type="button" data-bs-target="#carouselId" data-bs-slide="prev">
                     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -79,7 +67,7 @@
 
     <!-- Slider End -->
     <!-- Small Banner Start -->
-    <section class="p-0 banners section-padding bg-light"  ng-init="GetSmallBanner()">
+    <section class="p-0 banners section-padding bg-light" ng-show="GetSmallBannerData.length>0"  ng-init="GetSmallBanner()">
         <div class="container pt-4 pb-4">
             <div class="row g-2 gx-3 justify-content-start m-nowrap">
                 <div class="col-lg-4 col-sm-4 col-7"   ng-repeat="b in GetSmallBannerData">
@@ -150,7 +138,7 @@
         </section>*@
     <!-- Category Section End -->
     <!-- Category Section Start -->
-    <section class="p-0 category-section section-padding">
+    <section class="p-0 category-section section-padding" ng-show="MainCateData.length>0">
         <div class="container pt-4 pb-4">
             <h3 class="section-title mb-20">All Categories</h3>
             <div class="row align-items-center g-1 gx-2" ng-init="GetMainCateData()">
@@ -169,25 +157,25 @@
     </section>
     <!-- Category Section End -->
     <!-- Design Banner Start -->
-    <section class="p-0 section-padding bg-light">
+    <section class="p-0 section-padding bg-light" ng-init="GetDesignBanner()">
         <div class="container pt-4 pb-4">
             <div class="row g-1">
                 <div class="col-lg-6 col-sm-12 col-12">
                     <div class="row g-1">
-                        <div class="col-lg-8 col-sm-8 col-7">
+                        <div class="col-lg-8 col-sm-8 col-7" ng-show="DesignBannerData[0]">
                             <div data-aos="zoom-in">
                                 <div class="image image-1">
-                                    <a href="banner-category.html">
-                                        <img src="https://dummyimage.com/800x900/ccc/fff" alt="banner-image" class="img-fluid">
+                                    <a href="/Home/BannerGifts?Banner={{DesignBannerData[0].MainCateId}}">
+                                        <img src="~/images/BannerPTImage/{{DesignBannerData[0].MImage}}" alt="banner-image" class="img-fluid">
                                     </a>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-lg-4 col-sm-4 col-5">
+                        <div class="col-lg-4 col-sm-4 col-5" ng-show="DesignBannerData[1]">
                             <div data-aos="zoom-in">
                                 <div class="image image-2">
-                                    <a href="banner-category.html">
-                                        <img src="https://dummyimage.com/400x900/ccc/fff" alt="banner-image" class="img-fluid">
+                                    <a href="/Home/BannerGifts?Banner={{DesignBannerData[1].MainCateId}}">
+                                        <img src="~/images/BannerPTImage/{{DesignBannerData[1].MImage}}" alt="banner-image" class="img-fluid">
                                     </a>
                                 </div>
                             </div>
@@ -197,20 +185,20 @@
 
                 <div class="col-lg-6 col-sm-12 col-12">
                     <div class="row g-1">
-                        <div class="col-lg-12 col-sm-12 col-6">
+                        <div class="col-lg-12 col-sm-12 col-6" ng-show="DesignBannerData[2]">
                             <div data-aos="zoom-in">
                                 <div class="image image-3">
-                                    <a href="banner-category.html">
-                                        <img src="https://dummyimage.com/600x220/ccc/fff" alt="banner-image" class="img-fluid">
+                                    <a href="/Home/BannerGifts?Banner={{DesignBannerData[2].MainCateId}}">
+                                        <img src="~/images/BannerPTImage/{{DesignBannerData[2].MImage}}" alt="banner-image" class="img-fluid">
                                     </a>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-lg-12 col-sm-12 col-6">
+                        <div class="col-lg-12 col-sm-12 col-6" ng-show="DesignBannerData[3]">
                             <div data-aos="zoom-in">
                                 <div class="image image-4">
-                                    <a href="banner-category.html">
-                                        <img src="https://dummyimage.com/600x220/ccc/fff" alt="banner-image" class="img-fluid">
+                                    <a href="/Home/BannerGifts?Banner={{DesignBannerData[3].MainCateId}}">
+                                        <img src="~/images/BannerPTImage/{{DesignBannerData[3].MImage}}" alt="banner-image" class="img-fluid">
                                     </a>
                                 </div>
                             </div>

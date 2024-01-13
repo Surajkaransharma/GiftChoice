@@ -2449,6 +2449,10 @@
     <Content Include="images\ProductImg\999.jpg" />
     <Content Include="images\SliderImg\1.jpg" />
     <Content Include="images\SliderImg\2.JPG" />
+    <Content Include="images\SliderImg\3.jpg" />
+    <Content Include="images\SliderImg\4.jpg" />
+    <Content Include="images\SliderImg\5.jpg" />
+    <Content Include="images\SliderImg\6.jpg" />
     <Content Include="Models\Model1.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Model1.Context.cs</LastGenOutput>
