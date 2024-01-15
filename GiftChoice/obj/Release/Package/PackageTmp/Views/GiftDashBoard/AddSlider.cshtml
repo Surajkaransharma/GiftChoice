@@ -47,7 +47,7 @@
                             </div>
                             <div class="col-md-12">
 
-                                <label for="inputFirstName" class="form-label">Image <span style="color:#ff0000;font-weight:bolder;">1920 * 700</span></label>
+                                <label for="inputFirstName" class="form-label">Image <span style="color:#ff0000;font-weight:bolder;">1920 * 500</span></label>
 
                                 <section id="image-section">
                                     <div id="uploadArea" class="upload-area">
@@ -272,7 +272,7 @@
         image.src = URL.createObjectURL(file);
 
         image.onload = function () {
-            if (image.naturalWidth === 1920 && image.naturalHeight === 700) {
+            if (image.naturalWidth === 1920 && image.naturalHeight === 500) {
                 // If File Is Passed from the (File Validation) Function
                 if (fileValidate(fileType, fileSize)) {
 

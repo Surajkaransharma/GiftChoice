@@ -55,27 +55,27 @@
                                     <div class="row">
                                         <div class="col-lg-6 col-md-6">
                                             <div class="input-style mb-20">
-                                                <input name="name" placeholder="First Name" type="text" required>
+                                                <input name="name" placeholder="Name" id="FirstName" ng-model="FirstName" type="text" required>
                                             </div>
                                         </div>
                                         <div class="col-lg-6 col-md-6">
                                             <div class="input-style mb-20">
-                                                <input name="email" placeholder="Your Email" type="email" required>
+                                                <input name="email" placeholder="Your Email" id="Email" ng-model="Email" type="email" required>
                                             </div>
                                         </div>
                                         <div class="col-lg-6 col-md-6">
                                             <div class="input-style mb-20">
-                                                <input name="telephone" placeholder="Your Phone" type="tel" required>
+                                                <input name="telephone" placeholder="Your Phone" id="MobileNo" ng-model="Phone" type="tel" required>
                                             </div>
                                         </div>
                                         <div class="col-lg-6 col-md-6">
                                             <div class="input-style mb-20">
-                                                <input name="subject" placeholder="Subject" type="text" required>
+                                                <input name="subject" placeholder="Subject" id="Subject" ng-model="Subject" type="text" required>
                                             </div>
                                         </div>
                                         <div class="col-lg-12 col-md-12">
                                             <div class="textarea-style mb-2">
-                                                <textarea name="message" placeholder="Message" required></textarea>
+                                                <textarea name="message" placeholder="Message" id="Msg" ng-model="Msg" required></textarea>
                                             </div>
                                             <button class="submit submit-auto-width mb-2" type="submit">Send message</button>
                                         </div>
@@ -90,3 +90,21 @@
         </div>
     </section>
 </main>
+<script>
+    let loginForm = document.getElementById("contact-form");
+
+        loginForm.addEventListener("submit", (e) => {
+            e.preventDefault();
+
+            var username = $("#FirstName").val();
+            var mobileno = $("#MobileNo").val();
+            var email = $("#Email").val();
+            var Subject = $("#Subject").val();
+
+            var Msg = $("#Msg").val();
+
+
+            debugger
+            window.location.href = "https://api.whatsapp.com/send?phone=+917976948872&text=Name: " + username + " Mobile No.:" + mobileno + " Email:" + email + " Subject : " + Subject + " Message" + Msg;
+        });
+</script>

@@ -243,7 +243,7 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
 
         $scope.Product = $scope.ProductData[index];
 
-        CKEDITOR.instances.ckeditor.setData($scope.Product.PDesc);
+        CKEDITOR.instances.ckeditor.setData($scope.Product.TableDesc);
         //const previewImage = document.querySelector('#previewImage');
         //$('#previewImage').css('display', 'block');
         //previewImage.setAttribute("src", "/images/MainCate/" + $scope.MainCate.MImage);
@@ -396,7 +396,7 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
             method: 'post',
             data: {
                 ProductId: id,
-                PDesc: $scope.Description,
+                TableDesc: $scope.Description,
                 KeywordTbls: Keywordarr,
                 SizeTbls: PSizeArr
             }
@@ -456,7 +456,14 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
         $.each($(".checkbox-Size:checked"), function () {
             PSizeArr.push({ 'SizeId': $(this).val() });
         });
+
+        if ($scope.Product.TableDesc != undefined) {
+
+            delete $scope.Product.TableDesc;
+        }
+        $scope.PDescval = $scope.Product.PDesc;
         delete $scope.Product.PDesc;
+
         debugger;
         upload({
             url: '/GiftDashBoard/UpdateProductData',
@@ -489,7 +496,8 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
             method: 'post',
             data: {
                 ProductId: id,
-                PDesc: $scope.Description,
+                TableDesc: $scope.Description,
+                PDesc: $scope.PDescval,
                 KeywordTbls: Keywordarr,
                 SizeTbls: PSizeArr
 

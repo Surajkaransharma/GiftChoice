@@ -337,24 +337,97 @@ app.controller("HomeController", ['$scope', '$http', '$sce', 'orderByFilter', fu
 
             debugger
             $scope.SliderListData = d.data;
-            //setTimeout(() => {
-            //    var mainslider = $(".home-slider");
-            //    if (mainslider.length > 0) {
-            //        mainslider.owlCarousel({
-            //            items: 1,
-            //            dots: false,
-            //            lazyLoad: true,
-            //            pagination: true,
-            //            autoPlay: 4000,
-            //            loop: true,
-            //            singleItem: true,
-            //            navigation: true,
-            //            stopOnHover: true,
-            //            nav: true,
-            //            navigationText: ["<i class='fa fa-arrow-left'></i>", "<i class='fa fa-arrow-right'></i>"]
-            //        });
-            //    }
-            //}, 10);
+            setTimeout(() => {
+                var mainslider = $(".home-slider");
+                if (mainslider.length > 0) {
+                    mainslider.owlCarousel({
+                        items: 1,
+                        dots: false,
+                        lazyLoad: true,
+                        pagination: true,
+                        autoPlay: 4000,
+                        loop: true,
+                        singleItem: true,
+                        navigation: true,
+                        stopOnHover: true,
+                        nav: true,
+                        navigationText: ["<i class='fa fa-arrow-left'></i>", "<i class='fa fa-arrow-right'></i>"]
+                    });
+                }
+            }, 10);
+        }, function (error) {
+            alert(error.data);
+        });
+    };
+    $scope.GetFestivalBanner = function () {
+        debugger
+        $http.get("/Home/GetFestivalBanner").then(function (d) {
+
+            debugger
+            $scope.FestivalBannerData = d.data;
+
+        }, function (error) {
+            alert(error.data);
+        });
+    };
+    $scope.GetLabelProduct = function () {
+        debugger
+        $http.get("/Home/GetLabelProduct").then(function (d) {
+
+            debugger
+            $scope.TopsellingProduct = d.data.TopsellingProduct;
+            $scope.NewProduct = d.data.NewProduct;
+            $scope.NewArivals = d.data.NewArivals;
+            setTimeout(() => {
+
+                /*Carausel 6 columns*/
+                $(".carausel-6-columns").each(function (key, item) {
+                    var id = $(this).attr("id");
+                    var sliderID = '#' + id;
+                    var appendArrowsClassName = '#' + id + '-arrows'
+
+                    $(sliderID).slick({
+                        dots: false,
+                        infinite: false,
+                        speed: 1000,
+                        arrows: true,
+                        autoplay: true,
+                        slidesToShow: 1,
+                        slidesToScroll: 1,
+                        loop: false,
+                        adaptiveHeight: true,
+                        responsive: [
+                            {
+                                breakpoint: 1025,
+                                settings: {
+                                    slidesToShow: 1,
+                                    slidesToScroll: 1,
+                                }
+                            },
+                            {
+                                breakpoint: 768,
+                                settings: {
+                                    slidesToShow: 1,
+                                    slidesToScroll: 1,
+                                }
+                            },
+                            {
+                                breakpoint: 480,
+                                settings: {
+                                    slidesToShow: 1,
+                                    slidesToScroll: 1
+                                }
+                            }
+                        ],
+                        prevArrow: '<span class="slider-btn slider-prev"><i class="fi-rs-angle-left"></i></span>',
+                        nextArrow: '<span class="slider-btn slider-next"><i class="fi-rs-angle-right"></i></span>',
+                        appendArrows: (appendArrowsClassName),
+                    });
+                });
+
+        }, 10);
+
+
         }, function (error) {
             alert(error.data);
         });
@@ -657,11 +730,10 @@ app.controller("HomeController", ['$scope', '$http', '$sce', 'orderByFilter', fu
 
             $scope.GetSmillerProduct($scope.Product.ProductId, $scope.Product.MainCateId);
 
-            $('#desc').html($scope.Product.PDesc);
+            $('#desc').html($scope.Product.TableDesc);
 
             setTimeout(() => {
 
-                //Load functions
 
                 $('.product-image-slider').slick({
                     slidesToShow: 1,
@@ -704,50 +776,68 @@ app.controller("HomeController", ['$scope', '$http', '$sce', 'orderByFilter', fu
                         zoomWindowFadeOut: 750
                     });
                 });
-                //Elevate Zoom
-                if ($(".product-image-slider").length) {
-                    $('.product-image-slider .slick-active img').elevateZoom({
+            }, 10);
+
+        }, function (error) {
+            alert(error.data);
+        });
+    };
+
+    $scope.GetBProductByid = function (id) {
+        debugger
+        $http.get("/Home/GetBProductByid?id=" + id).then(function (d) {
+            debugger
+            $scope.Product = d.data;
+            //$scope.idd = $scope.Product.MainCateId;
+
+            $scope.GetBSmillerProduct($scope.Product.ProductId, $scope.Product.MainCateId);
+
+            $('#desc').html($scope.Product.PDesc1);
+
+            setTimeout(() => {
+
+
+                $('.product-image-slider').slick({
+                    slidesToShow: 1,
+                    slidesToScroll: 1,
+                    arrows: false,
+                    fade: false,
+                    asNavFor: '.slider-nav-thumbnails',
+                });
+
+                $('.slider-nav-thumbnails').slick({
+                    slidesToShow: 5,
+                    slidesToScroll: 1,
+                    asNavFor: '.product-image-slider',
+                    dots: false,
+                    focusOnSelect: true,
+                    prevArrow: '<button type="button" class="slick-prev"><i class="fi-rs-angle-left"></i></button>',
+                    nextArrow: '<button type="button" class="slick-next"><i class="fi-rs-angle-right"></i></button>'
+                });
+
+                // Remove active class from all thumbnail slides
+                $('.slider-nav-thumbnails .slick-slide').removeClass('slick-active');
+
+                // Set active class to first thumbnail slides
+                $('.slider-nav-thumbnails .slick-slide').eq(0).addClass('slick-active');
+
+                // On before slide change match active thumbnail to current slide
+                $('.product-image-slider').on('beforeChange', function (event, slick, currentSlide, nextSlide) {
+                    var mySlideNumber = nextSlide;
+                    $('.slider-nav-thumbnails .slick-slide').removeClass('slick-active');
+                    $('.slider-nav-thumbnails .slick-slide').eq(mySlideNumber).addClass('slick-active');
+                });
+
+                $('.product-image-slider').on('beforeChange', function (event, slick, currentSlide, nextSlide) {
+                    var img = $(slick.$slides[nextSlide]).find("img");
+                    $('.zoomWindowContainer,.zoomContainer').remove();
+                    $(img).elevateZoom({
                         zoomType: "inner",
                         cursor: "crosshair",
                         zoomWindowFadeIn: 500,
                         zoomWindowFadeOut: 750
                     });
-                }
-                //Filter color/Size
-                $('.list-filter').each(function () {
-                    $(this).find('a').on('click', function (event) {
-                        event.preventDefault();
-                        $(this).parent().siblings().removeClass('active');
-                        $(this).parent().toggleClass('active');
-                        $(this).parents('.attr-detail').find('.current-size').text($(this).text());
-                        $(this).parents('.attr-detail').find('.current-color').text($(this).attr('data-color'));
-                    });
                 });
-                //Qty Up-Down
-                $('.detail-qty').each(function () {
-                    var qtyval = parseInt($(this).find('.qty-val').text(), 10);
-                    $('.qty-up').on('click', function (event) {
-                        event.preventDefault();
-                        qtyval = qtyval + 1;
-                        $(this).prev().text(qtyval);
-                    });
-                    $('.qty-down').on('click', function (event) {
-                        event.preventDefault();
-                        qtyval = qtyval - 1;
-                        if (qtyval > 1) {
-                            $(this).next().text(qtyval);
-                        } else {
-                            qtyval = 1;
-                            $(this).next().text(qtyval);
-                        }
-                    });
-                });
-
-                $('.dropdown-menu .cart_list').on('click', function (event) {
-                    event.stopPropagation();
-                });
-
-
             }, 10);
 
         }, function (error) {
@@ -768,6 +858,15 @@ app.controller("HomeController", ['$scope', '$http', '$sce', 'orderByFilter', fu
         });
     };
 
+    $scope.GetBSmillerProduct = function (id, idd) {
+        debugger
+        $http.get("/Home/GetBSmillerProduct?id=" + id + '&idd=' + idd).then(function (d) {
+            debugger
+            $scope.ProductData = d.data;
+        }, function (error) {
+            alert(error.data);
+        });
+    };
 
     $scope.AddOrder = function () {
 
@@ -823,23 +922,65 @@ app.controller("HomeController", ['$scope', '$http', '$sce', 'orderByFilter', fu
             alert(error.data);
         });
     };
+    $scope.GetDesignBanner = function () {
+        debugger
+        $http.get("/Home/GetDesignBanner").then(function (d) {
+            $scope.DesignBannerData = d.data.DesignBanner;
+            debugger
+        }, function (error) {
+            alert(error.data);
+        });
+    };
+    $scope.GetMultipleBanner = function () {
+        debugger
+        $http.get("/Home/GetMultipleBanner").then(function (d) {
+            $scope.MultipleBannerData = d.data.MultipleBanner;
+            debugger
+        }, function (error) {
+            alert(error.data);
+        });
+    };
     $scope.OpenModelInBanner = function () {
         debugger
         var urlParams = new URLSearchParams(window.location.search);
+        $scope.banner = urlParams.get('Banner');
+        $scope.BannerAll = urlParams.get('BannerAll');
 
-        // Get the value of the "CartData" parameter
-        var banner = urlParams.get('Banner');
         debugger
-        $http.get("/Home/GetBannerAsk1?banner=" + banner).then(function (d) {
+        $http.get("/Home/GetBannerAsk1?banner=" + $scope.banner).then(function (d) {
             $scope.GetBannerAsk1Data = d.data;
             debugger
+            if ($scope.GetBannerAsk1Data[0].BannerTitle.ModelQuery1 == true) {
 
-            setTimeout(() => {
-                $('#modalId').modal("toggle");
-            }, 100);
+                setTimeout(() => {
+                    $('#modalId').modal("toggle");
+                }, 100);
+            }
 
         }, function (error) {
             alert(error.data);
+        });
+
+
+    };
+
+    $scope.GetBannerAllProduct = function () {
+        debugger
+        var urlParams = new URLSearchParams(window.location.search);
+        $scope.banner = urlParams.get('Banner');
+
+        $http({
+            url: '/Home/modelTofilterBannerProduct',
+            method: 'post',
+            data: {
+                BannerId: $scope.banner
+            }
+        }).then(function (d) {
+            $scope.ProductData = d.data.ProductList;
+            $('#modalId').modal("toggle");
+
+        }, function (error) {
+            toastr["error"]("Something Went Wrong");
         });
 
 
@@ -859,7 +1000,7 @@ app.controller("HomeController", ['$scope', '$http', '$sce', 'orderByFilter', fu
             $scope.GetBannerAsk2Data = d.data;
             debugger
 
-        
+
 
         }, function (error) {
             alert(error.data);
@@ -877,7 +1018,7 @@ app.controller("HomeController", ['$scope', '$http', '$sce', 'orderByFilter', fu
                     $scope.BSubDId = parseInt($scope.GetBannerAsk2Data[i].AnswerList[k].BSubDId);
                 }
             }
-           
+
         }
 
         $http.get("/Home/ContinueAskQues2?BSubDId=" + $scope.BSubDId).then(function (d) {
@@ -893,4 +1034,51 @@ app.controller("HomeController", ['$scope', '$http', '$sce', 'orderByFilter', fu
 
     };
 
+    $scope.modelTofilterBannerProduct = function () {
+        debugger
+        var Keywordarr = [];
+        for (var i = 0; i < $scope.GetBannerAsk1Data.length; i++) {
+            if ($scope.GetBannerAsk1Data[i].Selected) {
+                Keywordarr.push($scope.GetBannerAsk1Data[i].QId);
+            }
+        }
+        $http({
+            url: '/Home/modelTofilterBannerProduct',
+            method: 'post',
+            data: {
+                PBanner: Keywordarr,
+                BannerId: $scope.banner
+            }
+        }).then(function (d) {
+            $scope.ProductData = d.data.ProductList;
+            $('#modalId').modal("toggle");
+
+        }, function (error) {
+            toastr["error"]("Something Went Wrong");
+        });
+
+    };
+
+    $scope.GetTopProduct = function () {
+        debugger
+        var urlParams = new URLSearchParams(window.location.search);
+
+        // Get the value of the "CartData" parameter
+        $scope.ProductType = urlParams.get('ProductType');
+        debugger
+        $http.get("/Home/GetTopProduct?ProductType=" + $scope.ProductType).then(function (d) {
+            $scope.ProductData = d.data.ProductList;
+            debugger
+           
+
+        }, function (error) {
+            alert(error.data);
+        });
+
+
+    };
+     $scope.showFullContent = false;
+    $scope.toggleContent = function (post) {
+        $scope.showFullContent = !$scope.showFullContent;
+    };
 }]);

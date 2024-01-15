@@ -730,7 +730,7 @@ app.controller("HomeController", ['$scope', '$http', '$sce', 'orderByFilter', fu
 
             $scope.GetSmillerProduct($scope.Product.ProductId, $scope.Product.MainCateId);
 
-            $('#desc').html($scope.Product.PDesc);
+            $('#desc').html($scope.Product.TableDesc);
 
             setTimeout(() => {
 
@@ -790,7 +790,7 @@ app.controller("HomeController", ['$scope', '$http', '$sce', 'orderByFilter', fu
             $scope.Product = d.data;
             //$scope.idd = $scope.Product.MainCateId;
 
-            $scope.GetSmillerProduct($scope.Product.ProductId, $scope.Product.MainCateId);
+            $scope.GetBSmillerProduct($scope.Product.ProductId, $scope.Product.MainCateId);
 
             $('#desc').html($scope.Product.PDesc1);
 
@@ -858,6 +858,15 @@ app.controller("HomeController", ['$scope', '$http', '$sce', 'orderByFilter', fu
         });
     };
 
+    $scope.GetBSmillerProduct = function (id, idd) {
+        debugger
+        $http.get("/Home/GetBSmillerProduct?id=" + id + '&idd=' + idd).then(function (d) {
+            debugger
+            $scope.ProductData = d.data;
+        }, function (error) {
+            alert(error.data);
+        });
+    };
 
     $scope.AddOrder = function () {
 
@@ -934,9 +943,9 @@ app.controller("HomeController", ['$scope', '$http', '$sce', 'orderByFilter', fu
     $scope.OpenModelInBanner = function () {
         debugger
         var urlParams = new URLSearchParams(window.location.search);
-
-        // Get the value of the "CartData" parameter
         $scope.banner = urlParams.get('Banner');
+        $scope.BannerAll = urlParams.get('BannerAll');
+
         debugger
         $http.get("/Home/GetBannerAsk1?banner=" + $scope.banner).then(function (d) {
             $scope.GetBannerAsk1Data = d.data;
@@ -950,6 +959,28 @@ app.controller("HomeController", ['$scope', '$http', '$sce', 'orderByFilter', fu
 
         }, function (error) {
             alert(error.data);
+        });
+
+
+    };
+
+    $scope.GetBannerAllProduct = function () {
+        debugger
+        var urlParams = new URLSearchParams(window.location.search);
+        $scope.banner = urlParams.get('Banner');
+
+        $http({
+            url: '/Home/modelTofilterBannerProduct',
+            method: 'post',
+            data: {
+                BannerId: $scope.banner
+            }
+        }).then(function (d) {
+            $scope.ProductData = d.data.ProductList;
+            $('#modalId').modal("toggle");
+
+        }, function (error) {
+            toastr["error"]("Something Went Wrong");
         });
 
 
@@ -1028,4 +1059,26 @@ app.controller("HomeController", ['$scope', '$http', '$sce', 'orderByFilter', fu
 
     };
 
+    $scope.GetTopProduct = function () {
+        debugger
+        var urlParams = new URLSearchParams(window.location.search);
+
+        // Get the value of the "CartData" parameter
+        $scope.ProductType = urlParams.get('ProductType');
+        debugger
+        $http.get("/Home/GetTopProduct?ProductType=" + $scope.ProductType).then(function (d) {
+            $scope.ProductData = d.data.ProductList;
+            debugger
+           
+
+        }, function (error) {
+            alert(error.data);
+        });
+
+
+    };
+     $scope.showFullContent = false;
+    $scope.toggleContent = function (post) {
+        $scope.showFullContent = !$scope.showFullContent;
+    };
 }]);

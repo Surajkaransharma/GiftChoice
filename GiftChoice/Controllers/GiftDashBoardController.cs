@@ -545,6 +545,7 @@ namespace GiftChoice.Controllers
                    m.Price,
                    m.PUrl,
                    m.Active,
+                   m.TableDesc,
                    m.PDesc,
                    m.LabelId,
                    m.Priority,
@@ -583,6 +584,7 @@ namespace GiftChoice.Controllers
                    m.PLabel,
                    m.Price,
                    m.PUrl,
+                   m.TableDesc,
                    m.Active,
                    m.PDesc,
                    m.Priority,
@@ -619,6 +621,8 @@ namespace GiftChoice.Controllers
             public string PUrl { get; set; }
             public string PLabel { get; set; }
             public string PDesc { get; set; }
+            public string TableDesc { get; set; }
+
             public string PDesc1 { get; set; }
 
             public Nullable<long> Priority { get; set; }
@@ -708,8 +712,7 @@ namespace GiftChoice.Controllers
                     productmodel.LabelId = model.LabelId;
                     productmodel.Active = true;
                     productmodel.PUrl = model.ProductTitle.Replace(" ", "-");
-                    productmodel.PDesc = model.PDesc;
-                    
+                    productmodel.PDesc = model.PDesc;                    
                     productmodel.PLabel = model.PLabel == null ? "" : model.PLabel;
                     productmodel.Price = model.Price;
                     productmodel.Qty = 1;
@@ -814,7 +817,7 @@ namespace GiftChoice.Controllers
 
                 if (result != null)
                 {
-                    result.PDesc = model.PDesc;
+                    result.TableDesc = model.TableDesc;
                     db.SaveChanges();
                 }
 
@@ -1179,6 +1182,7 @@ namespace GiftChoice.Controllers
                 if (result != null)
                 {
                     result.PDesc = model.PDesc;
+                    result.TableDesc = model.TableDesc;
                     db.SaveChanges();
 
                     var totoid = db.PKeywordTbls.Where(p => p.ProductId == model.ProductId);
@@ -2341,6 +2345,7 @@ namespace GiftChoice.Controllers
                     result.ProductTitle = model.ProductTitle;
                     result.VideoUrl = model.VideoUrl;
                     result.SameDay = model.SameDay;
+                    result.PDesc = model.PDesc;
                     result.PUrl = model.ProductTitle.Replace(" ", "-");
                     result.PLabel = model.PLabel == null ? "" : model.PLabel;
                     result.Price = model.Price;
@@ -2607,7 +2612,7 @@ namespace GiftChoice.Controllers
                    m.PDesc1,
                    m.Priority,
                    ProductImage = db.BannerProductImages.Where(i => i.ProductId == m.ProductId).Select(i => i.PImage),
-                   Maincate = db.BannerPTTbls.Where(p => p.MainCateId == m.MainCateId).Select(p => p.MTitle).FirstOrDefault(),
+                   Maincate = db.BannerPTTbls.Where(p => p.MainCateId == m.MainCateId).FirstOrDefault(),
                    Submenu = db.BannerQueryListTbls.Where(s => s.ProductId == m.ProductId).Select(s => new
                    {
                        s.ProductId,

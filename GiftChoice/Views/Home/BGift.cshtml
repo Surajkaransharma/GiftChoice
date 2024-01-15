@@ -267,127 +267,129 @@
 
                                     <div data-aos="zoom-in">
                                         <div class="description mb-20">
-                                            <p align="justify" class="fs-7">
-                                                {{Product.PDesc}}
+                                            <p align="justify" class="fs-7" ng-show="!showFullContent">
+                                                {{Product.PDesc | limitTo: 300}}{{Product.PDesc.length > 300 ? '...' : ''}}
+
+                                                <strong ng-click="toggleContent(post)" id="myBtn" class="text-brand cursor">Read more</strong>
                                             </p>
-                                        @*<div class="description mb-20">
-            <p align="justify" class="fs-7">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloremque nam iste perspiciatis commodi temporibus sunt iure inventore quasi a illo.
-                <span id="dots">...</span>
-                <span id="more">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quibusdam excepturi et iure itaque assumenda. Ipsa illum saepe laboriosam? Sapiente obcaecati ea soluta nesciunt, eos vero illum dicta numquam similique laborum!</span>
-                <strong onclick="myFunction()" id="myBtn" class="text-brand cursor">Read more</strong>
-            </p>
-        </div>*@
-                                        <div id="profile-description">
+                                            <p align="justify" class="fs-7" ng-show="showFullContent">
+                                                {{Product.PDesc}}
 
-                                            <div class="description mb-20 text show-more-height">
-                                                <p align="justify" id="desc" class="fs-7">
-                                                </p>
+                                                <strong ng-click="toggleContent(post)" id="myBtn" class="text-brand cursor">Read Less</strong>
+                                            </p>
 
+                                           
+                                            <div id="profile-description">
+
+                                                <div class="description mb-20 text show-more-height">
+                                                    <p align="justify" id="desc" class="fs-7">
+                                                    </p>
+
+                                                </div>
                                             </div>
+
                                         </div>
 
-                                    </div>
+                                        @*<div data-aos="zoom-in">
+                                                <div class="social-icons single-share mb-20">
+                                                    <ul class="text-grey-5 d-inline-block">
+                                                        <li><strong class="mr-10">Share this:</strong></li>
+                                                        <li class="social-facebook"><a href="#"><img src="assets/imgs/theme/icons/icon-facebook.svg" alt=""></a></li>
+                                                        <li class="social-twitter"> <a href="#"><img src="assets/imgs/theme/icons/icon-twitter.svg" alt=""></a></li>
+                                                        <li class="social-instagram"><a href="#"><img src="assets/imgs/theme/icons/icon-instagram.svg" alt=""></a></li>
+                                                        <li class="social-linkedin"><a href="#"><img src="assets/imgs/theme/icons/icon-pinterest.svg" alt=""></a></li>
+                                                    </ul>
+                                                </div>
+                                            </div>*@
 
-                                    @*<div data-aos="zoom-in">
-                                            <div class="social-icons single-share mb-20">
-                                                <ul class="text-grey-5 d-inline-block">
-                                                    <li><strong class="mr-10">Share this:</strong></li>
-                                                    <li class="social-facebook"><a href="#"><img src="assets/imgs/theme/icons/icon-facebook.svg" alt=""></a></li>
-                                                    <li class="social-twitter"> <a href="#"><img src="assets/imgs/theme/icons/icon-twitter.svg" alt=""></a></li>
-                                                    <li class="social-instagram"><a href="#"><img src="assets/imgs/theme/icons/icon-instagram.svg" alt=""></a></li>
-                                                    <li class="social-linkedin"><a href="#"><img src="assets/imgs/theme/icons/icon-pinterest.svg" alt=""></a></li>
+                                        <div data-aos="zoom-in">
+                                            <div class="attr-detail attr-size mb-30" ng-show="Product.PSizeList.length>0">
+                                                <strong class="mr-10">Size</strong>
+                                                <ul class="list-filter size-filter font-small">
+                                                    <li ng-repeat="s in Product.PSizeList" style="margin-left:5px;"><a href="#">{{s.SizeTitle}}</a> </li>
+
                                                 </ul>
                                             </div>
-                                        </div>*@
-
-                                    <div data-aos="zoom-in">
-                                        <div class="attr-detail attr-size mb-30" ng-show="Product.PSizeList.length>0">
-                                            <strong class="mr-10">Size</strong>
-                                            <ul class="list-filter size-filter font-small">
-                                                <li ng-repeat="s in Product.PSizeList" style="margin-left:5px;"><a href="#">{{s.SizeTitle}}</a> </li>
-
-                                            </ul>
                                         </div>
-                                    </div>
 
-                                    <div data-aos="zoom-in">
-                                        <div class="detail-extralink">
-                                            <div class="detail-qty border radius">
-                                                <a href="#" class="qty-down"><i class="fi-rs-angle-small-down"></i></a>
-                                                <span class="qty-val">1</span>
-                                                <a href="#" class="qty-up"><i class="fi-rs-angle-small-up"></i></a>
+                                        <div data-aos="zoom-in">
+                                            <div class="detail-extralink">
+                                                <div class="detail-qty border radius">
+                                                    <a href="#" class="qty-down"><i class="fi-rs-angle-small-down"></i></a>
+                                                    <span class="qty-val">1</span>
+                                                    <a href="#" class="qty-up"><i class="fi-rs-angle-small-up"></i></a>
+                                                </div>
+                                                <a class="button button-add-to-cart text-white" ng-click="GiftAddItemToCart(Product.ProductId)" role="button">Add To Cart</a>
+                                                <a class="button btn-danger button-add-to-cart filter-button animate__bounceIn" href="{{Product.VideoUrl}}" target="_blank" role="button">See Video</a>
                                             </div>
-                                            <a class="button button-add-to-cart text-white"  ng-click="GiftAddItemToCart(Product.ProductId)" role="button">Add To Cart</a>
-                                            <a class="button btn-danger button-add-to-cart filter-button animate__bounceIn" href="{{Product.VideoUrl}}" target="_blank" role="button">See Video</a>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Product Section End -->
+                            <!-- Related Product Start -->
+                            <div class="row mt-60">
+                                <div class="col-12">
+                                    <h3 class="section-title style-1 mb-30">Related Gifts</h3>
+                                </div>
+                                <div class="row product-grid-4">
+                                    <div class="col-lg-3 col-6 col-sm-4" ng-repeat="q in ProductData" ng-click="RecentViewData($index)">
+                                        <div class="product-cart-wrap mb-30">
+                                            <div class="product-img-action-wrap">
+                                                <div class="product-img">
+                                                    <a href="/Home/BGift?url={{q.PUrl}}">
+                                                        <img class="default-img img-fluid" src="~/images/ProductImg/{{q.ProductImage}}" loading="lazy" alt="product-image">
+                                                        <img class="hover-img img-fluid" src="~/images/ProductImg/{{q.ProductImage}}" loading="lazy" alt="product-hover-image">
+                                                    </a>
+                                                </div>
+                                                <div class="product-badges product-badges-position product-badges-mrg" ng-show="q.PLabel!=''">
+                                                    <span class="hot">{{q.PLabel}}</span>
+                                                </div>
+                                            </div>
+                                            <div class="product-content-wrap">
+                                                <h2><a href="/Home/Gift?url={{q.PUrl}}">{{q.ProductTitle}}</a></h2>
+                                                <div class="product-price">
+                                                    <span><i class="fa fa-inr" aria-hidden="true"></i> {{q.Price}}/-</span>
+                                                </div>
+                                                <div class="product-action-1 show">
+                                                    <a aria-label="Add To Cart" class="action-btn hover-up" ng-click="addItemToCart($index)"><i class="fi-rs-shopping-bag-add"></i></a>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
 
                                 </div>
                             </div>
+                            <!-- Related Product Start -->
                         </div>
-                        <!-- Product Section End -->
-                        <!-- Related Product Start -->
-                        <div class="row mt-60">
-                            <div class="col-12">
-                                <h3 class="section-title style-1 mb-30">Related Gifts</h3>
-                            </div>
-                            <div class="row product-grid-4">
-                                <div class="col-lg-3 col-6 col-sm-4" ng-repeat="q in ProductData" ng-click="RecentViewData($index)">
-                                    <div class="product-cart-wrap mb-30">
-                                        <div class="product-img-action-wrap">
-                                            <div class="product-img">
-                                                <a href="/Home/Gift?url={{q.PUrl}}">
-                                                    <img class="default-img img-fluid" src="~/images/ProductImg/{{q.ProductImage}}" loading="lazy" alt="product-image">
-                                                    <img class="hover-img img-fluid" src="~/images/ProductImg/{{q.ProductImage}}" loading="lazy" alt="product-hover-image">
-                                                </a>
-                                            </div>
-                                            <div class="product-badges product-badges-position product-badges-mrg" ng-show="q.PLabel!=''">
-                                                <span class="hot">{{q.PLabel}}</span>
-                                            </div>
-                                        </div>
-                                        <div class="product-content-wrap">
-                                            <h2><a href="/Home/Gift?url={{q.PUrl}}">{{q.ProductTitle}}</a></h2>
-                                            <div class="product-price">
-                                                <span><i class="fa fa-inr" aria-hidden="true"></i> {{q.Price}}/-</span>
-                                            </div>
-                                            <div class="product-action-1 show">
-                                                <a aria-label="Add To Cart" class="action-btn hover-up" ng-click="addItemToCart($index)"><i class="fi-rs-shopping-bag-add"></i></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                            </div>
-                        </div>
-                        <!-- Related Product Start -->
                     </div>
                 </div>
             </div>
-        </div></div>
+        </div>
     </section>
 
 
     <!-- Design Banner Start -->
-    <section class="p-0 section-padding bg-light">
+    <section class="p-0 section-padding bg-light" ng-init="GetDesignBanner()">
         <div class="container pt-4 pb-4">
             <div class="row g-1">
                 <div class="col-lg-6 col-sm-12 col-12">
                     <div class="row g-1">
-                        <div class="col-lg-8 col-sm-8 col-7">
+                        <div class="col-lg-8 col-sm-8 col-7" ng-show="DesignBannerData[0]">
                             <div data-aos="zoom-in">
                                 <div class="image image-1">
-                                    <a href="banner-category.html">
-                                        <img src="https://dummyimage.com/800x900/ccc/fff" alt="banner-image" class="img-fluid">
+                                    <a href="/Home/BannerGifts?Banner={{DesignBannerData[0].MainCateId}}">
+                                        <img src="~/images/BannerPTImage/{{DesignBannerData[0].MImage}}" alt="banner-image" class="img-fluid">
                                     </a>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-lg-4 col-sm-4 col-5">
+                        <div class="col-lg-4 col-sm-4 col-5" ng-show="DesignBannerData[1]">
                             <div data-aos="zoom-in">
                                 <div class="image image-2">
-                                    <a href="banner-category.html">
-                                        <img src="https://dummyimage.com/400x900/ccc/fff" alt="banner-image" class="img-fluid">
+                                    <a href="/Home/BannerGifts?Banner={{DesignBannerData[1].MainCateId}}">
+                                        <img src="~/images/BannerPTImage/{{DesignBannerData[1].MImage}}" alt="banner-image" class="img-fluid">
                                     </a>
                                 </div>
                             </div>
@@ -397,20 +399,20 @@
 
                 <div class="col-lg-6 col-sm-12 col-12">
                     <div class="row g-1">
-                        <div class="col-lg-12 col-sm-12 col-6">
+                        <div class="col-lg-12 col-sm-12 col-6" ng-show="DesignBannerData[2]">
                             <div data-aos="zoom-in">
                                 <div class="image image-3">
-                                    <a href="banner-category.html">
-                                        <img src="https://dummyimage.com/600x220/ccc/fff" alt="banner-image" class="img-fluid">
+                                    <a href="/Home/BannerGifts?Banner={{DesignBannerData[2].MainCateId}}">
+                                        <img src="~/images/BannerPTImage/{{DesignBannerData[2].MImage}}" alt="banner-image" class="img-fluid">
                                     </a>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-lg-12 col-sm-12 col-6">
+                        <div class="col-lg-12 col-sm-12 col-6" ng-show="DesignBannerData[3]">
                             <div data-aos="zoom-in">
                                 <div class="image image-4">
-                                    <a href="banner-category.html">
-                                        <img src="https://dummyimage.com/600x220/ccc/fff" alt="banner-image" class="img-fluid">
+                                    <a href="/Home/BannerGifts?Banner={{DesignBannerData[3].MainCateId}}">
+                                        <img src="~/images/BannerPTImage/{{DesignBannerData[3].MImage}}" alt="banner-image" class="img-fluid">
                                     </a>
                                 </div>
                             </div>

@@ -185,7 +185,7 @@
                                         <td> <span class="badge {{m.ModelQuery1==1? 'bg-success' : 'bg-danger'}}">{{m.ModelQuery1==1?'Open':'Close'}}</span> </td>
 
                                         <td>{{m.Priority}}</td>
-                                        <td><img src="~/images/BannerPTImage/{{m.MImage}}"></td>
+                                        <td><img src="~/images/BannerPTImage/{{m.MImage}}" ></td>
                                         <td><a ng-click="BannerProdcutTActiveDeActive(m.MainCateId)"> <span class="badge {{m.Active==1? 'bg-success' : 'bg-danger'}}">{{m.Active==1?'Active':'Deactive'}}</span></a> </td>
                                         <td><a><i class="bx bxs-pencil" ng-click="GetBannerProdcutTid($index)"></i></a></td>
                                     </tr>
@@ -420,25 +420,25 @@
 
 
         // If The Uploaded File Type Is 'jpeg'
-        if (isImage[0] === 'jpeg') {
-            // Add Inisde (uploadedFileIconText) The (jpg) Value
-            uploadedFileIconText.innerHTML = 'jpg';
-        } else { // else
-            // Add Inisde (uploadedFileIconText) The Uploaded File Type
-            uploadedFileIconText.innerHTML = isImage[0];
-        };
+        //if (isImage[0] === 'jpeg') {
+        //    // Add Inisde (uploadedFileIconText) The (jpg) Value
+        //    uploadedFileIconText.innerHTML = 'jpg';
+        //} else { // else
+        //    // Add Inisde (uploadedFileIconText) The Uploaded File Type
+        //    uploadedFileIconText.innerHTML = isImage[0];
+        //};
 
-        // If The Uploaded File Is An Image
-        if (isImage.length !== 0) {
-            // Check, If File Size Is 2MB or Less
-            if (fileSize <= 2000000) { // 2MB :)
-                return true;
-            } else { // Else File Size
-                return alert('Please Your File Should be 2 Megabytes or Less');
-            };
-        } else { // Else File Type
-            return alert('Please make sure to upload An Image File Type');
-        };
+        //// If The Uploaded File Is An Image
+        //if (isImage.length !== 0) {
+        //    // Check, If File Size Is 2MB or Less
+        //    if (fileSize <= 2000000) { // 2MB :)
+        //        return true;
+        //    } else { // Else File Size
+        //        return alert('Please Your File Should be 2 Megabytes or Less');
+        //    };
+        //} else { // Else File Type
+        //    return alert('Please make sure to upload An Image File Type');
+        //};
     };
 
     // :)

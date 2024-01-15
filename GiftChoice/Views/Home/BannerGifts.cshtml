@@ -75,7 +75,7 @@
                                             <span><i class="fa fa-inr" aria-hidden="true"></i> {{p.Price}}/-</span>
                                         </div>
                                         <div class="product-action-1 show">
-                                            <a aria-label="Add To Cart" class="action-btn hover-up" href="cart.html"><i class="fi-rs-shopping-bag-add"></i></a>
+                                            <a aria-label="Add To Cart" class="action-btn hover-up" ng-click="addItemToCart($index)"><i class="fi-rs-shopping-bag-add"></i></a>
                                         </div>
                                     </div>
                                 </div>
@@ -107,10 +107,12 @@
 
                                     <input class="form-check-input" type="radio" name="inlineRadioOptions" id="AskQues1_{{b.QId}}" value="{{b.QId}}" ng-model="b.Selected">
                                     <label class="form-check-label mb-0" for="AskQues1_{{b.QId}}">{{b.Answer}}</label>
-                                </span>                           
+                                </span>
 
-
-
+                                <a ng-click="GetBannerAllProduct()" class="form-check-label">
+                                   View All
+                                  
+                                </a>
                             </div>
                         </div>
                     </div>

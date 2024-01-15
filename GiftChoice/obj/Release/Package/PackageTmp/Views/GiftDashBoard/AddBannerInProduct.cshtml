@@ -65,27 +65,27 @@
 
 
                             </div>
-                            <div class="col-md-3">
-                                <label for="input1" class="form-label">Select Query</label>
+                            @*<div class="col-md-3">
+                                    <label for="input1" class="form-label">Select Query</label>
 
-                                <select id="MainCate" class="form-select" ng-model="Product.QueryId" onchange="angular.element(this).scope().GetSubTitleList(this.value)">
-                                    <option ng-selected="true" value="-1">Select Query Title</option>
-                                    <option ng-repeat="m in GetBannerToQueryData" value="{{m.QId}}">{{m.Answer}}</option>
-                                </select>
-
-
-                            </div>
-                            <div class="col-md-3">
-                                <label for="input1" class="form-label">Select KeyWord Title</label>
-
-                                <select id="MainCate" class="form-select" ng-model="Product.BSubDId" onchange="angular.element(this).scope().GetQueryKeywordlist(this.value)">
-                                    <option ng-selected="true" value="-1">Select KeyWord Title</option>
-                                    <option ng-repeat="m in GetSubTitleListData" value="{{m.BSubDId}}">{{m.kSubTitle}}</option>
-                                    @*<option ng-repeat="m in GetBannerInProductData" value="{{m.MainCateId}}">{{m.MTitle}}</option>*@
-                                </select>
+                                    <select id="MainCate" class="form-select" ng-model="Product.QueryId" onchange="angular.element(this).scope().GetSubTitleList(this.value)">
+                                        <option ng-selected="true" value="-1">Select Query Title</option>
+                                        <option ng-repeat="m in GetBannerToQueryData" value="{{m.QId}}">{{m.Answer}}</option>
+                                    </select>
 
 
-                            </div>
+                                </div>*@
+                            @*<div class="col-md-3">
+                                    <label for="input1" class="form-label">Select KeyWord Title</label>
+
+                                    <select id="MainCate" class="form-select" ng-model="Product.BSubDId" onchange="angular.element(this).scope().GetQueryKeywordlist(this.value)">
+                                        <option ng-selected="true" value="-1">Select KeyWord Title</option>
+                                        <option ng-repeat="m in GetSubTitleListData" value="{{m.BSubDId}}">{{m.kSubTitle}}</option>
+
+                                    </select>
+
+
+                                </div>*@
                             <div class="col-md-3">
                                 <label for="input1" class="form-label">Product Title</label>
                                 <input type="text" id="Producttitle" class="form-control" ng-model="Product.ProductTitle" placeholder="Product Title">
@@ -112,18 +112,30 @@
                                 <label for="input1" class="form-label">Same Day Deliver</label>
                                 <input type="checkbox" ng-model="Product.SameDay" id="" placeholder="">
                             </div>
-                            <div class="col-md-12" ng-init="GetKeywordData()">
-                                <label for="input1" class="form-label">Select Keyword</label>
+                            <div class="col-md-12" >
+                                <label for="input1" class="form-label">Select Answer</label>
                                 <div class="" id="check_box">
-                                    <label class="checkbox-wrapper" ng-repeat="k in KeywordList">
-                                        <input type="checkbox" id="Keyword_{{k.KeywordId}}" class="checkbox-input" value="{{k.KeywordId}}" ng-model="k.Selected" ng-checked="" />
+                                    <label class="checkbox-wrapper" ng-repeat="m in GetBannerToQueryData">
+                                        <input type="checkbox" id="Keyword_{{m.QId}}" class="checkbox-input" value="{{m.QId}}" ng-model="m.Selected" ng-checked="" />
                                         <span class="checkbox-tile">
-                                            <span class="checkbox-label">{{k.Keyword}}</span>
+                                            <span class="checkbox-label">{{m.Answer}}</span>
                                         </span>
                                     </label>
 
                                 </div>
                             </div>
+                            @*<div class="col-md-12" ng-init="GetKeywordData()">
+                                    <label for="input1" class="form-label">Select Keyword</label>
+                                    <div class="" id="check_box">
+                                        <label class="checkbox-wrapper" ng-repeat="k in KeywordList">
+                                            <input type="checkbox" id="Keyword_{{k.KeywordId}}" class="checkbox-input" value="{{k.KeywordId}}" ng-model="k.Selected" ng-checked="" />
+                                            <span class="checkbox-tile">
+                                                <span class="checkbox-label">{{k.Keyword}}</span>
+                                            </span>
+                                        </label>
+
+                                    </div>
+                                </div>*@
                             <div class="col-md-12" ng-init="GetSizeData()">
                                 <label for="input1" class="form-label">Select Size</label>
                                 <div class="" id="check_box">

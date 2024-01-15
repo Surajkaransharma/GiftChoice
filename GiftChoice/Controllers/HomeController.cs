@@ -464,6 +464,7 @@ namespace GiftChoice.Controllers
                    m.Create_at,
                    m.PUrl,
                    m.PDesc,
+                   m.TableDesc,
                    m.Qty,
                    m.Active,
                    m.Priority,
@@ -511,7 +512,7 @@ namespace GiftChoice.Controllers
                    m.PDesc1,
                    m.Active,
                    m.Priority,
-                   ProductImage = db.ProductImages.Where(i => i.ProductId == m.ProductId).Select(i => i.PImage).FirstOrDefault(),
+                   ProductImage = db.BannerProductImages.Where(i => i.ProductId == m.ProductId).Select(i => i.PImage).FirstOrDefault(),
                    AllProductImage = db.ProductImages.Where(i => i.ProductId == m.ProductId).Select(i => i.PImage),
                    Maincate = db.MainCateTbls.Where(p => p.MainCateId == m.MainCateId).FirstOrDefault(),
                    //Submenu = db.PKeywordTbls.Where(s => s.ProductId == m.ProductId && s.Active == true).Select(s => new
@@ -539,6 +540,31 @@ namespace GiftChoice.Controllers
             var res =
 
                db.ProductTbls.Where(p => p.ProductId != id && p.MainCateId == idd && p.Active == true).Select(m => new
+               {
+                   m.ProductId,
+                   m.MainCateId,
+                   m.ProductTitle,
+                   m.PLabel,
+                   m.Price,
+                   m.PUrl,
+                   m.Create_at,
+                   m.Qty,
+                   m.Active,
+                   m.Priority,
+                   ProductImage = db.ProductImages.Where(i => i.ProductId == m.ProductId).Select(i => i.PImage).FirstOrDefault(),
+
+               }).OrderBy(x => Guid.NewGuid()).Take(8);
+            return Json(res, JsonRequestBehavior.AllowGet);
+
+        }
+
+        [JsonNetFilter]
+        public JsonResult GetBSmillerProduct(int id, int idd)
+        {
+            db.Configuration.ProxyCreationEnabled = false;
+            var res =
+
+               db.BannerProductTbls.Where(p => p.ProductId != id && p.MainCateId == idd && p.Active == true).Select(m => new
                {
                    m.ProductId,
                    m.MainCateId,
@@ -1260,7 +1286,31 @@ namespace GiftChoice.Controllers
 
 
 
+        public JsonResult GetTopProduct(string ProductType)
+        {
+            int labelid = ProductType == "TopsellingProduct" ? 1 : ProductType == "NewArivals" ? 3 : ProductType == "NewProduct" ? 2 : 0;
 
+            var res = new
+            {
+              ProductList =  db.ProductTbls.Where(p => p.LabelId == labelid && p.Active == true).Select(m => new
+                {
+                    m.ProductId,
+                    m.MainCateId,
+                    m.ProductTitle,
+                    m.PLabel,
+                    m.Price,
+                    m.PUrl,
+                    m.Create_at,
+                    m.Qty,
+                    m.Active,
+                    m.Priority,
+                    ProductImage = db.ProductImages.Where(i => i.ProductId == m.ProductId).Select(i => i.PImage).FirstOrDefault(),
+
+                }).OrderBy(x => Guid.NewGuid())
+            };
+            return Json(res, JsonRequestBehavior.AllowGet);
+
+        }
 
     }
 }
