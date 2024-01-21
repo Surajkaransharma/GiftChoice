@@ -513,8 +513,8 @@ namespace GiftChoice.Controllers
                    m.Active,
                    m.Priority,
                    ProductImage = db.BannerProductImages.Where(i => i.ProductId == m.ProductId).Select(i => i.PImage).FirstOrDefault(),
-                   AllProductImage = db.ProductImages.Where(i => i.ProductId == m.ProductId).Select(i => i.PImage),
-                   Maincate = db.MainCateTbls.Where(p => p.MainCateId == m.MainCateId).FirstOrDefault(),
+                   AllProductImage = db.BannerProductImages.Where(i => i.ProductId == m.ProductId).Select(i => i.PImage),
+                   Maincate = db.BannerPTTbls.Where(p => p.MainCateId == m.MainCateId).FirstOrDefault(),
                    //Submenu = db.PKeywordTbls.Where(s => s.ProductId == m.ProductId && s.Active == true).Select(s => new
                    //{
                    //    s.ProductId,
@@ -576,7 +576,7 @@ namespace GiftChoice.Controllers
                    m.Qty,
                    m.Active,
                    m.Priority,
-                   ProductImage = db.ProductImages.Where(i => i.ProductId == m.ProductId).Select(i => i.PImage).FirstOrDefault(),
+                   ProductImage = db.BannerProductImages.Where(i => i.ProductId == m.ProductId).Select(i => i.PImage).FirstOrDefault(),
 
                }).OrderBy(x => Guid.NewGuid()).Take(8);
             return Json(res, JsonRequestBehavior.AllowGet);
@@ -1215,7 +1215,7 @@ namespace GiftChoice.Controllers
                 {
                     ProductList = (from bannerCateProduct in db.BannerQueryListTbls
                                    join product in db.BannerProductTbls on bannerCateProduct.ProductId equals product.ProductId
-                                   where subid.Contains(bannerCateProduct.QueryId ?? 0) && product.MainCateId == BannerId
+                                   where product.Active == true && subid.Contains(bannerCateProduct.QueryId ?? 0) && product.MainCateId == BannerId
                                    orderby Guid.NewGuid()
                                    select new
                                    {
@@ -1250,14 +1250,12 @@ namespace GiftChoice.Controllers
 
                 var res = new
                 {
-                    ProductList = (from bannerCateProduct in db.BannerQueryListTbls
-                                   join product in db.BannerProductTbls on bannerCateProduct.ProductId equals product.ProductId
-                                   where product.MainCateId == BannerId
+                    ProductList = (from product in db.BannerProductTbls
+                                   where product.MainCateId == BannerId && product.Active == true 
                                    orderby Guid.NewGuid()
                                    select new
                                    {
-                                       bannerCateProduct.BannerQueryListId,
-                                       bannerCateProduct.QueryId,
+                                      
                                        product.ProductId,
                                        product.MainCateId,
                                        product.ProductTitle,

@@ -2446,6 +2446,8 @@
     <Content Include="images\ProductImg\997.jpg" />
     <Content Include="images\ProductImg\998.jpg" />
     <Content Include="images\ProductImg\999.jpg" />
+    <Content Include="images\ProductImg\B_1.jpg" />
+    <Content Include="images\ProductImg\B_2.jpg" />
     <Content Include="images\SliderImg\1.jpg" />
     <Content Include="images\SliderImg\2.JPG" />
     <Content Include="images\SliderImg\3.jpg" />

@@ -1051,6 +1051,7 @@ app.controller("HomeController", ['$scope', '$http', '$sce', 'orderByFilter', fu
             }
         }).then(function (d) {
             $scope.ProductData = d.data.ProductList;
+
             $('#modalId').modal("toggle");
 
         }, function (error) {

@@ -1623,29 +1623,29 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
 
                 toastr["success"]("Product save successfully");
                 //$('#MainCate').val("-1").trigger('change');
-                //  location.href = '/GiftDashBoard/AddBannerInProduct';
-                $scope.Product.ProductTitle = null;
-                $scope.Product.PLabel = null;
-                $scope.Product.Price = null;
-                $scope.Product.VideoUrl = null;
-                $scope.Product.SameDay = false;
-                $scope.Product.PDesc = null;
-                $scope.Product.Image1 = null;
-                $scope.Product.Image2 = null;
-                $scope.Product.Image3 = null;
-                $scope.Product.Image4 = null;
-                $scope.Product.Image5 = null;
-                document.getElementById('image1').value = '';
-                document.getElementById('image2').value = '';
-                document.getElementById('image3').value = '';
-                document.getElementById('image4').value = '';
-                document.getElementById('image5').value = '';
+                  location.href = '/GiftDashBoard/AddBannerInProduct';
+                //$scope.Product.ProductTitle = null;
+                //$scope.Product.PLabel = null;
+                //$scope.Product.Price = null;
+                //$scope.Product.VideoUrl = null;
+                //$scope.Product.SameDay = false;
+                //$scope.Product.PDesc = null;
+                //$scope.Product.Image1 = null;
+                //$scope.Product.Image2 = null;
+                //$scope.Product.Image3 = null;
+                //$scope.Product.Image4 = null;
+                //$scope.Product.Image5 = null;
+                //document.getElementById('image1').value = '';
+                //document.getElementById('image2').value = '';
+                //document.getElementById('image3').value = '';
+                //document.getElementById('image4').value = '';
+                //document.getElementById('image5').value = '';
 
-                CKEDITOR.instances.ckeditor.setData('');
+                //CKEDITOR.instances.ckeditor.setData('');
 
 
 
-                $scope.GetSizeData();
+                //$scope.GetSizeData();
                 /* $scope.GetKeywordData();*/
 
                 //    $scope.GetProduct();

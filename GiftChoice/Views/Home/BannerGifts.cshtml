@@ -30,7 +30,7 @@
                         <div class="sort-by-product-area">
                             <div class="sort-by-cover mr-10">
                                 <div class="sort-by-product-wrap filter-button animate__pulse">
-                                    <div class="sort-by" data-bs-toggle="modal" data-bs-target="#modalId">
+                                    <div class="sort-by" @*data-bs-toggle="modal" data-bs-target="#modalId"*@ ng-click="OpenModelInBanner()">
                                         <span><i class="fa fa-filter fs-5" aria-hidden="true"></i>Filter</span>
                                     </div>
                                 </div>
@@ -65,7 +65,7 @@
                                                 <img class="hover-img img-fluid" src="~/images/ProductImg/{{p.ProductImage}}" loading="lazy" alt="product-hover-image" loading="lazy" alt="">
                                             </a>
                                         </div>
-                                        <div class="product-badges product-badges-position product-badges-mrg">
+                                        <div ng-show="p.PLabel!=''" class="product-badges product-badges-position product-badges-mrg">
                                             <span class="hot">{{p.PLabel}}</span>
                                         </div>
                                     </div>

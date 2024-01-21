@@ -51,7 +51,7 @@
         <div class="container">
             <div class="breadcrumb">
                 <a href="/Home/Index" rel="nofollow">Home</a>
-                @*<a href="/Home/shop?Main={{Product.Maincate.MTitle}}"> <span>{{Product.Maincate.MTitle}}</span></a>*@
+                <a href="/Home/BannerGifts?Banner={{Product.Maincate.MainCateId}}"><span> {{Product.Maincate.MTitle}}</span></a>
                 <span> {{Product.ProductTitle}}</span>
             </div>
         </div>
@@ -252,7 +252,7 @@
                                         <span class="badge bg-success mb-2 animate__flash" ng-show="Product.SameDay">Same Day Delivery</span>
                                         <h2 class="title-detail">{{Product.ProductTitle}}</h2>
                                         <div class="pro-details-brand">
-                                            <span><a href="/Home/shop?Main={{Product.Maincate.MTitle}}">{{Product.Maincate.MTitle}}</a></span>
+                                            <span><a href="/Home/BannerGifts?Banner={{Product.Maincate.MainCateId}}">{{Product.Maincate.MTitle}}</a></span>
 
                                         </div>
                                     </div>
@@ -320,7 +320,7 @@
                                                     <a href="#" class="qty-up"><i class="fi-rs-angle-small-up"></i></a>
                                                 </div>
                                                 <a class="button button-add-to-cart text-white" ng-click="GiftAddItemToCart(Product.ProductId)" role="button">Add To Cart</a>
-                                                <a class="button btn-danger button-add-to-cart filter-button animate__bounceIn" href="{{Product.VideoUrl}}" target="_blank" role="button">See Video</a>
+                                                <a class="button btn-danger button-add-to-cart filter-button animate__bounceIn" ng-show="Product.VideoUrl!=''" href="{{Product.VideoUrl}}" target="_blank" role="button">See Video</a>
                                             </div>
                                         </div>
 

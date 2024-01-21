@@ -2343,7 +2343,7 @@ namespace GiftChoice.Controllers
                     result.BSubId = db.BSubTitleDetailTbls.Where(q => q.BSubDId == model.BSubDId).Select(q => q.BSubId).FirstOrDefault();
                     result.BSubDId = model.BSubDId;
                     result.ProductTitle = model.ProductTitle;
-                    result.VideoUrl = model.VideoUrl;
+                    result.VideoUrl = model.VideoUrl ?? "";
                     result.SameDay = model.SameDay;
                     result.PDesc = model.PDesc;
                     result.PUrl = model.ProductTitle.Replace(" ", "-");
