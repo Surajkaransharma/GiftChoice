@@ -138,11 +138,11 @@
         </section>*@
     <!-- Category Section End -->
     <!-- Category Section Start -->
-    <section class="p-0 category-section section-padding" ng-show="MainCateData.length>0">
+    <section class="p-0 category-section section-padding" ng-show="HomeMainCateData.length>0">
         <div class="container pt-4 pb-4">
             <h3 class="section-title mb-20">All Categories</h3>
-            <div class="row align-items-center g-1 gx-2" ng-init="GetMainCateData()">
-                <div class="col" ng-repeat="m in MainCateData">
+            <div class="row align-items-center g-1 gx-2" ng-init="GetHomeMainCateData()">
+                <div class="col" ng-repeat="m in HomeMainCateData">
                     <div data-aos="zoom-in">
                         <div class="img-hover-scale overflow-hidden">
                             <a href="/Home/shop?Main={{m.MTitle}}">

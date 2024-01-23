@@ -80,6 +80,24 @@ namespace GiftChoice.Controllers
             }
 
         }
+        public JsonResult GetHomeMainCateData()
+        {          
+
+                var res = db.MainCateTbls.Where(m => m.Active == true).Select(m => new
+                {
+                    m.MainCateId,
+                    m.MUrl,
+                    m.MTitle,
+                    m.Active,
+                    m.MImage,
+                    m.Priority,
+                }).OrderBy(m => m.Priority);
+                return Json(res, JsonRequestBehavior.AllowGet);
+            
+
+        }
+
+
 
         public JsonResult GetBannerCateData()
         {
@@ -1136,6 +1154,7 @@ namespace GiftChoice.Controllers
 
         public JsonResult GetBannerAsk1(int banner)
         {
+
             var res = db.QueryTbls.Where(m => m.Active == true && m.MainCateId == banner).Select(m => new
             {
                 m.AskQues1,

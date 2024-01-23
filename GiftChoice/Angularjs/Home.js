@@ -629,6 +629,16 @@ app.controller("HomeController", ['$scope', '$http', '$sce', 'orderByFilter', fu
         });
     };
 
+    $scope.GetHomeMainCateData = function () {
+        $http.get("/Home/GetHomeMainCateData").then(function (d) {
+            $scope.HomeMainCateData = d.data;
+            debugger
+        
+        }, function (error) {
+            alert(error.data);
+        });
+    };
+
     $scope.GetBannerCateData = function () {
         $http.get("/Home/GetBannerCateData").then(function (d) {
             $scope.MainCateData = d.data;
