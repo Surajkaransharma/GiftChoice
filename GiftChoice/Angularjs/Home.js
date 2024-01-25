@@ -425,7 +425,7 @@ app.controller("HomeController", ['$scope', '$http', '$sce', 'orderByFilter', fu
                     });
                 });
 
-        }, 10);
+            }, 10);
 
 
         }, function (error) {
@@ -633,7 +633,7 @@ app.controller("HomeController", ['$scope', '$http', '$sce', 'orderByFilter', fu
         $http.get("/Home/GetHomeMainCateData").then(function (d) {
             $scope.HomeMainCateData = d.data;
             debugger
-        
+
         }, function (error) {
             alert(error.data);
         });
@@ -958,14 +958,22 @@ app.controller("HomeController", ['$scope', '$http', '$sce', 'orderByFilter', fu
 
         debugger
         $http.get("/Home/GetBannerAsk1?banner=" + $scope.banner).then(function (d) {
-            $scope.GetBannerAsk1Data = d.data;
-            debugger
-            if ($scope.GetBannerAsk1Data[0].BannerTitle.ModelQuery1 == true) {
+            $scope.GetBannerAsk1Data = d.data.Querydata;
+            $scope.ModelStatus = d.data.ModelStatus;
 
-                setTimeout(() => {
-                    $('#modalId').modal("toggle");
-                }, 100);
+            debugger
+            if ($scope.ModelStatus == true) {
+
+                if ($scope.GetBannerAsk1Data[0].BannerTitle.ModelQuery1 == true) {
+
+                    setTimeout(() => {
+                        $('#modalId').modal("toggle");
+                    }, 100);
+                }
+            } else {
+                $scope.GetBannerAllProductwithmodel();
             }
+                    
 
         }, function (error) {
             alert(error.data);
@@ -973,7 +981,54 @@ app.controller("HomeController", ['$scope', '$http', '$sce', 'orderByFilter', fu
 
 
     };
+    $scope.OpenModelInBannerFilter = function () {
+        debugger
+        var urlParams = new URLSearchParams(window.location.search);
+        $scope.banner = urlParams.get('Banner');
+        $scope.BannerAll = urlParams.get('BannerAll');
 
+        debugger
+        $http.get("/Home/GetBannerAsk1?banner=" + $scope.banner).then(function (d) {
+            $scope.GetBannerAsk1Data = d.data.Querydata;
+            $scope.ModelStatus = d.data.ModelStatus;
+
+            debugger
+         
+                if ($scope.GetBannerAsk1Data[0].BannerTitle.ModelQuery1 == true) {
+
+                    setTimeout(() => {
+                        $('#modalId').modal("toggle");
+                    }, 100);
+                }
+             
+
+        }, function (error) {
+            alert(error.data);
+        });
+
+
+    };
+    $scope.GetBannerAllProductwithmodel = function () {
+        debugger
+        var urlParams = new URLSearchParams(window.location.search);
+        $scope.banner = urlParams.get('Banner');
+
+        $http({
+            url: '/Home/modelTofilterBannerProduct',
+            method: 'post',
+            data: {
+                BannerId: $scope.banner
+            }
+        }).then(function (d) {
+            $scope.ProductData = d.data.ProductList;
+           
+
+        }, function (error) {
+            toastr["error"]("Something Went Wrong");
+        });
+
+
+    };
     $scope.GetBannerAllProduct = function () {
         debugger
         var urlParams = new URLSearchParams(window.location.search);
@@ -1048,9 +1103,12 @@ app.controller("HomeController", ['$scope', '$http', '$sce', 'orderByFilter', fu
         debugger
         var Keywordarr = [];
         for (var i = 0; i < $scope.GetBannerAsk1Data.length; i++) {
-            if ($scope.GetBannerAsk1Data[i].Selected) {
+            if ($("#AskQues1_" + $scope.GetBannerAsk1Data[i].QId).is(":checked")) {
                 Keywordarr.push($scope.GetBannerAsk1Data[i].QId);
+
             }
+            //if ($scope.GetBannerAsk1Data[i].Selected) {
+            //}
         }
         $http({
             url: '/Home/modelTofilterBannerProduct',
@@ -1080,7 +1138,7 @@ app.controller("HomeController", ['$scope', '$http', '$sce', 'orderByFilter', fu
         $http.get("/Home/GetTopProduct?ProductType=" + $scope.ProductType).then(function (d) {
             $scope.ProductData = d.data.ProductList;
             debugger
-           
+
 
         }, function (error) {
             alert(error.data);
@@ -1088,7 +1146,7 @@ app.controller("HomeController", ['$scope', '$http', '$sce', 'orderByFilter', fu
 
 
     };
-     $scope.showFullContent = false;
+    $scope.showFullContent = false;
     $scope.toggleContent = function (post) {
         $scope.showFullContent = !$scope.showFullContent;
     };

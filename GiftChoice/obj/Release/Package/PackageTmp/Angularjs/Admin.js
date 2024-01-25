@@ -1504,6 +1504,17 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
         });
     };
 
+
+    $scope.GetBannerInProductFilter = function () {
+        debugger
+        $http.get("/GiftDashBoard/GetBannerInProductFilter").then(function (d) {
+            debugger
+            $scope.GetBannerInProductFilterData = d.data;
+        }, function (error) {
+            alert(error.data);
+        });
+    };
+
     $scope.GetSubTitleList = function (id) {
         debugger
         if (id != "-1" && id != "") {

@@ -320,7 +320,7 @@
                                                     <a href="#" class="qty-up"><i class="fi-rs-angle-small-up"></i></a>
                                                 </div>
                                                 <a class="button button-add-to-cart text-white" ng-click="GiftAddItemToCart(Product.ProductId)" role="button">Add To Cart</a>
-                                                <a class="button btn-danger button-add-to-cart filter-button animate__bounceIn" href="{{Product.VideoUrl}}" target="_blank" role="button">See Video</a>
+                                                <a class="button btn-danger button-add-to-cart filter-button animate__bounceIn" ng-show="Product.VideoUrl!=null && Product.VideoUrl!=''" href="{{Product.VideoUrl}}" target="_blank" role="button">See Video</a>
                                             </div>
                                         </div>
 
@@ -348,7 +348,7 @@
                                                 </div>
                                             </div>
                                             <div class="product-content-wrap">
-                                                <h2><a href="/Home/Gift?url={{q.PUrl}}">{{q.ProductTitle}}</a></h2>
+                                                <h2><a href="/Home/BGift?url={{q.PUrl}}">{{q.ProductTitle}}</a></h2>
                                                 <div class="product-price">
                                                     <span><i class="fa fa-inr" aria-hidden="true"></i> {{q.Price}}/-</span>
                                                 </div>

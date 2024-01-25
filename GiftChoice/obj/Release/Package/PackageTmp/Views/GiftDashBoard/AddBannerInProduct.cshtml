@@ -206,13 +206,13 @@
                                 </div>*@
                             @*  <div class="ms-auto"><a href="javascript:;" class="btn btn-primary radius-30 mt-2 mt-lg-0" data-bs-toggle="modal" data-bs-target="#createcompany"><i class="bx bxs-plus-square"></i>Add New Company</a></div>*@
 
-                            <div class="col-md-3">
+                            <div class="col-md-3" ng-init="GetBannerInProductFilter()">
                                 <label for="input1" class="form-label">Select Banner Title</label>
 
                                 <select id="MainCate" class="form-select" onchange="angular.element(this).scope().GetBannerProduct(this.value)">
                                     <option ng-selected="true" value="-1">Select Banner Title</option>
                                     <option value="-2">All Product</option>
-                                    <option ng-repeat="m in GetBannerInProductData" value="{{m.MainCateId}}">{{m.MTitle}}</option>
+                                    <option ng-repeat="m in GetBannerInProductFilterData" value="{{m.MainCateId}}">{{m.MTitle}}</option>
                                 </select>
 
 
