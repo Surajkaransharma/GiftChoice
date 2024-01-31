@@ -189,6 +189,7 @@
           <Property Name="Update_at" Type="datetime" />
           <Property Name="MImage" Type="nvarchar(max)" />
           <Property Name="UserId" Type="bigint" />
+          <Property Name="MainCateType" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="MCKeywordTbl">
           <Key>
@@ -771,6 +772,7 @@ warning 6002: The table/view 'giftchoice.giftchoice.AutocompleteSuggestions' doe
           <Property Name="MImage" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="UserId" Type="Int64" />
           <NavigationProperty Name="MCKeywordTbls" Relationship="GiftChoiceModel.FK__MCKeyword__MainC__534D60F1" FromRole="MainCateTbl" ToRole="MCKeywordTbl" />
+          <Property Name="MainCateType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="MCKeywordTbl">
           <Key>
@@ -1229,6 +1231,7 @@ warning 6002: The table/view 'giftchoice.giftchoice.AutocompleteSuggestions' doe
           <EntitySetMapping Name="MainCateTbls">
             <EntityTypeMapping TypeName="GiftChoiceModel.MainCateTbl">
               <MappingFragment StoreEntitySet="MainCateTbl">
+                <ScalarProperty Name="MainCateType" ColumnName="MainCateType" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
                 <ScalarProperty Name="MImage" ColumnName="MImage" />
                 <ScalarProperty Name="Update_at" ColumnName="Update_at" />

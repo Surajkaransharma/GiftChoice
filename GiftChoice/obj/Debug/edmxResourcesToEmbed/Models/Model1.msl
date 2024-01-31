@@ -189,6 +189,7 @@
     <EntitySetMapping Name="MainCateTbls">
       <EntityTypeMapping TypeName="GiftChoiceModel.MainCateTbl">
         <MappingFragment StoreEntitySet="MainCateTbl">
+          <ScalarProperty Name="MainCateType" ColumnName="MainCateType" />
           <ScalarProperty Name="UserId" ColumnName="UserId" />
           <ScalarProperty Name="MImage" ColumnName="MImage" />
           <ScalarProperty Name="Update_at" ColumnName="Update_at" />

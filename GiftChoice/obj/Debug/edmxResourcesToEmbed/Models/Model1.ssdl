@@ -184,6 +184,7 @@
     <Property Name="Update_at" Type="datetime" />
     <Property Name="MImage" Type="nvarchar(max)" />
     <Property Name="UserId" Type="bigint" />
+    <Property Name="MainCateType" Type="nvarchar" MaxLength="50" />
   </EntityType>
   <EntityType Name="MCKeywordTbl">
     <Key>

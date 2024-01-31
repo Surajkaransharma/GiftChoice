@@ -125,6 +125,8 @@ namespace GiftChoice.Controllers
 
         public class MainCateTblModel
         {
+            public string MainCateType { get; set; }
+
             public string Menu { get; set; }
             public string Position { get; set; }
 
@@ -276,6 +278,36 @@ namespace GiftChoice.Controllers
             }
         }
 
+        public class maincatetypemodel
+        {
+            public List<MainCateTblModel> MainCateTblModel { get; set; }
+        }
+        public JsonResult UpdateMainCateType(maincatetypemodel model)
+        {
+            try
+            {
+                for (int i = 0; i < model.MainCateTblModel.Count(); i++)
+                {
+                    long mainid = model.MainCateTblModel[i].MainCateId;
+                    var result = db.MainCateTbls.FirstOrDefault(p => p.MainCateId == mainid);
+                    if (result != null)
+                    {
+                        result.MainCateType = model.MainCateTblModel[i].MainCateType;
+                        db.SaveChanges();
+
+                    }
+                }
+                var res = new { res = "1" };
+                return Json(res, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+
+                var res = new { res = "0" };
+                return Json(res, JsonRequestBehavior.AllowGet);
+            }
+        }
+
         public JsonResult UpdateKeywordArrayData(MainCateTblModel model)
         {
 
@@ -364,6 +396,7 @@ namespace GiftChoice.Controllers
                    m.Active,
                    m.MImage,
                    m.Priority,
+                   m.MainCateType,
                    Submenu = db.MCKeywordTbls.Where(s => s.MainCateId == m.MainCateId && s.Active == true).Select(s => new
                    {
                        s.MainCateId,
@@ -712,7 +745,7 @@ namespace GiftChoice.Controllers
                     productmodel.LabelId = model.LabelId;
                     productmodel.Active = true;
                     productmodel.PUrl = model.ProductTitle.Replace(" ", "-");
-                    productmodel.PDesc = model.PDesc;                    
+                    productmodel.PDesc = model.PDesc;
                     productmodel.PLabel = model.PLabel == null ? "" : model.PLabel;
                     productmodel.Price = model.Price;
                     productmodel.Qty = 1;
@@ -2071,7 +2104,7 @@ namespace GiftChoice.Controllers
                    m.Active,
                    m.MImage,
                    m.Position,
-                   m.Priority,                 
+                   m.Priority,
                }).OrderBy(m => m.Priority);
             return Json(res, JsonRequestBehavior.AllowGet);
 
@@ -2271,7 +2304,7 @@ namespace GiftChoice.Controllers
                         BannerQueryListTbl pKeyword = new BannerQueryListTbl();
                         pKeyword.BannerQueryListId = db.BannerQueryListTbls.DefaultIfEmpty().Max(r => r == null ? 0 : r.BannerQueryListId) + 1;
                         pKeyword.BMainCateId = Convert.ToInt32(result.MainCateId);
-                        pKeyword.ProductId = result.ProductId;                     
+                        pKeyword.ProductId = result.ProductId;
                         pKeyword.QueryId = model.bannerQueryListTbls[i].QueryId;
                         db.BannerQueryListTbls.Add(pKeyword);
                         db.SaveChanges();

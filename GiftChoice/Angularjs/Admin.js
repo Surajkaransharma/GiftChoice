@@ -521,6 +521,24 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
     ///   Add Product End
 
     ///// Main Category
+
+
+    $scope.UpdateMainCateType = function () {
+        debugger
+      
+        $http({
+            url: '/GiftDashBoard/UpdateMainCateType',
+            method: 'post',
+            data: { MainCateTblModel : $scope.MainCateData }
+        }).then(function (d) {
+            $scope.result = d.data;
+           
+        }, function (error) {
+            toastr["error"]("Something Went Wrong");
+        });
+
+    };
+
     $scope.GetMainCate = function () {
         $http.get("/GiftDashBoard/GetMainCate").then(function (d) {
             $scope.MainCateData = d.data;
