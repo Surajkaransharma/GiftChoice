@@ -4,21 +4,21 @@
 
 <!-- Main Content Start -->
 <main class="main">
-    
+
 
     <!-- Slider Start -->
     <div data-aos="zoom-in">
         <section class="p-0 home-slider" ng-init="SliderList()">
             <div id="carouselId" class="carousel slide" data-bs-ride="carousel">
                 <div class="carousel-inner" role="listbox">
-             
-                    <div ng-repeat="s in SliderListData" class="carousel-item {{$index==0?'active':''}} " >
+
+                    <div ng-repeat="s in SliderListData" class="carousel-item {{$index==0?'active':''}} ">
                         <a href="/Home/shop?Main={{s.MainCate}}">
                             <img src="~/images/SliderImg/{{s.SliderImage}}" class="w-100 d-block img-fluid" loading="lazy" alt="corporates-gifts">
                         </a>
                     </div>
 
-                 
+
                 </div>
                 <button class="carousel-control-prev" type="button" data-bs-target="#carouselId" data-bs-slide="prev">
                     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -67,10 +67,10 @@
 
     <!-- Slider End -->
     <!-- Small Banner Start -->
-    <section class="p-0 banners section-padding bg-light" ng-show="GetSmallBannerData.length>0"  ng-init="GetSmallBanner()">
+    <section class="p-0 banners section-padding" ng-show="GetSmallBannerData.length>0" ng-init="GetSmallBanner()">
         <div class="container pt-4 pb-4">
             <div class="row g-2 gx-3 justify-content-start m-nowrap">
-                <div class="col-lg-4 col-sm-4 col-7"   ng-repeat="b in GetSmallBannerData">
+                <div class="col-lg-4 col-sm-4 col-7" ng-repeat="b in GetSmallBannerData">
                     <div data-aos="zoom-in">
                         <div class="banner-img mb-0 rounded-3">
                             <a href="/Home/BannerGifts?Banner={{b.MainCateId}}">
@@ -79,13 +79,13 @@
                         </div>
                     </div>
                 </div>
-             
+
             </div>
         </div>
     </section>
     <!-- Small Banner End -->
     <!-- Festival Banner Start -->
-    <section class="p-0 section-padding bg-light" ng-show="FestivalBannerData!=''" ng-init="GetFestivalBanner()">
+    <section class="p-0 section-padding" ng-show="FestivalBannerData!=''" ng-init="GetFestivalBanner()">
         <div class="container pt-4 pb-4">
             <div class="row g-1 gx-1">
                 <div class="col-lg-12">
@@ -137,6 +137,89 @@
             </div>
         </section>*@
     <!-- Category Section End -->
+    @* Hero Category Section Start *@
+    <section class="p-0 category-section section-padding bg-light">
+        <div class="container pt-4 pb-4">
+            <h3 class="section-title mb-20">Hero Categories</h3>
+            <div class="row align-items-center g-1 gx-2">
+                <div class="col">
+                    <div data-aos="zoom-in">
+                        <div class="img-hover-scale overflow-hidden">
+                            <a href="shop-by-categories.html">
+                                <img src="https://dummyimage.com/300x300/ccc/fff.jpg" loading="lazy" alt="Caricatures" class="w-100 img-fluid img-thumbnail rounded-2">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div data-aos="zoom-in">
+                        <div class="img-hover-scale overflow-hidden">
+                            <a href="shop-by-categories.html">
+                                <img src="https://dummyimage.com/300x300/ccc/fff.jpg" loading="lazy" alt="Caricatures" class="w-100 img-fluid img-thumbnail rounded-2">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div data-aos="zoom-in">
+                        <div class="img-hover-scale overflow-hidden">
+                            <a href="shop-by-categories.html">
+                                <img src="https://dummyimage.com/300x300/ccc/fff.jpg" loading="lazy" alt="Caricatures" class="w-100 img-fluid img-thumbnail rounded-2">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div data-aos="zoom-in">
+                        <div class="img-hover-scale overflow-hidden">
+                            <a href="shop-by-categories.html">
+                                <img src="https://dummyimage.com/300x300/ccc/fff.jpg" loading="lazy" alt="Caricatures" class="w-100 img-fluid img-thumbnail rounded-2">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div data-aos="zoom-in">
+                        <div class="img-hover-scale overflow-hidden">
+                            <a href="shop-by-categories.html">
+                                <img src="https://dummyimage.com/300x300/ccc/fff.jpg" loading="lazy" alt="Caricatures" class="w-100 img-fluid img-thumbnail rounded-2">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div data-aos="zoom-in">
+                        <div class="img-hover-scale overflow-hidden">
+                            <a href="shop-by-categories.html">
+                                <img src="https://dummyimage.com/300x300/ccc/fff.jpg" loading="lazy" alt="Caricatures" class="w-100 img-fluid img-thumbnail rounded-2">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div data-aos="zoom-in">
+                        <div class="img-hover-scale overflow-hidden">
+                            <a href="shop-by-categories.html">
+                                <img src="https://dummyimage.com/300x300/ccc/fff.jpg" loading="lazy" alt="Caricatures" class="w-100 img-fluid img-thumbnail rounded-2">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div data-aos="zoom-in">
+                        <div class="img-hover-scale overflow-hidden">
+                            <a href="shop-by-categories.html">
+                                <img src="https://dummyimage.com/300x300/ccc/fff.jpg" loading="lazy" alt="Caricatures" class="w-100 img-fluid img-thumbnail rounded-2">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    @* Hero Category Section End *@
+
+
     <!-- Category Section Start -->
     <section class="p-0 category-section section-padding" ng-show="HomeMainCateData.length>0">
         <div class="container pt-4 pb-4">
@@ -151,7 +234,7 @@
                         </div>
                     </div>
                 </div>
-            
+
             </div>
         </div>
     </section>
@@ -210,10 +293,10 @@
     </section>
     <!-- Design Banner End -->
     <!-- Top Products Start -->
-    <section class="section-padding p-0" ng-show="NewArivals.length>0 || TopsellingProduct.length>0 || NewProduct.length>0"  ng-init="GetLabelProduct()">
+    <section class="section-padding p-0" ng-show="NewArivals.length>0 || TopsellingProduct.length>0 || NewProduct.length>0" ng-init="GetLabelProduct()">
         <div class="container pt-4 pb-4">
             <div class="row gx-2 g-2">
-                <div class="col-lg-4 col-sm-4 col-12"  ng-show="TopsellingProduct.length>0">
+                <div class="col-lg-4 col-sm-4 col-12" ng-show="TopsellingProduct.length>0">
                     <div class="bg-light p-3 pt-4 pb-4 border border-light rounded-5 ppt-4">
                         <div class="different-products">
                             <div class="row">
@@ -246,8 +329,8 @@
                                                             <h6><i class="fa fa-inr" aria-hidden="true"></i>{{b.Price}} </h6>
                                                         </div>
                                                         <div class="details">
-                                                            
-                                                                <a href="/Home/Gift?url={{b.PUrl}}" type="button" class="btn btn-primary view-more">View Details</a>
+
+                                                            <a href="/Home/Gift?url={{b.PUrl}}" type="button" class="btn btn-primary view-more">View Details</a>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -301,7 +384,7 @@
                                             </div>
                                         </div>
                                     </div>
-                      
+
                                 </div>
                             </div>
                         </div>
@@ -347,7 +430,7 @@
                                             </div>
                                         </div>
                                     </div>
-                         
+
                                 </div>
                             </div>
                         </div>
@@ -365,57 +448,141 @@
                     <div data-aos="zoom-in">
                         <div class="big-banner">
                             <a href="/Home/BannerGifts?Banner={{m.MainCateId}}">
-                               
+
                                 <img src="~/images/BannerPTImage/{{m.MImage}}" alt="banner-image" class="img-fluid">
                             </a>
                         </div>
                     </div>
                 </div>
-           </div>
+            </div>
         </div>
     </section>
     <!-- Multiple Banner End -->
-    <!-- Products Section Start -->
-    @*<section class="product-tabs section-padding bg-light fadeIn animated">
-        <div class="container">
-            <h3 class="section-title mb-20">New Arivals</h3>
-            <div class="tab-content wow fadeIn animated" ng-init="GetProduct()">
-                <div class="tab-pane fade show active" id="tab-one" role="tabpanel" aria-labelledby="tab-one">
-                    <div class="row product-grid-4 gx-2">
-                        <div class="col-lg-3 col-6 col-sm-4" ng-repeat="p in ProductData" ng-click="RecentViewData($index)">
-                            <div class="product-cart-wrap mb-10">
-                                <div class="product-img-action-wrap">
-                                    <div class="product-img product-img-zoom">
-                                        <a href="/Home/Gift?url={{p.PUrl}}">
-                                            <img class="default-img img-fluid" src="~/images/ProductImg/{{p.ProductImage}}" loading="lazy" alt="product-image">
-                                            <img class="hover-img img-fluid" src="~/images/ProductImg/{{p.ProductImage}}" loading="lazy" alt="product-hover-image">
-                                        </a>
-                                    </div>
-                                    <div class="product-badges product-badges-position product-badges-mrg" ng-show="p.PLabel!=''">
-                                        <span class="hot">{{p.PLabel}}</span>
-                                    </div>
-                                </div>
-                                <div class="product-content-wrap">
-                                    <h2 class="mt-2"><a href="/Home/Gift?url={{p.PUrl}}">{{p.ProductTitle}}</a></h2>
-                                    <div class="product-price">
-                                        <span><i class="fa fa-inr" aria-hidden="true"></i> {{p.Price}}/-</span>
-                                    </div>
-                                    <div class="product-action-1 show">
-                                        <a aria-label="Add To Cart" class="action-btn hover-up" ng-click="addItemToCart($index)"><i class="fi-rs-shopping-bag-add"></i></a>
-                                    </div>
-                                </div>
+
+
+    @* Normal Category Section Start *@
+        <section class="p-0 category-section section-padding">
+            <div class="container pt-4 pb-4">
+                <h3 class="section-title mb-20">Normal Categories</h3>
+                <div class="row align-items-center g-1 gx-2">
+                    <div class="col">
+                        <div data-aos="zoom-in">
+                            <div class="img-hover-scale overflow-hidden">
+                                <a href="shop-by-categories.html">
+                                    <img src="https://dummyimage.com/300x300/ccc/fff.jpg" loading="lazy" alt="Caricatures" class="w-100 img-fluid img-thumbnail rounded-2">
+                                </a>
                             </div>
                         </div>
-
+                    </div>
+                    <div class="col">
+                        <div data-aos="zoom-in">
+                            <div class="img-hover-scale overflow-hidden">
+                                <a href="shop-by-categories.html">
+                                    <img src="https://dummyimage.com/300x300/ccc/fff.jpg" loading="lazy" alt="Caricatures" class="w-100 img-fluid img-thumbnail rounded-2">
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div data-aos="zoom-in">
+                            <div class="img-hover-scale overflow-hidden">
+                                <a href="shop-by-categories.html">
+                                    <img src="https://dummyimage.com/300x300/ccc/fff.jpg" loading="lazy" alt="Caricatures" class="w-100 img-fluid img-thumbnail rounded-2">
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div data-aos="zoom-in">
+                            <div class="img-hover-scale overflow-hidden">
+                                <a href="shop-by-categories.html">
+                                    <img src="https://dummyimage.com/300x300/ccc/fff.jpg" loading="lazy" alt="Caricatures" class="w-100 img-fluid img-thumbnail rounded-2">
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div data-aos="zoom-in">
+                            <div class="img-hover-scale overflow-hidden">
+                                <a href="shop-by-categories.html">
+                                    <img src="https://dummyimage.com/300x300/ccc/fff.jpg" loading="lazy" alt="Caricatures" class="w-100 img-fluid img-thumbnail rounded-2">
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div data-aos="zoom-in">
+                            <div class="img-hover-scale overflow-hidden">
+                                <a href="shop-by-categories.html">
+                                    <img src="https://dummyimage.com/300x300/ccc/fff.jpg" loading="lazy" alt="Caricatures" class="w-100 img-fluid img-thumbnail rounded-2">
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div data-aos="zoom-in">
+                            <div class="img-hover-scale overflow-hidden">
+                                <a href="shop-by-categories.html">
+                                    <img src="https://dummyimage.com/300x300/ccc/fff.jpg" loading="lazy" alt="Caricatures" class="w-100 img-fluid img-thumbnail rounded-2">
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div data-aos="zoom-in">
+                            <div class="img-hover-scale overflow-hidden">
+                                <a href="shop-by-categories.html">
+                                    <img src="https://dummyimage.com/300x300/ccc/fff.jpg" loading="lazy" alt="Caricatures" class="w-100 img-fluid img-thumbnail rounded-2">
+                                </a>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>*@
-    <!-- Products Section End -->
+        </section>
+    @* Normal Category Section End *@
+
 
     <!-- Products Section Start -->
-    <section class="product-tabs section-padding">
+    @*<section class="product-tabs section-padding bg-light fadeIn animated">
+            <div class="container">
+                <h3 class="section-title mb-20">New Arivals</h3>
+                <div class="tab-content wow fadeIn animated" ng-init="GetProduct()">
+                    <div class="tab-pane fade show active" id="tab-one" role="tabpanel" aria-labelledby="tab-one">
+                        <div class="row product-grid-4 gx-2">
+                            <div class="col-lg-3 col-6 col-sm-4" ng-repeat="p in ProductData" ng-click="RecentViewData($index)">
+                                <div class="product-cart-wrap mb-10">
+                                    <div class="product-img-action-wrap">
+                                        <div class="product-img product-img-zoom">
+                                            <a href="/Home/Gift?url={{p.PUrl}}">
+                                                <img class="default-img img-fluid" src="~/images/ProductImg/{{p.ProductImage}}" loading="lazy" alt="product-image">
+                                                <img class="hover-img img-fluid" src="~/images/ProductImg/{{p.ProductImage}}" loading="lazy" alt="product-hover-image">
+                                            </a>
+                                        </div>
+                                        <div class="product-badges product-badges-position product-badges-mrg" ng-show="p.PLabel!=''">
+                                            <span class="hot">{{p.PLabel}}</span>
+                                        </div>
+                                    </div>
+                                    <div class="product-content-wrap">
+                                        <h2 class="mt-2"><a href="/Home/Gift?url={{p.PUrl}}">{{p.ProductTitle}}</a></h2>
+                                        <div class="product-price">
+                                            <span><i class="fa fa-inr" aria-hidden="true"></i> {{p.Price}}/-</span>
+                                        </div>
+                                        <div class="product-action-1 show">
+                                            <a aria-label="Add To Cart" class="action-btn hover-up" ng-click="addItemToCart($index)"><i class="fi-rs-shopping-bag-add"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>*@
+    <!-- Products Section End -->
+    <!-- Products Section Start -->
+    <section class="product-tabs section-padding bg-light">
         <div class="container">
             <div class="row">
                 <div class="col-lg-6 col-sm-6 col-6">
@@ -437,6 +604,7 @@
                                 <div class="product-cart-wrap mb-1">
                                     <div class="product-img-action-wrap">
                                         <div class="product-img product-img-zoom">
+                                            @*<iframe src="https://www.youtube.com/embed/5UXodPraMTU?autoplay=1&loop=1&mute=1" allow="loop"></iframe>*@
                                             <a href="/Home/Gift?url={{p.PUrl}}">
                                                 <img class="default-img img-fluid" src="~/images/ProductImg/{{p.ProductImage}}" loading="lazy" alt="product-image" loading="lazy" alt="">
                                                 <img class="hover-img img-fluid" src="~/images/ProductImg/{{p.ProductImage}}" loading="lazy" alt="product-hover-image" loading="lazy" alt="">
@@ -445,6 +613,9 @@
                                         <div class="product-badges product-badges-position product-badges-mrg" ng-show="p.PLabel!=''">
                                             <span class="hot">{{p.PLabel}}</span>
                                         </div>
+                                        <div class="product-badges product-badges-position_1 product-badges-mrg same-day-badge">
+                                            <span class="hot">Same Day Available</span>
+                                        </div>
                                     </div>
                                     <div class="product-content-wrap">
                                         <h2 class="mt-2"><a href="/Home/Gift?url={{p.PUrl}}">{{p.ProductTitle}}</a></h2>
@@ -452,13 +623,13 @@
                                             <span><i class="fa fa-inr" aria-hidden="true"></i>  {{p.Price}}/-</span>
                                         </div>
                                         <div class="product-action-1 show">
-                                            <a aria-label="Add To Cart" class="action-btn hover-up"  ng-click="addItemToCart($index)"><i class="fi-rs-shopping-bag-add"></i></a>
+                                            <a aria-label="Add To Cart" class="action-btn hover-up" ng-click="addItemToCart($index)"><i class="fi-rs-shopping-bag-add"></i></a>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                      
+
                     </div>
                 </div>
             </div>
@@ -482,7 +653,7 @@
     </section>-->
     <!-- Advertisement End -->
     <!-- Testimonial Start -->
-    <section class="testimonial-start section-padding bg-light">
+    <section class="testimonial-start section-padding">
         <div data-aos="zoom-in">
             <div class="container">
                 <div class="d-flex justify-content-between">

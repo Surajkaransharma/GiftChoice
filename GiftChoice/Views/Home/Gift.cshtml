@@ -266,43 +266,6 @@
                                         </div>
                                     </div>
 
-                                    <div data-aos="zoom-in">
-
-                                        <div class="description mb-20">
-                                            <p align="justify" class="fs-7" ng-show="!showFullContent">
-                                                {{Product.PDesc | limitTo: 300}}{{Product.PDesc.length > 300 ? '...' : ''}}
-
-                                                <strong ng-click="toggleContent(post)" id="myBtn" class="text-brand cursor">Read more</strong>
-                                            </p>
-                                            <p align="justify" class="fs-7" ng-show="showFullContent">
-                                                {{Product.PDesc}}
-
-                                                <strong ng-click="toggleContent(post)" id="myBtn" class="text-brand cursor">Read Less</strong>
-                                            </p>
-                                         
-                                        </div>
-                                        <div id="profile-description">
-
-                                            <div class="description mb-20 text show-more-height">
-                                                <p align="justify" id="desc" class="fs-7">
-                                                </p>
-
-                                            </div>
-                                        </div>
-
-                                    </div>
-
-                                    @*<div data-aos="zoom-in">
-                                            <div class="social-icons single-share mb-20">
-                                                <ul class="text-grey-5 d-inline-block">
-                                                    <li><strong class="mr-10">Share this:</strong></li>
-                                                    <li class="social-facebook"><a href="#"><img src="assets/imgs/theme/icons/icon-facebook.svg" alt=""></a></li>
-                                                    <li class="social-twitter"> <a href="#"><img src="assets/imgs/theme/icons/icon-twitter.svg" alt=""></a></li>
-                                                    <li class="social-instagram"><a href="#"><img src="assets/imgs/theme/icons/icon-instagram.svg" alt=""></a></li>
-                                                    <li class="social-linkedin"><a href="#"><img src="assets/imgs/theme/icons/icon-pinterest.svg" alt=""></a></li>
-                                                </ul>
-                                            </div>
-                                        </div>*@
 
                                     <div data-aos="zoom-in">
                                         <div class="attr-detail attr-size mb-30" ng-show="Product.PSizeList.length>0">
@@ -320,11 +283,51 @@
                                                 <a href="#" class="qty-down"><i class="fi-rs-angle-small-down"></i></a>
                                                 <span class="qty-val">1</span>
                                                 <a href="#" class="qty-up"><i class="fi-rs-angle-small-up"></i></a>
-                                            </div> 
-                                            <a class="button button-add-to-cart text-white"  role="button" ng-click="addItemToCart($index)">Add To Cart</a>
+                                            </div>
+                                            <a class="button button-add-to-cart text-white" role="button" ng-click="addItemToCart($index)">Add To Cart</a>
                                             @*<a class="button btn-danger button-add-to-cart filter-button animate__bounceIn" href="#" target="_blank" role="button">See Video</a>*@
                                         </div>
                                     </div>
+
+                                    <div data-aos="zoom-in">
+
+                                        <div class="description mb-20">
+                                            <p align="justify" class="fs-7" ng-show="!showFullContent">
+                                                {{Product.PDesc | limitTo: 300}}{{Product.PDesc.length > 300 ? '...' : ''}}
+
+                                                <strong ng-click="toggleContent(post)" id="myBtn" class="text-brand cursor">Read more</strong>
+                                            </p>
+                                            <p align="justify" class="fs-7" ng-show="showFullContent">
+                                                {{Product.PDesc}}
+
+                                                <strong ng-click="toggleContent(post)" id="myBtn" class="text-brand cursor">Read Less</strong>
+                                            </p>
+
+                                        </div>
+                                        <div id="profile-description">
+
+                                            <div class="description mb-20 text show-more-height">
+                                                <p align="justify" id="desc" class="fs-7">
+                                                </p>
+
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                    @*<div data-aos="zoom-in">
+            <div class="social-icons single-share mb-20">
+                <ul class="text-grey-5 d-inline-block">
+                    <li><strong class="mr-10">Share this:</strong></li>
+                    <li class="social-facebook"><a href="#"><img src="assets/imgs/theme/icons/icon-facebook.svg" alt=""></a></li>
+                    <li class="social-twitter"> <a href="#"><img src="assets/imgs/theme/icons/icon-twitter.svg" alt=""></a></li>
+                    <li class="social-instagram"><a href="#"><img src="assets/imgs/theme/icons/icon-instagram.svg" alt=""></a></li>
+                    <li class="social-linkedin"><a href="#"><img src="assets/imgs/theme/icons/icon-pinterest.svg" alt=""></a></li>
+                </ul>
+            </div>
+        </div>*@
+
+
 
                                 </div>
                             </div>
@@ -335,9 +338,9 @@
                             <div class="col-12">
                                 <h3 class="section-title style-1 mb-30">Related Gifts</h3>
                             </div>
-                            <div class="row product-grid-4">
+                            <div class="row product-grid-4 g-1 gx-1">
                                 <div class="col-lg-3 col-6 col-sm-4" ng-repeat="q in ProductData" ng-click="RecentViewData($index)">
-                                    <div class="product-cart-wrap mb-30">
+                                    <div class="product-cart-wrap">
                                         <div class="product-img-action-wrap">
                                             <div class="product-img">
                                                 <a href="/Home/Gift?url={{q.PUrl}}">
