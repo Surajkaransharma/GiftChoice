@@ -33,37 +33,7 @@
     </div>
     <!-- Slider End -->
     <!-- Slider Start -->
-    @*<section ng-init="SliderList()" class="carousel-slider-main text-center border-top border-bottom bg-white">
-            <div class="owl-carousel owl-carousel-slider ">
-                <div ng-repeat="s in SliderListData" class="item">
-                    <a href="/Home/shop?Main={{s.MainCate}}"><img class="img-fluid img-responsive" src="~/images/SliderImg/{{s.SliderImage}}" alt="First slide"></a>
-                </div>
-            </div>
-        </section>
-        <style>
-            .owl-controls {
-                margin-top: -25px !important;
-            }
-
-            .owl-pagination clickable {
-                background-color: white !important;
-            }
-
-            .item img {
-                height: auto;
-            }
-
-            @@media only screen and (max-width: 767px) {
-                .item {
-                    height: 25ch;
-                }
-
-                    .item img {
-                        width: 100vh;
-                        height: 200px;
-                    }
-            }
-        </style>*@
+  
 
     <!-- Slider End -->
     <!-- Small Banner Start -->
@@ -85,8 +55,8 @@
     </section>
     <!-- Small Banner End -->
     <!-- Festival Banner Start -->
-    <section class="p-0 section-padding" ng-show="FestivalBannerData!=''" ng-init="GetFestivalBanner()">
-        <div class="container pt-4 pb-4">
+    <section class="p-0 section-padding" ng-show="FestivalBannerData" ng-init="GetFestivalBanner()">
+        <div class="container pt-4 pb-4" ng-show="FestivalBannerData!=''">
             <div class="row g-1 gx-1">
                 <div class="col-lg-12">
                     <div data-aos="zoom-in">
@@ -101,131 +71,13 @@
         </div>
     </section>
     <!-- Festival Banner End -->
-    <!-- Category Section Start -->
-    @*<section class="popular-categories section-padding" ng-init="GetMainCateData()">
-            <div class="container wow fadeIn animated">
-                <h3 class="section-title mb-20">Categories</h3>
-                <div class="carausel-6-columns-cover position-relative">
-                    <div class="slider-arrow slider-arrow-2 carausel-6-columns-arrow" id="carausel-6-columns-arrows"></div>
-                    <div class="carausel-6-columns" id="carausel-6-columns">
-                        <div class="card-1" ng-repeat="m in MainCateData">
-                            <figure class=" img-hover-scale overflow-hidden">
-                                <a href="/Home/shop?Main={{m.MTitle}}">
-                                    <img src="~/images/MainCate/{{m.MImage}}" loading="lazy" alt="category-name" class="w-100 img-fluid">
-                                </a>
-                            </figure>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-        </section>*@
-    @*<section class="category-section section-padding" ng-init="GetMainCateData()">
-            <div class="container">
-                <h3 class="section-title mb-20">All Categories</h3>
-                <div class="row align-items-center g-1 gx-2">
-                    <div class="col" ng-repeat="m in MainCateData">
-                        <div class="img-hover-scale overflow-hidden">
-                            <a href="/Home/shop?Main={{m.MTitle}}">
-                                <img src="~/images/MainCate/{{m.MImage}}" loading="lazy" alt="{{m.MTitle}}" class="w-100 img-fluid img-thumbnail">
-                            </a>
-                        </div>
-                    </div>
-
-
-                </div>
-            </div>
-        </section>*@
-    <!-- Category Section End -->
+  
     @* Hero Category Section Start *@
-    <section class="p-0 category-section section-padding bg-light">
+    <section class="p-0 category-section section-padding bg-light" ng-show="HomeHeroMainCateData.length>0" ng-init="GetHomeMainCateHeroData()">
         <div class="container pt-4 pb-4">
             <h3 class="section-title mb-20">Hero Categories</h3>
             <div class="row align-items-center g-1 gx-2">
-                <div class="col">
-                    <div data-aos="zoom-in">
-                        <div class="img-hover-scale overflow-hidden">
-                            <a href="shop-by-categories.html">
-                                <img src="https://dummyimage.com/300x300/ccc/fff.jpg" loading="lazy" alt="Caricatures" class="w-100 img-fluid img-thumbnail rounded-2">
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div data-aos="zoom-in">
-                        <div class="img-hover-scale overflow-hidden">
-                            <a href="shop-by-categories.html">
-                                <img src="https://dummyimage.com/300x300/ccc/fff.jpg" loading="lazy" alt="Caricatures" class="w-100 img-fluid img-thumbnail rounded-2">
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div data-aos="zoom-in">
-                        <div class="img-hover-scale overflow-hidden">
-                            <a href="shop-by-categories.html">
-                                <img src="https://dummyimage.com/300x300/ccc/fff.jpg" loading="lazy" alt="Caricatures" class="w-100 img-fluid img-thumbnail rounded-2">
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div data-aos="zoom-in">
-                        <div class="img-hover-scale overflow-hidden">
-                            <a href="shop-by-categories.html">
-                                <img src="https://dummyimage.com/300x300/ccc/fff.jpg" loading="lazy" alt="Caricatures" class="w-100 img-fluid img-thumbnail rounded-2">
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div data-aos="zoom-in">
-                        <div class="img-hover-scale overflow-hidden">
-                            <a href="shop-by-categories.html">
-                                <img src="https://dummyimage.com/300x300/ccc/fff.jpg" loading="lazy" alt="Caricatures" class="w-100 img-fluid img-thumbnail rounded-2">
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div data-aos="zoom-in">
-                        <div class="img-hover-scale overflow-hidden">
-                            <a href="shop-by-categories.html">
-                                <img src="https://dummyimage.com/300x300/ccc/fff.jpg" loading="lazy" alt="Caricatures" class="w-100 img-fluid img-thumbnail rounded-2">
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div data-aos="zoom-in">
-                        <div class="img-hover-scale overflow-hidden">
-                            <a href="shop-by-categories.html">
-                                <img src="https://dummyimage.com/300x300/ccc/fff.jpg" loading="lazy" alt="Caricatures" class="w-100 img-fluid img-thumbnail rounded-2">
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div data-aos="zoom-in">
-                        <div class="img-hover-scale overflow-hidden">
-                            <a href="shop-by-categories.html">
-                                <img src="https://dummyimage.com/300x300/ccc/fff.jpg" loading="lazy" alt="Caricatures" class="w-100 img-fluid img-thumbnail rounded-2">
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    @* Hero Category Section End *@
-
-
-    <!-- Category Section Start -->
-    <section class="p-0 category-section section-padding" ng-show="HomeMainCateData.length>0">
-        <div class="container pt-4 pb-4">
-            <h3 class="section-title mb-20">All Categories</h3>
-            <div class="row align-items-center g-1 gx-2" ng-init="GetHomeMainCateData()">
-                <div class="col" ng-repeat="m in HomeMainCateData">
+                <div class="col" ng-repeat="m in HomeHeroMainCateData">
                     <div data-aos="zoom-in">
                         <div class="img-hover-scale overflow-hidden">
                             <a href="/Home/shop?Main={{m.MTitle}}">
@@ -238,7 +90,9 @@
             </div>
         </div>
     </section>
-    <!-- Category Section End -->
+    @* Hero Category Section End *@
+
+
     <!-- Design Banner Start -->
     <section class="p-0 section-padding bg-light" ng-init="GetDesignBanner()">
         <div class="container pt-4 pb-4">
@@ -461,126 +315,26 @@
 
 
     @* Normal Category Section Start *@
-        <section class="p-0 category-section section-padding">
-            <div class="container pt-4 pb-4">
+        <section class="p-0 category-section section-padding" ng-show="HomeMainCateData.length>0">
+            <div class="container pt-4 pb-4"  ng-init="GetHomeMainCateData()">
                 <h3 class="section-title mb-20">Normal Categories</h3>
                 <div class="row align-items-center g-1 gx-2">
-                    <div class="col">
+                    <div class="col" ng-repeat="m in HomeMainCateData">
                         <div data-aos="zoom-in">
                             <div class="img-hover-scale overflow-hidden">
-                                <a href="shop-by-categories.html">
-                                    <img src="https://dummyimage.com/300x300/ccc/fff.jpg" loading="lazy" alt="Caricatures" class="w-100 img-fluid img-thumbnail rounded-2">
+                                <a href="/Home/shop?Main={{m.MTitle}}">
+                                    <img src="~/images/MainCate/{{m.MImage}}" loading="lazy" alt="Caricatures" class="w-100 img-fluid img-thumbnail rounded-2">
                                 </a>
                             </div>
                         </div>
                     </div>
-                    <div class="col">
-                        <div data-aos="zoom-in">
-                            <div class="img-hover-scale overflow-hidden">
-                                <a href="shop-by-categories.html">
-                                    <img src="https://dummyimage.com/300x300/ccc/fff.jpg" loading="lazy" alt="Caricatures" class="w-100 img-fluid img-thumbnail rounded-2">
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div data-aos="zoom-in">
-                            <div class="img-hover-scale overflow-hidden">
-                                <a href="shop-by-categories.html">
-                                    <img src="https://dummyimage.com/300x300/ccc/fff.jpg" loading="lazy" alt="Caricatures" class="w-100 img-fluid img-thumbnail rounded-2">
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div data-aos="zoom-in">
-                            <div class="img-hover-scale overflow-hidden">
-                                <a href="shop-by-categories.html">
-                                    <img src="https://dummyimage.com/300x300/ccc/fff.jpg" loading="lazy" alt="Caricatures" class="w-100 img-fluid img-thumbnail rounded-2">
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div data-aos="zoom-in">
-                            <div class="img-hover-scale overflow-hidden">
-                                <a href="shop-by-categories.html">
-                                    <img src="https://dummyimage.com/300x300/ccc/fff.jpg" loading="lazy" alt="Caricatures" class="w-100 img-fluid img-thumbnail rounded-2">
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div data-aos="zoom-in">
-                            <div class="img-hover-scale overflow-hidden">
-                                <a href="shop-by-categories.html">
-                                    <img src="https://dummyimage.com/300x300/ccc/fff.jpg" loading="lazy" alt="Caricatures" class="w-100 img-fluid img-thumbnail rounded-2">
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div data-aos="zoom-in">
-                            <div class="img-hover-scale overflow-hidden">
-                                <a href="shop-by-categories.html">
-                                    <img src="https://dummyimage.com/300x300/ccc/fff.jpg" loading="lazy" alt="Caricatures" class="w-100 img-fluid img-thumbnail rounded-2">
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div data-aos="zoom-in">
-                            <div class="img-hover-scale overflow-hidden">
-                                <a href="shop-by-categories.html">
-                                    <img src="https://dummyimage.com/300x300/ccc/fff.jpg" loading="lazy" alt="Caricatures" class="w-100 img-fluid img-thumbnail rounded-2">
-                                </a>
-                            </div>
-                        </div>
-                    </div>
+
                 </div>
             </div>
         </section>
     @* Normal Category Section End *@
 
 
-    <!-- Products Section Start -->
-    @*<section class="product-tabs section-padding bg-light fadeIn animated">
-            <div class="container">
-                <h3 class="section-title mb-20">New Arivals</h3>
-                <div class="tab-content wow fadeIn animated" ng-init="GetProduct()">
-                    <div class="tab-pane fade show active" id="tab-one" role="tabpanel" aria-labelledby="tab-one">
-                        <div class="row product-grid-4 gx-2">
-                            <div class="col-lg-3 col-6 col-sm-4" ng-repeat="p in ProductData" ng-click="RecentViewData($index)">
-                                <div class="product-cart-wrap mb-10">
-                                    <div class="product-img-action-wrap">
-                                        <div class="product-img product-img-zoom">
-                                            <a href="/Home/Gift?url={{p.PUrl}}">
-                                                <img class="default-img img-fluid" src="~/images/ProductImg/{{p.ProductImage}}" loading="lazy" alt="product-image">
-                                                <img class="hover-img img-fluid" src="~/images/ProductImg/{{p.ProductImage}}" loading="lazy" alt="product-hover-image">
-                                            </a>
-                                        </div>
-                                        <div class="product-badges product-badges-position product-badges-mrg" ng-show="p.PLabel!=''">
-                                            <span class="hot">{{p.PLabel}}</span>
-                                        </div>
-                                    </div>
-                                    <div class="product-content-wrap">
-                                        <h2 class="mt-2"><a href="/Home/Gift?url={{p.PUrl}}">{{p.ProductTitle}}</a></h2>
-                                        <div class="product-price">
-                                            <span><i class="fa fa-inr" aria-hidden="true"></i> {{p.Price}}/-</span>
-                                        </div>
-                                        <div class="product-action-1 show">
-                                            <a aria-label="Add To Cart" class="action-btn hover-up" ng-click="addItemToCart($index)"><i class="fi-rs-shopping-bag-add"></i></a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>*@
-    <!-- Products Section End -->
     <!-- Products Section Start -->
     <section class="product-tabs section-padding bg-light">
         <div class="container">

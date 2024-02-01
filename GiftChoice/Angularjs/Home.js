@@ -639,6 +639,17 @@ app.controller("HomeController", ['$scope', '$http', '$sce', 'orderByFilter', fu
         });
     };
 
+    $scope.GetHomeMainCateHeroData = function () {
+        $http.get("/Home/GetHomeMainCateHeroData").then(function (d) {
+            $scope.HomeHeroMainCateData = d.data;
+            debugger
+
+        }, function (error) {
+            alert(error.data);
+        });
+    };
+
+
     $scope.GetBannerCateData = function () {
         $http.get("/Home/GetBannerCateData").then(function (d) {
             $scope.MainCateData = d.data;

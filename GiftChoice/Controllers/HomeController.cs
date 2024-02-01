@@ -83,7 +83,23 @@ namespace GiftChoice.Controllers
         public JsonResult GetHomeMainCateData()
         {
 
-            var res = db.MainCateTbls.Where(m => m.Active == true).Select(m => new
+            var res = db.MainCateTbls.Where(m => m.Active == true && m.MainCateType == "Normal").Select(m => new
+            {
+                m.MainCateId,
+                m.MUrl,
+                m.MTitle,
+                m.Active,
+                m.MImage,
+                m.Priority,
+            }).OrderBy(m => m.Priority);
+            return Json(res, JsonRequestBehavior.AllowGet);
+
+
+        }
+        public JsonResult GetHomeMainCateHeroData()
+        {
+
+            var res = db.MainCateTbls.Where(m => m.Active == true && m.MainCateType == "Hero").Select(m => new
             {
                 m.MainCateId,
                 m.MUrl,

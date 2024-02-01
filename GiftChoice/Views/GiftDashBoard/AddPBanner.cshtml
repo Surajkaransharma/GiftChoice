@@ -185,7 +185,10 @@
                                         <td> <span class="badge {{m.ModelQuery1==1? 'bg-success' : 'bg-danger'}}">{{m.ModelQuery1==1?'Open':'Close'}}</span> </td>
 
                                         <td>{{m.Priority}}</td>
-                                        <td><img src="~/images/BannerPTImage/{{m.MImage}}" ></td>
+                                        <td>
+                                            <img src="~/images/BannerPTImage/{{m.MImage}}">
+                                           
+                                        </td>
                                         <td><a ng-click="BannerProdcutTActiveDeActive(m.MainCateId)"> <span class="badge {{m.Active==1? 'bg-success' : 'bg-danger'}}">{{m.Active==1?'Active':'Deactive'}}</span></a> </td>
                                         <td><a><i class="bx bxs-pencil" ng-click="GetBannerProdcutTid($index)"></i></a></td>
                                     </tr>

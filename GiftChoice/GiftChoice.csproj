@@ -1357,6 +1357,7 @@
     <Content Include="images\BannerImage\2.jpg" />
     <Content Include="images\BannerImage\3.jpg" />
     <Content Include="images\BannerImage\4.jpg" />
+    <Content Include="images\BannerPTImage\4.jpg" />
     <Content Include="images\check_img.png" />
     <Content Include="images\FestivalBanner\1.png" />
     <Content Include="images\gift-choice-vertical.png" />
@@ -2510,6 +2511,9 @@
     <Content Include="assets\ckeditor\SECURITY.md" />
     <Content Include="assets\ckeditor\skins\moono-lisa\readme.md" />
     <Content Include="images\ProductImg\32.webp" />
+    <Content Include="images\BannerPTImage\1.webp" />
+    <Content Include="images\BannerPTImage\3.webp" />
+    <Content Include="assets\1.webp" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
@@ -2569,7 +2573,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="images\BannerPTImage\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
