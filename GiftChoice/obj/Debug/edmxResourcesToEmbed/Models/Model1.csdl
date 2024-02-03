@@ -309,6 +309,8 @@
     <Property Name="Qty" Type="Int64" />
     <Property Name="LabelId" Type="Int32" />
     <Property Name="TableDesc" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="SameDay" Type="Boolean" />
+    <Property Name="VideoUrl" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
   </EntityType>
   <EntityType Name="PSizeTbl">
     <Key>

@@ -1,11 +1,11 @@
 ﻿
 @{
-                /**/
+    /**/
 
-                /**/
+    /**/
 
-                ViewBag.Title = "AddProduct";
-                Layout = "~/Views/Shared/_Admin.cshtml";
+    ViewBag.Title = "AddProduct";
+    Layout = "~/Views/Shared/_Admin.cshtml";
 }
 
 <style>
@@ -80,6 +80,14 @@
                             <div class="col-md-2">
                                 <label for="input1" class="form-label">Price</label>
                                 <input type="number" class="form-control" ng-model="Product.Price" id="" placeholder="Price">
+                            </div>
+                            <div class="col-md-2">
+                                <label for="input1" class="form-label">See Video</label>
+                                <input type="text" class="form-control" ng-model="Product.VideoUrl" id="" placeholder="See Video">
+                            </div>
+                            <div class="col-md-2">
+                                <label for="input1" class="form-label">Same Day Deliver</label>
+                                <input type="checkbox" ng-model="Product.SameDay" id="" placeholder="">
                             </div>
                             <div class="col-md-12" ng-init="GetKeywordData()">
                                 <label for="input1" class="form-label">Select Keyword</label>

@@ -34,6 +34,7 @@
                     <div class="card-body p-4">
 
                         <form class="row g-3" enctype="multipart/form-data">
+             
                             <div class="col-md-12">
                                 <label for="input1" class="form-label">Main Category Title</label>
                                 <input type="text" class="form-control" id="MTitle" ng-model="MainCate.MTitle" placeholder="Main Category">
@@ -183,7 +184,10 @@
                                 <thead class="table-light">
                                     <tr>
                                         <th>S.No.</th>
+
                                         <th>Main Category Name</th>
+                                        <th> <a ng-click="UpdateMainCateType()"> Category Type</a></th>
+
                                         <th>Keyword</th>
                                         <th>Priority</th>
                                         <th>Image</th>
@@ -195,10 +199,17 @@
                                     <tr ng-repeat="m in MainCateData">
                                         <td>{{$index+1}}</td>
                                         <td>{{m.MTitle}}</td>
+                                        <td>
+                                            <label for="MainCate{{m.MainCateId}}">Hero</label>
+                                            <input type="radio" id="MainCate{{m.MainCateId}}" name="MainCate{{m.MainCateId}}" value="Hero" ng-model="m.MainCateType" />
+                                            <label for="NormalMainCate{{m.MainCateId}}">Normal</label>
+                                            <input type="radio" id="NormalMainCate{{m.MainCateId}}" name="MainCate{{m.MainCateId}}" value="Normal" ng-model="m.MainCateType"/>
+
+                                        </td>
                                         <td style="white-space: normal"><span ng-repeat="n in m.Submenu">{{n.SubmenuTitle}},</span></td>
                                         <td>{{m.Priority}}</td>
-                                        <td><a ng-click="MainCateActiveDeActive(m.MainCateId)"> <span class="badge {{m.Active==1? 'bg-success' : 'bg-danger'}}">{{m.Active==1?'Active':'Deactive'}}</span></a> </td>
                                         <td><img src="~/images/MainCate/{{m.MImage}}" style="width:50px"></td>
+                                        <td><a ng-click="MainCateActiveDeActive(m.MainCateId)"> <span class="badge {{m.Active==1? 'bg-success' : 'bg-danger'}}">{{m.Active==1?'Active':'Deactive'}}</span></a> </td>
                                         <td><a><i class="bx bxs-pencil" ng-click="GetMainCatebyid($index)"></i></a></td>
                                     </tr>
                                 </tbody>

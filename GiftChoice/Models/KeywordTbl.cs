@@ -26,15 +26,14 @@ public partial class KeywordTbl
 
     }
 
-
-    public long KeywordId { get; set; }
+        public string Menu { get; set; }
+        public long KeywordId { get; set; }
 
     public string Keyword { get; set; }
 
     public string KUrl { get; set; }
 
-        public string Menu { get; set; }
-        public Nullable<System.DateTime> Create_at { get; set; }
+    public Nullable<System.DateTime> Create_at { get; set; }
 
     public Nullable<System.DateTime> Update_at { get; set; }
 

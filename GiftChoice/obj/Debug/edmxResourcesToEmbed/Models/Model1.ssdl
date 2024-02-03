@@ -263,6 +263,8 @@
     <Property Name="Qty" Type="bigint" />
     <Property Name="LabelId" Type="int" />
     <Property Name="TableDesc" Type="nvarchar(max)" />
+    <Property Name="SameDay" Type="bit" />
+    <Property Name="VideoUrl" Type="nvarchar(max)" />
   </EntityType>
   <EntityType Name="PSizeTbl">
     <Key>

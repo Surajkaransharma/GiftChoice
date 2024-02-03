@@ -189,6 +189,7 @@
     <EntitySetMapping Name="MainCateTbls">
       <EntityTypeMapping TypeName="GiftChoiceModel.MainCateTbl">
         <MappingFragment StoreEntitySet="MainCateTbl">
+          <ScalarProperty Name="MainCateType" ColumnName="MainCateType" />
           <ScalarProperty Name="UserId" ColumnName="UserId" />
           <ScalarProperty Name="MImage" ColumnName="MImage" />
           <ScalarProperty Name="Update_at" ColumnName="Update_at" />
@@ -267,6 +268,8 @@
     <EntitySetMapping Name="ProductTbls">
       <EntityTypeMapping TypeName="GiftChoiceModel.ProductTbl">
         <MappingFragment StoreEntitySet="ProductTbl">
+          <ScalarProperty Name="VideoUrl" ColumnName="VideoUrl" />
+          <ScalarProperty Name="SameDay" ColumnName="SameDay" />
           <ScalarProperty Name="TableDesc" ColumnName="TableDesc" />
           <ScalarProperty Name="LabelId" ColumnName="LabelId" />
           <ScalarProperty Name="Qty" ColumnName="Qty" />

@@ -5,45 +5,6 @@
 }
 
 
-@*<style>
-        #profile-description {
-            max-width: 400px;
-            margin-top: 50px;
-            position: relative;
-        }
-
-            #profile-description .text {
-                /*   width: 660px;  */
-                margin-bottom: 5px;
-                color: #777;
-                padding: 0 15px;
-                position: relative;
-                font-family: Arial;
-                font-size: 14px;
-                display: block;
-            }
-
-            #profile-description .show-more {
-                /*   width: 690px;  */
-                color: #777;
-                position: relative;
-                font-size: 12px;
-                padding-top: 5px;
-                height: 20px;
-                text-align: center;
-                background: #f1f1f1;
-                cursor: pointer;
-            }
-
-                #profile-description .show-more:hover {
-                    color: #1779dd;
-                }
-
-            #profile-description .show-more-height {
-                height: 65px;
-                overflow: hidden;
-            }
-    </style>*@
 <main class="main" ng-init="GetBProductByid(@ViewBag.id)">
 
     <!-- Breadcrumb Section Start -->
@@ -57,158 +18,7 @@
         </div>
     </div>
     <!-- Breadcrumb Section End -->
-    <!--<section class="mt-50 mb-50">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="product-detail accordion-detail">-->
-    <!-- Product Section Start -->
-    <!--<div class="row mb-50">
-        <div class="col-lg-6 col-sm-12 col-xs-12">
-            <div class="detail-gallery">-->
-    <!-- Main Image -->
-    <!--<div class="product-image-slider">
-        <figure class="border-radius-10" ng-repeat="i in Product.AllProductImage">
-            <img src="~/images/ProductImg/{{i}}" alt="product image" class="img-fluid" loading="lazy">
-        </figure>
-
-    </div>-->
-    <!-- Main Image -->
-    <!-- Small Image -->
-    <!--<div class="slider-nav-thumbnails pl-15 pr-15" ng-show="Product.AllProductImage.length>1">
-        <div ng-repeat="i in Product.AllProductImage" ng-show="i!=null">
-            <img src="~/images/ProductImg/{{i}}" ng-show="i!=null" class="img-fluid" loading="lazy" alt="product image">
-        </div>
-        <div><img src="~/images/ProductImg/{{i}}" ng-show="i!=null" class="img-fluid" loading="lazy" alt="product image"></div>
-
-    </div>-->
-    <!-- Small Image -->
-    <!--</div>
-
-        </div>
-        <div class="col-lg-6 col-sm-12 col-xs-12">
-            <div class="detail-info">
-                <h2 class="title-detail"> {{Product.ProductTitle}}</h2>
-                <div class="pro-details-brand">
-                    <span><a href="/Home/shop?Main={{Product.Maincate.MTitle}}">{{Product.Maincate.MTitle}}</a></span>
-                </div>
-
-                <div class="clearfix product-price-cover border-0 mb-0">
-                    <div class="product-price primary-color float-left">
-                        <ins><span class="text-brand"><i class="fa fa-inr" aria-hidden="true"></i>{{Product.Price}}/-</span></ins>
-                    </div>
-                </div>
-                <div id="profile-description">
-
-                    <div class="description mb-20 text show-more-height">
-                        <p align="justify" id="desc" class="fs-7">
-                        </p>
-
-                    </div>
-                </div>
-                <div class="show-more">(Show More)</div>
-
-
-                <div class="attr-detail attr-size mb-30" ng-show="Product.PSizeList.length>0">
-                    <strong class="mr-10">Size</strong>
-                    <ul class="list-filter size-filter font-small">
-                        <li ng-repeat="s in Product.PSizeList" style="margin-left:5px;"><a href="#">{{s.SizeTitle}}</a> </li>
-
-                    </ul>
-                </div>
-
-                <div class="detail-extralink">
-                    <a class="button button-add-to-cart text-white" ng-click="GiftAddItemToCart(Product.ProductId)" role="button">Add To Cart</a>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="row mt-60" ng-show="RecentViewGifts.length>0">
-        <div class="col-12">
-            <h3 class="section-title style-1 mb-30">Recent Views</h3>
-        </div>
-        <div class="row product-grid-4" ng-init="GetRecentViewGifts()">
-            <div class="col-lg-3 col-6 col-sm-4" ng-repeat="q in RecentViewGifts">
-                <div class="product-cart-wrap mb-30">
-                    <div class="product-img-action-wrap">
-                        <div class="product-img product-img-zoom">
-                            <a href="/Home/Gift?url={{q.PUrl}}">
-                                <img class="default-img img-fluid" src="~/images/ProductImg/{{q.ProductImage}}" loading="lazy" alt="product-image">
-                                <img class="hover-img img-fluid" src="~/images/ProductImg/{{q.ProductImage}}" loading="lazy" alt="product-hover-image">
-                            </a>
-                        </div>
-                        <div class="product-badges product-badges-position product-badges-mrg" ng-show="q.PLabel!=''">
-                            <span class="hot">{{q.PLabel}}</span>
-                        </div>
-                    </div>
-                    <div class="product-content-wrap">
-                        <h2><a href="/Home/Gift?url={{q.PUrl}}">{{q.ProductTitle}}</a></h2>
-                        <div class="product-price">
-                            <span><i class="fa fa-inr" aria-hidden="true"></i> {{q.Price}}/-</span>
-                        </div>
-                        <div class="product-action-1 show">
-                            <a aria-label="Add To Cart" class="action-btn hover-up" ng-click="RecentViewaddItemToCart($index)"><i class="fi-rs-shopping-bag-add"></i></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-    </div>-->
-    <!-- Product Section End -->
-    <!-- Related Product Start -->
-    @*<div class="row mt-60">
-            <div class="col-12">
-                <h3 class="section-title style-1 mb-30">Related Gifts</h3>
-            </div>
-            <div class="row product-grid-4">
-                <div class="col-lg-3 col-6 col-sm-4" ng-repeat="q in ProductData" ng-click="RecentViewData($index)">
-                    <div class="product-cart-wrap mb-30">
-                        <div class="product-img-action-wrap">
-                            <div class="product-img">
-                                <a href="/Home/Gift?url={{q.PUrl}}">
-                                    <img class="default-img img-fluid" src="~/images/ProductImg/{{q.ProductImage}}" loading="lazy" alt="product-image">
-                                    <img class="hover-img img-fluid" src="~/images/ProductImg/{{q.ProductImage}}" loading="lazy" alt="product-hover-image">
-                                </a>
-                            </div>
-                            <div class="product-badges product-badges-position product-badges-mrg" ng-show="q.PLabel!=''">
-                                <span class="hot">{{q.PLabel}}</span>
-                            </div>
-                        </div>
-                        <div class="product-content-wrap">
-                            <h2><a href="/Home/Gift?url={{q.PUrl}}">{{q.ProductTitle}}</a></h2>
-                            <div class="product-price">
-                                <span><i class="fa fa-inr" aria-hidden="true"></i> {{q.Price}}/-</span>
-                            </div>
-                            <div class="product-action-1 show">
-                                <a aria-label="Add To Cart" class="action-btn hover-up" ng-click="addItemToCart($index)"><i class="fi-rs-shopping-bag-add"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-        </div>*@
-    <!-- Related Product Start -->
-    <!--</div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <script src="~/Content/assets/js/vendor/jquery-3.6.0.min.js"></script>
-
-    <script>
-        $(".show-more").click(function () {
-            if ($(".text").hasClass("show-more-height")) {
-                $(this).text("(Show Less)");
-            } else {
-                $(this).text("(Show More)");
-            }
-
-            $(".text").toggleClass("show-more-height");
-        });
-    </script>-->
+   
 
 
     <section class="mt-30 mb-50">
@@ -249,7 +59,7 @@
                             <div class="col-lg-6 col-sm-12 col-xs-12">
                                 <div class="detail-info">
                                     <div data-aos="zoom-in">
-                                        <span class="badge bg-success mb-2 animate__flash" ng-show="Product.SameDay">Same Day Delivery</span>
+                                        <span class="badge bg-success mb-2 animate__flash" ng-show="Product.SameDay">Same Day Available</span>
                                         <h2 class="title-detail">{{Product.ProductTitle}}</h2>
                                         <div class="pro-details-brand">
                                             <span><a href="/Home/BannerGifts?Banner={{Product.Maincate.MainCateId}}">{{Product.Maincate.MTitle}}</a></span>

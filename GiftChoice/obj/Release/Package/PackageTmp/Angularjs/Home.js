@@ -639,6 +639,17 @@ app.controller("HomeController", ['$scope', '$http', '$sce', 'orderByFilter', fu
         });
     };
 
+    $scope.GetHomeMainCateHeroData = function () {
+        $http.get("/Home/GetHomeMainCateHeroData").then(function (d) {
+            $scope.HomeHeroMainCateData = d.data;
+            debugger
+
+        }, function (error) {
+            alert(error.data);
+        });
+    };
+
+
     $scope.GetBannerCateData = function () {
         $http.get("/Home/GetBannerCateData").then(function (d) {
             $scope.MainCateData = d.data;
@@ -653,6 +664,19 @@ app.controller("HomeController", ['$scope', '$http', '$sce', 'orderByFilter', fu
         $http.get("/Home/GetProduct").then(function (d) {
             debugger
             $scope.ProductData = d.data;
+
+            setTimeout(() => {
+
+                for (var i = 0; i < $scope.ProductData.length; i++) {
+                    if ($scope.ProductData[i].VideoUrl != null) {
+
+                        var site = "https://www.youtube.com/embed/" + $scope.ProductData[i].VideoUrl + "?autoplay=1&loop=1&mute=1";
+                        document.getElementById('iFrameName' + i).src = site;
+                    }
+
+
+                }
+            }, 10);
         }, function (error) {
             alert(error.data);
         });

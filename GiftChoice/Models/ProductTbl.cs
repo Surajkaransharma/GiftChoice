@@ -48,6 +48,10 @@ public partial class ProductTbl
 
     public string TableDesc { get; set; }
 
+    public Nullable<bool> SameDay { get; set; }
+
+    public string VideoUrl { get; set; }
+
 }
 
 }

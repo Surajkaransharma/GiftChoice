@@ -579,6 +579,8 @@ namespace GiftChoice.Controllers
                    m.PUrl,
                    m.Active,
                    m.TableDesc,
+                   m.VideoUrl,
+                   m.SameDay,
                    m.PDesc,
                    m.LabelId,
                    m.Priority,
@@ -749,6 +751,8 @@ namespace GiftChoice.Controllers
                     productmodel.PLabel = model.PLabel == null ? "" : model.PLabel;
                     productmodel.Price = model.Price;
                     productmodel.Qty = 1;
+                    productmodel.VideoUrl = model.VideoUrl;
+                    productmodel.SameDay = model.SameDay;
                     productmodel.Create_at = DateTime.Now;
                     productmodel.Update_at = DateTime.Now;
                     productmodel.Priority = model.Priority;
@@ -967,6 +971,8 @@ namespace GiftChoice.Controllers
                     result.PUrl = model.ProductTitle.Replace(" ", "-");
                     result.PLabel = model.PLabel == null ? "" : model.PLabel;
                     result.Price = model.Price;
+                    result.VideoUrl = model.VideoUrl;
+                    result.SameDay = model.SameDay;
                     result.Update_at = DateTime.Now;
                     result.Priority = model.Priority;
                     db.SaveChanges();

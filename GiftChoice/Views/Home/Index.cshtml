@@ -358,16 +358,19 @@
                                 <div class="product-cart-wrap mb-1">
                                     <div class="product-img-action-wrap">
                                         <div class="product-img product-img-zoom">
+
+                                            <iframe ng-show="p.VideoUrl" id="iFrameName{{$index}}" allow="loop"></iframe>
+
                                             @*<iframe src="https://www.youtube.com/embed/5UXodPraMTU?autoplay=1&loop=1&mute=1" allow="loop"></iframe>*@
-                                            <a href="/Home/Gift?url={{p.PUrl}}">
+                                            <a href="/Home/Gift?url={{p.PUrl}}" ng-show="!p.VideoUrl">
                                                 <img class="default-img img-fluid" src="~/images/ProductImg/{{p.ProductImage}}" loading="lazy" alt="product-image" loading="lazy" alt="">
-                                                <img class="hover-img img-fluid" src="~/images/ProductImg/{{p.ProductImage}}" loading="lazy" alt="product-hover-image" loading="lazy" alt="">
+                                                @*<img class="hover-img img-fluid" src="~/images/ProductImg/{{p.ProductImage}}" loading="lazy" alt="product-hover-image" loading="lazy" alt="">*@
                                             </a>
                                         </div>
                                         <div class="product-badges product-badges-position product-badges-mrg" ng-show="p.PLabel!=''">
                                             <span class="hot">{{p.PLabel}}</span>
                                         </div>
-                                        <div class="product-badges product-badges-position_1 product-badges-mrg same-day-badge">
+                                        <div ng-show="p.SameDay" class="product-badges product-badges-position_1 product-badges-mrg same-day-badge">
                                             <span class="hot">Same Day Available</span>
                                         </div>
                                     </div>

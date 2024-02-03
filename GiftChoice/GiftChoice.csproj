@@ -2513,7 +2513,12 @@
     <Content Include="images\ProductImg\32.webp" />
     <Content Include="images\BannerPTImage\1.webp" />
     <Content Include="images\BannerPTImage\3.webp" />
-    <Content Include="assets\1.webp" />
+    <Content Include="images\SliderImg\1.webp" />
+    <Content Include="images\SliderImg\2.webp" />
+    <Content Include="images\SliderImg\3.webp" />
+    <Content Include="images\SliderImg\4.webp" />
+    <Content Include="images\SliderImg\5.webp" />
+    <Content Include="images\SliderImg\6.webp" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />

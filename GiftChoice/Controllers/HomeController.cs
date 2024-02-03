@@ -168,6 +168,8 @@ namespace GiftChoice.Controllers
                    m.MainCateId,
                    m.ProductTitle,
                    m.PLabel,
+                   m.VideoUrl,
+                   m.SameDay,
                    m.Price,
                    m.PUrl,
                    m.Active,
