@@ -60,7 +60,9 @@
                                 <div class="product-cart-wrap">
                                     <div class="product-img-action-wrap">
                                         <div class="product-img product-img-zoom">
-                                            <a href="/Home/BGift?url={{p.PUrl}}">
+                                            <iframe ng-show="p.VideoUrl" id="iFrameName{{$index}}" allow="loop"></iframe>
+
+                                            <a href="/Home/BGift?url={{p.PUrl}}" ng-show="!p.VideoUrl">
                                                 <img class="default-img img-fluid" src="~/images/ProductImg/{{p.ProductImage}}" loading="lazy" alt="product-image" loading="lazy" alt="">
                                                 <img class="hover-img img-fluid" src="~/images/ProductImg/{{p.ProductImage}}" loading="lazy" alt="product-hover-image" loading="lazy" alt="">
                                             </a>

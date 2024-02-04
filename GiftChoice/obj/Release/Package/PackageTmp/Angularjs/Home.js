@@ -816,7 +816,20 @@ app.controller("HomeController", ['$scope', '$http', '$sce', 'orderByFilter', fu
             alert(error.data);
         });
     };
+    $scope.SelectSizePrice = function (ProductSize) {
 
+      
+
+        var selectedProduct = $scope.Product.productDataArray.find(function (product) {
+            return product.ProductSize === ProductSize;
+        });
+
+  
+        if (selectedProduct) {
+            $scope.Product.Price = selectedProduct.Price;
+        }
+    
+    };
     $scope.GetBProductByid = function (id) {
         debugger
         $http.get("/Home/GetBProductByid?id=" + id).then(function (d) {
@@ -878,6 +891,7 @@ app.controller("HomeController", ['$scope', '$http', '$sce', 'orderByFilter', fu
             alert(error.data);
         });
     };
+
     $scope.GetSmillerProduct = function (id, idd) {
         debugger
         $http.get("/Home/GetSmillerProduct?id=" + id + '&idd=' + idd).then(function (d) {
@@ -1045,7 +1059,18 @@ app.controller("HomeController", ['$scope', '$http', '$sce', 'orderByFilter', fu
             }
         }).then(function (d) {
             $scope.ProductData = d.data.ProductList;
-           
+            setTimeout(() => {
+
+                for (var i = 0; i < $scope.ProductData.length; i++) {
+                    if ($scope.ProductData[i].VideoUrl != null) {
+
+                        var site = "https://www.youtube.com/embed/" + $scope.ProductData[i].VideoUrl + "?autoplay=1&loop=1&mute=1";
+                        document.getElementById('iFrameName' + i).src = site;
+                    }
+
+
+                }
+            }, 10);
 
         }, function (error) {
             toastr["error"]("Something Went Wrong");

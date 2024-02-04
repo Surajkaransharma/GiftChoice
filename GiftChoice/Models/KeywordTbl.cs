@@ -27,6 +27,7 @@ public partial class KeywordTbl
     }
 
         public string Menu { get; set; }
+
         public long KeywordId { get; set; }
 
     public string Keyword { get; set; }

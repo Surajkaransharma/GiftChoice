@@ -564,6 +564,14 @@ namespace GiftChoice.Controllers
                        s.SizeId,
                        s.BPSizeId,
                        SizeTitle = db.SizeTbls.Where(t => t.SizeId == s.SizeId && t.Active == true).Select(t => t.SizeTitle).FirstOrDefault()
+                   }),
+                   productDataArray = db.ProductDetailTbls.Where(p => p.ProductId == m.ProductId).Select(p => new
+                   {
+                       p.ProductId,
+                       p.Price,                      
+                       p.SizeId,
+                       p.SizeName,
+                       ProductSize = db.SizeTbls.Where(s => s.SizeId == p.SizeId).OrderByDescending(s => s.SizeTitle).Select(s => s.SizeTitle).FirstOrDefault(),
                    })
                }).FirstOrDefault();
             return Json(res, JsonRequestBehavior.AllowGet);
@@ -1297,6 +1305,8 @@ namespace GiftChoice.Controllers
                                        product.PUrl,
                                        product.Qty,
                                        product.Create_at,
+                                       product.VideoUrl,
+                                       product.SameDay,
                                        product.Active,
                                        product.Priority,
                                        ProductImage = db.BannerProductImages
@@ -1332,6 +1342,8 @@ namespace GiftChoice.Controllers
                                        product.PUrl,
                                        product.Qty,
                                        product.Create_at,
+                                       product.VideoUrl,
+                                       product.SameDay,
                                        product.Active,
                                        product.Priority,
                                        ProductImage = db.BannerProductImages

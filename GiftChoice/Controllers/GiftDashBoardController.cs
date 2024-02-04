@@ -751,7 +751,7 @@ namespace GiftChoice.Controllers
                     productmodel.PLabel = model.PLabel == null ? "" : model.PLabel;
                     productmodel.Price = model.Price;
                     productmodel.Qty = 1;
-                    productmodel.VideoUrl = model.VideoUrl;
+                    productmodel.VideoUrl = model.VideoUrl ?? "";
                     productmodel.SameDay = model.SameDay;
                     productmodel.Create_at = DateTime.Now;
                     productmodel.Update_at = DateTime.Now;
@@ -971,7 +971,7 @@ namespace GiftChoice.Controllers
                     result.PUrl = model.ProductTitle.Replace(" ", "-");
                     result.PLabel = model.PLabel == null ? "" : model.PLabel;
                     result.Price = model.Price;
-                    result.VideoUrl = model.VideoUrl;
+                    result.VideoUrl = model.VideoUrl ?? "";
                     result.SameDay = model.SameDay;
                     result.Update_at = DateTime.Now;
                     result.Priority = model.Priority;
@@ -2191,7 +2191,7 @@ namespace GiftChoice.Controllers
 
                     productmodel.ProductTitle = model.ProductTitle;
                     productmodel.Active = true;
-                    productmodel.VideoUrl = model.VideoUrl;
+                    productmodel.VideoUrl = model.VideoUrl ?? "";
                     productmodel.SameDay = model.SameDay;
                     productmodel.PUrl = model.ProductTitle.Replace(" ", "-");
                     productmodel.PDesc = model.PDesc;
@@ -2287,7 +2287,7 @@ namespace GiftChoice.Controllers
         }
 
 
-        public JsonResult BannerProductArrayData(ProductTblmodel model)
+        public JsonResult BannerProductArrayData(ProductTblmodel model,List<ProductDetailTbl> productDataArray)
         {
 
             try
@@ -2346,6 +2346,19 @@ namespace GiftChoice.Controllers
                         db.SaveChanges();
 
                     }
+                }
+                for (int i = 0; i < productDataArray.Count; i++)
+                {
+                    ProductDetailTbl productDetail = new ProductDetailTbl();
+                    productDetail.PdId = db.ProductDetailTbls.DefaultIfEmpty().Max(r => r == null ? 0 : r.PdId) + 1;
+                    productDetail.ProductId = result.ProductId;
+                    productDetail.SizeId = productDataArray[i].SizeId;                 
+                    productDetail.Price = productDataArray[i].Price;       
+                    productDetail.ProductType = "BannerProduct";
+                    productDetail.Priority = productDataArray[i].Priority;
+                    productDetail.Active = true;
+                    db.ProductDetailTbls.Add(productDetail);
+                    db.SaveChanges();
                 }
                 var res = new { res = "1", };
                 return Json(res, JsonRequestBehavior.AllowGet);
@@ -2574,7 +2587,7 @@ namespace GiftChoice.Controllers
             }
         }
 
-        public JsonResult BannerUpdateProductArrayData(ProductTblmodel model)
+        public JsonResult BannerUpdateProductArrayData(ProductTblmodel model, List<ProductDetailTbl> productDataArray)
         {
             try
             {
@@ -2636,6 +2649,24 @@ namespace GiftChoice.Controllers
 
                         }
                     }
+                    // Remove ProductDetail_Tbl records for the given PId
+                    var RemoveProductDetail = db.ProductDetailTbls.Where(r => r.ProductId == model.ProductId);
+                    db.ProductDetailTbls.RemoveRange(RemoveProductDetail);
+                    db.SaveChanges();
+
+                    for (int i = 0; i < productDataArray.Count; i++)
+                    {
+                        ProductDetailTbl productDetail = new ProductDetailTbl();
+                        productDetail.PdId = db.ProductDetailTbls.DefaultIfEmpty().Max(r => r == null ? 0 : r.PdId) + 1;
+                        productDetail.ProductId = result.ProductId;
+                        productDetail.ProductType = "BannerProduct";
+                        productDetail.SizeId = productDataArray[i].SizeId;
+                        productDetail.Price = productDataArray[i].Price;
+                        productDetail.Priority = productDataArray[i].Priority;
+                        productDetail.Active = true;
+                        db.ProductDetailTbls.Add(productDetail);
+                        db.SaveChanges();
+                    }
                 }
 
 
@@ -2691,6 +2722,14 @@ namespace GiftChoice.Controllers
                        s.SizeId,
                        s.BPSizeId,
                        SizeTitle = db.SizeTbls.Where(t => t.SizeId == s.SizeId && t.Active == true).Select(t => t.SizeTitle).FirstOrDefault()
+                   }),
+                   productDataArray = db.ProductDetailTbls.Where(p => p.ProductId == m.ProductId).Select(p => new
+                   {
+                       p.ProductId,
+                       p.Price,
+                       p.SizeId,
+                       p.SizeName,
+                       ProductSize = db.SizeTbls.Where(s => s.SizeId == p.SizeId).OrderByDescending(s => s.SizeTitle).Select(s => s.SizeTitle).FirstOrDefault(),
                    })
                });
             return Json(res, JsonRequestBehavior.AllowGet);

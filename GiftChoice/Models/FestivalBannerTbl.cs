@@ -19,10 +19,11 @@ using System;
     public partial class FestivalBannerTbl
     {
 
-        public HttpPostedFileBase Image { get; set; }
-        public long FBannerId { get; set; }
+    public long FBannerId { get; set; }
 
-    public string FBTitle { get; set; }
+        public HttpPostedFileBase Image { get; set; }
+
+        public string FBTitle { get; set; }
 
     public string FBPosition { get; set; }
 

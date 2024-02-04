@@ -96,6 +96,8 @@ public partial class GiftChoiceEntities : DbContext
 
     public virtual DbSet<AutocompleteSuggestion> AutocompleteSuggestions { get; set; }
 
+    public virtual DbSet<ProductDetailTbl> ProductDetailTbls { get; set; }
+
 }
 
 }

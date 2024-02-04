@@ -369,6 +369,19 @@
           <Property Name="Update_at" Type="datetime" />
           <Property Name="UserId" Type="bigint" />
         </EntityType>
+        <EntityType Name="ProductDetailTbl">
+          <Key>
+            <PropertyRef Name="PdId" />
+          </Key>
+          <Property Name="PdId" Type="bigint" Nullable="false" />
+          <Property Name="ProductId" Type="bigint" />
+          <Property Name="ProductType" Type="nvarchar" MaxLength="50" />
+          <Property Name="Price" Type="nvarchar" MaxLength="50" />
+          <Property Name="SizeId" Type="int" />
+          <Property Name="SizeName" Type="nvarchar" MaxLength="50" />
+          <Property Name="Priority" Type="bigint" />
+          <Property Name="Active" Type="bit" />
+        </EntityType>
         <EntityType Name="QueryTbl">
           <Key>
             <PropertyRef Name="QId" />
@@ -488,6 +501,7 @@ warning 6002: The table/view 'giftchoice.giftchoice.AutocompleteSuggestions' doe
           <EntitySet Name="BannerQueryListTbl" EntityType="Self.BannerQueryListTbl" Schema="giftchoice" store:Type="Tables" />
           <EntitySet Name="BSubTitleDetailTbl" EntityType="Self.BSubTitleDetailTbl" Schema="giftchoice" store:Type="Tables" />
           <EntitySet Name="FestivalBannerTbl" EntityType="Self.FestivalBannerTbl" Schema="giftchoice" store:Type="Tables" />
+          <EntitySet Name="ProductDetailTbl" EntityType="Self.ProductDetailTbl" Schema="giftchoice" store:Type="Tables" />
           <EntitySet Name="QueryTbl" EntityType="Self.QueryTbl" Schema="giftchoice" store:Type="Tables" />
           <EntitySet Name="VProduct" EntityType="Self.VProduct" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
@@ -587,6 +601,7 @@ warning 6002: The table/view 'giftchoice.giftchoice.AutocompleteSuggestions' doe
             <End Role="MainCateTbl" EntitySet="MainCateTbls" />
             <End Role="MCKeywordTbl" EntitySet="MCKeywordTbls" />
           </AssociationSet>
+          <EntitySet Name="ProductDetailTbls" EntityType="GiftChoiceModel.ProductDetailTbl" />
         </EntityContainer>
         <EntityType Name="AdminTbl">
           <Key>
@@ -1041,6 +1056,19 @@ warning 6002: The table/view 'giftchoice.giftchoice.AutocompleteSuggestions' doe
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="ProductDetailTbl">
+          <Key>
+            <PropertyRef Name="PdId" />
+          </Key>
+          <Property Name="PdId" Type="Int64" Nullable="false" />
+          <Property Name="ProductId" Type="Int64" />
+          <Property Name="ProductType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Price" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SizeId" Type="Int32" />
+          <Property Name="SizeName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Priority" Type="Int64" />
+          <Property Name="Active" Type="Boolean" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1500,6 +1528,20 @@ warning 6002: The table/view 'giftchoice.giftchoice.AutocompleteSuggestions' doe
               <MappingFragment StoreEntitySet="AutocompleteSuggestions">
                 <ScalarProperty Name="Suggestion" ColumnName="Suggestion" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProductDetailTbls">
+            <EntityTypeMapping TypeName="GiftChoiceModel.ProductDetailTbl">
+              <MappingFragment StoreEntitySet="ProductDetailTbl">
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="Priority" ColumnName="Priority" />
+                <ScalarProperty Name="SizeName" ColumnName="SizeName" />
+                <ScalarProperty Name="SizeId" ColumnName="SizeId" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="ProductType" ColumnName="ProductType" />
+                <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+                <ScalarProperty Name="PdId" ColumnName="PdId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

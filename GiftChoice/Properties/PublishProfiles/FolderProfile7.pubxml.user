@@ -5,11 +5,12 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
 <Project>
   <PropertyGroup>
     <_PublishTargetUrl>D:\Publice Web Project\giftchoicep\gg03022024</_PublishTargetUrl>
-    <History>True|2024-02-03T10:18:40.2026342Z;</History>
+    <History>True|2024-02-04T17:17:38.8067461Z;True|2024-02-03T15:48:40.2026342+05:30;</History>
+    <LastFailureDetails />
   </PropertyGroup>
   <ItemGroup>
     <File Include="Angularjs/Admin.js">
-      <publishTime>02/01/2024 00:19:10</publishTime>
+      <publishTime>02/05/2024 01:01:16</publishTime>
     </File>
     <File Include="Angularjs/AnguAutoComplete/angucomplete-alt.css">
       <publishTime>12/22/2023 21:04:16</publishTime>
@@ -27,7 +28,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>12/22/2023 21:04:16</publishTime>
     </File>
     <File Include="Angularjs/Home.js">
-      <publishTime>02/03/2024 15:38:36</publishTime>
+      <publishTime>02/05/2024 00:41:44</publishTime>
     </File>
     <File Include="Angularjs/LoginJs.js">
       <publishTime>12/22/2023 21:04:16</publishTime>
@@ -3165,10 +3166,10 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>09/04/2023 14:32:15</publishTime>
     </File>
     <File Include="bin/GiftChoice.dll">
-      <publishTime>02/03/2024 15:48:22</publishTime>
+      <publishTime>02/05/2024 01:04:02</publishTime>
     </File>
     <File Include="bin/GiftChoice.pdb">
-      <publishTime>02/03/2024 15:48:22</publishTime>
+      <publishTime>02/05/2024 01:04:02</publishTime>
     </File>
     <File Include="bin/Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll">
       <publishTime>09/04/2023 14:32:15</publishTime>
@@ -6969,7 +6970,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>02/02/2024 00:42:49</publishTime>
     </File>
     <File Include="Models/Model1.edmx.diagram">
-      <publishTime>01/13/2024 21:29:58</publishTime>
+      <publishTime>02/04/2024 23:28:17</publishTime>
     </File>
     <File Include="Scripts/bootstrap.js">
       <publishTime>12/22/2023 21:04:16</publishTime>
@@ -7020,7 +7021,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>12/22/2023 21:04:16</publishTime>
     </File>
     <File Include="Views/GiftDashBoard/AddBannerInProduct.cshtml">
-      <publishTime>01/25/2024 21:53:04</publishTime>
+      <publishTime>02/05/2024 00:57:39</publishTime>
     </File>
     <File Include="Views/GiftDashBoard/AddBannerMateCate.cshtml">
       <publishTime>12/22/2023 21:04:16</publishTime>
@@ -7068,10 +7069,10 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>12/22/2023 21:04:16</publishTime>
     </File>
     <File Include="Views/Home/BannerGifts.cshtml">
-      <publishTime>01/25/2024 21:39:32</publishTime>
+      <publishTime>02/04/2024 22:39:13</publishTime>
     </File>
     <File Include="Views/Home/BGift.cshtml">
-      <publishTime>02/02/2024 22:10:46</publishTime>
+      <publishTime>02/05/2024 00:28:01</publishTime>
     </File>
     <File Include="Views/Home/Cart.cshtml">
       <publishTime>01/31/2024 22:07:49</publishTime>

@@ -113,10 +113,10 @@
                                             </div>*@
 
                                         <div data-aos="zoom-in">
-                                            <div class="attr-detail attr-size mb-30" ng-show="Product.PSizeList.length>0">
+                                            <div class="attr-detail attr-size mb-30" ng-show="Product.productDataArray.length>0">
                                                 <strong class="mr-10">Size</strong>
                                                 <ul class="list-filter size-filter font-small">
-                                                    <li ng-repeat="s in Product.PSizeList" style="margin-left:5px;"><a href="#">{{s.SizeTitle}}</a> </li>
+                                                    <li ng-repeat="s in Product.productDataArray" style="margin-left:5px;"><a ng-click="SelectSizePrice(s.ProductSize)">{{s.ProductSize}}</a> </li>
 
                                                 </ul>
                                             </div>
@@ -130,7 +130,7 @@
                                                     <a href="#" class="qty-up"><i class="fi-rs-angle-small-up"></i></a>
                                                 </div>
                                                 <a class="button button-add-to-cart text-white" ng-click="GiftAddItemToCart(Product.ProductId)" role="button">Add To Cart</a>
-                                                <a class="button btn-danger button-add-to-cart filter-button animate__bounceIn" ng-show="Product.VideoUrl!=null && Product.VideoUrl!=''" href="{{Product.VideoUrl}}" target="_blank" role="button">See Video</a>
+                                                <a class="button btn-danger button-add-to-cart filter-button animate__bounceIn" ng-show="Product.VideoUrl!=null && Product.VideoUrl!=''"  href="https://www.youtube.com/embed/{{Product.VideoUrl}}?autoplay=1&loop=1&mute=1" target="_blank" role="button">See Video</a>
                                             </div>
                                         </div>
 

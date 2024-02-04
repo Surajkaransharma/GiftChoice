@@ -41,6 +41,7 @@
       <End Role="MainCateTbl" EntitySet="MainCateTbls" />
       <End Role="MCKeywordTbl" EntitySet="MCKeywordTbls" />
     </AssociationSet>
+    <EntitySet Name="ProductDetailTbls" EntityType="GiftChoiceModel.ProductDetailTbl" />
   </EntityContainer>
   <EntityType Name="AdminTbl">
     <Key>
@@ -495,4 +496,17 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <EntityType Name="ProductDetailTbl">
+    <Key>
+      <PropertyRef Name="PdId" />
+    </Key>
+    <Property Name="PdId" Type="Int64" Nullable="false" />
+    <Property Name="ProductId" Type="Int64" />
+    <Property Name="ProductType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Price" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="SizeId" Type="Int32" />
+    <Property Name="SizeName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Priority" Type="Int64" />
+    <Property Name="Active" Type="Boolean" />
+  </EntityType>
 </Schema>

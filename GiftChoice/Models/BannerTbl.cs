@@ -17,8 +17,7 @@ using System;
     using System.Web;
 
     public partial class BannerTbl
-    {
-
+{
         public HttpPostedFileBase Image { get; set; }
         public long BannerId { get; set; }
 

@@ -338,8 +338,32 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
         });
     };
 
+    $scope.productDataArray = [];
+
+    $scope.AddProductDetails = function () {
+        debugger
+        $scope.productDataArray.push({
+            'SizeId': -1,
+         //   'Color_Id': -1,
+          //  'Quantity': 0,
+            'Price': 0,
+           // 'Discount': 0
+            //'Priority': 0
+
+        });
+    };
+    $scope.GetProductSizeList = function (index) {
+
+        $http.get("/GiftDashBoard/GetSizeData").then(function (d) {
 
 
+            // $scope.SizeListData = d.data;
+            $scope.productDataArray[index].SizeList = d.data;
+
+        }, function (error) {
+            alert(error.data);
+        });
+    };
     var PSizeArr = [];
     $scope.SubmitProduct = function () {
         debugger
@@ -532,7 +556,8 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
             data: { MainCateTblModel : $scope.MainCateData }
         }).then(function (d) {
             $scope.result = d.data;
-           
+            toastr["success"]("Update successfully");
+
         }, function (error) {
             toastr["error"]("Something Went Wrong");
         });
@@ -1644,7 +1669,10 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
                 ProductId: id,
                 PDesc1: $scope.Description,
                 bannerQueryListTbls: Keywordarr,
-                BPSizeTbl: PSizeArr
+                BPSizeTbl: PSizeArr,
+                ProductDataArray: $scope.productDataArray
+
+
             }
         }).then(function (d) {
             $scope.result = d.data;
@@ -1764,7 +1792,9 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
                 ProductId: id,
                 PDesc1: $scope.Description,
                 bannerQueryListTbls: Keywordarr,
-                BPSizeTbl: PSizeArr
+                BPSizeTbl: PSizeArr,
+                ProductDataArray: $scope.productDataArray
+
 
             }
         }).then(function (d) {
@@ -1819,6 +1849,7 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
         debugger
 
         $scope.Product = $scope.ProductData[index];
+        $scope.productDataArray = $scope.Product.productDataArray;
 
 
         $scope.GetBannerToQuery($scope.Product.MainCateId);
