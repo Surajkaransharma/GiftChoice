@@ -358,8 +358,8 @@
                                 <div class="product-cart-wrap mb-1">
                                     <div class="product-img-action-wrap">
                                         <div class="product-img product-img-zoom">
-
-                                            <iframe ng-show="p.VideoUrl" id="iFrameName{{$index}}" allow="loop"></iframe>
+                                            <iframe ng-show="p.VideoUrl" ng-src="{{trustSrc('https://www.youtube.com/embed/' + p.VideoUrl +'?autoplay=1&loop=1&mute=1')}}" allow="loop"></iframe>
+                                            @*<iframe ng-show="p.VideoUrl" id="iFrameName{{$index}}" allow="loop"></iframe>*@
 
                                             @*<iframe src="https://www.youtube.com/embed/5UXodPraMTU?autoplay=1&loop=1&mute=1" allow="loop"></iframe>*@
                                             <a href="/Home/Gift?url={{p.PUrl}}" ng-show="!p.VideoUrl">

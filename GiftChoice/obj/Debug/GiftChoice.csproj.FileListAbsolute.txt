@@ -233,7 +233,6 @@ D:\github2\GiftChoice\GiftChoice\bin\System.Web.WebPages.Razor.xml
 D:\github2\GiftChoice\GiftChoice\bin\Newtonsoft.Json.xml
 D:\github2\GiftChoice\GiftChoice\bin\Antlr3.Runtime.pdb
 D:\github2\GiftChoice\GiftChoice\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
-D:\github2\GiftChoice\GiftChoice\obj\Debug\GiftChoice.csprojAssemblyReference.cache
 D:\github2\GiftChoice\GiftChoice\obj\Debug\GiftChoice.csproj.CoreCompileInputs.cache
 D:\github2\GiftChoice\GiftChoice\obj\Debug\GiftChoice.csproj.CopyComplete
 D:\github2\GiftChoice\GiftChoice\obj\Debug\GiftChoice.dll

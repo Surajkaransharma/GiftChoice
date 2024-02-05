@@ -2287,7 +2287,7 @@ namespace GiftChoice.Controllers
         }
 
 
-        public JsonResult BannerProductArrayData(ProductTblmodel model,List<ProductDetailTbl> productDataArray)
+        public JsonResult BannerProductArrayData(ProductTblmodel model, List<ProductDetailTbl> productDataArray)
         {
 
             try
@@ -2352,8 +2352,8 @@ namespace GiftChoice.Controllers
                     ProductDetailTbl productDetail = new ProductDetailTbl();
                     productDetail.PdId = db.ProductDetailTbls.DefaultIfEmpty().Max(r => r == null ? 0 : r.PdId) + 1;
                     productDetail.ProductId = result.ProductId;
-                    productDetail.SizeId = productDataArray[i].SizeId;                 
-                    productDetail.Price = productDataArray[i].Price;       
+                    productDetail.SizeId = productDataArray[i].SizeId;
+                    productDetail.Price = productDataArray[i].Price;
                     productDetail.ProductType = "BannerProduct";
                     productDetail.Priority = productDataArray[i].Priority;
                     productDetail.Active = true;
@@ -2656,16 +2656,22 @@ namespace GiftChoice.Controllers
 
                     for (int i = 0; i < productDataArray.Count; i++)
                     {
-                        ProductDetailTbl productDetail = new ProductDetailTbl();
-                        productDetail.PdId = db.ProductDetailTbls.DefaultIfEmpty().Max(r => r == null ? 0 : r.PdId) + 1;
-                        productDetail.ProductId = result.ProductId;
-                        productDetail.ProductType = "BannerProduct";
-                        productDetail.SizeId = productDataArray[i].SizeId;
-                        productDetail.Price = productDataArray[i].Price;
-                        productDetail.Priority = productDataArray[i].Priority;
-                        productDetail.Active = true;
-                        db.ProductDetailTbls.Add(productDetail);
-                        db.SaveChanges();
+
+                        if (productDataArray[i].SizeId != -1)
+                        {
+
+                            ProductDetailTbl productDetail = new ProductDetailTbl();
+                            productDetail.PdId = db.ProductDetailTbls.DefaultIfEmpty().Max(r => r == null ? 0 : r.PdId) + 1;
+                            productDetail.ProductId = result.ProductId;
+                            productDetail.ProductType = "BannerProduct";
+                            productDetail.SizeId = productDataArray[i].SizeId;
+                            productDetail.Price = productDataArray[i].Price;
+                            productDetail.Priority = productDataArray[i].Priority;
+                            productDetail.Active = true;
+                            db.ProductDetailTbls.Add(productDetail);
+                            db.SaveChanges();
+                        }
+                        
                     }
                 }
 

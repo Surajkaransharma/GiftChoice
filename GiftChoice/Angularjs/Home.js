@@ -665,18 +665,18 @@ app.controller("HomeController", ['$scope', '$http', '$sce', 'orderByFilter', fu
             debugger
             $scope.ProductData = d.data;
 
-            setTimeout(() => {
+            //setTimeout(() => {
 
-                for (var i = 0; i < $scope.ProductData.length; i++) {
-                    if ($scope.ProductData[i].VideoUrl != null) {
+            //    for (var i = 0; i < $scope.ProductData.length; i++) {
+            //        if ($scope.ProductData[i].VideoUrl != null) {
 
-                        var site = "https://www.youtube.com/embed/" + $scope.ProductData[i].VideoUrl + "?autoplay=1&loop=1&mute=1";
-                        document.getElementById('iFrameName' + i).src = site;
-                    }
+            //            var site = "https://www.youtube.com/embed/" + $scope.ProductData[i].VideoUrl + "?autoplay=1&loop=1&mute=1";
+            //            document.getElementById('iFrameName' + i).src = site;
+            //        }
 
 
-                }
-            }, 10);
+            //    }
+            //}, 10);
         }, function (error) {
             alert(error.data);
         });
@@ -1059,24 +1059,27 @@ app.controller("HomeController", ['$scope', '$http', '$sce', 'orderByFilter', fu
             }
         }).then(function (d) {
             $scope.ProductData = d.data.ProductList;
-            setTimeout(() => {
+            //setTimeout(() => {
 
-                for (var i = 0; i < $scope.ProductData.length; i++) {
-                    if ($scope.ProductData[i].VideoUrl != null) {
+            //    for (var i = 0; i < $scope.ProductData.length; i++) {
+            //        if ($scope.ProductData[i].VideoUrl != null) {
 
-                        var site = "https://www.youtube.com/embed/" + $scope.ProductData[i].VideoUrl + "?autoplay=1&loop=1&mute=1";
-                        document.getElementById('iFrameName' + i).src = site;
-                    }
+            //            var site = "https://www.youtube.com/embed/" + $scope.ProductData[i].VideoUrl + "?autoplay=1&loop=1&mute=1";
+            //            document.getElementById('iFrameName' + i).src = site;
+            //        }
 
 
-                }
-            }, 10);
+            //    }
+            //}, 10);
 
         }, function (error) {
             toastr["error"]("Something Went Wrong");
         });
 
 
+    };
+    $scope.trustSrc = function (src) {
+        return $sce.trustAsResourceUrl(src);
     };
     $scope.GetBannerAllProduct = function () {
         debugger

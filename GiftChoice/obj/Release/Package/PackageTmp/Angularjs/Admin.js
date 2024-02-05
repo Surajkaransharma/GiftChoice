@@ -344,10 +344,10 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
         debugger
         $scope.productDataArray.push({
             'SizeId': -1,
-         //   'Color_Id': -1,
-          //  'Quantity': 0,
+            //   'Color_Id': -1,
+            //  'Quantity': 0,
             'Price': 0,
-           // 'Discount': 0
+            // 'Discount': 0
             //'Priority': 0
 
         });
@@ -549,11 +549,11 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
 
     $scope.UpdateMainCateType = function () {
         debugger
-      
+
         $http({
             url: '/GiftDashBoard/UpdateMainCateType',
             method: 'post',
-            data: { MainCateTblModel : $scope.MainCateData }
+            data: { MainCateTblModel: $scope.MainCateData }
         }).then(function (d) {
             $scope.result = d.data;
             toastr["success"]("Update successfully");
@@ -1680,7 +1680,7 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
 
                 toastr["success"]("Product save successfully");
                 //$('#MainCate').val("-1").trigger('change');
-                  location.href = '/GiftDashBoard/AddBannerInProduct';
+                location.href = '/GiftDashBoard/AddBannerInProduct';
                 //$scope.Product.ProductTitle = null;
                 //$scope.Product.PLabel = null;
                 //$scope.Product.Price = null;
@@ -1849,7 +1849,13 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
         debugger
 
         $scope.Product = $scope.ProductData[index];
-        $scope.productDataArray = $scope.Product.productDataArray;
+
+        if ($scope.Product.productDataArray.length > 0) {
+
+            $scope.productDataArray = $scope.Product.productDataArray;
+        } else {
+            $scope.AddProductDetails();
+        }
 
 
         $scope.GetBannerToQuery($scope.Product.MainCateId);
