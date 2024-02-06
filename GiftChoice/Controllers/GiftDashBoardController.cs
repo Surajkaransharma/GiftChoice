@@ -666,6 +666,9 @@ namespace GiftChoice.Controllers
             public Nullable<System.DateTime> Update_at { get; set; }
             public Nullable<long> UserID { get; set; }
 
+            public HttpPostedFileBase VideoData { get; set; }
+
+
             public HttpPostedFileBase Image1 { get; set; }
             public HttpPostedFileBase Image2 { get; set; }
             public HttpPostedFileBase Image3 { get; set; }
@@ -2198,12 +2201,20 @@ namespace GiftChoice.Controllers
                     productmodel.PLabel = model.PLabel == null ? "" : model.PLabel;
                     productmodel.Price = model.Price;
                     productmodel.Qty = 1;
+                    if (model.VideoData != null)
+                    {
+                        string extensionstuimg = Path.GetExtension(model.VideoData.FileName);
+                        model.VideoData.SaveAs(Server.MapPath("~/images/ProductVideo/" + "B_" + productmodel.ProductId + extensionstuimg));
+                        productmodel.Video = "B_" + productmodel.ProductId + extensionstuimg;
+
+                    }
 
                     productmodel.Create_at = DateTime.Now;
                     productmodel.Update_at = DateTime.Now;
                     productmodel.Priority = model.Priority;
                     db.BannerProductTbls.Add(productmodel);
                     db.SaveChanges();
+
 
                     if (model.Image1 != null)
                     {
@@ -2418,6 +2429,12 @@ namespace GiftChoice.Controllers
                     result.SameDay = model.SameDay;
                     result.PDesc = model.PDesc;
                     result.PUrl = model.ProductTitle.Replace(" ", "-");
+                    if (model.VideoData != null)
+                    {
+                        string extensionstuimg = Path.GetExtension(model.VideoData.FileName);
+                        model.VideoData.SaveAs(Server.MapPath("~/images/ProductVideo/" + "B_" + result.ProductId + extensionstuimg));
+                        result.Video = "B_" + result.ProductId + extensionstuimg; 
+                    }
                     result.PLabel = model.PLabel == null ? "" : model.PLabel;
                     result.Price = model.Price;
                     result.Update_at = DateTime.Now;

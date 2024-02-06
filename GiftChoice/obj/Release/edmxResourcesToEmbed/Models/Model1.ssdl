@@ -66,6 +66,7 @@
     <Property Name="QueryId" Type="int" />
     <Property Name="BSubId" Type="int" />
     <Property Name="BSubDId" Type="int" />
+    <Property Name="Video" Type="nvarchar(max)" />
   </EntityType>
   <EntityType Name="BannerTbl">
     <Key>

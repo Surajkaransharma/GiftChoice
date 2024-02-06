@@ -130,7 +130,8 @@
                                                     <a href="#" class="qty-up"><i class="fi-rs-angle-small-up"></i></a>
                                                 </div>
                                                 <a class="button button-add-to-cart text-white" ng-click="GiftAddItemToCart(Product.ProductId)" role="button">Add To Cart</a>
-                                                <a class="button btn-danger button-add-to-cart filter-button animate__bounceIn" ng-show="Product.VideoUrl!=null && Product.VideoUrl!=''"  href="https://www.youtube.com/embed/{{Product.VideoUrl}}?autoplay=1&loop=1&mute=1" target="_blank" role="button">See Video</a>
+                                                <a ng-show="Product.Video!=null && Product.Video!=''" class="button btn-danger button-add-to-cart filter-button video-button" href="{{'/images/ProductVideo/' + p.Video}}" target="_blank" role="button">See Video</a>
+                                                @*<a class="button btn-danger button-add-to-cart filter-button animate__bounceIn" ng-show="Product.VideoUrl!=null && Product.VideoUrl!=''" href="https://www.youtube.com/embed/{{Product.VideoUrl}}?autoplay=1&loop=1&mute=1" target="_blank" role="button">See Video</a>*@
                                             </div>
                                         </div>
 

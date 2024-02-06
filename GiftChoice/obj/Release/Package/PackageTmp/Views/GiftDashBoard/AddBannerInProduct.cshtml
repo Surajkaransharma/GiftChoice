@@ -104,9 +104,13 @@
                                 <label for="input1" class="form-label">Price</label>
                                 <input type="number" class="form-control" ng-model="Product.Price" id="" placeholder="Price">
                             </div>
+                            @*<div class="col-md-2">
+                                    <label for="input1" class="form-label">See Video</label>
+                                    <input type="text" class="form-control" ng-model="Product.VideoUrl" id="" placeholder="See Video">
+                                </div>*@
                             <div class="col-md-2">
                                 <label for="input1" class="form-label">See Video</label>
-                                <input type="text" class="form-control" ng-model="Product.VideoUrl" id="" placeholder="See Video">
+                                <input type="file" id="VideoData" class="form-control" upload-file="Product.VideoData">
                             </div>
                             <div class="col-md-2">
                                 <label for="input1" class="form-label">Same Day Available</label>
@@ -142,8 +146,7 @@
 
                                     <div class="col-md-2" ng-init="GetProductSizeList($index)">
                                         <label for="input1" class="form-label">Size</label>
-                                        <select id="P_Size" class="form-select" ng-model="a.SizeId" ng-options="q.SizeId as q.SizeTitle for q in a.SizeList">
-                                        </select>
+                                        <select id="P_Size" class="form-select" ng-model="a.SizeId" ng-options="q.SizeId as q.SizeTitle for q in a.SizeList"></select>
                                     </div>
 
 
@@ -156,7 +159,7 @@
 
                                     <div class="col-md-2" ng-show="$last">
                                         <div class="d-md-flex d-grid align-items-center gap-3">
-                                            
+
                                             <button type="button" id="Adbtn" ng-click="AddProductDetails()" class="btn btn-primary px-4 mt-28">Add Detail</button>
                                         </div>
                                     </div>

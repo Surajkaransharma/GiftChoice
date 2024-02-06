@@ -71,6 +71,7 @@
           <Property Name="QueryId" Type="int" />
           <Property Name="BSubId" Type="int" />
           <Property Name="BSubDId" Type="int" />
+          <Property Name="Video" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="BannerTbl">
           <Key>
@@ -669,6 +670,7 @@ warning 6002: The table/view 'giftchoice.giftchoice.AutocompleteSuggestions' doe
           <Property Name="QueryId" Type="Int32" />
           <Property Name="BSubId" Type="Int32" />
           <Property Name="BSubDId" Type="Int32" />
+          <Property Name="Video" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="BannerTbl">
           <Key>
@@ -1125,6 +1127,7 @@ warning 6002: The table/view 'giftchoice.giftchoice.AutocompleteSuggestions' doe
           <EntitySetMapping Name="BannerProductTbls">
             <EntityTypeMapping TypeName="GiftChoiceModel.BannerProductTbl">
               <MappingFragment StoreEntitySet="BannerProductTbl">
+                <ScalarProperty Name="Video" ColumnName="Video" />
                 <ScalarProperty Name="BSubDId" ColumnName="BSubDId" />
                 <ScalarProperty Name="BSubId" ColumnName="BSubId" />
                 <ScalarProperty Name="QueryId" ColumnName="QueryId" />

@@ -1629,11 +1629,11 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
         $.each($(".checkbox-input:checked"), function () {
             Keywordarr.push({ 'QueryId': $(this).val() });
         });
-        for (var i = 0; i < $scope.SizeList.length; i++) {
-            if ($scope.SizeList[i].Selected) {
-                PSizeArr.push($scope.SizeList[i]);
-            }
-        }
+        //for (var i = 0; i < $scope.SizeList.length; i++) {
+        //    if ($scope.SizeList[i].Selected) {
+        //        PSizeArr.push($scope.SizeList[i]);
+        //    }
+        //}
 
         debugger;
         upload({

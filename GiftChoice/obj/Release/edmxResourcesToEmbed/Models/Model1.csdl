@@ -109,6 +109,7 @@
     <Property Name="QueryId" Type="Int32" />
     <Property Name="BSubId" Type="Int32" />
     <Property Name="BSubDId" Type="Int32" />
+    <Property Name="Video" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
   </EntityType>
   <EntityType Name="BannerTbl">
     <Key>
