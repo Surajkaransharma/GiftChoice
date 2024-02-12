@@ -190,6 +190,9 @@
     <EntitySetMapping Name="MainCateTbls">
       <EntityTypeMapping TypeName="GiftChoiceModel.MainCateTbl">
         <MappingFragment StoreEntitySet="MainCateTbl">
+          <ScalarProperty Name="ModelQuery1" ColumnName="ModelQuery1" />
+          <ScalarProperty Name="Position" ColumnName="Position" />
+          <ScalarProperty Name="CateType" ColumnName="CateType" />
           <ScalarProperty Name="MainCateType" ColumnName="MainCateType" />
           <ScalarProperty Name="UserId" ColumnName="UserId" />
           <ScalarProperty Name="MImage" ColumnName="MImage" />
@@ -259,6 +262,7 @@
     <EntitySetMapping Name="ProductImages">
       <EntityTypeMapping TypeName="GiftChoiceModel.ProductImage">
         <MappingFragment StoreEntitySet="ProductImage">
+          <ScalarProperty Name="ImageIndex" ColumnName="ImageIndex" />
           <ScalarProperty Name="Active" ColumnName="Active" />
           <ScalarProperty Name="PImage" ColumnName="PImage" />
           <ScalarProperty Name="ProductId" ColumnName="ProductId" />
@@ -269,6 +273,9 @@
     <EntitySetMapping Name="ProductTbls">
       <EntityTypeMapping TypeName="GiftChoiceModel.ProductTbl">
         <MappingFragment StoreEntitySet="ProductTbl">
+          <ScalarProperty Name="Video" ColumnName="Video" />
+          <ScalarProperty Name="BannerCateId" ColumnName="BannerCateId" />
+          <ScalarProperty Name="ProductType" ColumnName="ProductType" />
           <ScalarProperty Name="VideoUrl" ColumnName="VideoUrl" />
           <ScalarProperty Name="SameDay" ColumnName="SameDay" />
           <ScalarProperty Name="TableDesc" ColumnName="TableDesc" />

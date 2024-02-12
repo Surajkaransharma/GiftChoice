@@ -231,6 +231,9 @@
     <Property Name="UserId" Type="Int64" />
     <NavigationProperty Name="MCKeywordTbls" Relationship="GiftChoiceModel.FK__MCKeyword__MainC__534D60F1" FromRole="MainCateTbl" ToRole="MCKeywordTbl" />
     <Property Name="MainCateType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="CateType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Position" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="ModelQuery1" Type="Boolean" />
   </EntityType>
   <EntityType Name="MCKeywordTbl">
     <Key>
@@ -291,6 +294,7 @@
     <Property Name="ProductId" Type="Int64" />
     <Property Name="PImage" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="Active" Type="Boolean" />
+    <Property Name="ImageIndex" Type="Int32" />
   </EntityType>
   <EntityType Name="ProductTbl">
     <Key>
@@ -313,6 +317,9 @@
     <Property Name="TableDesc" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="SameDay" Type="Boolean" />
     <Property Name="VideoUrl" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ProductType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="BannerCateId" Type="Int32" />
+    <Property Name="Video" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
   </EntityType>
   <EntityType Name="PSizeTbl">
     <Key>

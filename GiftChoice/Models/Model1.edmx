@@ -191,6 +191,9 @@
           <Property Name="MImage" Type="nvarchar(max)" />
           <Property Name="UserId" Type="bigint" />
           <Property Name="MainCateType" Type="nvarchar" MaxLength="50" />
+          <Property Name="CateType" Type="nvarchar" MaxLength="50" />
+          <Property Name="Position" Type="nvarchar" MaxLength="50" />
+          <Property Name="ModelQuery1" Type="bit" />
         </EntityType>
         <EntityType Name="MCKeywordTbl">
           <Key>
@@ -249,6 +252,7 @@
           <Property Name="ProductId" Type="bigint" />
           <Property Name="PImage" Type="nvarchar(max)" />
           <Property Name="Active" Type="bit" />
+          <Property Name="ImageIndex" Type="int" />
         </EntityType>
         <EntityType Name="ProductTbl">
           <Key>
@@ -271,6 +275,9 @@
           <Property Name="TableDesc" Type="nvarchar(max)" />
           <Property Name="SameDay" Type="bit" />
           <Property Name="VideoUrl" Type="nvarchar(max)" />
+          <Property Name="ProductType" Type="nvarchar" MaxLength="50" />
+          <Property Name="BannerCateId" Type="int" />
+          <Property Name="Video" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="PSizeTbl">
           <Key>
@@ -792,6 +799,9 @@ warning 6002: The table/view 'giftchoice.giftchoice.AutocompleteSuggestions' doe
           <Property Name="UserId" Type="Int64" />
           <NavigationProperty Name="MCKeywordTbls" Relationship="GiftChoiceModel.FK__MCKeyword__MainC__534D60F1" FromRole="MainCateTbl" ToRole="MCKeywordTbl" />
           <Property Name="MainCateType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CateType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Position" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ModelQuery1" Type="Boolean" />
         </EntityType>
         <EntityType Name="MCKeywordTbl">
           <Key>
@@ -852,6 +862,7 @@ warning 6002: The table/view 'giftchoice.giftchoice.AutocompleteSuggestions' doe
           <Property Name="ProductId" Type="Int64" />
           <Property Name="PImage" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Active" Type="Boolean" />
+          <Property Name="ImageIndex" Type="Int32" />
         </EntityType>
         <EntityType Name="ProductTbl">
           <Key>
@@ -874,6 +885,9 @@ warning 6002: The table/view 'giftchoice.giftchoice.AutocompleteSuggestions' doe
           <Property Name="TableDesc" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="SameDay" Type="Boolean" />
           <Property Name="VideoUrl" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ProductType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="BannerCateId" Type="Int32" />
+          <Property Name="Video" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="PSizeTbl">
           <Key>
@@ -1266,6 +1280,9 @@ warning 6002: The table/view 'giftchoice.giftchoice.AutocompleteSuggestions' doe
           <EntitySetMapping Name="MainCateTbls">
             <EntityTypeMapping TypeName="GiftChoiceModel.MainCateTbl">
               <MappingFragment StoreEntitySet="MainCateTbl">
+                <ScalarProperty Name="ModelQuery1" ColumnName="ModelQuery1" />
+                <ScalarProperty Name="Position" ColumnName="Position" />
+                <ScalarProperty Name="CateType" ColumnName="CateType" />
                 <ScalarProperty Name="MainCateType" ColumnName="MainCateType" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
                 <ScalarProperty Name="MImage" ColumnName="MImage" />
@@ -1335,6 +1352,7 @@ warning 6002: The table/view 'giftchoice.giftchoice.AutocompleteSuggestions' doe
           <EntitySetMapping Name="ProductImages">
             <EntityTypeMapping TypeName="GiftChoiceModel.ProductImage">
               <MappingFragment StoreEntitySet="ProductImage">
+                <ScalarProperty Name="ImageIndex" ColumnName="ImageIndex" />
                 <ScalarProperty Name="Active" ColumnName="Active" />
                 <ScalarProperty Name="PImage" ColumnName="PImage" />
                 <ScalarProperty Name="ProductId" ColumnName="ProductId" />
@@ -1345,6 +1363,9 @@ warning 6002: The table/view 'giftchoice.giftchoice.AutocompleteSuggestions' doe
           <EntitySetMapping Name="ProductTbls">
             <EntityTypeMapping TypeName="GiftChoiceModel.ProductTbl">
               <MappingFragment StoreEntitySet="ProductTbl">
+                <ScalarProperty Name="Video" ColumnName="Video" />
+                <ScalarProperty Name="BannerCateId" ColumnName="BannerCateId" />
+                <ScalarProperty Name="ProductType" ColumnName="ProductType" />
                 <ScalarProperty Name="VideoUrl" ColumnName="VideoUrl" />
                 <ScalarProperty Name="SameDay" ColumnName="SameDay" />
                 <ScalarProperty Name="TableDesc" ColumnName="TableDesc" />

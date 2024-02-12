@@ -186,6 +186,9 @@
     <Property Name="MImage" Type="nvarchar(max)" />
     <Property Name="UserId" Type="bigint" />
     <Property Name="MainCateType" Type="nvarchar" MaxLength="50" />
+    <Property Name="CateType" Type="nvarchar" MaxLength="50" />
+    <Property Name="Position" Type="nvarchar" MaxLength="50" />
+    <Property Name="ModelQuery1" Type="bit" />
   </EntityType>
   <EntityType Name="MCKeywordTbl">
     <Key>
@@ -244,6 +247,7 @@
     <Property Name="ProductId" Type="bigint" />
     <Property Name="PImage" Type="nvarchar(max)" />
     <Property Name="Active" Type="bit" />
+    <Property Name="ImageIndex" Type="int" />
   </EntityType>
   <EntityType Name="ProductTbl">
     <Key>
@@ -266,6 +270,9 @@
     <Property Name="TableDesc" Type="nvarchar(max)" />
     <Property Name="SameDay" Type="bit" />
     <Property Name="VideoUrl" Type="nvarchar(max)" />
+    <Property Name="ProductType" Type="nvarchar" MaxLength="50" />
+    <Property Name="BannerCateId" Type="int" />
+    <Property Name="Video" Type="nvarchar" MaxLength="50" />
   </EntityType>
   <EntityType Name="PSizeTbl">
     <Key>

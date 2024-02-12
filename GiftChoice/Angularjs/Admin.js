@@ -1358,11 +1358,11 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
         }).then(function (d) {
             $scope.result = d.data;
             if ($scope.result.res === "1") {
-                if (Keywordarr != null) {
+                toastr["success"]("Banner Save Successfully");
+                //if (Keywordarr != null) {
 
-                    $scope.BannerProdcutTKeywordArray($scope.result.MainCateId);
-                }
-                //toastr["success"]("Banner Save Successfully");
+                //    $scope.BannerProdcutTKeywordArray($scope.result.MainCateId);
+                //}
                 //$scope.BannerProdcutT = null;
                 //$scope.GetBannerProdcutT();
 
@@ -1478,10 +1478,12 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
         }).then(function (d) {
             $scope.result = d.data;
             if ($scope.result.res === "1") {
-                if (Keywordarr !== null) {
+                toastr["success"]("Banner Update successfully");
 
-                    $scope.UpdateBannerProdcutTKeywordArray($scope.result.MainCateId);
-                }
+                //if (Keywordarr !== null) {
+
+                //    $scope.UpdateBannerProdcutTKeywordArray($scope.result.MainCateId);
+                //}
                 //$scope.BannerProdcutT = null;
                 //$scope.GetBannerProdcutT();
             }
