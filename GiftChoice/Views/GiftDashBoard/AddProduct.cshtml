@@ -81,13 +81,43 @@
                                 <label for="input1" class="form-label">Price</label>
                                 <input type="number" class="form-control" ng-model="Product.Price" id="" placeholder="Price">
                             </div>
+                            @*<div class="col-md-2">
+                                    <label for="input1" class="form-label">See Video</label>
+                                    <input type="text" class="form-control" ng-model="Product.VideoUrl" id="" placeholder="See Video">
+                                </div>*@
                             <div class="col-md-2">
                                 <label for="input1" class="form-label">See Video</label>
-                                <input type="text" class="form-control" ng-model="Product.VideoUrl" id="" placeholder="See Video">
+                                <input type="file" id="VideoData" class="form-control" upload-file="Product.VideoData">
                             </div>
                             <div class="col-md-2">
                                 <label for="input1" class="form-label">Same Day Deliver</label>
                                 <input type="checkbox" ng-model="Product.SameDay" id="" placeholder="">
+                            </div>
+                            <div ng-init="AddProductDetails()">
+
+                                <div class="row g-3" ng-repeat="a in productDataArray">
+
+                                    <div class="col-md-2" ng-init="GetProductSizeList($index)">
+                                        <label for="input1" class="form-label">Size</label>
+                                        <select id="P_Size" class="form-select" ng-model="a.SizeId" ng-options="q.SizeId as q.SizeTitle for q in a.SizeList"></select>
+                                    </div>
+
+
+
+                                    <div class="col-md-2">
+                                        <label for="input1" class="form-label">Price</label>
+                                        <input type="text" class="form-control" ng-model="a.Price" id="" placeholder="Price" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');">
+                                    </div>
+
+
+                                    <div class="col-md-2" ng-show="$last">
+                                        <div class="d-md-flex d-grid align-items-center gap-3">
+
+                                            <button type="button" id="Adbtn" ng-click="AddProductDetails()" class="btn btn-primary px-4 mt-28">Add Detail</button>
+                                        </div>
+                                    </div>
+
+                                </div>
                             </div>
                             <div class="col-md-12" ng-init="GetKeywordData()">
                                 <label for="input1" class="form-label">Select Keyword</label>
@@ -101,18 +131,18 @@
 
                                 </div>
                             </div>
-                            <div class="col-md-12" ng-init="GetSizeData()">
-                                <label for="input1" class="form-label">Select Size</label>
-                                <div class="" id="check_box">
-                                    <label class="checkbox-wrapper" ng-repeat="s in SizeList">
-                                        <input type="checkbox" id="Size_{{s.SizeId}}" class="checkbox-Size" value="{{s.SizeId}}" ng-model="s.Selected" ng-checked="" />
-                                        <span class="checkbox-tile">
-                                            <span class="checkbox-label">{{s.SizeTitle}}</span>
-                                        </span>
-                                    </label>
+                            @*<div class="col-md-12" ng-init="GetSizeData()">
+                                    <label for="input1" class="form-label">Select Size</label>
+                                    <div class="" id="check_box">
+                                        <label class="checkbox-wrapper" ng-repeat="s in SizeList">
+                                            <input type="checkbox" id="Size_{{s.SizeId}}" class="checkbox-Size" value="{{s.SizeId}}" ng-model="s.Selected" ng-checked="" />
+                                            <span class="checkbox-tile">
+                                                <span class="checkbox-label">{{s.SizeTitle}}</span>
+                                            </span>
+                                        </label>
 
-                                </div>
-                            </div>
+                                    </div>
+                                </div>*@
                             <div class="col-md-12">
                                 <label for="input1" class="form-label">Description</label>
                                 <textarea id="TableDesc" class="form-control" rows="6" cols="4" ng-model="Product.PDesc"></textarea>
@@ -212,7 +242,26 @@
                                         <td>{{m.Price}}</td>
                                         <td>{{m.Priority}}</td>
                                         <td><span ng-repeat="n in m.Submenu">{{n.SubmenuTitle}},<br /></span></td>
-                                        <td><span ng-repeat="n in m.PSizeList">{{n.SizeTitle}},<br /></span></td>
+                                        <td>
+                                            <table class="table table-bordered">
+                                                <tr>
+                                                    <td>Price</td>
+                                                    <td>Size</td>
+
+                                                </tr>
+                                                <tr ng-repeat="a in m.productDataArray">
+                                                    <td>{{a.Price}}</td>
+                                                    <td>{{a.ProductSize}}</td>
+
+                                                </tr>
+
+                                                @*<span ng-repeat="n in m.PSizeList">
+                                                        {{n.SizeTitle}},<br />
+
+                                                    </span>*@
+                                            </table>
+                                            @*<span ng-repeat="n in m.PSizeList">{{n.SizeTitle}},<br /></span>*@
+                                        </td>
                                         <td><span ng-repeat="i in m.ProductImage"><img src="~/images/ProductImg/{{i}}"><br /></span> </td>
                                         <td><a ng-click="ProductActiveDeActive(m.ProductId)"> <span class="badge {{m.Active==1? 'bg-success' : 'bg-danger'}}">{{m.Active==1?'Active':'Deactive'}}</span></a> </td>
                                         <td><a><i class="bx bxs-pencil" ng-click="GetProductbyid($index)"></i></a></td>

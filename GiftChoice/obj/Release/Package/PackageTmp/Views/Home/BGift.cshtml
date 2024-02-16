@@ -12,7 +12,7 @@
         <div class="container">
             <div class="breadcrumb">
                 <a href="/Home/Index" rel="nofollow">Home</a>
-                <a href="/Home/BannerGifts?Banner={{Product.Maincate.MainCateId}}"><span> {{Product.Maincate.MTitle}}</span></a>
+                <a href="/Home/BannerGifts?Banner={{Product.Bannercate.MainCateId}}"><span> {{Product.Bannercate.MTitle}}</span></a>
                 <span> {{Product.ProductTitle}}</span>
             </div>
         </div>
@@ -62,7 +62,7 @@
                                         <span class="badge bg-success mb-2 animate__flash" ng-show="Product.SameDay">Same Day Available</span>
                                         <h2 class="title-detail">{{Product.ProductTitle}}</h2>
                                         <div class="pro-details-brand">
-                                            <span><a href="/Home/BannerGifts?Banner={{Product.Maincate.MainCateId}}">{{Product.Maincate.MTitle}}</a></span>
+                                            <span><a href="/Home/BannerGifts?Banner={{Product.Bannercate.MainCateId}}">{{Product.Bannercate.MTitle}}</a></span>
 
                                         </div>
                                     </div>
@@ -130,7 +130,7 @@
                                                     <a href="#" class="qty-up"><i class="fi-rs-angle-small-up"></i></a>
                                                 </div>
                                                 <a class="button button-add-to-cart text-white" ng-click="GiftAddItemToCart(Product.ProductId)" role="button">Add To Cart</a>
-                                                <a ng-show="Product.Video!=null && Product.Video!=''" class="button btn-danger button-add-to-cart filter-button video-button" href="~/images/ProductVideo/{{p.Video}}" target="_blank" role="button">See Video</a>
+                                                    <a ng-show="Product.Video!=null && Product.Video!=''" class="button btn-danger button-add-to-cart filter-button video-button" href="{{'/images/ProductVideo/' + Product.Video}}" target="_blank" role="button">See Video</a>
                                                 @*<a class="button btn-danger button-add-to-cart filter-button animate__bounceIn" ng-show="Product.VideoUrl!=null && Product.VideoUrl!=''" href="https://www.youtube.com/embed/{{Product.VideoUrl}}?autoplay=1&loop=1&mute=1" target="_blank" role="button">See Video</a>*@
                                             </div>
                                         </div>
@@ -144,9 +144,9 @@
                                 <div class="col-12">
                                     <h3 class="section-title style-1 mb-30">Related Gifts</h3>
                                 </div>
-                                <div class="row product-grid-4">
+                                <div class="row product-grid-4 g-1 gx-1" ng-show="ProductData.length>1">
                                     <div class="col-lg-3 col-6 col-sm-4" ng-repeat="q in ProductData" ng-click="RecentViewData($index)">
-                                        <div class="product-cart-wrap mb-30">
+                                        <div class="product-cart-wrap">
                                             <div class="product-img-action-wrap">
                                                 <div class="product-img">
                                                     <a href="/Home/BGift?url={{q.PUrl}}">

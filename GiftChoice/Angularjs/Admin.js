@@ -243,6 +243,13 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
 
         $scope.Product = $scope.ProductData[index];
 
+        if ($scope.Product.productDataArray.length > 0) {
+
+            $scope.productDataArray = $scope.Product.productDataArray;
+        } else {
+            $scope.AddProductDetails();
+        }
+
         CKEDITOR.instances.ckeditor.setData($scope.Product.TableDesc);
         //const previewImage = document.querySelector('#previewImage');
         //$('#previewImage').css('display', 'block');
@@ -382,11 +389,11 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
         $.each($(".checkbox-input:checked"), function () {
             Keywordarr.push({ 'KeywordId': $(this).val() });
         });
-        for (var i = 0; i < $scope.SizeList.length; i++) {
-            if ($scope.SizeList[i].Selected) {
-                PSizeArr.push($scope.SizeList[i]);
-            }
-        }
+        //for (var i = 0; i < $scope.SizeList.length; i++) {
+        //    if ($scope.SizeList[i].Selected) {
+        //        PSizeArr.push($scope.SizeList[i]);
+        //    }
+        //}
 
         debugger;
         upload({
@@ -422,7 +429,8 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
                 ProductId: id,
                 TableDesc: $scope.Description,
                 KeywordTbls: Keywordarr,
-                SizeTbls: PSizeArr
+                SizeTbls: PSizeArr,
+                ProductDataArray: $scope.productDataArray
             }
         }).then(function (d) {
             $scope.result = d.data;
@@ -523,7 +531,9 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
                 TableDesc: $scope.Description,
                 PDesc: $scope.PDescval,
                 KeywordTbls: Keywordarr,
-                SizeTbls: PSizeArr
+                SizeTbls: PSizeArr,
+                ProductDataArray: $scope.productDataArray
+
 
             }
         }).then(function (d) {
@@ -590,6 +600,8 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
             toastr["error"]("Enter Main Category Priority");
             return;
         }
+
+        $scope.MainCate.CateType = $("#CateType").val();
 
 
         debugger
@@ -725,6 +737,7 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
                 Keywordarr.push($scope.KeywordList[i]);
             }
         }
+        $scope.MainCate.CateType = $("#CateType").val();
         debugger
 
         upload({
@@ -1759,6 +1772,8 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
             PSizeArr.push({ 'SizeId': $(this).val() });
         });
         delete $scope.Product.PDesc1;
+        delete $scope.Product.TableDesc;
+
 
         debugger;
         upload({

@@ -1,9 +1,11 @@
 ﻿
 @{
-    /**/
+                /**/
 
-    ViewBag.Title = "AddBannerInProduct";
-    Layout = "~/Views/Shared/_Admin.cshtml";
+                /**/
+
+                ViewBag.Title = "AddBannerInProduct";
+                Layout = "~/Views/Shared/_Admin.cshtml";
 }
 
 <style>
@@ -58,7 +60,7 @@
                             <div class="col-md-3">
                                 <label for="input1" class="form-label">Select Banner Title</label>
 
-                                <select id="MainCate" class="form-select" ng-model="Product.MainCateId" onchange="angular.element(this).scope().GetBannerToQuery(this.value)">
+                                <select id="MainCate" class="form-select" ng-model="Product.BannerCateId" onchange="angular.element(this).scope().GetBannerToQuery(this.value)">
                                     <option ng-selected="true" value="-1">Select Banner Title</option>
                                     <option ng-repeat="m in GetBannerInProductData" value="{{m.MainCateId}}">{{m.MTitle}}</option>
                                 </select>
@@ -115,6 +117,18 @@
                             <div class="col-md-2">
                                 <label for="input1" class="form-label">Same Day Available</label>
                                 <input type="checkbox" ng-model="Product.SameDay" id="" placeholder="">
+                            </div>
+                            <div class="col-md-2">
+                                <label for="input1" class="form-label">Common</label>
+                                <input type="checkbox" ng-model="Product.Common" id="" placeholder="">
+                            </div>
+                            <div class="col-md-3" ng-init="GetMainCateData()" ng-show="Product.Common">
+                                <label for="input1" class="form-label">Select Main Category</label>
+
+                                <select id="MainCate" class="form-select" ng-model="Product.MainCateId" @*onchange="angular.element(this).scope().MainCateKeyword(this.value)"*@>
+                                    <option ng-selected="true" value="-1">Select Main Category</option>
+                                    <option ng-repeat="m in MainCateData" value="{{m.MainCateId}}">{{m.MTitle}}</option>
+                                </select>
                             </div>
                             <div class="col-md-12">
                                 <label for="input1" class="form-label">Select Answer</label>
@@ -257,6 +271,8 @@
                                     <tr>
                                         <th>S.No.</th>
                                         <th class="box1">Product Title</th>
+                                        <th class="box1">Main Category Name</th>
+
                                         <th class="box1">Banner Title</th>
                                         <th>Label</th>
                                         <th>See Video</th>
@@ -266,7 +282,7 @@
                                         @*<th>Priority</th>*@
                                         <th>Keywords</th>
 
-                                        <th>Size</th>
+                                        <th>Size With Price</th>
                                         <th>Image</th>
                                         <th>Active</th>
                                         <th>Action</th>
@@ -277,6 +293,8 @@
                                         <td>{{$index+1}}</td>
                                         <td style="white-space:normal" class="box1">{{m.ProductTitle}}</td>
                                         <td style="white-space:normal" class="box1">{{m.Maincate.MTitle}}</td>
+                                        <td style="white-space:normal" class="box1">{{m.Bannercate.MTitle}}</td>
+
                                         <td>{{m.PLabel}}</td>
                                         <td style="white-space:normal" class="box1">{{m.VideoUrl}}</td>
                                         <td>
@@ -286,7 +304,25 @@
                                         <td>{{m.Price}}</td>
                                         @*<td>{{m.Priority}}</td>*@
                                         <td><span ng-repeat="n in m.Submenu">{{n.SubmenuTitle}},<br /></span></td>
-                                        <td><span ng-repeat="n in m.PSizeList">{{n.SizeTitle}},<br /></span></td>
+                                        <td>
+                                            <table class="table table-bordered">
+                                                <tr>
+                                                    <td>Price</td>
+                                                    <td>Size</td>
+
+                                                </tr>
+                                                <tr ng-repeat="a in m.productDataArray">
+                                                    <td>{{a.Price}}</td>
+                                                    <td>{{a.ProductSize}}</td>
+
+                                                </tr>
+
+                                                @*<span ng-repeat="n in m.PSizeList">
+                    {{n.SizeTitle}},<br />
+
+                </span>*@
+                                            </table>
+                                        </td>
                                         <td><span ng-repeat="i in m.ProductImage"><img src="~/images/ProductImg/{{i}}"><br /></span> </td>
                                         <td><a ng-click="BannerProductActiveDeActive(m.ProductId)"> <span class="badge {{m.Active==1? 'bg-success' : 'bg-danger'}}">{{m.Active==1?'Active':'Deactive'}}</span></a> </td>
                                         <td><a><i class="bx bxs-pencil" ng-click="GetBannerProductbyid($index)"></i></a></td>

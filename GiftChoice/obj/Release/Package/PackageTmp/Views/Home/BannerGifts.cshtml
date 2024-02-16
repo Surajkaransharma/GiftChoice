@@ -1,7 +1,9 @@
 ﻿
 @{
-    ViewBag.Title = "BannerGifts";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+                /**/
+
+                ViewBag.Title = "BannerGifts";
+                Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 
@@ -61,7 +63,7 @@
                                     <div class="product-img-action-wrap">
                                         <div class="product-img product-img-zoom">
                                             <video ng-show="p.Video" width="100%" autoplay loop muted controls>
-                                                <source  ng-src="{{'/images/ProductVideo/' + p.Video}}" type="video/mp4">
+                                                <source ng-src="{{'/images/ProductVideo/' + p.Video}}" type="video/mp4">
                                             </video>
                                             @*<iframe  ng-show="p.VideoUrl" ng-src="{{trustSrc('https://www.youtube.com/embed/' + p.VideoUrl +'?autoplay=1&loop=1&mute=1')}}" allow="loop"></iframe>*@
                                             @*<iframe ng-show="p.VideoUrl" id="iFrameName{{$index}}" allow="loop"></iframe>*@
@@ -87,7 +89,7 @@
                                 </div>
                             </div>
                         </div>
-         
+
                     </div>
                 </div>
             </div>
@@ -106,7 +108,7 @@
                 </div>
                 <div class="modal-body p-4">
                     <div class="content page-1">
-                        <h5 >{{GetBannerAsk1Data[0].AskQues1}}</h5>
+                        <h5>{{GetBannerAsk1Data[0].AskQues1}}</h5>
                         <div class="selection mt-3">
                             <div class="radio-button-style">
                                 <span ng-repeat="b in GetBannerAsk1Data" ng-show="GetBannerAsk2Data==null">
@@ -116,8 +118,8 @@
                                 </span>
 
                                 <a ng-click="GetBannerAllProduct()" class="form-check-label">
-                                   View All
-                                  
+                                    View All
+
                                 </a>
                             </div>
                         </div>
@@ -126,9 +128,9 @@
                 </div>
                 <div class="modal-footer">
                     <a href="/Home/index" type="button" class="btn-danger btn-sm">Back To Home</a>
-                    <a href="#" type="button" class="btn btn-primary btn-sm"  ng-click="modelTofilterBannerProduct()">Continue</a>
+                    <a href="#" type="button" class="btn btn-primary btn-sm" ng-click="modelTofilterBannerProduct()">Continue</a>
 
-             
+
 
                 </div>
             </div>

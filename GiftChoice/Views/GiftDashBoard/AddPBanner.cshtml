@@ -52,6 +52,7 @@
                             <div class="col-md-12">
                                 <label for="input1" class="form-label">Banner Title</label>
                                 <input type="text" class="form-control" id="MTitle" ng-model="BannerProdcutT.MTitle" placeholder="Banner Title">
+                                <input type="text" style="display: none" class="form-control" id="CateType" value="BannerCate">
 
                             </div>
 
@@ -186,7 +187,7 @@
 
                                         <td>{{m.Priority}}</td>
                                         <td>
-                                            <img src="~/images/BannerPTImage/{{m.MImage}}">
+                                            <img src="~/images/MainCate/{{m.MImage}}">
                                            
                                         </td>
                                         <td><a ng-click="BannerProdcutTActiveDeActive(m.MainCateId)"> <span class="badge {{m.Active==1? 'bg-success' : 'bg-danger'}}">{{m.Active==1?'Active':'Deactive'}}</span></a> </td>

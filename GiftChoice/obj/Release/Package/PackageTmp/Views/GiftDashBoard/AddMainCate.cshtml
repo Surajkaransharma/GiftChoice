@@ -34,12 +34,12 @@
                     <div class="card-body p-4">
 
                         <form class="row g-3" enctype="multipart/form-data">
-             
+
                             <div class="col-md-12">
                                 <label for="input1" class="form-label">Main Category Title</label>
                                 <input type="text" class="form-control" id="MTitle" ng-model="MainCate.MTitle" placeholder="Main Category">
-                                @*<input type="hidden" class="form-control" id="imgcode" ng-model="MainCate.MImage" placeholder="Main Category">*@
-                                @*<div id="imageContainer"></div>*@
+                                <input type="text" style="display: none" class="form-control" id="CateType"  value="MainCate">
+
                             </div>
                             <div class="col-md-12">
 
@@ -203,7 +203,7 @@
                                             <label for="MainCate{{m.MainCateId}}">Hero</label>
                                             <input type="radio" id="MainCate{{m.MainCateId}}" name="MainCate{{m.MainCateId}}" value="Hero" ng-model="m.MainCateType" />
                                             <label for="NormalMainCate{{m.MainCateId}}">Normal</label>
-                                            <input type="radio" id="NormalMainCate{{m.MainCateId}}" name="MainCate{{m.MainCateId}}" value="Normal" ng-model="m.MainCateType"/>
+                                            <input type="radio" id="NormalMainCate{{m.MainCateId}}" name="MainCate{{m.MainCateId}}" value="Normal" ng-model="m.MainCateType" />
 
                                         </td>
                                         <td style="white-space: normal"><span ng-repeat="n in m.Submenu">{{n.SubmenuTitle}},</span></td>

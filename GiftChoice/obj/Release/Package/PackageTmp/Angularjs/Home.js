@@ -7,13 +7,13 @@ app.controller("HomeController", ['$scope', '$http', '$sce', 'orderByFilter', fu
         $scope.NavbarMenuList = d.data.NavbarMenuList;
         $scope.ScondNavbarMenuList = d.data.ScondNavbarMenuList;
 
-        debugger
+        
     }, function (error) {
         alert(error.data);
     });
     $scope.RecentViewGifts = [];
     $scope.RecentViewData = function (index) {
-        debugger
+        
 
         var selectedProduct = $scope.ProductData[index];
         var productId = selectedProduct.ProductId;
@@ -34,7 +34,7 @@ app.controller("HomeController", ['$scope', '$http', '$sce', 'orderByFilter', fu
     };
 
     $scope.GetRecentViewGifts = function () {
-        debugger
+        
 
 
         $scope.RecentViewGifts = JSON.parse(localStorage.getItem('RecentViewGifts')) || [];
@@ -44,7 +44,7 @@ app.controller("HomeController", ['$scope', '$http', '$sce', 'orderByFilter', fu
     $scope.cart = [];
     //$scope.CartItem = JSON.parse(localStorage.getItem('cart'));
     $scope.GetCart = function () {
-        debugger
+        
         var cartlist = [];
 
         $scope.cart = JSON.parse(localStorage.getItem('cart')) || [];
@@ -57,8 +57,8 @@ app.controller("HomeController", ['$scope', '$http', '$sce', 'orderByFilter', fu
         }
     };
     $scope.addItemToCart = function (index) {
-        debugger
-        debugger;
+        
+        ;
 
         var selectedProduct = $scope.ProductData[index];
         var productId = selectedProduct.ProductId;
@@ -92,8 +92,8 @@ app.controller("HomeController", ['$scope', '$http', '$sce', 'orderByFilter', fu
     };
 
     $scope.RecentViewaddItemToCart = function (index) {
-        debugger
-        debugger;
+        
+        ;
 
         var selectedProduct = $scope.RecentViewGifts[index];
         var productId = selectedProduct.ProductId;
@@ -127,8 +127,8 @@ app.controller("HomeController", ['$scope', '$http', '$sce', 'orderByFilter', fu
     };
 
     $scope.GiftsaddItemToCart = function (index) {
-        debugger
-        debugger;
+        
+        ;
 
         var selectedProduct = $scope.ProductData[index];
         var productId = selectedProduct.ProductId;
@@ -174,7 +174,7 @@ app.controller("HomeController", ['$scope', '$http', '$sce', 'orderByFilter', fu
     };
     $scope.Qty = 1;
     $scope.AddQty = function (id, index) {
-        debugger
+        
 
         if (id == 1) {
 
@@ -247,7 +247,7 @@ app.controller("HomeController", ['$scope', '$http', '$sce', 'orderByFilter', fu
     };
 
     $scope.SearchDataShop = function () {
-        debugger
+        
         var id = $("#Keyword").val();
         $http({
             url: '/Home/SearchDataShop',
@@ -257,9 +257,9 @@ app.controller("HomeController", ['$scope', '$http', '$sce', 'orderByFilter', fu
 
             }
         }).then(function (d) {
-            debugger
+            
             $scope.result = d.data.Keywords;
-            debugger
+            
 
             location.href = '/Home/Shop?Keyword=' + $scope.result;
         }, function (error) {
@@ -269,7 +269,7 @@ app.controller("HomeController", ['$scope', '$http', '$sce', 'orderByFilter', fu
     };
 
     $scope.GetRandomKeywordMobile = function () {
-        debugger
+        
         $("#MKeyword").addClass('ui-autocomplete-loader-center');
         $http.get("/Home/GetRandomKeyword?id=" + $scope.Keyword).then(function (d) {
 
@@ -306,9 +306,9 @@ app.controller("HomeController", ['$scope', '$http', '$sce', 'orderByFilter', fu
 
 
     $scope.SearchData = function () {
-        debugger
+        
         $scope.kk = $("#Keyword").val();
-        debugger;
+        ;
         $http({
             url: '/Home/SearchData',
             method: 'POST',
@@ -320,9 +320,9 @@ app.controller("HomeController", ['$scope', '$http', '$sce', 'orderByFilter', fu
                 maincategory_id: $("#MainCate").val()
             }
         }).then(function (d) {
-            debugger
+            
             $scope.result = d.data.Keywordlist;
-            debugger
+            
             //    location.href = '/Home/SearchList?list=' + $scope.result.list + 'brand' + $scope.result.brand + 'CompanyName' + $scope.result.cname + 'CityId' + $scope.result.ctid + 'MainCate' + $scope.result.mcate;
 
         }, function (error) {
@@ -332,10 +332,10 @@ app.controller("HomeController", ['$scope', '$http', '$sce', 'orderByFilter', fu
     };
 
     $scope.SliderList = function () {
-        debugger
+        
         $http.get("/Home/SliderList").then(function (d) {
 
-            debugger
+            
             $scope.SliderListData = d.data;
             setTimeout(() => {
                 var mainslider = $(".home-slider");
@@ -360,10 +360,10 @@ app.controller("HomeController", ['$scope', '$http', '$sce', 'orderByFilter', fu
         });
     };
     $scope.GetFestivalBanner = function () {
-        debugger
+        
         $http.get("/Home/GetFestivalBanner").then(function (d) {
 
-            debugger
+            
             $scope.FestivalBannerData = d.data;
 
         }, function (error) {
@@ -371,10 +371,10 @@ app.controller("HomeController", ['$scope', '$http', '$sce', 'orderByFilter', fu
         });
     };
     $scope.GetLabelProduct = function () {
-        debugger
+        
         $http.get("/Home/GetLabelProduct").then(function (d) {
 
-            debugger
+            
             $scope.TopsellingProduct = d.data.TopsellingProduct;
             $scope.NewProduct = d.data.NewProduct;
             $scope.NewArivals = d.data.NewArivals;
@@ -433,7 +433,7 @@ app.controller("HomeController", ['$scope', '$http', '$sce', 'orderByFilter', fu
         });
     };
     $scope.sortByPrice = function (order) {
-        debugger
+        
         $scope.ProductData.sort(function (a, b) {
             if (order === 'asc') {
                 return a.Price - b.Price;
@@ -473,14 +473,14 @@ app.controller("HomeController", ['$scope', '$http', '$sce', 'orderByFilter', fu
     //$scope.reverse = true;
     //$scope.ProductData = orderBy($scope.ProductData, $scope.propertyName, $scope.reverse);
     //$scope.sortBy = function (propertyName) {
-    //    debugger;
+    //    ;
     //    $scope.reverse = (propertyName !== null && $scope.propertyName === propertyName)
     //        ? !$scope.reverse : false;
     //    $scope.propertyName = propertyName;
     //    $scope.ProductData = orderBy($scope.ProductData, $scope.propertyName, $scope.reverse);
     //};
     $scope.FilterProductData = function (id) {
-        debugger;
+        ;
 
         var Cid = [];
         var Bid = [];
@@ -510,7 +510,7 @@ app.controller("HomeController", ['$scope', '$http', '$sce', 'orderByFilter', fu
             $scope.lastItem = priceTblarr[priceTblarr.length - 1];
             $scope.maxPrice = $scope.lastItem.maxPrice;
         }
-        debugger
+        
         $http({
             url: '/Home/FilterProductData',
             method: 'post',
@@ -521,7 +521,7 @@ app.controller("HomeController", ['$scope', '$http', '$sce', 'orderByFilter', fu
                 Bid: Bid
             }
         }).then(function (d) {
-            debugger
+            
             $scope.ProductData = d.data.ProductList;
             $('.offcanvas').removeClass('show');
         }), function (error) {
@@ -532,7 +532,7 @@ app.controller("HomeController", ['$scope', '$http', '$sce', 'orderByFilter', fu
     $scope.GetMainCateData = function () {
         $http.get("/Home/GetMainCateData").then(function (d) {
             $scope.MainCateData = d.data;
-            debugger
+            
             //setTimeout(() => {
             //    $(".carausel-6-columns").each(function (key, item) {
             //        var id = $(this).attr("id");
@@ -632,7 +632,7 @@ app.controller("HomeController", ['$scope', '$http', '$sce', 'orderByFilter', fu
     $scope.GetHomeMainCateData = function () {
         $http.get("/Home/GetHomeMainCateData").then(function (d) {
             $scope.HomeMainCateData = d.data;
-            debugger
+            
 
         }, function (error) {
             alert(error.data);
@@ -642,7 +642,7 @@ app.controller("HomeController", ['$scope', '$http', '$sce', 'orderByFilter', fu
     $scope.GetHomeMainCateHeroData = function () {
         $http.get("/Home/GetHomeMainCateHeroData").then(function (d) {
             $scope.HomeHeroMainCateData = d.data;
-            debugger
+            
 
         }, function (error) {
             alert(error.data);
@@ -653,16 +653,16 @@ app.controller("HomeController", ['$scope', '$http', '$sce', 'orderByFilter', fu
     $scope.GetBannerCateData = function () {
         $http.get("/Home/GetBannerCateData").then(function (d) {
             $scope.MainCateData = d.data;
-            debugger
+            
         }, function (error) {
             alert(error.data);
         });
     };
 
     $scope.GetProduct = function () {
-        debugger
+        
         $http.get("/Home/GetProduct").then(function (d) {
-            debugger
+            
             $scope.ProductData = d.data;
 
             //setTimeout(() => {
@@ -683,13 +683,13 @@ app.controller("HomeController", ['$scope', '$http', '$sce', 'orderByFilter', fu
     };
 
     $scope.FilterProduct = function () {
-        debugger
+        
         $http.get("/Home/FilterProduct").then(function (d) {
-            debugger
+            
 
 
             $scope.ProductData = d.data;
-            debugger
+            
         }, function (error) {
             alert(error.data);
         });
@@ -707,10 +707,10 @@ app.controller("HomeController", ['$scope', '$http', '$sce', 'orderByFilter', fu
 
 
     $scope.BannerList = function () {
-        debugger
+        
         $http.get("/Home/BannerList").then(function (d) {
 
-            debugger
+            
             $scope.BannerListData = d.data;
 
         }, function (error) {
@@ -721,8 +721,8 @@ app.controller("HomeController", ['$scope', '$http', '$sce', 'orderByFilter', fu
 
 
     $scope.GiftAddItemToCart = function (Productid) {
-        debugger
-        debugger;
+        
+        ;
 
         var selectedProduct = $scope.Product;
         var productId = selectedProduct.ProductId;
@@ -756,9 +756,9 @@ app.controller("HomeController", ['$scope', '$http', '$sce', 'orderByFilter', fu
     };
 
     $scope.GetProductByid = function (id) {
-        debugger
+        
         $http.get("/Home/GetProductByid?id=" + id).then(function (d) {
-            debugger
+            
             $scope.Product = d.data;
             //$scope.idd = $scope.Product.MainCateId;
 
@@ -831,9 +831,9 @@ app.controller("HomeController", ['$scope', '$http', '$sce', 'orderByFilter', fu
     
     };
     $scope.GetBProductByid = function (id) {
-        debugger
+        
         $http.get("/Home/GetBProductByid?id=" + id).then(function (d) {
-            debugger
+            
             $scope.Product = d.data;
             //$scope.idd = $scope.Product.MainCateId;
 
@@ -893,9 +893,9 @@ app.controller("HomeController", ['$scope', '$http', '$sce', 'orderByFilter', fu
     };
 
     $scope.GetSmillerProduct = function (id, idd) {
-        debugger
+        
         $http.get("/Home/GetSmillerProduct?id=" + id + '&idd=' + idd).then(function (d) {
-            debugger
+            
             $scope.ProductData = d.data;
 
 
@@ -907,9 +907,9 @@ app.controller("HomeController", ['$scope', '$http', '$sce', 'orderByFilter', fu
     };
 
     $scope.GetBSmillerProduct = function (id, idd) {
-        debugger
+        
         $http.get("/Home/GetBSmillerProduct?id=" + id + '&idd=' + idd).then(function (d) {
-            debugger
+            
             $scope.ProductData = d.data;
         }, function (error) {
             alert(error.data);
@@ -930,7 +930,7 @@ app.controller("HomeController", ['$scope', '$http', '$sce', 'orderByFilter', fu
             return;
         }
 
-        debugger;
+        ;
         $http({
             url: '/Home/AddOrder',
             method: 'post',
@@ -947,7 +947,7 @@ app.controller("HomeController", ['$scope', '$http', '$sce', 'orderByFilter', fu
             }
         }).then(function (d) {
             $scope.result = d.data;
-            debugger
+            
             if ($scope.result.res === "1") {
 
                 $scope.cart = [];
@@ -962,44 +962,44 @@ app.controller("HomeController", ['$scope', '$http', '$sce', 'orderByFilter', fu
 
 
     $scope.GetSmallBanner = function () {
-        debugger
+        
         $http.get("/Home/GetSmallBanner").then(function (d) {
             $scope.GetSmallBannerData = d.data.SmallBanner;
-            debugger
+            
         }, function (error) {
             alert(error.data);
         });
     };
     $scope.GetDesignBanner = function () {
-        debugger
+        
         $http.get("/Home/GetDesignBanner").then(function (d) {
             $scope.DesignBannerData = d.data.DesignBanner;
-            debugger
+            
         }, function (error) {
             alert(error.data);
         });
     };
     $scope.GetMultipleBanner = function () {
-        debugger
+        
         $http.get("/Home/GetMultipleBanner").then(function (d) {
             $scope.MultipleBannerData = d.data.MultipleBanner;
-            debugger
+            
         }, function (error) {
             alert(error.data);
         });
     };
     $scope.OpenModelInBanner = function () {
-        debugger
+        
         var urlParams = new URLSearchParams(window.location.search);
         $scope.banner = urlParams.get('Banner');
         $scope.BannerAll = urlParams.get('BannerAll');
 
-        debugger
+        
         $http.get("/Home/GetBannerAsk1?banner=" + $scope.banner).then(function (d) {
             $scope.GetBannerAsk1Data = d.data.Querydata;
             $scope.ModelStatus = d.data.ModelStatus;
 
-            debugger
+            
             if ($scope.ModelStatus == true) {
 
                 if ($scope.GetBannerAsk1Data[0].BannerTitle.ModelQuery1 == true) {
@@ -1020,17 +1020,17 @@ app.controller("HomeController", ['$scope', '$http', '$sce', 'orderByFilter', fu
 
     };
     $scope.OpenModelInBannerFilter = function () {
-        debugger
+        
         var urlParams = new URLSearchParams(window.location.search);
         $scope.banner = urlParams.get('Banner');
         $scope.BannerAll = urlParams.get('BannerAll');
 
-        debugger
+        
         $http.get("/Home/GetBannerAsk1?banner=" + $scope.banner).then(function (d) {
             $scope.GetBannerAsk1Data = d.data.Querydata;
             $scope.ModelStatus = d.data.ModelStatus;
 
-            debugger
+            
          
                 if ($scope.GetBannerAsk1Data[0].BannerTitle.ModelQuery1 == true) {
 
@@ -1047,7 +1047,7 @@ app.controller("HomeController", ['$scope', '$http', '$sce', 'orderByFilter', fu
 
     };
     $scope.GetBannerAllProductwithmodel = function () {
-        debugger
+        
         var urlParams = new URLSearchParams(window.location.search);
         $scope.banner = urlParams.get('Banner');
 
@@ -1082,7 +1082,7 @@ app.controller("HomeController", ['$scope', '$http', '$sce', 'orderByFilter', fu
         return $sce.trustAsResourceUrl(src);
     };
     $scope.GetBannerAllProduct = function () {
-        debugger
+        
         var urlParams = new URLSearchParams(window.location.search);
         $scope.banner = urlParams.get('Banner');
 
@@ -1104,7 +1104,7 @@ app.controller("HomeController", ['$scope', '$http', '$sce', 'orderByFilter', fu
     };
 
     $scope.ContinueAskQues1 = function () {
-        debugger
+        
 
         for (var i = 0; i < $scope.GetBannerAsk1Data.length; i++) {
 
@@ -1115,7 +1115,7 @@ app.controller("HomeController", ['$scope', '$http', '$sce', 'orderByFilter', fu
 
         $http.get("/Home/ContinueAskQues1?QId=" + $scope.QId).then(function (d) {
             $scope.GetBannerAsk2Data = d.data;
-            debugger
+            
 
 
 
@@ -1127,7 +1127,7 @@ app.controller("HomeController", ['$scope', '$http', '$sce', 'orderByFilter', fu
     };
 
     $scope.ContinueAskQues2 = function () {
-        debugger
+        
 
         for (var i = 0; i < $scope.GetBannerAsk2Data.length; i++) {
             for (var k = 0; k < $scope.GetBannerAsk2Data[i].AnswerList.length; k++) {
@@ -1140,7 +1140,7 @@ app.controller("HomeController", ['$scope', '$http', '$sce', 'orderByFilter', fu
 
         $http.get("/Home/ContinueAskQues2?BSubDId=" + $scope.BSubDId).then(function (d) {
             $scope.GetContinueAskQues2Data = d.data;
-            debugger
+            
 
 
 
@@ -1152,7 +1152,7 @@ app.controller("HomeController", ['$scope', '$http', '$sce', 'orderByFilter', fu
     };
 
     $scope.modelTofilterBannerProduct = function () {
-        debugger
+        
         var Keywordarr = [];
         for (var i = 0; i < $scope.GetBannerAsk1Data.length; i++) {
             if ($("#AskQues1_" + $scope.GetBannerAsk1Data[i].QId).is(":checked")) {
@@ -1181,15 +1181,15 @@ app.controller("HomeController", ['$scope', '$http', '$sce', 'orderByFilter', fu
     };
 
     $scope.GetTopProduct = function () {
-        debugger
+        
         var urlParams = new URLSearchParams(window.location.search);
 
         // Get the value of the "CartData" parameter
         $scope.ProductType = urlParams.get('ProductType');
-        debugger
+        
         $http.get("/Home/GetTopProduct?ProductType=" + $scope.ProductType).then(function (d) {
             $scope.ProductData = d.data.ProductList;
-            debugger
+            
 
 
         }, function (error) {
