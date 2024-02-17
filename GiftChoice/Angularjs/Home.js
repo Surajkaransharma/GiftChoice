@@ -690,7 +690,7 @@ app.controller("HomeController", ['$scope', '$http', '$sce', 'startFromFilter','
 
             $scope.ProductData = d.data;
             debugger
-            $scope.pageSize = 6;
+            $scope.pageSize = 20;
             $scope.currentPage = 1; // Reset to the first page after fetching data
             $scope.totalPages = Math.ceil($scope.ProductData.length / $scope.pageSize);
             $scope.goToPage(1); // Go to the first page
@@ -1064,7 +1064,10 @@ app.controller("HomeController", ['$scope', '$http', '$sce', 'startFromFilter','
         }).then(function (d) {
             $scope.ProductData = d.data.ProductList;
 
-        
+            $scope.pageSize = 20;
+            $scope.currentPage = 1; // Reset to the first page after fetching data
+            $scope.totalPages = Math.ceil($scope.ProductData.length / $scope.pageSize);
+            $scope.goToPage(1); // Go to the first page
 
             //setTimeout(() => {
 
@@ -1088,7 +1091,7 @@ app.controller("HomeController", ['$scope', '$http', '$sce', 'startFromFilter','
     /////// pagenation
     $scope.ProductData = [];
     $scope.currentPage = 1;
-    $scope.pageSize = 6;
+    $scope.pageSize = 20;
 
     $scope.goToPage = function (page) {
 
@@ -1137,7 +1140,12 @@ app.controller("HomeController", ['$scope', '$http', '$sce', 'startFromFilter','
             }
         }).then(function (d) {
             $scope.ProductData = d.data.ProductList;
+
             $('#modalId').modal("toggle");
+            $scope.pageSize = 20;
+            $scope.currentPage = 1; // Reset to the first page after fetching data
+            $scope.totalPages = Math.ceil($scope.ProductData.length / $scope.pageSize);
+            $scope.goToPage(1); // Go to the first page
 
         }, function (error) {
             toastr["error"]("Something Went Wrong");
@@ -1216,6 +1224,11 @@ app.controller("HomeController", ['$scope', '$http', '$sce', 'startFromFilter','
             $scope.ProductData = d.data.ProductList;
 
             $('#modalId').modal("toggle");
+
+            $scope.pageSize = 20;
+            $scope.currentPage = 1; // Reset to the first page after fetching data
+            $scope.totalPages = Math.ceil($scope.ProductData.length / $scope.pageSize);
+            $scope.goToPage(1); // Go to the first page
 
         }, function (error) {
             toastr["error"]("Something Went Wrong");

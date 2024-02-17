@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
@@ -754,6 +755,22 @@ namespace GiftChoice.Controllers
 
         }
 
+        private void ReduceImageSize(double scaleFactor, Stream sourcePath, string targetPath)
+        {
+            using (var image = System.Drawing.Image.FromStream(sourcePath))
+            {
+                var newWidth = (int)(550 * scaleFactor);
+                var newHeight = (int)(550 * scaleFactor);
+                var thumbnailImg = new Bitmap(newWidth, newHeight);
+                var thumbGraph = Graphics.FromImage(thumbnailImg);
+                thumbGraph.CompositingQuality = CompositingQuality.HighQuality;
+                thumbGraph.SmoothingMode = SmoothingMode.HighQuality;
+                thumbGraph.InterpolationMode = InterpolationMode.HighQualityBicubic;
+                var imageRectangle = new Rectangle(0, 0, newWidth, newHeight);
+                thumbGraph.DrawImage(image, imageRectangle);
+                thumbnailImg.Save(targetPath, image.RawFormat);
+            }
+        }
         public JsonResult SubmitProduct(ProductTblmodel model)
         {
 
@@ -2535,8 +2552,12 @@ namespace GiftChoice.Controllers
                             ProductImage pimagearr = db.ProductImages.Where(c => c.PImageId == Pimageid).FirstOrDefault();
                             string extensionstuimg = Path.GetExtension(model.Image1.FileName);
 
-                            model.Image1.SaveAs(Server.MapPath("~/images/ProductImg/" + pimagearr.PImageId + extensionstuimg));
-                            ProductVaryQualityLevel(model.Image1.InputStream, Pimageid + extensionstuimg);
+                             model.Image1.SaveAs(Server.MapPath("~/images/ProductImg/" + pimagearr.PImageId + extensionstuimg));
+                            string targetPath = Server.MapPath("~/images/ProductImg/" + pimagearr.PImageId + extensionstuimg);
+                            Stream strm = model.Image1.InputStream;
+                            var targetFile = targetPath;
+                            ReduceImageSize(0.5, strm, targetFile);
+                       //     ProductVaryQualityLevel(model.Image1.InputStream, Pimageid + extensionstuimg);
                             pimagearr.PImage = pimagearr.PImageId + extensionstuimg;
                             db.SaveChanges();
                         }

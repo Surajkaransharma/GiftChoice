@@ -57,7 +57,7 @@
                         </div>
                     </div>
                     <div class="row product-grid-4 g-1 gx-1">
-                        <div class="col-lg-3 col-6 col-sm-4" ng-repeat="p in ProductData">
+                        <div class="col-lg-3 col-6 col-sm-4" ng-repeat="p in ProductData | startFrom:(currentPage - 1) * pageSize | limitTo:pageSize">
                             <div data-aos="zoom-in">
                                 <div class="product-cart-wrap">
                                     <div class="product-img-action-wrap">
@@ -90,6 +90,18 @@
                             </div>
                         </div>
 
+                    </div>
+                    <div class="tp-shop-pagination mt-20">
+                        <div class="tp-pagination">
+
+                            <div class="d-md-flex d-grid align-items-center gap-3">
+                                <button type="button" ng-click="prevPage()" ng-disabled="currentPage === 1" class="btn-link">Previous</button>
+                                <span ng-repeat="page in range(totalPages)">
+                                    <button type="button" ng-click="goToPage(page + 1)" ng-class="{ 'btn-link': currentPage !== (page + 1), 'btn-link-active': currentPage === (page + 1) }">{{ page + 1 }}</button>
+                                </span>
+                                <button type="button" ng-click="nextPage()" ng-disabled="ProductData.length < pageSize" class="btn-link">Next</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
