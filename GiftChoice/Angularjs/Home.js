@@ -689,8 +689,8 @@ app.controller("HomeController", ['$scope', '$http', '$sce', 'startFromFilter','
 
 
             $scope.ProductData = d.data;
-            debugger
-            $scope.pageSize = 20;
+            
+            $scope.pageSize = 28;
             $scope.currentPage = 1; // Reset to the first page after fetching data
             $scope.totalPages = Math.ceil($scope.ProductData.length / $scope.pageSize);
             $scope.goToPage(1); // Go to the first page
@@ -1120,7 +1120,10 @@ app.controller("HomeController", ['$scope', '$http', '$sce', 'startFromFilter','
     $scope.range = function (totalPages) {
         $scope.pages = [];
         for (i = 0; i < totalPages; i++) {
+            if (i <= 3) {
             $scope.pages.push(i);
+
+            }
         } return $scope.pages;
     };
 /////// pagenation
