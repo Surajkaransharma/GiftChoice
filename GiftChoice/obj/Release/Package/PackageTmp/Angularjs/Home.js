@@ -1,5 +1,5 @@
 ﻿var app = angular.module("HomeApp", []);
-app.controller("HomeController", ['$scope', '$http', '$sce', 'orderByFilter', function ($scope, $http, $sce, orderBy) {
+app.controller("HomeController", ['$scope', '$http', '$sce', 'startFromFilter','orderByFilter', function ($scope, $http, $sce, orderBy) {
 
 
 
@@ -689,7 +689,11 @@ app.controller("HomeController", ['$scope', '$http', '$sce', 'orderByFilter', fu
 
 
             $scope.ProductData = d.data;
-            
+            debugger
+            $scope.pageSize = 20;
+            $scope.currentPage = 1; // Reset to the first page after fetching data
+            $scope.totalPages = Math.ceil($scope.ProductData.length / $scope.pageSize);
+            $scope.goToPage(1); // Go to the first page
         }, function (error) {
             alert(error.data);
         });
@@ -1059,6 +1063,12 @@ app.controller("HomeController", ['$scope', '$http', '$sce', 'orderByFilter', fu
             }
         }).then(function (d) {
             $scope.ProductData = d.data.ProductList;
+
+            $scope.pageSize = 20;
+            $scope.currentPage = 1; // Reset to the first page after fetching data
+            $scope.totalPages = Math.ceil($scope.ProductData.length / $scope.pageSize);
+            $scope.goToPage(1); // Go to the first page
+
             //setTimeout(() => {
 
             //    for (var i = 0; i < $scope.ProductData.length; i++) {
@@ -1078,6 +1088,42 @@ app.controller("HomeController", ['$scope', '$http', '$sce', 'orderByFilter', fu
 
 
     };
+    /////// pagenation
+    $scope.ProductData = [];
+    $scope.currentPage = 1;
+    $scope.pageSize = 20;
+
+    $scope.goToPage = function (page) {
+
+        $scope.currentPage = page;
+    };
+
+    $scope.prevPage = function () {
+
+        if ($scope.currentPage > 1) {
+            $scope.goToPage($scope.currentPage - 1);
+        }
+        $('html, body').scrollTop(0);
+        //   $('html, body').animate({ scrollTop: 0 }, '300');
+
+    };
+
+    $scope.nextPage = function () {
+
+        if (($scope.currentPage * $scope.pageSize) < $scope.ProductData.length) {
+            $scope.goToPage($scope.currentPage + 1);
+        }
+        $('html, body').scrollTop(0);
+
+    };
+
+    $scope.range = function (totalPages) {
+        $scope.pages = [];
+        for (i = 0; i < totalPages; i++) {
+            $scope.pages.push(i);
+        } return $scope.pages;
+    };
+/////// pagenation
     $scope.trustSrc = function (src) {
         return $sce.trustAsResourceUrl(src);
     };
@@ -1094,7 +1140,12 @@ app.controller("HomeController", ['$scope', '$http', '$sce', 'orderByFilter', fu
             }
         }).then(function (d) {
             $scope.ProductData = d.data.ProductList;
+
             $('#modalId').modal("toggle");
+            $scope.pageSize = 20;
+            $scope.currentPage = 1; // Reset to the first page after fetching data
+            $scope.totalPages = Math.ceil($scope.ProductData.length / $scope.pageSize);
+            $scope.goToPage(1); // Go to the first page
 
         }, function (error) {
             toastr["error"]("Something Went Wrong");
@@ -1174,6 +1225,11 @@ app.controller("HomeController", ['$scope', '$http', '$sce', 'orderByFilter', fu
 
             $('#modalId').modal("toggle");
 
+            $scope.pageSize = 20;
+            $scope.currentPage = 1; // Reset to the first page after fetching data
+            $scope.totalPages = Math.ceil($scope.ProductData.length / $scope.pageSize);
+            $scope.goToPage(1); // Go to the first page
+
         }, function (error) {
             toastr["error"]("Something Went Wrong");
         });
@@ -1203,3 +1259,10 @@ app.controller("HomeController", ['$scope', '$http', '$sce', 'orderByFilter', fu
         $scope.showFullContent = !$scope.showFullContent;
     };
 }]);
+
+app.filter('startFrom', function () {
+    return function (input, start) {
+        start = +start;
+        return input.slice(start);
+    };
+});

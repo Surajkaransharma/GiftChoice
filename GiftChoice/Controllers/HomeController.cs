@@ -190,7 +190,7 @@ namespace GiftChoice.Controllers
             var res =
                 new
                 {
-                    TopsellingProduct = db.ProductTbls.Where(m => m.Active == true && m.LabelId == 1 && m.ProductType == "Common" && m.ProductType == "MainProduct").Select(m => new
+                    TopsellingProduct = db.ProductTbls.Where(m => m.Active == true && m.LabelId == 1  && m.ProductType == "MainProduct").Select(m => new
                     {
                         Toplabel = db.LabelProductTbls.Where(l => l.LabelId == 1).Select(l => l.LTitle).FirstOrDefault(),
                         m.ProductId,
@@ -208,7 +208,7 @@ namespace GiftChoice.Controllers
                         Maincate = db.MainCateTbls.Where(p => p.MainCateId == m.MainCateId).Select(p => p.MTitle).FirstOrDefault(),
 
                     }).OrderBy(x => Guid.NewGuid()).Take(10),
-                    NewProduct = db.ProductTbls.Where(m => m.Active == true && m.LabelId == 2 && m.ProductType == "Common" && m.ProductType == "MainProduct").Select(m => new
+                    NewProduct = db.ProductTbls.Where(m => m.Active == true && m.LabelId == 2 &&  m.ProductType == "MainProduct").Select(m => new
                     {
                         Toplabel = db.LabelProductTbls.Where(l => l.LabelId == 1).Select(l => l.LTitle).FirstOrDefault(),
                         m.ProductId,
@@ -227,7 +227,7 @@ namespace GiftChoice.Controllers
                         Maincate = db.MainCateTbls.Where(p => p.MainCateId == m.MainCateId).Select(p => p.MTitle).FirstOrDefault(),
 
                     }).OrderBy(x => Guid.NewGuid()).Take(10),
-                    NewArivals = db.ProductTbls.Where(m => m.Active == true && m.LabelId == 3 && m.ProductType == "Common" && m.ProductType == "MainProduct").Select(m => new
+                    NewArivals = db.ProductTbls.Where(m => m.Active == true && m.LabelId == 3  && m.ProductType == "MainProduct").Select(m => new
                     {
                         Toplabel = db.LabelProductTbls.Where(l => l.LabelId == 1).Select(l => l.LTitle).FirstOrDefault(),
                         m.ProductId,
@@ -255,6 +255,8 @@ namespace GiftChoice.Controllers
         public class ProductViewModel
         {
             public int ProductId { get; set; }
+            public Nullable<int> LabelId { get; set; }
+
             public string ProductTitle { get; set; }
             public string ProductImage { get; set; }
 
@@ -331,6 +333,7 @@ namespace GiftChoice.Controllers
                                 ProductViewModel product = new ProductViewModel
                                 {
                                     ProductId = Convert.ToInt32(reader["ProductId"]),
+                                    LabelId = Convert.ToInt32(reader["LabelId"]),
                                     ProductTitle = reader["ProductTitle"].ToString(),
                                     ProductImage = reader["PImage"].ToString(),
                                     Price = Convert.ToDouble(reader["Price"]),
@@ -367,6 +370,7 @@ namespace GiftChoice.Controllers
                                product.PLabel,
                                product.Price,
                                product.PUrl,
+                               product.LabelId,
                                product.Qty,
                                product.Create_at,
                                product.Active,
@@ -420,6 +424,7 @@ namespace GiftChoice.Controllers
                m.MainCateId,
                m.ProductTitle,
                m.PLabel,
+               m.LabelId,
                m.Price,
                m.PUrl,
                m.Qty,

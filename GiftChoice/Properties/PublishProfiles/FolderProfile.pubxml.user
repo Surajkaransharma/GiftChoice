@@ -30,7 +30,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>12/26/2023 11:05:30</publishTime>
     </File>
     <File Include="Angularjs/Home.js">
-      <publishTime>02/12/2024 10:28:50</publishTime>
+      <publishTime>02/17/2024 12:09:03</publishTime>
     </File>
     <File Include="Angularjs/LoginJs.js">
       <publishTime>12/26/2023 11:05:30</publishTime>
@@ -3168,10 +3168,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>12/26/2023 11:05:38</publishTime>
     </File>
     <File Include="bin/GiftChoice.dll">
-      <publishTime>02/16/2024 16:02:55</publishTime>
+      <publishTime>02/22/2024 12:22:13</publishTime>
     </File>
     <File Include="bin/GiftChoice.pdb">
-      <publishTime>02/16/2024 16:02:55</publishTime>
+      <publishTime>02/22/2024 12:22:13</publishTime>
     </File>
     <File Include="bin/Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll">
       <publishTime>12/26/2023 11:05:38</publishTime>
@@ -3369,7 +3369,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>12/26/2023 11:05:30</publishTime>
     </File>
     <File Include="Content/assets/css/main.css">
-      <publishTime>02/06/2024 14:30:22</publishTime>
+      <publishTime>02/22/2024 12:01:33</publishTime>
     </File>
     <File Include="Content/assets/css/plugins/jquery-ui.css">
       <publishTime>12/26/2023 11:05:30</publishTime>
@@ -6948,7 +6948,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>01/25/2024 10:59:06</publishTime>
     </File>
     <File Include="images/ProductImg/B_2.jpg">
-      <publishTime>01/02/2024 11:51:55</publishTime>
+      <publishTime>02/01/2024 11:51:55</publishTime>
     </File>
     <File Include="images/SliderImg/1.jpg">
       <publishTime>02/12/2024 10:28:48</publishTime>
@@ -7086,13 +7086,13 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>12/26/2023 11:05:30</publishTime>
     </File>
     <File Include="Views/Home/BannerGifts.cshtml">
-      <publishTime>02/16/2024 15:42:31</publishTime>
+      <publishTime>02/17/2024 12:09:55</publishTime>
     </File>
     <File Include="Views/Home/BGift.cshtml">
       <publishTime>02/16/2024 16:02:35</publishTime>
     </File>
     <File Include="Views/Home/Cart.cshtml">
-      <publishTime>01/02/2024 11:51:55</publishTime>
+      <publishTime>02/01/2024 11:51:55</publishTime>
     </File>
     <File Include="Views/Home/checkout.cshtml">
       <publishTime>12/26/2023 11:05:30</publishTime>
@@ -7107,13 +7107,13 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>12/26/2023 11:05:30</publishTime>
     </File>
     <File Include="Views/Home/Index.cshtml">
-      <publishTime>02/16/2024 15:57:13</publishTime>
+      <publishTime>02/22/2024 12:20:32</publishTime>
     </File>
     <File Include="Views/Home/privacy_policy.cshtml">
       <publishTime>12/26/2023 11:05:30</publishTime>
     </File>
     <File Include="Views/Home/Shop.cshtml">
-      <publishTime>12/26/2023 11:05:30</publishTime>
+      <publishTime>02/22/2024 12:11:11</publishTime>
     </File>
     <File Include="Views/Home/terms_condition.cshtml">
       <publishTime>12/26/2023 11:05:30</publishTime>
