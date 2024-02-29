@@ -455,30 +455,6 @@ warning 6002: The table/view 'giftchoice.giftchoice.AutocompleteSuggestions' doe
           <Property Name="ID" Type="bigint" Nullable="false" />
           <Property Name="Suggestion" Type="nvarchar(max)" />
         </EntityType>
-        <Association Name="FK__MCKeyword__Keywo__52593CB8">
-          <End Role="KeywordTbl" Type="Self.KeywordTbl" Multiplicity="0..1" />
-          <End Role="MCKeywordTbl" Type="Self.MCKeywordTbl" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="KeywordTbl">
-              <PropertyRef Name="KeywordId" />
-            </Principal>
-            <Dependent Role="MCKeywordTbl">
-              <PropertyRef Name="KeywordId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__MCKeyword__MainC__534D60F1">
-          <End Role="MainCateTbl" Type="Self.MainCateTbl" Multiplicity="0..1" />
-          <End Role="MCKeywordTbl" Type="Self.MCKeywordTbl" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="MainCateTbl">
-              <PropertyRef Name="MainCateId" />
-            </Principal>
-            <Dependent Role="MCKeywordTbl">
-              <PropertyRef Name="MainCateId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityContainer Name="GiftChoiceModelStoreContainer">
           <EntitySet Name="AdminTbl" EntityType="Self.AdminTbl" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="BannerCateProductTbl" EntityType="Self.BannerCateProductTbl" Schema="dbo" store:Type="Tables" />
@@ -555,14 +531,6 @@ warning 6002: The table/view 'giftchoice.giftchoice.AutocompleteSuggestions' doe
     [AutocompleteSuggestions].[Suggestion] AS [Suggestion]
     FROM [giftchoice].[AutocompleteSuggestions] AS [AutocompleteSuggestions]</DefiningQuery>
           </EntitySet>
-          <AssociationSet Name="FK__MCKeyword__Keywo__52593CB8" Association="Self.FK__MCKeyword__Keywo__52593CB8">
-            <End Role="KeywordTbl" EntitySet="KeywordTbl" />
-            <End Role="MCKeywordTbl" EntitySet="MCKeywordTbl" />
-          </AssociationSet>
-          <AssociationSet Name="FK__MCKeyword__MainC__534D60F1" Association="Self.FK__MCKeyword__MainC__534D60F1">
-            <End Role="MainCateTbl" EntitySet="MainCateTbl" />
-            <End Role="MCKeywordTbl" EntitySet="MCKeywordTbl" />
-          </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -598,18 +566,10 @@ warning 6002: The table/view 'giftchoice.giftchoice.AutocompleteSuggestions' doe
           <EntitySet Name="BannerQueryListTbls" EntityType="GiftChoiceModel.BannerQueryListTbl" />
           <EntitySet Name="BSubTitleDetailTbls" EntityType="GiftChoiceModel.BSubTitleDetailTbl" />
           <EntitySet Name="FestivalBannerTbls" EntityType="GiftChoiceModel.FestivalBannerTbl" />
+          <EntitySet Name="ProductDetailTbls" EntityType="GiftChoiceModel.ProductDetailTbl" />
           <EntitySet Name="QueryTbls" EntityType="GiftChoiceModel.QueryTbl" />
           <EntitySet Name="VProducts" EntityType="GiftChoiceModel.VProduct" />
           <EntitySet Name="AutocompleteSuggestions" EntityType="GiftChoiceModel.AutocompleteSuggestion" />
-          <AssociationSet Name="FK__MCKeyword__Keywo__52593CB8" Association="GiftChoiceModel.FK__MCKeyword__Keywo__52593CB8">
-            <End Role="KeywordTbl" EntitySet="KeywordTbls" />
-            <End Role="MCKeywordTbl" EntitySet="MCKeywordTbls" />
-          </AssociationSet>
-          <AssociationSet Name="FK__MCKeyword__MainC__534D60F1" Association="GiftChoiceModel.FK__MCKeyword__MainC__534D60F1">
-            <End Role="MainCateTbl" EntitySet="MainCateTbls" />
-            <End Role="MCKeywordTbl" EntitySet="MCKeywordTbls" />
-          </AssociationSet>
-          <EntitySet Name="ProductDetailTbls" EntityType="GiftChoiceModel.ProductDetailTbl" />
         </EntityContainer>
         <EntityType Name="AdminTbl">
           <Key>
@@ -769,7 +729,6 @@ warning 6002: The table/view 'giftchoice.giftchoice.AutocompleteSuggestions' doe
           <Property Name="Active" Type="Boolean" />
           <Property Name="Priority" Type="Int64" />
           <Property Name="UserId" Type="Int64" />
-          <NavigationProperty Name="MCKeywordTbls" Relationship="GiftChoiceModel.FK__MCKeyword__Keywo__52593CB8" FromRole="KeywordTbl" ToRole="MCKeywordTbl" />
         </EntityType>
         <EntityType Name="LabelProductTbl">
           <Key>
@@ -797,7 +756,6 @@ warning 6002: The table/view 'giftchoice.giftchoice.AutocompleteSuggestions' doe
           <Property Name="Update_at" Type="DateTime" Precision="3" />
           <Property Name="MImage" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="UserId" Type="Int64" />
-          <NavigationProperty Name="MCKeywordTbls" Relationship="GiftChoiceModel.FK__MCKeyword__MainC__534D60F1" FromRole="MainCateTbl" ToRole="MCKeywordTbl" />
           <Property Name="MainCateType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="CateType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Position" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
@@ -814,8 +772,6 @@ warning 6002: The table/view 'giftchoice.giftchoice.AutocompleteSuggestions' doe
           <Property Name="Menu" Type="Boolean" />
           <Property Name="Fliter" Type="Boolean" />
           <Property Name="MenuFilter" Type="Boolean" />
-          <NavigationProperty Name="KeywordTbl" Relationship="GiftChoiceModel.FK__MCKeyword__Keywo__52593CB8" FromRole="MCKeywordTbl" ToRole="KeywordTbl" />
-          <NavigationProperty Name="MainCateTbl" Relationship="GiftChoiceModel.FK__MCKeyword__MainC__534D60F1" FromRole="MCKeywordTbl" ToRole="MainCateTbl" />
         </EntityType>
         <EntityType Name="OrderMainTbl">
           <Key>
@@ -987,6 +943,19 @@ warning 6002: The table/view 'giftchoice.giftchoice.AutocompleteSuggestions' doe
           <Property Name="Update_at" Type="DateTime" Precision="3" />
           <Property Name="UserId" Type="Int64" />
         </EntityType>
+        <EntityType Name="ProductDetailTbl">
+          <Key>
+            <PropertyRef Name="PdId" />
+          </Key>
+          <Property Name="PdId" Type="Int64" Nullable="false" />
+          <Property Name="ProductId" Type="Int64" />
+          <Property Name="ProductType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Price" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SizeId" Type="Int32" />
+          <Property Name="SizeName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Priority" Type="Int64" />
+          <Property Name="Active" Type="Boolean" />
+        </EntityType>
         <EntityType Name="QueryTbl">
           <Key>
             <PropertyRef Name="QId" />
@@ -1047,43 +1016,6 @@ warning 6002: The table/view 'giftchoice.giftchoice.AutocompleteSuggestions' doe
           </Key>
           <Property Name="ID" Type="Int64" Nullable="false" />
           <Property Name="Suggestion" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-        </EntityType>
-        <Association Name="FK__MCKeyword__Keywo__52593CB8">
-          <End Type="GiftChoiceModel.KeywordTbl" Role="KeywordTbl" Multiplicity="0..1" />
-          <End Type="GiftChoiceModel.MCKeywordTbl" Role="MCKeywordTbl" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="KeywordTbl">
-              <PropertyRef Name="KeywordId" />
-            </Principal>
-            <Dependent Role="MCKeywordTbl">
-              <PropertyRef Name="KeywordId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__MCKeyword__MainC__534D60F1">
-          <End Type="GiftChoiceModel.MainCateTbl" Role="MainCateTbl" Multiplicity="0..1" />
-          <End Type="GiftChoiceModel.MCKeywordTbl" Role="MCKeywordTbl" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="MainCateTbl">
-              <PropertyRef Name="MainCateId" />
-            </Principal>
-            <Dependent Role="MCKeywordTbl">
-              <PropertyRef Name="MainCateId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityType Name="ProductDetailTbl">
-          <Key>
-            <PropertyRef Name="PdId" />
-          </Key>
-          <Property Name="PdId" Type="Int64" Nullable="false" />
-          <Property Name="ProductId" Type="Int64" />
-          <Property Name="ProductType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Price" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="SizeId" Type="Int32" />
-          <Property Name="SizeName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Priority" Type="Int64" />
-          <Property Name="Active" Type="Boolean" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -1492,6 +1424,20 @@ warning 6002: The table/view 'giftchoice.giftchoice.AutocompleteSuggestions' doe
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="ProductDetailTbls">
+            <EntityTypeMapping TypeName="GiftChoiceModel.ProductDetailTbl">
+              <MappingFragment StoreEntitySet="ProductDetailTbl">
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="Priority" ColumnName="Priority" />
+                <ScalarProperty Name="SizeName" ColumnName="SizeName" />
+                <ScalarProperty Name="SizeId" ColumnName="SizeId" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="ProductType" ColumnName="ProductType" />
+                <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+                <ScalarProperty Name="PdId" ColumnName="PdId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="QueryTbls">
             <EntityTypeMapping TypeName="GiftChoiceModel.QueryTbl">
               <MappingFragment StoreEntitySet="QueryTbl">
@@ -1552,20 +1498,6 @@ warning 6002: The table/view 'giftchoice.giftchoice.AutocompleteSuggestions' doe
               <MappingFragment StoreEntitySet="AutocompleteSuggestions">
                 <ScalarProperty Name="Suggestion" ColumnName="Suggestion" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="ProductDetailTbls">
-            <EntityTypeMapping TypeName="GiftChoiceModel.ProductDetailTbl">
-              <MappingFragment StoreEntitySet="ProductDetailTbl">
-                <ScalarProperty Name="Active" ColumnName="Active" />
-                <ScalarProperty Name="Priority" ColumnName="Priority" />
-                <ScalarProperty Name="SizeName" ColumnName="SizeName" />
-                <ScalarProperty Name="SizeId" ColumnName="SizeId" />
-                <ScalarProperty Name="Price" ColumnName="Price" />
-                <ScalarProperty Name="ProductType" ColumnName="ProductType" />
-                <ScalarProperty Name="ProductId" ColumnName="ProductId" />
-                <ScalarProperty Name="PdId" ColumnName="PdId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

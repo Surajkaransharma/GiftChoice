@@ -450,30 +450,6 @@ warning 6002: The table/view 'giftchoice.giftchoice.AutocompleteSuggestions' doe
     <Property Name="ID" Type="bigint" Nullable="false" />
     <Property Name="Suggestion" Type="nvarchar(max)" />
   </EntityType>
-  <Association Name="FK__MCKeyword__Keywo__52593CB8">
-    <End Role="KeywordTbl" Type="Self.KeywordTbl" Multiplicity="0..1" />
-    <End Role="MCKeywordTbl" Type="Self.MCKeywordTbl" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="KeywordTbl">
-        <PropertyRef Name="KeywordId" />
-      </Principal>
-      <Dependent Role="MCKeywordTbl">
-        <PropertyRef Name="KeywordId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK__MCKeyword__MainC__534D60F1">
-    <End Role="MainCateTbl" Type="Self.MainCateTbl" Multiplicity="0..1" />
-    <End Role="MCKeywordTbl" Type="Self.MCKeywordTbl" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="MainCateTbl">
-        <PropertyRef Name="MainCateId" />
-      </Principal>
-      <Dependent Role="MCKeywordTbl">
-        <PropertyRef Name="MainCateId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <EntityContainer Name="GiftChoiceModelStoreContainer">
     <EntitySet Name="AdminTbl" EntityType="Self.AdminTbl" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="BannerCateProductTbl" EntityType="Self.BannerCateProductTbl" Schema="dbo" store:Type="Tables" />
@@ -550,13 +526,5 @@ warning 6002: The table/view 'giftchoice.giftchoice.AutocompleteSuggestions' doe
     [AutocompleteSuggestions].[Suggestion] AS [Suggestion]
     FROM [giftchoice].[AutocompleteSuggestions] AS [AutocompleteSuggestions]</DefiningQuery>
     </EntitySet>
-    <AssociationSet Name="FK__MCKeyword__Keywo__52593CB8" Association="Self.FK__MCKeyword__Keywo__52593CB8">
-      <End Role="KeywordTbl" EntitySet="KeywordTbl" />
-      <End Role="MCKeywordTbl" EntitySet="MCKeywordTbl" />
-    </AssociationSet>
-    <AssociationSet Name="FK__MCKeyword__MainC__534D60F1" Association="Self.FK__MCKeyword__MainC__534D60F1">
-      <End Role="MainCateTbl" EntitySet="MainCateTbl" />
-      <End Role="MCKeywordTbl" EntitySet="MCKeywordTbl" />
-    </AssociationSet>
   </EntityContainer>
 </Schema>

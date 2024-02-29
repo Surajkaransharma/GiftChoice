@@ -5,41 +5,39 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="389be54863be4d45afa7e78e582f8c03" Name="Diagram1" ZoomLevel="80">
-        <EntityTypeShape EntityType="GiftChoiceModel.AdminTbl" Width="1.5" PointX="2.75" PointY="4.75" />
-        <EntityTypeShape EntityType="GiftChoiceModel.BannerCateProductTbl" Width="1.5" PointX="4.75" PointY="4.75" />
-        <EntityTypeShape EntityType="GiftChoiceModel.BannerCateTbl" Width="1.5" PointX="5.75" PointY="0.75" />
-        <EntityTypeShape EntityType="GiftChoiceModel.BannerProductImage" Width="1.5" PointX="6.75" PointY="4.75" />
-        <EntityTypeShape EntityType="GiftChoiceModel.BannerProductTbl" Width="1.5" PointX="2.75" PointY="7.75" />
-        <EntityTypeShape EntityType="GiftChoiceModel.BannerTbl" Width="1.5" PointX="7.75" PointY="0.75" />
-        <EntityTypeShape EntityType="GiftChoiceModel.BCKeywordTbl" Width="1.5" PointX="4.75" PointY="7.75" />
-        <EntityTypeShape EntityType="GiftChoiceModel.BPKeywordTbl" Width="1.5" PointX="6.75" PointY="7.75" />
-        <EntityTypeShape EntityType="GiftChoiceModel.BPSizeTbl" Width="1.5" PointX="8.75" PointY="4.75" />
-        <EntityTypeShape EntityType="GiftChoiceModel.BPTKeywordTbl" Width="1.5" PointX="8.75" PointY="7.75" />
-        <EntityTypeShape EntityType="GiftChoiceModel.BSubKTbl" Width="1.5" PointX="9.75" PointY="0.75" />
+        <EntityTypeShape EntityType="GiftChoiceModel.AdminTbl" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="GiftChoiceModel.BannerCateProductTbl" Width="1.5" PointX="2.75" PointY="0.75" />
+        <EntityTypeShape EntityType="GiftChoiceModel.BannerCateTbl" Width="1.5" PointX="0.75" PointY="3.75" />
+        <EntityTypeShape EntityType="GiftChoiceModel.BannerProductImage" Width="1.5" PointX="2.75" PointY="3.75" />
+        <EntityTypeShape EntityType="GiftChoiceModel.BannerProductTbl" Width="1.5" PointX="4.75" PointY="0.75" />
+        <EntityTypeShape EntityType="GiftChoiceModel.BannerPTTbl" Width="1.5" PointX="6.75" PointY="0.75" />
+        <EntityTypeShape EntityType="GiftChoiceModel.BannerQueryListTbl" Width="1.5" PointX="2.75" PointY="6.75" />
+        <EntityTypeShape EntityType="GiftChoiceModel.BannerTbl" Width="1.5" PointX="6.75" PointY="4.75" />
+        <EntityTypeShape EntityType="GiftChoiceModel.BCKeywordTbl" Width="1.5" PointX="8.75" PointY="0.75" />
+        <EntityTypeShape EntityType="GiftChoiceModel.BPKeywordTbl" Width="1.5" PointX="8.75" PointY="3.75" />
+        <EntityTypeShape EntityType="GiftChoiceModel.BPSizeTbl" Width="1.5" PointX="4.75" PointY="8.75" />
+        <EntityTypeShape EntityType="GiftChoiceModel.BPTKeywordTbl" Width="1.5" PointX="8.75" PointY="6.75" />
+        <EntityTypeShape EntityType="GiftChoiceModel.BSubKTbl" Width="1.5" PointX="0.75" PointY="9.75" />
+        <EntityTypeShape EntityType="GiftChoiceModel.BSubTitleDetailTbl" Width="1.5" PointX="10.75" PointY="0.75" />
         <EntityTypeShape EntityType="GiftChoiceModel.BSubTitleTbl" Width="1.5" PointX="10.75" PointY="3.75" />
-        <EntityTypeShape EntityType="GiftChoiceModel.KeywordTbl" Width="1.5" PointX="0.75" PointY="5.125" />
-        <EntityTypeShape EntityType="GiftChoiceModel.LabelProductTbl" Width="1.5" PointX="4.75" PointY="10.75" />
-        <EntityTypeShape EntityType="GiftChoiceModel.MainCateTbl" Width="1.5" PointX="0.75" PointY="1" />
-        <EntityTypeShape EntityType="GiftChoiceModel.MCKeywordTbl" Width="1.5" PointX="3" PointY="1.125" />
-        <EntityTypeShape EntityType="GiftChoiceModel.OrderMainTbl" Width="1.5" PointX="10.75" PointY="7.75" />
-        <EntityTypeShape EntityType="GiftChoiceModel.OrderTbl" Width="1.5" PointX="6.75" PointY="11.75" />
-        <EntityTypeShape EntityType="GiftChoiceModel.PKeywordTbl" Width="1.5" PointX="11.75" PointY="0.75" />
-        <EntityTypeShape EntityType="GiftChoiceModel.ProductImage" Width="1.5" PointX="8.75" PointY="11.75" />
-        <EntityTypeShape EntityType="GiftChoiceModel.ProductTbl" Width="1.5" PointX="10.75" PointY="11.75" />
-        <EntityTypeShape EntityType="GiftChoiceModel.PSizeTbl" Width="1.5" PointX="12.75" PointY="3.75" />
-        <EntityTypeShape EntityType="GiftChoiceModel.SizeTbl" Width="1.5" PointX="12.75" PointY="6.75" />
-        <EntityTypeShape EntityType="GiftChoiceModel.SliderTbl" Width="1.5" PointX="12.75" PointY="9.75" />
-        <EntityTypeShape EntityType="GiftChoiceModel.UserRegister" Width="1.5" PointX="0.75" PointY="13.75" />
-        <EntityTypeShape EntityType="GiftChoiceModel.BannerPTTbl" Width="1.5" PointX="12.75" PointY="13.75" />
-        <EntityTypeShape EntityType="GiftChoiceModel.BannerQueryListTbl" Width="1.5" PointX="13.75" PointY="0.75" />
-        <EntityTypeShape EntityType="GiftChoiceModel.BSubTitleDetailTbl" Width="1.5" PointX="2.75" PointY="14.75" />
-        <EntityTypeShape EntityType="GiftChoiceModel.FestivalBannerTbl" Width="1.5" PointX="14.75" PointY="3.75" />
-        <EntityTypeShape EntityType="GiftChoiceModel.QueryTbl" Width="1.5" PointX="14.75" PointY="7.75" />
-        <EntityTypeShape EntityType="GiftChoiceModel.VProduct" Width="1.5" PointX="14.75" PointY="11.75" />
-        <EntityTypeShape EntityType="GiftChoiceModel.AutocompleteSuggestion" Width="1.5" PointX="15.75" PointY="0.75" />
-        <AssociationConnector Association="GiftChoiceModel.FK__MCKeyword__Keywo__52593CB8" />
-        <AssociationConnector Association="GiftChoiceModel.FK__MCKeyword__MainC__534D60F1" />
-        <EntityTypeShape EntityType="GiftChoiceModel.ProductDetailTbl" Width="1.5" PointX="5.375" PointY="15.75" />
+        <EntityTypeShape EntityType="GiftChoiceModel.FestivalBannerTbl" Width="1.5" PointX="6.75" PointY="10.75" />
+        <EntityTypeShape EntityType="GiftChoiceModel.KeywordTbl" Width="1.5" PointX="10.75" PointY="7.75" />
+        <EntityTypeShape EntityType="GiftChoiceModel.LabelProductTbl" Width="1.5" PointX="2.75" PointY="11.75" />
+        <EntityTypeShape EntityType="GiftChoiceModel.MainCateTbl" Width="1.5" PointX="8.75" PointY="11.75" />
+        <EntityTypeShape EntityType="GiftChoiceModel.MCKeywordTbl" Width="1.5" PointX="10.75" PointY="11.75" />
+        <EntityTypeShape EntityType="GiftChoiceModel.OrderMainTbl" Width="1.5" PointX="12.75" PointY="0.75" />
+        <EntityTypeShape EntityType="GiftChoiceModel.OrderTbl" Width="1.5" PointX="12.75" PointY="4.75" />
+        <EntityTypeShape EntityType="GiftChoiceModel.PKeywordTbl" Width="1.5" PointX="12.75" PointY="8.75" />
+        <EntityTypeShape EntityType="GiftChoiceModel.ProductDetailTbl" Width="1.5" PointX="12.75" PointY="11.75" />
+        <EntityTypeShape EntityType="GiftChoiceModel.ProductImage" Width="1.5" PointX="14.75" PointY="0.75" />
+        <EntityTypeShape EntityType="GiftChoiceModel.ProductTbl" Width="1.5" PointX="14.75" PointY="3.75" />
+        <EntityTypeShape EntityType="GiftChoiceModel.PSizeTbl" Width="1.5" PointX="4.75" PointY="14.75" />
+        <EntityTypeShape EntityType="GiftChoiceModel.QueryTbl" Width="1.5" PointX="14.75" PointY="9.75" />
+        <EntityTypeShape EntityType="GiftChoiceModel.SizeTbl" Width="1.5" PointX="14.75" PointY="13.75" />
+        <EntityTypeShape EntityType="GiftChoiceModel.SliderTbl" Width="1.5" PointX="0.75" PointY="15.75" />
+        <EntityTypeShape EntityType="GiftChoiceModel.UserRegister" Width="1.5" PointX="10.75" PointY="15.75" />
+        <EntityTypeShape EntityType="GiftChoiceModel.AutocompleteSuggestion" Width="1.5" PointX="16.75" PointY="0.75" />
+        <EntityTypeShape EntityType="GiftChoiceModel.VProduct" Width="1.5" PointX="16.75" PointY="3.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

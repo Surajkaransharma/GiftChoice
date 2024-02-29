@@ -159,7 +159,7 @@ namespace GiftChoice.Controllers
         [JsonNetFilter]
         public JsonResult GetProduct()
         {
-            db.Configuration.ProxyCreationEnabled = false;
+           
             var res =
 
                db.ProductTbls.Where(m =>  m.ProductType == "MainProduct" && m.Active == true).Select(m => new
@@ -186,7 +186,7 @@ namespace GiftChoice.Controllers
         [JsonNetFilter]
         public JsonResult GetLabelProduct()
         {
-            db.Configuration.ProxyCreationEnabled = false;
+           
             var res =
                 new
                 {
@@ -271,7 +271,7 @@ namespace GiftChoice.Controllers
         [JsonNetFilter]
         public JsonResult FilterProduct()
         {
-            db.Configuration.ProxyCreationEnabled = false;
+           
 
             string Keyword = Convert.ToString(Session["SearchKeyword"]);
             int Main = Convert.ToInt32(Session["Main"]);
@@ -444,7 +444,7 @@ namespace GiftChoice.Controllers
         //[JsonNetFilter]
         //public JsonResult FilterProduct()
         //{
-        //    db.Configuration.ProxyCreationEnabled = false;
+        //   
 
         //    string Keyword = Convert.ToString(Session["SearchKeyword"]);
         //    int Main = Convert.ToInt32(Session["Main"]);
@@ -492,7 +492,7 @@ namespace GiftChoice.Controllers
         [JsonNetFilter]
         public JsonResult GetProductByid(int id)
         {
-            db.Configuration.ProxyCreationEnabled = false;
+           
             var res =
 
                db.ProductTbls.Where(p => p.ProductId == id).Select(m => new
@@ -542,7 +542,7 @@ namespace GiftChoice.Controllers
         [JsonNetFilter]
         public JsonResult GetBProductByid(int id)
         {
-            db.Configuration.ProxyCreationEnabled = false;
+           
             var res =
 
                db.ProductTbls.Where(p => p.ProductId == id).Select(m => new
@@ -596,7 +596,7 @@ namespace GiftChoice.Controllers
         [JsonNetFilter]
         public JsonResult GetSmillerProduct(int id, int idd)
         {
-            db.Configuration.ProxyCreationEnabled = false;
+           
             var res =
 
                db.ProductTbls.Where(p => p.ProductId != id && p.MainCateId == idd && p.Active == true).Select(m => new
@@ -621,7 +621,7 @@ namespace GiftChoice.Controllers
         [JsonNetFilter]
         public JsonResult GetBSmillerProduct(int id, int idd)
         {
-            db.Configuration.ProxyCreationEnabled = false;
+           
             var res =
 
                db.ProductTbls.Where(p => p.ProductId != id && p.BannerCateId == idd && p.Active == true).Select(m => new
@@ -781,7 +781,7 @@ namespace GiftChoice.Controllers
 
         public JsonResult GetNavbarMenu()
         {
-            db.Configuration.ProxyCreationEnabled = false;
+           
             var res = new
             {
 
@@ -808,7 +808,7 @@ namespace GiftChoice.Controllers
 
         //public JsonResult GetNavbarMenu()
         //{
-        //    db.Configuration.ProxyCreationEnabled = false;
+        //   
         //    var res = new
         //    {
 
@@ -835,7 +835,7 @@ namespace GiftChoice.Controllers
 
         public JsonResult GetKeyword()
         {
-            db.Configuration.ProxyCreationEnabled = false;
+           
             var query = new
             {
 
@@ -847,7 +847,7 @@ namespace GiftChoice.Controllers
 
         public JsonResult SearchData(string KeyWords)
         {
-            db.Configuration.ProxyCreationEnabled = false;
+           
             Session["Keyword"] = KeyWords;
             var query = new
             {
@@ -1002,7 +1002,7 @@ namespace GiftChoice.Controllers
         [JsonNetFilter]
         public JsonResult FilterProductData(int[] Cid, int[] Bid, Double maxprice, Double minprice)
         {
-            db.Configuration.ProxyCreationEnabled = false;
+           
             if (Cid != null /*&& priceTbls != null*/)
             {
 
@@ -1291,7 +1291,7 @@ namespace GiftChoice.Controllers
         [JsonNetFilter]
         public JsonResult modelTofilterBannerProduct(int[] PBanner, int BannerId)
         {
-            db.Configuration.ProxyCreationEnabled = false;
+           
 
             if (PBanner != null)
             {

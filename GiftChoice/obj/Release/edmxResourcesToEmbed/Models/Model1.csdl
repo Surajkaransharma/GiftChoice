@@ -6,13 +6,17 @@
     <EntitySet Name="BannerCateTbls" EntityType="GiftChoiceModel.BannerCateTbl" />
     <EntitySet Name="BannerProductImages" EntityType="GiftChoiceModel.BannerProductImage" />
     <EntitySet Name="BannerProductTbls" EntityType="GiftChoiceModel.BannerProductTbl" />
+    <EntitySet Name="BannerPTTbls" EntityType="GiftChoiceModel.BannerPTTbl" />
+    <EntitySet Name="BannerQueryListTbls" EntityType="GiftChoiceModel.BannerQueryListTbl" />
     <EntitySet Name="BannerTbls" EntityType="GiftChoiceModel.BannerTbl" />
     <EntitySet Name="BCKeywordTbls" EntityType="GiftChoiceModel.BCKeywordTbl" />
     <EntitySet Name="BPKeywordTbls" EntityType="GiftChoiceModel.BPKeywordTbl" />
     <EntitySet Name="BPSizeTbls" EntityType="GiftChoiceModel.BPSizeTbl" />
     <EntitySet Name="BPTKeywordTbls" EntityType="GiftChoiceModel.BPTKeywordTbl" />
     <EntitySet Name="BSubKTbls" EntityType="GiftChoiceModel.BSubKTbl" />
+    <EntitySet Name="BSubTitleDetailTbls" EntityType="GiftChoiceModel.BSubTitleDetailTbl" />
     <EntitySet Name="BSubTitleTbls" EntityType="GiftChoiceModel.BSubTitleTbl" />
+    <EntitySet Name="FestivalBannerTbls" EntityType="GiftChoiceModel.FestivalBannerTbl" />
     <EntitySet Name="KeywordTbls" EntityType="GiftChoiceModel.KeywordTbl" />
     <EntitySet Name="LabelProductTbls" EntityType="GiftChoiceModel.LabelProductTbl" />
     <EntitySet Name="MainCateTbls" EntityType="GiftChoiceModel.MainCateTbl" />
@@ -20,28 +24,16 @@
     <EntitySet Name="OrderMainTbls" EntityType="GiftChoiceModel.OrderMainTbl" />
     <EntitySet Name="OrderTbls" EntityType="GiftChoiceModel.OrderTbl" />
     <EntitySet Name="PKeywordTbls" EntityType="GiftChoiceModel.PKeywordTbl" />
+    <EntitySet Name="ProductDetailTbls" EntityType="GiftChoiceModel.ProductDetailTbl" />
     <EntitySet Name="ProductImages" EntityType="GiftChoiceModel.ProductImage" />
     <EntitySet Name="ProductTbls" EntityType="GiftChoiceModel.ProductTbl" />
     <EntitySet Name="PSizeTbls" EntityType="GiftChoiceModel.PSizeTbl" />
+    <EntitySet Name="QueryTbls" EntityType="GiftChoiceModel.QueryTbl" />
     <EntitySet Name="SizeTbls" EntityType="GiftChoiceModel.SizeTbl" />
     <EntitySet Name="SliderTbls" EntityType="GiftChoiceModel.SliderTbl" />
     <EntitySet Name="UserRegisters" EntityType="GiftChoiceModel.UserRegister" />
-    <EntitySet Name="BannerPTTbls" EntityType="GiftChoiceModel.BannerPTTbl" />
-    <EntitySet Name="BannerQueryListTbls" EntityType="GiftChoiceModel.BannerQueryListTbl" />
-    <EntitySet Name="BSubTitleDetailTbls" EntityType="GiftChoiceModel.BSubTitleDetailTbl" />
-    <EntitySet Name="FestivalBannerTbls" EntityType="GiftChoiceModel.FestivalBannerTbl" />
-    <EntitySet Name="QueryTbls" EntityType="GiftChoiceModel.QueryTbl" />
-    <EntitySet Name="VProducts" EntityType="GiftChoiceModel.VProduct" />
     <EntitySet Name="AutocompleteSuggestions" EntityType="GiftChoiceModel.AutocompleteSuggestion" />
-    <AssociationSet Name="FK__MCKeyword__Keywo__52593CB8" Association="GiftChoiceModel.FK__MCKeyword__Keywo__52593CB8">
-      <End Role="KeywordTbl" EntitySet="KeywordTbls" />
-      <End Role="MCKeywordTbl" EntitySet="MCKeywordTbls" />
-    </AssociationSet>
-    <AssociationSet Name="FK__MCKeyword__MainC__534D60F1" Association="GiftChoiceModel.FK__MCKeyword__MainC__534D60F1">
-      <End Role="MainCateTbl" EntitySet="MainCateTbls" />
-      <End Role="MCKeywordTbl" EntitySet="MCKeywordTbls" />
-    </AssociationSet>
-    <EntitySet Name="ProductDetailTbls" EntityType="GiftChoiceModel.ProductDetailTbl" />
+    <EntitySet Name="VProducts" EntityType="GiftChoiceModel.VProduct" />
   </EntityContainer>
   <EntityType Name="AdminTbl">
     <Key>
@@ -111,6 +103,31 @@
     <Property Name="BSubDId" Type="Int32" />
     <Property Name="Video" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
   </EntityType>
+  <EntityType Name="BannerPTTbl">
+    <Key>
+      <PropertyRef Name="MainCateId" />
+    </Key>
+    <Property Name="MainCateId" Type="Int64" Nullable="false" />
+    <Property Name="MTitle" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Position" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="MUrl" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Active" Type="Boolean" />
+    <Property Name="Priority" Type="Int64" />
+    <Property Name="MImage" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Create_at" Type="DateTime" Precision="3" />
+    <Property Name="Update_at" Type="DateTime" Precision="3" />
+    <Property Name="UserId" Type="Int64" />
+    <Property Name="ModelQuery1" Type="Boolean" />
+  </EntityType>
+  <EntityType Name="BannerQueryListTbl">
+    <Key>
+      <PropertyRef Name="BannerQueryListId" />
+    </Key>
+    <Property Name="BannerQueryListId" Type="Int32" Nullable="false" />
+    <Property Name="QueryId" Type="Int32" />
+    <Property Name="BMainCateId" Type="Int32" />
+    <Property Name="ProductId" Type="Int64" />
+  </EntityType>
   <EntityType Name="BannerTbl">
     <Key>
       <PropertyRef Name="BannerId" />
@@ -174,6 +191,16 @@
     <Property Name="Priority" Type="Int64" />
     <Property Name="Active" Type="Boolean" />
   </EntityType>
+  <EntityType Name="BSubTitleDetailTbl">
+    <Key>
+      <PropertyRef Name="BSubDId" />
+    </Key>
+    <Property Name="BSubDId" Type="Int32" Nullable="false" />
+    <Property Name="MainCateId" Type="Int32" />
+    <Property Name="QueryId" Type="Int32" />
+    <Property Name="BSubId" Type="Int32" />
+    <Property Name="kSubTitle" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+  </EntityType>
   <EntityType Name="BSubTitleTbl">
     <Key>
       <PropertyRef Name="BSubId" />
@@ -189,6 +216,21 @@
     <Property Name="KeywordTitle" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="AskQues2" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
   </EntityType>
+  <EntityType Name="FestivalBannerTbl">
+    <Key>
+      <PropertyRef Name="FBannerId" />
+    </Key>
+    <Property Name="FBannerId" Type="Int64" Nullable="false" />
+    <Property Name="FBTitle" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="FBPosition" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="FBUrl" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Active" Type="Boolean" />
+    <Property Name="Priority" Type="Int64" />
+    <Property Name="FBImage" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Create_at" Type="DateTime" Precision="3" />
+    <Property Name="Update_at" Type="DateTime" Precision="3" />
+    <Property Name="UserId" Type="Int64" />
+  </EntityType>
   <EntityType Name="KeywordTbl">
     <Key>
       <PropertyRef Name="KeywordId" />
@@ -201,7 +243,6 @@
     <Property Name="Active" Type="Boolean" />
     <Property Name="Priority" Type="Int64" />
     <Property Name="UserId" Type="Int64" />
-    <NavigationProperty Name="MCKeywordTbls" Relationship="GiftChoiceModel.FK__MCKeyword__Keywo__52593CB8" FromRole="KeywordTbl" ToRole="MCKeywordTbl" />
   </EntityType>
   <EntityType Name="LabelProductTbl">
     <Key>
@@ -229,7 +270,6 @@
     <Property Name="Update_at" Type="DateTime" Precision="3" />
     <Property Name="MImage" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="UserId" Type="Int64" />
-    <NavigationProperty Name="MCKeywordTbls" Relationship="GiftChoiceModel.FK__MCKeyword__MainC__534D60F1" FromRole="MainCateTbl" ToRole="MCKeywordTbl" />
     <Property Name="MainCateType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="CateType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="Position" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
@@ -246,8 +286,6 @@
     <Property Name="Menu" Type="Boolean" />
     <Property Name="Fliter" Type="Boolean" />
     <Property Name="MenuFilter" Type="Boolean" />
-    <NavigationProperty Name="KeywordTbl" Relationship="GiftChoiceModel.FK__MCKeyword__Keywo__52593CB8" FromRole="MCKeywordTbl" ToRole="KeywordTbl" />
-    <NavigationProperty Name="MainCateTbl" Relationship="GiftChoiceModel.FK__MCKeyword__MainC__534D60F1" FromRole="MCKeywordTbl" ToRole="MainCateTbl" />
   </EntityType>
   <EntityType Name="OrderMainTbl">
     <Key>
@@ -284,6 +322,19 @@
     <Property Name="PKeywordId" Type="Int64" Nullable="false" />
     <Property Name="ProductId" Type="Int64" />
     <Property Name="KeywordId" Type="Int64" />
+    <Property Name="Active" Type="Boolean" />
+  </EntityType>
+  <EntityType Name="ProductDetailTbl">
+    <Key>
+      <PropertyRef Name="PdId" />
+    </Key>
+    <Property Name="PdId" Type="Int64" Nullable="false" />
+    <Property Name="ProductId" Type="Int64" />
+    <Property Name="ProductType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Price" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="SizeId" Type="Int32" />
+    <Property Name="SizeName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Priority" Type="Int64" />
     <Property Name="Active" Type="Boolean" />
   </EntityType>
   <EntityType Name="ProductImage">
@@ -330,6 +381,20 @@
     <Property Name="ProductId" Type="Int64" />
     <Property Name="Active" Type="Boolean" />
   </EntityType>
+  <EntityType Name="QueryTbl">
+    <Key>
+      <PropertyRef Name="QId" />
+    </Key>
+    <Property Name="QId" Type="Int32" Nullable="false" />
+    <Property Name="MainCateId" Type="Int32" />
+    <Property Name="AskQues1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Answer" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Priority" Type="Boolean" />
+    <Property Name="Active" Type="Boolean" />
+    <Property Name="ModelQuery2" Type="Boolean" />
+    <Property Name="Create_at" Type="DateTime" Precision="3" />
+    <Property Name="Update_at" Type="DateTime" Precision="3" />
+  </EntityType>
   <EntityType Name="SizeTbl">
     <Key>
       <PropertyRef Name="SizeId" />
@@ -369,69 +434,12 @@
     <Property Name="Active" Type="Boolean" />
     <Property Name="Create_at" Type="DateTime" Precision="0" />
   </EntityType>
-  <EntityType Name="BannerPTTbl">
+  <EntityType Name="AutocompleteSuggestion">
     <Key>
-      <PropertyRef Name="MainCateId" />
+      <PropertyRef Name="ID" />
     </Key>
-    <Property Name="MainCateId" Type="Int64" Nullable="false" />
-    <Property Name="MTitle" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="Position" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="MUrl" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="Active" Type="Boolean" />
-    <Property Name="Priority" Type="Int64" />
-    <Property Name="MImage" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="Create_at" Type="DateTime" Precision="3" />
-    <Property Name="Update_at" Type="DateTime" Precision="3" />
-    <Property Name="UserId" Type="Int64" />
-    <Property Name="ModelQuery1" Type="Boolean" />
-  </EntityType>
-  <EntityType Name="BannerQueryListTbl">
-    <Key>
-      <PropertyRef Name="BannerQueryListId" />
-    </Key>
-    <Property Name="BannerQueryListId" Type="Int32" Nullable="false" />
-    <Property Name="QueryId" Type="Int32" />
-    <Property Name="BMainCateId" Type="Int32" />
-    <Property Name="ProductId" Type="Int64" />
-  </EntityType>
-  <EntityType Name="BSubTitleDetailTbl">
-    <Key>
-      <PropertyRef Name="BSubDId" />
-    </Key>
-    <Property Name="BSubDId" Type="Int32" Nullable="false" />
-    <Property Name="MainCateId" Type="Int32" />
-    <Property Name="QueryId" Type="Int32" />
-    <Property Name="BSubId" Type="Int32" />
-    <Property Name="kSubTitle" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-  </EntityType>
-  <EntityType Name="FestivalBannerTbl">
-    <Key>
-      <PropertyRef Name="FBannerId" />
-    </Key>
-    <Property Name="FBannerId" Type="Int64" Nullable="false" />
-    <Property Name="FBTitle" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="FBPosition" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="FBUrl" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="Active" Type="Boolean" />
-    <Property Name="Priority" Type="Int64" />
-    <Property Name="FBImage" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="Create_at" Type="DateTime" Precision="3" />
-    <Property Name="Update_at" Type="DateTime" Precision="3" />
-    <Property Name="UserId" Type="Int64" />
-  </EntityType>
-  <EntityType Name="QueryTbl">
-    <Key>
-      <PropertyRef Name="QId" />
-    </Key>
-    <Property Name="QId" Type="Int32" Nullable="false" />
-    <Property Name="MainCateId" Type="Int32" />
-    <Property Name="AskQues1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="Answer" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="Priority" Type="Boolean" />
-    <Property Name="Active" Type="Boolean" />
-    <Property Name="ModelQuery2" Type="Boolean" />
-    <Property Name="Create_at" Type="DateTime" Precision="3" />
-    <Property Name="Update_at" Type="DateTime" Precision="3" />
+    <Property Name="ID" Type="Int64" Nullable="false" />
+    <Property Name="Suggestion" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
   </EntityType>
   <EntityType Name="VProduct">
     <Key>
@@ -472,49 +480,5 @@
     <Property Name="Expr12" Type="DateTime" Precision="3" />
     <Property Name="Expr14" Type="DateTime" Precision="3" />
     <Property Name="Qty" Type="Int64" />
-  </EntityType>
-  <EntityType Name="AutocompleteSuggestion">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="Int64" Nullable="false" />
-    <Property Name="Suggestion" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-  </EntityType>
-  <Association Name="FK__MCKeyword__Keywo__52593CB8">
-    <End Type="GiftChoiceModel.KeywordTbl" Role="KeywordTbl" Multiplicity="0..1" />
-    <End Type="GiftChoiceModel.MCKeywordTbl" Role="MCKeywordTbl" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="KeywordTbl">
-        <PropertyRef Name="KeywordId" />
-      </Principal>
-      <Dependent Role="MCKeywordTbl">
-        <PropertyRef Name="KeywordId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK__MCKeyword__MainC__534D60F1">
-    <End Type="GiftChoiceModel.MainCateTbl" Role="MainCateTbl" Multiplicity="0..1" />
-    <End Type="GiftChoiceModel.MCKeywordTbl" Role="MCKeywordTbl" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="MainCateTbl">
-        <PropertyRef Name="MainCateId" />
-      </Principal>
-      <Dependent Role="MCKeywordTbl">
-        <PropertyRef Name="MainCateId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <EntityType Name="ProductDetailTbl">
-    <Key>
-      <PropertyRef Name="PdId" />
-    </Key>
-    <Property Name="PdId" Type="Int64" Nullable="false" />
-    <Property Name="ProductId" Type="Int64" />
-    <Property Name="ProductType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="Price" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="SizeId" Type="Int32" />
-    <Property Name="SizeName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="Priority" Type="Int64" />
-    <Property Name="Active" Type="Boolean" />
   </EntityType>
 </Schema>
