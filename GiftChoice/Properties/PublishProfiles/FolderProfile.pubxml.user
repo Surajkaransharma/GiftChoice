@@ -6,7 +6,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <TimeStampOfAssociatedLegacyPublishXmlFile />
-    <_PublishTargetUrl>D:\Publice Web Project\GiftChoicePublish\GV2AWS</_PublishTargetUrl>
+    <_PublishTargetUrl>D:\Publice Web Project\GiftChoicePublish\GV2</_PublishTargetUrl>
     <History>True|2024-02-22T16:50:16.9144167Z;True|2024-01-02T10:26:37.3615825+05:30;True|2023-09-30T23:16:46.6890233+05:30;True|2023-09-21T22:14:56.5814878+05:30;True|2023-09-21T00:24:40.0710920+05:30;</History>
     <LastFailureDetails />
   </PropertyGroup>
@@ -3168,10 +3168,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>12/26/2023 11:05:38</publishTime>
     </File>
     <File Include="bin/GiftChoice.dll">
-      <publishTime>02/29/2024 12:25:09</publishTime>
+      <publishTime>03/04/2024 16:28:52</publishTime>
     </File>
     <File Include="bin/GiftChoice.pdb">
-      <publishTime>02/29/2024 12:25:09</publishTime>
+      <publishTime>03/04/2024 16:28:52</publishTime>
     </File>
     <File Include="bin/Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll">
       <publishTime>12/26/2023 11:05:38</publishTime>
@@ -6987,7 +6987,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>02/03/2024 11:25:09</publishTime>
     </File>
     <File Include="Models/Model1.edmx.diagram">
-      <publishTime>02/29/2024 12:23:10</publishTime>
+      <publishTime>03/04/2024 16:23:36</publishTime>
     </File>
     <File Include="Scripts/bootstrap.js">
       <publishTime>12/26/2023 11:05:30</publishTime>
@@ -7086,13 +7086,13 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>12/26/2023 11:05:30</publishTime>
     </File>
     <File Include="Views/Home/BannerGifts.cshtml">
-      <publishTime>02/17/2024 12:09:55</publishTime>
+      <publishTime>02/29/2024 12:56:48</publishTime>
     </File>
     <File Include="Views/Home/BGift.cshtml">
       <publishTime>02/16/2024 16:02:35</publishTime>
     </File>
     <File Include="Views/Home/Cart.cshtml">
-      <publishTime>02/01/2024 11:51:55</publishTime>
+      <publishTime>02/29/2024 12:56:38</publishTime>
     </File>
     <File Include="Views/Home/checkout.cshtml">
       <publishTime>12/26/2023 11:05:30</publishTime>
@@ -7101,13 +7101,13 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>01/15/2024 10:50:14</publishTime>
     </File>
     <File Include="Views/Home/Gift.cshtml">
-      <publishTime>02/16/2024 12:58:15</publishTime>
+      <publishTime>02/29/2024 12:56:12</publishTime>
     </File>
     <File Include="Views/Home/Gifts.cshtml">
       <publishTime>12/26/2023 11:05:30</publishTime>
     </File>
     <File Include="Views/Home/Index.cshtml">
-      <publishTime>02/27/2024 17:35:56</publishTime>
+      <publishTime>03/04/2024 16:24:38</publishTime>
     </File>
     <File Include="Views/Home/privacy_policy.cshtml">
       <publishTime>12/26/2023 11:05:30</publishTime>
@@ -7131,7 +7131,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>02/16/2024 10:49:38</publishTime>
     </File>
     <File Include="Views/Shared/_Layout.cshtml">
-      <publishTime>02/29/2024 11:42:22</publishTime>
+      <publishTime>02/29/2024 18:11:57</publishTime>
     </File>
     <File Include="Views/Web.config">
       <publishTime>12/26/2023 11:05:30</publishTime>
@@ -7140,7 +7140,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>12/26/2023 11:05:30</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>02/29/2024 12:25:11</publishTime>
+      <publishTime>03/04/2024 16:28:53</publishTime>
     </File>
   </ItemGroup>
 </Project>

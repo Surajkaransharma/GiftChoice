@@ -792,7 +792,7 @@ namespace GiftChoice.Controllers
                     productmodel.BannerCateId = model.BannerCateId;
 
                     productmodel.ProductTitle = model.ProductTitle;
-                    productmodel.LabelId = model.LabelId;
+                    productmodel.LabelId = model.LabelId ?? 0;
                     productmodel.Active = true;
                     productmodel.PUrl = model.ProductTitle.Replace(" ", "-");
                     productmodel.PDesc = model.PDesc;

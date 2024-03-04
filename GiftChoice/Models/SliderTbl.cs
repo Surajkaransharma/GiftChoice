@@ -15,10 +15,9 @@ namespace GiftChoice.Models
 
     public partial class SliderTbl
     {
+        public HttpPostedFileBase Image { get; set; }
         public long SliderId { get; set; }
         public Nullable<long> MainCateId { get; set; }
-
-        public HttpPostedFileBase Image { get; set; }
         public string SUrl { get; set; }
         public string SliderImage { get; set; }
         public Nullable<long> Priority { get; set; }
