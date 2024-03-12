@@ -1864,6 +1864,7 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
         $('#btn').css('display', 'none');
         $('#edbtn').css('display', 'inline');
         debugger
+        $('html, body').animate({ scrollTop: 0 }, '300');
 
         $scope.Product = $scope.ProductData[index];
 
@@ -1875,7 +1876,7 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
         }
 
 
-        $scope.GetBannerToQuery($scope.Product.MainCateId);
+        $scope.GetBannerToQuery($scope.Product.BannerCateId);
 
         for (var s = 0; s < $scope.GetBannerToQueryData.length; s++) {
             var vallc1s = $scope.GetBannerToQueryData[s].QId;
@@ -1908,7 +1909,6 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
 
 
         debugger
-        $('html, body').animate({ scrollTop: 0 }, '300');
     };
 
     //-------------- add Banner in Product End ->------------->---------------------->---------------------------->------->------------>---------->---

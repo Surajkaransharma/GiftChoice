@@ -736,24 +736,24 @@ namespace GiftChoice.Controllers
 
         }
 
-        private void ProductVaryQualityLevel(Stream stream, string fname)
-        {
-            //  size 
-            System.Drawing.Image photo = new Bitmap(stream);
-            //Bitmap bmp1 = new Bitmap(photo, 119, 83);
+        //private void ProductVaryQualityLevel(Stream stream, string fname)
+        //{
+        //    //  size 
+        //    System.Drawing.Image photo = new Bitmap(stream);
+        //    //Bitmap bmp1 = new Bitmap(photo, 119, 83);
 
-            Bitmap bmp1 = new Bitmap(photo, 550, 550);
-            // without size
-            //  Bitmap bmp1 = new Bitmap(stream);
-            ImageCodecInfo jgpEncoder = GetEncoder(ImageFormat.Jpeg);
-            System.Drawing.Imaging.Encoder myEncoder = System.Drawing.Imaging.Encoder.Quality;
-            EncoderParameters myEncoderParameters = new EncoderParameters(1);
-            EncoderParameter myEncoderParameter = new EncoderParameter(myEncoder, 30L);
-            myEncoderParameters.Param[0] = myEncoderParameter;
-            bmp1.Save(Server.MapPath("~/images/ProductImg/" + fname), jgpEncoder, myEncoderParameters);
-            bmp1.Dispose();
+        //    Bitmap bmp1 = new Bitmap(photo, 550, 550);
+        //    // without size
+        //    //  Bitmap bmp1 = new Bitmap(stream);
+        //    ImageCodecInfo jgpEncoder = GetEncoder(ImageFormat.Jpeg);
+        //    System.Drawing.Imaging.Encoder myEncoder = System.Drawing.Imaging.Encoder.Quality;
+        //    EncoderParameters myEncoderParameters = new EncoderParameters(1);
+        //    EncoderParameter myEncoderParameter = new EncoderParameter(myEncoder, 30L);
+        //    myEncoderParameters.Param[0] = myEncoderParameter;
+        //    bmp1.Save(Server.MapPath("~/images/ProductImg/" + fname), jgpEncoder, myEncoderParameters);
+        //    bmp1.Dispose();
 
-        }
+        //}
 
         private void ReduceImageSize(double scaleFactor, Stream sourcePath, string targetPath)
         {
@@ -822,7 +822,7 @@ namespace GiftChoice.Controllers
                         productImage.PImageId = db.ProductImages.DefaultIfEmpty().Max(r => r == null ? 0 : r.PImageId) + 1;
                         string extensionstuimg = Path.GetExtension(model.Image1.FileName);
                         model.Image1.SaveAs(Server.MapPath("~/images/ProductImg/" + productImage.PImageId + extensionstuimg));
-                        ProductVaryQualityLevel(model.Image1.InputStream, productImage.PImageId + extensionstuimg);
+                        //ProductVaryQualityLevel(model.Image1.InputStream, productImage.PImageId + extensionstuimg);
                         productImage.ImageIndex = 1;
                         productImage.PImage = productImage.PImageId + extensionstuimg;
                         productImage.ProductId = productmodel.ProductId;
@@ -837,7 +837,7 @@ namespace GiftChoice.Controllers
                         string extensionstuimg = Path.GetExtension(model.Image2.FileName);
                         //  VaryQualityLevel(model.Image1.InputStream, productImage.PImageId + extensionstuimg);
                         model.Image2.SaveAs(Server.MapPath("~/images/ProductImg/" + productImage.PImageId + extensionstuimg));
-                        ProductVaryQualityLevel(model.Image2.InputStream, productImage.PImageId + extensionstuimg);
+                     //   ProductVaryQualityLevel(model.Image2.InputStream, productImage.PImageId + extensionstuimg);
                         productImage.ImageIndex = 2;
 
                         productImage.PImage = productImage.PImageId + extensionstuimg;
@@ -852,7 +852,7 @@ namespace GiftChoice.Controllers
                         productImage.PImageId = db.ProductImages.DefaultIfEmpty().Max(r => r == null ? 0 : r.PImageId) + 1;
                         string extensionstuimg = Path.GetExtension(model.Image3.FileName);
                         model.Image3.SaveAs(Server.MapPath("~/images/ProductImg/" + productImage.PImageId + extensionstuimg));
-                        ProductVaryQualityLevel(model.Image3.InputStream, productImage.PImageId + extensionstuimg);
+                       // ProductVaryQualityLevel(model.Image3.InputStream, productImage.PImageId + extensionstuimg);
                         productImage.ImageIndex = 3;
 
                         productImage.PImage = productImage.PImageId + extensionstuimg;
@@ -867,7 +867,7 @@ namespace GiftChoice.Controllers
                         productImage.PImageId = db.ProductImages.DefaultIfEmpty().Max(r => r == null ? 0 : r.PImageId) + 1;
                         string extensionstuimg = Path.GetExtension(model.Image4.FileName);
                         model.Image4.SaveAs(Server.MapPath("~/images/ProductImg/" + productImage.PImageId + extensionstuimg));
-                        ProductVaryQualityLevel(model.Image4.InputStream, productImage.PImageId + extensionstuimg);
+                      //  ProductVaryQualityLevel(model.Image4.InputStream, productImage.PImageId + extensionstuimg);
                         productImage.ImageIndex = 4;
 
                         productImage.PImage = productImage.PImageId + extensionstuimg;
@@ -882,7 +882,7 @@ namespace GiftChoice.Controllers
                         productImage.PImageId = db.ProductImages.DefaultIfEmpty().Max(r => r == null ? 0 : r.PImageId) + 1;
                         string extensionstuimg = Path.GetExtension(model.Image5.FileName);
                         model.Image5.SaveAs(Server.MapPath("~/images/ProductImg/" + productImage.PImageId + extensionstuimg));
-                        ProductVaryQualityLevel(model.Image5.InputStream, productImage.PImageId + extensionstuimg);
+                     //   ProductVaryQualityLevel(model.Image5.InputStream, productImage.PImageId + extensionstuimg);
                         productImage.ImageIndex = 5;
                         productImage.PImage = productImage.PImageId + extensionstuimg;
                         productImage.ProductId = productmodel.ProductId;
@@ -1076,7 +1076,7 @@ namespace GiftChoice.Controllers
                             string extensionstuimg = Path.GetExtension(model.Image1.FileName);
 
                             model.Image1.SaveAs(Server.MapPath("~/images/ProductImg/" + pimagearr.PImageId + extensionstuimg));
-                            ProductVaryQualityLevel(model.Image1.InputStream, Pimageid + extensionstuimg);
+                        //    ProductVaryQualityLevel(model.Image1.InputStream, Pimageid + extensionstuimg);
                             pimagearr.PImage = pimagearr.PImageId + extensionstuimg;
                             db.SaveChanges();
                         }
@@ -1086,7 +1086,7 @@ namespace GiftChoice.Controllers
                             productImage1.PImageId = db.ProductImages.DefaultIfEmpty().Max(r => r == null ? 0 : r.PImageId) + 1;
                             string extensionstuimg = Path.GetExtension(model.Image1.FileName);
                             model.Image1.SaveAs(Server.MapPath("~/images/ProductImg/" + productImage1.PImageId + extensionstuimg));
-                            ProductVaryQualityLevel(model.Image1.InputStream, productImage1.PImageId + extensionstuimg);
+                          //  ProductVaryQualityLevel(model.Image1.InputStream, productImage1.PImageId + extensionstuimg);
                             productImage1.PImage = productImage1.PImageId + extensionstuimg;
                             productImage1.ImageIndex = 1;
                             productImage1.ProductId = result.ProductId;
@@ -1108,7 +1108,7 @@ namespace GiftChoice.Controllers
                             ProductImage pimagearr = db.ProductImages.Where(c => c.PImageId == Pimageid).FirstOrDefault();
                             string extensionstuimg = Path.GetExtension(model.Image2.FileName);
                             model.Image2.SaveAs(Server.MapPath("~/images/ProductImg/" + pimagearr.PImageId + extensionstuimg));
-                            ProductVaryQualityLevel(model.Image2.InputStream, Pimageid + extensionstuimg);
+                        //    ProductVaryQualityLevel(model.Image2.InputStream, Pimageid + extensionstuimg);
                             pimagearr.PImage = pimagearr.PImageId + extensionstuimg;
                             db.SaveChanges();
                         }
@@ -1118,7 +1118,7 @@ namespace GiftChoice.Controllers
                             productImage1.PImageId = db.ProductImages.DefaultIfEmpty().Max(r => r == null ? 0 : r.PImageId) + 1;
                             string extensionstuimg = Path.GetExtension(model.Image2.FileName);
                             model.Image2.SaveAs(Server.MapPath("~/images/ProductImg/" + productImage1.PImageId + extensionstuimg));
-                            ProductVaryQualityLevel(model.Image2.InputStream, productImage1.PImageId + extensionstuimg);
+                        //    ProductVaryQualityLevel(model.Image2.InputStream, productImage1.PImageId + extensionstuimg);
                             productImage1.PImage = productImage1.PImageId + extensionstuimg;
                             productImage1.ProductId = result.ProductId;
                             productImage1.ImageIndex = 2;
@@ -1139,7 +1139,7 @@ namespace GiftChoice.Controllers
                             ProductImage pimagearr = db.ProductImages.Where(c => c.PImageId == Pimageid).FirstOrDefault();
                             string extensionstuimg = Path.GetExtension(model.Image3.FileName);
                             model.Image3.SaveAs(Server.MapPath("~/images/ProductImg/" + pimagearr.PImageId + extensionstuimg));
-                            ProductVaryQualityLevel(model.Image3.InputStream, pimagearr.PImageId + extensionstuimg);
+                          //  ProductVaryQualityLevel(model.Image3.InputStream, pimagearr.PImageId + extensionstuimg);
                             pimagearr.PImage = pimagearr.PImageId + extensionstuimg;
                             db.SaveChanges();
                         }
@@ -1149,7 +1149,7 @@ namespace GiftChoice.Controllers
                             productImage1.PImageId = db.ProductImages.DefaultIfEmpty().Max(r => r == null ? 0 : r.PImageId) + 1;
                             string extensionstuimg = Path.GetExtension(model.Image3.FileName);
                             model.Image3.SaveAs(Server.MapPath("~/images/ProductImg/" + productImage1.PImageId + extensionstuimg));
-                            ProductVaryQualityLevel(model.Image3.InputStream, productImage1.PImageId + extensionstuimg);
+                         //   ProductVaryQualityLevel(model.Image3.InputStream, productImage1.PImageId + extensionstuimg);
                             productImage1.PImage = productImage1.PImageId + extensionstuimg;
                             productImage1.ProductId = result.ProductId;
                             productImage1.ImageIndex = 3;
@@ -1169,7 +1169,7 @@ namespace GiftChoice.Controllers
                             ProductImage pimagearr = db.ProductImages.Where(c => c.PImageId == Pimageid).FirstOrDefault();
                             string extensionstuimg = Path.GetExtension(model.Image4.FileName);
                             model.Image4.SaveAs(Server.MapPath("~/images/ProductImg/" + pimagearr.PImageId + extensionstuimg));
-                            ProductVaryQualityLevel(model.Image1.InputStream, pimagearr.PImageId + extensionstuimg);
+                         //   ProductVaryQualityLevel(model.Image1.InputStream, pimagearr.PImageId + extensionstuimg);
                             pimagearr.PImage = pimagearr.PImageId + extensionstuimg;
                             db.SaveChanges();
                         }
@@ -1179,7 +1179,7 @@ namespace GiftChoice.Controllers
                             productImage1.PImageId = db.ProductImages.DefaultIfEmpty().Max(r => r == null ? 0 : r.PImageId) + 1;
                             string extensionstuimg = Path.GetExtension(model.Image4.FileName);
                             model.Image4.SaveAs(Server.MapPath("~/images/ProductImg/" + productImage1.PImageId + extensionstuimg));
-                            ProductVaryQualityLevel(model.Image1.InputStream, productImage1.PImageId + extensionstuimg);
+                          ///  ProductVaryQualityLevel(model.Image1.InputStream, productImage1.PImageId + extensionstuimg);
                             productImage1.PImage = productImage1.PImageId + extensionstuimg;
                             productImage1.ProductId = result.ProductId;
                             productImage1.ImageIndex = 4;
@@ -1199,7 +1199,7 @@ namespace GiftChoice.Controllers
                             ProductImage pimagearr = db.ProductImages.Where(c => c.PImageId == Pimageid).FirstOrDefault();
                             string extensionstuimg = Path.GetExtension(model.Image5.FileName);
                             model.Image5.SaveAs(Server.MapPath("~/images/ProductImg/" + pimagearr.PImageId + extensionstuimg));
-                            ProductVaryQualityLevel(model.Image1.InputStream, pimagearr.PImageId + extensionstuimg);
+                         //   ProductVaryQualityLevel(model.Image1.InputStream, pimagearr.PImageId + extensionstuimg);
                             pimagearr.PImage = pimagearr.PImageId + extensionstuimg;
                             db.SaveChanges();
                         }
@@ -1209,7 +1209,7 @@ namespace GiftChoice.Controllers
                             productImage1.PImageId = db.ProductImages.DefaultIfEmpty().Max(r => r == null ? 0 : r.PImageId) + 1;
                             string extensionstuimg = Path.GetExtension(model.Image5.FileName);
                             model.Image5.SaveAs(Server.MapPath("~/images/ProductImg/" + productImage1.PImageId + extensionstuimg));
-                            ProductVaryQualityLevel(model.Image1.InputStream, productImage1.PImageId + extensionstuimg);
+                         //   ProductVaryQualityLevel(model.Image1.InputStream, productImage1.PImageId + extensionstuimg);
                             productImage1.PImage = productImage1.PImageId + extensionstuimg;
                             productImage1.ProductId = result.ProductId;
                             productImage1.ImageIndex = 5;
@@ -2300,7 +2300,7 @@ namespace GiftChoice.Controllers
                         productImage.PImageId = db.ProductImages.DefaultIfEmpty().Max(r => r == null ? 0 : r.PImageId) + 1;
                         string extensionstuimg = Path.GetExtension(model.Image1.FileName);
                         model.Image1.SaveAs(Server.MapPath("~/images/ProductImg/" + productImage.PImageId + extensionstuimg));
-                        ProductVaryQualityLevel(model.Image1.InputStream, productImage.PImageId + extensionstuimg);
+                      //  ProductVaryQualityLevel(model.Image1.InputStream, productImage.PImageId + extensionstuimg);
                         productImage.ImageIndex = 1;
                         productImage.PImage = productImage.PImageId + extensionstuimg;
                         productImage.ProductId = productmodel.ProductId;
@@ -2315,7 +2315,7 @@ namespace GiftChoice.Controllers
                         string extensionstuimg = Path.GetExtension(model.Image2.FileName);
                         //  VaryQualityLevel(model.Image1.InputStream, productImage.PImageId + extensionstuimg);
                         model.Image2.SaveAs(Server.MapPath("~/images/ProductImg/" + productImage.PImageId + extensionstuimg));
-                        ProductVaryQualityLevel(model.Image2.InputStream, productImage.PImageId + extensionstuimg);
+                    //    ProductVaryQualityLevel(model.Image2.InputStream, productImage.PImageId + extensionstuimg);
                         productImage.ImageIndex = 2;
 
                         productImage.PImage = productImage.PImageId + extensionstuimg;
@@ -2330,7 +2330,7 @@ namespace GiftChoice.Controllers
                         productImage.PImageId = db.ProductImages.DefaultIfEmpty().Max(r => r == null ? 0 : r.PImageId) + 1;
                         string extensionstuimg = Path.GetExtension(model.Image3.FileName);
                         model.Image3.SaveAs(Server.MapPath("~/images/ProductImg/" + productImage.PImageId + extensionstuimg));
-                        ProductVaryQualityLevel(model.Image3.InputStream, productImage.PImageId + extensionstuimg);
+                      //  ProductVaryQualityLevel(model.Image3.InputStream, productImage.PImageId + extensionstuimg);
                         productImage.ImageIndex = 3;
 
                         productImage.PImage = productImage.PImageId + extensionstuimg;
@@ -2345,7 +2345,7 @@ namespace GiftChoice.Controllers
                         productImage.PImageId = db.ProductImages.DefaultIfEmpty().Max(r => r == null ? 0 : r.PImageId) + 1;
                         string extensionstuimg = Path.GetExtension(model.Image4.FileName);
                         model.Image4.SaveAs(Server.MapPath("~/images/ProductImg/" + productImage.PImageId + extensionstuimg));
-                        ProductVaryQualityLevel(model.Image4.InputStream, productImage.PImageId + extensionstuimg);
+                       // ProductVaryQualityLevel(model.Image4.InputStream, productImage.PImageId + extensionstuimg);
                         productImage.ImageIndex = 4;
 
                         productImage.PImage = productImage.PImageId + extensionstuimg;
@@ -2360,7 +2360,7 @@ namespace GiftChoice.Controllers
                         productImage.PImageId = db.ProductImages.DefaultIfEmpty().Max(r => r == null ? 0 : r.PImageId) + 1;
                         string extensionstuimg = Path.GetExtension(model.Image5.FileName);
                         model.Image5.SaveAs(Server.MapPath("~/images/ProductImg/" + productImage.PImageId + extensionstuimg));
-                        ProductVaryQualityLevel(model.Image5.InputStream, productImage.PImageId + extensionstuimg);
+                       // ProductVaryQualityLevel(model.Image5.InputStream, productImage.PImageId + extensionstuimg);
                         productImage.ImageIndex = 5;
                         productImage.PImage = productImage.PImageId + extensionstuimg;
                         productImage.ProductId = productmodel.ProductId;
@@ -2404,7 +2404,7 @@ namespace GiftChoice.Controllers
                     {
                         BannerQueryListTbl pKeyword = new BannerQueryListTbl();
                         pKeyword.BannerQueryListId = db.BannerQueryListTbls.DefaultIfEmpty().Max(r => r == null ? 0 : r.BannerQueryListId) + 1;
-                        pKeyword.BMainCateId = Convert.ToInt32(result.MainCateId);
+                        pKeyword.BMainCateId = Convert.ToInt32(result.BannerCateId);
                         pKeyword.ProductId = result.ProductId;
                         pKeyword.QueryId = model.bannerQueryListTbls[i].QueryId;
                         db.BannerQueryListTbls.Add(pKeyword);
@@ -2553,10 +2553,10 @@ namespace GiftChoice.Controllers
                             string extensionstuimg = Path.GetExtension(model.Image1.FileName);
 
                              model.Image1.SaveAs(Server.MapPath("~/images/ProductImg/" + pimagearr.PImageId + extensionstuimg));
-                            string targetPath = Server.MapPath("~/images/ProductImg/" + pimagearr.PImageId + extensionstuimg);
-                            Stream strm = model.Image1.InputStream;
-                            var targetFile = targetPath;
-                            ReduceImageSize(0.5, strm, targetFile);
+                            //string targetPath = Server.MapPath("~/images/ProductImg/" + pimagearr.PImageId + extensionstuimg);
+                            //Stream strm = model.Image1.InputStream;
+                            //var targetFile = targetPath;
+                       //     ReduceImageSize(0.5, strm, targetFile);
                        //     ProductVaryQualityLevel(model.Image1.InputStream, Pimageid + extensionstuimg);
                             pimagearr.PImage = pimagearr.PImageId + extensionstuimg;
                             db.SaveChanges();
@@ -2567,7 +2567,7 @@ namespace GiftChoice.Controllers
                             productImage1.PImageId = db.ProductImages.DefaultIfEmpty().Max(r => r == null ? 0 : r.PImageId) + 1;
                             string extensionstuimg = Path.GetExtension(model.Image1.FileName);
                             model.Image1.SaveAs(Server.MapPath("~/images/ProductImg/" + productImage1.PImageId + extensionstuimg));
-                            ProductVaryQualityLevel(model.Image1.InputStream, productImage1.PImageId + extensionstuimg);
+                       //     ProductVaryQualityLevel(model.Image1.InputStream, productImage1.PImageId + extensionstuimg);
                             productImage1.PImage = productImage1.PImageId + extensionstuimg;
                             productImage1.ImageIndex = 1;
                             productImage1.ProductId = result.ProductId;
@@ -2589,7 +2589,7 @@ namespace GiftChoice.Controllers
                             ProductImage pimagearr = db.ProductImages.Where(c => c.PImageId == Pimageid).FirstOrDefault();
                             string extensionstuimg = Path.GetExtension(model.Image2.FileName);
                             model.Image2.SaveAs(Server.MapPath("~/images/ProductImg/" + pimagearr.PImageId + extensionstuimg));
-                            ProductVaryQualityLevel(model.Image2.InputStream, Pimageid + extensionstuimg);
+                          //  ProductVaryQualityLevel(model.Image2.InputStream, Pimageid + extensionstuimg);
                             pimagearr.PImage = pimagearr.PImageId + extensionstuimg;
                             db.SaveChanges();
                         }
@@ -2599,7 +2599,7 @@ namespace GiftChoice.Controllers
                             productImage1.PImageId = db.ProductImages.DefaultIfEmpty().Max(r => r == null ? 0 : r.PImageId) + 1;
                             string extensionstuimg = Path.GetExtension(model.Image2.FileName);
                             model.Image2.SaveAs(Server.MapPath("~/images/ProductImg/" + productImage1.PImageId + extensionstuimg));
-                            ProductVaryQualityLevel(model.Image2.InputStream, productImage1.PImageId + extensionstuimg);
+                        //    ProductVaryQualityLevel(model.Image2.InputStream, productImage1.PImageId + extensionstuimg);
                             productImage1.PImage = productImage1.PImageId + extensionstuimg;
                             productImage1.ProductId = result.ProductId;
                             productImage1.ImageIndex = 2;
@@ -2620,7 +2620,7 @@ namespace GiftChoice.Controllers
                             ProductImage pimagearr = db.ProductImages.Where(c => c.PImageId == Pimageid).FirstOrDefault();
                             string extensionstuimg = Path.GetExtension(model.Image3.FileName);
                             model.Image3.SaveAs(Server.MapPath("~/images/ProductImg/" + pimagearr.PImageId + extensionstuimg));
-                            ProductVaryQualityLevel(model.Image3.InputStream, pimagearr.PImageId + extensionstuimg);
+                        //    ProductVaryQualityLevel(model.Image3.InputStream, pimagearr.PImageId + extensionstuimg);
                             pimagearr.PImage = pimagearr.PImageId + extensionstuimg;
                             db.SaveChanges();
                         }
@@ -2630,7 +2630,7 @@ namespace GiftChoice.Controllers
                             productImage1.PImageId = db.ProductImages.DefaultIfEmpty().Max(r => r == null ? 0 : r.PImageId) + 1;
                             string extensionstuimg = Path.GetExtension(model.Image3.FileName);
                             model.Image3.SaveAs(Server.MapPath("~/images/ProductImg/" + productImage1.PImageId + extensionstuimg));
-                            ProductVaryQualityLevel(model.Image3.InputStream, productImage1.PImageId + extensionstuimg);
+                          //  ProductVaryQualityLevel(model.Image3.InputStream, productImage1.PImageId + extensionstuimg);
                             productImage1.PImage = productImage1.PImageId + extensionstuimg;
                             productImage1.ProductId = result.ProductId;
                             productImage1.ImageIndex = 3;
@@ -2650,7 +2650,7 @@ namespace GiftChoice.Controllers
                             ProductImage pimagearr = db.ProductImages.Where(c => c.PImageId == Pimageid).FirstOrDefault();
                             string extensionstuimg = Path.GetExtension(model.Image4.FileName);
                             model.Image4.SaveAs(Server.MapPath("~/images/ProductImg/" + pimagearr.PImageId + extensionstuimg));
-                            ProductVaryQualityLevel(model.Image1.InputStream, pimagearr.PImageId + extensionstuimg);
+                          //  ProductVaryQualityLevel(model.Image1.InputStream, pimagearr.PImageId + extensionstuimg);
                             pimagearr.PImage = pimagearr.PImageId + extensionstuimg;
                             db.SaveChanges();
                         }
@@ -2660,7 +2660,7 @@ namespace GiftChoice.Controllers
                             productImage1.PImageId = db.ProductImages.DefaultIfEmpty().Max(r => r == null ? 0 : r.PImageId) + 1;
                             string extensionstuimg = Path.GetExtension(model.Image4.FileName);
                             model.Image4.SaveAs(Server.MapPath("~/images/ProductImg/" + productImage1.PImageId + extensionstuimg));
-                            ProductVaryQualityLevel(model.Image1.InputStream, productImage1.PImageId + extensionstuimg);
+                         //   ProductVaryQualityLevel(model.Image1.InputStream, productImage1.PImageId + extensionstuimg);
                             productImage1.PImage = productImage1.PImageId + extensionstuimg;
                             productImage1.ProductId = result.ProductId;
                             productImage1.ImageIndex = 4;
@@ -2680,7 +2680,7 @@ namespace GiftChoice.Controllers
                             ProductImage pimagearr = db.ProductImages.Where(c => c.PImageId == Pimageid).FirstOrDefault();
                             string extensionstuimg = Path.GetExtension(model.Image5.FileName);
                             model.Image5.SaveAs(Server.MapPath("~/images/ProductImg/" + pimagearr.PImageId + extensionstuimg));
-                            ProductVaryQualityLevel(model.Image1.InputStream, pimagearr.PImageId + extensionstuimg);
+                          //  ProductVaryQualityLevel(model.Image1.InputStream, pimagearr.PImageId + extensionstuimg);
                             pimagearr.PImage = pimagearr.PImageId + extensionstuimg;
                             db.SaveChanges();
                         }
@@ -2690,7 +2690,7 @@ namespace GiftChoice.Controllers
                             productImage1.PImageId = db.ProductImages.DefaultIfEmpty().Max(r => r == null ? 0 : r.PImageId) + 1;
                             string extensionstuimg = Path.GetExtension(model.Image5.FileName);
                             model.Image5.SaveAs(Server.MapPath("~/images/ProductImg/" + productImage1.PImageId + extensionstuimg));
-                            ProductVaryQualityLevel(model.Image1.InputStream, productImage1.PImageId + extensionstuimg);
+                         //   ProductVaryQualityLevel(model.Image1.InputStream, productImage1.PImageId + extensionstuimg);
                             productImage1.PImage = productImage1.PImageId + extensionstuimg;
                             productImage1.ProductId = result.ProductId;
                             productImage1.ImageIndex = 5;
@@ -2735,7 +2735,7 @@ namespace GiftChoice.Controllers
                         {
                             BannerQueryListTbl pKeyword = new BannerQueryListTbl();
                             pKeyword.BannerQueryListId = db.BannerQueryListTbls.DefaultIfEmpty().Max(r => r == null ? 0 : r.BannerQueryListId) + 1;
-                            pKeyword.BMainCateId = Convert.ToInt32(result.MainCateId);
+                            pKeyword.BMainCateId = Convert.ToInt32(result.BannerCateId);
                             pKeyword.ProductId = result.ProductId;
                             pKeyword.QueryId = model.bannerQueryListTbls[i].QueryId;
                             db.BannerQueryListTbls.Add(pKeyword);
@@ -2835,6 +2835,7 @@ namespace GiftChoice.Controllers
                    m.SameDay,
                    m.VideoUrl,
                    m.TableDesc,
+                   m.BannerCateId,
                    m.Priority,
                    ProductImage = db.ProductImages.Where(i => i.ProductId == m.ProductId).Select(i => i.PImage),
                    Maincate = db.MainCateTbls.Where(p => p.MainCateId == m.MainCateId).FirstOrDefault(),

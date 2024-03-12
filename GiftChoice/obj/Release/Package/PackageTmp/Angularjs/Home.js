@@ -480,7 +480,7 @@ app.controller("HomeController", ['$scope', '$http', '$sce', 'startFromFilter','
     //    $scope.ProductData = orderBy($scope.ProductData, $scope.propertyName, $scope.reverse);
     //};
     $scope.FilterProductData = function (id) {
-        ;
+        
 
         var Cid = [];
         var Bid = [];
@@ -690,10 +690,10 @@ app.controller("HomeController", ['$scope', '$http', '$sce', 'startFromFilter','
 
             $scope.ProductData = d.data;
             
-            $scope.pageSize = 28;
-            $scope.currentPage = 1; // Reset to the first page after fetching data
-            $scope.totalPages = Math.ceil($scope.ProductData.length / $scope.pageSize);
-            $scope.goToPage(1); // Go to the first page
+            //$scope.pageSize = 28;
+            //$scope.currentPage = 1; // Reset to the first page after fetching data
+            //$scope.totalPages = Math.ceil($scope.ProductData.length / $scope.pageSize);
+            //$scope.goToPage(1); // Go to the first page
         }, function (error) {
             alert(error.data);
         });
@@ -841,7 +841,7 @@ app.controller("HomeController", ['$scope', '$http', '$sce', 'startFromFilter','
             $scope.Product = d.data;
             //$scope.idd = $scope.Product.MainCateId;
 
-            $scope.GetBSmillerProduct($scope.Product.ProductId, $scope.Product.MainCateId);
+            $scope.GetBSmillerProduct($scope.Product.ProductId, $scope.Product.BannerCateId);
 
             $('#desc').html($scope.Product.PDesc1);
 
@@ -1064,10 +1064,10 @@ app.controller("HomeController", ['$scope', '$http', '$sce', 'startFromFilter','
         }).then(function (d) {
             $scope.ProductData = d.data.ProductList;
 
-            $scope.pageSize = 20;
-            $scope.currentPage = 1; // Reset to the first page after fetching data
-            $scope.totalPages = Math.ceil($scope.ProductData.length / $scope.pageSize);
-            $scope.goToPage(1); // Go to the first page
+            //$scope.pageSize = 20;
+            //$scope.currentPage = 1; // Reset to the first page after fetching data
+            //$scope.totalPages = Math.ceil($scope.ProductData.length / $scope.pageSize);
+            //$scope.goToPage(1); // Go to the first page
 
             //setTimeout(() => {
 
@@ -1145,10 +1145,10 @@ app.controller("HomeController", ['$scope', '$http', '$sce', 'startFromFilter','
             $scope.ProductData = d.data.ProductList;
 
             $('#modalId').modal("toggle");
-            $scope.pageSize = 20;
-            $scope.currentPage = 1; // Reset to the first page after fetching data
-            $scope.totalPages = Math.ceil($scope.ProductData.length / $scope.pageSize);
-            $scope.goToPage(1); // Go to the first page
+            //$scope.pageSize = 20;
+            //$scope.currentPage = 1; // Reset to the first page after fetching data
+            //$scope.totalPages = Math.ceil($scope.ProductData.length / $scope.pageSize);
+            //$scope.goToPage(1); // Go to the first page
 
         }, function (error) {
             toastr["error"]("Something Went Wrong");

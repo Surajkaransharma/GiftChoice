@@ -1307,7 +1307,7 @@ namespace GiftChoice.Controllers
                 {
                     ProductList = (from bannerCateProduct in db.BannerQueryListTbls
                                    join product in db.ProductTbls on bannerCateProduct.ProductId equals product.ProductId
-                                   where product.Active == true && product.ProductType == "BannerProduct" || product.ProductType == "Common" && subid.Contains(bannerCateProduct.QueryId ?? 0) && product.BannerCateId == BannerId
+                                   where product.Active == true && (product.ProductType == "BannerProduct" || product.ProductType == "Common") && subid.Contains(bannerCateProduct.QueryId ?? 0) && product.BannerCateId == BannerId
                                    orderby Guid.NewGuid()
                                    select new
                                    {
@@ -1350,7 +1350,7 @@ namespace GiftChoice.Controllers
                 var res = new
                 {
                     ProductList = (from product in db.ProductTbls
-                                   where product.BannerCateId == BannerId && product.ProductType == "BannerProduct" || product.ProductType == "Common" && product.Active == true
+                                   where product.BannerCateId == BannerId && (product.ProductType == "BannerProduct" || product.ProductType == "Common") && product.Active == true
                                    orderby Guid.NewGuid()
                                    select new
                                    {
