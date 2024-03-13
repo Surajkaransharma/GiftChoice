@@ -173,10 +173,11 @@
                                     </div>
 
 
-                                    <div class="col-md-2" ng-show="$last">
-                                        <div class="d-md-flex d-grid align-items-center gap-3">
+                                    <div class="col-md-2" >
+                                        <div class="d-md-flex d-grid align-items-center gap-3" style="margin-top: 30px">
+                                            <button type="button"   ng-click="removeproductDataArraydata($index)" class="btn btn-primary px-4 mt-28"><i class="bx bx-trash"></i></button>
 
-                                            <button type="button" id="Adbtn" ng-click="AddProductDetails()" class="btn btn-primary px-4 mt-28">Add Detail</button>
+                                            <button ng-show="$last" type="button" id="Adbtn" ng-click="AddProductDetails()" class="btn btn-primary px-4 mt-28">Add Detail</button>
                                         </div>
                                     </div>
 

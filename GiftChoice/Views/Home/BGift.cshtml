@@ -78,7 +78,7 @@
                                     <div data-aos="zoom-in">
                                         <div class="description mb-20">
                                             <p align="justify" class="fs-7" ng-show="!showFullContent">
-                                                {{Product.PDesc | limitTo: 300}}{{Product.PDesc.length > 300 ? '...' : ''}}
+                                                {{Product.PDesc | limitTo: 100}}{{Product.PDesc.length > 100 ? '...' : ''}}
 
                                                 <strong ng-click="toggleContent(post)" id="myBtn" class="text-brand cursor">Read more</strong>
                                             </p>
