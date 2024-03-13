@@ -1641,7 +1641,7 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
         //        Keywordarr.push($scope.KeywordList[i]);
         //    }
         //}
-        //var Keywordarr = [];
+      //  var Keywordarr = [];
         //var PSizeArr = [];
 
         $.each($(".checkbox-input:checked"), function () {
@@ -1679,7 +1679,7 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
     };
 
     $scope.BannerProductArrayData = function (id) {
-        ;
+        debugger
         $http({
             url: '/GiftDashBoard/BannerProductArrayData',
             method: 'post',
@@ -1697,6 +1697,7 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
             if ($scope.result.res === "1") {
 
                 toastr["success"]("Product save successfully");
+                Keywordarr = [];
                 //$('#MainCate').val("-1").trigger('change');
                // location.href = '/GiftDashBoard/AddBannerInProduct';
                 //$scope.Product.ProductTitle = null;
