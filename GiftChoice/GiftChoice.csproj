@@ -720,14 +720,29 @@
     <Content Include="Content\assets\js\main.js" />
     <Content Include="Content\assets\js\plugins\counterup.js" />
     <Content Include="Content\assets\js\plugins\images-loaded.js" />
+    <Content Include="Content\assets\js\plugins\isotope.js" />
+    <Content Include="Content\assets\js\plugins\jquery-ui.js" />
+    <Content Include="Content\assets\js\plugins\jquery.countdown.min.js" />
+    <Content Include="Content\assets\js\plugins\jquery.elevatezoom.js" />
+    <Content Include="Content\assets\js\plugins\jquery.syotimer.min.js" />
+    <Content Include="Content\assets\js\plugins\jquery.theia.sticky.js" />
+    <Content Include="Content\assets\js\plugins\jquery.vticker-min.js" />
+    <Content Include="Content\assets\js\plugins\leaflet.js" />
     <Content Include="Content\assets\js\plugins\magnific-popup.js" />
+    <Content Include="Content\assets\js\plugins\perfect-scrollbar.js" />
     <Content Include="Content\assets\js\plugins\scrollup.js" />
     <Content Include="Content\assets\js\plugins\select2.min.js" />
     <Content Include="Content\assets\js\plugins\slick.js" />
+    <Content Include="Content\assets\js\plugins\waypoints.js" />
     <Content Include="Content\assets\js\plugins\wow.js" />
     <Content Include="Content\assets\js\shop.js" />
     <Content Include="Content\assets\js\vendor\bootstrap.bundle.min.js" />
     <Content Include="Content\assets\js\vendor\jquery-3.6.0.min.js" />
+    <Content Include="Content\assets\js\vendor\jquery-migrate-3.3.0.min.js" />
+    <Content Include="Content\assets\js\vendor\modernizr-3.6.0.min.js" />
+    <Content Include="Content\assets\owl-carousel\owl.carousel.css" />
+    <Content Include="Content\assets\owl-carousel\owl.carousel.js" />
+    <Content Include="Content\assets\owl-carousel\owl.theme.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -740,6 +755,7 @@
     <Content Include="images\FestivalBanner\1.png" />
     <Content Include="images\gift-choice-vertical.png" />
     <Content Include="images\MainCate\1.jpg" />
+    <Content Include="images\MainCate\3.jpg" />
     <Content Include="images\ProductImg\1.jpg" />
     <Content Include="images\ProductImg\10.JPG" />
     <Content Include="images\ProductImg\11.jpg" />
@@ -783,8 +799,6 @@
       <DependentUpon>Model1.edmx</DependentUpon>
       <LastGenOutput>Model1.cs</LastGenOutput>
     </Content>
-    <Content Include="Scripts\bootstrap.js" />
-    <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="assets\fonts\boxicons.eot" />
     <Content Include="assets\fonts\boxicons.ttf" />
     <Content Include="assets\fonts\boxicons.woff" />
@@ -836,18 +850,11 @@
     <Content Include="Content\assets\fonts\uicons\uicons-regular-straight.eot" />
     <Content Include="Content\assets\fonts\uicons\uicons-regular-straight.woff" />
     <Content Include="Content\assets\fonts\uicons\uicons-regular-straight.woff2" />
+    <Content Include="Content\assets\imgs\resources\gift-choic.webp" />
+    <Content Include="Content\assets\imgs\resources\gift-choice-vertical.webp" />
+    <Content Include="Content\assets\imgs\resources\thankyo.webp" />
+    <Content Include="images\MainCate\1.webp" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
-    <None Include="Scripts\jquery-3.3.1.intellisense.js" />
-    <Content Include="Scripts\jquery-3.3.1.js" />
-    <Content Include="Scripts\jquery-3.3.1.min.js" />
-    <Content Include="Scripts\jquery-3.3.1.slim.js" />
-    <Content Include="Scripts\jquery-3.3.1.slim.min.js" />
-    <None Include="Scripts\jquery.validate-vsdoc.js" />
-    <Content Include="Scripts\jquery.validate.js" />
-    <Content Include="Scripts\jquery.validate.min.js" />
-    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
-    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
-    <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -905,8 +912,6 @@
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <None Include="packages.config" />
-    <Content Include="Scripts\jquery-3.3.1.slim.min.map" />
-    <Content Include="Scripts\jquery-3.3.1.min.map" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

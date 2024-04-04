@@ -88,7 +88,7 @@
                                                 <strong ng-click="toggleContent(post)" id="myBtn" class="text-brand cursor">Read Less</strong>
                                             </p>
 
-                                           
+
                                             <div id="profile-description">
 
                                                 <div class="description mb-20 text show-more-height">
@@ -101,24 +101,35 @@
                                         </div>
 
                                         @*<div data-aos="zoom-in">
-                                                <div class="social-icons single-share mb-20">
-                                                    <ul class="text-grey-5 d-inline-block">
-                                                        <li><strong class="mr-10">Share this:</strong></li>
-                                                        <li class="social-facebook"><a href="#"><img src="assets/imgs/theme/icons/icon-facebook.svg" alt=""></a></li>
-                                                        <li class="social-twitter"> <a href="#"><img src="assets/imgs/theme/icons/icon-twitter.svg" alt=""></a></li>
-                                                        <li class="social-instagram"><a href="#"><img src="assets/imgs/theme/icons/icon-instagram.svg" alt=""></a></li>
-                                                        <li class="social-linkedin"><a href="#"><img src="assets/imgs/theme/icons/icon-pinterest.svg" alt=""></a></li>
-                                                    </ul>
-                                                </div>
-                                            </div>*@
+            <div class="social-icons single-share mb-20">
+                <ul class="text-grey-5 d-inline-block">
+                    <li><strong class="mr-10">Share this:</strong></li>
+                    <li class="social-facebook"><a href="#"><img src="assets/imgs/theme/icons/icon-facebook.svg" alt=""></a></li>
+                    <li class="social-twitter"> <a href="#"><img src="assets/imgs/theme/icons/icon-twitter.svg" alt=""></a></li>
+                    <li class="social-instagram"><a href="#"><img src="assets/imgs/theme/icons/icon-instagram.svg" alt=""></a></li>
+                    <li class="social-linkedin"><a href="#"><img src="assets/imgs/theme/icons/icon-pinterest.svg" alt=""></a></li>
+                </ul>
+            </div>
+        </div>*@
 
+                                        @*<div data-aos="zoom-in">
+            <div class="attr-detail attr-size mb-30" ng-show="Product.productDataArray.length>0">
+                <strong class="mr-10">Size</strong>
+                <ul class="list-filter size-filter font-small">
+                    <li ng-repeat="s in Product.productDataArray" style="margin-left:5px;"><a ng-click="SelectSizePrice(s.ProductSize)">{{s.ProductSize}}</a> </li>
+
+                </ul>
+            </div>
+        </div>*@
                                         <div data-aos="zoom-in">
-                                            <div class="attr-detail attr-size mb-30" ng-show="Product.productDataArray.length>0">
-                                                <strong class="mr-10">Size</strong>
-                                                <ul class="list-filter size-filter font-small">
-                                                    <li ng-repeat="s in Product.productDataArray" style="margin-left:5px;"><a ng-click="SelectSizePrice(s.ProductSize)">{{s.ProductSize}}</a> </li>
+                                            <div class="attr-detail attr-size mb-30">
+                                                <strong class="mr-10">Size : </strong>
+                                                <select class="form-select form-select-sm w-auto shadow-none theme-border" name="" id="">
+                                                    <option selected="ture" disabled>-- Select Size --</option>
+                                                    <option ng-repeat="s in Product.productDataArray" value=""><a ng-click="SelectSizePrice(s.ProductSize)">{{s.ProductSize}}</a></option>
+                                          
+                                                </select>
 
-                                                </ul>
                                             </div>
                                         </div>
 
@@ -130,7 +141,7 @@
                                                     <a href="#" class="qty-up"><i class="fi-rs-angle-small-up"></i></a>
                                                 </div>
                                                 <a class="button button-add-to-cart text-white" ng-click="GiftAddItemToCart(Product.ProductId)" role="button">Add To Cart</a>
-                                                    <a ng-show="Product.Video!=null && Product.Video!=''" class="button btn-danger button-add-to-cart filter-button video-button" href="{{'/images/ProductVideo/' + Product.Video}}" target="_blank" role="button">See Video</a>
+                                                <a ng-show="Product.Video!=null && Product.Video!=''" class="button btn-danger button-add-to-cart filter-button video-button" href="{{'/images/ProductVideo/' + Product.Video}}" target="_blank" role="button">See Video</a>
                                                 @*<a class="button btn-danger button-add-to-cart filter-button animate__bounceIn" ng-show="Product.VideoUrl!=null && Product.VideoUrl!=''" href="https://www.youtube.com/embed/{{Product.VideoUrl}}?autoplay=1&loop=1&mute=1" target="_blank" role="button">See Video</a>*@
                                             </div>
                                         </div>

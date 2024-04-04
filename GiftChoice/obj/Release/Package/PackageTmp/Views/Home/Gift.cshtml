@@ -87,13 +87,24 @@
                                             </div>
                                         </div>*@
 
-                                    <div data-aos="zoom-in">
-                                        <div class="attr-detail attr-size mb-30" ng-show="Product.productDataArray.length>0">
-                                            <strong class="mr-10">Size</strong>
-                                            <ul class="list-filter size-filter font-small">
-                                                <li ng-repeat="s in Product.productDataArray" style="margin-left:5px;"><a ng-click="SelectSizePrice(s.ProductSize)">{{s.ProductSize}}</a> </li>
+                                    @*<div data-aos="zoom-in">
+                                            <div class="attr-detail attr-size mb-30" ng-show="Product.productDataArray.length>0">
+                                                <strong class="mr-10">Size</strong>
+                                                <ul class="list-filter size-filter font-small">
+                                                    <li ng-repeat="s in Product.productDataArray" style="margin-left:5px;"><a ng-click="SelectSizePrice(s.ProductSize)">{{s.ProductSize}}</a> </li>
 
-                                            </ul>
+                                                </ul>
+                                            </div>
+                                        </div>*@
+                                    <div data-aos="zoom-in">
+                                        <div class="attr-detail attr-size mb-30">
+                                            <strong class="mr-10">Size : </strong>
+                                            <select class="form-select form-select-sm w-auto shadow-none theme-border" name="" id="">
+                                                <option selected="ture" disabled>-- Select Size --</option>
+                                                <option ng-repeat="s in Product.productDataArray" value=""><a ng-click="SelectSizePrice(s.ProductSize)">{{s.ProductSize}}</a></option>
+
+                                            </select>
+
                                         </div>
                                     </div>
 

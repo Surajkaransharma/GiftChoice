@@ -978,7 +978,7 @@ app.controller("HomeController", ['$scope', '$http', '$sce', 'startFromFilter','
         
         $http.get("/Home/GetDesignBanner").then(function (d) {
             $scope.DesignBannerData = d.data.DesignBanner;
-            
+            debugger
         }, function (error) {
             alert(error.data);
         });

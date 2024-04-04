@@ -70,7 +70,7 @@
                                                 @*<iframe  ng-show="p.VideoUrl" ng-src="{{trustSrc('https://www.youtube.com/embed/' + p.VideoUrl +'?autoplay=1&loop=1&mute=1')}}" allow="loop"></iframe>*@
                                                 @*<iframe ng-show="p.VideoUrl" id="iFrameName{{$index}}" allow="loop"></iframe>*@
 
-                                                <a href="/Home/BGift?url={{p.PUrl}}" ng-show="!p.VideoUrl">
+                                                <a href="/Home/BGift?url={{p.PUrl}}" ng-show="!p.Video">
                                                     <img class="default-img img-fluid" src="~/images/ProductImg/{{p.ProductImage}}" loading="lazy" alt="product-image" loading="lazy" alt="">
                                                     <img class="hover-img img-fluid" src="~/images/ProductImg/{{p.ProductImage}}" loading="lazy" alt="product-hover-image" loading="lazy" alt="">
                                                 </a>

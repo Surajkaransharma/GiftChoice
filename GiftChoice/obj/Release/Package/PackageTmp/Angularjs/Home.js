@@ -843,7 +843,7 @@ app.controller("HomeController", ['$scope', '$http', '$sce', 'startFromFilter','
 
             $scope.GetBSmillerProduct($scope.Product.ProductId, $scope.Product.BannerCateId);
 
-            $('#desc').html($scope.Product.PDesc1);
+            $('#desc').html($scope.Product.TableDesc);
 
             setTimeout(() => {
 
