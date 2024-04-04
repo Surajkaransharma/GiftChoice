@@ -5,7 +5,7 @@
 <!-- Main Content Start -->
 <main class="main">
     <!-- Slider Start -->
-    <div data-aos="zoom-in">
+
         <section class="p-0 home-slider" ng-init="SliderList()">
             <div id="carouselId" class="carousel slide" data-bs-ride="carousel">
                 <div class="carousel-inner" role="listbox">
@@ -27,7 +27,7 @@
                 </button>
             </div>
         </section>
-    </div>
+   
     <!-- Slider End -->
     <!-- Slider Start -->
   
@@ -38,13 +38,13 @@
         <div class="container pt-4 pb-4">
             <div class="row g-2 gx-3 justify-content-start m-nowrap">
                 <div class="col-lg-4 col-sm-4 col-7" ng-repeat="b in GetSmallBannerData">
-                    <div data-aos="zoom-in">
+                  
                         <div class="banner-img mb-0 rounded-3">
                             <a href="/Home/BannerGifts?Banner={{b.MainCateId}}">
-                                <img ng-src="~/images/MainCate/{{b.MImage}}" loading="lazy" alt="advertisement-image" class="img-fluid rounded-3 w-100 border-light border">
+                                <img ng-src="~/images/MainCate/{{b.MImage}}" loading="lazy" alt="advertisement-image" class="img-fluid w-100">
                             </a>
                         </div>
-                    </div>
+                   
                 </div>
 
             </div>
@@ -56,13 +56,11 @@
         <div class="container pt-4 pb-4" ng-if="FestivalBannerData!=''">
             <div class="row g-1 gx-1">
                 <div class="col-lg-12">
-                    <div data-aos="zoom-in">
                         <div class="big-banner">
                             <a href="{{FestivalBannerData.FBUrl}}">
                                 <img ng-src="~/images/FestivalBanner/{{FestivalBannerData.FBImage}}" alt="banner-image" class="img-fluid">
                             </a>
                         </div>
-                    </div>
                 </div>
             </div>
         </div>
@@ -75,12 +73,12 @@
             <h3 class="section-title mb-20">Hero Categories</h3>
             <div class="row align-items-center g-1 gx-2">
                 <div class="col" ng-repeat="m in HomeHeroMainCateData">
-                    <div data-aos="zoom-in">
+                   
                         <div class="img-hover-scale overflow-hidden">
                             <a href="/Home/shop?Main={{m.MTitle}}">
                                 <img ng-src="~/images/MainCate/{{m.MImage}}" loading="lazy" alt="Caricatures" class="w-100 img-fluid img-thumbnail rounded-2">
                             </a>
-                        </div>
+                       
                     </div>
                 </div>
 
@@ -97,22 +95,22 @@
                 <div class="col-lg-6 col-sm-12 col-12">
                     <div class="row g-1">
                         <div class="col-lg-8 col-sm-8 col-7" ng-if="DesignBannerData[0]">
-                            <div data-aos="zoom-in">
+                          
                                 <div class="image image-1">
                                     <a href="/Home/BannerGifts?Banner={{DesignBannerData[0].MainCateId}}">
                                         <img  ng-src="~/images/MainCate/{{DesignBannerData[0].MImage}}" alt="banner-image" class="img-fluid">
                                     </a>
                                 </div>
-                            </div>
+                     
                         </div>
                         <div class="col-lg-4 col-sm-4 col-5" ng-if="DesignBannerData[1]">
-                            <div data-aos="zoom-in">
+                        
                                 <div class="image image-2">
                                     <a href="/Home/BannerGifts?Banner={{DesignBannerData[1].MainCateId}}">
                                         <img ng-src="~/images/MainCate/{{DesignBannerData[1].MImage}}" alt="banner-image" class="img-fluid">
                                     </a>
                                 </div>
-                            </div>
+                         
                         </div>
                     </div>
                 </div>
@@ -120,22 +118,22 @@
                 <div class="col-lg-6 col-sm-12 col-12">
                     <div class="row g-1">
                         <div class="col-lg-12 col-sm-12 col-6" ng-if="DesignBannerData[2]">
-                            <div data-aos="zoom-in">
+                         
                                 <div class="image image-3">
                                     <a href="/Home/BannerGifts?Banner={{DesignBannerData[2].MainCateId}}">
                                         <img ng-src="~/images/MainCate/{{DesignBannerData[2].MImage}}" alt="banner-image" class="img-fluid">
                                     </a>
                                 </div>
-                            </div>
+                        
                         </div>
                         <div class="col-lg-12 col-sm-12 col-6" ng-if="DesignBannerData[3]">
-                            <div data-aos="zoom-in">
+                      
                                 <div class="image image-4">
                                     <a href="/Home/BannerGifts?Banner={{DesignBannerData[3].MainCateId}}">
                                         <img ng-src="~/images/MainCate/{{DesignBannerData[3].MImage}}" alt="banner-image" class="img-fluid">
                                     </a>
                                 </div>
-                            </div>
+                        
                         </div>
                     </div>
                 </div>
@@ -159,12 +157,12 @@
                                     <p align="right"><a href="/Home/TopProduct?ProductType=TopsellingProduct"><strong>View More</strong></a></p>
                                 </div>
                             </div>
-                            <div data-aos="zoom-in">
+                       
                                 <div class="carausel-6-columns" id="carausel-6-columns-3">
                                     <div class="brand-logo bg-white" ng-repeat="b in TopsellingProduct">
                                         <div class="product-list-small p-2 pb-0">
-                                            <div class="row align-items-center">
-                                                <div class="col-lg-4 col-sm-6 col-4">
+                                            <div class="row align-items-center g-3">
+                                                <div class="col-lg-3 col-sm-6 col-4">
                                                     <a href="/Home/Gift?url={{b.PUrl}}">
                                                         <img ng-src="~/images/ProductImg/{{b.ProductImage}}" alt="product-image" class="img-fluid p-0">
                                                     </a>
@@ -191,7 +189,7 @@
                                     </div>
 
                                 </div>
-                            </div>
+                       
 
                         </div>
                     </div>
@@ -207,7 +205,7 @@
                                     <p align="right"><a href="/Home/TopProduct?ProductType=NewProduct"><strong>View More</strong></a></p>
                                 </div>
                             </div>
-                            <div data-aos="zoom-in">
+                         
                                 <div class="carausel-6-columns" id="carausel-6-columns-3_1">
                                     <div class="brand-logo bg-white" ng-repeat="b in NewProduct">
                                         <div class="product-list-small p-2 pb-0">
@@ -238,7 +236,7 @@
                                     </div>
 
                                 </div>
-                            </div>
+                         
                         </div>
                     </div>
                 </div>
@@ -253,7 +251,7 @@
                                     <p align="right"><a href="/Home/TopProduct?ProductType=NewArivals"><strong>View More</strong></a></p>
                                 </div>
                             </div>
-                            <div data-aos="zoom-in">
+                            
                                 <div class="carausel-6-columns" id="carausel-6-columns-3_2">
                                     <div class="brand-logo bg-white" ng-repeat="b in NewArivals">
                                         <div class="product-list-small p-2 pb-0">
@@ -289,7 +287,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+    
     </section>
     <!-- Top Products End -->
 
@@ -298,14 +296,14 @@
         <div class="container pt-4 pb-4">
             <div class="row g-1 gx-1">
                 <div class="col-lg-6 col-6 col-sm-6" ng-repeat="m in MultipleBannerData">
-                    <div data-aos="zoom-in">
+                   
                         <div class="big-banner">
                             <a href="/Home/BannerGifts?Banner={{m.MainCateId}}">
 
                                 <img ng-src="~/images/MainCate/{{m.MImage}}" alt="banner-image" class="img-fluid">
                             </a>
                         </div>
-                    </div>
+                   
                 </div>
             </div>
         </div>
@@ -319,7 +317,7 @@
                 <h3 class="section-title mb-20">Normal Categories</h3>
                 <div class="row align-items-center g-1 gx-2">
                     <div class="col" ng-repeat="m in HomeMainCateData">
-                        <div data-aos="zoom-in">
+                        
                             <div class="img-hover-scale overflow-hidden">
                                 <a href="/Home/shop?Main={{m.MTitle}}">
                                     <img ng-src="~/images/MainCate/{{m.MImage}}" loading="lazy" alt="Caricatures" class="w-100 img-fluid img-thumbnail rounded-2">
@@ -329,7 +327,7 @@
                     </div>
 
                 </div>
-            </div>
+          
         </section>
     @* Normal Category Section End *@
 
@@ -344,11 +342,11 @@
                     </div>
                 </div>            
             </div>
-            <div class="tab-content wow fadeIn animated">
+            <div class="tab-content">
                 <div class="tab-pane fade show active" id="tab-one" role="tabpanel" aria-labelledby="tab-one">
-                    <div class="row product-grid-4 g-1" ng-init="GetProduct()">
-                        <div class="col-lg-3 col-6 col-sm-4" ng-repeat="p in ProductData" ng-click="RecentViewData($index)">
-                            <div data-aos="zoom-in">
+                    <div class="row product-grid-4 g-2" ng-init="GetProduct()">
+                        <div class="col-lg-2 col-6 col-sm-3" ng-repeat="p in ProductData" ng-click="RecentViewData($index)">
+                            
                                 <div class="product-cart-wrap mb-1">
                                     <div class="product-img-action-wrap">
                                         <div class="product-img product-img-zoom">
@@ -373,8 +371,8 @@
                                         <div class="product-price">
                                             <span><i class="fa fa-inr" aria-hidden="true"></i>  {{p.Price}}/-</span>
                                         </div>
-                                        <div class="product-action-1 show">
-                                            <a aria-label="Add To Cart" class="action-btn hover-up" ng-click="addItemToCart($index)"><i class="fi-rs-shopping-bag-add"></i></a>
+                                        <div class="button-design mt-2">
+                                            <a aria-label="Add To Cart" class="btn theme-button-2" ng-click="addItemToCart($index)"><i class="fi-rs-shopping-bag-add"></i> Add To Cart</a>
                                         </div>
                                     </div>
                                 </div>
@@ -384,13 +382,13 @@
                     </div>
                 </div>
             </div>
-        </div>
+        
     </section>
     <!-- Products Section End -->
 
     <!-- Testimonial Start -->
     <section class="testimonial-start section-padding">
-        <div data-aos="zoom-in">
+   
             <div class="container">
                 <div class="d-flex justify-content-between">
                     <div class="title">
@@ -479,7 +477,7 @@
 
                 </div>
             </div>
-        </div>
+      
     </section>
     <!-- Testimonial End -->
 </main>
