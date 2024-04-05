@@ -29,33 +29,54 @@
                         <div class="totall-product">
                             <p>Welcome to Gift Choice Bhilwara</p>
                         </div>
-                        <div class="sort-by-product-area">
+                        <div class="sort-by-product-area align-items-center">
                             <div class="sort-by-cover mr-10">
-                                <div class="sort-by-product-wrap filter-button animate__pulse">
+                                <div class="sort-by-product-wrap filter-button">
                                     <div class="sort-by" @*data-bs-toggle="modal" data-bs-target="#modalId"*@ ng-click="OpenModelInBannerFilter()">
-                                        <span><i class="fa fa-filter fs-5" aria-hidden="true"></i>Filter</span>
+                                        <span><i class="fa fa-filter fs-5" aria-hidden="true"></i><span class="m-none">Filter</span></span>
                                     </div>
                                 </div>
                             </div>
-                            <div class="sort-by-cover">
-                                <div class="sort-by-product-wrap">
-                                    <div class="sort-by">
-                                        <span><i class="fi-rs-apps-sort"></i>Sort by:</span>
-                                    </div>
-                                    <div class="sort-by-dropdown-wrap">
-                                        <span> Featured <i class="fi-rs-angle-small-down"></i></span>
-                                    </div>
-                                </div>
-                                <div class="sort-by-dropdown">
-                                    <ul>
-                                        <li><a class="active" href="#">Featured</a></li>
-                                        <li><a ng-click="sortByPrice('asc')">Price: Low to High</a></li>
-                                        <li><a ng-click="sortByPrice('desc')">Price: High to Low</a></li>
+                            <div class="d-flex m-nowrap-1 align-item-center">
+                                <div class="popup-filter">
+                                    <ul class="list-filter size-filter font-small">
+                                        <li>
+                                            <a class="theme-button-3" href="#">Men's</a>
+                                        </li>
+                                        <li>
+                                            <a class="theme-button-3" href="#">Women's</a>
+                                        </li>
+                                        <li class="active">
+                                            <a class="theme-button-3" href="#">Boy's</a>
+                                        </li>
+                                        <li>
+                                            <a class="theme-button-3" href="#">Girl's</a>
+                                        </li>
+                                        <li>
+                                            <a class="theme-button-3" href="#">Kid's</a>
+                                        </li>
                                     </ul>
                                 </div>
                             </div>
-                        </div>
+                                @*<div class="sort-by-cover">
+                <div class="sort-by-product-wrap">
+                    <div class="sort-by">
+                        <span><i class="fi-rs-apps-sort"></i>Sort by:</span>
                     </div>
+                    <div class="sort-by-dropdown-wrap">
+                        <span> Featured <i class="fi-rs-angle-small-down"></i></span>
+                    </div>
+                </div>
+               <div class="sort-by-dropdown">
+                    <ul>
+                        <li><a class="active" href="#">Featured</a></li>
+                        <li><a ng-click="sortByPrice('asc')">Price: Low to High</a></li>
+                        <li><a ng-click="sortByPrice('desc')">Price: High to Low</a></li>
+                    </ul>
+                </div>
+            </div>*@
+                            </div>
+                        </div>
                     <div class="row product-grid-4 g-1 gx-1">
                         @*<div class="col-lg-3 col-6 col-sm-4" ng-repeat="p in ProductData | startFrom:(currentPage - 1) * pageSize | limitTo:pageSize">*@
 
@@ -64,9 +85,11 @@
                                     <div class="product-cart-wrap">
                                         <div class="product-img-action-wrap">
                                             <div class="product-img product-img-zoom">
-                                                <video ng-show="p.Video" width="100%" autoplay loop muted controls>
-                                                    <source ng-src="{{'/images/ProductVideo/' + p.Video}}" type="video/mp4">
-                                                </video>
+                                                <a href="#">
+                                                    <video ng-show="p.Video" width="100%" autoplay loop muted>
+                                                        <source ng-src="{{'/images/ProductVideo/' + p.Video}}" type="video/mp4">
+                                                    </video>
+                                                </a>
                                                 @*<iframe  ng-show="p.VideoUrl" ng-src="{{trustSrc('https://www.youtube.com/embed/' + p.VideoUrl +'?autoplay=1&loop=1&mute=1')}}" allow="loop"></iframe>*@
                                                 @*<iframe ng-show="p.VideoUrl" id="iFrameName{{$index}}" allow="loop"></iframe>*@
 
