@@ -51,54 +51,54 @@
                     <div class="row product-grid-4 g-1 gx-1">
                         @*<div class="col-lg-3 col-6 col-sm-4" ng-repeat="p in ProductData  | startFrom:(currentPage - 1) * pageSize | limitTo:pageSize" ng-click="RecentViewData($index)">*@
 
-                            <div class="col-lg-2 col-6 col-sm-3" ng-repeat="p in ProductData" ng-click="RecentViewData($index)">
-                                <div data-aos="zoom-in">
-                                    <div class="product-cart-wrap mb-10  {{p.LabelId == 0 ? '' : 'special-product'}}">
-                                        <div class="product-img-action-wrap">
-                                            <div class="product-img product-img-zoom">
-                                                <a href="/Home/Gift?url={{p.PUrl}}">
-                                                    <img class="default-img img-fluid" src="~/images/ProductImg/{{p.ProductImage}}" loading="lazy" alt="product-image" loading="lazy" alt="">
-                                                    <img class="hover-img img-fluid" src="~/images/ProductImg/{{p.ProductImage}}" loading="lazy" alt="product-hover-image" loading="lazy" alt="">
-                                                </a>
-                                            </div>
-                                            <div class="product-badges product-badges-position product-badges-mrg   {{p.LabelId == 0 ? '' : 'special-badge'}}" ng-show="p.PLabel!=''">
-                                                <span class="hot">{{p.PLabel}}</span>
-                                            </div>
+                        <div class="col-lg-2 col-6 col-sm-3" ng-repeat="p in ProductData" ng-click="RecentViewData($index)">
+                            <div data-aos="zoom-in">
+                                <div class="product-cart-wrap mb-10  {{p.LabelId == 0 ? '' : 'special-product'}}">
+                                    <div class="product-img-action-wrap">
+                                        <div class="product-img product-img-zoom">
+                                            <a href="/Home/Gift?url={{p.PUrl}}">
+                                                <img class="default-img img-fluid" src="~/images/ProductImg/{{p.ProductImage}}" loading="lazy" alt="product-image" loading="lazy" alt="">
+                                                <img class="hover-img img-fluid" src="~/images/ProductImg/{{p.ProductImage}}" loading="lazy" alt="product-hover-image" loading="lazy" alt="">
+                                            </a>
                                         </div>
-                                        <div class="product-content-wrap">
-                                            <h2 class="mt-2"><a href="/Home/Gift?url={{p.PUrl}}">{{p.ProductTitle}}</a></h2>
-                                            <div class="product-price">
-                                                <span><i class="fa fa-inr" aria-hidden="true"></i> {{p.Price}}/-</span>
-                                            </div>
-                                            <div class="button-design mt-2">
-                                                <a aria-label="Add To Cart" class="btn theme-button-2" ng-click="addItemToCart($index)"><i class="fi-rs-shopping-bag-add"></i> Add To Cart</a>
-                                            </div>
+                                        <div class="product-badges product-badges-position product-badges-mrg   {{p.LabelId == 0 ? '' : 'special-badge'}}" ng-show="p.PLabel!=''">
+                                            <span class="hot">{{p.PLabel}}</span>
                                         </div>
+                                    </div>
+                                    <div class="product-content-wrap">
+                                        <h2 class="mt-2"><a href="/Home/Gift?url={{p.PUrl}}">{{p.ProductTitle}}</a></h2>
+                                        <div class="product-price">
+                                            <span><i class="fa fa-inr" aria-hidden="true"></i> {{p.Price}}/-</span>
+                                        </div>
+                                        <div class="button-design mt-2">
+                                            <a data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight" aria-label="Add To Cart" class="btn theme-button-2" ng-click="addItemToCart($index)"><i class="fi-rs-shopping-bag-add"></i> Add To Cart</a>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                         @*<div class="tp-shop-pagination mt-20">
-            <div class="tp-pagination pagination-btn-design">
+                                <div class="tp-pagination pagination-btn-design">
 
-                <div class="d-flex d-grid align-items-center gap-3">
-                    <button type="button" ng-click="prevPage()" ng-disabled="currentPage === 1" class="pagination-button">Previous</button>
+                                    <div class="d-flex d-grid align-items-center gap-3">
+                                        <button type="button" ng-click="prevPage()" ng-disabled="currentPage === 1" class="pagination-button">Previous</button>
 
-                    <span ng-repeat="page in range(totalPages)" >
-                        <button type="button" ng-click="goToPage(page + 1)" ng-class="{ 'btn-link': currentPage !== (page + 1), 'btn-link-active': currentPage === (page + 1) }">{{ page + 1 }}</button>
-                    </span>
-                    <button type="button" ng-click="nextPage()" ng-disabled="currentPage == totalPages" class="pagination-button">Next </button>
+                                        <span ng-repeat="page in range(totalPages)" >
+                                            <button type="button" ng-click="goToPage(page + 1)" ng-class="{ 'btn-link': currentPage !== (page + 1), 'btn-link-active': currentPage === (page + 1) }">{{ page + 1 }}</button>
+                                        </span>
+                                        <button type="button" ng-click="nextPage()" ng-disabled="currentPage == totalPages" class="pagination-button">Next </button>
 
-                </div>
+                                    </div>
 
 
-            </div>
+                                </div>
 
-        </div>*@
+                            </div>*@
                     </div>
-                    </div>
                 </div>
             </div>
-        
+        </div>
+
     </section>
 
     <section class="filter-section">
@@ -155,6 +155,164 @@
             </div>
         </div>
     </section>
+
+
+    <!-- Cart Sidebar -->
+    <div class="offcanvas offcanvas-end w-90 sidebar-product-cart" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+        <div class="offcanvas-header border-bottom ">
+            <h5 id="offcanvasRightLabel theme-text-size font-weight-600">Your Cart</h5>
+            <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+            <div class="cart-product">
+                <div class="card rounded-0 p-2 border-0 mb-1">
+                    <div class="d-flex justify-content-between">
+                        <div class="product-image">
+                            <img src="https://dummyimage.com/100x100/ccc/fff.jpg" alt="product image" class="img-fluid" width="60">
+                        </div>
+                        <div class="sidebar-product-detail mt-1">
+                            <h4 class="mb-2 theme-text-size-13"><a href="#">Product Name Here</a></h4>
+                            <h5 class="theme-text-size"><i class="fa fa-inr" aria-hidden="true"></i> 200.00</h5>
+                        </div>
+                        <div class="remove-btn" align="end">
+                            <a href="#" class="theme-button-2"> <i class="fa fa-trash" aria-hidden="true"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="card rounded-0 p-2 border-0 mb-1">
+                    <div class="d-flex justify-content-between">
+                        <div class="product-image">
+                            <img src="https://dummyimage.com/100x100/ccc/fff.jpg" alt="product image" class="img-fluid" width="60">
+                        </div>
+                        <div class="sidebar-product-detail mt-1">
+                            <h4 class="mb-2 theme-text-size-13"><a href="#">Product Name Here</a></h4>
+                            <h5 class="theme-text-size"><i class="fa fa-inr" aria-hidden="true"></i> 200.00</h5>
+                        </div>
+                        <div class="remove-btn" align="end">
+                            <a href="#" class="theme-button-2"> <i class="fa fa-trash" aria-hidden="true"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="card rounded-0 p-2 border-0 mb-1">
+                    <div class="d-flex justify-content-between">
+                        <div class="product-image">
+                            <img src="https://dummyimage.com/100x100/ccc/fff.jpg" alt="product image" class="img-fluid" width="60">
+                        </div>
+                        <div class="sidebar-product-detail mt-1">
+                            <h4 class="mb-2 theme-text-size-13"><a href="#">Product Name Here</a></h4>
+                            <h5 class="theme-text-size"><i class="fa fa-inr" aria-hidden="true"></i> 200.00</h5>
+                        </div>
+                        <div class="remove-btn" align="end">
+                            <a href="#" class="theme-button-2"> <i class="fa fa-trash" aria-hidden="true"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="related-data mt-4 bg-light p-2 mb-6">
+                <h6 class="mt-2">Related Product</h6>
+                <div class="products mt-3">
+                    <div class="cart-product">
+                        <div class="card rounded-0 p-2 bg-white border-0 mb-1">
+                            <div class="d-flex justify-content-between">
+                                <div class="product-image">
+                                    <img src="https://dummyimage.com/100x100/ccc/fff.jpg" alt="product image" class="img-fluid" width="50">
+                                </div>
+                                <div class="sidebar-product-detail mt-1">
+                                    <h4 class="mb-2 theme-text-size-13"><a href="#">Product Name Here</a></h4>
+                                    <h5 class="theme-text-size"><i class="fa fa-inr" aria-hidden="true"></i> 200.00</h5>
+                                </div>
+                                <div class="add-btn" align="end">
+                                    <a href="#" class="theme-button-2"> <i class="fa fa-plus" aria-hidden="true"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card rounded-0 p-2 bg-white border-0 mb-1">
+                            <div class="d-flex justify-content-between">
+                                <div class="product-image">
+                                    <img src="https://dummyimage.com/100x100/ccc/fff.jpg" alt="product image" class="img-fluid" width="50">
+                                </div>
+                                <div class="sidebar-product-detail mt-1">
+                                    <h4 class="mb-2 theme-text-size-13"><a href="#">Product Name Here</a></h4>
+                                    <h5 class="theme-text-size"><i class="fa fa-inr" aria-hidden="true"></i> 200.00</h5>
+                                </div>
+                                <div class="add-btn" align="end">
+                                    <a href="#" class="theme-button-2"> <i class="fa fa-plus" aria-hidden="true"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card rounded-0 p-2 bg-white border-0 mb-1">
+                            <div class="d-flex justify-content-between">
+                                <div class="product-image">
+                                    <img src="https://dummyimage.com/100x100/ccc/fff.jpg" alt="product image" class="img-fluid" width="50">
+                                </div>
+                                <div class="sidebar-product-detail mt-1">
+                                    <h4 class="mb-2 theme-text-size-13"><a href="#">Product Name Here</a></h4>
+                                    <h5 class="theme-text-size"><i class="fa fa-inr" aria-hidden="true"></i> 200.00</h5>
+                                </div>
+                                <div class="add-btn" align="end">
+                                    <a href="#" class="theme-button-2"> <i class="fa fa-plus" aria-hidden="true"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card rounded-0 p-2 bg-white border-0 mb-1">
+                            <div class="d-flex justify-content-between">
+                                <div class="product-image">
+                                    <img src="https://dummyimage.com/100x100/ccc/fff.jpg" alt="product image" class="img-fluid" width="50">
+                                </div>
+                                <div class="sidebar-product-detail mt-1">
+                                    <h4 class="mb-2 theme-text-size-13"><a href="#">Product Name Here</a></h4>
+                                    <h5 class="theme-text-size"><i class="fa fa-inr" aria-hidden="true"></i> 200.00</h5>
+                                </div>
+                                <div class="add-btn" align="end">
+                                    <a href="#" class="theme-button-2"> <i class="fa fa-plus" aria-hidden="true"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card rounded-0 p-2 bg-white border-0 mb-1">
+                            <div class="d-flex justify-content-between">
+                                <div class="product-image">
+                                    <img src="https://dummyimage.com/100x100/ccc/fff.jpg" alt="product image" class="img-fluid" width="50">
+                                </div>
+                                <div class="sidebar-product-detail mt-1">
+                                    <h4 class="mb-2 theme-text-size-13"><a href="#">Product Name Here</a></h4>
+                                    <h5 class="theme-text-size"><i class="fa fa-inr" aria-hidden="true"></i> 200.00</h5>
+                                </div>
+                                <div class="add-btn" align="end">
+                                    <a href="#" class="theme-button-2"> <i class="fa fa-plus" aria-hidden="true"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card rounded-0 p-2 bg-white border-0 mb-1">
+                            <div class="d-flex justify-content-between">
+                                <div class="product-image">
+                                    <img src="https://dummyimage.com/100x100/ccc/fff.jpg" alt="product image" class="img-fluid" width="50">
+                                </div>
+                                <div class="sidebar-product-detail mt-1">
+                                    <h4 class="mb-2 theme-text-size-13"><a href="#">Product Name Here</a></h4>
+                                    <h5 class="theme-text-size"><i class="fa fa-inr" aria-hidden="true"></i> 200.00</h5>
+                                </div>
+                                <div class="add-btn" align="end">
+                                    <a href="#" class="theme-button-2"> <i class="fa fa-plus" aria-hidden="true"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="buttons bg-white p-2">
+                <div class="d-flex justify-content-between gap-2 ">
+                    <div class="view-cart-button w-100">
+                        <a name="" id="" class="btn theme-button-3 w-100 theme-text-size p-2" href="#" role="button">Go to Cart</a>
+                    </div>
+                    <div class="checkout-button w-100">
+                        <a name="" id="" class="btn theme-button-2 w-100 theme-text-size p-2" href="#" role="button">Share On Whatsapp</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Cart Sidebar -->
 </main>
 
 

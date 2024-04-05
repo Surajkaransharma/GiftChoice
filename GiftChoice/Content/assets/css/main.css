@@ -11180,15 +11180,17 @@ h3.section-title {
     }
 
 .sidebar-product-cart .buttons {
-    position: relative;
+    position: fixed;
+    bottom: 0;
+    width: -webkit-fill-available !important;
 }
 
-.sidebar-product-cart .fixed-bottom {
+/* .sidebar-product-cart .fixed-bottom {
     left: 3em;
     border-top: 1px solid #ececec;
     padding: 1.3em;
     background: #fff;
-}
+} */
 
 .mb-6 {
     margin-bottom: 3.4em;
