@@ -30,132 +30,134 @@
 
                         <!-- Product Section Start -->
                         <div class="row mb-50">
-                            <div class="col-lg-6 col-sm-12 col-xs-12">
+                            <div class="col-lg-3 col-sm-4 col-12">
                                 <div class="detail-gallery">
 
                                     <!-- Main Image -->
-                                    <div data-aos="zoom-in">
+                                    
                                         <div class="product-image-slider">
                                             <figure class="border-radius-10" ng-repeat="i in Product.AllProductImage">
                                                 <img src="~/images/ProductImg/{{i}}" alt="product image" class="img-fluid" loading="lazy">
                                             </figure>
 
                                         </div>
-                                    </div>
+                                    
                                     <!-- Main Image -->
                                     <!-- Small Image -->
-                                    <div data-aos="zoom-in">
+                                    
                                         <div class="slider-nav-thumbnails pl-15 pr-15" ng-show="Product.AllProductImage.length>1">
                                             <div ng-repeat="i in Product.AllProductImage" ng-show="i!=null">
                                                 <img src="~/images/ProductImg/{{i}}" ng-show="i!=null" class="img-fluid" loading="lazy" alt="product image">
                                             </div>
                                             <div><img src="~/images/ProductImg/{{i}}" ng-show="i!=null" class="img-fluid" loading="lazy" alt="product image"></div>
                                         </div>
-                                    </div>
+                                   
 
                                     <!-- Small Image -->
                                 </div>
 
                             </div>
-                            <div class="col-lg-6 col-sm-12 col-xs-12">
+                            <div class="col-lg-9 col-sm-8 col-xs-12">
                                 <div class="detail-info">
-                                    <div data-aos="zoom-in">
-                                        @*<span class="badge bg-success mb-2 animate__flash">Same Day Delivery</span>*@
-                                        <h2 class="title-detail">{{Product.ProductTitle}}</h2>
-                                        <div class="pro-details-brand">
-                                            <span><a href="/Home/shop?Main={{Product.Maincate.MTitle}}">{{Product.Maincate.MTitle}}</a></span>
 
-                                        </div>
+                                    @*<span class="badge bg-success mb-2 animate__flash">Same Day Delivery</span>*@
+                                    <div class="pro-details-brand mb-2">
+                                        <span><a href="/Home/shop?Main={{Product.Maincate.MTitle}}">{{Product.Maincate.MTitle}}</a></span>
                                     </div>
+                                    <h2 class="theme-text-size-16 mb-4">{{Product.ProductTitle}}</h2>
 
-                                    <div data-aos="zoom-in">
-                                        <div class="clearfix product-price-cover border-0 mb-0">
-                                            <div class="product-price primary-color float-left">
-                                                <ins><span class="text-brand"><i class="fa fa-inr" aria-hidden="true"></i>{{Product.Price}}/-</span></ins>
-                                            </div>
-                                        </div>
+
+
+                                    <div class="description mb-20">
+                                        <p align="justify" class="theme-text-size-13" ng-show="!showFullContent">
+                                            {{Product.PDesc | limitTo: 100}}{{Product.PDesc.length > 100 ? '...' : ''}}
+
+                                            <strong ng-click="toggleContent(post)" id="myBtn" class="text-brand cursor">Read more</strong>
+                                        </p>
+                                        <p align="justify" class="theme-text-size-13" ng-show="showFullContent">
+                                            {{Product.PDesc}}
+
+                                            <strong ng-click="toggleContent(post)" id="myBtn" class="text-brand cursor">Read Less</strong>
+                                        </p>
+
                                     </div>
+                                    <div id="profile-description">
 
-
-                                    @*<div data-aos="zoom-in">
-                                            <div class="attr-detail attr-size mb-30" ng-show="Product.PSizeList.length>0">
-                                                <strong class="mr-10">Size</strong>
-                                                <ul class="list-filter size-filter font-small">
-                                                    <li ng-repeat="s in Product.PSizeList" style="margin-left:5px;"><a href="#">{{s.SizeTitle}}</a> </li>
-
-                                                </ul>
-                                            </div>
-                                        </div>*@
-
-                                    @*<div data-aos="zoom-in">
-                                            <div class="attr-detail attr-size mb-30" ng-show="Product.productDataArray.length>0">
-                                                <strong class="mr-10">Size</strong>
-                                                <ul class="list-filter size-filter font-small">
-                                                    <li ng-repeat="s in Product.productDataArray" style="margin-left:5px;"><a ng-click="SelectSizePrice(s.ProductSize)">{{s.ProductSize}}</a> </li>
-
-                                                </ul>
-                                            </div>
-                                        </div>*@
-                                    <div data-aos="zoom-in">
-                                        <div class="attr-detail attr-size mb-30" ng-if="Product.productDataArray.length>0">
-                                            <strong class="mr-10">Size : </strong>
-                                            <select class="form-select form-select-sm w-auto shadow-none theme-border" name="" ng-model="size" id="" ng-change="SelectSizePrice(size)">
-                                                <option selected="ture" disabled value="">-- Select Size --</option>
-                                                <option ng-repeat="s in Product.productDataArray" value="{{s.ProductSize}}">{{s.ProductSize}}</option>
-                                            </select>
-
-                                        </div>
-                                    </div>
-
-                                    <div data-aos="zoom-in">
-                                        <div class="detail-extralink">
-                                            <div class="detail-qty border radius">
-                                                <a href="#" class="qty-down"><i class="fi-rs-angle-small-down"></i></a>
-                                                <span class="qty-val">1</span>
-                                                <a href="#" class="qty-up"><i class="fi-rs-angle-small-up"></i></a>
-                                            </div>
-                                            <a class="button button-add-to-cart text-white" role="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight" ng-click="addItemToCart($index)">Add To Cart</a>
-                                            @*<a class="button btn-danger button-add-to-cart filter-button animate__bounceIn" href="#" target="_blank" role="button">See Video</a>*@
-                                        </div>
-                                    </div>
-
-                                    <div data-aos="zoom-in">
-
-                                        <div class="description mb-20">
-                                            <p align="justify" class="fs-7" ng-show="!showFullContent">
-                                                {{Product.PDesc | limitTo: 100}}{{Product.PDesc.length > 100 ? '...' : ''}}
-
-                                                <strong ng-click="toggleContent(post)" id="myBtn" class="text-brand cursor">Read more</strong>
-                                            </p>
-                                            <p align="justify" class="fs-7" ng-show="showFullContent">
-                                                {{Product.PDesc}}
-
-                                                <strong ng-click="toggleContent(post)" id="myBtn" class="text-brand cursor">Read Less</strong>
+                                        <div class="description mb-20 text show-more-height">
+                                            <p align="justify" id="desc" class="theme-text-size-13">
                                             </p>
 
                                         </div>
-                                        <div id="profile-description">
+                                    </div>
 
-                                            <div class="description mb-20 text show-more-height">
-                                                <p align="justify" id="desc" class="fs-7">
-                                                </p>
 
-                                            </div>
-                                        </div>
+
+                                    @*<div data-aos="zoom-in">
+            <div class="attr-detail attr-size mb-30" ng-show="Product.PSizeList.length>0">
+                <strong class="mr-10">Size</strong>
+                <ul class="list-filter size-filter font-small">
+                    <li ng-repeat="s in Product.PSizeList" style="margin-left:5px;"><a href="#">{{s.SizeTitle}}</a> </li>
+
+                </ul>
+            </div>
+        </div>*@
+
+                                    @*<div data-aos="zoom-in">
+            <div class="attr-detail attr-size mb-30" ng-show="Product.productDataArray.length>0">
+                <strong class="mr-10">Size</strong>
+                <ul class="list-filter size-filter font-small">
+                    <li ng-repeat="s in Product.productDataArray" style="margin-left:5px;"><a ng-click="SelectSizePrice(s.ProductSize)">{{s.ProductSize}}</a> </li>
+
+                </ul>
+            </div>
+        </div>*@
+
+                                    <div class="attr-detail attr-size mb-3" ng-if="Product.productDataArray.length>0">
+                                        <strong class="mr-10">Size : </strong>
+                                        <select class="form-select form-select-sm w-auto shadow-none theme-button-3 rounded-0 " name="" ng-model="size" id="" ng-change="SelectSizePrice(size)">
+                                            <option selected="ture" disabled value="">-- Select Size --</option>
+                                            <option class="text-dark" ng-repeat="s in Product.productDataArray" value="{{s.ProductSize}}">{{s.ProductSize}}</option>
+                                        </select>
 
                                     </div>
 
-                                    @*<div data-aos="zoom-in">
-                                            <div class="social-icons single-share mb-20">
-                                                <ul class="text-grey-5 d-inline-block">
-                                                    <li><strong class="mr-10">Share this:</strong></li>
-                                                    <li class="social-facebook"><a href="#"><img src="assets/imgs/theme/icons/icon-facebook.svg" alt=""></a></li>
-                                                    <li class="social-twitter"> <a href="#"><img src="assets/imgs/theme/icons/icon-twitter.svg" alt=""></a></li>
-                                                    <li class="social-instagram"><a href="#"><img src="assets/imgs/theme/icons/icon-instagram.svg" alt=""></a></li>
-                                                    <li class="social-linkedin"><a href="#"><img src="assets/imgs/theme/icons/icon-pinterest.svg" alt=""></a></li>
-                                                </ul>
+
+
+                                    <div class="detail-extralink">
+                                        @*<div class="detail-qty border radius">
+                <a href="#" class="qty-down"><i class="fi-rs-angle-small-down"></i></a>
+                <span class="qty-val">1</span>
+                <a href="#" class="qty-up"><i class="fi-rs-angle-small-up"></i></a>
+            </div>*@
+                                        <div class="d-flex align-items-center gap-3">
+                                            <div class="clearfix product-price-cover p-1 mb-2   border-0 mb-0">
+                                                <div class="product-price primary-color float-left">
+                                                    <ins><span class="text-brand theme-text-size-18"><i class="fa fa-inr" aria-hidden="true"></i>{{Product.Price}}/-</span></ins>
+                                                </div>
                                             </div>
-                                        </div>*@
+                                            <a class="btn theme-button-2" role="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight" ng-click="addItemToCart($index)">Add To Cart</a>
+                                        </div>
+                                        @*<a class="button btn-danger button-add-to-cart filter-button animate__bounceIn" href="#" target="_blank" role="button">See Video</a>*@
+                                    </div>
+
+
+
+
+
+
+
+
+                                    @*<div data-aos="zoom-in">
+            <div class="social-icons single-share mb-20">
+                <ul class="text-grey-5 d-inline-block">
+                    <li><strong class="mr-10">Share this:</strong></li>
+                    <li class="social-facebook"><a href="#"><img src="assets/imgs/theme/icons/icon-facebook.svg" alt=""></a></li>
+                    <li class="social-twitter"> <a href="#"><img src="assets/imgs/theme/icons/icon-twitter.svg" alt=""></a></li>
+                    <li class="social-instagram"><a href="#"><img src="assets/imgs/theme/icons/icon-instagram.svg" alt=""></a></li>
+                    <li class="social-linkedin"><a href="#"><img src="assets/imgs/theme/icons/icon-pinterest.svg" alt=""></a></li>
+                </ul>
+            </div>
+        </div>*@
 
 
 
@@ -166,10 +168,10 @@
                         <!-- Related Product Start -->
                         <div class="row mt-60">
                             <div class="col-12">
-                                <h3 class="section-title style-1 mb-30">Related Gifts</h3>
+                                <h3 class="section-title style-1 mb-20 theme-text-size-13">Related Gifts</h3>
                             </div>
                             <div class="row product-grid-4 g-1 gx-1">
-                                <div class="col-lg-3 col-6 col-sm-4" ng-repeat="q in ProductData" ng-click="RecentViewData($index)">
+                                <div class="col-lg-2 col-6 col-sm-3" ng-repeat="q in ProductData" ng-click="RecentViewData($index)">
                                     <div class="product-cart-wrap">
                                         <div class="product-img-action-wrap">
                                             <div class="product-img">
@@ -187,8 +189,8 @@
                                             <div class="product-price">
                                                 <span><i class="fa fa-inr" aria-hidden="true"></i> {{q.Price}}/-</span>
                                             </div>
-                                            <div class="product-action-1 show">
-                                                <a aria-label="Add To Cart" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight" class="action-btn hover-up" ng-click="addItemToCart($index)"><i class="fi-rs-shopping-bag-add"></i></a>
+                                            <div class="button-design mt-2">
+                                                <a aria-label="Add To Cart" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight" class="btn theme-button-2" ng-click="addItemToCart($index)"><i class="fi-rs-shopping-bag-add"></i> Add To Cart</a>
                                             </div>
                                         </div>
                                     </div>
