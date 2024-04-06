@@ -42,6 +42,7 @@ app.controller("HomeController", ['$scope', '$http', '$sce', 'startFromFilter','
 
     };
     $scope.cart = [];
+    
     //$scope.CartItem = JSON.parse(localStorage.getItem('cart'));
     $scope.GetCart = function () {
         
@@ -55,6 +56,12 @@ app.controller("HomeController", ['$scope', '$http', '$sce', 'startFromFilter','
                 $scope.TotalAmount += $scope.cart[i].Price * $scope.cart[i].Qty;
             }
         }
+        $scope.whatsappdata = '';
+        for (var i = 0; i < $scope.cart.length; i++) {
+
+            $scope.whatsappdata += '*S.No. ' + (i + 1) + '* Gift Name =*' + $scope.cart[i].ProductTitle + '*%0a' + 'Price =*' + $scope.cart[i].Price + '*%0a' + 'Gift Url = *https://www.giftchoice.net/Home/Gift?url=' + $scope.cart[i].PUrl + '*%0a';
+        }
+
     };
     $scope.addItemToCart = function (index) {
         
@@ -73,12 +80,12 @@ app.controller("HomeController", ['$scope', '$http', '$sce', 'startFromFilter','
             $scope.cart.push(selectedProduct);
             localStorage.setItem('cart', JSON.stringify($scope.cart));
             $scope.GetCart();
-            toastr["success"]("Product successfully added to the cart.");
+          //  toastr["success"]("Product successfully added to the cart.");
         } else {
             // If the product is already in the cart, you can handle this case as needed.
             // For example, you can display a message to the user.
 
-            toastr["error"]('This product is already in your cart.');
+          //  toastr["error"]('This product is already in your cart.');
             return;
         }
         //$scope.cart.push($scope.ProductData[index]);
@@ -765,8 +772,13 @@ app.controller("HomeController", ['$scope', '$http', '$sce', 'startFromFilter','
             
             $scope.Product = d.data;
             //$scope.idd = $scope.Product.MainCateId;
+            if ($scope.Product.ProductType == "BannerProduct")  {
 
-            $scope.GetSmillerProduct($scope.Product.ProductId, $scope.Product.MainCateId);
+                $scope.GetBSmillerProduct($scope.Product.ProductId, $scope.Product.BannerCateId);
+            } else {
+
+                $scope.GetSmillerProduct($scope.Product.ProductId, $scope.Product.MainCateId);
+            }
 
             $('#desc').html($scope.Product.TableDesc);
 
@@ -822,8 +834,8 @@ app.controller("HomeController", ['$scope', '$http', '$sce', 'startFromFilter','
     };
     $scope.SelectSizePrice = function (ProductSize) {
 
-      
 
+        debugger
         var selectedProduct = $scope.Product.productDataArray.find(function (product) {
             return product.ProductSize === ProductSize;
         });
@@ -1024,7 +1036,7 @@ app.controller("HomeController", ['$scope', '$http', '$sce', 'startFromFilter','
 
     };
     $scope.OpenModelInBannerFilter = function () {
-        
+        debugger
         var urlParams = new URLSearchParams(window.location.search);
         $scope.banner = urlParams.get('Banner');
         $scope.BannerAll = urlParams.get('BannerAll');
@@ -1041,6 +1053,8 @@ app.controller("HomeController", ['$scope', '$http', '$sce', 'startFromFilter','
                     setTimeout(() => {
                         $('#modalId').modal("toggle");
                     }, 100);
+                } else {
+                    $scope.GetBannerAllProduct();
                 }
              
 
@@ -1051,7 +1065,7 @@ app.controller("HomeController", ['$scope', '$http', '$sce', 'startFromFilter','
 
     };
     $scope.GetBannerAllProductwithmodel = function () {
-        
+        debugger
         var urlParams = new URLSearchParams(window.location.search);
         $scope.banner = urlParams.get('Banner');
 

@@ -97,12 +97,11 @@
                                             </div>
                                         </div>*@
                                     <div data-aos="zoom-in">
-                                        <div class="attr-detail attr-size mb-30">
+                                        <div class="attr-detail attr-size mb-30" ng-if="Product.productDataArray.length>0">
                                             <strong class="mr-10">Size : </strong>
-                                            <select class="form-select form-select-sm w-auto shadow-none theme-border" name="" id="">
-                                                <option selected="ture" disabled>-- Select Size --</option>
-                                                <option ng-repeat="s in Product.productDataArray" value=""><a ng-click="SelectSizePrice(s.ProductSize)">{{s.ProductSize}}</a></option>
-
+                                            <select class="form-select form-select-sm w-auto shadow-none theme-border" name="" ng-model="size" id="" ng-change="SelectSizePrice(size)">
+                                                <option selected="ture" disabled value="">-- Select Size --</option>
+                                                <option ng-repeat="s in Product.productDataArray" value="{{s.ProductSize}}">{{s.ProductSize}}</option>
                                             </select>
 
                                         </div>
@@ -115,7 +114,7 @@
                                                 <span class="qty-val">1</span>
                                                 <a href="#" class="qty-up"><i class="fi-rs-angle-small-up"></i></a>
                                             </div>
-                                            <a class="button button-add-to-cart text-white" role="button" ng-click="addItemToCart($index)">Add To Cart</a>
+                                            <a class="button button-add-to-cart text-white" role="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight" ng-click="addItemToCart($index)">Add To Cart</a>
                                             @*<a class="button btn-danger button-add-to-cart filter-button animate__bounceIn" href="#" target="_blank" role="button">See Video</a>*@
                                         </div>
                                     </div>
@@ -124,7 +123,7 @@
 
                                         <div class="description mb-20">
                                             <p align="justify" class="fs-7" ng-show="!showFullContent">
-                                                {{Product.PDesc | limitTo: 300}}{{Product.PDesc.length > 300 ? '...' : ''}}
+                                                {{Product.PDesc | limitTo: 100}}{{Product.PDesc.length > 100 ? '...' : ''}}
 
                                                 <strong ng-click="toggleContent(post)" id="myBtn" class="text-brand cursor">Read more</strong>
                                             </p>
@@ -189,7 +188,7 @@
                                                 <span><i class="fa fa-inr" aria-hidden="true"></i> {{q.Price}}/-</span>
                                             </div>
                                             <div class="product-action-1 show">
-                                                <a aria-label="Add To Cart" class="action-btn hover-up" ng-click="addItemToCart($index)"><i class="fi-rs-shopping-bag-add"></i></a>
+                                                <a aria-label="Add To Cart" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight" class="action-btn hover-up" ng-click="addItemToCart($index)"><i class="fi-rs-shopping-bag-add"></i></a>
                                             </div>
                                         </div>
                                     </div>

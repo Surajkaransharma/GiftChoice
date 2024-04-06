@@ -40,14 +40,14 @@
                                     <tr ng-repeat="i in cart track by $index">
                                         <td>{{$index+1}}</td>
                                         <td class="image product-thumbnail">
-                                            <a href="">
+                                            <a href="/Home/Gift?url={{i.PUrl}}">
                                                 <img src="~/images/ProductImg/{{i.ProductImage}}" alt="#" class="img-fluid rounded-2">
                                             </a>
                                         </td>
 
                                         <td class="product-des product-name" width="500">
                                             <h5 class="product-name">
-                                                <a href="">{{i.ProductTitle}}</a>
+                                                <a href="/Home/Gift?url={{i.PUrl}}">{{i.ProductTitle}}</a>
                                             </h5>
                                         </td>
 

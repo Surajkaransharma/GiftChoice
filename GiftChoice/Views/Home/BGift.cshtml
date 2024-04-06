@@ -1,7 +1,9 @@
 ﻿
 @{
-    ViewBag.Title = "BGift";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+                /**/
+
+                ViewBag.Title = "BGift";
+                Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 
@@ -18,7 +20,7 @@
         </div>
     </div>
     <!-- Breadcrumb Section End -->
-   
+
 
 
     <section class="mt-30 mb-50">
@@ -101,33 +103,33 @@
                                         </div>
 
                                         @*<div data-aos="zoom-in">
-            <div class="social-icons single-share mb-20">
-                <ul class="text-grey-5 d-inline-block">
-                    <li><strong class="mr-10">Share this:</strong></li>
-                    <li class="social-facebook"><a href="#"><img src="assets/imgs/theme/icons/icon-facebook.svg" alt=""></a></li>
-                    <li class="social-twitter"> <a href="#"><img src="assets/imgs/theme/icons/icon-twitter.svg" alt=""></a></li>
-                    <li class="social-instagram"><a href="#"><img src="assets/imgs/theme/icons/icon-instagram.svg" alt=""></a></li>
-                    <li class="social-linkedin"><a href="#"><img src="assets/imgs/theme/icons/icon-pinterest.svg" alt=""></a></li>
-                </ul>
-            </div>
-        </div>*@
+                                                <div class="social-icons single-share mb-20">
+                                                    <ul class="text-grey-5 d-inline-block">
+                                                        <li><strong class="mr-10">Share this:</strong></li>
+                                                        <li class="social-facebook"><a href="#"><img src="assets/imgs/theme/icons/icon-facebook.svg" alt=""></a></li>
+                                                        <li class="social-twitter"> <a href="#"><img src="assets/imgs/theme/icons/icon-twitter.svg" alt=""></a></li>
+                                                        <li class="social-instagram"><a href="#"><img src="assets/imgs/theme/icons/icon-instagram.svg" alt=""></a></li>
+                                                        <li class="social-linkedin"><a href="#"><img src="assets/imgs/theme/icons/icon-pinterest.svg" alt=""></a></li>
+                                                    </ul>
+                                                </div>
+                                            </div>*@
 
                                         @*<div data-aos="zoom-in">
-            <div class="attr-detail attr-size mb-30" ng-show="Product.productDataArray.length>0">
-                <strong class="mr-10">Size</strong>
-                <ul class="list-filter size-filter font-small">
-                    <li ng-repeat="s in Product.productDataArray" style="margin-left:5px;"><a ng-click="SelectSizePrice(s.ProductSize)">{{s.ProductSize}}</a> </li>
+                                                <div class="attr-detail attr-size mb-30" ng-show="Product.productDataArray.length>0">
+                                                    <strong class="mr-10">Size</strong>
+                                                    <ul class="list-filter size-filter font-small">
+                                                        <li ng-repeat="s in Product.productDataArray" style="margin-left:5px;"><a ng-click="SelectSizePrice(s.ProductSize)">{{s.ProductSize}}</a> </li>
 
-                </ul>
-            </div>
-        </div>*@
-                                        <div data-aos="zoom-in">
-                                            <div class="attr-detail attr-size mb-30">
+                                                    </ul>
+                                                </div>
+                                            </div>*@
+                                        <div data-aos="zoom-in" >
+                                            <div class="attr-detail attr-size mb-30" ng-if="Product.productDataArray.length>0">
                                                 <strong class="mr-10">Size : </strong>
-                                                <select class="form-select form-select-sm w-auto shadow-none theme-border" name="" id="">
-                                                    <option selected="ture" disabled>-- Select Size --</option>
-                                                    <option ng-repeat="s in Product.productDataArray" value=""><a ng-click="SelectSizePrice(s.ProductSize)">{{s.ProductSize}}</a></option>
-                                          
+                                                <select class="form-select form-select-sm w-auto shadow-none theme-border" name="" ng-model="size" id="" ng-change="SelectSizePrice(size)">
+                                                    <option selected="ture" disabled value="">-- Select Size --</option>
+                                                    <option ng-repeat="s in Product.productDataArray" value="{{s.ProductSize}}">{{s.ProductSize}}</option>
+
                                                 </select>
 
                                             </div>
@@ -140,7 +142,7 @@
                                                     <span class="qty-val">1</span>
                                                     <a href="#" class="qty-up"><i class="fi-rs-angle-small-up"></i></a>
                                                 </div>
-                                                <a class="button button-add-to-cart text-white" ng-click="GiftAddItemToCart(Product.ProductId)" role="button">Add To Cart</a>
+                                                <a class="button button-add-to-cart text-white" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight" ng-click="GiftAddItemToCart(Product.ProductId)" role="button">Add To Cart</a>
                                                 <a ng-show="Product.Video!=null && Product.Video!=''" class="button btn-danger button-add-to-cart filter-button video-button" href="{{'/images/ProductVideo/' + Product.Video}}" target="_blank" role="button">See Video</a>
                                                 @*<a class="button btn-danger button-add-to-cart filter-button animate__bounceIn" ng-show="Product.VideoUrl!=null && Product.VideoUrl!=''" href="https://www.youtube.com/embed/{{Product.VideoUrl}}?autoplay=1&loop=1&mute=1" target="_blank" role="button">See Video</a>*@
                                             </div>
@@ -175,7 +177,7 @@
                                                     <span><i class="fa fa-inr" aria-hidden="true"></i> {{q.Price}}/-</span>
                                                 </div>
                                                 <div class="product-action-1 show">
-                                                    <a aria-label="Add To Cart" class="action-btn hover-up" ng-click="addItemToCart($index)"><i class="fi-rs-shopping-bag-add"></i></a>
+                                                    <a aria-label="Add To Cart" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight" class="action-btn hover-up" ng-click="addItemToCart($index)"><i class="fi-rs-shopping-bag-add"></i></a>
                                                 </div>
                                             </div>
                                         </div>

@@ -99,7 +99,7 @@ namespace GiftChoice.Controllers
         public JsonResult GetHomeMainCateHeroData()
         {
 
-            var res = db.MainCateTbls.Where(m => m.Active == true && m.CateType == "MainCate"  && m.MainCateType == "Hero").Select(m => new
+            var res = db.MainCateTbls.Where(m => m.Active == true && m.CateType == "MainCate" && m.MainCateType == "Hero").Select(m => new
             {
                 m.MainCateId,
                 m.MUrl,
@@ -159,10 +159,10 @@ namespace GiftChoice.Controllers
         [JsonNetFilter]
         public JsonResult GetProduct()
         {
-           
+
             var res =
 
-               db.ProductTbls.Where(m =>  m.ProductType == "MainProduct" && m.Active == true).Select(m => new
+               db.ProductTbls.Where(m => (m.ProductType == "MainProduct" || m.ProductType == "Common") && m.Active == true).Select(m => new
                {
                    m.ProductId,
                    m.MainCateId,
@@ -171,7 +171,7 @@ namespace GiftChoice.Controllers
                    m.VideoUrl,
                    m.SameDay,
                    m.Price,
-                   m.PUrl,                   
+                   m.PUrl,
                    m.Active,
                    m.Create_at,
                    m.Priority,
@@ -186,11 +186,11 @@ namespace GiftChoice.Controllers
         [JsonNetFilter]
         public JsonResult GetLabelProduct()
         {
-           
+
             var res =
                 new
                 {
-                    TopsellingProduct = db.ProductTbls.Where(m => m.Active == true && m.LabelId == 1  && m.ProductType == "MainProduct").Select(m => new
+                    TopsellingProduct = db.ProductTbls.Where(m => m.Active == true && m.LabelId == 1 && m.ProductType == "MainProduct").Select(m => new
                     {
                         Toplabel = db.LabelProductTbls.Where(l => l.LabelId == 1).Select(l => l.LTitle).FirstOrDefault(),
                         m.ProductId,
@@ -208,7 +208,7 @@ namespace GiftChoice.Controllers
                         Maincate = db.MainCateTbls.Where(p => p.MainCateId == m.MainCateId).Select(p => p.MTitle).FirstOrDefault(),
 
                     }).OrderBy(x => Guid.NewGuid()).Take(10),
-                    NewProduct = db.ProductTbls.Where(m => m.Active == true && m.LabelId == 2 &&  m.ProductType == "MainProduct").Select(m => new
+                    NewProduct = db.ProductTbls.Where(m => m.Active == true && m.LabelId == 2 && m.ProductType == "MainProduct").Select(m => new
                     {
                         Toplabel = db.LabelProductTbls.Where(l => l.LabelId == 1).Select(l => l.LTitle).FirstOrDefault(),
                         m.ProductId,
@@ -227,7 +227,7 @@ namespace GiftChoice.Controllers
                         Maincate = db.MainCateTbls.Where(p => p.MainCateId == m.MainCateId).Select(p => p.MTitle).FirstOrDefault(),
 
                     }).OrderBy(x => Guid.NewGuid()).Take(10),
-                    NewArivals = db.ProductTbls.Where(m => m.Active == true && m.LabelId == 3  && m.ProductType == "MainProduct").Select(m => new
+                    NewArivals = db.ProductTbls.Where(m => m.Active == true && m.LabelId == 3 && m.ProductType == "MainProduct").Select(m => new
                     {
                         Toplabel = db.LabelProductTbls.Where(l => l.LabelId == 1).Select(l => l.LTitle).FirstOrDefault(),
                         m.ProductId,
@@ -271,7 +271,7 @@ namespace GiftChoice.Controllers
         [JsonNetFilter]
         public JsonResult FilterProduct()
         {
-           
+
 
             string Keyword = Convert.ToString(Session["SearchKeyword"]);
             int Main = Convert.ToInt32(Session["Main"]);
@@ -332,14 +332,15 @@ namespace GiftChoice.Controllers
                             {
                                 ProductViewModel product = new ProductViewModel
                                 {
-                                    ProductId = Convert.ToInt32(reader["ProductId"]),
-                                    LabelId = Convert.ToInt32(reader["LabelId"]),
-                                    ProductTitle = reader["ProductTitle"].ToString(),
-                                    ProductImage = reader["PImage"].ToString(),
-                                    Price = Convert.ToDouble(reader["Price"]),
-                                    PLabel = reader["PLabel"].ToString(),
-                                    Qty = Convert.ToInt32(reader["Qty"]),
-                                    PUrl = reader["PUrl"].ToString(),
+                                    ProductId = reader["ProductId"] != DBNull.Value ? Convert.ToInt32(reader["ProductId"]) : 0,
+                                    LabelId = reader["LabelId"] != DBNull.Value ? Convert.ToInt32(reader["LabelId"]) : 0,
+                                    ProductTitle = reader["ProductTitle"] != DBNull.Value ? reader["ProductTitle"].ToString() : string.Empty,
+                                    ProductImage = reader["PImage"] != DBNull.Value ? reader["PImage"].ToString() : string.Empty,
+                                    Price = reader["Price"] != DBNull.Value ? Convert.ToDouble(reader["Price"]) : 0,
+                                    PLabel = reader["PLabel"] != DBNull.Value ? reader["PLabel"].ToString() : string.Empty,
+                                    Qty = reader["Qty"] != DBNull.Value ? Convert.ToInt32(reader["Qty"]) : 0,
+                                    PUrl = reader["PUrl"] != DBNull.Value ? reader["PUrl"].ToString() : string.Empty
+
 
 
                                 };
@@ -492,7 +493,7 @@ namespace GiftChoice.Controllers
         [JsonNetFilter]
         public JsonResult GetProductByid(int id)
         {
-           
+
             var res =
 
                db.ProductTbls.Where(p => p.ProductId == id).Select(m => new
@@ -500,9 +501,11 @@ namespace GiftChoice.Controllers
                    m.ProductId,
                    m.MainCateId,
                    m.ProductTitle,
+                   m.BannerCateId,
                    m.PLabel,
                    m.Price,
                    m.Create_at,
+                   m.ProductType,
                    m.PUrl,
                    m.PDesc,
                    m.TableDesc,
@@ -542,7 +545,7 @@ namespace GiftChoice.Controllers
         [JsonNetFilter]
         public JsonResult GetBProductByid(int id)
         {
-           
+
             var res =
 
                db.ProductTbls.Where(p => p.ProductId == id).Select(m => new
@@ -551,6 +554,7 @@ namespace GiftChoice.Controllers
                    m.MainCateId,
                    m.ProductTitle,
                    m.PLabel,
+                   m.ProductType,
                    m.Price,
                    m.Create_at,
                    m.VideoUrl,
@@ -584,7 +588,7 @@ namespace GiftChoice.Controllers
                    productDataArray = db.ProductDetailTbls.Where(p => p.ProductId == m.ProductId).Select(p => new
                    {
                        p.ProductId,
-                       p.Price,                      
+                       p.Price,
                        p.SizeId,
                        p.SizeName,
                        ProductSize = db.SizeTbls.Where(s => s.SizeId == p.SizeId).OrderByDescending(s => s.SizeTitle).Select(s => s.SizeTitle).FirstOrDefault(),
@@ -596,7 +600,7 @@ namespace GiftChoice.Controllers
         [JsonNetFilter]
         public JsonResult GetSmillerProduct(int id, int idd)
         {
-           
+
             var res =
 
                db.ProductTbls.Where(p => p.ProductId != id && p.MainCateId == idd && p.Active == true).Select(m => new
@@ -621,7 +625,7 @@ namespace GiftChoice.Controllers
         [JsonNetFilter]
         public JsonResult GetBSmillerProduct(int id, int idd)
         {
-           
+
             var res =
 
                db.ProductTbls.Where(p => p.ProductId != id && p.BannerCateId == idd && p.Active == true).Select(m => new
@@ -781,7 +785,7 @@ namespace GiftChoice.Controllers
 
         public JsonResult GetNavbarMenu()
         {
-           
+
             var res = new
             {
 
@@ -835,7 +839,7 @@ namespace GiftChoice.Controllers
 
         public JsonResult GetKeyword()
         {
-           
+
             var query = new
             {
 
@@ -847,7 +851,7 @@ namespace GiftChoice.Controllers
 
         public JsonResult SearchData(string KeyWords)
         {
-           
+
             Session["Keyword"] = KeyWords;
             var query = new
             {
@@ -1002,7 +1006,7 @@ namespace GiftChoice.Controllers
         [JsonNetFilter]
         public JsonResult FilterProductData(int[] Cid, int[] Bid, Double maxprice, Double minprice)
         {
-           
+
             if (Cid != null /*&& priceTbls != null*/)
             {
 
@@ -1159,7 +1163,7 @@ namespace GiftChoice.Controllers
             var res = new
             {
 
-                SmallBanner = db.MainCateTbls.Where(m => m.CateType == "BannerCate" &&  m.Active == true && m.Position == "Small Banner").OrderBy(m => m.Priority).Take(3),
+                SmallBanner = db.MainCateTbls.Where(m => m.CateType == "BannerCate" && m.Active == true && m.Position == "Small Banner").OrderBy(m => m.Priority).Take(3),
 
             };
 
@@ -1197,36 +1201,46 @@ namespace GiftChoice.Controllers
         public JsonResult GetBannerAsk1(int banner)
         {
             int bannerid = 0;
+            var modelstatustbl = db.MainCateTbls.Where(m => m.MainCateId == banner && m.CateType == "BannerCate").Select(m => m.ModelQuery1).FirstOrDefault();
             bool modelstatus = true;
+            if (modelstatustbl == null || modelstatustbl == false)
+            {
+
+                modelstatus = false;
+            }
+            else
+            {
+                modelstatus = true;
+            }
+
 
             if (Session["BannerId"] == null)
             {
                 bannerid = banner;
                 Session["BannerId"] = bannerid;
-             
+
             }
             else if (Session["BannerId"] != null)
             {
 
-                bannerid = Convert.ToInt32(Session["BannerId"])  ;
-                if (banner  == bannerid)
+                bannerid = Convert.ToInt32(Session["BannerId"]);
+                if (banner == bannerid)
                 {
-                     modelstatus = false;
+                    modelstatus = false;
                 }
                 else
                 {
                     bannerid = banner;
                     Session["BannerId"] = bannerid;
-                 
+
                 }
             }
 
 
 
-
             var res = new
             {
-                Querydata = db.QueryTbls.Where(m => m.Active == true && m.MainCateId == banner).Select(m => new
+                Querydata = db.QueryTbls.Where(m => m.MainCateId == banner).Select(m => new
                 {
                     m.AskQues1,
                     m.Answer,
@@ -1291,7 +1305,7 @@ namespace GiftChoice.Controllers
         [JsonNetFilter]
         public JsonResult modelTofilterBannerProduct(int[] PBanner, int BannerId)
         {
-           
+
 
             if (PBanner != null)
             {
