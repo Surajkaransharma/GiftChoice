@@ -46,17 +46,17 @@
                                             <a class="theme-button-3" href="#">{{b.Answer}}</a>
                                         </li>
                                         @*<li>
-                                            <a class="theme-button-3" href="#">Women's</a>
-                                        </li>
-                                        <li class="active">
-                                            <a class="theme-button-3" href="#">Boy's</a>
-                                        </li>
-                                        <li>
-                                            <a class="theme-button-3" href="#">Girl's</a>
-                                        </li>
-                                        <li>
-                                            <a class="theme-button-3" href="#">Kid's</a>
-                                        </li>*@
+                                                <a class="theme-button-3" href="#">Women's</a>
+                                            </li>
+                                            <li class="active">
+                                                <a class="theme-button-3" href="#">Boy's</a>
+                                            </li>
+                                            <li>
+                                                <a class="theme-button-3" href="#">Girl's</a>
+                                            </li>
+                                            <li>
+                                                <a class="theme-button-3" href="#">Kid's</a>
+                                            </li>*@
 
                                     </ul>
                                 </div>
@@ -83,40 +83,45 @@
                     <div class="row product-grid-4 g-2">
                         @*<div class="col-lg-3 col-6 col-sm-4" ng-repeat="p in ProductData | startFrom:(currentPage - 1) * pageSize | limitTo:pageSize">*@
 
-                        <div class="col-lg-2 col-12 col-sm-3" ng-repeat="p in ProductData">
-                            
-                                <div class="product-cart-wrap">
-                                    @*(Animation for top rated / selling category - class="top-rated-product")*@
-                                    <div class="product-img-action-wrap">
-                                        <div class="product-img product-img-zoom">
-                                            <a href="/Home/BGift?url={{p.PUrl}}">
-                                                <video ng-show="p.Video" width="100%" autoplay loop muted>
-                                                    <source ng-src="{{'/images/ProductVideo/' + p.Video}}" type="video/mp4">
-                                                </video>
-                                            </a>
-                                            @*<iframe  ng-show="p.VideoUrl" ng-src="{{trustSrc('https://www.youtube.com/embed/' + p.VideoUrl +'?autoplay=1&loop=1&mute=1')}}" allow="loop"></iframe>*@
-                                            @*<iframe ng-show="p.VideoUrl" id="iFrameName{{$index}}" allow="loop"></iframe>*@
+                        <div class="col-lg-2 col-6 col-sm-3" ng-repeat="p in ProductData">
 
-                                            <a href="/Home/BGift?url={{p.PUrl}}" ng-show="!p.Video">
-                                                <img class="default-img img-fluid" src="~/images/ProductImg/{{p.ProductImage}}" loading="lazy" alt="product-image" loading="lazy" alt="">
-                                                <img class="hover-img img-fluid" src="~/images/ProductImg/{{p.ProductImage}}" loading="lazy" alt="product-hover-image" loading="lazy" alt="">
-                                            </a>
-                                        </div>
-                                        <div ng-show="p.PLabel!=''" class="product-badges product-badges-position product-badges-mrg">
-                                            <span class="hot">{{p.PLabel}}</span>
-                                        </div>
+                            <div class="product-cart-wrap">
+                                @*(Animation for top rated / selling category - class="top-rated-product")*@
+                                <div class="product-img-action-wrap">
+                                    <div class="product-img product-img-zoom">
+                                        <a href="/Home/BGift?url={{p.PUrl}}">
+                                            <video ng-show="p.Video" width="100%" autoplay loop muted>
+                                                <source ng-src="{{'/images/ProductVideo/' + p.Video}}" type="video/mp4">
+                                            </video>
+                                        </a>
+                                        @*<iframe  ng-show="p.VideoUrl" ng-src="{{trustSrc('https://www.youtube.com/embed/' + p.VideoUrl +'?autoplay=1&loop=1&mute=1')}}" allow="loop"></iframe>*@
+                                        @*<iframe ng-show="p.VideoUrl" id="iFrameName{{$index}}" allow="loop"></iframe>*@
+
+                                        <a href="/Home/BGift?url={{p.PUrl}}" ng-show="!p.Video">
+                                            <img class="default-img img-fluid" src="~/images/ProductImg/{{p.ProductImage}}" loading="lazy" alt="product-image" loading="lazy" alt="">
+                                            <img class="hover-img img-fluid" src="~/images/ProductImg/{{p.ProductImage}}" loading="lazy" alt="product-hover-image" loading="lazy" alt="">
+                                        </a>
                                     </div>
-                                    <div class="product-content-wrap">
-                                        <h2 class="mt-2"><a href="/Home/BGift?url={{p.PUrl}}">{{p.ProductTitle}}</a></h2>
-                                        <div class="product-price">
-                                            <span><i class="fa fa-inr" aria-hidden="true"></i> {{p.Price}}/-</span>
-                                        </div>
+                                    <div ng-show="p.PLabel!=''" class="product-badges product-badges-position product-badges-mrg">
+                                        <span class="hot">{{p.PLabel}}</span>
+                                    </div>
+                                </div>
+                                <div class="product-content-wrap">
+                                    <h2 class="mt-2"><a href="/Home/BGift?url={{p.PUrl}}">{{p.ProductTitle}}</a></h2>
+                                    <div class="product-price">
+                                        <span><i class="fa fa-inr" aria-hidden="true"></i> {{p.Price}}/-</span>
+                                    </div>
+                                    <div class="d-flex justify-content-between">
                                         <div class="button-design mt-2">
                                             <a aria-label="Add To Cart" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight" class="btn theme-button-2" ng-click="addItemToCart($index)"><i class="fi-rs-shopping-bag-add"></i> Add To Cart </a>
                                         </div>
+                                        <div class="button-design mt-2">
+                                            <a aria-label="View Image" class="btn theme-button-3" data-bs-toggle="modal" data-bs-target="#quickview"><i class="fa fa-search" aria-hidden="true"></i></a>
+                                        </div>
                                     </div>
                                 </div>
-                            
+                            </div>
+
                         </div>
 
                     </div>
@@ -195,6 +200,28 @@
         </div>
     </div>
     <!-- Query Popup End -->
+
+
+    @* Quick View Modal Popup IMage *@
+    <div class="modal fade" id="quickview" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" role="dialog"
+         aria-labelledby="modalTitleId" aria-hidden="true">
+        <div class="modal-dialog  modal-lg" role="document">
+            <div class="modal-content position-relative">
+                <button type="button" class="btn-close position-absolute" data-bs-dismiss="modal" aria-label="Close">
+                    <i class="fa fa-times" aria-hidden="true"></i>
+                </button>
+                <div class="modal-body p-1">
+                    @* Image Code *@
+                    <img src="https://dummyimage.com/500x500/ccc/fff.jpg" alt="product image" class="img-responsive w-100">
+
+                    @* Video Code *@
+                    @*<video width="100%" autoplay loop muted>
+                        <source src="assets/imgs/video/video_1.mp4" type="video/mp4">
+                    </video>*@
+                </div>
+            </div>
+        </div>
+    </div>
 
 </main>
 

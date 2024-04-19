@@ -11229,3 +11229,16 @@ h3.section-title {
     font-size : 10px !important;
     font-weight : 600 !important;
 }
+
+#quickview .btn-close {
+    z-index: 999;
+    background: #fff;
+    height: 20px;
+    width: 20px;
+    margin: 10px;
+    font-size: 17px;
+    border-radius: 50%;
+    box-shadow: none !important;
+    color: #000;
+    right: 0;
+}
