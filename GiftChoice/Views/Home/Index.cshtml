@@ -357,8 +357,13 @@
                                     <div class="product-price">
                                         <span><i class="fa fa-inr" aria-hidden="true"></i>  {{p.Price}}/-</span>
                                     </div>
-                                    <div class="button-design mt-2">
-                                        <a data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight" aria-label="Add To Cart" class="btn theme-button-2" ng-click="addItemToCart($index)"><i class="fi-rs-shopping-bag-add"></i> Add To Cart</a>
+                                    <div class="d-flex justify-content-between">
+                                        <div class="button-design mt-2">
+                                            <a aria-label="Add To Cart" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight" class="btn theme-button-2" ng-click="addItemToCart($index)"><i class="fi-rs-shopping-bag-add"></i> Add To Cart </a>
+                                        </div>
+                                        <div class="button-design mt-2">
+                                            <a aria-label="View Image" class="btn theme-button-3" data-bs-toggle="modal" data-bs-target="#quickview"><i class="fa fa-eye" aria-hidden="true"></i></a>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

@@ -116,7 +116,7 @@
                                             <a aria-label="Add To Cart" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight" class="btn theme-button-2" ng-click="addItemToCart($index)"><i class="fi-rs-shopping-bag-add"></i> Add To Cart </a>
                                         </div>
                                         <div class="button-design mt-2">
-                                            <a aria-label="View Image" class="btn theme-button-3" data-bs-toggle="modal" data-bs-target="#quickview"><i class="fa fa-search" aria-hidden="true"></i></a>
+                                            <a aria-label="View Image" class="btn theme-button-3" data-bs-toggle="modal" data-bs-target="#quickview"><i class="fa fa-eye" aria-hidden="true"></i></a>
                                         </div>
                                     </div>
                                 </div>
@@ -202,26 +202,7 @@
     <!-- Query Popup End -->
 
 
-    @* Quick View Modal Popup IMage *@
-    <div class="modal fade" id="quickview" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" role="dialog"
-         aria-labelledby="modalTitleId" aria-hidden="true">
-        <div class="modal-dialog  modal-lg" role="document">
-            <div class="modal-content position-relative">
-                <button type="button" class="btn-close position-absolute" data-bs-dismiss="modal" aria-label="Close">
-                    <i class="fa fa-times" aria-hidden="true"></i>
-                </button>
-                <div class="modal-body p-1">
-                    @* Image Code *@
-                    <img src="https://dummyimage.com/500x500/ccc/fff.jpg" alt="product image" class="img-responsive w-100">
 
-                    @* Video Code *@
-                    @*<video width="100%" autoplay loop muted>
-                        <source src="assets/imgs/video/video_1.mp4" type="video/mp4">
-                    </video>*@
-                </div>
-            </div>
-        </div>
-    </div>
 
 </main>
 

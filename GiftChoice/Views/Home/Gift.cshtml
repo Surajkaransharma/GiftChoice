@@ -34,24 +34,24 @@
                                 <div class="detail-gallery">
 
                                     <!-- Main Image -->
-                                    
-                                        <div class="product-image-slider">
-                                            <figure class="border-radius-10" ng-repeat="i in Product.AllProductImage">
-                                                <img src="~/images/ProductImg/{{i}}" alt="product image" class="img-fluid" loading="lazy">
-                                            </figure>
 
-                                        </div>
-                                    
+                                    <div class="product-image-slider">
+                                        <figure class="border-radius-10" ng-repeat="i in Product.AllProductImage">
+                                            <img src="~/images/ProductImg/{{i}}" alt="product image" class="img-fluid" loading="lazy">
+                                        </figure>
+
+                                    </div>
+
                                     <!-- Main Image -->
                                     <!-- Small Image -->
-                                    
-                                        <div class="slider-nav-thumbnails pl-15 pr-15" ng-show="Product.AllProductImage.length>1">
-                                            <div ng-repeat="i in Product.AllProductImage" ng-show="i!=null">
-                                                <img src="~/images/ProductImg/{{i}}" ng-show="i!=null" class="img-fluid" loading="lazy" alt="product image">
-                                            </div>
-                                            <div><img src="~/images/ProductImg/{{i}}" ng-show="i!=null" class="img-fluid" loading="lazy" alt="product image"></div>
+
+                                    <div class="slider-nav-thumbnails pl-15 pr-15" ng-show="Product.AllProductImage.length>1">
+                                        <div ng-repeat="i in Product.AllProductImage" ng-show="i!=null">
+                                            <img src="~/images/ProductImg/{{i}}" ng-show="i!=null" class="img-fluid" loading="lazy" alt="product image">
                                         </div>
-                                   
+                                        <div><img src="~/images/ProductImg/{{i}}" ng-show="i!=null" class="img-fluid" loading="lazy" alt="product image"></div>
+                                    </div>
+
 
                                     <!-- Small Image -->
                                 </div>
@@ -93,24 +93,24 @@
 
 
                                     @*<div data-aos="zoom-in">
-            <div class="attr-detail attr-size mb-30" ng-show="Product.PSizeList.length>0">
-                <strong class="mr-10">Size</strong>
-                <ul class="list-filter size-filter font-small">
-                    <li ng-repeat="s in Product.PSizeList" style="margin-left:5px;"><a href="#">{{s.SizeTitle}}</a> </li>
+                                            <div class="attr-detail attr-size mb-30" ng-show="Product.PSizeList.length>0">
+                                                <strong class="mr-10">Size</strong>
+                                                <ul class="list-filter size-filter font-small">
+                                                    <li ng-repeat="s in Product.PSizeList" style="margin-left:5px;"><a href="#">{{s.SizeTitle}}</a> </li>
 
-                </ul>
-            </div>
-        </div>*@
+                                                </ul>
+                                            </div>
+                                        </div>*@
 
                                     @*<div data-aos="zoom-in">
-            <div class="attr-detail attr-size mb-30" ng-show="Product.productDataArray.length>0">
-                <strong class="mr-10">Size</strong>
-                <ul class="list-filter size-filter font-small">
-                    <li ng-repeat="s in Product.productDataArray" style="margin-left:5px;"><a ng-click="SelectSizePrice(s.ProductSize)">{{s.ProductSize}}</a> </li>
+                                            <div class="attr-detail attr-size mb-30" ng-show="Product.productDataArray.length>0">
+                                                <strong class="mr-10">Size</strong>
+                                                <ul class="list-filter size-filter font-small">
+                                                    <li ng-repeat="s in Product.productDataArray" style="margin-left:5px;"><a ng-click="SelectSizePrice(s.ProductSize)">{{s.ProductSize}}</a> </li>
 
-                </ul>
-            </div>
-        </div>*@
+                                                </ul>
+                                            </div>
+                                        </div>*@
 
                                     <div class="attr-detail attr-size mb-3" ng-if="Product.productDataArray.length>0">
                                         <strong class="mr-10">Size : </strong>
@@ -125,10 +125,10 @@
 
                                     <div class="detail-extralink">
                                         @*<div class="detail-qty border radius">
-                <a href="#" class="qty-down"><i class="fi-rs-angle-small-down"></i></a>
-                <span class="qty-val">1</span>
-                <a href="#" class="qty-up"><i class="fi-rs-angle-small-up"></i></a>
-            </div>*@
+                                                <a href="#" class="qty-down"><i class="fi-rs-angle-small-down"></i></a>
+                                                <span class="qty-val">1</span>
+                                                <a href="#" class="qty-up"><i class="fi-rs-angle-small-up"></i></a>
+                                            </div>*@
                                         <div class="d-flex align-items-center gap-3">
                                             <div class="clearfix product-price-cover p-1 mb-2   border-0 mb-0">
                                                 <div class="product-price primary-color float-left">
@@ -148,16 +148,16 @@
 
 
                                     @*<div data-aos="zoom-in">
-            <div class="social-icons single-share mb-20">
-                <ul class="text-grey-5 d-inline-block">
-                    <li><strong class="mr-10">Share this:</strong></li>
-                    <li class="social-facebook"><a href="#"><img src="assets/imgs/theme/icons/icon-facebook.svg" alt=""></a></li>
-                    <li class="social-twitter"> <a href="#"><img src="assets/imgs/theme/icons/icon-twitter.svg" alt=""></a></li>
-                    <li class="social-instagram"><a href="#"><img src="assets/imgs/theme/icons/icon-instagram.svg" alt=""></a></li>
-                    <li class="social-linkedin"><a href="#"><img src="assets/imgs/theme/icons/icon-pinterest.svg" alt=""></a></li>
-                </ul>
-            </div>
-        </div>*@
+                                            <div class="social-icons single-share mb-20">
+                                                <ul class="text-grey-5 d-inline-block">
+                                                    <li><strong class="mr-10">Share this:</strong></li>
+                                                    <li class="social-facebook"><a href="#"><img src="assets/imgs/theme/icons/icon-facebook.svg" alt=""></a></li>
+                                                    <li class="social-twitter"> <a href="#"><img src="assets/imgs/theme/icons/icon-twitter.svg" alt=""></a></li>
+                                                    <li class="social-instagram"><a href="#"><img src="assets/imgs/theme/icons/icon-instagram.svg" alt=""></a></li>
+                                                    <li class="social-linkedin"><a href="#"><img src="assets/imgs/theme/icons/icon-pinterest.svg" alt=""></a></li>
+                                                </ul>
+                                            </div>
+                                        </div>*@
 
 
 
@@ -189,8 +189,13 @@
                                             <div class="product-price">
                                                 <span><i class="fa fa-inr" aria-hidden="true"></i> {{q.Price}}/-</span>
                                             </div>
-                                            <div class="button-design mt-2">
-                                                <a aria-label="Add To Cart" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight" class="btn theme-button-2" ng-click="addItemToCart($index)"><i class="fi-rs-shopping-bag-add"></i> Add To Cart</a>
+                                            <div class="d-flex justify-content-between">
+                                                <div class="button-design mt-2">
+                                                    <a aria-label="Add To Cart" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight" class="btn theme-button-2" ng-click="addItemToCart($index)"><i class="fi-rs-shopping-bag-add"></i> Add To Cart </a>
+                                                </div>
+                                                <div class="button-design mt-2">
+                                                    <a aria-label="View Image" class="btn theme-button-3" data-bs-toggle="modal" data-bs-target="#quickview"><i class="fa fa-eye" aria-hidden="true"></i></a>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -204,6 +209,239 @@
             </div>
         </div>
     </section>
+
+
+
+
+    @* Related Product Slider Section Start *@
+    <section class="section-paddin mb-30">
+        <div class="container">
+            <h3 class="section-title mb-20 fs-14 mmb-20"><span>Related</span> Products</h3>
+            <div class="carausel-6-columns-cover position-relative">
+                <div class="slider-arrow slider-arrow-2 carausel-6-columns-arrow" id="carausel-6-columns-2-arrows"></div>
+                <div class="carausel-6-columns carausel-arrow-center" id="carausel-6-columns-2">
+                    <div class="product-cart-wrap">
+                        <div class="product-img-action-wrap">
+                            <div class="product-img border-0">
+                                <a href="#">
+                                    <img class="default-img img-fluid" src="https://dummyimage.com/400x400/ccc/fff" loading="lazy" alt="product-image">
+                                    <img class="hover-img img-fluid" src="https://dummyimage.com/400x400/ccc/fff" loading="lazy" alt="product-hover-image">
+                                </a>
+                            </div>
+                            <div class="product-badges product-badges-position product-badges-mrg">
+                                <span class="hot">New Product</span>
+                            </div>
+                        </div>
+                        <div class="product-content-wrap">
+                            <h2><a href="#">Baby Detail Frame Design 03</a></h2>
+                            <div class="product-price">
+                                <span><i class="fa fa-inr" aria-hidden="true"></i> 300/-</span>
+                            </div>
+                            <div class="d-flex justify-content-between">
+                                <div class="button-design mt-2">
+                                    <a aria-label="Add To Cart" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight" class="btn theme-button-2" ng-click="addItemToCart($index)"><i class="fi-rs-shopping-bag-add"></i> Add To Cart </a>
+                                </div>
+                                <div class="button-design mt-2">
+                                    <a aria-label="View Image" class="btn theme-button-3" data-bs-toggle="modal" data-bs-target="#quickview"><i class="fa fa-eye" aria-hidden="true"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="product-cart-wrap">
+                        <div class="product-img-action-wrap">
+                            <div class="product-img border-0">
+                                <a href="#">
+                                    <img class="default-img img-fluid" src="https://dummyimage.com/400x400/ccc/fff" loading="lazy" alt="product-image">
+                                    <img class="hover-img img-fluid" src="https://dummyimage.com/400x400/ccc/fff" loading="lazy" alt="product-hover-image">
+                                </a>
+                            </div>
+                            <div class="product-badges product-badges-position product-badges-mrg">
+                                <span class="hot">New Product</span>
+                            </div>
+                        </div>
+                        <div class="product-content-wrap">
+                            <h2><a href="#">Baby Detail Frame Design 03</a></h2>
+                            <div class="product-price">
+                                <span><i class="fa fa-inr" aria-hidden="true"></i> 300/-</span>
+                            </div>
+                            <div class="d-flex justify-content-between">
+                                <div class="button-design mt-2">
+                                    <a aria-label="Add To Cart" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight" class="btn theme-button-2" ng-click="addItemToCart($index)"><i class="fi-rs-shopping-bag-add"></i> Add To Cart </a>
+                                </div>
+                                <div class="button-design mt-2">
+                                    <a aria-label="View Image" class="btn theme-button-3" data-bs-toggle="modal" data-bs-target="#quickview"><i class="fa fa-eye" aria-hidden="true"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="product-cart-wrap">
+                        <div class="product-img-action-wrap">
+                            <div class="product-img border-0">
+                                <a href="#">
+                                    <img class="default-img img-fluid" src="https://dummyimage.com/400x400/ccc/fff" loading="lazy" alt="product-image">
+                                    <img class="hover-img img-fluid" src="https://dummyimage.com/400x400/ccc/fff" loading="lazy" alt="product-hover-image">
+                                </a>
+                            </div>
+                            <div class="product-badges product-badges-position product-badges-mrg">
+                                <span class="hot">New Product</span>
+                            </div>
+                        </div>
+                        <div class="product-content-wrap">
+                            <h2><a href="#">Baby Detail Frame Design 03</a></h2>
+                            <div class="product-price">
+                                <span><i class="fa fa-inr" aria-hidden="true"></i> 300/-</span>
+                            </div>
+                            <div class="d-flex justify-content-between">
+                                <div class="button-design mt-2">
+                                    <a aria-label="Add To Cart" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight" class="btn theme-button-2" ng-click="addItemToCart($index)"><i class="fi-rs-shopping-bag-add"></i> Add To Cart </a>
+                                </div>
+                                <div class="button-design mt-2">
+                                    <a aria-label="View Image" class="btn theme-button-3" data-bs-toggle="modal" data-bs-target="#quickview"><i class="fa fa-eye" aria-hidden="true"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="product-cart-wrap">
+                        <div class="product-img-action-wrap">
+                            <div class="product-img border-0">
+                                <a href="#">
+                                    <img class="default-img img-fluid" src="https://dummyimage.com/400x400/ccc/fff" loading="lazy" alt="product-image">
+                                    <img class="hover-img img-fluid" src="https://dummyimage.com/400x400/ccc/fff" loading="lazy" alt="product-hover-image">
+                                </a>
+                            </div>
+                            <div class="product-badges product-badges-position product-badges-mrg">
+                                <span class="hot">New Product</span>
+                            </div>
+                        </div>
+                        <div class="product-content-wrap">
+                            <h2><a href="#">Baby Detail Frame Design 03</a></h2>
+                            <div class="product-price">
+                                <span><i class="fa fa-inr" aria-hidden="true"></i> 300/-</span>
+                            </div>
+                            <div class="d-flex justify-content-between">
+                                <div class="button-design mt-2">
+                                    <a aria-label="Add To Cart" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight" class="btn theme-button-2" ng-click="addItemToCart($index)"><i class="fi-rs-shopping-bag-add"></i> Add To Cart </a>
+                                </div>
+                                <div class="button-design mt-2">
+                                    <a aria-label="View Image" class="btn theme-button-3" data-bs-toggle="modal" data-bs-target="#quickview"><i class="fa fa-eye" aria-hidden="true"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="product-cart-wrap">
+                        <div class="product-img-action-wrap">
+                            <div class="product-img border-0">
+                                <a href="#">
+                                    <img class="default-img img-fluid" src="https://dummyimage.com/400x400/ccc/fff" loading="lazy" alt="product-image">
+                                    <img class="hover-img img-fluid" src="https://dummyimage.com/400x400/ccc/fff" loading="lazy" alt="product-hover-image">
+                                </a>
+                            </div>
+                            <div class="product-badges product-badges-position product-badges-mrg">
+                                <span class="hot">New Product</span>
+                            </div>
+                        </div>
+                        <div class="product-content-wrap">
+                            <h2><a href="#">Baby Detail Frame Design 03</a></h2>
+                            <div class="product-price">
+                                <span><i class="fa fa-inr" aria-hidden="true"></i> 300/-</span>
+                            </div>
+                            <div class="d-flex justify-content-between">
+                                <div class="button-design mt-2">
+                                    <a aria-label="Add To Cart" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight" class="btn theme-button-2" ng-click="addItemToCart($index)"><i class="fi-rs-shopping-bag-add"></i> Add To Cart </a>
+                                </div>
+                                <div class="button-design mt-2">
+                                    <a aria-label="View Image" class="btn theme-button-3" data-bs-toggle="modal" data-bs-target="#quickview"><i class="fa fa-eye" aria-hidden="true"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="product-cart-wrap">
+                        <div class="product-img-action-wrap">
+                            <div class="product-img border-0">
+                                <a href="#">
+                                    <img class="default-img img-fluid" src="https://dummyimage.com/400x400/ccc/fff" loading="lazy" alt="product-image">
+                                    <img class="hover-img img-fluid" src="https://dummyimage.com/400x400/ccc/fff" loading="lazy" alt="product-hover-image">
+                                </a>
+                            </div>
+                            <div class="product-badges product-badges-position product-badges-mrg">
+                                <span class="hot">New Product</span>
+                            </div>
+                        </div>
+                        <div class="product-content-wrap">
+                            <h2><a href="#">Baby Detail Frame Design 03</a></h2>
+                            <div class="product-price">
+                                <span><i class="fa fa-inr" aria-hidden="true"></i> 300/-</span>
+                            </div>
+                            <div class="d-flex justify-content-between">
+                                <div class="button-design mt-2">
+                                    <a aria-label="Add To Cart" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight" class="btn theme-button-2" ng-click="addItemToCart($index)"><i class="fi-rs-shopping-bag-add"></i> Add To Cart </a>
+                                </div>
+                                <div class="button-design mt-2">
+                                    <a aria-label="View Image" class="btn theme-button-3" data-bs-toggle="modal" data-bs-target="#quickview"><i class="fa fa-eye" aria-hidden="true"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="product-cart-wrap">
+                        <div class="product-img-action-wrap">
+                            <div class="product-img border-0">
+                                <a href="#">
+                                    <img class="default-img img-fluid" src="https://dummyimage.com/400x400/ccc/fff" loading="lazy" alt="product-image">
+                                    <img class="hover-img img-fluid" src="https://dummyimage.com/400x400/ccc/fff" loading="lazy" alt="product-hover-image">
+                                </a>
+                            </div>
+                            <div class="product-badges product-badges-position product-badges-mrg">
+                                <span class="hot">New Product</span>
+                            </div>
+                        </div>
+                        <div class="product-content-wrap">
+                            <h2><a href="#">Baby Detail Frame Design 03</a></h2>
+                            <div class="product-price">
+                                <span><i class="fa fa-inr" aria-hidden="true"></i> 300/-</span>
+                            </div>
+                            <div class="d-flex justify-content-between">
+                                <div class="button-design mt-2">
+                                    <a aria-label="Add To Cart" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight" class="btn theme-button-2" ng-click="addItemToCart($index)"><i class="fi-rs-shopping-bag-add"></i> Add To Cart </a>
+                                </div>
+                                <div class="button-design mt-2">
+                                    <a aria-label="View Image" class="btn theme-button-3" data-bs-toggle="modal" data-bs-target="#quickview"><i class="fa fa-eye" aria-hidden="true"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="product-cart-wrap">
+                        <div class="product-img-action-wrap">
+                            <div class="product-img border-0">
+                                <a href="#">
+                                    <img class="default-img img-fluid" src="https://dummyimage.com/400x400/ccc/fff" loading="lazy" alt="product-image">
+                                    <img class="hover-img img-fluid" src="https://dummyimage.com/400x400/ccc/fff" loading="lazy" alt="product-hover-image">
+                                </a>
+                            </div>
+                            <div class="product-badges product-badges-position product-badges-mrg">
+                                <span class="hot">New Product</span>
+                            </div>
+                        </div>
+                        <div class="product-content-wrap">
+                            <h2><a href="#">Baby Detail Frame Design 03</a></h2>
+                            <div class="product-price">
+                                <span><i class="fa fa-inr" aria-hidden="true"></i> 300/-</span>
+                            </div>
+                            <div class="d-flex justify-content-between">
+                                <div class="button-design mt-2">
+                                    <a aria-label="Add To Cart" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight" class="btn theme-button-2" ng-click="addItemToCart($index)"><i class="fi-rs-shopping-bag-add"></i> Add To Cart </a>
+                                </div>
+                                <div class="button-design mt-2">
+                                    <a aria-label="View Image" class="btn theme-button-3" data-bs-toggle="modal" data-bs-target="#quickview"><i class="fa fa-eye" aria-hidden="true"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    @* Related Product Slider Section End *@
+
 
 
     <!-- Design Banner Start -->

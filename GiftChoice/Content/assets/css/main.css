@@ -2065,7 +2065,7 @@ label {
 /*Carausel*/
 .carausel-6-columns-cover .carausel-6-columns {
     overflow: hidden;
-    margin: 0 -12px;
+    /*margin: 0 -12px;*/
 }
 
     .carausel-6-columns-cover .carausel-6-columns .card-1 {
@@ -11216,8 +11216,8 @@ h3.section-title {
 }
 
 
-.theme-text-size-18{
-    font-size : 18px !important;
+.theme-text-size-18 {
+    font-size: 18px !important;
 }
 
 .theme-text-size-16 {
@@ -11226,8 +11226,8 @@ h3.section-title {
 
 .video-button {
     padding: 1px 20px !important;
-    font-size : 10px !important;
-    font-weight : 600 !important;
+    font-size: 10px !important;
+    font-weight: 600 !important;
 }
 
 #quickview .btn-close {
@@ -11241,4 +11241,25 @@ h3.section-title {
     box-shadow: none !important;
     color: #000;
     right: 0;
+}
+
+.fs-14{
+    font-size : 14px !important;
+}
+@media only screen and (max-width : 767px) {
+    .carausel-6-columns-cover .slider-arrow {
+        top: -42px !important;
+    }
+    .mmb-0{
+        margin-bottom : 20px !important;
+    }
+    .carausel-6-columns-cover .slider-arrow .slider-btn.slider-prev{
+        right : 30px;
+    }
+    .slider-arrow.slider-arrow-2 .slider-btn {
+        width: 25px;
+        height: 25px;
+        line-height: 27px;
+        font-size: 10px;
+    }
 }
