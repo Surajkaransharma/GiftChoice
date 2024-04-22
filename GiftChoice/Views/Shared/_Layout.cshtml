@@ -302,7 +302,7 @@
                     </div>
 
                 </div>
-                <div class="related-data mt-4 bg-light p-2 mb-6">
+                <div class="related-data mt-4 bg-light p-2 mb-6" style="display: none">
                     <h6 class="mt-2">Related Product</h6>
                     <div class="products mt-3">
                         <div class="cart-product">
@@ -417,12 +417,17 @@
                     </button>
                     <div class="modal-body p-1">
                         @* Image Code *@
-                        <img src="https://dummyimage.com/500x500/ccc/fff.jpg" alt="product image" class="img-responsive w-100">
+                        <a href="/Home/BGift?url={{product.PUrl}}" ng-show="!product.Video">
 
+                            <img ng-show="!product.Video" src="~/images/ProductImg/{{product.ProductImage}}" alt="product image" class="img-responsive w-100">
+                        </a>
                         @* Video Code *@
-                        @*<video width="100%" autoplay loop muted>
-                            <source src="assets/imgs/video/video_1.mp4" type="video/mp4">
-                        </video>*@
+                        <a href="/Home/BGift?url={{product.PUrl}}">
+                            <video width="100%" autoplay loop muted ng-show="product.Video" id="pVideo">
+                                <source type="video/mp4">
+                            </video>
+                        </a>
+
                     </div>
                 </div>
             </div>

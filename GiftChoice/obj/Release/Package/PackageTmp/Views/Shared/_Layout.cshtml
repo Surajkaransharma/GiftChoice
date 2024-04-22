@@ -29,7 +29,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;400;500&display=swap" rel="stylesheet">
 
     <!-- Amination Link -->
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    @*<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">*@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
 
     <!-- Angular Js Links-->
@@ -43,17 +43,18 @@
         <header class="header-area header-style-4 header-height-2">
 
             <!-- Topbar Section Start -->
-            <div class="header-top header-top-ptb-1 d-none d-lg-block d-sm-none">
+            <div class="header-top header-top-ptb-1">
                 <div class="container">
                     <div class="row align-items-center">
                         <div class="col-xl-9 col-lg-9">
                             <div class="header-info">
                                 <ul>
-                                    <li><i class="fi-rs-marker"></i><a href="https://goo.gl/maps/kRtQzQX6ASj5CYfJ7" target="_blank">Bhilwara Furniture House Near Sitaram Ji Ki Bawri, Bhilwara,311001- Rajasthan, INDIA</a></li>
+                                    <li class="d-lg-block d-sm-block d-none"><i class="fi-rs-marker"></i><a href="https://goo.gl/maps/kRtQzQX6ASj5CYfJ7" target="_blank">Bhilwara Furniture House Near Sitaram Ji Ki Bawri, Bhilwara,311001- Rajasthan, INDIA</a></li>
+                                    <li class="d-lg-none d-sm-none d-block text-center fs-9"><b>Working Time</b> : 10:00AM to 8:00PM</li>
                                 </ul>
                             </div>
                         </div>
-                        <div class="col-xl-3 col-lg-3">
+                        <div class="col-xl-3 col-lg-3 d-none d-lg-block d-sm-none">
                             <div class="header-info header-info-right">
                                 <ul>
                                     <li>
@@ -107,7 +108,7 @@
                             <div class="header-action-right">
                                 <div class="header-action-2">
                                     <div class="header-action-icon-2" ng-init="GetCart()">
-                                        <a class="mini-cart-icon" href="/Home/Cart">
+                                        <a class="mini-cart-icon" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">
                                             <img alt="cart-image" src="~/Content/assets/imgs/theme/icons/icon-cart.svg">
                                             <span class="pro-count blue">{{cart.length==null?0:cart.length}}</span>
                                         </a>
@@ -134,9 +135,9 @@
                                         <li ng-repeat="n in NavbarMenuList">
                                             <a href="/Home/shop?Main={{n.MTitle}}">{{n.MTitle}} @*<i ng-show="n.Submenu.length>0" class="fi-rs-angle-down"></i>*@</a>
                                             @*<ul class="sub-menu" ng-show="n.Submenu.length>0">
-                                                    <li ng-repeat="s in n.Submenu"><a href="/Home/shop?Keyword={{s.SubmenuTitle.Keyword}}">{{s.SubmenuTitle.Keyword}}</a></li>
+                                                <li ng-repeat="s in n.Submenu"><a href="/Home/shop?Keyword={{s.SubmenuTitle.Keyword}}">{{s.SubmenuTitle.Keyword}}</a></li>
 
-                                                </ul>*@
+                                            </ul>*@
                                         </li>
 
                                         <li ng-show='NavbarMenuList.length>5'>
@@ -155,7 +156,7 @@
                         <div class="header-action-right d-block d-lg-none">
                             <div class="header-action-2">
                                 <div class="header-action-icon-2" ng-init="GetCart()">
-                                    <a class="mini-cart-icon" href="/Home/Cart">
+                                    <a class="mini-cart-icon" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">
                                         <img alt="Evara" src="~/Content/assets/imgs/theme/icons/icon-cart.svg">
                                         <span class="pro-count white">{{cart.length==null?0:cart.length}}</span>
                                     </a>
@@ -214,11 +215,11 @@
                                     <span class="menu-expand"></span><a href="/Home/shop?Main={{n.MTitle}}">{{n.MTitle}} </a>
                                     @*<ul class="dropdown" ng-show="n.Submenu.length>0">
 
-                                            <li ng-repeat="s in n.Submenu">
-                                                <a href="/Home/shop/{{s.SubmenuTitle.KUrl}}">{{s.SubmenuTitle.Keyword}}</a>
-                                            </li>
+                                        <li ng-repeat="s in n.Submenu">
+                                            <a href="/Home/shop/{{s.SubmenuTitle.KUrl}}">{{s.SubmenuTitle.Keyword}}</a>
+                                        </li>
 
-                                        </ul>*@
+                                    </ul>*@
                                 </li>
 
                                 <li class="menu-item-has-children" ng-show="NavbarMenuList.length>5">
@@ -277,31 +278,178 @@
             </div>
         </div>
         <!-- Mobile Sidebar End -->
+        <!-- Cart Sidebar -->
+        <div class="offcanvas offcanvas-end w-90 sidebar-product-cart" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+            <div class="offcanvas-header border-bottom ">
+                <h5 id="offcanvasRightLabel theme-text-size font-weight-600">Your Cart</h5>
+                <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            </div>
+            <div class="offcanvas-body">
+                <div class="cart-product">
+                    <div class="card rounded-0 p-2 border-0 mb-1" ng-repeat="i in cart track by $index">
+                        <div class="d-flex justify-content-between">
+                            <div class="product-image">
+                                <a href="/Home/Gift?url={{i.PUrl}}">  <img src="~/images/ProductImg/{{i.ProductImage}}" alt="product image" class="img-fluid" width="60"></a>
+                            </div>
+                            <div class="sidebar-product-detail mt-1">
+                                <h4 class="mb-2 theme-text-size-13">     <a href="/Home/Gift?url={{i.PUrl}}">{{i.ProductTitle}}</a></h4>
+                                <h5 class="theme-text-size"><i class="fa fa-inr" aria-hidden="true"></i>{{i.Price}}</h5>
+                            </div>
+                            <div class="remove-btn" align="end">
+                                <a ng-click="removeItemFromCart($index)" class="theme-button-2"> <i class="fa fa-trash" aria-hidden="true"></i></a>
+                            </div>
+                        </div>
+                    </div>
 
-        @RenderBody()
-        <footer class="main">
-
-            <!-- Green Box Start -->
-            <section class="newsletter p-30 text-white wow fadeIn animated">
-                <div class="container">
-                    <div class="row align-items-center">
+                </div>
+                <div class="related-data mt-4 bg-light p-2 mb-6" style="display: none">
+                    <h6 class="mt-2">Related Product</h6>
+                    <div class="products mt-3">
+                        <div class="cart-product">
+                            <div class="card rounded-0 p-2 bg-white border-0 mb-1">
+                                <div class="d-flex justify-content-between">
+                                    <div class="product-image">
+                                        <img src="https://dummyimage.com/100x100/ccc/fff.jpg" alt="product image" class="img-fluid" width="50">
+                                    </div>
+                                    <div class="sidebar-product-detail mt-1">
+                                        <h4 class="mb-2 theme-text-size-13"><a href="#">Product Name Here</a></h4>
+                                        <h5 class="theme-text-size"><i class="fa fa-inr" aria-hidden="true"></i> 200.00</h5>
+                                    </div>
+                                    <div class="add-btn" align="end">
+                                        <a href="#" class="theme-button-2"> <i class="fa fa-plus" aria-hidden="true"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card rounded-0 p-2 bg-white border-0 mb-1">
+                                <div class="d-flex justify-content-between">
+                                    <div class="product-image">
+                                        <img src="https://dummyimage.com/100x100/ccc/fff.jpg" alt="product image" class="img-fluid" width="50">
+                                    </div>
+                                    <div class="sidebar-product-detail mt-1">
+                                        <h4 class="mb-2 theme-text-size-13"><a href="#">Product Name Here</a></h4>
+                                        <h5 class="theme-text-size"><i class="fa fa-inr" aria-hidden="true"></i> 200.00</h5>
+                                    </div>
+                                    <div class="add-btn" align="end">
+                                        <a href="#" class="theme-button-2"> <i class="fa fa-plus" aria-hidden="true"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card rounded-0 p-2 bg-white border-0 mb-1">
+                                <div class="d-flex justify-content-between">
+                                    <div class="product-image">
+                                        <img src="https://dummyimage.com/100x100/ccc/fff.jpg" alt="product image" class="img-fluid" width="50">
+                                    </div>
+                                    <div class="sidebar-product-detail mt-1">
+                                        <h4 class="mb-2 theme-text-size-13"><a href="#">Product Name Here</a></h4>
+                                        <h5 class="theme-text-size"><i class="fa fa-inr" aria-hidden="true"></i> 200.00</h5>
+                                    </div>
+                                    <div class="add-btn" align="end">
+                                        <a href="#" class="theme-button-2"> <i class="fa fa-plus" aria-hidden="true"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card rounded-0 p-2 bg-white border-0 mb-1">
+                                <div class="d-flex justify-content-between">
+                                    <div class="product-image">
+                                        <img src="https://dummyimage.com/100x100/ccc/fff.jpg" alt="product image" class="img-fluid" width="50">
+                                    </div>
+                                    <div class="sidebar-product-detail mt-1">
+                                        <h4 class="mb-2 theme-text-size-13"><a href="#">Product Name Here</a></h4>
+                                        <h5 class="theme-text-size"><i class="fa fa-inr" aria-hidden="true"></i> 200.00</h5>
+                                    </div>
+                                    <div class="add-btn" align="end">
+                                        <a href="#" class="theme-button-2"> <i class="fa fa-plus" aria-hidden="true"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card rounded-0 p-2 bg-white border-0 mb-1">
+                                <div class="d-flex justify-content-between">
+                                    <div class="product-image">
+                                        <img src="https://dummyimage.com/100x100/ccc/fff.jpg" alt="product image" class="img-fluid" width="50">
+                                    </div>
+                                    <div class="sidebar-product-detail mt-1">
+                                        <h4 class="mb-2 theme-text-size-13"><a href="#">Product Name Here</a></h4>
+                                        <h5 class="theme-text-size"><i class="fa fa-inr" aria-hidden="true"></i> 200.00</h5>
+                                    </div>
+                                    <div class="add-btn" align="end">
+                                        <a href="#" class="theme-button-2"> <i class="fa fa-plus" aria-hidden="true"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card rounded-0 p-2 bg-white border-0 mb-1">
+                                <div class="d-flex justify-content-between">
+                                    <div class="product-image">
+                                        <img src="https://dummyimage.com/100x100/ccc/fff.jpg" alt="product image" class="img-fluid" width="50">
+                                    </div>
+                                    <div class="sidebar-product-detail mt-1">
+                                        <h4 class="mb-2 theme-text-size-13"><a href="#">Product Name Here</a></h4>
+                                        <h5 class="theme-text-size"><i class="fa fa-inr" aria-hidden="true"></i> 200.00</h5>
+                                    </div>
+                                    <div class="add-btn" align="end">
+                                        <a href="#" class="theme-button-2"> <i class="fa fa-plus" aria-hidden="true"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </section>
-            <!-- Green Box End -->
+
+                <div class="buttons bg-white p-2">
+                    <div class="d-flex justify-content-center gap-2 ">
+                        <div class="view-cart-button">
+                            <a name="" id="" class="btn theme-button-3 w-100 theme-text-size p-2" href="/Home/Cart" role="button">Go to Cart</a>
+                        </div>
+                        <div class="checkout-button">
+                            <a name="" id="" class="btn theme-button-2 w-100 theme-text-size p-2" href="https://wa.me/+917877341189?text={{whatsappdata}}" target="_blank" role="button">Share On Whatsapp</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Cart Sidebar -->
+        @* Quick View Modal Popup IMage *@
+        <div class="modal fade" id="quickview" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" role="dialog"
+             aria-labelledby="modalTitleId" aria-hidden="true">
+            <div class="modal-dialog  modal-lg" role="document">
+                <div class="modal-content position-relative">
+                    <button type="button" class="btn-close position-absolute" data-bs-dismiss="modal" aria-label="Close">
+                        <i class="fa fa-times" aria-hidden="true"></i>
+                    </button>
+                    <div class="modal-body p-1">
+                        @* Image Code *@
+                        <a href="/Home/BGift?url={{product.PUrl}}" ng-show="!product.Video">
+
+                            <img ng-show="!product.Video" src="~/images/ProductImg/{{product.ProductImage}}" alt="product image" class="img-responsive w-100">
+                        </a>
+                        @* Video Code *@
+                        <a href="/Home/BGift?url={{product.PUrl}}">
+                            <video width="100%" autoplay loop muted ng-show="product.Video" id="pVideo">
+                                <source type="video/mp4">
+                            </video>
+                        </a>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        @RenderBody()
+        <footer class="main border-top">
+
             <!-- Main Footer Section Start -->
             <section class="section-padding footer-mid">
                 <div class="container pt-15 pb-20">
                     <div class="row align-items-center">
                         <div class="col-lg-5 col-sm-5">
                             <div class="widget-about font-md mb-md-5 mb-lg-0">
-                                <div class="logo logo-width-1 wow fadeIn animated">
+                                <div class="logo logo-width-1">
                                     <a href="/Home/Index"><img src="~/Content/assets/imgs/resources/gift-choice-vertical.webp" alt="logo" class="img-fluid"></a>
                                 </div>
-                                <p class="wow fadeIn animated text-justify">
+                                <p class="text-justify">
                                     Discover a world of personalized gifts that make every moment extraordinary. At Gift Choice Bhilwara, we believe in the magic of unique and special presents.
                                 </p>
-                                <div class="mobile-social-icon wow fadeIn animated mb-sm-5 mt-3 mb-md-0">
+                                <div class="mobile-social-icon mb-sm-5 mt-3 mb-md-0">
                                     <a href="https://www.facebook.com/giftchoicebhl" target="_blank">
                                         <i class="fa fa-facebook" aria-hidden="true"></i>
                                     </a>
@@ -321,15 +469,15 @@
                             </div>
                         </div>
                         <div class="offest-lg-2 offset-md-1 col-lg-5 col-sm-5">
-                            <h5 class="widget-title wow fadeIn animated">Help &amp; Support</h5>
+                            <h5 class="widget-title">Help &amp; Support</h5>
                             <div class="widget-about font-md mb-md-5 mb-lg-0">
-                                <p class="wow fadeIn animated">
+                                <p class="">
                                     <strong>Address: </strong>Bhilwara Furniture House Near Sitaram Ji Ki Bawri, Bhilwara,311001- Rajasthan, INDIA
                                 </p>
-                                <p class="wow fadeIn animated">
+                                <p class="">
                                     <strong>Contact: </strong>+91 79769-48872 <br><span class="text-dark"><i class="fa fa-clock-o" aria-hidden="true"></i> 10:00AM to 8:00PM</span>
                                 </p>
-                                <p class="wow fadeIn animated">
+                                <p class="footer-mid">
                                     <strong>Email: </strong>yashj.6628@gmail.com
                                 </p>
                             </div>
@@ -340,16 +488,16 @@
             <!-- Main Footer Section End -->
 
 
-            <div class="container pb-20 wow fadeIn animated">
+            <div class="container pb-20">
                 <div class="row">
                     <div class="col-12 mb-20">
                         <div class="footer-bottom"></div>
                     </div>
                     <div class="col-lg-6">
-                        <p class="float-md-left font-sm text-muted mb-0">&copy; 2023 <a href="/Home/Index"> <strong class="text-brand">Gift Choice Bhilwara</strong></a> </p>
+                        <p class="float-md-left theme-text-size text-muted mb-0">&copy; 2023 <a href="/Home/Index"> <strong class="text-brand">Gift Choice Bhilwara</strong></a> </p>
                     </div>
                     <div class="col-lg-6">
-                        <p class="text-lg-end text-start font-sm text-muted mb-0">
+                        <p class="text-lg-end text-start theme-text-size text-muted mb-0">
                             Designed by <a href="#" target="_blank">Friends Fix It</a>. All rights reserved
                         </p>
                     </div>
@@ -386,10 +534,10 @@
     <script src="~/Content/assets/js/shop.js"></script>
     <script src="~/Angularjs/toast-alert/toastr.js"></script>
     <!-- AOS Animation -->
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script>
-        AOS.init();
-    </script>
+    @*<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+        <script>
+            AOS.init();
+        </script>*@
 
 </body>
 </html>

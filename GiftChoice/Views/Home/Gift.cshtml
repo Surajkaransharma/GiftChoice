@@ -166,7 +166,7 @@
                         </div>
                         <!-- Product Section End -->
                         <!-- Related Product Start -->
-                        <div class="row mt-60">
+                        <div class="row mt-60" style="display: none">
                             <div class="col-12">
                                 <h3 class="section-title style-1 mb-20 theme-text-size-13">Related Gifts</h3>
                             </div>
@@ -194,7 +194,7 @@
                                                     <a aria-label="Add To Cart" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight" class="btn theme-button-2" ng-click="addItemToCart($index)"><i class="fi-rs-shopping-bag-add"></i> Add To Cart </a>
                                                 </div>
                                                 <div class="button-design mt-2">
-                                                    <a aria-label="View Image" class="btn theme-button-3" data-bs-toggle="modal" data-bs-target="#quickview"><i class="fa fa-eye" aria-hidden="true"></i></a>
+                                                    <a aria-label="View Image" class="btn theme-button-3" ng-click="quickview(q)"><i class="fa fa-eye" aria-hidden="true"></i></a>
                                                 </div>
                                             </div>
                                         </div>
@@ -220,222 +220,37 @@
             <div class="carausel-6-columns-cover position-relative">
                 <div class="slider-arrow slider-arrow-2 carausel-6-columns-arrow" id="carausel-6-columns-2-arrows"></div>
                 <div class="carausel-6-columns carausel-arrow-center" id="carausel-6-columns-2">
-                    <div class="product-cart-wrap">
+                    <div class="product-cart-wrap" ng-repeat="q in ProductData" ng-click="RecentViewData($index)">
                         <div class="product-img-action-wrap">
                             <div class="product-img border-0">
-                                <a href="#">
-                                    <img class="default-img img-fluid" src="https://dummyimage.com/400x400/ccc/fff" loading="lazy" alt="product-image">
-                                    <img class="hover-img img-fluid" src="https://dummyimage.com/400x400/ccc/fff" loading="lazy" alt="product-hover-image">
+                                <a href="/Home/Gift?url={{q.PUrl}}">
+
+                                    <img class="default-img img-fluid" src="~/images/ProductImg/{{q.ProductImage}}" loading="lazy" alt="product-image">
+                                    <img class="hover-img img-fluid" src="~/images/ProductImg/{{q.ProductImage}}" loading="lazy" alt="product-hover-image">
                                 </a>
                             </div>
-                            <div class="product-badges product-badges-position product-badges-mrg">
-                                <span class="hot">New Product</span>
+                            <div class="product-badges product-badges-position product-badges-mrg" ng-show="q.PLabel!=''">
+                                <span class="hot">{{q.PLabel}}</span>
                             </div>
                         </div>
                         <div class="product-content-wrap">
-                            <h2><a href="#">Baby Detail Frame Design 03</a></h2>
+                            <h2><a href="/Home/Gift?url={{q.PUrl}}">{{q.ProductTitle}}</a></h2>
+
                             <div class="product-price">
-                                <span><i class="fa fa-inr" aria-hidden="true"></i> 300/-</span>
+                                <span><i class="fa fa-inr" aria-hidden="true"></i> {{q.Price}}/-</span>
+
                             </div>
                             <div class="d-flex justify-content-between">
                                 <div class="button-design mt-2">
                                     <a aria-label="Add To Cart" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight" class="btn theme-button-2" ng-click="addItemToCart($index)"><i class="fi-rs-shopping-bag-add"></i> Add To Cart </a>
                                 </div>
                                 <div class="button-design mt-2">
-                                    <a aria-label="View Image" class="btn theme-button-3" data-bs-toggle="modal" data-bs-target="#quickview"><i class="fa fa-eye" aria-hidden="true"></i></a>
+                                    <a aria-label="View Image" class="btn theme-button-3" ng-click="quickview(q)"><i class="fa fa-eye" aria-hidden="true"></i></a>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="product-cart-wrap">
-                        <div class="product-img-action-wrap">
-                            <div class="product-img border-0">
-                                <a href="#">
-                                    <img class="default-img img-fluid" src="https://dummyimage.com/400x400/ccc/fff" loading="lazy" alt="product-image">
-                                    <img class="hover-img img-fluid" src="https://dummyimage.com/400x400/ccc/fff" loading="lazy" alt="product-hover-image">
-                                </a>
-                            </div>
-                            <div class="product-badges product-badges-position product-badges-mrg">
-                                <span class="hot">New Product</span>
-                            </div>
-                        </div>
-                        <div class="product-content-wrap">
-                            <h2><a href="#">Baby Detail Frame Design 03</a></h2>
-                            <div class="product-price">
-                                <span><i class="fa fa-inr" aria-hidden="true"></i> 300/-</span>
-                            </div>
-                            <div class="d-flex justify-content-between">
-                                <div class="button-design mt-2">
-                                    <a aria-label="Add To Cart" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight" class="btn theme-button-2" ng-click="addItemToCart($index)"><i class="fi-rs-shopping-bag-add"></i> Add To Cart </a>
-                                </div>
-                                <div class="button-design mt-2">
-                                    <a aria-label="View Image" class="btn theme-button-3" data-bs-toggle="modal" data-bs-target="#quickview"><i class="fa fa-eye" aria-hidden="true"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="product-cart-wrap">
-                        <div class="product-img-action-wrap">
-                            <div class="product-img border-0">
-                                <a href="#">
-                                    <img class="default-img img-fluid" src="https://dummyimage.com/400x400/ccc/fff" loading="lazy" alt="product-image">
-                                    <img class="hover-img img-fluid" src="https://dummyimage.com/400x400/ccc/fff" loading="lazy" alt="product-hover-image">
-                                </a>
-                            </div>
-                            <div class="product-badges product-badges-position product-badges-mrg">
-                                <span class="hot">New Product</span>
-                            </div>
-                        </div>
-                        <div class="product-content-wrap">
-                            <h2><a href="#">Baby Detail Frame Design 03</a></h2>
-                            <div class="product-price">
-                                <span><i class="fa fa-inr" aria-hidden="true"></i> 300/-</span>
-                            </div>
-                            <div class="d-flex justify-content-between">
-                                <div class="button-design mt-2">
-                                    <a aria-label="Add To Cart" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight" class="btn theme-button-2" ng-click="addItemToCart($index)"><i class="fi-rs-shopping-bag-add"></i> Add To Cart </a>
-                                </div>
-                                <div class="button-design mt-2">
-                                    <a aria-label="View Image" class="btn theme-button-3" data-bs-toggle="modal" data-bs-target="#quickview"><i class="fa fa-eye" aria-hidden="true"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="product-cart-wrap">
-                        <div class="product-img-action-wrap">
-                            <div class="product-img border-0">
-                                <a href="#">
-                                    <img class="default-img img-fluid" src="https://dummyimage.com/400x400/ccc/fff" loading="lazy" alt="product-image">
-                                    <img class="hover-img img-fluid" src="https://dummyimage.com/400x400/ccc/fff" loading="lazy" alt="product-hover-image">
-                                </a>
-                            </div>
-                            <div class="product-badges product-badges-position product-badges-mrg">
-                                <span class="hot">New Product</span>
-                            </div>
-                        </div>
-                        <div class="product-content-wrap">
-                            <h2><a href="#">Baby Detail Frame Design 03</a></h2>
-                            <div class="product-price">
-                                <span><i class="fa fa-inr" aria-hidden="true"></i> 300/-</span>
-                            </div>
-                            <div class="d-flex justify-content-between">
-                                <div class="button-design mt-2">
-                                    <a aria-label="Add To Cart" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight" class="btn theme-button-2" ng-click="addItemToCart($index)"><i class="fi-rs-shopping-bag-add"></i> Add To Cart </a>
-                                </div>
-                                <div class="button-design mt-2">
-                                    <a aria-label="View Image" class="btn theme-button-3" data-bs-toggle="modal" data-bs-target="#quickview"><i class="fa fa-eye" aria-hidden="true"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="product-cart-wrap">
-                        <div class="product-img-action-wrap">
-                            <div class="product-img border-0">
-                                <a href="#">
-                                    <img class="default-img img-fluid" src="https://dummyimage.com/400x400/ccc/fff" loading="lazy" alt="product-image">
-                                    <img class="hover-img img-fluid" src="https://dummyimage.com/400x400/ccc/fff" loading="lazy" alt="product-hover-image">
-                                </a>
-                            </div>
-                            <div class="product-badges product-badges-position product-badges-mrg">
-                                <span class="hot">New Product</span>
-                            </div>
-                        </div>
-                        <div class="product-content-wrap">
-                            <h2><a href="#">Baby Detail Frame Design 03</a></h2>
-                            <div class="product-price">
-                                <span><i class="fa fa-inr" aria-hidden="true"></i> 300/-</span>
-                            </div>
-                            <div class="d-flex justify-content-between">
-                                <div class="button-design mt-2">
-                                    <a aria-label="Add To Cart" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight" class="btn theme-button-2" ng-click="addItemToCart($index)"><i class="fi-rs-shopping-bag-add"></i> Add To Cart </a>
-                                </div>
-                                <div class="button-design mt-2">
-                                    <a aria-label="View Image" class="btn theme-button-3" data-bs-toggle="modal" data-bs-target="#quickview"><i class="fa fa-eye" aria-hidden="true"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="product-cart-wrap">
-                        <div class="product-img-action-wrap">
-                            <div class="product-img border-0">
-                                <a href="#">
-                                    <img class="default-img img-fluid" src="https://dummyimage.com/400x400/ccc/fff" loading="lazy" alt="product-image">
-                                    <img class="hover-img img-fluid" src="https://dummyimage.com/400x400/ccc/fff" loading="lazy" alt="product-hover-image">
-                                </a>
-                            </div>
-                            <div class="product-badges product-badges-position product-badges-mrg">
-                                <span class="hot">New Product</span>
-                            </div>
-                        </div>
-                        <div class="product-content-wrap">
-                            <h2><a href="#">Baby Detail Frame Design 03</a></h2>
-                            <div class="product-price">
-                                <span><i class="fa fa-inr" aria-hidden="true"></i> 300/-</span>
-                            </div>
-                            <div class="d-flex justify-content-between">
-                                <div class="button-design mt-2">
-                                    <a aria-label="Add To Cart" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight" class="btn theme-button-2" ng-click="addItemToCart($index)"><i class="fi-rs-shopping-bag-add"></i> Add To Cart </a>
-                                </div>
-                                <div class="button-design mt-2">
-                                    <a aria-label="View Image" class="btn theme-button-3" data-bs-toggle="modal" data-bs-target="#quickview"><i class="fa fa-eye" aria-hidden="true"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="product-cart-wrap">
-                        <div class="product-img-action-wrap">
-                            <div class="product-img border-0">
-                                <a href="#">
-                                    <img class="default-img img-fluid" src="https://dummyimage.com/400x400/ccc/fff" loading="lazy" alt="product-image">
-                                    <img class="hover-img img-fluid" src="https://dummyimage.com/400x400/ccc/fff" loading="lazy" alt="product-hover-image">
-                                </a>
-                            </div>
-                            <div class="product-badges product-badges-position product-badges-mrg">
-                                <span class="hot">New Product</span>
-                            </div>
-                        </div>
-                        <div class="product-content-wrap">
-                            <h2><a href="#">Baby Detail Frame Design 03</a></h2>
-                            <div class="product-price">
-                                <span><i class="fa fa-inr" aria-hidden="true"></i> 300/-</span>
-                            </div>
-                            <div class="d-flex justify-content-between">
-                                <div class="button-design mt-2">
-                                    <a aria-label="Add To Cart" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight" class="btn theme-button-2" ng-click="addItemToCart($index)"><i class="fi-rs-shopping-bag-add"></i> Add To Cart </a>
-                                </div>
-                                <div class="button-design mt-2">
-                                    <a aria-label="View Image" class="btn theme-button-3" data-bs-toggle="modal" data-bs-target="#quickview"><i class="fa fa-eye" aria-hidden="true"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="product-cart-wrap">
-                        <div class="product-img-action-wrap">
-                            <div class="product-img border-0">
-                                <a href="#">
-                                    <img class="default-img img-fluid" src="https://dummyimage.com/400x400/ccc/fff" loading="lazy" alt="product-image">
-                                    <img class="hover-img img-fluid" src="https://dummyimage.com/400x400/ccc/fff" loading="lazy" alt="product-hover-image">
-                                </a>
-                            </div>
-                            <div class="product-badges product-badges-position product-badges-mrg">
-                                <span class="hot">New Product</span>
-                            </div>
-                        </div>
-                        <div class="product-content-wrap">
-                            <h2><a href="#">Baby Detail Frame Design 03</a></h2>
-                            <div class="product-price">
-                                <span><i class="fa fa-inr" aria-hidden="true"></i> 300/-</span>
-                            </div>
-                            <div class="d-flex justify-content-between">
-                                <div class="button-design mt-2">
-                                    <a aria-label="Add To Cart" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight" class="btn theme-button-2" ng-click="addItemToCart($index)"><i class="fi-rs-shopping-bag-add"></i> Add To Cart </a>
-                                </div>
-                                <div class="button-design mt-2">
-                                    <a aria-label="View Image" class="btn theme-button-3" data-bs-toggle="modal" data-bs-target="#quickview"><i class="fa fa-eye" aria-hidden="true"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                  
                 </div>
             </div>
         </div>
