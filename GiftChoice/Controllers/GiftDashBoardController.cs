@@ -302,6 +302,7 @@ namespace GiftChoice.Controllers
                     if (result != null)
                     {
                         result.MainCateType = model.MainCateTblModel[i].MainCateType;
+                        result.Priority = model.MainCateTblModel[i].Priority;
                         db.SaveChanges();
 
                     }
@@ -1354,7 +1355,7 @@ namespace GiftChoice.Controllers
                     }
                     rws.MainCateId = model.MainCateId;
                     rws.Priority = model.Priority;
-                    rws.SUrl = db.MainCateTbls.Where(m => m.MainCateId == model.MainCateId).Select(m => m.MUrl).FirstOrDefault();
+                    rws.SUrl = model.SUrl;
                     rws.Active = true;
                     db.SliderTbls.Add(rws);
                     db.SaveChanges();
@@ -1395,7 +1396,7 @@ namespace GiftChoice.Controllers
 
                     rws.Priority = model.Priority;
                     rws.MainCateId = model.MainCateId;
-                    rws.SUrl = db.MainCateTbls.Where(m => m.MainCateId == model.MainCateId).Select(m => m.MUrl).FirstOrDefault();
+                    rws.SUrl = model.SUrl;
                     db.SaveChanges();
                     var res = new { res = "1" };
                     return Json(res, JsonRequestBehavior.AllowGet);
@@ -1433,9 +1434,9 @@ namespace GiftChoice.Controllers
             {
                 c.MainCateId,
                 c.SliderId,
+                c.SUrl,
                 c.Priority,
                 c.SliderImage,
-                MainCate = db.MainCateTbls.Where(m => m.MainCateId == c.MainCateId).Select(m => m.MTitle).FirstOrDefault(),
                 c.Active
             }).OrderBy(c => c.Priority);
             return Json(res, JsonRequestBehavior.AllowGet);

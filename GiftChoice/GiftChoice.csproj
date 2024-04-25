@@ -17,8 +17,7 @@
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>true</UseIISExpress>
-    <Use64BitIISExpress>
-    </Use64BitIISExpress>
+    <Use64BitIISExpress>false</Use64BitIISExpress>
     <IISExpressSSLPort>27138</IISExpressSSLPort>
     <IISExpressAnonymousAuthentication>enabled</IISExpressAnonymousAuthentication>
     <IISExpressWindowsAuthentication>disabled</IISExpressWindowsAuthentication>
@@ -758,6 +757,13 @@
     <Content Include="images\MainCate\10.jpg" />
     <Content Include="images\MainCate\2.jpg" />
     <Content Include="images\MainCate\3.jpg" />
+    <Content Include="images\MainCate\30.JPG" />
+    <Content Include="images\MainCate\31.JPG" />
+    <Content Include="images\MainCate\32.JPG" />
+    <Content Include="images\MainCate\33.JPG" />
+    <Content Include="images\MainCate\34.JPG" />
+    <Content Include="images\MainCate\35.JPG" />
+    <Content Include="images\MainCate\36.JPG" />
     <Content Include="images\MainCate\4.jpg" />
     <Content Include="images\MainCate\5.jpg" />
     <Content Include="images\MainCate\6.jpg" />
@@ -770,6 +776,7 @@
     <Content Include="images\ProductImg\12.JPG" />
     <Content Include="images\ProductImg\13.jpg" />
     <Content Include="images\ProductImg\14.JPG" />
+    <Content Include="images\ProductImg\146.jpg" />
     <Content Include="images\ProductImg\15.jpg" />
     <Content Include="images\ProductImg\16.JPG" />
     <Content Include="images\ProductImg\17.jpg" />
@@ -941,7 +948,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>27138</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:27138/</IISUrl>
+          <IISUrl>http://localhost:27123/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

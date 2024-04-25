@@ -27,7 +27,6 @@ namespace GiftChoice.Controllers
                 c.SliderId,
                 c.Priority,
                 c.SliderImage,
-                MainCate = db.MainCateTbls.Where(m => m.MainCateId == c.MainCateId).Select(m => m.MTitle).FirstOrDefault(),
                 c.Active
             }).OrderBy(c => c.Priority);
             return Json(res, JsonRequestBehavior.AllowGet);

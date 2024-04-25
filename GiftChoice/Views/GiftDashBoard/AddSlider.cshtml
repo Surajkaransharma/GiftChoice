@@ -35,14 +35,19 @@
                     <div class="card-body p-4">
 
                         <form class="row g-3" enctype="multipart/form-data">
+                            @*<div class="col-md-12">
+                                    <label for="input1" class="form-label">Select Main Category</label>
+
+                                    <select id="input9" class="form-select" ng-init="GetMainCateData()" ng-model="Slider.MainCateId">
+                                        <option ng-selected="true" value="-1">Select Main Category</option>
+                                        <option ng-repeat="m in MainCateData" value="{{m.MainCateId}}">{{m.MTitle}}</option>
+                                    </select>
+
+
+                                </div>*@
                             <div class="col-md-12">
-                                <label for="input1" class="form-label">Select Main Category</label>
-
-                                <select id="input9" class="form-select" ng-init="GetMainCateData()" ng-model="Slider.MainCateId">
-                                    <option ng-selected="true" value="-1">Select Main Category</option>
-                                    <option ng-repeat="m in MainCateData" value="{{m.MainCateId}}">{{m.MTitle}}</option>
-                                </select>
-
+                                <label for="input1" class="form-label">Slider Url</label>
+                                <input type="text" class="form-control" id="SUrl" ng-model="Slider.SUrl" placeholder="Slider Url">
 
                             </div>
                             <div class="col-md-12">
@@ -137,7 +142,7 @@
                                 <thead class="table-light">
                                     <tr>
                                         <th>S.No.</th>
-                                        <th>Main Category Name</th>
+                                        <th>Slider Url</th>
                                         <th>Priority</th>
                                         <th>Image</th>
                                         <th>Active</th>
@@ -148,7 +153,7 @@
                                 <tbody>
                                     <tr ng-repeat="m in SliderListData">
                                         <td>{{$index+1}}</td>
-                                        <td>{{m.MainCate}}</td>
+                                        <td>{{m.SUrl}}</td>
                                         <td>{{m.Priority}}</td>
                                         <td><img src="~/images/SliderImg/{{m.SliderImage}}"></td>
                                         <td><a ng-click="ADAcDcShortPage(m.SliderId)"> <span class="badge {{m.Active==1? 'bg-success' : 'bg-danger'}}">{{m.Active==1?'Active':'Deactive'}}</span></a> </td>
@@ -209,7 +214,8 @@
         "jpeg",
         "png",
         "svg",
-        "gif"
+        "gif",
+        "webp"
     ];
 
     // Append Images Types Array Inisde Tooltip Data
@@ -346,7 +352,7 @@
 
                 };
             } else {
-                alert('Please make sure your image has dimensions of 1920*700 pixels.');
+                alert('Please make sure your image has dimensions of 1920*500 pixels.');
                 return false;
             }
         };

@@ -242,6 +242,23 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
         }
     };
 
+    $scope.previewImage1 = function (index) {
+        debugger
+         
+            var input = document.getElementsByClassName('image-input')[index];
+            var preview = document.getElementById('image-preview-' + index);
+            debugger
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    preview.src = e.target.result;
+                };
+
+                reader.readAsDataURL(input.files[0]);
+            }
+       
+    };
 
     $scope.GetProductbyid = function (index) {
         $('#btn').css('display', 'none');
@@ -412,7 +429,7 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
         //    }
         //}
 
-        ;
+        
         upload({
             url: '/GiftDashBoard/SubmitProduct',
             method: 'post',
@@ -1410,7 +1427,7 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
 
 
     $scope.BannerProdcutTKeywordArray = function (id) {
-        ;
+        
         $http({
             url: '/GiftDashBoard/BannerProdcutTKeywordArray',
             method: 'post',
