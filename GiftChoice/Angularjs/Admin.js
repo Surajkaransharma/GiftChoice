@@ -4,16 +4,60 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
 
     ////// duplicateProduct
 
-    $scope.duplicateProduct = function () {
-        debugger
-        if ($scope.duplicate) {
+    $scope.duplicateProduct = function (index) {
 
-            $('#edbtn').css('display', 'none');
-            $('#btn').css('display', 'block');
+
+
+        $scope.Product = $scope.ProductData[index];
+        $scope.productDataArray = [];
+        if ($scope.Product.productDataArray.length > 0) {
+
+            $scope.productDataArray = $scope.Product.productDataArray;
         } else {
-            $('#edbtn').css('display', 'block');
-            $('#btn').css('display', 'none');
+            $scope.AddProductDetails();
         }
+
+
+        $scope.GetBannerToQuery($scope.Product.BannerCateId);
+
+        if ($scope.GetBannerToQueryData != undefined) {
+
+            for (var s = 0; s < $scope.GetBannerToQueryData.length; s++) {
+                var vallc1s = $scope.GetBannerToQueryData[s].QId;
+                $('#Keyword_' + vallc1s).prop('checked', false);
+
+            }
+        }
+
+
+
+        /*        CKEDITOR.instances.ckeditor.setData($scope.Product.PDesc);*/
+        //CKEDITOR.instances.ckeditor.setData($scope.Product.PDesc1);
+
+        CKEDITOR.instances.ckeditor.setData($scope.Product.TableDesc);
+
+        //const previewImage = document.querySelector('#previewImage');
+        //$('#previewImage').css('display', 'block');
+        //previewImage.setAttribute("src", "/images/MainCate/" + $scope.MainCate.MImage);
+
+        if ($scope.Product.Submenu.length > 0) {
+
+            for (var i = 0; i < $scope.Product.Submenu.length; i++) {
+                var vallc = $scope.Product.Submenu[i].QueryId;
+                $('#Keyword_' + vallc).prop('checked', true);
+            }
+        }
+        if ($scope.Product.PSizeList.length > 0) {
+
+            for (var i = 0; i < $scope.Product.PSizeList.length; i++) {
+                var vallc = $scope.Product.PSizeList[i].SizeId;
+                $('#Size_' + vallc).prop('checked', true);
+            }
+        }
+
+
+
+        $('html, body').animate({ scrollTop: 0 }, '300');
     };
 
     var BannerCateProductArr = [];
@@ -244,20 +288,20 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
 
     $scope.previewImage1 = function (index) {
         debugger
-         
-            var input = document.getElementsByClassName('image-input')[index];
-            var preview = document.getElementById('image-preview-' + index);
-            debugger
-            if (input.files && input.files[0]) {
-                var reader = new FileReader();
 
-                reader.onload = function (e) {
-                    preview.src = e.target.result;
-                };
+        var input = document.getElementsByClassName('image-input')[index];
+        var preview = document.getElementById('image-preview-' + index);
+        debugger
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
 
-                reader.readAsDataURL(input.files[0]);
-            }
-       
+            reader.onload = function (e) {
+                preview.src = e.target.result;
+            };
+
+            reader.readAsDataURL(input.files[0]);
+        }
+
     };
 
     $scope.GetProductbyid = function (index) {
@@ -273,6 +317,7 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
 
 
         $scope.Product = $scope.ProductData[index];
+        $scope.productDataArray = [];
 
         if ($scope.Product.productDataArray.length > 0) {
 
@@ -285,17 +330,21 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
         //const previewImage = document.querySelector('#previewImage');
         //$('#previewImage').css('display', 'block');
         //previewImage.setAttribute("src", "/images/MainCate/" + $scope.MainCate.MImage);
+        if ($scope.Product.Submenu.length > 0) {
 
-        for (var i = 0; i < $scope.Product.Submenu.length; i++) {
-            var vallc = $scope.Product.Submenu[i].KeywordId;
-            $('#Keyword_' + vallc).prop('checked', true);
+            for (var i = 0; i < $scope.Product.Submenu.length; i++) {
+                var vallc = $scope.Product.Submenu[i].KeywordId;
+                $('#Keyword_' + vallc).prop('checked', true);
+            }
         }
-        for (var i = 0; i < $scope.Product.PSizeList.length; i++) {
-            var vallc = $scope.Product.PSizeList[i].SizeId;
-            $('#Size_' + vallc).prop('checked', true);
+        if ($scope.Product.PSizeList.length > 0) {
+
+            for (var i = 0; i < $scope.Product.PSizeList.length; i++) {
+                var vallc = $scope.Product.PSizeList[i].SizeId;
+                $('#Size_' + vallc).prop('checked', true);
+            }
+
         }
-
-
 
         //ckeditor.replace('postBody');
         // $("#ckeditor").val($scope.Product.Description);
@@ -429,7 +478,7 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
         //    }
         //}
 
-        
+
         upload({
             url: '/GiftDashBoard/SubmitProduct',
             method: 'post',
@@ -1427,7 +1476,7 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
 
 
     $scope.BannerProdcutTKeywordArray = function (id) {
-        
+
         $http({
             url: '/GiftDashBoard/BannerProdcutTKeywordArray',
             method: 'post',
@@ -1586,9 +1635,9 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
 
     //-------------- add Banner in Product ->------------->---------------------->---------------------------->------->------------>---------->---
 
-    $scope.GetBannerInProduct = function (id) {
+    $scope.GetBannerInProduct = function () {
 
-        $http.get("/GiftDashBoard/GetBannerInProduct?id=" + id).then(function (d) {
+        $http.get("/GiftDashBoard/GetBannerInProduct").then(function (d) {
 
             $scope.GetBannerInProductData = d.data;
         }, function (error) {
@@ -1684,7 +1733,7 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
         //    }
         //}
 
-        ;
+
         upload({
             url: '/GiftDashBoard/SubmitBannerProduct',
             method: 'post',
@@ -1730,7 +1779,7 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
                 toastr["success"]("Product save successfully");
                 Keywordarr = [];
                 //$('#MainCate').val("-1").trigger('change');
-                // location.href = '/GiftDashBoard/AddBannerInProduct';
+                 location.href = '/GiftDashBoard/AddBannerInProduct';
                 //$scope.Product.ProductTitle = null;
                 //$scope.Product.PLabel = null;
                 //$scope.Product.Price = null;
@@ -1896,13 +1945,13 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
     };
 
     $scope.GetBannerProductbyid = function (index) {
-
+        debugger
         $('#btn').css('display', 'none');
         $('#edbtn').css('display', 'inline');
 
 
         $scope.Product = $scope.ProductData[index];
-
+        $scope.productDataArray = [];
         if ($scope.Product.productDataArray.length > 0) {
 
             $scope.productDataArray = $scope.Product.productDataArray;
@@ -1913,29 +1962,39 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
 
         $scope.GetBannerToQuery($scope.Product.BannerCateId);
 
-        for (var s = 0; s < $scope.GetBannerToQueryData.length; s++) {
-            var vallc1s = $scope.GetBannerToQueryData[s].QId;
-            $('#Keyword_' + vallc1s).prop('checked', false);
+        if ($scope.GetBannerToQueryData != undefined) {
 
+            for (var s = 0; s < $scope.GetBannerToQueryData.length; s++) {
+                var vallc1s = $scope.GetBannerToQueryData[s].QId;
+                $('#Keyword_' + vallc1s).prop('checked', false);
+
+            }
         }
 
 
 
         /*        CKEDITOR.instances.ckeditor.setData($scope.Product.PDesc);*/
         //CKEDITOR.instances.ckeditor.setData($scope.Product.PDesc1);
+
         CKEDITOR.instances.ckeditor.setData($scope.Product.TableDesc);
 
         //const previewImage = document.querySelector('#previewImage');
         //$('#previewImage').css('display', 'block');
         //previewImage.setAttribute("src", "/images/MainCate/" + $scope.MainCate.MImage);
 
-        for (var i = 0; i < $scope.Product.Submenu.length; i++) {
-            var vallc = $scope.Product.Submenu[i].QueryId;
-            $('#Keyword_' + vallc).prop('checked', true);
+        if ($scope.Product.Submenu.length > 0) {
+
+            for (var i = 0; i < $scope.Product.Submenu.length; i++) {
+                var vallc = $scope.Product.Submenu[i].QueryId;
+                $('#Keyword_' + vallc).prop('checked', true);
+            }
         }
-        for (var i = 0; i < $scope.Product.PSizeList.length; i++) {
-            var vallc = $scope.Product.PSizeList[i].SizeId;
-            $('#Size_' + vallc).prop('checked', true);
+        if ($scope.Product.PSizeList.length > 0) {
+
+            for (var i = 0; i < $scope.Product.PSizeList.length; i++) {
+                var vallc = $scope.Product.PSizeList[i].SizeId;
+                $('#Size_' + vallc).prop('checked', true);
+            }
         }
 
 

@@ -2133,11 +2133,11 @@ namespace GiftChoice.Controllers
 
         //-------------- Add Banner in Product->------------->---------------------->---------------------------->------->------------>---------->---
 
-        public JsonResult GetBannerInProduct(string id)
+        public JsonResult GetBannerInProduct()
         {
             var res =
 
-               db.MainCateTbls.Where(m => m.Position == id && m.Active == true && m.CateType == "BannerCate").Select(m => new
+               db.MainCateTbls.Where(m => m.Active == true && m.CateType == "BannerCate").Select(m => new
                {
                    m.MainCateId,
                    m.MUrl,
@@ -2259,7 +2259,7 @@ namespace GiftChoice.Controllers
             {
                 ProductTbl productmodel = new ProductTbl();
 
-                ProductTbl result = db.ProductTbls.Where(c => c.ProductTitle == model.ProductTitle && c.ProductType == "BannerProduct").FirstOrDefault();
+                ProductTbl result = db.ProductTbls.Where(c => c.ProductTitle == model.ProductTitle && (c.ProductType == "BannerProduct" || c.ProductType == "Common")).FirstOrDefault();
                 if (result != null)
                 {
                     var res = new { res = "-1" };
@@ -2843,6 +2843,7 @@ namespace GiftChoice.Controllers
                    m.SameDay,
                    m.VideoUrl,
                    m.TableDesc,
+                   m.Video,
                    m.BannerCateId,
                    m.Priority,
                    ProductImage = db.ProductImages.Where(i => i.ProductId == m.ProductId).Select(i => i.PImage),

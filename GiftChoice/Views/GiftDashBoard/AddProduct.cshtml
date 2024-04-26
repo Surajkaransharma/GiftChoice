@@ -9,9 +9,6 @@
 }
 
 <style>
-    img {
-        width: 50px
-    }
 
     .box1 {
         inline-size: 150px !important;
@@ -90,8 +87,8 @@
                                 <input type="file" id="VideoData" class="form-control" upload-file="Product.VideoData">
                             </div>
                             <div class="col-md-2">
-                                <label for="input1" class="form-label">Same Day Deliver</label>
-                                <input type="checkbox" ng-model="Product.SameDay" id="" placeholder="">
+                                <label for="SameDay" class="form-label">Same Day Deliver</label>
+                                <input type="checkbox" ng-model="Product.SameDay" id="SameDay" placeholder="">
                             </div>
                             <div ng-init="AddProductDetails()">
 
@@ -110,12 +107,14 @@
                                     </div>
 
 
-                                    <div class="col-md-2" ng-show="$last">
-                                        <div class="d-md-flex d-grid align-items-center gap-3">
+                                    <div class="col-md-2">
+                                        <div class="d-md-flex d-grid align-items-center gap-3" style="margin-top: 30px">
+                                            <button type="button" ng-click="removeproductDataArraydata($index)" class="btn btn-primary px-4 mt-28"><i class="bx bx-trash"></i></button>
 
-                                            <button type="button" id="Adbtn" ng-click="AddProductDetails()" class="btn btn-primary px-4 mt-28">Add Detail</button>
+                                            <button ng-show="$last" type="button" id="Adbtn" ng-click="AddProductDetails()" class="btn btn-primary px-4 mt-28"><i class="bx bx-plus"></i></button>
                                         </div>
                                     </div>
+
 
                                 </div>
                             </div>
@@ -148,14 +147,14 @@
                                 <textarea id="TableDesc" class="form-control" rows="6" cols="4" ng-model="Product.PDesc"></textarea>
                             </div>
                             <div class="col-md-12">
-                                ss
+
                                 <label for="input1" class="form-label">Table Description</label>
                                 <textarea class="ckeditor" id="ckeditor"></textarea>
                             </div>
                             <div class="col-md-2">
                                 <label for="input1" class="form-label">Image 1</label>
 
-                                <input type="file"  class="form-control image-input" onchange="angular.element(this).scope().previewImage1(0)" upload-file="Product.Image1">
+                                <input type="file" class="form-control image-input" onchange="angular.element(this).scope().previewImage1(0)" upload-file="Product.Image1">
                                 <img class="image-preview" id="image-preview-0" alt="Image Preview">
 
                             </div>
@@ -211,16 +210,16 @@
                                 <script>
                                     const dropZone = document.getElementById('drop-zone');
                                     let imagePreview = null;
-
+                                    debugger
                                     // Prevent default behavior when dropping files
                                     dropZone.addEventListener('dragover', (e) => {
                                         e.preventDefault();
                                         dropZone.classList.add('hover');
                                     });
 
-                                    dropZone.addEventListener('dragleave', () => {
-                                        dropZone.classList.remove('hover');
-                                    });
+                                    //dropZone.addEventListener('dragleave', () => {
+                                    //    dropZone.classList.remove('hover');
+                                    //});
 
                                     // Handle file drop
                                     dropZone.addEventListener('drop', (e) => {
@@ -249,8 +248,8 @@
                                                 const removeButton = document.createElement('button');
                                                 removeButton.textContent = 'Remove Image';
                                                 removeButton.addEventListener('click', () => {
-                                                    dropZone.removeChild(imagePreview);
                                                     dropZone.removeChild(removeButton);
+                                                    dropZone.removeChild(imagePreview);
                                                     imagePreview = null;
                                                 });
                                                 dropZone.appendChild(removeButton);
@@ -344,7 +343,7 @@
                                             </table>
                                             @*<span ng-repeat="n in m.PSizeList">{{n.SizeTitle}},<br /></span>*@
                                         </td>
-                                        <td><span ng-repeat="i in m.ProductImage"><img src="~/images/ProductImg/{{i}}"><br /></span> </td>
+                                        <td><span ng-repeat="i in m.ProductImage"><img src="~/images/ProductImg/{{i}}" width="150px"><br /></span> </td>
                                         <td><a ng-click="ProductActiveDeActive(m.ProductId)"> <span class="badge {{m.Active==1? 'bg-success' : 'bg-danger'}}">{{m.Active==1?'Active':'Deactive'}}</span></a> </td>
                                         <td><a><i class="bx bxs-pencil" ng-click="GetProductbyid($index)"></i></a></td>
                                     </tr>
@@ -362,3 +361,186 @@
 
 
 
+@*<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Drag & Drop Image Uploader</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <style>
+        #drop-zone {
+            width: 300px;
+            height: 200px;
+            border: 2px dashed #ccc;
+            margin: 0 auto;
+            text-align: center;
+            padding: 20px;
+        }
+
+            #drop-zone p {
+                margin-bottom: 10px;
+            }
+
+        #image-input {
+            display: none;
+        }
+
+        #preview {
+            width: 100%;
+            max-height: 150px;
+            object-fit: cover;
+            margin-bottom: 10px;
+        }
+
+        #remove-image {
+            background-color: #ccc;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+            opacity: 0.5;
+            transition: opacity 0.2s ease;
+        }
+
+            #remove-image:hover {
+                opacity: 1;
+            }
+    </style>
+    <div id="drop-zone">
+        <p>Drag & drop your image here or click to browse</p>
+        <input type="file" id="image-input" accept="image/*">
+        <img id="preview" src="" alt="Image Preview">
+        <button id="remove-image" disabled>Remove Image</button>
+    </div>
+    <button id="submit">submit</button>
+
+    <script src="script.js"></script>
+    <script>
+        const dropZone = document.getElementById('drop-zone');
+        const imageInput = document.getElementById('image-input');
+        const preview = document.getElementById('preview');
+        const submit = document.getElementById('submit');
+
+        const removeButton = document.getElementById('remove-image');
+
+        // Allow drag and drop
+        dropZone.addEventListener('dragover', (event) => {
+            event.preventDefault();
+            dropZone.classList.add('dragover');
+        });
+
+        dropZone.addEventListener('dragleave', () => {
+            dropZone.classList.remove('dragover');
+        });
+
+        // dropZone.addEventListener('drop', function (event) {
+        //         // Prevent Default Behavior
+        //         event.preventDefault();
+
+        //         // Remove Class (drop-zoon--over) from (drop-zoon)
+        //         dropZoon.classList.remove('dragover');
+
+        //         // Select The Dropped File
+        //         const file = event.dataTransfer.files[0];
+
+        //         // Call Function uploadFile(), And Send To Her The Dropped File :)
+        //         uploadFile(file);
+        //     });
+
+        dropZone.addEventListener('drop', (event) => {
+            event.preventDefault();
+            dropZone.classList.remove('dragover');
+
+            const file = event.dataTransfer.files[0];
+            if (!file || !file.type.startsWith('image/')) {
+                alert('Please drag and drop an image file.');
+                return;
+            }
+            uploadFile(file);
+
+
+        });
+        dropZone.addEventListener('click', function (event) {
+            // Click The (fileInput)
+            imageInput.click();
+        });
+
+        // When (fileInput) has (change) Event
+        imageInput.addEventListener('change', function (event) {
+            // Select The Chosen File
+            const file = event.target.files[0];
+
+            // Call Function uploadFile(), And Send To Her The Chosen File :)
+            uploadFile(file);
+        });
+
+        function uploadFile(file) {
+            debugger
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                preview.src = e.target.result;
+                debugger
+                //   imageInput.value = file.name; // Set filename in input for potential submission
+                debugger
+                removeButton.disabled = false;
+                removeButton.style.opacity = 1;
+            };
+            reader.readAsDataURL(file);
+        }
+        // Handle image selection from file input
+        // imageInput.addEventListener('change', (event) => {
+
+        //   const file = event.target.files[0];
+        //   if (!file || !file.type.startsWith('image/')) {
+        //     alert('Please select an image file.');
+        //     return;
+        //   }
+
+        //   const reader = new FileReader();
+        //   reader.onload = (e) => {
+        //     preview.src = e.target.result;
+        //     removeButton.disabled = false;
+        //     removeButton.style.opacity = 1;
+        //   };
+        //   reader.readAsDataURL(file);
+        // });
+
+        // Remove image and reset
+        removeButton.addEventListener('click', () => {
+            preview.src = '';
+            imageInput.value = '';
+            removeButton.disabled = true;
+            removeButton.style.opacity = 0.5;
+        });
+
+        submit.addEventListener('click', () => {
+            debugger
+            const file = imageInput.files[0];
+            if (!file || !file.type.startsWith('image/')) {
+                alert('Please select an image file.');
+                return;
+            }
+            debugger
+            const formData = new FormData();
+            formData.append('image', file);
+
+            // Send the FormData to your server using AJAX or Fetch API
+            // Replace 'YOUR_SERVER_URL' with the actual URL of your server endpoint
+            //   fetch('YOUR_SERVER_URL', {
+            //     method: 'POST',
+            //     body: formData
+            //   })
+            //     .then(response => {
+            //       // Handle successful upload response
+            //       console.log('Image uploaded successfully!');
+            //     })
+            //     .catch(error => {
+            //       // Handle upload error
+            //       console.error('Error uploading image:', error);
+            //     });
+        })
+    </script>
+</body>
+</html>*@
