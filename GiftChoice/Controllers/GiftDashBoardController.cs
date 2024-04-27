@@ -2830,7 +2830,7 @@ namespace GiftChoice.Controllers
             db.Configuration.ProxyCreationEnabled = false;
             var res =
 
-               db.ProductTbls.Where(m => m.Active == true && m.ProductType != "MainProduct" && (id == -2 ? true : m.BannerCateId == id)).Select(m => new
+               db.ProductTbls.Where(m =>  m.ProductType != "MainProduct" && (id == -2 ? true : m.BannerCateId == id)).Select(m => new
                {
                    m.ProductId,
                    m.MainCateId,
@@ -2883,6 +2883,80 @@ namespace GiftChoice.Controllers
 
         }
 
+
+        [JsonNetFilter]
+        public JsonResult DeleteProductVideo(int id)
+        {
+            try
+            {
+
+
+                ProductTbl productTbl = db.ProductTbls.Where(p => p.ProductId == id).FirstOrDefault();
+                if (productTbl != null)
+                {
+
+
+                    string filePath = Server.MapPath("~/images/ProductVideo/" + productTbl.Video);
+                    if (System.IO.File.Exists(filePath))
+                    {
+                        System.IO.File.Delete(filePath);
+                    }
+                    productTbl.Video = "";
+                    productTbl.Update_at = DateTime.Now;
+
+                    db.SaveChanges();
+
+
+
+                }
+                var res = new { res = "1" };
+                return Json(res, JsonRequestBehavior.AllowGet);
+
+
+            }
+            catch
+            {
+                var res = new { res = "0" };
+                return Json(res, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+
+        [JsonNetFilter]
+        public JsonResult DeleteProductImage(string id,int pid)
+        {
+            try
+            {
+
+
+                ProductImage productTbl = db.ProductImages.Where(p => p.PImage == id && p.ProductId == pid).FirstOrDefault();
+                if (productTbl != null)
+                {
+
+
+                    string filePath = Server.MapPath("~/images/ProductImg/" + productTbl.PImage);
+                    if (System.IO.File.Exists(filePath))
+                    {
+                        System.IO.File.Delete(filePath);
+                    }
+
+                    db.ProductImages.Remove(productTbl);
+                    db.SaveChanges();
+
+
+
+                }
+                var res = new { res = "1" };
+                return Json(res, JsonRequestBehavior.AllowGet);
+
+
+            }
+            catch
+            {
+                var res = new { res = "0" };
+                return Json(res, JsonRequestBehavior.AllowGet);
+            }
+        }
         //-------------- Add Banner in Product End->------------->---------------------->---------------------------->------->------------>---------->---
 
 

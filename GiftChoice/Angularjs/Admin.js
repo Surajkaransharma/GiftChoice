@@ -6,9 +6,11 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
 
     $scope.duplicateProduct = function (index) {
 
-
+        $('#btn').css('display', 'inline');
+        $('#edbtn').css('display', 'none');
 
         $scope.Product = $scope.ProductData[index];
+        $scope.duplicateproductbool = true;
         $scope.productDataArray = [];
         if ($scope.Product.productDataArray.length > 0) {
 
@@ -17,7 +19,15 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
             $scope.AddProductDetails();
         }
 
+        const previews = document.querySelectorAll('.preview');
+        const removeButtons = document.querySelectorAll('.remove-image');
 
+        for (var k = 0; k < $scope.Product.ProductImage.length; k++) {
+
+            previews[k].style.display = 'block';
+            removeButtons[k].disabled = false;
+            previews[k].setAttribute("src", "/images/ProductImg/" + $scope.Product.ProductImage[k]);
+        }
         $scope.GetBannerToQuery($scope.Product.BannerCateId);
 
         if ($scope.GetBannerToQueryData != undefined) {
@@ -305,6 +315,7 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
     };
 
     $scope.GetProductbyid = function (index) {
+        debugger
         $('#btn').css('display', 'none');
         $('#edbtn').css('display', 'inline');
 
@@ -327,9 +338,18 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
         }
 
         CKEDITOR.instances.ckeditor.setData($scope.Product.TableDesc);
-        //const previewImage = document.querySelector('#previewImage');
-        //$('#previewImage').css('display', 'block');
-        //previewImage.setAttribute("src", "/images/MainCate/" + $scope.MainCate.MImage);
+
+        const previews = document.querySelectorAll('.preview');
+        const removeButtons = document.querySelectorAll('.remove-image');
+
+        for (var k = 0; k < $scope.Product.ProductImage.length; k++) {
+
+            previews[k].style.display = 'block';
+            removeButtons[k].disabled = false;
+            previews[k].setAttribute("src", "/images/ProductImg/" + $scope.Product.ProductImage[k]);
+        }
+
+
         if ($scope.Product.Submenu.length > 0) {
 
             for (var i = 0; i < $scope.Product.Submenu.length; i++) {
@@ -456,14 +476,21 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
     };
     var PSizeArr = [];
     $scope.SubmitProduct = function () {
-
+        debugger
         var editorText = CKEDITOR.instances.ckeditor.getData();
         $scope.Description = editorText;
 
 
+        //var files1 = document.getElementById('image1').files;
+        const imageInputs = document.querySelectorAll('.image-input');
+        $scope.Product.Image1 = imageInputs[0].files[0];
+        $scope.Product.Image2 = imageInputs[1].files[0];
+        $scope.Product.Image3 = imageInputs[2].files[0];
+        $scope.Product.Image4 = imageInputs[3].files[0];
+        $scope.Product.Image5 = imageInputs[4].files[0];
 
 
-        ;
+
         //for (var i = 0; i < $scope.KeywordList.length; i++) {
         //    if ($scope.KeywordList[i].Selected) {
         //        Keywordarr.push($scope.KeywordList[i]);
@@ -534,7 +561,12 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
 
 
     $scope.UpdateProductData = function () {
-
+        const imageInputs = document.querySelectorAll('.image-input');
+        $scope.Product.Image1 = imageInputs[0].files[0];
+        $scope.Product.Image2 = imageInputs[1].files[0];
+        $scope.Product.Image3 = imageInputs[2].files[0];
+        $scope.Product.Image4 = imageInputs[3].files[0];
+        $scope.Product.Image5 = imageInputs[4].files[0];
         var editorText = CKEDITOR.instances.ckeditor.getData();
         $scope.Description = editorText;
 
@@ -669,6 +701,7 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
 
     $scope.SubmitMainCate = function () {
 
+        debugger
         for (var i = 0; i < $scope.KeywordList.length; i++) {
             if ($scope.KeywordList[i].Selected) {
                 Keywordarr.push($scope.KeywordList[i]);
@@ -685,6 +718,9 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
         }
 
         $scope.MainCate.CateType = $("#CateType").val();
+
+        const imageInputs = document.querySelectorAll('.image-input');
+        $scope.MainCate.Image = imageInputs[0].files[0];
 
 
 
@@ -760,13 +796,21 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
 
 
         $scope.MainCate = $scope.MainCateData[index];
-        const previewImage = document.querySelector('#previewImage');
-        const loadingText = document.querySelector('#loadingText');
-        const dropZoon = document.querySelector('#dropZoon');
-        dropZoon.classList.add('drop-zoon--Uploaded');
-        loadingText.style.display = "none";
-        $('#previewImage').css('display', 'block');
-        previewImage.setAttribute("src", "/images/MainCate/" + $scope.MainCate.MImage);
+        //const previewImage = document.querySelector('#previewImage');
+        //const loadingText = document.querySelector('#loadingText');
+        //const dropZoon = document.querySelector('#dropZoon');
+        //dropZoon.classList.add('drop-zoon--Uploaded');
+        //loadingText.style.display = "none";
+        //$('#previewImage').css('display', 'block');
+
+        const previews = document.querySelectorAll('.preview');
+        const removeButtons = document.querySelectorAll('.remove-image');
+
+
+        previews[0].style.display = 'block';
+        removeButtons[0].disabled = false;
+        previews[0].setAttribute("src", "/images/MainCate/" + $scope.MainCate.MImage);
+
 
         for (var i = 0; i < $scope.MainCate.Submenu.length; i++) {
             var vallc = $scope.MainCate.Submenu[i].KeywordId;
@@ -798,7 +842,7 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
 
 
     $scope.UpdateMainCate = function () {
-
+        debugger
         var maincate = angular.element(document.getElementById("MTitle"));
         if (maincate.val() === "") {
             toastr["error"]("Please Enter Main Category");
@@ -821,7 +865,8 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
             }
         }
         $scope.MainCate.CateType = $("#CateType").val();
-
+        const imageInputs = document.querySelectorAll('.image-input');
+        $scope.MainCate.Image = imageInputs[0].files[0];
 
         upload({
             url: '/GiftDashBoard/UpdateMainCate',
@@ -1732,6 +1777,12 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
         //        PSizeArr.push($scope.SizeList[i]);
         //    }
         //}
+        const imageInputs = document.querySelectorAll('.image-input');
+        $scope.Product.Image1 = imageInputs[0].files[0];
+        $scope.Product.Image2 = imageInputs[1].files[0];
+        $scope.Product.Image3 = imageInputs[2].files[0];
+        $scope.Product.Image4 = imageInputs[3].files[0];
+        $scope.Product.Image5 = imageInputs[4].files[0];
 
 
         upload({
@@ -1779,7 +1830,7 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
                 toastr["success"]("Product save successfully");
                 Keywordarr = [];
                 //$('#MainCate').val("-1").trigger('change');
-                 location.href = '/GiftDashBoard/AddBannerInProduct';
+                location.href = '/GiftDashBoard/AddBannerInProduct';
                 //$scope.Product.ProductTitle = null;
                 //$scope.Product.PLabel = null;
                 //$scope.Product.Price = null;
@@ -1857,9 +1908,14 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
         });
         delete $scope.Product.PDesc1;
         delete $scope.Product.TableDesc;
+        const imageInputs = document.querySelectorAll('.image-input');
+        $scope.Product.Image1 = imageInputs[0].files[0];
+        $scope.Product.Image2 = imageInputs[1].files[0];
+        $scope.Product.Image3 = imageInputs[2].files[0];
+        $scope.Product.Image4 = imageInputs[3].files[0];
+        $scope.Product.Image5 = imageInputs[4].files[0];
 
-
-        ;
+        
         upload({
             url: '/GiftDashBoard/BannerUpdateProductData',
             method: 'post',
@@ -1943,6 +1999,26 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
             });
         }
     };
+    $scope.DeleteProductVideo = function (id) {
+
+        $http.get("/GiftDashBoard/DeleteProductVideo?id=" + id).then(function (d) {
+            
+
+            window.location.reload();
+        }, function (error) {
+            toastr.error(error.data);
+        });
+    };
+    $scope.DeleteProductImage = function (id,pid) {
+
+        $http.get("/GiftDashBoard/DeleteProductImage?id=" + id + "&pid=" + pid).then(function (d) {
+
+
+            window.location.reload();
+        }, function (error) {
+            toastr.error(error.data);
+        });
+    };
 
     $scope.GetBannerProductbyid = function (index) {
         debugger
@@ -1951,6 +2027,7 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
 
 
         $scope.Product = $scope.ProductData[index];
+        $scope.duplicateproductbool = false;
         $scope.productDataArray = [];
         if ($scope.Product.productDataArray.length > 0) {
 
@@ -1959,6 +2036,17 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
             $scope.AddProductDetails();
         }
 
+
+
+        const previews = document.querySelectorAll('.preview');
+        const removeButtons = document.querySelectorAll('.remove-image');
+
+        for (var k = 0; k < $scope.Product.ProductImage.length; k++) {
+
+            previews[k].style.display = 'block';
+            removeButtons[k].disabled = false;
+            previews[k].setAttribute("src", "/images/ProductImg/" + $scope.Product.ProductImage[k]);
+        }
 
         $scope.GetBannerToQuery($scope.Product.BannerCateId);
 

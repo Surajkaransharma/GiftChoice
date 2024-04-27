@@ -53,7 +53,7 @@
 
                         <div class="col-lg-2 col-6 col-sm-3" ng-repeat="p in ProductData" ng-click="RecentViewData($index)">
                             
-                                <div class="product-cart-wrap mb-10  {{p.LabelId != '' ? 'top-rated-product' : '' }}">
+                                <div class="product-cart-wrap mb-10  {{p.LabelId != NULL  ? 'top-rated-product' : ' ' }}">
                                     <div class="product-img-action-wrap">
                                         <div class="product-img product-img-zoom">
                                             <a href="/Home/Gift?url={{p.PUrl}}">
@@ -62,7 +62,7 @@
                                             </a>
                                         </div>
                                         <div class="product-badges product-badges-position product-badges-mrg   {{p.LabelId == 0 ? '' : 'special-badge'}}" ng-show="p.PLabel!=''">
-                                            <span class="hot">{{p.PLabel}}</span>
+                                            <span class="hot">{{p.PLabel}} </span>
                                         </div>
                                     </div>
                                     <div class="product-content-wrap">
