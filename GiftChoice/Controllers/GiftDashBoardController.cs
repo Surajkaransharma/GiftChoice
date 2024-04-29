@@ -2830,7 +2830,7 @@ namespace GiftChoice.Controllers
             db.Configuration.ProxyCreationEnabled = false;
             var res =
 
-               db.ProductTbls.Where(m =>  m.ProductType != "MainProduct" && (id == -2 ? true : m.BannerCateId == id)).Select(m => new
+               db.ProductTbls.Where(m => m.Active == true &&  m.ProductType != "MainProduct" && (id == -2 ? true : m.BannerCateId == id)).Select(m => new
                {
                    m.ProductId,
                    m.MainCateId,

@@ -9,6 +9,44 @@
     .img64 img {
         width: 50px
     }
+    .drop-zone {
+        width: 300px;
+        height: 200px;
+        border: 2px dashed #ccc;
+        margin: 0 auto;
+        text-align: center;
+        padding: 20px;
+        margin-bottom: 20px;
+    }
+
+        .drop-zone p {
+            margin-bottom: 10px;
+        }
+
+    .image-input {
+        display: none;
+    }
+
+    .preview {
+        width: 150px;
+
+        margin-bottom: 10px;
+        display: none;
+        margin: 0 auto;
+    }
+
+    .remove-image {
+        background-color: #ccc;
+        border: none;
+        padding: 5px 10px;
+        cursor: pointer;
+        opacity: 0.5;
+        transition: opacity 0.2s ease;
+    }
+
+        .remove-image:hover {
+            opacity: 1;
+        }
 </style>
 <script src="~/Angularjs/Admin.js"></script>
 <div class="page-wrapper" ng-app="AdminApp" ng-controller="AdminController">
@@ -38,58 +76,20 @@
                             <div class="col-md-12">
                                 <label for="input1" class="form-label">Main Category Title</label>
                                 <input type="text" class="form-control" id="MTitle" ng-model="MainCate.MTitle" placeholder="Main Category">
-                                <input type="text" style="display: none" class="form-control" id="CateType"  value="MainCate">
+                                <input type="text" style="display: none" class="form-control" id="CateType" value="MainCate">
 
                             </div>
                             <div class="col-md-12">
 
                                 <label for="inputFirstName" class="form-label">Image <span style="color:#ff0000;font-weight:bolder;">880 * 880</span></label>
 
-                                <section id="image-section">
-                                    <div id="uploadArea" class="upload-area">
-                                        <!-- Header -->
-                                        <div class="upload-area__header" style="display:none">
-                                            <h1 class="upload-area__title">Upload your file</h1>
-                                            <p class="upload-area__paragraph">
-                                                File should be an image
-                                                <strong class="upload-area__tooltip">
-                                                    Like
-                                                    <span class="upload-area__tooltip-data"></span>
-                                                </strong>
-                                            </p>
-                                        </div>
-                                        <!-- End Header -->
-                                        <!-- Drop Zoon -->
-                                        <div id="dropZoon" class="upload-area__drop-zoon drop-zoon">
-                                            <span class="drop-zoon__icon">
-                                                <i class='bx bxs-file-image'></i>
-                                            </span>
-                                            <p class="drop-zoon__paragraph">Drop your file here or Click to browse</p>
-                                            <span id="loadingText" class="drop-zoon__loading-text">Please Wait</span>
-                                            <img src="" alt="Preview Image" id="previewImage" class="drop-zoon__preview-image" draggable="false">
-                                            <input type="file" id="fileInput" upload-file="MainCate.Image" class="drop-zoon__file-input" multiple>
-                                        </div>
-                                        <!-- End Drop Zoon -->
-                                        <!-- File Details -->
-                                        <div id="fileDetails" class="upload-area__file-details file-details" style="display: none">
-                                            <h3 class="file-details__title">Uploaded File</h3>
-
-                                            <div id="uploadedFile" class="uploaded-file">
-                                                <div class="uploaded-file__icon-container">
-                                                    <i class='bx bxs-file-blank uploaded-file__icon'></i>
-                                                    <span class="uploaded-file__icon-text"></span>
-
-                                                </div>
-
-                                                <div id="uploadedFileInfo" class="uploaded-file__info">
-                                                    <span class="uploaded-file__name">Proejct 1</span>
-                                                    <span class="uploaded-file__counter">0%</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <!-- End File Details -->
-                                    </div>
-                                </section>
+                                <p>Drop Zone 1: Drag & drop your image here or click to browse</p>
+                                <div class="drop-zone">
+                                    <input type="file" class="image-input" accept="image/*"  upload-file="MainCate.Image" >
+                                    <img class="preview" src="" alt="Image Preview">
+                                </div>
+                                <button class="remove-image" disabled>Remove Image</button>
+                         
 
                             </div>
 
@@ -97,7 +97,7 @@
                                 <label for="input1" class="form-label">Priority</label>
                                 <input type="number" id="Priority" class="form-control" ng-model="MainCate.Priority" placeholder="Priority">
                             </div>
-                            <div class="col-md-12" ng-init="GetKeywordData()">
+                            <div class="col-md-12" ng-init="GetKeywordData()" ng-show="KeywordList.length>0">
                                 <label for="input1" class="form-label">Select Keyword</label>
                                 <table class="table">
                                     <thead>
@@ -172,7 +172,7 @@
                                 <input type="text" class="form-control ps-5 radius-30" ng-model="search" placeholder="Search here...">
                                 <span class="position-absolute top-50 product-show translate-middle-y"><i class="bx bx-search"></i></span>
                             </div>
-                            @*  <div class="ms-auto"><a href="javascript:;" class="btn btn-primary radius-30 mt-2 mt-lg-0" data-bs-toggle="modal" data-bs-target="#createcompany"><i class="bx bxs-plus-square"></i>Add New Company</a></div>*@
+                            <div class="ms-auto"><a href="javascript:;" class="btn btn-primary radius-30 mt-2 mt-lg-0" ng-click="UpdateMainCateType()">Update Category/Priority </a></div>
 
 
 
@@ -186,7 +186,7 @@
                                         <th>S.No.</th>
 
                                         <th>Main Category Name</th>
-                                        <th> <a ng-click="UpdateMainCateType()"> Category Type</a></th>
+                                        <th> <a> Category Type</a></th>
 
                                         <th>Keyword</th>
                                         <th>Priority</th>
@@ -207,7 +207,7 @@
 
                                         </td>
                                         <td style="white-space: normal"><span ng-repeat="n in m.Submenu">{{n.SubmenuTitle}},</span></td>
-                                        <td>{{m.Priority}}</td>
+                                        <td> <input v ng-model="m.Priority" style="width: 50px" /></td>
                                         <td><img src="~/images/MainCate/{{m.MImage}}" style="width:50px"></td>
                                         <td><a ng-click="MainCateActiveDeActive(m.MainCateId)"> <span class="badge {{m.Active==1? 'bg-success' : 'bg-danger'}}">{{m.Active==1?'Active':'Deactive'}}</span></a> </td>
                                         <td><a><i class="bx bxs-pencil" ng-click="GetMainCatebyid($index)"></i></a></td>
@@ -221,246 +221,62 @@
         </div>
     </div>
 </div>
+
 <script>
+    const dropZones = document.querySelectorAll('.drop-zone');
+    const imageInputs = document.querySelectorAll('.image-input');
+    const previews = document.querySelectorAll('.preview');
+    const removeButtons = document.querySelectorAll('.remove-image');
 
+    dropZones.forEach((dropZone, index) => {
+        dropZone.addEventListener('dragover', (event) => {
+            event.preventDefault();
+            dropZone.classList.add('dragover');
+        });
 
-    // Select Upload-Area
-    const uploadArea = document.querySelector('#uploadArea')
+        dropZone.addEventListener('dragleave', () => {
+            dropZone.classList.remove('dragover');
+        });
 
-    // Select Drop-Zoon Area
-    const dropZoon = document.querySelector('#dropZoon');
+        dropZone.addEventListener('drop', (event) => {
+            event.preventDefault();
+            dropZone.classList.remove('dragover');
 
-    // Loading Text
-    const loadingText = document.querySelector('#loadingText');
+            const file = event.dataTransfer.files[0];
+            if (!file || !file.type.startsWith('image/')) {
+                alert('Please drag and drop an image file.');
+                return;
+            }
+            uploadFile(file, previews[index], removeButtons[index], imageInputs[index]);
+        });
 
-    // Slect File Input
-    const fileInput = document.querySelector('input[type="file"]');
+        dropZone.addEventListener('click', () => {
+            imageInputs[index].click();
+        });
 
-    // Select Preview Image
-    const previewImage = document.querySelector('#previewImage');
+        imageInputs[index].addEventListener('change', (event) => {
+            const file = event.target.files[0];
+            uploadFile(file, previews[index], removeButtons[index], imageInputs[index]);
+        });
 
-    // File-Details Area
-    const fileDetails = document.querySelector('#fileDetails');
-
-    // Uploaded File
-    const uploadedFile = document.querySelector('#uploadedFile');
-
-    // Uploaded File Info
-    const uploadedFileInfo = document.querySelector('#uploadedFileInfo');
-
-    // Uploaded File  Name
-    const uploadedFileName = document.querySelector('.uploaded-file__name');
-
-    // Uploaded File Icon
-    const uploadedFileIconText = document.querySelector('.uploaded-file__icon-text');
-
-    // Uploaded File Counter
-    const uploadedFileCounter = document.querySelector('.uploaded-file__counter');
-
-    // ToolTip Data
-    const toolTipData = document.querySelector('.upload-area__tooltip-data');
-
-    // Images Types
-    const imagesTypes = [
-        "jpeg",
-        "png",
-        "svg",
-        "gif"
-    ];
-
-    // Append Images Types Array Inisde Tooltip Data
-    toolTipData.innerHTML = [...imagesTypes].join(', .');
-
-    // When (drop-zoon) has (dragover) Event
-    dropZoon.addEventListener('dragover', function (event) {
-        // Prevent Default Behavior
-        event.preventDefault();
-
-        // Add Class (drop-zoon--over) On (drop-zoon)
-        dropZoon.classList.add('drop-zoon--over');
+        removeButtons[index].addEventListener('click', () => {
+            previews[index].src = '';
+            imageInputs[index].value = '';
+            previews[index].style.display = 'none';
+            removeButtons[index].disabled = true;
+        });
     });
 
-    // When (drop-zoon) has (dragleave) Event
-    dropZoon.addEventListener('dragleave', function (event) {
-        // Remove Class (drop-zoon--over) from (drop-zoon)
-        dropZoon.classList.remove('drop-zoon--over');
-    });
+    function uploadFile(file, preview, removeButton, input) {
+        const reader = new FileReader();
+        reader.onload = (e) => {
+            preview.src = e.target.result;
+            preview.style.display = 'block';
 
-    // When (drop-zoon) has (drop) Event
-    dropZoon.addEventListener('drop', function (event) {
-        // Prevent Default Behavior
-        event.preventDefault();
-
-        // Remove Class (drop-zoon--over) from (drop-zoon)
-        dropZoon.classList.remove('drop-zoon--over');
-
-        // Select The Dropped File
-        const file = event.dataTransfer.files[0];
-
-        // Call Function uploadFile(), And Send To Her The Dropped File :)
-        uploadFile(file);
-    });
-
-    // When (drop-zoon) has (click) Event
-    dropZoon.addEventListener('click', function (event) {
-        // Click The (fileInput)
-        fileInput.click();
-    });
-
-    // When (fileInput) has (change) Event
-    fileInput.addEventListener('change', function (event) {
-        // Select The Chosen File
-        const file = event.target.files[0];
-
-        // Call Function uploadFile(), And Send To Her The Chosen File :)
-        uploadFile(file);
-    });
-
-    // Upload File Function
-    function uploadFile(file) {
-        // FileReader()
-        const fileReader = new FileReader();
-        // File Type
-        const fileType = file.type;
-        // File Size
-        const fileSize = file.size;
-        const image = new Image();
-        image.src = URL.createObjectURL(file);
-
-        image.onload = function () {
-            //if (image.naturalWidth === 880 && image.naturalHeight === 880) {
-            // If File Is Passed from the (File Validation) Function
-            if (fileValidate(fileType, fileSize)) {
-
-                // Add Class (drop-zoon--Uploaded) on (drop-zoon)
-                dropZoon.classList.add('drop-zoon--Uploaded');
-
-                // Show Loading-text
-                loadingText.style.display = "block";
-                // Hide Preview Image
-                previewImage.style.display = 'none';
-
-                // Remove Class (uploaded-file--open) From (uploadedFile)
-                uploadedFile.classList.remove('uploaded-file--open');
-                // Remove Class (uploaded-file__info--active) from (uploadedFileInfo)
-                uploadedFileInfo.classList.remove('uploaded-file__info--active');
-
-                // After File Reader Loaded
-                fileReader.addEventListener('load', function () {
-                    // After Half Second
-
-
-                    setTimeout(function () {
-                        // Add Class (upload-area--open) On (uploadArea)
-                        uploadArea.classList.add('upload-area--open');
-
-                        // Hide Loading-text (please-wait) Element
-                        loadingText.style.display = "none";
-                        // Show Preview Image
-                        previewImage.style.display = 'block';
-
-                        // Add Class (file-details--open) On (fileDetails)
-                        fileDetails.classList.add('file-details--open');
-                        // Add Class (uploaded-file--open) On (uploadedFile)
-                        uploadedFile.classList.add('uploaded-file--open');
-                        // Add Class (uploaded-file__info--active) On (uploadedFileInfo)
-                        uploadedFileInfo.classList.add('uploaded-file__info--active');
-                    }, 500); // 0.5s
-
-                    // Add The (fileReader) Result Inside (previewImage) Source
-                    previewImage.setAttribute('src', fileReader.result);
-
-                    //const base64Data = fileReader.result.split(',')[1];
-                    //$("#imgcode").val(base64Data)
-                    //// Now you have the base64 encoded image data in base64Data variable
-                    //console.log('Base64 Encoded Image Data:', base64Data);
-
-                    // Replace with your actual base64 data
-
-                    // Create a new Image element
-                    //const decodedImage = new Image();
-
-                    //// Set the src attribute to the base64 data
-                    //decodedImage.src = 'data:image/jpeg;base64,' + base64Data;
-
-                    //// Add the image to a container element
-                    //const imageContainer = document.querySelector('#imageContainer'); // Replace with your container element's ID
-                    //imageContainer.appendChild(decodedImage);
-
-                    // Add File Name Inside Uploaded File Name
-                    uploadedFileName.innerHTML = file.name;
-
-                    // Call Function progressMove();
-                    progressMove();
-                });
-
-                // Read (file) As Data Url
-                fileReader.readAsDataURL(file);
-            } else { // Else
-
-                this; // (this) Represent The fileValidate(fileType, fileSize) Function
-
-            };
-            //} else {
-            //    alert('Please make sure your image has dimensions of 880*880 pixels.');
-            //    return false;
-            //}
+            removeButton.disabled = false;
         };
-
-    };
-
-    // Progress Counter Increase Function
-    function progressMove() {
-        // Counter Start
-        let counter = 0;
-
-        // After 600ms
-        setTimeout(() => {
-            // Every 100ms
-            let counterIncrease = setInterval(() => {
-                // If (counter) is equle 100
-                if (counter === 100) {
-                    // Stop (Counter Increase)
-                    clearInterval(counterIncrease);
-                } else { // Else
-                    // plus 10 on counter
-                    counter = counter + 10;
-                    // add (counter) vlaue inisde (uploadedFileCounter)
-                    uploadedFileCounter.innerHTML = `${counter}%`
-                }
-            }, 100);
-        }, 600);
-    };
-
-
-    // Simple File Validate Function
-    function fileValidate(fileType, fileSize) {
-        // File Type Validation
-        let isImage = imagesTypes.filter((type) => fileType.indexOf(`image/${type}`) !== -1);
-
-
-
-        // If The Uploaded File Type Is 'jpeg'
-        if (isImage[0] === 'jpeg') {
-            // Add Inisde (uploadedFileIconText) The (jpg) Value
-            uploadedFileIconText.innerHTML = 'jpg';
-        } else { // else
-            // Add Inisde (uploadedFileIconText) The Uploaded File Type
-            uploadedFileIconText.innerHTML = isImage[0];
-        };
-
-        // If The Uploaded File Is An Image
-        if (isImage.length !== 0) {
-            // Check, If File Size Is 2MB or Less
-            if (fileSize <= 2000000) { // 2MB :)
-                return true;
-            } else { // Else File Size
-                return alert('Please Your File Should be 2 Megabytes or Less');
-            };
-        } else { // Else File Type
-            return alert('Please make sure to upload An Image File Type');
-        };
-    };
-
-    // :)
+        reader.readAsDataURL(file);
+        debugger
+        input.files = event.dataTransfer.files;
+    }
 </script>

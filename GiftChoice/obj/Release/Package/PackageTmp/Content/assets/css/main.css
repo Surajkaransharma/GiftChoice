@@ -10397,14 +10397,17 @@ span.fi-rs-apps {
 
 .mobile-social-icon .fa {
     height: 35px;
-    background-color: #000;
+    background-color: #fff;
     border-radius: 5px;
-    color: #fff;
+    color: #000;
     text-align: center;
     padding: 8px 0 0 0;
     width: 35px;
 }
-
+.pro-details-brand a{
+    color : cornflowerblue;
+    font-weight : 500;
+}
 .header-info .fa {
     height: 25px;
     width: 25px;
@@ -10541,7 +10544,7 @@ span.fi-rs-apps {
     .image-1 img {
         height: 100%;
         width: 100%;
-        object-fit: cover;
+        /*object-fit: cover;*/
     }
 
 .image-2 {
@@ -10552,7 +10555,7 @@ span.fi-rs-apps {
     .image-2 img {
         height: 100%;
         width: 100%;
-        object-fit: cover;
+        /*object-fit: cover;*/
     }
 
 .image-3 {
@@ -10563,7 +10566,7 @@ span.fi-rs-apps {
     .image-3 img {
         height: 100%;
         width: 100%;
-        object-fit: cover;
+        /*object-fit: cover;*/
     }
 
 .image-4 {
@@ -10574,7 +10577,7 @@ span.fi-rs-apps {
     .image-4 img {
         height: 100%;
         width: 100%;
-        object-fit: cover;
+        /*object-fit: cover;*/
     }
 
 h3.section-title {
@@ -10824,7 +10827,7 @@ h3.section-title {
 }
 
 .product-cart-wrap .same-day-badge span.hot {
-    background: linear-gradient(45deg, #ffffff, #000000, #505050, #ffffff);
+    background: linear-gradient(45deg, #ffffff, #198754, #00542d, #ffffff);
     background-size: 400% 400%;
     animation: gradient_new 5s ease infinite;
 }
@@ -11215,9 +11218,24 @@ h3.section-title {
     }
 }
 
+@media only screen and (min-width:767px){
+    .top-23 {
+        top: 0px !important;
+    }
+}
+
+@media only screen and (max-width:767px) {
+    .top-23 {
+        top: 23px !important;
+    }
+}
 
 .theme-text-size-18 {
     font-size: 18px !important;
+}
+
+.theme-text-size-22 {
+    font-size: 22px !important;
 }
 
 .theme-text-size-16 {

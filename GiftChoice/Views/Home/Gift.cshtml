@@ -114,9 +114,9 @@
 
                                     <div class="attr-detail attr-size mb-3" ng-if="Product.productDataArray.length>0">
                                         <strong class="mr-10">Size : </strong>
-                                        <select class="form-select form-select-sm w-auto shadow-none theme-button-3 rounded-0 " name="" ng-model="size" id="" ng-change="SelectSizePrice(size)">
-                                            <option selected="ture" disabled value="">-- Select Size --</option>
-                                            <option class="text-dark" ng-repeat="s in Product.productDataArray" value="{{s.ProductSize}}">{{s.ProductSize}}</option>
+                                        <select class="form-select form-select-sm w-auto shadow-none theme-button-3 rounded-0 " name="" ng-model="size" id="" ng-change="SelectSizePrice(size)" ng-init="size = Product.productDataArray[0].ProductSize">
+                                            @*<option selected="ture" disabled value="">-- Select Size --</option>*@
+                                            <option  class="text-dark" ng-repeat="s in Product.productDataArray" value="{{s.ProductSize}}">{{s.ProductSize}}</option>
                                         </select>
 
                                     </div>

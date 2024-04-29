@@ -12,13 +12,51 @@
 
 <style>
     img {
-        width: 50px
+        width: 150px
     }
 
     .box1 {
         inline-size: 150px !important;
         overflow-wrap: break-word !important;
     }
+
+    .drop-zone {
+        width: 300px;
+        height: 200px;
+        border: 2px dashed #ccc;
+        margin: 0 auto;
+        text-align: center;
+        padding: 20px;
+        margin-bottom: 20px;
+    }
+
+        .drop-zone p {
+            margin-bottom: 10px;
+        }
+
+    .image-input {
+        display: none;
+    }
+
+    .preview {
+        width: 150px;
+        margin-bottom: 10px;
+        display: none;
+        margin: 0 auto;
+    }
+
+    .remove-image {
+        background-color: #ccc;
+        border: none;
+        padding: 5px 10px;
+        cursor: pointer;
+        opacity: 0.5;
+        transition: opacity 0.2s ease;
+    }
+
+        .remove-image:hover {
+            opacity: 1;
+        }
 </style>
 <script src="~/Angularjs/Admin.js"></script>
 
@@ -39,19 +77,19 @@
                 </nav>
             </div>
             <div class="ms-auto">
-                <div class="btn-group" ng-show="ProductData!= null">
-                    <input type="checkbox" ng-click="duplicateProduct()" ng-model="duplicate" id="duplicate" /> &nbsp;&nbsp;
-                    <label for="duplicate">Duplicate</label>
-                    @*<button type="button" class="btn btn-primary split-bg-primary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown">
-                            <span class="visually-hidden">Toggle Dropdown</span>
-                        </button>
-                        <div class="dropdown-menu dropdown-menu-right dropdown-menu-lg-end">
-                            <a class="dropdown-item" href="javascript:;">Action</a>
-                            <a class="dropdown-item" href="javascript:;">Another action</a>
-                            <a class="dropdown-item" href="javascript:;">Something else here</a>
-                            <div class="dropdown-divider"></div>	<a class="dropdown-item" href="javascript:;">Separated link</a>
-                        </div>*@
-                </div>
+                @*<div class="btn-group" ng-show="ProductData!= null">
+                        <input type="checkbox" ng-click="duplicateProduct()" ng-model="duplicate" id="duplicate" /> &nbsp;&nbsp;
+                        <label for="duplicate">Duplicate</label>
+                        <button type="button" class="btn btn-primary split-bg-primary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown">
+                                <span class="visually-hidden">Toggle Dropdown</span>
+                            </button>
+                            <div class="dropdown-menu dropdown-menu-right dropdown-menu-lg-end">
+                                <a class="dropdown-item" href="javascript:;">Action</a>
+                                <a class="dropdown-item" href="javascript:;">Another action</a>
+                                <a class="dropdown-item" href="javascript:;">Something else here</a>
+                                <div class="dropdown-divider"></div>	<a class="dropdown-item" href="javascript:;">Separated link</a>
+                            </div>
+                    </div>*@
             </div>
         </div>
         <div class="row">
@@ -61,19 +99,19 @@
                     <div class="card-body p-4">
 
                         <form class="row g-3" enctype="multipart/form-data">
-                            <div class="col-md-2">
-                                <label for="input1" class="form-label">Select Banner Position</label>
-                                <select id="MainCateSelect" class="form-select" onchange="angular.element(this).scope().GetBannerInProduct(this.value)" ng-model="BannerProdcutT.Position">
-                                    <option ng-selected="true" value="-1">Select Banner Position</option>
-                                    <option value="Small Banner">Small Banner</option>
-                                    <option value="Design Banner">Design Banner</option>
-                                    <option value="Multiple Banner">Multiple Banner</option>
+                            @*<div class="col-md-2">
+                                    <label for="input1" class="form-label">Select Banner Position</label>
+                                    <select id="MainCateSelect" class="form-select" onchange="angular.element(this).scope().GetBannerInProduct(this.value)" ng-model="BannerProdcutT.Position">
+                                        <option ng-selected="true" value="-1">Select Banner Position</option>
+                                        <option value="Small Banner">Small Banner</option>
+                                        <option value="Design Banner">Design Banner</option>
+                                        <option value="Multiple Banner">Multiple Banner</option>
 
-                                </select>
+                                    </select>
 
 
-                            </div>
-                            <div class="col-md-3">
+                                </div>*@
+                            <div class="col-md-3" ng-init="GetBannerInProduct()">
                                 <label for="input1" class="form-label">Select Banner Title</label>
 
                                 <select id="MainCate" class="form-select" ng-model="Product.BannerCateId" onchange="angular.element(this).scope().GetBannerToQuery(this.value)">
@@ -104,7 +142,7 @@
 
 
                                 </div>*@
-                            <div class="col-md-3">
+                            <div class="col-md-4">
                                 <label for="input1" class="form-label">Product Title</label>
                                 <input type="text" id="Producttitle" class="form-control" ng-model="Product.ProductTitle" placeholder="Product Title">
                             </div>
@@ -126,17 +164,17 @@
                                     <label for="input1" class="form-label">See Video</label>
                                     <input type="text" class="form-control" ng-model="Product.VideoUrl" id="" placeholder="See Video">
                                 </div>*@
-                            <div class="col-md-2">
-                                <label for="input1" class="form-label">See Video</label>
+                            <div class="col-md-3">
+                                <label for="input1" class="form-label">See Video  <span ng-show="!duplicateproductbool">    <a ng-show="Product.Video!=null && Product.Video!=''" class="badge bg-danger" href="{{'/images/ProductVideo/' + Product.Video}}" title="see video" target="_blank" role="button">See Video</a> &nbsp;&nbsp;&nbsp;&nbsp;   <a ng-show="Product.Video!=null && Product.Video!=''" ng-click="DeleteProductVideo(Product.ProductId)">Delete Video</a></span></label>
                                 <input type="file" id="VideoData" class="form-control" upload-file="Product.VideoData">
                             </div>
                             <div class="col-md-2">
-                                <label for="input1" class="form-label">Same Day Available</label>
-                                <input type="checkbox" ng-model="Product.SameDay" id="" placeholder="">
+                                <label for="SameDay" class="form-label">Same Day Available</label>
+                                <input type="checkbox" ng-model="Product.SameDay" id="SameDay" placeholder="">
                             </div>
                             <div class="col-md-2">
-                                <label for="input1" class="form-label">Common</label>
-                                <input type="checkbox" ng-model="Product.Common" id="" placeholder="">
+                                <label for="Common" class="form-label">Common</label>
+                                <input type="checkbox" ng-model="Product.Common" id="Common" placeholder="">
                             </div>
                             <div class="col-md-3" ng-init="GetMainCateData()" ng-show="Product.Common">
                                 <label for="input1" class="form-label">Select Main Category</label>
@@ -191,7 +229,7 @@
                                         <div class="d-md-flex d-grid align-items-center gap-3" style="margin-top: 30px">
                                             <button type="button" ng-click="removeproductDataArraydata($index)" class="btn btn-primary px-4 mt-28"><i class="bx bx-trash"></i></button>
 
-                                            <button ng-show="$last" type="button" id="Adbtn" ng-click="AddProductDetails()" class="btn btn-primary px-4 mt-28">Add Detail</button>
+                                            <button ng-show="$last" type="button" id="Adbtn" ng-click="AddProductDetails()" class="btn btn-primary px-4 mt-28"><i class="bx bx-plus"></i></button>
                                         </div>
                                     </div>
 
@@ -222,28 +260,89 @@
                                         CKEDITOR.replace($(this).prop('id'));
                                     });
                                 </script>*@
-                            <div class="col-md-2">
-                                <label for="input1" class="form-label">Image 1</label>
+                            @*<div class="col-md-2">
+                                    <label for="input1" class="form-label">Image 1</label>
 
-                                <input type="file" id="image1" class="form-control" upload-file="Product.Image1">
-                            </div>
+                                    <input type="file" id="image1" class="form-control" upload-file="Product.Image1">
+                                </div>
 
-                            <div class="col-md-2">
-                                <label for="input1" class="form-label">Image 2</label>
-                                <input type="file" class="form-control" upload-file="Product.Image2" id="image2">
-                            </div>
+                                <div class="col-md-2">
+                                    <label for="input1" class="form-label">Image 2</label>
+                                    <input type="file" class="form-control" upload-file="Product.Image2" id="image2">
+                                </div>
 
-                            <div class="col-md-2">
-                                <label for="input1" class="form-label">Image 3</label>
-                                <input type="file" class="form-control" upload-file="Product.Image3" id="image3">
+                                <div class="col-md-2">
+                                    <label for="input1" class="form-label">Image 3</label>
+                                    <input type="file" class="form-control" upload-file="Product.Image3" id="image3">
+                                </div>
+                                <div class="col-md-2">
+                                    <label for="input1" class="form-label">Image 4</label>
+                                    <input type="file" class="form-control" upload-file="Product.Image4" id="image4">
+                                </div>
+                                <div class="col-md-2">
+                                    <label for="input1" class="form-label">Image 5</label>
+                                    <input type="file" class="form-control" upload-file="Product.Image5" id="image5">
+                                </div>*@
+
+                            <div class="col-md-3">
+
+                                <p>Drop Zone 1: Drag & drop your image here or click to browse</p>
+                                <div class="drop-zone">
+                                    <input type="file" class="image-input" accept="image/*">
+                                    <img class="preview" src="" alt="Image Preview">
+                                </div>
+                                <button class="remove-image" disabled>Remove Image</button>
+                                <span ng-show="!duplicateproductbool">  <button class="btn btn-danger" ng-show="Product.ProductImage[0]" style="float: right" ng-click="DeleteProductImage(Product.ProductImage[0],Product.ProductId)">Delete Image</button></span>
+
+</div>
+                            <div class="col-md-3">
+
+                                <p>Drop Zone 2: Drag & drop your image here or click to browse</p>
+                                <div class="drop-zone">
+                                    <input type="file" class="image-input" accept="image/*">
+                                    <img class="preview" src="" alt="Image Preview">
+                                </div>
+                                <button class="remove-image" disabled>Remove Image</button>
+                                <span ng-show="!duplicateproductbool">      <button class="btn btn-danger" ng-show="Product.ProductImage[1]" style="float: right"  ng-click="DeleteProductImage(Product.ProductImage[1],Product.ProductId)">Delete Image</button></span>
+
+
                             </div>
-                            <div class="col-md-2">
-                                <label for="input1" class="form-label">Image 4</label>
-                                <input type="file" class="form-control" upload-file="Product.Image4" id="image4">
+                            <div class="col-md-3">
+
+                                <p>Drop Zone 3: Drag & drop your image here or click to browse</p>
+                                <div class="drop-zone">
+                                    <input type="file" class="image-input" accept="image/*">
+                                    <img class="preview" src="" alt="Image Preview">
+                                </div>
+                                <button class="remove-image" disabled>Remove Image</button>
+                                <span ng-show="!duplicateproductbool">   <button class="btn btn-danger" ng-show="Product.ProductImage[2]" style="float: right" ng-click="DeleteProductImage(Product.ProductImage[2],Product.ProductId)">Delete Image</button></span>
+
+
+</div>
+                            <div class="col-md-3">
+
+                                <p>Drop Zone 4: Drag & drop your image here or click to browse</p>
+                                <div class="drop-zone">
+                                    <input type="file" class="image-input" accept="image/*">
+                                    <img class="preview" src="" alt="Image Preview">
+                                </div>
+                                <button class="remove-image" disabled>Remove Image</button>
+                                <span ng-show="!duplicateproductbool">  <button class="btn btn-danger" ng-show="Product.ProductImage[3]" style="float: right" ng-click="DeleteProductImage(Product.ProductImage[3],Product.ProductId)">Delete Image</button></span>
+
+
+
                             </div>
-                            <div class="col-md-2">
-                                <label for="input1" class="form-label">Image 5</label>
-                                <input type="file" class="form-control" upload-file="Product.Image5" id="image5">
+                            <div class="col-md-3" style="display: none">
+
+                                <p>Drop Zone 5: Drag & drop your image here or click to browse</p>
+                                <div class="drop-zone">
+                                    <input type="file" class="image-input" accept="image/*">
+                                    <img class="preview" src="" alt="Image Preview">
+                                </div>
+                                <button class="remove-image" disabled>Remove Image</button>
+                                <span ng-show="!duplicateproductbool"> <button class="btn btn-danger" ng-show="Product.ProductImage[4]" style="float: right" ng-click="DeleteProductImage(Product.ProductImage[4],Product.ProductId)">Delete Image</button></span>
+
+
                             </div>
                             <div class="col-md-12">
                                 <div class="d-md-flex d-grid align-items-center gap-3">
@@ -288,9 +387,9 @@
                                     <tr>
                                         <th>S.No.</th>
                                         <th class="box1">Product Title</th>
-                                        <th class="box1">Main Category Name</th>
+                                        <th class="box1">Category Name</th>
 
-                                        <th class="box1">Banner Title</th>
+
                                         <th>Label</th>
                                         <th>See Video</th>
                                         <th>Same Day</th>
@@ -303,17 +402,25 @@
                                         <th>Image</th>
                                         <th>Active</th>
                                         <th>Action</th>
+                                        <th>Duplicate</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr ng-repeat="m in ProductData">
                                         <td>{{$index+1}}</td>
                                         <td style="white-space:normal" class="box1">{{m.ProductTitle}}</td>
-                                        <td style="white-space:normal" class="box1">{{m.Maincate.MTitle}}</td>
-                                        <td style="white-space:normal" class="box1">{{m.Bannercate.MTitle}}</td>
+                                        <td style="white-space:normal" class="box1">
+                                            <p> Main Category : {{m.Maincate.MTitle}}  </p>
+                                            <p>Banner Title : {{m.Bannercate.MTitle}} </p>
+                                        </td>
+
 
                                         <td>{{m.PLabel}}</td>
-                                        <td style="white-space:normal" class="box1">{{m.VideoUrl}}</td>
+                                        <td style="white-space:normal" class="box1">
+
+                                            <a ng-show="m.Video!=null && m.Video!=''" class="badge bg-danger" href="{{'/images/ProductVideo/' + m.Video}}" title="see video" target="_blank" role="button">See Video</a>
+
+                                        </td>
                                         <td>
                                             <span class="badge {{m.SameDay==1? 'bg-success' : 'bg-danger'}}">{{m.SameDay==1?'open':'Close'}}</span></a>
                                         </td>
@@ -322,7 +429,7 @@
                                         @*<td>{{m.Priority}}</td>*@
                                         <td><span ng-repeat="n in m.Submenu">{{n.SubmenuTitle}},<br /></span></td>
                                         <td>
-                                            <table class="table table-bordered">
+                                            <table class="table table-bordered" ng-show="m.productDataArray.length>0">
                                                 <tr>
                                                     <td>Price</td>
                                                     <td>Size</td>
@@ -342,7 +449,9 @@
                                         </td>
                                         <td><span ng-repeat="i in m.ProductImage"><img src="~/images/ProductImg/{{i}}"><br /></span> </td>
                                         <td><a ng-click="BannerProductActiveDeActive(m.ProductId)"> <span class="badge {{m.Active==1? 'bg-success' : 'bg-danger'}}">{{m.Active==1?'Active':'Deactive'}}</span></a> </td>
-                                        <td><a><i class="bx bxs-pencil" ng-click="GetBannerProductbyid($index)"></i></a></td>
+                                        <td><a title="Edit"><i class="bx bxs-pencil" ng-click="GetBannerProductbyid($index)"></i></a></td>
+                                        <td><a title="Duplicate"> <i class="bx bxs-duplicate" ng-click="duplicateProduct($index)"></i></a></td>
+
                                     </tr>
                                 </tbody>
                             </table>
@@ -354,3 +463,62 @@
     </div>
 </div>
 <script src="~/assets/ckeditor/ckeditor.js"></script>
+
+<script>
+    const dropZones = document.querySelectorAll('.drop-zone');
+    const imageInputs = document.querySelectorAll('.image-input');
+    const previews = document.querySelectorAll('.preview');
+    const removeButtons = document.querySelectorAll('.remove-image');
+
+    dropZones.forEach((dropZone, index) => {
+        dropZone.addEventListener('dragover', (event) => {
+            event.preventDefault();
+            dropZone.classList.add('dragover');
+        });
+
+        dropZone.addEventListener('dragleave', () => {
+            dropZone.classList.remove('dragover');
+        });
+
+        dropZone.addEventListener('drop', (event) => {
+            event.preventDefault();
+            dropZone.classList.remove('dragover');
+
+            const file = event.dataTransfer.files[0];
+            if (!file || !file.type.startsWith('image/')) {
+                alert('Please drag and drop an image file.');
+                return;
+            }
+            uploadFile(file, previews[index], removeButtons[index], imageInputs[index]);
+        });
+
+        dropZone.addEventListener('click', () => {
+            imageInputs[index].click();
+        });
+
+        imageInputs[index].addEventListener('change', (event) => {
+            const file = event.target.files[0];
+            uploadFile(file, previews[index], removeButtons[index], imageInputs[index]);
+        });
+
+        removeButtons[index].addEventListener('click', () => {
+            previews[index].src = '';
+            imageInputs[index].value = '';
+            previews[index].style.display = 'none';
+            removeButtons[index].disabled = true;
+        });
+    });
+
+    function uploadFile(file, preview, removeButton, input) {
+        const reader = new FileReader();
+        reader.onload = (e) => {
+            preview.src = e.target.result;
+            preview.style.display = 'block';
+
+            removeButton.disabled = false;
+        };
+        reader.readAsDataURL(file);
+        debugger
+        input.files = event.dataTransfer.files;
+    }
+</script>

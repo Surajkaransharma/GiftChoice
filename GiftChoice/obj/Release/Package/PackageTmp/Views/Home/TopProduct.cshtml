@@ -28,9 +28,9 @@
                                 </div>
                             </div>
                             <div class="row product-grid-4 g-1 gx-1" ng-init="GetTopProduct()">
-                                <div class="col-lg-3 col-6 col-sm-4" ng-repeat="q in ProductData">
+                                <div class="col-lg-2 col-6 col-sm-3" ng-repeat="q in ProductData">
                                     <div data-aos="zoom-in">
-                                        <div class="product-cart-wrap">
+                                        <div class="product-cart-wrap mb-10 ">
                                             <div class="product-img-action-wrap">
                                                 <div class="product-img product-img-zoom">
                                                     <a href="/Home/Gift?url={{q.PUrl}}">
@@ -47,8 +47,13 @@
                                                 <div class="product-price">
                                                     <span><i class="fa fa-inr" aria-hidden="true"></i> {{q.Price}}/-</span>
                                                 </div>
-                                                <div class="product-action-1 show">
-                                                    <a aria-label="Add To Cart" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight" class="action-btn hover-up" ng-click="addItemToCart($index)"><i class="fi-rs-shopping-bag-add"></i></a>
+                                                <div class="d-flex justify-content-between">
+                                                    <div class="button-design mt-2">
+                                                        <a aria-label="Add To Cart" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight" class="btn theme-button-2" ng-click="addItemToCart($index)"><i class="fi-rs-shopping-bag-add"></i> Add To Cart </a>
+                                                    </div>
+                                                    <div class="button-design mt-2">
+                                                        <a aria-label="View Image" class="btn theme-button-3" ng-click="quickview(q)"><i class="fa fa-eye" aria-hidden="true"></i></a>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
