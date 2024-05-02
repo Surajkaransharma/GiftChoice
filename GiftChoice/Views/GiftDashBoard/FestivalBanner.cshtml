@@ -8,6 +8,43 @@
     img {
         width: 50px
     }
+    .drop-zone {
+        width: 300px;
+        height: 200px;
+        border: 2px dashed #ccc;
+        margin: 0 auto;
+        text-align: center;
+        padding: 20px;
+        margin-bottom: 20px;
+    }
+
+        .drop-zone p {
+            margin-bottom: 10px;
+        }
+
+    .image-input {
+        display: none;
+    }
+
+    .preview {
+        width: 150px;
+        margin-bottom: 10px;
+        display: none;
+        margin: 0 auto;
+    }
+
+    .remove-image {
+        background-color: #ccc;
+        border: none;
+        padding: 5px 10px;
+        cursor: pointer;
+        opacity: 0.5;
+        transition: opacity 0.2s ease;
+    }
+
+        .remove-image:hover {
+            opacity: 1;
+        }
 </style>
 <script src="~/Angularjs/Admin.js"></script>
 <div class="page-wrapper" ng-app="AdminApp" ng-controller="AdminController">
@@ -47,52 +84,57 @@
                             <div class="col-md-12">
 
                                 <label for="inputFirstName" class="form-label">Image <span style="color:#ff0000;font-weight:bolder;"></span></label>
+                                <p>Drop Zone 1: Drag & drop your image here or click to browse</p>
+                                <div class="drop-zone">
+                                    <input type="file" class="image-input" accept="image/*" upload-file="FestivalBanner.Image">
+                                    <img class="preview" src="" alt="Image Preview">
+                                </div>
+                                <button class="remove-image" disabled>Remove Image</button>
+                                @*<section id="image-section">
+                                        <div id="uploadArea" class="upload-area">
+                                            <!-- Header -->
+                                            <div class="upload-area__header" style="display:none">
+                                                <h1 class="upload-area__title">Upload your file</h1>
+                                                <p class="upload-area__paragraph">
+                                                    File should be an image
+                                                    <strong class="upload-area__tooltip">
+                                                        Like
+                                                        <span class="upload-area__tooltip-data"></span>
+                                                    </strong>
+                                                </p>
+                                            </div>
+                                            <!-- End Header -->
+                                            <!-- Drop Zoon -->
+                                            <div id="dropZoon" class="upload-area__drop-zoon drop-zoon">
+                                                <span class="drop-zoon__icon">
+                                                    <i class='bx bxs-file-image'></i>
+                                                </span>
+                                                <p class="drop-zoon__paragraph">Drop your file here or Click to browse</p>
+                                                <span id="loadingText" class="drop-zoon__loading-text">Please Wait</span>
+                                                <img src="" alt="Preview Image" id="previewImage" class="drop-zoon__preview-image" draggable="false">
+                                                <input type="file" id="fileInput" upload-file="FestivalBanner.Image" class="drop-zoon__file-input" multiple>
+                                            </div>
+                                            <!-- End Drop Zoon -->
+                                            <!-- File Details -->
+                                            <div id="fileDetails" class="upload-area__file-details file-details" style="display: none">
+                                                <h3 class="file-details__title">Uploaded File</h3>
 
-                                <section id="image-section">
-                                    <div id="uploadArea" class="upload-area">
-                                        <!-- Header -->
-                                        <div class="upload-area__header" style="display:none">
-                                            <h1 class="upload-area__title">Upload your file</h1>
-                                            <p class="upload-area__paragraph">
-                                                File should be an image
-                                                <strong class="upload-area__tooltip">
-                                                    Like
-                                                    <span class="upload-area__tooltip-data"></span>
-                                                </strong>
-                                            </p>
-                                        </div>
-                                        <!-- End Header -->
-                                        <!-- Drop Zoon -->
-                                        <div id="dropZoon" class="upload-area__drop-zoon drop-zoon">
-                                            <span class="drop-zoon__icon">
-                                                <i class='bx bxs-file-image'></i>
-                                            </span>
-                                            <p class="drop-zoon__paragraph">Drop your file here or Click to browse</p>
-                                            <span id="loadingText" class="drop-zoon__loading-text">Please Wait</span>
-                                            <img src="" alt="Preview Image" id="previewImage" class="drop-zoon__preview-image" draggable="false">
-                                            <input type="file" id="fileInput" upload-file="FestivalBanner.Image" class="drop-zoon__file-input" multiple>
-                                        </div>
-                                        <!-- End Drop Zoon -->
-                                        <!-- File Details -->
-                                        <div id="fileDetails" class="upload-area__file-details file-details" style="display: none">
-                                            <h3 class="file-details__title">Uploaded File</h3>
+                                                <div id="uploadedFile" class="uploaded-file">
+                                                    <div class="uploaded-file__icon-container">
+                                                        <i class='bx bxs-file-blank uploaded-file__icon'></i>
+                                                        <span class="uploaded-file__icon-text"></span>
 
-                                            <div id="uploadedFile" class="uploaded-file">
-                                                <div class="uploaded-file__icon-container">
-                                                    <i class='bx bxs-file-blank uploaded-file__icon'></i>
-                                                    <span class="uploaded-file__icon-text"></span>
+                                                    </div>
 
-                                                </div>
-
-                                                <div id="uploadedFileInfo" class="uploaded-file__info">
-                                                    <span class="uploaded-file__name">Proejct 1</span>
-                                                    <span class="uploaded-file__counter">0%</span>
+                                                    <div id="uploadedFileInfo" class="uploaded-file__info">
+                                                        <span class="uploaded-file__name">Proejct 1</span>
+                                                        <span class="uploaded-file__counter">0%</span>
+                                                    </div>
                                                 </div>
                                             </div>
+                                            <!-- End File Details -->
                                         </div>
-                                        <!-- End File Details -->
-                                    </div>
-                                </section>
+                                    </section>*@
 
                             </div>
 
@@ -115,7 +157,7 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="d-lg-flex align-items-center mb-4 gap-3">
-                         
+
 
 
                         </div>
@@ -127,7 +169,7 @@
                                         <th>Festival Banner Title</th>
                                         <th>Festival Banner Url</th>
 
-                                     
+
                                         <th>Image</th>
                                         <th>Active</th>
 
@@ -140,7 +182,7 @@
                                         <td>{{$index+1}}</td>
                                         <td>{{m.FBTitle}}</td>
                                         <td>{{m.FBUrl}}</td>
-                                    
+
                                         <td><img src="~/images/FestivalBanner/{{m.FBImage}}"></td>
                                         <td><a ng-click="FestivalBannerActiveDeActive(m.FBannerId)"> <span class="badge {{m.Active==1? 'bg-success' : 'bg-danger'}}">{{m.Active==1?'Active':'Deactive'}}</span></a> </td>
                                         <td><a><i class="bx bxs-pencil" ng-click="GetFestivalBannerByid($index)"></i></a></td>

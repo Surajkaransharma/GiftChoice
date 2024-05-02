@@ -1091,6 +1091,8 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
         //    return;
         //}
 
+        const imageInputs = document.querySelectorAll('.image-input');
+        $scope.Slider.Image = imageInputs[0].files[0];
 
         upload({
             url: '/GiftDashBoard/SubmitSlider',
@@ -1133,13 +1135,21 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
         $('#btn').css('display', 'none');
 
         $scope.Slider = $scope.SliderListData[index];
-        const previewImage = document.querySelector('#previewImage');
-        const loadingText = document.querySelector('#loadingText');
-        const dropZoon = document.querySelector('#dropZoon');
-        dropZoon.classList.add('drop-zoon--Uploaded');
-        loadingText.style.display = "none";
-        $('#previewImage').css('display', 'block');
-        previewImage.setAttribute("src", "/images/SliderImg/" + $scope.Slider.SliderImage);
+
+        const previews = document.querySelectorAll('.preview');
+        const removeButtons = document.querySelectorAll('.remove-image');
+
+
+        previews[0].style.display = 'block';
+        removeButtons[0].disabled = false;
+        previews[0].setAttribute("src", "/images/SliderImg/" + $scope.Slider.SliderImage);
+        //const previewImage = document.querySelector('#previewImage');
+        //const loadingText = document.querySelector('#loadingText');
+        //const dropZoon = document.querySelector('#dropZoon');
+        //dropZoon.classList.add('drop-zoon--Uploaded');
+        //loadingText.style.display = "none";
+        //$('#previewImage').css('display', 'block');
+        //previewImage.setAttribute("src", "/images/SliderImg/" + $scope.Slider.SliderImage);
 
     };
     $scope.UpdateSlider = function () {
@@ -1155,7 +1165,8 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
         //    return;
         //}
 
-
+        const imageInputs = document.querySelectorAll('.image-input');
+        $scope.Slider.Image = imageInputs[0].files[0];
         upload({
             url: '/GiftDashBoard/UpdateSlider',
             method: 'post',
@@ -1489,7 +1500,8 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
         }
 
 
-
+        const imageInputs = document.querySelectorAll('.image-input');
+        $scope.BannerProdcutT.Image = imageInputs[0].files[0];
 
 
         upload({
@@ -1560,13 +1572,16 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
 
 
         $scope.BannerProdcutT = $scope.GetBannerProdcutTData[index];
-        const previewImage = document.querySelector('#previewImage');
-        const loadingText = document.querySelector('#loadingText');
-        const dropZoon = document.querySelector('#dropZoon');
-        dropZoon.classList.add('drop-zoon--Uploaded');
-        loadingText.style.display = "none";
-        $('#previewImage').css('display', 'block');
-        previewImage.setAttribute("src", "/images/BannerPTImage/" + $scope.BannerProdcutT.MImage);
+        previews[0].style.display = 'block';
+        removeButtons[0].disabled = false;
+        previews[0].setAttribute("src", "/images/BannerPTImage/" + $scope.BannerProdcutT.MImage);
+        //const previewImage = document.querySelector('#previewImage');
+        //const loadingText = document.querySelector('#loadingText');
+        //const dropZoon = document.querySelector('#dropZoon');
+        //dropZoon.classList.add('drop-zoon--Uploaded');
+        //loadingText.style.display = "none";
+        //$('#previewImage').css('display', 'block');
+        //previewImage.setAttribute("src", "/images/BannerPTImage/" + $scope.BannerProdcutT.MImage);
 
         //for (var i = 0; i < $scope.BannerProdcutT.Submenu.length; i++) {
         //    var vallc = $scope.BannerProdcutT.Submenu[i].KeywordId;
@@ -1610,7 +1625,8 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
         //        BPKeywordarr.push($scope.KeywordList[i]);
         //    }
         //}
-
+        const imageInputs = document.querySelectorAll('.image-input');
+        $scope.BannerProdcutT.Image = imageInputs[0].files[0];
 
         upload({
             url: '/GiftDashBoard/UpdateBannerProdcutT',
@@ -2718,7 +2734,8 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
         //    $('#priority').focus;
         //    return;
         //}
-
+        const imageInputs = document.querySelectorAll('.image-input');
+        $scope.FestivalBanner.Image = imageInputs[0].files[0];
 
         upload({
             url: '/GiftDashBoard/SubmitFestivalBanner',
@@ -2761,13 +2778,21 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
         $('#btn').css('display', 'none');
 
         $scope.FestivalBanner = $scope.GetFestivalBannerData[index];
-        const previewImage = document.querySelector('#previewImage');
-        const loadingText = document.querySelector('#loadingText');
-        const dropZoon = document.querySelector('#dropZoon');
-        dropZoon.classList.add('drop-zoon--Uploaded');
-        loadingText.style.display = "none";
-        $('#previewImage').css('display', 'block');
-        previewImage.setAttribute("src", "/images/FestivalBanner/" + $scope.FestivalBanner.FBImage);
+
+        const previews = document.querySelectorAll('.preview');
+        const removeButtons = document.querySelectorAll('.remove-image');
+
+
+        previews[0].style.display = 'block';
+        removeButtons[0].disabled = false;
+        previews[0].setAttribute("src", "/images/FestivalBanner/" + $scope.FestivalBanner.FBImage);
+        //const previewImage = document.querySelector('#previewImage');
+        //const loadingText = document.querySelector('#loadingText');
+        //const dropZoon = document.querySelector('#dropZoon');
+        //dropZoon.classList.add('drop-zoon--Uploaded');
+        //loadingText.style.display = "none";
+        //$('#previewImage').css('display', 'block');
+        //previewImage.setAttribute("src", "/images/FestivalBanner/" + $scope.FestivalBanner.FBImage);
 
     };
     $scope.UpdateFestivalBanner = function () {
@@ -2782,7 +2807,8 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
         //    $('#priority').focus;
         //    return;
         //}
-
+        const imageInputs = document.querySelectorAll('.image-input');
+        $scope.FestivalBanner.Image = imageInputs[0].files[0];
 
         upload({
             url: '/GiftDashBoard/UpdateFestivalBanner',
