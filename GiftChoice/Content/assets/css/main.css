@@ -10320,6 +10320,9 @@ span.fi-rs-apps {
         top: 11px;
     }
 
+
+
+
     .product-cart-wrap .product-badges span {
         font-size: 10px;
     }
@@ -11279,5 +11282,34 @@ h3.section-title {
         height: 25px;
         line-height: 27px;
         font-size: 10px;
+    }
+}
+
+
+
+.product-cart-wrap .product-badges.product-badges-position-1 {
+    left: unset !important;
+    right: 10px !important;
+    top : 11px !important;
+}
+
+
+.product-cart-wrap .product-badges span.pot {
+    background: linear-gradient(45deg, #000000, #7c7c7c, #5a5a5a, #000000);
+    background-size: 400% 400%;
+    animation: gradientvideo 5s ease infinite;
+}
+
+@keyframes gradientvideo {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
     }
 }

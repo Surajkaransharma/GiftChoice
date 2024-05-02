@@ -142,7 +142,7 @@
     <section class="section-padding p-0" ng-show="NewArivals.length>0 || TopsellingProduct.length>0 || NewProduct.length>0" ng-init="GetLabelProduct()">
         <div class="container pt-4 pb-4">
             <div class="row gx-2 g-2 overflow-auto">
-                <div class="col-lg-4 col-sm-4 col-7" ng-show="TopsellingProduct.length>0">
+                <div class="col-lg-4 col-sm-7 col-9" ng-show="TopsellingProduct.length>0">
                     <div class="bg-light p-3 pt-4 pb-4 border border-light rounded-5 ppt-4">
                         <div class="different-products">
                             <div class="row">
@@ -187,7 +187,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-4 col-sm-4 col-7" ng-show="NewProduct.length>0">
+                <div class="col-lg-4 col-sm-7 col-9" ng-show="NewProduct.length>0">
                     <div class="bg-light p-3 pt-4 pb-4 border border-light rounded-5 ppt-4">
                         <div class="different-products">
                             <div class="row">
@@ -231,7 +231,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-4 col-sm-4 col-7" ng-show="NewArivals.length>0">
+                <div class="col-lg-4 col-sm-7 col-9" ng-show="NewArivals.length>0">
                     <div class="bg-light p-3 pt-4 pb-4 border border-light rounded-5 ppt-4">
                         <div class="different-products">
                             <div class="row">
@@ -345,6 +345,9 @@
                                             @*<img class="hover-img img-fluid" src="~/images/ProductImg/{{p.ProductImage}}" loading="lazy" alt="product-hover-image" loading="lazy" alt="">*@
                                         </a>
                                     </div>
+                                    <div class="product-badges product-badges-position product-badges-mrg product-badges-position-1">
+                                        <a href="#" ng-click="quickview(p)"><span class="pot"><i class="fa fa-camera" aria-hidden="true"></i> Video </span></a>
+                                    </div>
                                     <div class="product-badges product-badges-position product-badges-mrg" ng-show="p.PLabel!=''">
                                         <span class="hot">{{p.PLabel}}</span>
                                     </div>
@@ -362,7 +365,7 @@
                                             <a aria-label="Add To Cart" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight" class="btn theme-button-2" ng-click="addItemToCart($index)"><i class="fi-rs-shopping-bag-add"></i> Add To Cart </a>
                                         </div>
                                         <div class="button-design mt-2">
-                                            <a aria-label="View Image" class="btn theme-button-3" ng-click="quickview(p)"><i class="fa fa-eye" aria-hidden="true"></i></a>
+                                            <a aria-label="View Image" class="btn theme-button-3 d-flex gap-2 align-items-center" ng-click="quickview(p)"><span class="d-lg-none d-sm-none d-block fs-9">View </span><i class="fa fa-eye" aria-hidden="true"></i></a>
                                         </div>
                                     </div>
                                 </div>
