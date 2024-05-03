@@ -1574,7 +1574,7 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
         $scope.BannerProdcutT = $scope.GetBannerProdcutTData[index];
         previews[0].style.display = 'block';
         removeButtons[0].disabled = false;
-        previews[0].setAttribute("src", "/images/BannerPTImage/" + $scope.BannerProdcutT.MImage);
+        previews[0].setAttribute("src", "/images/MainCate/" + $scope.BannerProdcutT.MImage);
         //const previewImage = document.querySelector('#previewImage');
         //const loadingText = document.querySelector('#loadingText');
         //const dropZoon = document.querySelector('#dropZoon');

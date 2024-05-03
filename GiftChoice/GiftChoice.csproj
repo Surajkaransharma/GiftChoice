@@ -751,6 +751,7 @@
     <Content Include="images\BannerImage\4.jpg" />
     <Content Include="images\BannerPTImage\4.jpg" />
     <Content Include="images\check_img.png" />
+    <Content Include="images\FestivalBanner\1.JPG" />
     <Content Include="images\FestivalBanner\1.png" />
     <Content Include="images\gift-choice-vertical.png" />
     <Content Include="images\MainCate\1.jpg" />
@@ -777,7 +778,12 @@
     <Content Include="images\ProductImg\13.jpg" />
     <Content Include="images\ProductImg\14.JPG" />
     <Content Include="images\ProductImg\146.jpg" />
+    <Content Include="images\ProductImg\147.jpg" />
+    <Content Include="images\ProductImg\148.JPG" />
+    <Content Include="images\ProductImg\149.JPG" />
     <Content Include="images\ProductImg\15.jpg" />
+    <Content Include="images\ProductImg\150.jpg" />
+    <Content Include="images\ProductImg\151.jpg" />
     <Content Include="images\ProductImg\16.JPG" />
     <Content Include="images\ProductImg\17.jpg" />
     <Content Include="images\ProductImg\18.JPG" />

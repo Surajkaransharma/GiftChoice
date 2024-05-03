@@ -136,6 +136,7 @@
                                                 </div>
                                             </div>
                                             <a class="btn theme-button-2" role="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight" ng-click="GiftAddItemToCart(Product.ProductId)">Add To Cart</a>
+                                            <a ng-show="Product.Video!=null && Product.Video!=''" class="button btn-danger button-add-to-cart filter-button video-button" href="{{'/images/ProductVideo/' + Product.Video}}" target="_blank" role="button">See Video</a>
                                         </div>
                                         @*<a class="button btn-danger button-add-to-cart filter-button animate__bounceIn" href="#" target="_blank" role="button">See Video</a>*@
                                     </div>

@@ -1164,9 +1164,11 @@ app.controller("HomeController", ['$scope', '$http', '$sce', 'startFromFilter', 
 
 
     };
-    $scope.quickview = function (product) {
+    $scope.quickview = function (product,id) {
         debugger
         $scope.product = product;
+        $scope.imagevideo = id;
+
         $('#quickview').modal("toggle");
 
         setTimeout(() => {

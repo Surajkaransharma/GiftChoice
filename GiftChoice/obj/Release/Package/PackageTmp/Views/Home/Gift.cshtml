@@ -114,9 +114,9 @@
 
                                     <div class="attr-detail attr-size mb-3" ng-if="Product.productDataArray.length>0">
                                         <strong class="mr-10">Size : </strong>
-                                        <select class="form-select form-select-sm w-auto shadow-none theme-button-3 rounded-0 " name="" ng-model="size" id="" ng-change="SelectSizePrice(size)">
-                                            <option selected="ture" disabled value="">-- Select Size --</option>
-                                            <option class="text-dark" ng-repeat="s in Product.productDataArray" value="{{s.ProductSize}}">{{s.ProductSize}}</option>
+                                        <select class="form-select form-select-sm w-auto shadow-none theme-button-3 rounded-0 " name="" ng-model="size" id="" ng-change="SelectSizePrice(size)" ng-init="size = Product.productDataArray[0].ProductSize">
+                                            @*<option selected="ture" disabled value="">-- Select Size --</option>*@
+                                            <option  class="text-dark" ng-repeat="s in Product.productDataArray" value="{{s.ProductSize}}">{{s.ProductSize}}</option>
                                         </select>
 
                                     </div>
@@ -136,6 +136,7 @@
                                                 </div>
                                             </div>
                                             <a class="btn theme-button-2" role="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight" ng-click="GiftAddItemToCart(Product.ProductId)">Add To Cart</a>
+                                            <a ng-show="Product.Video!=null && Product.Video!=''" class="button btn-danger button-add-to-cart filter-button video-button" href="{{'/images/ProductVideo/' + Product.Video}}" target="_blank" role="button">See Video</a>
                                         </div>
                                         @*<a class="button btn-danger button-add-to-cart filter-button animate__bounceIn" href="#" target="_blank" role="button">See Video</a>*@
                                     </div>
@@ -214,7 +215,7 @@
 
 
     @* Related Product Slider Section Start *@
-    <section class="section-paddin mb-30">
+    <section class="section-paddin mb-30" ng-show="ProductData.length>0">
         <div class="container">
             <h3 class="section-title mb-20 fs-14 mmb-20"><span>Related</span> Products</h3>
             <div class="carausel-6-columns-cover position-relative">

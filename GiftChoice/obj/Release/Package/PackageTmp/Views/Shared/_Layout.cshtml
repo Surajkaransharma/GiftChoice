@@ -398,9 +398,9 @@
 
                 <div class="buttons bg-white p-2">
                     <div class="d-flex justify-content-center gap-2 ">
-                        <div class="view-cart-button">
+                        @*<div class="view-cart-button">
                             <a name="" id="" class="btn theme-button-3 w-100 theme-text-size p-2" href="/Home/Cart" role="button">Go to Cart</a>
-                        </div>
+                        </div>*@
                         <div class="checkout-button">
                             <a name="" id="" class="btn theme-button-2 w-100 theme-text-size p-2" href="https://wa.me/+917877341189?text={{whatsappdata}}" target="_blank" role="button">Share On Whatsapp</a>
                         </div>
@@ -419,12 +419,12 @@
                     </button>
                     <div class="modal-body p-1">
                         @* Image Code *@
-                        <a href="/Home/BGift?url={{product.PUrl}}" ng-show="!product.Video">
+                        <a href="/Home/BGift?url={{product.PUrl}}"  ng-if="imagevideo=='image'">
 
-                            <img ng-show="!product.Video" src="~/images/ProductImg/{{product.ProductImage}}" alt="product image" class="img-responsive w-100">
+                            <img  src="~/images/ProductImg/{{product.ProductImage}}" alt="product image" class="img-responsive w-100">
                         </a>
                         @* Video Code *@
-                        <a href="/Home/BGift?url={{product.PUrl}}">
+                        <a href="/Home/BGift?url={{product.PUrl}}" ng-if="imagevideo=='video'">
                             <video width="100%" autoplay loop muted ng-show="product.Video" id="pVideo">
                                 <source type="video/mp4">
                             </video>
@@ -434,6 +434,7 @@
                 </div>
             </div>
         </div>
+
 
 
         @RenderBody()
