@@ -11,6 +11,15 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
 
         $scope.Product = $scope.ProductData[index];
         $scope.duplicateproductbool = true;
+
+
+        if ($scope.Product.ProductType == "Common") {
+            $("#Common").attr('checked', true).trigger("click");
+            $scope.Product.Common = true;
+        } else {
+            $scope.Product.Common = false;
+
+        }
         $scope.productDataArray = [];
         if ($scope.Product.productDataArray.length > 0) {
 
@@ -2043,6 +2052,15 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
 
 
         $scope.Product = $scope.ProductData[index];
+
+        if ($scope.Product.ProductType == "Common") {
+            $("#Common").attr('checked', true).trigger("click");
+            $scope.Product.Common = true;
+        } else {
+            $scope.Product.Common = false;
+
+        }
+
         $scope.duplicateproductbool = false;
         $scope.productDataArray = [];
         if ($scope.Product.productDataArray.length > 0) {

@@ -190,7 +190,7 @@ namespace GiftChoice.Controllers
             var res =
                 new
                 {
-                    TopsellingProduct = db.ProductTbls.Where(m => m.Active == true && m.LabelId == 1 && m.ProductType == "MainProduct").Select(m => new
+                    TopsellingProduct = db.ProductTbls.Where(m => m.Active == true && m.LabelId == 1).Select(m => new
                     {
                         Toplabel = db.LabelProductTbls.Where(l => l.LabelId == 1).Select(l => l.LTitle).FirstOrDefault(),
                         m.ProductId,
@@ -208,7 +208,7 @@ namespace GiftChoice.Controllers
                         Maincate = db.MainCateTbls.Where(p => p.MainCateId == m.MainCateId).Select(p => p.MTitle).FirstOrDefault(),
 
                     }).OrderBy(x => Guid.NewGuid()).Take(10),
-                    NewProduct = db.ProductTbls.Where(m => m.Active == true && m.LabelId == 2 && m.ProductType == "MainProduct").Select(m => new
+                    NewProduct = db.ProductTbls.Where(m => m.Active == true && m.LabelId == 2 ).Select(m => new
                     {
                         Toplabel = db.LabelProductTbls.Where(l => l.LabelId == 1).Select(l => l.LTitle).FirstOrDefault(),
                         m.ProductId,
@@ -227,7 +227,7 @@ namespace GiftChoice.Controllers
                         Maincate = db.MainCateTbls.Where(p => p.MainCateId == m.MainCateId).Select(p => p.MTitle).FirstOrDefault(),
 
                     }).OrderBy(x => Guid.NewGuid()).Take(10),
-                    NewArivals = db.ProductTbls.Where(m => m.Active == true && m.LabelId == 3 && m.ProductType == "MainProduct").Select(m => new
+                    NewArivals = db.ProductTbls.Where(m => m.Active == true && m.LabelId == 3).Select(m => new
                     {
                         Toplabel = db.LabelProductTbls.Where(l => l.LabelId == 1).Select(l => l.LTitle).FirstOrDefault(),
                         m.ProductId,
@@ -259,9 +259,13 @@ namespace GiftChoice.Controllers
 
             public string ProductTitle { get; set; }
             public string ProductImage { get; set; }
+            public string Video { get; set; }
+
 
             public Nullable<double> Price { get; set; }
             public string PUrl { get; set; }
+            public bool SameDay { get; set; }
+
             public Nullable<long> Qty { get; set; }
             public string PLabel { get; set; }
 
@@ -316,7 +320,7 @@ namespace GiftChoice.Controllers
 
                     string sqlQuery = @"
                 WITH CTE AS (
-                    SELECT p.*, m.MTitle, kw.Keyword , i.PImage,  ROW_NUMBER() OVER (PARTITION BY p.ProductId ORDER BY kw.KeywordID, i.PImageId) AS RowNum
+                    SELECT p.*, m.MTitle, kw.Keyword , i.PImage, ROW_NUMBER() OVER (PARTITION BY p.ProductId ORDER BY kw.KeywordID, i.PImageId) AS RowNum
                     FROM ProductTbl p
                     JOIN MainCateTbl m ON m.MainCateId = p.MainCateId
                     LEFT JOIN ProductImage i ON p.ProductId = i.ProductId
@@ -339,8 +343,9 @@ namespace GiftChoice.Controllers
                                     Price = reader["Price"] != DBNull.Value ? Convert.ToDouble(reader["Price"]) : 0,
                                     PLabel = reader["PLabel"] != DBNull.Value ? reader["PLabel"].ToString() : string.Empty,
                                     Qty = reader["Qty"] != DBNull.Value ? Convert.ToInt32(reader["Qty"]) : 0,
-                                    PUrl = reader["PUrl"] != DBNull.Value ? reader["PUrl"].ToString() : string.Empty
-
+                                    PUrl = reader["PUrl"] != DBNull.Value ? reader["PUrl"].ToString() : string.Empty,
+                                    Video = reader["Video"] != DBNull.Value ? reader["Video"].ToString() : string.Empty,
+                                    SameDay = reader["SameDay"] != DBNull.Value ? Convert.ToBoolean(reader["SameDay"]) : false
 
 
                                 };
@@ -370,8 +375,10 @@ namespace GiftChoice.Controllers
                                product.ProductTitle,
                                product.PLabel,
                                product.Price,
+                               product.SameDay,
                                product.PUrl,
-                               product.LabelId,
+                               LabelId =   product.LabelId ?? 0,
+                               product.Video,
                                product.Qty,
                                product.Create_at,
                                product.Active,
@@ -425,9 +432,11 @@ namespace GiftChoice.Controllers
                m.MainCateId,
                m.ProductTitle,
                m.PLabel,
-               m.LabelId,
+               LabelId = m.LabelId ?? 0,
                m.Price,
+               m.Video,
                m.PUrl,
+               m.SameDay,
                m.Qty,
                m.Create_at,
                m.Active,
@@ -612,6 +621,7 @@ namespace GiftChoice.Controllers
                    m.PLabel,
                    m.Price,
                    m.PUrl,
+                   m.Video,
                    m.Create_at,
                    m.Qty,
                    m.Active,
@@ -636,6 +646,7 @@ namespace GiftChoice.Controllers
                    m.ProductTitle,
                    m.PLabel,
                    m.Price,
+                   m.Video,
                    m.PUrl,
                    m.Create_at,
                    m.Qty,
@@ -1333,6 +1344,7 @@ namespace GiftChoice.Controllers
                                        product.MainCateId,
                                        product.ProductTitle,
                                        product.PLabel,
+                                       LabelId = product.LabelId ?? 0,
                                        product.Price,
                                        product.PUrl,
                                        product.Qty,
@@ -1373,6 +1385,8 @@ namespace GiftChoice.Controllers
                                        product.ProductId,
                                        product.MainCateId,
                                        product.BannerCateId,
+                                       LabelId = product.LabelId ?? 0,
+
                                        product.ProductTitle,
                                        product.PLabel,
                                        product.Video,
@@ -1420,6 +1434,9 @@ namespace GiftChoice.Controllers
                     m.PLabel,
                     m.Price,
                     m.PUrl,
+                    m.Video,
+                    m.SameDay,
+                    LabelId = m.LabelId ?? 0,
                     m.Create_at,
                     m.Qty,
                     m.Active,

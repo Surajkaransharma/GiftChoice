@@ -89,15 +89,15 @@
                                 @*(Animation for top rated / selling category - class="top-rated-product")*@
                                 <div class="product-img-action-wrap">
                                     <div class="product-img product-img-zoom">
-                                        <a href="/Home/BGift?url={{p.PUrl}}">
+                                        @*<a href="/Home/BGift?url={{p.PUrl}}">
                                             <video ng-show="p.Video" width="100%" autoplay loop muted>
                                                 <source ng-src="{{'/images/ProductVideo/' + p.Video}}" type="video/mp4">
                                             </video>
-                                        </a>
+                                        </a>*@
                                         @*<iframe  ng-show="p.VideoUrl" ng-src="{{trustSrc('https://www.youtube.com/embed/' + p.VideoUrl +'?autoplay=1&loop=1&mute=1')}}" allow="loop"></iframe>*@
                                         @*<iframe ng-show="p.VideoUrl" id="iFrameName{{$index}}" allow="loop"></iframe>*@
 
-                                        <a href="/Home/BGift?url={{p.PUrl}}" ng-show="!p.Video">
+                                        <a href="/Home/BGift?url={{p.PUrl}}" >
                                             <img class="default-img img-fluid" src="~/images/ProductImg/{{p.ProductImage}}" loading="lazy" alt="product-image" loading="lazy" alt="">
                                             <img class="hover-img img-fluid" src="~/images/ProductImg/{{p.ProductImage}}" loading="lazy" alt="product-hover-image" loading="lazy" alt="">
                                         </a>
@@ -115,8 +115,15 @@
                                         <div class="button-design mt-2">
                                             <a aria-label="Add To Cart" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight" class="btn theme-button-2" ng-click="addItemToCart($index)"><i class="fi-rs-shopping-bag-add"></i> Add To Cart </a>
                                         </div>
-                                        <div class="button-design mt-2">
-                                            <a aria-label="View Image" class="btn theme-button-3" ng-click="quickview(p,'image')"><i class="fa fa-eye" aria-hidden="true"></i></a>
+                                        @* Popup Button For Image *@
+                                        <div class="button-design mt-2"  ng-if="!p.Video">
+                                            <a aria-label="View Image" class="btn theme-button-3 d-flex gap-2 align-items-center" ng-click="quickview(p)"><span class="d-lg-none d-sm-none d-block fs-9">View </span><i class="fa fa-eye" aria-hidden="true"></i></a>
+                                        </div>
+
+
+                                        @* Popup Button For Video *@
+                                        <div class="button-design mt-2" ng-if="p.Video">
+                                            <a aria-label="View Image" class="btn theme-button-3 d-flex gap-2 align-items-center for-video" ng-click="quickview(p)"><span class="d-lg-none d-sm-none d-block fs-9 hide-animation" id="hideText">View </span><i class="fa fa-youtube-play" aria-hidden="true"></i></a>
                                         </div>
                                     </div>
                                 </div>

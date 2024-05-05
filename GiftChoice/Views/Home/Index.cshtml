@@ -10,7 +10,7 @@
         <div id="carouselId" class="carousel slide" data-bs-ride="carousel">
             <div class="carousel-inner" role="listbox">
                 <div ng-repeat="s in SliderListData" class="carousel-item {{$index==0?'active':''}} ">
-                    <a href="/Home/shop?Main={{s.MainCate}}">
+                    <a href="{{s.SUrl}}">
                         <img src="~/images/SliderImg/{{s.SliderImage}}" class="w-100 d-block img-fluid" loading="lazy" alt="corporates-gifts" />
                     </a>
                 </div>
@@ -155,9 +155,9 @@
                             </div>
 
                             <div class="carausel-6-columns" id="carausel-6-columns-3">
-                                <div class="brand-logo bg-white" ng-repeat="b in TopsellingProduct">
-                                    <div class="product-list-small p-2 pb-0">
-                                        <div class="row align-items-center g-3">
+                                <div class="brand-logo bg-white" >
+                                    <div class="product-list-small p-2 pb-0" >
+                                        <div class="row align-items-center g-3" ng-repeat="b in TopsellingProduct">
                                             <div class="col-lg-3 col-sm-6 col-4">
                                                 <a href="/Home/Gift?url={{b.PUrl}}">
                                                     <img ng-src="~/images/ProductImg/{{b.ProductImage}}" alt="product-image" class="img-fluid p-0">
@@ -360,15 +360,15 @@
                                             <a aria-label="Add To Cart" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight" class="btn theme-button-2" ng-click="addItemToCart($index)"><i class="fi-rs-shopping-bag-add"></i> Add To Cart </a>
                                         </div>
                                         @* Popup Button For Image *@
-                                        <div class="button-design mt-2">
-                                            <a aria-label="View Image" class="btn theme-button-3 d-flex gap-2 align-items-center" ng-click="quickview(p,'image')"><span class="d-lg-none d-sm-none d-block fs-9" >View </span><i class="fa fa-eye" aria-hidden="true"></i></a>
+                                        <div class="button-design mt-2" ng-if="!p.Video">
+                                            <a aria-label="View Image" class="btn theme-button-3 d-flex gap-2 align-items-center" ng-click="quickview(p)"><span class="d-lg-none d-sm-none d-block fs-9" >View </span><i class="fa fa-eye" aria-hidden="true"></i></a>
                                         </div>
 
                                         
                                         @* Popup Button For Video *@
-                                        @*<div class="button-design mt-2">
-                                            <a aria-label="View Image" class="btn theme-button-3 d-flex gap-2 align-items-center for-video" ng-click="quickview(p,'image')"><span class="d-lg-none d-sm-none d-block fs-9 hide-animation" id="hideText">View </span><i class="fa fa-youtube-play" aria-hidden="true"></i></a>
-                                        </div>*@
+                                        <div class="button-design mt-2" ng-if="p.Video">
+                                            <a aria-label="View Image" class="btn theme-button-3 d-flex gap-2 align-items-center for-video" ng-click="quickview(p)"><span class="d-lg-none d-sm-none d-block fs-9 hide-animation" id="hideText">View </span><i class="fa fa-youtube-play" aria-hidden="true"></i></a>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

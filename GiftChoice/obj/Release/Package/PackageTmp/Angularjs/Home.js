@@ -1164,10 +1164,10 @@ app.controller("HomeController", ['$scope', '$http', '$sce', 'startFromFilter', 
 
 
     };
-    $scope.quickview = function (product,id) {
+    $scope.quickview = function (product) {
         debugger
         $scope.product = product;
-        $scope.imagevideo = id;
+    
 
         $('#quickview').modal("toggle");
 

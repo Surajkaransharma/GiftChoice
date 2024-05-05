@@ -121,6 +121,16 @@
 
 
                             </div>
+                            <div class="col-md-2" ng-init="GetLabelProduct()">
+                                <label for="input1" class="form-label">Select Label</label>
+
+                                <select id="LabelId" class="form-select" ng-model="Product.LabelId">
+                                    <option ng-selected="true" value="">Select Label</option>
+                                    <option ng-repeat="m in LabelProductData" value="{{m.LabelId}}">{{m.LTitle}}</option>
+                                </select>
+
+
+                            </div>
                             @*<div class="col-md-3">
                                     <label for="input1" class="form-label">Select Query</label>
 
@@ -184,7 +194,7 @@
                                     <option ng-repeat="m in MainCateData" value="{{m.MainCateId}}">{{m.MTitle}}</option>
                                 </select>
                             </div>
-                            <div class="col-md-12">
+                            <div class="col-md-12" ng-if="GetBannerToQueryData.length>0">
                                 <label for="input1" class="form-label">Select Answer</label>
                                 <div class="" id="check_box">
                                     <label class="checkbox-wrapper" ng-repeat="m in GetBannerToQueryData">
@@ -221,7 +231,7 @@
 
                                     <div class="col-md-2">
                                         <label for="input1" class="form-label">Price</label>
-                                        <input type="text" class="form-control" ng-model="a.Price" id="" placeholder="Price" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');">
+                                        <input type="text" class="form-control" ng-model="a.Price" id="" onfocus="this.select()" placeholder="Price" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');">
                                     </div>
 
 
@@ -260,30 +270,7 @@
                                         CKEDITOR.replace($(this).prop('id'));
                                     });
                                 </script>*@
-                            @*<div class="col-md-2">
-                                    <label for="input1" class="form-label">Image 1</label>
-
-                                    <input type="file" id="image1" class="form-control" upload-file="Product.Image1">
-                                </div>
-
-                                <div class="col-md-2">
-                                    <label for="input1" class="form-label">Image 2</label>
-                                    <input type="file" class="form-control" upload-file="Product.Image2" id="image2">
-                                </div>
-
-                                <div class="col-md-2">
-                                    <label for="input1" class="form-label">Image 3</label>
-                                    <input type="file" class="form-control" upload-file="Product.Image3" id="image3">
-                                </div>
-                                <div class="col-md-2">
-                                    <label for="input1" class="form-label">Image 4</label>
-                                    <input type="file" class="form-control" upload-file="Product.Image4" id="image4">
-                                </div>
-                                <div class="col-md-2">
-                                    <label for="input1" class="form-label">Image 5</label>
-                                    <input type="file" class="form-control" upload-file="Product.Image5" id="image5">
-                                </div>*@
-
+                         
                             <div class="col-md-3">
 
                                 <p>Drop Zone 1: Drag & drop your image here or click to browse</p>
@@ -294,7 +281,7 @@
                                 <button class="remove-image" disabled>Remove Image</button>
                                 <span ng-show="!duplicateproductbool">  <button class="btn btn-danger" ng-show="Product.ProductImage[0]" style="float: right" ng-click="DeleteProductImage(Product.ProductImage[0],Product.ProductId)">Delete Image</button></span>
 
-</div>
+                            </div>
                             <div class="col-md-3">
 
                                 <p>Drop Zone 2: Drag & drop your image here or click to browse</p>
@@ -303,7 +290,7 @@
                                     <img class="preview" src="" alt="Image Preview">
                                 </div>
                                 <button class="remove-image" disabled>Remove Image</button>
-                                <span ng-show="!duplicateproductbool">      <button class="btn btn-danger" ng-show="Product.ProductImage[1]" style="float: right"  ng-click="DeleteProductImage(Product.ProductImage[1],Product.ProductId)">Delete Image</button></span>
+                                <span ng-show="!duplicateproductbool">      <button class="btn btn-danger" ng-show="Product.ProductImage[1]" style="float: right" ng-click="DeleteProductImage(Product.ProductImage[1],Product.ProductId)">Delete Image</button></span>
 
 
                             </div>
@@ -318,7 +305,7 @@
                                 <span ng-show="!duplicateproductbool">   <button class="btn btn-danger" ng-show="Product.ProductImage[2]" style="float: right" ng-click="DeleteProductImage(Product.ProductImage[2],Product.ProductId)">Delete Image</button></span>
 
 
-</div>
+                            </div>
                             <div class="col-md-3">
 
                                 <p>Drop Zone 4: Drag & drop your image here or click to browse</p>
@@ -412,6 +399,8 @@
                                         <td style="white-space:normal" class="box1">
                                             <p> Main Category : {{m.Maincate.MTitle}}  </p>
                                             <p>Banner Title : {{m.Bannercate.MTitle}} </p>
+                                            <p>Label Title : {{m.Label.LTitle}} </p>
+
                                         </td>
 
 

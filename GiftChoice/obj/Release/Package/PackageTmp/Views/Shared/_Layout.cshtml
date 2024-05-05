@@ -412,19 +412,19 @@
         @* Quick View Modal Popup IMage *@
         <div class="modal fade" id="quickview" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" role="dialog"
              aria-labelledby="modalTitleId" aria-hidden="true">
-            <div class="modal-dialog  modal-lg" role="document">
+            <div class="modal-dialog modal-dialog-centered  modal-sm" role="document">
                 <div class="modal-content position-relative">
                     <button type="button" class="btn-close position-absolute" data-bs-dismiss="modal" aria-label="Close">
                         <i class="fa fa-times" aria-hidden="true"></i>
                     </button>
                     <div class="modal-body p-1">
                         @* Image Code *@
-                        <a href="/Home/BGift?url={{product.PUrl}}"  ng-if="imagevideo=='image'">
+                        <a href="/Home/Gift?url={{product.PUrl}}" ng-show="!product.Video" >
 
-                            <img  src="~/images/ProductImg/{{product.ProductImage}}" alt="product image" class="img-responsive w-100">
+                            <img ng-show="!product.Video" src="~/images/ProductImg/{{product.ProductImage}}" alt="product image" class="img-responsive w-100">
                         </a>
                         @* Video Code *@
-                        <a href="/Home/BGift?url={{product.PUrl}}" ng-if="imagevideo=='video'">
+                        <a href="/Home/Gift?url={{product.PUrl}}" ng-show="product.Video">
                             <video width="100%" autoplay loop muted ng-show="product.Video" id="pVideo">
                                 <source type="video/mp4">
                             </video>
@@ -541,6 +541,8 @@
         <script>
             AOS.init();
         </script>*@
+
+
 
 </body>
 </html>

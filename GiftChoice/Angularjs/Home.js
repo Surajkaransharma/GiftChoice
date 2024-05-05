@@ -1090,7 +1090,7 @@ app.controller("HomeController", ['$scope', '$http', '$sce', 'startFromFilter', 
 
         $http.get("/Home/GetDesignBanner").then(function (d) {
             $scope.DesignBannerData = d.data.DesignBanner;
-            debugger
+          
         }, function (error) {
             alert(error.data);
         });
@@ -1164,10 +1164,10 @@ app.controller("HomeController", ['$scope', '$http', '$sce', 'startFromFilter', 
 
 
     };
-    $scope.quickview = function (product,id) {
+    $scope.quickview = function (product) {
         debugger
         $scope.product = product;
-        $scope.imagevideo = id;
+    
 
         $('#quickview').modal("toggle");
 

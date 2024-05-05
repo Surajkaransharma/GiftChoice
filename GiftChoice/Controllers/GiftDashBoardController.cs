@@ -2273,7 +2273,7 @@ namespace GiftChoice.Controllers
                     //productmodel.QueryId = model.QueryId;
                     //productmodel.BSubId = db.BSubTitleDetailTbls.Where(q => q.BSubDId == model.BSubDId).Select(q => q.BSubId).FirstOrDefault();
                     //productmodel.BSubDId = model.BSubDId;
-
+                    productmodel.LabelId = model.LabelId ?? 0;
                     productmodel.ProductTitle = model.ProductTitle;
                     productmodel.Active = true;
                     productmodel.VideoUrl = model.VideoUrl ?? "";
@@ -2393,7 +2393,7 @@ namespace GiftChoice.Controllers
             try
             {
 
-                ProductTbl result = db.ProductTbls.Where(c => c.ProductId == model.ProductId && c.ProductType == "BannerProduct").FirstOrDefault();
+                ProductTbl result = db.ProductTbls.Where(c => c.ProductId == model.ProductId).FirstOrDefault();
 
                 if (result != null)
                 {
@@ -2532,6 +2532,7 @@ namespace GiftChoice.Controllers
                     //result.QueryId = model.QueryId;
                     //result.BSubId = db.BSubTitleDetailTbls.Where(q => q.BSubDId == model.BSubDId).Select(q => q.BSubId).FirstOrDefault();
                     //result.BSubDId = model.BSubDId;
+                    result.LabelId = model.LabelId ?? 0;
                     result.ProductTitle = model.ProductTitle;
                     result.VideoUrl = model.VideoUrl ?? "";
                     result.SameDay = model.SameDay;
@@ -2830,22 +2831,25 @@ namespace GiftChoice.Controllers
             db.Configuration.ProxyCreationEnabled = false;
             var res =
 
-               db.ProductTbls.Where(m => m.Active == true &&  m.ProductType != "MainProduct" && (id == -2 ? true : m.BannerCateId == id)).Select(m => new
+               db.ProductTbls.Where(m =>   m.ProductType != "MainProduct" && (id == -2 ? true : m.BannerCateId == id)).Select(m => new
                {
                    m.ProductId,
                    m.MainCateId,
                    m.ProductTitle,
                    m.PLabel,
                    m.Price,
+                   m.LabelId,
                    m.PUrl,
                    m.Active,
                    m.PDesc,
                    m.SameDay,
                    m.VideoUrl,
+                   m.ProductType,
                    m.TableDesc,
                    m.Video,
                    m.BannerCateId,
                    m.Priority,
+                   Label = db.LabelProductTbls.Where(i => i.LabelId == m.LabelId).FirstOrDefault(),
                    ProductImage = db.ProductImages.Where(i => i.ProductId == m.ProductId).Select(i => i.PImage),
                    Maincate = db.MainCateTbls.Where(p => p.MainCateId == m.MainCateId).FirstOrDefault(),
                    Bannercate = db.MainCateTbls.Where(p => p.MainCateId == m.BannerCateId).FirstOrDefault(),

@@ -419,12 +419,12 @@
                     </button>
                     <div class="modal-body p-1">
                         @* Image Code *@
-                        <a href="/Home/Gift?url={{product.PUrl}}"  ng-if="imagevideo=='image'">
+                        <a href="/Home/Gift?url={{product.PUrl}}" ng-show="!product.Video" >
 
-                            <img  src="~/images/ProductImg/{{product.ProductImage}}" alt="product image" class="img-responsive w-100">
+                            <img ng-show="!product.Video" src="~/images/ProductImg/{{product.ProductImage}}" alt="product image" class="img-responsive w-100">
                         </a>
                         @* Video Code *@
-                        <a href="/Home/Gift?url={{product.PUrl}}" ng-if="imagevideo=='video'">
+                        <a href="/Home/Gift?url={{product.PUrl}}" ng-show="product.Video">
                             <video width="100%" autoplay loop muted ng-show="product.Video" id="pVideo">
                                 <source type="video/mp4">
                             </video>

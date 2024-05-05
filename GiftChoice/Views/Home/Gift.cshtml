@@ -59,9 +59,9 @@
                             </div>
                             <div class="col-lg-9 col-sm-8 col-xs-12">
                                 <div class="detail-info">
+                                    <span class="badge bg-success theme-text-size-13 mb-2 animate__flash" ng-show="Product.SameDay">Same Day Available</span>
 
-                                    @*<span class="badge bg-success mb-2 animate__flash">Same Day Delivery</span>*@
-                                    <div class="pro-details-brand mb-2">
+                                   <div class="pro-details-brand mb-2">
                                         <span><a href="/Home/shop?Main={{Product.Maincate.MTitle}}">{{Product.Maincate.MTitle}}</a></span>
                                     </div>
                                     <h2 class="theme-text-size-16 mb-4">{{Product.ProductTitle}}</h2>
@@ -93,30 +93,30 @@
 
 
                                     @*<div data-aos="zoom-in">
-                                            <div class="attr-detail attr-size mb-30" ng-show="Product.PSizeList.length>0">
-                                                <strong class="mr-10">Size</strong>
-                                                <ul class="list-filter size-filter font-small">
-                                                    <li ng-repeat="s in Product.PSizeList" style="margin-left:5px;"><a href="#">{{s.SizeTitle}}</a> </li>
+            <div class="attr-detail attr-size mb-30" ng-show="Product.PSizeList.length>0">
+                <strong class="mr-10">Size</strong>
+                <ul class="list-filter size-filter font-small">
+                    <li ng-repeat="s in Product.PSizeList" style="margin-left:5px;"><a href="#">{{s.SizeTitle}}</a> </li>
 
-                                                </ul>
-                                            </div>
-                                        </div>*@
+                </ul>
+            </div>
+        </div>*@
 
                                     @*<div data-aos="zoom-in">
-                                            <div class="attr-detail attr-size mb-30" ng-show="Product.productDataArray.length>0">
-                                                <strong class="mr-10">Size</strong>
-                                                <ul class="list-filter size-filter font-small">
-                                                    <li ng-repeat="s in Product.productDataArray" style="margin-left:5px;"><a ng-click="SelectSizePrice(s.ProductSize)">{{s.ProductSize}}</a> </li>
+            <div class="attr-detail attr-size mb-30" ng-show="Product.productDataArray.length>0">
+                <strong class="mr-10">Size</strong>
+                <ul class="list-filter size-filter font-small">
+                    <li ng-repeat="s in Product.productDataArray" style="margin-left:5px;"><a ng-click="SelectSizePrice(s.ProductSize)">{{s.ProductSize}}</a> </li>
 
-                                                </ul>
-                                            </div>
-                                        </div>*@
+                </ul>
+            </div>
+        </div>*@
 
                                     <div class="attr-detail attr-size mb-3" ng-if="Product.productDataArray.length>0">
                                         <strong class="mr-10">Size : </strong>
                                         <select class="form-select form-select-sm w-auto shadow-none theme-button-3 rounded-0 " name="" ng-model="size" id="" ng-change="SelectSizePrice(size)" ng-init="size = Product.productDataArray[0].ProductSize">
                                             @*<option selected="ture" disabled value="">-- Select Size --</option>*@
-                                            <option  class="text-dark" ng-repeat="s in Product.productDataArray" value="{{s.ProductSize}}">{{s.ProductSize}}</option>
+                                            <option class="text-dark" ng-repeat="s in Product.productDataArray" value="{{s.ProductSize}}">{{s.ProductSize}}</option>
                                         </select>
 
                                     </div>
@@ -125,10 +125,10 @@
 
                                     <div class="detail-extralink">
                                         @*<div class="detail-qty border radius">
-                                                <a href="#" class="qty-down"><i class="fi-rs-angle-small-down"></i></a>
-                                                <span class="qty-val">1</span>
-                                                <a href="#" class="qty-up"><i class="fi-rs-angle-small-up"></i></a>
-                                            </div>*@
+                <a href="#" class="qty-down"><i class="fi-rs-angle-small-down"></i></a>
+                <span class="qty-val">1</span>
+                <a href="#" class="qty-up"><i class="fi-rs-angle-small-up"></i></a>
+            </div>*@
                                         <div class="d-flex align-items-center gap-3">
                                             <div class="clearfix product-price-cover p-1 mb-2   border-0 mb-0">
                                                 <div class="product-price primary-color float-left">
@@ -149,16 +149,16 @@
 
 
                                     @*<div data-aos="zoom-in">
-                                            <div class="social-icons single-share mb-20">
-                                                <ul class="text-grey-5 d-inline-block">
-                                                    <li><strong class="mr-10">Share this:</strong></li>
-                                                    <li class="social-facebook"><a href="#"><img src="assets/imgs/theme/icons/icon-facebook.svg" alt=""></a></li>
-                                                    <li class="social-twitter"> <a href="#"><img src="assets/imgs/theme/icons/icon-twitter.svg" alt=""></a></li>
-                                                    <li class="social-instagram"><a href="#"><img src="assets/imgs/theme/icons/icon-instagram.svg" alt=""></a></li>
-                                                    <li class="social-linkedin"><a href="#"><img src="assets/imgs/theme/icons/icon-pinterest.svg" alt=""></a></li>
-                                                </ul>
-                                            </div>
-                                        </div>*@
+            <div class="social-icons single-share mb-20">
+                <ul class="text-grey-5 d-inline-block">
+                    <li><strong class="mr-10">Share this:</strong></li>
+                    <li class="social-facebook"><a href="#"><img src="assets/imgs/theme/icons/icon-facebook.svg" alt=""></a></li>
+                    <li class="social-twitter"> <a href="#"><img src="assets/imgs/theme/icons/icon-twitter.svg" alt=""></a></li>
+                    <li class="social-instagram"><a href="#"><img src="assets/imgs/theme/icons/icon-instagram.svg" alt=""></a></li>
+                    <li class="social-linkedin"><a href="#"><img src="assets/imgs/theme/icons/icon-pinterest.svg" alt=""></a></li>
+                </ul>
+            </div>
+        </div>*@
 
 
 
@@ -194,8 +194,15 @@
                                                 <div class="button-design mt-2">
                                                     <a aria-label="Add To Cart" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight" class="btn theme-button-2" ng-click="addItemToCart($index)"><i class="fi-rs-shopping-bag-add"></i> Add To Cart </a>
                                                 </div>
-                                                <div class="button-design mt-2">
-                                                    <a aria-label="View Image" class="btn theme-button-3" ng-click="quickview(q)"><i class="fa fa-eye" aria-hidden="true"></i></a>
+                                                @* Popup Button For Image *@
+                                                <div class="button-design mt-2" ng-if="!q.Video">
+                                                    <a aria-label="View Image" class="btn theme-button-3 d-flex gap-2 align-items-center" ng-click="quickview(q)"><span class="d-lg-none d-sm-none d-block fs-9">View </span><i class="fa fa-eye" aria-hidden="true"></i></a>
+                                                </div>
+
+
+                                                @* Popup Button For Video *@
+                                                <div class="button-design mt-2" ng-if="q.Video">
+                                                    <a aria-label="View Image" class="btn theme-button-3 d-flex gap-2 align-items-center for-video" ng-click="quickview(q)"><span class="d-lg-none d-sm-none d-block fs-9 hide-animation" id="hideText">View </span><i class="fa fa-youtube-play" aria-hidden="true"></i></a>
                                                 </div>
                                             </div>
                                         </div>
@@ -245,8 +252,15 @@
                                 <div class="button-design mt-2">
                                     <a aria-label="Add To Cart" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight" class="btn theme-button-2" ng-click="addItemToCart($index)"><i class="fi-rs-shopping-bag-add"></i> Add To Cart </a>
                                 </div>
-                                <div class="button-design mt-2">
-                                    <a aria-label="View Image" class="btn theme-button-3" ng-click="quickview(q)"><i class="fa fa-eye" aria-hidden="true"></i></a>
+                                @* Popup Button For Image *@
+                                <div class="button-design mt-2" ng-if="!q.Video">
+                                    <a aria-label="View Image" class="btn theme-button-3 d-flex gap-2 align-items-center" ng-click="quickview(q)"><span class="d-lg-none d-sm-none d-block fs-9">View </span><i class="fa fa-eye" aria-hidden="true"></i></a>
+                                </div>
+
+
+                                @* Popup Button For Video *@
+                                <div class="button-design mt-2" ng-if="q.Video">
+                                    <a aria-label="View Image" class="btn theme-button-3 d-flex gap-2 align-items-center for-video" ng-click="quickview(q)"><span class="d-lg-none d-sm-none d-block fs-9 hide-animation" id="hideText">View </span><i class="fa fa-youtube-play" aria-hidden="true"></i></a>
                                 </div>
                             </div>
                         </div>
