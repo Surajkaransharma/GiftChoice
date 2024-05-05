@@ -11295,9 +11295,18 @@ h3.section-title {
 
 
 .product-cart-wrap .product-badges span.pot {
-    background: linear-gradient(45deg, #000000, #7c7c7c, #5a5a5a, #000000);
+    background: linear-gradient(45deg, #990000, #990000, #990000, #990000);
     background-size: 400% 400%;
     animation: gradientvideo 5s ease infinite;
+}
+.product-cart-wrap .product-badges-position-1 span {
+    display: inline-block;
+    font-size: 8px !important;
+    font-size : 14px !important;
+    line-height: 1 !important;
+    border-radius: 7px !important;
+    color: #fff !important;
+    padding: 3px 5px !important;
 }
 
 @keyframes gradientvideo {
