@@ -74,9 +74,16 @@
                                             <div class="button-design mt-2">
                                                 <a aria-label="Add To Cart" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight" class="btn theme-button-2" ng-click="addItemToCart($index)"><i class="fi-rs-shopping-bag-add"></i> Add To Cart </a>
                                             </div>
+                                            @* Popup Button For Image *@
                                             <div class="button-design mt-2">
-                                                <a aria-label="View Image" class="btn theme-button-3" ng-click="quickview(p,'image')"><i class="fa fa-eye" aria-hidden="true"></i></a>
+                                                <a aria-label="View Image" class="btn theme-button-3 d-flex gap-2 align-items-center" ng-click="quickview(p,'image')"><span class="d-lg-none d-sm-none d-block fs-9">View </span><i class="fa fa-eye" aria-hidden="true"></i></a>
                                             </div>
+
+
+                                            @* Popup Button For Video *@
+                                            @*<div class="button-design mt-2">
+                                                <a aria-label="View Image" class="btn theme-button-3 d-flex gap-2 align-items-center for-video" ng-click="quickview(p,'image')"><span class="d-lg-none d-sm-none d-block fs-9 hide-animation" id="hideText">View </span><i class="fa fa-youtube-play" aria-hidden="true"></i></a>
+                                            </div>*@
                                         </div>
                                     </div>
                                 </div>
