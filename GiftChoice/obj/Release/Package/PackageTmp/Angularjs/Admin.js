@@ -11,6 +11,15 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
 
         $scope.Product = $scope.ProductData[index];
         $scope.duplicateproductbool = true;
+
+
+        if ($scope.Product.ProductType == "Common") {
+            $("#Common").attr('checked', true).trigger("click");
+            $scope.Product.Common = true;
+        } else {
+            $scope.Product.Common = false;
+
+        }
         $scope.productDataArray = [];
         if ($scope.Product.productDataArray.length > 0) {
 
@@ -1841,12 +1850,12 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
             }
         }).then(function (d) {
             $scope.result = d.data;
+                location.href = '/GiftDashBoard/AddBannerInProduct';
             if ($scope.result.res === "1") {
 
                 toastr["success"]("Product save successfully");
                 Keywordarr = [];
                 //$('#MainCate').val("-1").trigger('change');
-                location.href = '/GiftDashBoard/AddBannerInProduct';
                 //$scope.Product.ProductTitle = null;
                 //$scope.Product.PLabel = null;
                 //$scope.Product.Price = null;
@@ -2043,6 +2052,15 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
 
 
         $scope.Product = $scope.ProductData[index];
+
+        if ($scope.Product.ProductType == "Common") {
+            $("#Common").attr('checked', true).trigger("click");
+            $scope.Product.Common = true;
+        } else {
+            $scope.Product.Common = false;
+
+        }
+
         $scope.duplicateproductbool = false;
         $scope.productDataArray = [];
         if ($scope.Product.productDataArray.length > 0) {

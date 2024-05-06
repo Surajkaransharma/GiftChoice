@@ -190,7 +190,7 @@ namespace GiftChoice.Controllers
             var res =
                 new
                 {
-                    TopsellingProduct = db.ProductTbls.Where(m => m.Active == true && m.LabelId == 1).Select(m => new
+                    TopsellingProduct = db.ProductTbls.Where(m => m.Active == true && m.LabelId == 1 ).Select(m => new
                     {
                         Toplabel = db.LabelProductTbls.Where(l => l.LabelId == 1).Select(l => l.LTitle).FirstOrDefault(),
                         m.ProductId,
@@ -210,7 +210,7 @@ namespace GiftChoice.Controllers
                     }).OrderBy(x => Guid.NewGuid()).Take(10),
                     NewProduct = db.ProductTbls.Where(m => m.Active == true && m.LabelId == 2 ).Select(m => new
                     {
-                        Toplabel = db.LabelProductTbls.Where(l => l.LabelId == 1).Select(l => l.LTitle).FirstOrDefault(),
+                        Toplabel = db.LabelProductTbls.Where(l => l.LabelId == 2).Select(l => l.LTitle).FirstOrDefault(),
                         m.ProductId,
                         m.MainCateId,
                         m.ProductTitle,
@@ -229,7 +229,7 @@ namespace GiftChoice.Controllers
                     }).OrderBy(x => Guid.NewGuid()).Take(10),
                     NewArivals = db.ProductTbls.Where(m => m.Active == true && m.LabelId == 3).Select(m => new
                     {
-                        Toplabel = db.LabelProductTbls.Where(l => l.LabelId == 1).Select(l => l.LTitle).FirstOrDefault(),
+                        Toplabel = db.LabelProductTbls.Where(l => l.LabelId == 3).Select(l => l.LTitle).FirstOrDefault(),
                         m.ProductId,
                         m.MainCateId,
                         m.ProductTitle,
@@ -1426,7 +1426,7 @@ namespace GiftChoice.Controllers
 
             var res = new
             {
-                ProductList = db.ProductTbls.Where(p => p.ProductType == "MainProduct" && p.LabelId == labelid && p.Active == true).Select(m => new
+                ProductList = db.ProductTbls.Where(p =>  p.LabelId == labelid && p.Active == true).Select(m => new
                 {
                     m.ProductId,
                     m.MainCateId,

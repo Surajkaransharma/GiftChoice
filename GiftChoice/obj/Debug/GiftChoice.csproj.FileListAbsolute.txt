@@ -237,7 +237,6 @@ D:\github2\GiftChoice\GiftChoice\obj\Debug\GiftChoice.csproj.CoreCompileInputs.c
 D:\github2\GiftChoice\GiftChoice\obj\Debug\GiftChoice.csproj.CopyComplete
 D:\github2\GiftChoice\GiftChoice\obj\Debug\GiftChoice.dll
 D:\github2\GiftChoice\GiftChoice\obj\Debug\GiftChoice.pdb
-D:\github2\GiftChoice\GiftChoice\obj\Debug\GiftChoice.csprojAssemblyReference.cache
 D:\github\GiftChoice\GiftChoice\GiftChoice\bin\GiftChoice.dll.config
 D:\github\GiftChoice\GiftChoice\GiftChoice\bin\GiftChoice.dll
 D:\github\GiftChoice\GiftChoice\GiftChoice\bin\GiftChoice.pdb
