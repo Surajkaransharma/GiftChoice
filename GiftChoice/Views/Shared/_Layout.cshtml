@@ -89,7 +89,6 @@
                 </div>
             </div>
             <!-- Topbar Section End -->
-
             <!-- Middle Header Start -->
             <div class="header-middle header-middle-ptb-1 d-none d-lg-block">
                 <div class="container">
@@ -121,7 +120,6 @@
                 </div>
             </div>
             <!-- Middle Header End -->
-
             <!-- Header Bottom Start -->
             <div class="header-bottom header-bottom-bg-color sticky-bar top-23">
                 <div class="container-fluid">
@@ -137,9 +135,9 @@
                                         <li ng-repeat="n in NavbarMenuList">
                                             <a href="/Home/shop?Main={{n.MTitle}}">{{n.MTitle}} @*<i ng-show="n.Submenu.length>0" class="fi-rs-angle-down"></i>*@</a>
                                             @*<ul class="sub-menu" ng-show="n.Submenu.length>0">
-                                                <li ng-repeat="s in n.Submenu"><a href="/Home/shop?Keyword={{s.SubmenuTitle.Keyword}}">{{s.SubmenuTitle.Keyword}}</a></li>
+                                                    <li ng-repeat="s in n.Submenu"><a href="/Home/shop?Keyword={{s.SubmenuTitle.Keyword}}">{{s.SubmenuTitle.Keyword}}</a></li>
 
-                                            </ul>*@
+                                                </ul>*@
                                         </li>
 
                                         <li ng-show='NavbarMenuList.length>5'>
@@ -217,11 +215,11 @@
                                     <span class="menu-expand"></span><a href="/Home/shop?Main={{n.MTitle}}">{{n.MTitle}} </a>
                                     @*<ul class="dropdown" ng-show="n.Submenu.length>0">
 
-                                        <li ng-repeat="s in n.Submenu">
-                                            <a href="/Home/shop/{{s.SubmenuTitle.KUrl}}">{{s.SubmenuTitle.Keyword}}</a>
-                                        </li>
+                                            <li ng-repeat="s in n.Submenu">
+                                                <a href="/Home/shop/{{s.SubmenuTitle.KUrl}}">{{s.SubmenuTitle.Keyword}}</a>
+                                            </li>
 
-                                    </ul>*@
+                                        </ul>*@
                                 </li>
 
                                 <li class="menu-item-has-children" ng-show="NavbarMenuList.length>5">
@@ -399,8 +397,8 @@
                 <div class="buttons bg-white p-2">
                     <div class="d-flex justify-content-center gap-2 ">
                         @*<div class="view-cart-button">
-                            <a name="" id="" class="btn theme-button-3 w-100 theme-text-size p-2" href="/Home/Cart" role="button">Go to Cart</a>
-                        </div>*@
+                                <a name="" id="" class="btn theme-button-3 w-100 theme-text-size p-2" href="/Home/Cart" role="button">Go to Cart</a>
+                            </div>*@
                         <div class="checkout-button">
                             <a name="" id="" class="btn theme-button-2 w-100 theme-text-size p-2" href="https://wa.me/+917877341189?text={{whatsappdata}}" target="_blank" role="button">Share On Whatsapp</a>
                         </div>
@@ -419,7 +417,7 @@
                     </button>
                     <div class="modal-body p-1">
                         @* Image Code *@
-                        <a href="/Home/Gift?url={{product.PUrl}}" ng-show="!product.Video" >
+                        <a href="/Home/Gift?url={{product.PUrl}}" ng-show="!product.Video">
 
                             <img ng-show="!product.Video" src="~/images/ProductImg/{{product.ProductImage}}" alt="product image" class="img-responsive w-100">
                         </a>
@@ -443,8 +441,8 @@
             <!-- Main Footer Section Start -->
             <section class="section-padding footer-mid ">
                 <div class="container pt-15 pb-20">
-                    <div class="row align-items-center">
-                        <div class="col-lg-5 col-sm-5">
+                    <div class="row">
+                        <div class="col-lg-4 col-sm-4">
                             <div class="widget-about font-md mb-md-5 mb-lg-0">
                                 <div class="logo logo-width-1 mb-2">
                                     <a href="/Home/Index"><img src="~/Content/assets/imgs/resources/gift-choice-vertical.webp" alt="logo" class="img-fluid"></a>
@@ -471,7 +469,26 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="offest-lg-2 offset-md-1 col-lg-5 col-sm-5">
+                        <div class="offset-lg-2 offset-sm-2 col-lg-3 col-sm-3 col-12">
+                            <h5 class="widget-title text-white">Ethics Links</h5>
+                            <div class="widget-about font-md mb-md-5 mb-lg-0">
+                                <div class="widget-about font-md mb-md-5 mb-lg-0">
+                                    <p class="text-light">
+                                        <a href="#" class="text-light">About Gift Choice</a>
+                                    </p>
+                                    <p class="text-light">
+                                        <a href="#" class="text-light">Terms &amp; Conditions</a>
+                                    </p>
+                                    <p class="text-light">
+                                        <a href="#" class="text-light">Privacy Policy</a>
+                                    </p>
+                                    <p class="text-light">
+                                        <a href="#" class="text-light">Contact Us</a>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-sm-3">
                             <h5 class="widget-title text-white">Help &amp; Support</h5>
                             <div class="widget-about font-md mb-md-5 mb-lg-0">
                                 <p class="text-light ">
@@ -501,7 +518,7 @@
                     </div>
                     <div class="col-lg-6">
                         <p class="text-lg-end text-start theme-text-size text-light mb-0">
-                            Designed by <a href="#" target="_blank"class="text-success">Friends Fix It</a>. All rights reserved
+                            Designed by <a href="#" target="_blank" class="text-success">Friends Fix It</a>. All rights reserved
                         </p>
                     </div>
                 </div>

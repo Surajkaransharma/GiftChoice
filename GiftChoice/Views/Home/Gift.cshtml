@@ -61,7 +61,7 @@
                                 <div class="detail-info">
                                     <span class="badge bg-success theme-text-size-13 mb-2 animate__flash" ng-show="Product.SameDay">Same Day Available</span>
 
-                                   <div class="pro-details-brand mb-2">
+                                    <div class="pro-details-brand mb-2">
                                         <span><a href="/Home/shop?Main={{Product.Maincate.MTitle}}">{{Product.Maincate.MTitle}}</a></span>
                                     </div>
                                     <h2 class="theme-text-size-16 mb-4">{{Product.ProductTitle}}</h2>
@@ -93,24 +93,24 @@
 
 
                                     @*<div data-aos="zoom-in">
-            <div class="attr-detail attr-size mb-30" ng-show="Product.PSizeList.length>0">
-                <strong class="mr-10">Size</strong>
-                <ul class="list-filter size-filter font-small">
-                    <li ng-repeat="s in Product.PSizeList" style="margin-left:5px;"><a href="#">{{s.SizeTitle}}</a> </li>
+                                            <div class="attr-detail attr-size mb-30" ng-show="Product.PSizeList.length>0">
+                                                <strong class="mr-10">Size</strong>
+                                                <ul class="list-filter size-filter font-small">
+                                                    <li ng-repeat="s in Product.PSizeList" style="margin-left:5px;"><a href="#">{{s.SizeTitle}}</a> </li>
 
-                </ul>
-            </div>
-        </div>*@
+                                                </ul>
+                                            </div>
+                                        </div>*@
 
                                     @*<div data-aos="zoom-in">
-            <div class="attr-detail attr-size mb-30" ng-show="Product.productDataArray.length>0">
-                <strong class="mr-10">Size</strong>
-                <ul class="list-filter size-filter font-small">
-                    <li ng-repeat="s in Product.productDataArray" style="margin-left:5px;"><a ng-click="SelectSizePrice(s.ProductSize)">{{s.ProductSize}}</a> </li>
+                                            <div class="attr-detail attr-size mb-30" ng-show="Product.productDataArray.length>0">
+                                                <strong class="mr-10">Size</strong>
+                                                <ul class="list-filter size-filter font-small">
+                                                    <li ng-repeat="s in Product.productDataArray" style="margin-left:5px;"><a ng-click="SelectSizePrice(s.ProductSize)">{{s.ProductSize}}</a> </li>
 
-                </ul>
-            </div>
-        </div>*@
+                                                </ul>
+                                            </div>
+                                        </div>*@
 
                                     <div class="attr-detail attr-size mb-3" ng-if="Product.productDataArray.length>0">
                                         <strong class="mr-10">Size : </strong>
@@ -125,10 +125,10 @@
 
                                     <div class="detail-extralink">
                                         @*<div class="detail-qty border radius">
-                <a href="#" class="qty-down"><i class="fi-rs-angle-small-down"></i></a>
-                <span class="qty-val">1</span>
-                <a href="#" class="qty-up"><i class="fi-rs-angle-small-up"></i></a>
-            </div>*@
+                                                <a href="#" class="qty-down"><i class="fi-rs-angle-small-down"></i></a>
+                                                <span class="qty-val">1</span>
+                                                <a href="#" class="qty-up"><i class="fi-rs-angle-small-up"></i></a>
+                                            </div>*@
                                         <div class="d-flex align-items-center gap-3">
                                             <div class="clearfix product-price-cover p-1 mb-2   border-0 mb-0">
                                                 <div class="product-price primary-color float-left">
@@ -149,16 +149,16 @@
 
 
                                     @*<div data-aos="zoom-in">
-            <div class="social-icons single-share mb-20">
-                <ul class="text-grey-5 d-inline-block">
-                    <li><strong class="mr-10">Share this:</strong></li>
-                    <li class="social-facebook"><a href="#"><img src="assets/imgs/theme/icons/icon-facebook.svg" alt=""></a></li>
-                    <li class="social-twitter"> <a href="#"><img src="assets/imgs/theme/icons/icon-twitter.svg" alt=""></a></li>
-                    <li class="social-instagram"><a href="#"><img src="assets/imgs/theme/icons/icon-instagram.svg" alt=""></a></li>
-                    <li class="social-linkedin"><a href="#"><img src="assets/imgs/theme/icons/icon-pinterest.svg" alt=""></a></li>
-                </ul>
-            </div>
-        </div>*@
+                                            <div class="social-icons single-share mb-20">
+                                                <ul class="text-grey-5 d-inline-block">
+                                                    <li><strong class="mr-10">Share this:</strong></li>
+                                                    <li class="social-facebook"><a href="#"><img src="assets/imgs/theme/icons/icon-facebook.svg" alt=""></a></li>
+                                                    <li class="social-twitter"> <a href="#"><img src="assets/imgs/theme/icons/icon-twitter.svg" alt=""></a></li>
+                                                    <li class="social-instagram"><a href="#"><img src="assets/imgs/theme/icons/icon-instagram.svg" alt=""></a></li>
+                                                    <li class="social-linkedin"><a href="#"><img src="assets/imgs/theme/icons/icon-pinterest.svg" alt=""></a></li>
+                                                </ul>
+                                            </div>
+                                        </div>*@
 
 
 
@@ -272,60 +272,6 @@
     </section>
     @* Related Product Slider Section End *@
 
-
-    <!-- Design Banner Start -->
-    <section class="p-0 section-padding bg-light" ng-init="GetDesignBanner()">
-        <div class="container pt-4 pb-4">
-            <div class="row g-1">
-                <div class="col-lg-6 col-sm-12 col-12">
-                    <div class="row g-1">
-                        <div class="col-lg-8 col-sm-8 col-7" ng-if="DesignBannerData[0]">
-
-                            <div class="image image-1">
-                                <a href="/Home/BannerGifts?Banner={{DesignBannerData[0].MainCateId}}">
-                                    <img ng-src="~/images/MainCate/{{DesignBannerData[0].MImage}}" alt="banner-image" class="img-fluid">
-                                </a>
-                            </div>
-
-                        </div>
-                        <div class="col-lg-4 col-sm-4 col-5" ng-if="DesignBannerData[1]">
-
-                            <div class="image image-2">
-                                <a href="/Home/BannerGifts?Banner={{DesignBannerData[1].MainCateId}}">
-                                    <img ng-src="~/images/MainCate/{{DesignBannerData[1].MImage}}" alt="banner-image" class="img-fluid">
-                                </a>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-lg-6 col-sm-12 col-12">
-                    <div class="row g-1">
-                        <div class="col-lg-12 col-sm-12 col-6" ng-if="DesignBannerData[2]">
-
-                            <div class="image image-3">
-                                <a href="/Home/BannerGifts?Banner={{DesignBannerData[2].MainCateId}}">
-                                    <img ng-src="~/images/MainCate/{{DesignBannerData[2].MImage}}" alt="banner-image" class="img-fluid">
-                                </a>
-                            </div>
-
-                        </div>
-                        <div class="col-lg-12 col-sm-12 col-6" ng-if="DesignBannerData[3]">
-
-                            <div class="image image-4">
-                                <a href="/Home/BannerGifts?Banner={{DesignBannerData[3].MainCateId}}">
-                                    <img ng-src="~/images/MainCate/{{DesignBannerData[3].MImage}}" alt="banner-image" class="img-fluid">
-                                </a>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- Design Banner End -->
 
 </main>
 
