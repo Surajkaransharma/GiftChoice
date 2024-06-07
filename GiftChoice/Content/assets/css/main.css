@@ -2063,49 +2063,69 @@ label {
     }
 
 /*Carausel*/
-.carausel-6-columns-cover .carausel-6-columns {
+.carausel-6-columns-cover .carausel-6-columns,
+.carausel-5-columns-cover .carausel-5-columns,
+.carausel-1-columns-cover .carausel-1-columns {
     overflow: hidden;
     /*margin: 0 -12px;*/
 }
 
-    .carausel-6-columns-cover .carausel-6-columns .card-1 {
+    .carausel-6-columns-cover .carausel-6-columns .card-1,
+    .carausel-1-columns-cover .carausel-1-columns .card-1,
+    .carausel-5-columns-cover .carausel-5-columns .card-1 {
         margin-right: 5px;
-        margin-left: 8px;
+        margin-left: 0px;
     }
 
-.carausel-6-columns-cover .product-img {
+.carausel-6-columns-cover .product-img,
+.carausel-1-columns-cover .product-img,
+.carausel-5-columns-cover .product-img {
     border: 1px solid #cce7d0;
 }
 
-.carausel-6-columns-cover .slider-arrow {
+.carausel-6-columns-cover .slider-arrow,
+.carausel-1-columns-cover .slider-arrow,
+.carausel-5-columns-cover .slider-arrow {
     top: -50px;
 }
 
-    .carausel-6-columns-cover .slider-arrow .slider-btn.slider-next {
+    .carausel-6-columns-cover .slider-arrow .slider-btn.slider-next,
+    .carausel-1-columns-cover .slider-arrow .slider-btn.slider-next,
+    .carausel-5-columns-cover .slider-arrow .slider-btn.slider-next {
         right: 0;
     }
 
-    .carausel-6-columns-cover .slider-arrow .slider-btn.slider-prev {
+    .carausel-6-columns-cover .slider-arrow .slider-btn.slider-prev,
+    .carausel-1-columns-cover .slider-arrow .slider-btn.slider-prev,
+    .carausel-5-columns-cover .slider-arrow .slider-btn.slider-prev {
         right: 40px;
         left: unset;
     }
 
-.carausel-6-columns-cover.arrow-center .slider-arrow {
+.carausel-6-columns-cover.arrow-center .slider-arrow,
+.carausel-1-columns-cover.arrow-center .slider-arrow,
+.carausel-5-columns-cover.arrow-center .slider-arrow {
     top: 50%;
     -webkit-transform: translateY(-50%);
     transform: translateY(-50%);
     margin-top: -50px;
 }
 
-    .carausel-6-columns-cover.arrow-center .slider-arrow .slider-btn.slider-next {
+    .carausel-6-columns-cover.arrow-center .slider-arrow .slider-btn.slider-next,
+    .carausel-1-columns-cover.arrow-center .slider-arrow .slider-btn.slider-next,
+    .carausel-5-columns-cover.arrow-center .slider-arrow .slider-btn.slider-next {
         right: -30px;
     }
 
-    .carausel-6-columns-cover.arrow-center .slider-arrow .slider-btn.slider-prev {
+    .carausel-6-columns-cover.arrow-center .slider-arrow .slider-btn.slider-prev,
+    .carausel-1-columns-cover.arrow-center .slider-arrow .slider-btn.slider-prev,
+    .carausel-5-columns-cover.arrow-center .slider-arrow .slider-btn.slider-prev {
         left: -30px;
     }
 
-    .carausel-6-columns-cover.arrow-center .slider-arrow.slider-arrow-3 {
+    .carausel-6-columns-cover.arrow-center .slider-arrow.slider-arrow-3,
+    .carausel-1-columns-cover.arrow-center .slider-arrow.slider-arrow-3,
+    .carausel-5-columns-cover.arrow-center .slider-arrow.slider-arrow-3 {
         margin-top: 0;
     }
 
@@ -2146,21 +2166,21 @@ label {
     position: relative;
     background: #fff;
     text-align: center;
-    border: 1px solid #cce7d0;
-    border-radius: 10px;
+    border: 1px solid #e6e9ec;
+    border-radius: 6px;
 }
 
     .card-1 figure {
         overflow: hidden;
         margin: 2px;
-        border-radius: 10px;
+        border-radius: 0px;
         display: -webkit-box;
         display: -ms-flexbox;
         display: flex;
     }
 
         .card-1 figure img {
-            border-radius: 10px;
+            border-radius: 6px;
         }
 
     .card-1 h5 {
@@ -9945,7 +9965,7 @@ span.fi-rs-apps {
     }
 
     .popular-categories .slider-btn.slider-prev {
-        right: 50px !important;
+        right: 30px !important;
         left: unset !important;
     }
 
@@ -10334,9 +10354,10 @@ span.fi-rs-apps {
         color: #b60000 !important;
     }
 
-    .carausel-6-columns-cover .carausel-6-columns .card-1 {
+    .carausel-1-columns-cover .carausel-1-columns .card-1,
+    .carausel-5-columns-cover .carausel-5-columns .card-1 {
         margin-right: 5px !important;
-        margin-left: 5px !important;
+        margin-left: 0px !important;
     }
 
     .product-cart-wrap .product-action-1.show {
@@ -11291,7 +11312,9 @@ h3.section-title {
         margin-bottom: 20px !important;
     }
 
-    .carausel-6-columns-cover .slider-arrow .slider-btn.slider-prev {
+    .carausel-6-columns-cover .slider-arrow .slider-btn.slider-prev,
+    .carausel-5-columns-cover .slider-arrow .slider-btn.slider-prev,
+    .carausel-1-columns-cover .slider-arrow .slider-btn.slider-prev {
         right: 30px;
     }
 
