@@ -27,96 +27,20 @@
     </section>
     <!-- Slider End -->
     @* Hero Category Section Start *@
-    <section class="popular-categorie">
+    <section class="popular-categorie" ng-init="GetHomeMainCateHeroData()" ng-show="HomeHeroMainCateData.length>0">
         <div class="container wow fadeIn animated pt-2 pb-2">
             <h5 class="section-title mb-20"><span>Shop By</span> Categories</h5>
             <div class="carausel-5-columns-cover position-relative">
                 @*<div class="slider-arrow slider-arrow-2 carausel-5-columns-arrow" id="carausel-5-columns-arrows"></div>*@
                 <div class="carausel-5-columns" id="carausel-5-columns">
-                    <div class="card-1">
+                    <div class="card-1" ng-repeat="m in HomeHeroMainCateData">
                         <figure class=" img-hover-scale overflow-hidden">
-                            <a href="#">
-                                <img src="https://dummyimage.com/140x180/ccc/fff" alt="">
+                            <a href="/Home/shop?Main={{m.MTitle}}">
+                                <img ng-src="~/images/MainCate/{{m.MImage}}" alt="{{m.MUrl}}" loading="lazy">
                             </a>
                         </figure>
                     </div>
-                    <div class="card-1">
-                        <figure class=" img-hover-scale overflow-hidden">
-                            <a href="#">
-                                <img src="https://dummyimage.com/140x180/ccc/fff" alt="">
-                            </a>
-                        </figure>
-                    </div>
-                    <div class="card-1">
-                        <figure class=" img-hover-scale overflow-hidden">
-                            <a href="#">
-                                <img src="https://dummyimage.com/140x180/ccc/fff" alt="">
-                            </a>
-                        </figure>
-                    </div>
-                    <div class="card-1">
-                        <figure class=" img-hover-scale overflow-hidden">
-                            <a href="#">
-                                <img src="https://dummyimage.com/140x180/ccc/fff" alt="">
-                            </a>
-                        </figure>
-                    </div>
-                    <div class="card-1">
-                        <figure class=" img-hover-scale overflow-hidden">
-                            <a href="#">
-                                <img src="https://dummyimage.com/140x180/ccc/fff" alt="">
-                            </a>
-                        </figure>
-                    </div>
-                    <div class="card-1">
-                        <figure class=" img-hover-scale overflow-hidden">
-                            <a href="#">
-                                <img src="https://dummyimage.com/140x180/ccc/fff" alt="">
-                            </a>
-                        </figure>
-                    </div>
-                    <div class="card-1">
-                        <figure class=" img-hover-scale overflow-hidden">
-                            <a href="#">
-                                <img src="https://dummyimage.com/140x180/ccc/fff" alt="">
-                            </a>
-                        </figure>
-                    </div>
-                    <div class="card-1">
-                        <figure class=" img-hover-scale overflow-hidden">
-                            <a href="#">
-                                <img src="https://dummyimage.com/140x180/ccc/fff" alt="">
-                            </a>
-                        </figure>
-                    </div>
-                    <div class="card-1">
-                        <figure class=" img-hover-scale overflow-hidden">
-                            <a href="#">
-                                <img src="https://dummyimage.com/140x180/ccc/fff" alt="">
-                            </a>
-                        </figure>
-                    </div>
-                    <div class="card-1">
-                        <figure class=" img-hover-scale overflow-hidden">
-                            <a href="#">
-                                <img src="https://dummyimage.com/140x180/ccc/fff" alt="">
-                            </a>
-                        </figure>
-                    </div>
-                    <div class="card-1">
-                        <figure class=" img-hover-scale overflow-hidden">
-                            <a href="#">
-                                <img src="https://dummyimage.com/140x180/ccc/fff" alt="">
-                            </a>
-                        </figure>
-                    </div>
-                    <div class="card-1">
-                        <figure class=" img-hover-scale overflow-hidden">
-                            <a href="#">
-                                <img src="https://dummyimage.com/140x180/ccc/fff" alt="">
-                            </a>
-                        </figure>
-                    </div>
+                   
                 </div>
             </div>
         </div>
@@ -364,96 +288,20 @@
     </section>
     <!-- Advertisement Banner End -->
     @* Normal Category Section Start *@
-    <section class="popular-categorie">
-        <div class="container wow fadeIn animated pt-2 pb-2">
+    <section class="popular-categorie" ng-show="HomeMainCateData.length>0">
+        <div class="container wow fadeIn animated pt-2 pb-2" ng-init="GetHomeMainCateData()">
             <h5 class="section-title mb-20"><span>Shop By</span> Main Categories</h5>
             <div class="carausel-1-columns-cover position-relative">
                 @*<div class="slider-arrow slider-arrow-2 carausel-1-columns-arrow" id="carausel-1-columns-arrows"></div>*@
                 <div class="carausel-1-columns" id="carausel-1-columns">
-                    <div class="card-1">
+                    <div class="card-1" ng-repeat="m in HomeMainCateData">
                         <figure class=" img-hover-scale overflow-hidden">
-                            <a href="#">
-                                <img src="https://dummyimage.com/140x180/ccc/fff" alt="">
+                            <a href="/Home/shop?Main={{m.MTitle}}">
+                                <img ng-src="~/images/MainCate/{{m.MImage}}" loading="lazy" alt="{{m.MUrl}}">
                             </a>
                         </figure>
                     </div>
-                    <div class="card-1">
-                        <figure class=" img-hover-scale overflow-hidden">
-                            <a href="#">
-                                <img src="https://dummyimage.com/140x180/ccc/fff" alt="">
-                            </a>
-                        </figure>
-                    </div>
-                    <div class="card-1">
-                        <figure class=" img-hover-scale overflow-hidden">
-                            <a href="#">
-                                <img src="https://dummyimage.com/140x180/ccc/fff" alt="">
-                            </a>
-                        </figure>
-                    </div>
-                    <div class="card-1">
-                        <figure class=" img-hover-scale overflow-hidden">
-                            <a href="#">
-                                <img src="https://dummyimage.com/140x180/ccc/fff" alt="">
-                            </a>
-                        </figure>
-                    </div>
-                    <div class="card-1">
-                        <figure class=" img-hover-scale overflow-hidden">
-                            <a href="#">
-                                <img src="https://dummyimage.com/140x180/ccc/fff" alt="">
-                            </a>
-                        </figure>
-                    </div>
-                    <div class="card-1">
-                        <figure class=" img-hover-scale overflow-hidden">
-                            <a href="#">
-                                <img src="https://dummyimage.com/140x180/ccc/fff" alt="">
-                            </a>
-                        </figure>
-                    </div>
-                    <div class="card-1">
-                        <figure class=" img-hover-scale overflow-hidden">
-                            <a href="#">
-                                <img src="https://dummyimage.com/140x180/ccc/fff" alt="">
-                            </a>
-                        </figure>
-                    </div>
-                    <div class="card-1">
-                        <figure class=" img-hover-scale overflow-hidden">
-                            <a href="#">
-                                <img src="https://dummyimage.com/140x180/ccc/fff" alt="">
-                            </a>
-                        </figure>
-                    </div>
-                    <div class="card-1">
-                        <figure class=" img-hover-scale overflow-hidden">
-                            <a href="#">
-                                <img src="https://dummyimage.com/140x180/ccc/fff" alt="">
-                            </a>
-                        </figure>
-                    </div>
-                    <div class="card-1">
-                        <figure class=" img-hover-scale overflow-hidden">
-                            <a href="#">
-                                <img src="https://dummyimage.com/140x180/ccc/fff" alt="">
-                            </a>
-                        </figure>
-                    </div>
-                    <div class="card-1">
-                        <figure class=" img-hover-scale overflow-hidden">
-                            <a href="#">
-                                <img src="https://dummyimage.com/140x180/ccc/fff" alt="">
-                            </a>
-                        </figure>
-                    </div>
-                    <div class="card-1">
-                        <figure class=" img-hover-scale overflow-hidden">
-                            <a href="#">
-                                <img src="https://dummyimage.com/140x180/ccc/fff" alt="">
-                            </a>
-                        </figure>
-                    </div>
+              
                 </div>
             </div>
         </div>
