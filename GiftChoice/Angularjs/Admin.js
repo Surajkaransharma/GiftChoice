@@ -1,6 +1,28 @@
-﻿var app = angular.module("AdminApp", ['lr.upload']);
+﻿var app = angular.module("AdminApp", ['lr.upload', 'ngTagsInput']);
 app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function ($scope, upload, $http, $sce) {
 
+
+    $scope.loadTags = function (query) {
+        return $http.get("/GiftDashBoard/GetKeywordData")
+    };
+    $scope.tags = [
+        { text: 'Tag1' },
+        { text: 'Tag2' },
+        { text: 'Tag3' }
+    ];
+
+    $scope.tagsj = [
+        { "text": "Tag1" },
+        { "text": "Tag2" },
+        { "text": "Tag3" },
+        { "text": "Tag4" },
+        { "text": "Tag5" },
+        { "text": "Tag6" },
+        { "text": "Tag7" },
+        { "text": "Tag8" },
+        { "text": "Tag9" },
+        { "text": "Tag10" }
+    ]
 
     ////// duplicateProduct
 

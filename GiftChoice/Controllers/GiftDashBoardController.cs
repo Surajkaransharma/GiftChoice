@@ -471,7 +471,7 @@ namespace GiftChoice.Controllers
 
         public JsonResult GetKeywordData()
         {
-            var res = db.KeywordTbls.Where(k => k.Active == true).Select(k => new { k.Keyword, k.Active, k.KeywordId });
+            var res = db.KeywordTbls.Where(k => k.Active == true).Select(k => new { text = k.Keyword, k.Active, k.KeywordId });
             return Json(res, JsonRequestBehavior.AllowGet);
 
         }
