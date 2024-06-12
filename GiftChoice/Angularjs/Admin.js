@@ -3030,24 +3030,21 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
 
 
             //-------------- Submit Filter Keyword Start ->------------->---------------------->---------------------------->------->------------>---------->---
-
+    $scope.FilterTag = [];
     $scope.SubmitFilterKeyword = function () {     
         if ($("#MainCate").val() == "" || $("#MainCate").val() == "-1") {
             toastr["error"]("Enter Banner Title");
             return;
         }
 
-
-        //  $scope.Querymodel.push({'AnswerArr': $scope.AnswerArr });
+        debugger
+        $scope.Filter.keywordTbls = $scope.FilterTag;
 
 
         $http({
             url: '/GiftDashBoard/SubmitFilterKeyword',
             method: 'post',
-            data: {
-                query: $scope.Querymodel,
-                answerArrs: $scope.AnswerArr
-            }
+            data: $scope.Filter
         }).then(function (d) {
             $scope.result = d.data;
             if ($scope.result.res === "1") {
