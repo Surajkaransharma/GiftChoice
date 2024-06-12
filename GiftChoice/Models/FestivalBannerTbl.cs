@@ -16,10 +16,10 @@ namespace GiftChoice.Models
     public partial class FestivalBannerTbl
     {
         public long FBannerId { get; set; }
-
-        public HttpPostedFileBase Image { get; set; }
         public string FBTitle { get; set; }
         public string FBPosition { get; set; }
+
+        public HttpPostedFileBase Image { get; set; }
         public string FBUrl { get; set; }
         public Nullable<bool> Active { get; set; }
         public Nullable<long> Priority { get; set; }

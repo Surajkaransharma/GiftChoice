@@ -39,17 +39,17 @@
 
                         <form class="row g-3">
                             @*<div class="col-md-12">
-            <label for="input1" class="form-label">Select Banner Position</label>
-            <select id="MainCateSelect" class="form-select" onchange="angular.element(this).scope().GetBannerInProduct(this.value)" ng-model="Querymodel.Position">
-                <option ng-selected="true" value="">Select Banner Position</option>
-                <option value="Small Banner">Small Banner</option>
-                <option value="Design Banner">Design Banner</option>
-                <option value="Multiple Banner">Multiple Banner</option>
+                                    <label for="input1" class="form-label">Select Banner Position</label>
+                                    <select id="MainCateSelect" class="form-select" onchange="angular.element(this).scope().GetBannerInProduct(this.value)" ng-model="Querymodel.Position">
+                                        <option ng-selected="true" value="">Select Banner Position</option>
+                                        <option value="Small Banner">Small Banner</option>
+                                        <option value="Design Banner">Design Banner</option>
+                                        <option value="Multiple Banner">Multiple Banner</option>
 
-            </select>
+                                    </select>
 
 
-        </div>*@
+                                </div>*@
                             <div class="col-md-12" ng-init="GetBannerInProduct()">
                                 <label for="input1" class="form-label">Select Banner Title</label>
 
@@ -60,55 +60,58 @@
 
 
                             </div>
-                            <tags-input ng-model="tagsja" add-on-paste="true">
-                                <auto-complete source="loadTags($query)"></auto-complete>
+                            <div class="col-md-12" ng-init="GetKeywordData()">
+
+                            <tags-input ng-model="KeywordList" add-on-paste="true">
+
                             </tags-input>
-                            <p>Model: {{tags}}</p>
+                            </div>
+                            @*<p>Model: {{tags}}</p>*@
                             @*<div class="col-md-12">
-            <label for="input1" class="form-label">Ask Question ?</label>
-            <input type="text" class="form-control" ng-model="Querymodel.AskQues1" id="AskQues1" placeholder="Ask Question ?">
-        </div>
+                                    <label for="input1" class="form-label">Ask Question ?</label>
+                                    <input type="text" class="form-control" ng-model="Querymodel.AskQues1" id="AskQues1" placeholder="Ask Question ?">
+                                </div>
 
-        <div class="col-md-12" ng-repeat="m in AnswerArr">
-            <div class="row">
-                <div class="col-md-10">
+                                <div class="col-md-12" ng-repeat="m in AnswerArr">
+                                    <div class="row">
+                                        <div class="col-md-10">
 
-                    <label for="input1" class="form-label">Add Answer</label>
-                    <input type="text" class="form-control" ng-model="m.Answer" id="Answer" placeholder="Answer">
-                </div>
-                <div class="col-md-2">
+                                            <label for="input1" class="form-label">Add Answer</label>
+                                            <input type="text" class="form-control" ng-model="m.Answer" id="Answer" placeholder="Answer">
+                                        </div>
+                                        <div class="col-md-2">
 
-                    <i class="bx bxs-trash" style="font-size: 20px; margin-top: 32px" ng-click="AnswerRemove($index)"></i>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-12">
-            <button type="button" id="AddMore" ng-click="AddMoreAnswer()" class="btn btn-primary px-4">Add More Answer</button>
-        </div>*@
+                                            <i class="bx bxs-trash" style="font-size: 20px; margin-top: 32px" ng-click="AnswerRemove($index)"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <button type="button" id="AddMore" ng-click="AddMoreAnswer()" class="btn btn-primary px-4">Add More Answer</button>
+                                </div>*@
                             @*<div class="col-md-12">
-            <label for="input1" class="form-label">Want To Add 2ND Query Popup ?</label>
-            <input type="checkbox" ng-model="Querymodel.ModelQuery2" id="ModelQuery2" placeholder="ModelQuery2">
-        </div>*@
+                                    <label for="input1" class="form-label">Want To Add 2ND Query Popup ?</label>
+                                    <input type="checkbox" ng-model="Querymodel.ModelQuery2" id="ModelQuery2" placeholder="ModelQuery2">
+                                </div>*@
 
                             @*<div class="col-md-12" ng-init="GetKeywordData()">
-            <label for="input1" class="form-label">Select Keyword</label>
+                                    <label for="input1" class="form-label">Select Keyword</label>
 
-            <div class="" id="check_box">
-                <label class="checkbox-wrapper" ng-repeat="k in KeywordList">
-                    <input type="checkbox" id="Keyword_{{k.KeywordId}}" class="checkbox-input" value="{{k.KeywordId}}" ng-model="k.Selected" ng-checked="" />
-                    <span class="checkbox-tile">
-                        <span class="checkbox-label">{{k.Keyword}}</span>
-                    </span>
-                </label>
+                                    <div class="" id="check_box">
+                                        <label class="checkbox-wrapper" ng-repeat="k in KeywordList">
+                                            <input type="checkbox" id="Keyword_{{k.KeywordId}}" class="checkbox-input" value="{{k.KeywordId}}" ng-model="k.Selected" ng-checked="" />
+                                            <span class="checkbox-tile">
+                                                <span class="checkbox-label">{{k.Keyword}}</span>
+                                            </span>
+                                        </label>
 
 
-            </div>
-        </div>*@
+                                    </div>
+                                </div>*@
 
 
                             <div class="col-md-12">
                                 <div class="d-md-flex d-grid align-items-center gap-3">
-                                    <button type="button" id="btn" ng-click="SubmitQuerymodel()" class="btn btn-primary px-4">Submit</button>
+                                    <button type="button" id="btn" ng-click="SubmitFilterKeyword()" class="btn btn-primary px-4">Submit</button>
                                     <button type="button" id="edbtn" ng-click="UpdateQuerymodel()" style="display: none" class="btn btn-primary px-4">Update</button>
                                     <button type="button" class="btn btn-light px-4" onClick="refreshPage()">Reset</button>
                                 </div>

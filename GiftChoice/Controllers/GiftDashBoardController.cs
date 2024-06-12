@@ -57,6 +57,11 @@ namespace GiftChoice.Controllers
             return View();
         }
 
+        public ActionResult AddVideo()
+        {
+            return View();
+        }
+
 
         public ActionResult FestivalBanner()
         {
@@ -2927,7 +2932,7 @@ namespace GiftChoice.Controllers
 
 
         [JsonNetFilter]
-        public JsonResult DeleteProductImage(string id,int pid)
+        public JsonResult DeleteProductImage(string id, int pid)
         {
             try
             {
@@ -3172,6 +3177,47 @@ namespace GiftChoice.Controllers
                 return Json(res, JsonRequestBehavior.AllowGet);
             }
         }
+        //public JsonResult SubmitQuerymodel(QueryTblmodel query, List<AnswerArr> answerArrs)
+        //{
+        //    try
+        //    {
+        //        var result = db.QueryTbls.Where(p => p.AskQues1 == query.AskQues1).FirstOrDefault();
+
+        //        if (result != null)
+        //        {
+
+        //            var res1 = new { res = "2" };
+        //            return Json(res1, JsonRequestBehavior.AllowGet);
+
+        //        }
+
+        //        for (int i = 0; i < answerArrs.Count; i++)
+        //        {
+
+        //            QueryTbl queryTbl = new QueryTbl();
+        //            queryTbl.QId = db.QueryTbls.DefaultIfEmpty().Max(r => r == null ? 0 : r.QId) + 1;
+        //            queryTbl.MainCateId = query.MainCateId;
+        //            queryTbl.AskQues1 = query.AskQues1;
+        //            queryTbl.Answer = answerArrs[i].Answer;
+        //            queryTbl.ModelQuery2 = query.ModelQuery2;
+        //            queryTbl.Create_at = DateTime.Now;
+        //            queryTbl.Update_at = DateTime.Now;
+        //            queryTbl.Active = true;
+        //            queryTbl.Priority = query.Priority;
+        //            db.QueryTbls.Add(queryTbl);
+        //            db.SaveChanges();
+        //        }
+
+        //        var res = new { res = "1" };
+        //        return Json(res, JsonRequestBehavior.AllowGet);
+        //    }
+        //    catch (Exception ex)
+        //    {
+
+        //        var res = new { res = "0" };
+        //        return Json(res, JsonRequestBehavior.AllowGet);
+        //    }
+        //}
 
         public JsonResult GetQuerymodel()
         {
@@ -3591,6 +3637,172 @@ namespace GiftChoice.Controllers
         //-------------- Submit Festival Banner End ->------------->---------------------->---------------------------->------->------------>---------->---
 
 
+
+
+        //-------------- Submit Filter  Main Cate Keyword Start ->------------->---------------------->---------------------------->------->------------>---------->---
+
+        public JsonResult SubmitFilterKeyword(MainCateTblModel model)
+        {
+
+            try
+            {
+
+                MainCateTbl result = db.MainCateTbls.Where(c => c.MainCateId == model.MainCateId).FirstOrDefault();
+
+                if (result == null)
+                {
+                    var res1 = new { res = "0" };
+                    return Json(res1, JsonRequestBehavior.AllowGet);
+                }
+
+
+                if (model.keywordTbls != null)
+                {
+                    //     public string Menu { get; set; }
+                    for (int i = 0; i < model.keywordTbls.Count; i++)
+                    {
+                        MCKeywordTbl mCKeyword = new MCKeywordTbl();
+                        mCKeyword.MCkeywordId = db.MCKeywordTbls.DefaultIfEmpty().Max(r => r == null ? 0 : r.MCkeywordId) + 1;
+                        mCKeyword.MainCateId = model.MainCateId;
+                        mCKeyword.Menu = model.keywordTbls[i].Menu == "Menu" ? true : false;
+                        mCKeyword.Fliter = model.keywordTbls[i].Menu == "Fliter" ? true : false;
+
+                        mCKeyword.MenuFilter = model.keywordTbls[i].Menu == "MenuFilter" ? true : false;
+
+                        mCKeyword.KeywordId = model.keywordTbls[i].KeywordId;
+                        mCKeyword.Active = true;
+                        db.MCKeywordTbls.Add(mCKeyword);
+                        db.SaveChanges();
+
+                    }
+                }
+
+                var res = new { res = "1", };
+                return Json(res, JsonRequestBehavior.AllowGet);
+
+            }
+            catch (Exception ex)
+            {
+                var md = ex.Message;
+                var res = new { res = "0" };
+                return Json(res, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        //-------------- Submit Filter Main Cate Keyword End ->------------->---------------------->---------------------------->------->------------>---------->---
+
+
+        //-------------- Submit Video Start ->------------->---------------------->---------------------------->------->------------>---------->---
+
+
+
+
+        public JsonResult SubmitVideo(VideoTbl model)
+        {
+            // public HttpPostedFileBase Image { get; set; }
+            try
+            {
+                VideoTbl rws = new VideoTbl();
+
+                VideoTbl result = db.VideoTbls.Where(v => v.VideoTitle == model.VideoTitle).FirstOrDefault();
+                if (result != null)
+                {
+                    var res = new { res = "-1" };
+                    return Json(res, JsonRequestBehavior.AllowGet);
+                }
+                else
+                {
+                    rws.VId = db.VideoTbls.DefaultIfEmpty().Max(r => r == null ? 0 : r.VId) + 1;
+
+                    if (model.Image != null)
+                    {
+                        string extensionstuimg = Path.GetExtension(model.Image.FileName);
+                        model.Image.SaveAs(Server.MapPath("~/images/ProductVideo/" + rws.VId + extensionstuimg));
+
+                        rws.Video = rws.VId + "" + extensionstuimg;
+
+
+                    }
+                    rws.VideoTitle = model.VideoTitle;
+                    rws.VUrl = rws.VideoTitle.Replace(" ", "-");
+                    rws.Active = true;
+                    rws.Create_at = DateTime.Now;
+                    rws.Update_at = DateTime.Now;
+                    db.VideoTbls.Add(rws);
+                    db.SaveChanges();
+                    var res = new { res = "1" };
+                    return Json(res, JsonRequestBehavior.AllowGet);
+                }
+            }
+            catch (Exception ex)
+            {
+                var md = ex.Message;
+                var res = new { res = "0" };
+                return Json(res, JsonRequestBehavior.AllowGet);
+            }
+        }
+        public JsonResult UpdateVideo(VideoTbl model)
+        {
+            // public HttpPostedFileBase Image { get; set; }
+            try
+            {            
+                var rws = db.VideoTbls.Where(r => r.VId == model.VId).FirstOrDefault();
+                if (rws != null)
+                {
+
+                    if (model.Image != null)
+                    {
+                        string extensionstuimg = Path.GetExtension(model.Image.FileName);
+                        model.Image.SaveAs(Server.MapPath("~/images/ProductVideo/" + rws.VId + extensionstuimg));
+
+                        rws.Video = rws.VId + "" + extensionstuimg;
+
+
+                    }
+                    rws.VideoTitle = model.VideoTitle;
+                    rws.VUrl = rws.VideoTitle.Replace(" ", "-");
+                    rws.Active = true;
+                    rws.Update_at = DateTime.Now;
+                    db.SaveChanges();
+                }
+                var res = new { res = "1" };
+                return Json(res, JsonRequestBehavior.AllowGet);
+                //}
+            }
+            catch (Exception ex)
+            {
+                var md = ex.Message;
+                var res = new { res = "0" };
+                return Json(res, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        public JsonResult VideoActiveDeActive(int id)
+        {
+            var jb = db.VideoTbls.Where(c => c.VId == id).FirstOrDefault();
+            if (jb != null)
+            {
+                jb.Active = jb.Active == true ? false : true;
+                db.SaveChanges();
+                var res = new { res = "1" };
+                return Json(res, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                var res = new { res = "2" };
+                return Json(res, JsonRequestBehavior.AllowGet);
+            }
+
+        }
+        public JsonResult GetVideoData()
+        {
+
+            var res = db.VideoTbls;
+            return Json(res, JsonRequestBehavior.AllowGet);
+        }
+
+
+        //-------------- Submit Video End ->------------->---------------------->---------------------------->------->------------>---------->---
 
     }
 }

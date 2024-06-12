@@ -58,5 +58,6 @@ namespace GiftChoice.Models
         public virtual DbSet<UserRegister> UserRegisters { get; set; }
         public virtual DbSet<AutocompleteSuggestion> AutocompleteSuggestions { get; set; }
         public virtual DbSet<VProduct> VProducts { get; set; }
+        public virtual DbSet<VideoTbl> VideoTbls { get; set; }
     }
 }

@@ -13,15 +13,14 @@ namespace GiftChoice.Models
     using System.Collections.Generic;
     using System.Web;
 
-    public partial class BannerTbl
+    public partial class VideoTbl
     {
-        public long BannerId { get; set; }
-        public Nullable<long> MainCateId { get; set; }
+        public int VId { get; set; }
+        public string VUrl { get; set; }
+        public string Video { get; set; }
+        public string VideoTitle { get; set; }
+       public HttpPostedFileBase Image { get; set; } 
 
-        public HttpPostedFileBase Image { get; set; }
-        public string BUrl { get; set; }
-        public string BannerImage { get; set; }
-        public Nullable<long> Priority { get; set; }
         public Nullable<bool> Active { get; set; }
         public Nullable<System.DateTime> Create_at { get; set; }
         public Nullable<System.DateTime> Update_at { get; set; }

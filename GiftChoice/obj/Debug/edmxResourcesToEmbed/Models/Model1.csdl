@@ -34,6 +34,7 @@
     <EntitySet Name="UserRegisters" EntityType="GiftChoiceModel.UserRegister" />
     <EntitySet Name="AutocompleteSuggestions" EntityType="GiftChoiceModel.AutocompleteSuggestion" />
     <EntitySet Name="VProducts" EntityType="GiftChoiceModel.VProduct" />
+    <EntitySet Name="VideoTbls" EntityType="GiftChoiceModel.VideoTbl" />
   </EntityContainer>
   <EntityType Name="AdminTbl">
     <Key>
@@ -371,6 +372,7 @@
     <Property Name="ProductType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="BannerCateId" Type="Int32" />
     <Property Name="Video" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="VideoId" Type="Int32" />
   </EntityType>
   <EntityType Name="PSizeTbl">
     <Key>
@@ -480,5 +482,17 @@
     <Property Name="Expr12" Type="DateTime" Precision="3" />
     <Property Name="Expr14" Type="DateTime" Precision="3" />
     <Property Name="Qty" Type="Int64" />
+  </EntityType>
+  <EntityType Name="VideoTbl">
+    <Key>
+      <PropertyRef Name="VId" />
+    </Key>
+    <Property Name="VId" Type="Int32" Nullable="false" />
+    <Property Name="VUrl" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Video" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="VideoTitle" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Active" Type="Boolean" />
+    <Property Name="Create_at" Type="DateTime" Precision="3" />
+    <Property Name="Update_at" Type="DateTime" Precision="3" />
   </EntityType>
 </Schema>

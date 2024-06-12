@@ -34,5 +34,6 @@ namespace GiftChoice.Models
         public string ProductType { get; set; }
         public Nullable<int> BannerCateId { get; set; }
         public string Video { get; set; }
+        public Nullable<int> VideoId { get; set; }
     }
 }

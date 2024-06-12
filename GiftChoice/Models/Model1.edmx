@@ -341,6 +341,7 @@
           <Property Name="ProductType" Type="nvarchar" MaxLength="50" />
           <Property Name="BannerCateId" Type="int" />
           <Property Name="Video" Type="nvarchar" MaxLength="50" />
+          <Property Name="VideoId" Type="int" />
         </EntityType>
         <EntityType Name="PSizeTbl">
           <Key>
@@ -403,6 +404,18 @@
           <Property Name="Pincode" Type="varchar" MaxLength="50" />
           <Property Name="Active" Type="bit" />
           <Property Name="Create_at" Type="date" />
+        </EntityType>
+        <EntityType Name="VideoTbl">
+          <Key>
+            <PropertyRef Name="VId" />
+          </Key>
+          <Property Name="VId" Type="int" Nullable="false" />
+          <Property Name="VUrl" Type="nvarchar(max)" />
+          <Property Name="Video" Type="nvarchar(max)" />
+          <Property Name="VideoTitle" Type="nvarchar(max)" />
+          <Property Name="Active" Type="bit" />
+          <Property Name="Create_at" Type="datetime" />
+          <Property Name="Update_at" Type="datetime" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'giftchoice.dbo.AutocompleteSuggestions' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -487,6 +500,7 @@ warning 6002: The table/view 'giftchoice.dbo.VProduct' does not have a primary k
           <EntitySet Name="SizeTbl" EntityType="Self.SizeTbl" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SliderTbl" EntityType="Self.SliderTbl" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserRegister" EntityType="Self.UserRegister" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="VideoTbl" EntityType="Self.VideoTbl" Schema="giftchoice" store:Type="Tables" />
           <EntitySet Name="AutocompleteSuggestions" EntityType="Self.AutocompleteSuggestions" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [AutocompleteSuggestions].[ID] AS [ID], 
@@ -570,6 +584,7 @@ warning 6002: The table/view 'giftchoice.dbo.VProduct' does not have a primary k
           <EntitySet Name="UserRegisters" EntityType="GiftChoiceModel.UserRegister" />
           <EntitySet Name="AutocompleteSuggestions" EntityType="GiftChoiceModel.AutocompleteSuggestion" />
           <EntitySet Name="VProducts" EntityType="GiftChoiceModel.VProduct" />
+          <EntitySet Name="VideoTbls" EntityType="GiftChoiceModel.VideoTbl" />
         </EntityContainer>
         <EntityType Name="AdminTbl">
           <Key>
@@ -907,6 +922,7 @@ warning 6002: The table/view 'giftchoice.dbo.VProduct' does not have a primary k
           <Property Name="ProductType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="BannerCateId" Type="Int32" />
           <Property Name="Video" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="VideoId" Type="Int32" />
         </EntityType>
         <EntityType Name="PSizeTbl">
           <Key>
@@ -1016,6 +1032,18 @@ warning 6002: The table/view 'giftchoice.dbo.VProduct' does not have a primary k
           <Property Name="Expr12" Type="DateTime" Precision="3" />
           <Property Name="Expr14" Type="DateTime" Precision="3" />
           <Property Name="Qty" Type="Int64" />
+        </EntityType>
+        <EntityType Name="VideoTbl">
+          <Key>
+            <PropertyRef Name="VId" />
+          </Key>
+          <Property Name="VId" Type="Int32" Nullable="false" />
+          <Property Name="VUrl" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Video" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="VideoTitle" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Active" Type="Boolean" />
+          <Property Name="Create_at" Type="DateTime" Precision="3" />
+          <Property Name="Update_at" Type="DateTime" Precision="3" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -1363,6 +1391,7 @@ warning 6002: The table/view 'giftchoice.dbo.VProduct' does not have a primary k
           <EntitySetMapping Name="ProductTbls">
             <EntityTypeMapping TypeName="GiftChoiceModel.ProductTbl">
               <MappingFragment StoreEntitySet="ProductTbl">
+                <ScalarProperty Name="VideoId" ColumnName="VideoId" />
                 <ScalarProperty Name="Video" ColumnName="Video" />
                 <ScalarProperty Name="BannerCateId" ColumnName="BannerCateId" />
                 <ScalarProperty Name="ProductType" ColumnName="ProductType" />
@@ -1498,6 +1527,19 @@ warning 6002: The table/view 'giftchoice.dbo.VProduct' does not have a primary k
                 <ScalarProperty Name="ProductTitle" ColumnName="ProductTitle" />
                 <ScalarProperty Name="MainCateId" ColumnName="MainCateId" />
                 <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VideoTbls">
+            <EntityTypeMapping TypeName="GiftChoiceModel.VideoTbl">
+              <MappingFragment StoreEntitySet="VideoTbl">
+                <ScalarProperty Name="Update_at" ColumnName="Update_at" />
+                <ScalarProperty Name="Create_at" ColumnName="Create_at" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="VideoTitle" ColumnName="VideoTitle" />
+                <ScalarProperty Name="Video" ColumnName="Video" />
+                <ScalarProperty Name="VUrl" ColumnName="VUrl" />
+                <ScalarProperty Name="VId" ColumnName="VId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

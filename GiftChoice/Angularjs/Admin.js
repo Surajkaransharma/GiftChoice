@@ -3,7 +3,7 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
 
 
     $scope.loadTags = function (query) {
-        return $http.get("/GiftDashBoard/GetKeywordData")
+        return $http.get("/GiftDashBoard/GetKeywordData");
     };
     $scope.tags = [
         { text: 'Tag1' },
@@ -22,7 +22,7 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
         { "text": "Tag8" },
         { "text": "Tag9" },
         { "text": "Tag10" }
-    ]
+    ];
 
     ////// duplicateProduct
 
@@ -3027,6 +3027,149 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
 
 
     //-------------- Submit Label Product End ->------------->---------------------->---------------------------->------->------------>---------->---
+
+
+            //-------------- Submit Filter Keyword Start ->------------->---------------------->---------------------------->------->------------>---------->---
+
+    $scope.SubmitFilterKeyword = function () {     
+        if ($("#MainCate").val() == "" || $("#MainCate").val() == "-1") {
+            toastr["error"]("Enter Banner Title");
+            return;
+        }
+
+
+        //  $scope.Querymodel.push({'AnswerArr': $scope.AnswerArr });
+
+
+        $http({
+            url: '/GiftDashBoard/SubmitFilterKeyword',
+            method: 'post',
+            data: {
+                query: $scope.Querymodel,
+                answerArrs: $scope.AnswerArr
+            }
+        }).then(function (d) {
+            $scope.result = d.data;
+            if ($scope.result.res === "1") {
+                toastr["success"]("Banner Category save successfully");
+                $scope.GetQuerymodel();
+                $scope.Querymodel = null;
+                $scope.AnswerArr = [];
+            } else if ($scope.result.res === "2") {
+                toastr["error"]("Banner Category already exist");
+            }
+            else {
+                toastr["error"]("Banner Category not save");
+            }
+        }, function (error) {
+            toastr["error"]("Something Went Wrong");
+        });
+    };
+
+
+
+    //-------------- Submit Festival Banner End ->------------->---------------------->---------------------------->------->------------>---------->---
+
+
+    //-------------- Submit Video Start->------------->---------------------->---------------------------->------->------------>---------->---
+
+    $scope.GetVideoData = function () {
+        $http.get("/GiftDashBoard/GetVideoData").then(function (d) {
+            $scope.VideoDataList = d.data;
+
+        }, function (error) {
+            alert(error.data);
+        });
+    };
+
+    $scope.SubmitVideo = function () {
+
+        debugger
+     
+        if ($("#VideoTitle").val() == "") {
+            toastr["error"]("Enter Video Title");
+            return;
+        }
+        upload({
+            url: '/GiftDashBoard/SubmitVideo',
+            method: 'post',
+            data: $scope.Video
+        }).then(function (d) {
+            $scope.result = d.data;
+            if ($scope.result.res === "1") {
+              
+                toastr["success"]("Video save successfully");
+                $scope.Video = null;
+                $scope.GetVideoData();
+
+            } else if ($scope.result.res === "2") {
+                toastr["error"]("Video Title already exist");
+            }
+            else {
+                toastr["error"]("Video not save");
+            }
+        }, function (error) {
+            toastr["error"]("Something Went Wrong");
+        });
+    };
+
+    $scope.GetVideoById = function (index) {
+        $('#btn').css('display', 'none');
+        $('#edbtn').css('display', 'inline');      
+
+
+        $scope.Video = $scope.VideoDataList[index];       
+
+
+        $('html, body').animate({ scrollTop: 0 }, '300');
+    };
+
+
+    $scope.UpdateVideo = function () {
+        debugger
+        var maincate = angular.element(document.getElementById("VideoTitle"));
+        if (maincate.val() === "") {
+            toastr["error"]("Enter Video Title");
+            maincate.focus();
+            return;
+        }
+     
+        upload({
+            url: '/GiftDashBoard/UpdateVideo',
+            method: 'post',
+            data: $scope.Video
+        }).then(function (d) {
+            $scope.result = d.data;
+            if ($scope.result.res === "1") {           
+                $scope.Video = null;
+                $scope.GetVideoData();
+            }
+            else {
+                toastr["error"]("Video not save");
+            }
+        }, function (error) {
+            toastr["error"]("Something Went Wrong");
+        });
+    };
+
+    $scope.VideoActiveDeActive = function (id) {
+        $http.get("/GiftDashBoard/VideoActiveDeActive?id=" + id).then(function (d) {
+            $scope.rees = d.data;
+            if ($scope.rees.res === "1") {
+                toastr["success"]("successful");
+                $scope.GetVideoData();
+            }
+            else {
+                toastr["error"]("something went wrong");
+            }
+
+
+        }, function (error) {
+            alert(error.data);
+        });
+    };
+
+    //-------------- Submit Video End->------------->---------------------->---------------------------->------->------------>---------->---
 
 
 
