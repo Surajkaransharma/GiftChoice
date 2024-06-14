@@ -11,17 +11,12 @@ namespace GiftChoice.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.Web;
-
-    public partial class VideoTbl
+    
+    public partial class ProductFilterWordTbl
     {
-        public int VId { get; set; }
-        public string VUrl { get; set; }
-        public string Video { get; set; }
-        public HttpPostedFileBase Image { get; set; }
-        public string VideoTitle { get; set; }
-        public Nullable<bool> Active { get; set; }
-        public Nullable<System.DateTime> Create_at { get; set; }
-        public Nullable<System.DateTime> Update_at { get; set; }
+        public int PFID { get; set; }
+        public Nullable<int> PFilterId { get; set; }
+        public Nullable<long> ProductId { get; set; }
+        public string PFilterTilte { get; set; }
     }
 }

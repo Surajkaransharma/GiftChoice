@@ -35,6 +35,7 @@
     <EntitySet Name="AutocompleteSuggestions" EntityType="GiftChoiceModel.AutocompleteSuggestion" />
     <EntitySet Name="VProducts" EntityType="GiftChoiceModel.VProduct" />
     <EntitySet Name="VideoTbls" EntityType="GiftChoiceModel.VideoTbl" />
+    <EntitySet Name="ProductFilterWordTbls" EntityType="GiftChoiceModel.ProductFilterWordTbl" />
   </EntityContainer>
   <EntityType Name="AdminTbl">
     <Key>
@@ -494,5 +495,14 @@
     <Property Name="Active" Type="Boolean" />
     <Property Name="Create_at" Type="DateTime" Precision="3" />
     <Property Name="Update_at" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="ProductFilterWordTbl">
+    <Key>
+      <PropertyRef Name="PFID" />
+    </Key>
+    <Property Name="PFID" Type="Int32" Nullable="false" />
+    <Property Name="PFilterId" Type="Int32" />
+    <Property Name="ProductId" Type="Int64" />
+    <Property Name="PFilterTilte" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
   </EntityType>
 </Schema>

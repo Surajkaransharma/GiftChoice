@@ -493,5 +493,15 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="ProductFilterWordTbls">
+      <EntityTypeMapping TypeName="GiftChoiceModel.ProductFilterWordTbl">
+        <MappingFragment StoreEntitySet="ProductFilterWordTbl">
+          <ScalarProperty Name="PFilterTilte" ColumnName="PFilterTilte" />
+          <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+          <ScalarProperty Name="PFilterId" ColumnName="PFilterId" />
+          <ScalarProperty Name="PFID" ColumnName="PFID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

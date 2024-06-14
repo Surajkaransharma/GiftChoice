@@ -51,14 +51,14 @@
                             <div class="col-md-12" ng-init="GetBannerInProduct()">
                                 <label for="input1" class="form-label">Select Banner Title</label>
 
-                                <select id="MainCate" class="form-select" ng-model="Filter.MainCateId">
+                                <select id="MainCate" class="form-select" ng-model="Filter.MainCateId" >
                                     <option ng-selected="true" value="">Select Banner Title</option>
                                     <option ng-repeat="m in GetBannerInProductData" value="{{m.MainCateId}}">{{m.MTitle}}</option>
                                 </select>
 
 
                             </div>
-                            <div class="col-md-12" >
+                            <div class="col-md-12">
                                 <label for="input1" class="form-label">Add Filter</label>
 
                                 <tags-input ng-model="FilterTag" add-on-paste="true">
@@ -111,7 +111,7 @@
                             <div class="col-md-12">
                                 <div class="d-md-flex d-grid align-items-center gap-3">
                                     <button type="button" id="btn" ng-click="SubmitFilterKeyword()" class="btn btn-primary px-4">Submit</button>
-                                    <button type="button" id="edbtn" ng-click="UpdateQuerymodel()" style="display: none" class="btn btn-primary px-4">Update</button>
+                                    <button type="button" id="edbtn" ng-click="UpdateFilterKeyword()" style="display: none" class="btn btn-primary px-4">Update</button>
                                     <button type="button" class="btn btn-light px-4" onClick="refreshPage()">Reset</button>
                                 </div>
                             </div>
@@ -136,11 +136,12 @@
 
                         </div>
                         <div class="table-responsive">
-                            <table class="table mb-0 table-bordered" ng-init="GetQuerymodel()">
+                            <table class="table mb-0 table-bordered" ng-init="GetFilterData()">
                                 <thead class="table-light">
                                     <tr>
                                         <th>S.No.</th>
                                         <th>Banner Title</th>
+                                        <th>Filter </th>
                                         @*<th>Ask Question ?</th>
                                             <th>Answer</th>*@
 
@@ -149,27 +150,19 @@
                                         @*<th>2nd Model</th>*@
                                         @*<th>Priority</th>*@
                                         @*<th>Image</th>*@
-                                        <th>Active</th>
+                                        @*<th>Active</th>*@
 
                                         <th>Action</th>
 
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr ng-repeat="m in GetQuerymodelData">
+                                    <tr ng-repeat="m in FilterData">
                                         <td>{{$index+1}}</td>
-                                        <td>{{m.bMainTitle.MTitle}}</td>
-
-                                        @*<td>{{m.AskQues1}}</td>
-                                            <td>{{m.Answer}}</td>*@
-                                        @*<td> <span class="badge {{m.ModelQuery2==1? 'bg-success' : 'bg-danger'}}">{{m.ModelQuery2==1?'Open':'Close'}}</span> </td>*@
-
-                                        @*<td>{{m.Position}}</td>*@
-                                        @*<td style="white-space: normal"><span ng-repeat="n in m.Submenu">{{n.SubmenuTitle}},</span></td>*@
-                                        @*<td>{{m.Priority}}</td>*@
-                                        @*<td><img src="~/images/BannerPTImage/{{m.MImage}}"></td>*@
-                                        <td><a ng-click="QuerymodelActiveDeActive(m.BSubId)"> <span class="badge {{m.Active==1? 'bg-success' : 'bg-danger'}}">{{m.Active==1?'Active':'Deactive'}}</span></a> </td>
-                                        <td><a><i class="bx bxs-pencil" ng-click="GetQuerymodelById(m.MainCateId)"></i></a></td>
+                                        <td>{{m.MTitle}}</td>
+                                        <td style="white-space: normal"><span ng-repeat="n in m.Submenu">{{n.text}},</span></td>                               
+                                        @*<td><a ng-click="QuerymodelActiveDeActive(m.BSubId)"> <span class="badge {{m.Active==1? 'bg-success' : 'bg-danger'}}">{{m.Active==1?'Active':'Deactive'}}</span></a> </td>*@
+                                        <td><a><i class="bx bxs-pencil" ng-click="GetBannerCateFilterById(m.MainCateId)"></i></a></td>
                                     </tr>
 
 

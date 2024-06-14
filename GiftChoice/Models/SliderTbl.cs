@@ -17,11 +17,10 @@ namespace GiftChoice.Models
     {
         public long SliderId { get; set; }
         public Nullable<long> MainCateId { get; set; }
-
-        public HttpPostedFileBase Image { get; set; }
         public string SUrl { get; set; }
         public string SliderImage { get; set; }
         public Nullable<long> Priority { get; set; }
+        public HttpPostedFileBase Image { get; set; }
         public Nullable<bool> Active { get; set; }
         public Nullable<System.DateTime> Create_at { get; set; }
         public Nullable<System.DateTime> Update_at { get; set; }

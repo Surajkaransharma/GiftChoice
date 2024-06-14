@@ -400,6 +400,15 @@
     <Property Name="Active" Type="bit" />
     <Property Name="Create_at" Type="date" />
   </EntityType>
+  <EntityType Name="ProductFilterWordTbl">
+    <Key>
+      <PropertyRef Name="PFID" />
+    </Key>
+    <Property Name="PFID" Type="int" Nullable="false" />
+    <Property Name="PFilterId" Type="int" />
+    <Property Name="ProductId" Type="bigint" />
+    <Property Name="PFilterTilte" Type="nvarchar(max)" />
+  </EntityType>
   <EntityType Name="VideoTbl">
     <Key>
       <PropertyRef Name="VId" />
@@ -495,6 +504,7 @@ warning 6002: The table/view 'giftchoice.dbo.VProduct' does not have a primary k
     <EntitySet Name="SizeTbl" EntityType="Self.SizeTbl" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="SliderTbl" EntityType="Self.SliderTbl" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="UserRegister" EntityType="Self.UserRegister" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ProductFilterWordTbl" EntityType="Self.ProductFilterWordTbl" Schema="giftchoice" store:Type="Tables" />
     <EntitySet Name="VideoTbl" EntityType="Self.VideoTbl" Schema="giftchoice" store:Type="Tables" />
     <EntitySet Name="AutocompleteSuggestions" EntityType="Self.AutocompleteSuggestions" store:Type="Views" store:Schema="dbo">
       <DefiningQuery>SELECT 

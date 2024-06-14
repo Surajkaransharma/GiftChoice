@@ -405,6 +405,15 @@
           <Property Name="Active" Type="bit" />
           <Property Name="Create_at" Type="date" />
         </EntityType>
+        <EntityType Name="ProductFilterWordTbl">
+          <Key>
+            <PropertyRef Name="PFID" />
+          </Key>
+          <Property Name="PFID" Type="int" Nullable="false" />
+          <Property Name="PFilterId" Type="int" />
+          <Property Name="ProductId" Type="bigint" />
+          <Property Name="PFilterTilte" Type="nvarchar(max)" />
+        </EntityType>
         <EntityType Name="VideoTbl">
           <Key>
             <PropertyRef Name="VId" />
@@ -500,6 +509,7 @@ warning 6002: The table/view 'giftchoice.dbo.VProduct' does not have a primary k
           <EntitySet Name="SizeTbl" EntityType="Self.SizeTbl" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SliderTbl" EntityType="Self.SliderTbl" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserRegister" EntityType="Self.UserRegister" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProductFilterWordTbl" EntityType="Self.ProductFilterWordTbl" Schema="giftchoice" store:Type="Tables" />
           <EntitySet Name="VideoTbl" EntityType="Self.VideoTbl" Schema="giftchoice" store:Type="Tables" />
           <EntitySet Name="AutocompleteSuggestions" EntityType="Self.AutocompleteSuggestions" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
@@ -585,6 +595,7 @@ warning 6002: The table/view 'giftchoice.dbo.VProduct' does not have a primary k
           <EntitySet Name="AutocompleteSuggestions" EntityType="GiftChoiceModel.AutocompleteSuggestion" />
           <EntitySet Name="VProducts" EntityType="GiftChoiceModel.VProduct" />
           <EntitySet Name="VideoTbls" EntityType="GiftChoiceModel.VideoTbl" />
+          <EntitySet Name="ProductFilterWordTbls" EntityType="GiftChoiceModel.ProductFilterWordTbl" />
         </EntityContainer>
         <EntityType Name="AdminTbl">
           <Key>
@@ -1044,6 +1055,15 @@ warning 6002: The table/view 'giftchoice.dbo.VProduct' does not have a primary k
           <Property Name="Active" Type="Boolean" />
           <Property Name="Create_at" Type="DateTime" Precision="3" />
           <Property Name="Update_at" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="ProductFilterWordTbl">
+          <Key>
+            <PropertyRef Name="PFID" />
+          </Key>
+          <Property Name="PFID" Type="Int32" Nullable="false" />
+          <Property Name="PFilterId" Type="Int32" />
+          <Property Name="ProductId" Type="Int64" />
+          <Property Name="PFilterTilte" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -1540,6 +1560,16 @@ warning 6002: The table/view 'giftchoice.dbo.VProduct' does not have a primary k
                 <ScalarProperty Name="Video" ColumnName="Video" />
                 <ScalarProperty Name="VUrl" ColumnName="VUrl" />
                 <ScalarProperty Name="VId" ColumnName="VId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProductFilterWordTbls">
+            <EntityTypeMapping TypeName="GiftChoiceModel.ProductFilterWordTbl">
+              <MappingFragment StoreEntitySet="ProductFilterWordTbl">
+                <ScalarProperty Name="PFilterTilte" ColumnName="PFilterTilte" />
+                <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+                <ScalarProperty Name="PFilterId" ColumnName="PFilterId" />
+                <ScalarProperty Name="PFID" ColumnName="PFID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -15,10 +15,9 @@ namespace GiftChoice.Models
 
     public partial class BannerTbl
     {
+        public HttpPostedFileBase Image { get; set; }
         public long BannerId { get; set; }
         public Nullable<long> MainCateId { get; set; }
-
-        public HttpPostedFileBase Image { get; set; }
         public string BUrl { get; set; }
         public string BannerImage { get; set; }
         public Nullable<long> Priority { get; set; }
