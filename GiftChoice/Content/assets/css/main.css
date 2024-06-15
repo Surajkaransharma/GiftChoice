@@ -11056,3 +11056,9 @@ h3.section-title {
     .product-cart-wrap .product-content-wrap .product-price .same-day p b {
         font-weight: 700 !important
     }
+
+    @media only screen and (max-width : 767px){
+        .pp-3{
+            padding : 0.5rem !important;
+        }
+    }
