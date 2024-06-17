@@ -65,9 +65,47 @@ app.controller("HomeController", ['$scope', '$http', '$sce', 'startFromFilter', 
     };
     $scope.addItemToCart = function (index) {
 
-        ;
+        
 
         var selectedProduct = $scope.ProductData[index];
+        var productId = selectedProduct.ProductId;
+
+        // Check if the product with the same productId is already in the cart
+        var productInCart = $scope.cart.find(function (item) {
+            return item.ProductId === productId;
+        });
+
+        if (!productInCart) {
+            // If the product is not in the cart, add it
+            $scope.cart.push(selectedProduct);
+            localStorage.setItem('cart', JSON.stringify($scope.cart));
+            $scope.GetCart();
+            //  toastr["success"]("Product successfully added to the cart.");
+        } else {
+            // If the product is already in the cart, you can handle this case as needed.
+            // For example, you can display a message to the user.
+
+            //  toastr["error"]('This product is already in your cart.');
+            return;
+        }
+        //$scope.cart.push($scope.ProductData[index]);
+        ////$scope.cart =    $scope.ProductData[index];
+        ////$scope.cart.push({
+        ////    'name': $scope.name,
+        ////    'price': $scope.price
+        ////});
+        //localStorage.setItem('cart', JSON.stringify($scope.cart));
+        //$scope.GetCart();
+    };
+
+
+    $scope.LabeladdItemToCart = function (index,id) {
+
+
+        debugger
+
+        var aid = $scope[id];
+        var selectedProduct = aid[index];
         var productId = selectedProduct.ProductId;
 
         // Check if the product with the same productId is already in the cart
@@ -385,54 +423,56 @@ app.controller("HomeController", ['$scope', '$http', '$sce', 'startFromFilter', 
             $scope.TopsellingProduct = d.data.TopsellingProduct;
             $scope.NewProduct = d.data.NewProduct;
             $scope.NewArivals = d.data.NewArivals;
-            setTimeout(() => {
+            $scope.Relation = d.data.Relation;
 
-                /*Carausel 6 columns*/
-                $(".carausel-6-columns").each(function (key, item) {
-                    var id = $(this).attr("id");
-                    var sliderID = '#' + id;
-                    var appendArrowsClassName = '#' + id + '-arrows'
+            //setTimeout(() => {
 
-                    $(sliderID).slick({
-                        dots: false,
-                        infinite: false,
-                        speed: 1000,
-                        arrows: true,
-                        autoplay: true,
-                        slidesToShow: 1,
-                        slidesToScroll: 1,
-                        loop: false,
-                        adaptiveHeight: true,
-                        responsive: [
-                            {
-                                breakpoint: 1025,
-                                settings: {
-                                    slidesToShow: 1,
-                                    slidesToScroll: 1,
-                                }
-                            },
-                            {
-                                breakpoint: 768,
-                                settings: {
-                                    slidesToShow: 1,
-                                    slidesToScroll: 1,
-                                }
-                            },
-                            {
-                                breakpoint: 480,
-                                settings: {
-                                    slidesToShow: 1,
-                                    slidesToScroll: 1
-                                }
-                            }
-                        ],
-                        prevArrow: '<span class="slider-btn slider-prev"><i class="fi-rs-angle-left"></i></span>',
-                        nextArrow: '<span class="slider-btn slider-next"><i class="fi-rs-angle-right"></i></span>',
-                        appendArrows: (appendArrowsClassName),
-                    });
-                });
+            //    /*Carausel 6 columns*/
+            //    $(".carausel-6-columns").each(function (key, item) {
+            //        var id = $(this).attr("id");
+            //        var sliderID = '#' + id;
+            //        var appendArrowsClassName = '#' + id + '-arrows'
 
-            }, 10);
+            //        $(sliderID).slick({
+            //            dots: false,
+            //            infinite: false,
+            //            speed: 1000,
+            //            arrows: true,
+            //            autoplay: true,
+            //            slidesToShow: 1,
+            //            slidesToScroll: 1,
+            //            loop: false,
+            //            adaptiveHeight: true,
+            //            responsive: [
+            //                {
+            //                    breakpoint: 1025,
+            //                    settings: {
+            //                        slidesToShow: 1,
+            //                        slidesToScroll: 1,
+            //                    }
+            //                },
+            //                {
+            //                    breakpoint: 768,
+            //                    settings: {
+            //                        slidesToShow: 1,
+            //                        slidesToScroll: 1,
+            //                    }
+            //                },
+            //                {
+            //                    breakpoint: 480,
+            //                    settings: {
+            //                        slidesToShow: 1,
+            //                        slidesToScroll: 1
+            //                    }
+            //                }
+            //            ],
+            //            prevArrow: '<span class="slider-btn slider-prev"><i class="fi-rs-angle-left"></i></span>',
+            //            nextArrow: '<span class="slider-btn slider-next"><i class="fi-rs-angle-right"></i></span>',
+            //            appendArrows: (appendArrowsClassName),
+            //        });
+            //    });
+
+            //}, 10);
 
 
         }, function (error) {
@@ -1273,15 +1313,18 @@ app.controller("HomeController", ['$scope', '$http', '$sce', 'startFromFilter', 
         debugger
         var urlParams = new URLSearchParams(window.location.search);
         $scope.banner = urlParams.get('Banner');
-
+       var  id = 0;
         $http({
             url: '/Home/modelTofilterBannerProduct',
             method: 'post',
             data: {
-                BannerId: $scope.banner
+                BannerId: $scope.banner,
+                id : id
             }
         }).then(function (d) {
             $scope.ProductData = d.data.ProductList;
+            $scope.FilterKeywordList = d.data.FilterKeywordList;
+
 
             //$scope.pageSize = 20;
             //$scope.currentPage = 1; // Reset to the first page after fetching data
@@ -1307,6 +1350,47 @@ app.controller("HomeController", ['$scope', '$http', '$sce', 'startFromFilter', 
 
 
     };
+
+    $scope.GetFilterKeywordBy = function (id) {
+        var urlParams = new URLSearchParams(window.location.search);
+        $scope.banner = urlParams.get('Banner');
+        
+        $http({
+            url: '/Home/modelTofilterBannerProduct',
+            method: 'post',
+            data: {
+                BannerId: $scope.banner,
+                id: id
+            }
+        }).then(function (d) {
+            $scope.ProductData = d.data.ProductList;           
+
+
+            //$scope.pageSize = 20;
+            //$scope.currentPage = 1; // Reset to the first page after fetching data
+            //$scope.totalPages = Math.ceil($scope.ProductData.length / $scope.pageSize);
+            //$scope.goToPage(1); // Go to the first page
+
+            //setTimeout(() => {
+
+            //    for (var i = 0; i < $scope.ProductData.length; i++) {
+            //        if ($scope.ProductData[i].VideoUrl != null) {
+
+            //            var site = "https://www.youtube.com/embed/" + $scope.ProductData[i].VideoUrl + "?autoplay=1&loop=1&mute=1";
+            //            document.getElementById('iFrameName' + i).src = site;
+            //        }
+
+
+            //    }
+            //}, 10);
+
+        }, function (error) {
+            toastr["error"]("Something Went Wrong");
+        });
+
+
+    };
+
     /////// pagenation
     $scope.ProductData = [];
     $scope.currentPage = 1;
@@ -1479,6 +1563,23 @@ app.controller("HomeController", ['$scope', '$http', '$sce', 'startFromFilter', 
     $scope.showFullContent = false;
     $scope.toggleContent = function (post) {
         $scope.showFullContent = !$scope.showFullContent;
+    };
+
+
+    $scope.GetFilterWordList = function () {
+
+        $http.get("/Home/GetFilterWordList").then(function (d) {
+
+
+            $scope.Giftsunder499 = d.data.Giftsunder499;
+            $scope.Giftsunder999 = d.data.Giftsunder999;
+            $scope.giftsFriendsbestsellers = d.data.giftsFriendsbestsellers;
+
+
+
+        }, function (error) {
+            alert(error.data);
+        });
     };
 }]);
 

@@ -207,7 +207,7 @@ namespace GiftChoice.Controllers
                         ProductImage = db.ProductImages.Where(i => i.ProductId == m.ProductId).Select(i => i.PImage).FirstOrDefault(),
                         Maincate = db.MainCateTbls.Where(p => p.MainCateId == m.MainCateId).Select(p => p.MTitle).FirstOrDefault(),
 
-                    }).OrderBy(x => Guid.NewGuid()).Take(10),
+                    }).OrderBy(x => Guid.NewGuid()).Take(12),
                     NewProduct = db.ProductTbls.Where(m => m.Active == true && m.LabelId == 2 ).Select(m => new
                     {
                         Toplabel = db.LabelProductTbls.Where(l => l.LabelId == 2).Select(l => l.LTitle).FirstOrDefault(),
@@ -226,7 +226,7 @@ namespace GiftChoice.Controllers
                         ProductImage = db.ProductImages.Where(i => i.ProductId == m.ProductId).Select(i => i.PImage).FirstOrDefault(),
                         Maincate = db.MainCateTbls.Where(p => p.MainCateId == m.MainCateId).Select(p => p.MTitle).FirstOrDefault(),
 
-                    }).OrderBy(x => Guid.NewGuid()).Take(10),
+                    }).OrderBy(x => Guid.NewGuid()).Take(12),
                     NewArivals = db.ProductTbls.Where(m => m.Active == true && m.LabelId == 3).Select(m => new
                     {
                         Toplabel = db.LabelProductTbls.Where(l => l.LabelId == 3).Select(l => l.LTitle).FirstOrDefault(),
@@ -245,7 +245,26 @@ namespace GiftChoice.Controllers
                         ProductImage = db.ProductImages.Where(i => i.ProductId == m.ProductId).Select(i => i.PImage).FirstOrDefault(),
                         Maincate = db.MainCateTbls.Where(p => p.MainCateId == m.MainCateId).Select(p => p.MTitle).FirstOrDefault(),
 
-                    }).OrderBy(x => Guid.NewGuid()).Take(10),
+                    }).OrderBy(x => Guid.NewGuid()).Take(12),
+                    Relation = db.ProductTbls.Where(m => m.Active == true && m.LabelId == 4).Select(m => new
+                    {
+                        Toplabel = db.LabelProductTbls.Where(l => l.LabelId == 4).Select(l => l.LTitle).FirstOrDefault(),
+                        m.ProductId,
+                        m.MainCateId,
+                        m.ProductTitle,
+                        m.PLabel,
+                        m.Price,
+                        m.PDesc,
+
+                        m.PUrl,
+                        m.Active,
+                        m.Create_at,
+                        m.Priority,
+                        m.Qty,
+                        ProductImage = db.ProductImages.Where(i => i.ProductId == m.ProductId).Select(i => i.PImage).FirstOrDefault(),
+                        Maincate = db.MainCateTbls.Where(p => p.MainCateId == m.MainCateId).Select(p => p.MTitle).FirstOrDefault(),
+
+                    }).OrderBy(x => Guid.NewGuid()).Take(12),
 
                 };
             return Json(res, JsonRequestBehavior.AllowGet);
@@ -1315,7 +1334,7 @@ namespace GiftChoice.Controllers
         }
 
         [JsonNetFilter]
-        public JsonResult modelTofilterBannerProduct(int[] PBanner, int BannerId)
+        public JsonResult modelTofilterBannerProduct(int[] PBanner, int BannerId,int id)
         {
 
 
@@ -1339,6 +1358,49 @@ namespace GiftChoice.Controllers
                                    {
                                        bannerCateProduct.BannerQueryListId,
                                        bannerCateProduct.QueryId,
+                                       product.Video,
+                                       product.ProductId,
+                                       product.MainCateId,
+                                       product.ProductTitle,
+                                       product.PLabel,
+                                       LabelId = product.LabelId ?? 0,
+                                       product.Price,
+                                       product.PUrl,
+                                       product.Qty,
+                                       product.Create_at,
+                                       product.VideoUrl,
+                                       product.SameDay,
+                                       product.Active,
+                                       product.Priority,
+                                       ProductImage = db.ProductImages
+                                               .Where(i => i.ProductId == product.ProductId)
+                                               .Select(i => i.PImage)
+                                               .FirstOrDefault(),
+                                       Maincate = db.MainCateTbls
+                                               .Where(q => q.MainCateId == product.MainCateId)
+                                               .Select(q => q.MTitle)
+                                               .FirstOrDefault(),
+                                       Bannercate = db.MainCateTbls
+                                               .Where(q => q.MainCateId == product.BannerCateId)
+                                               .Select(q => q.MTitle)
+                                               .FirstOrDefault(),
+
+                                   }).ToList()
+                };
+                return Json(res, JsonRequestBehavior.AllowGet);
+
+            }
+            else if(id != 0)
+            {
+                var res = new
+                {
+                    ProductList = (from bannerCateProduct in db.PKeywordTbls
+                                   join product in db.ProductTbls on bannerCateProduct.ProductId equals product.ProductId
+                                   where product.Active == true && (product.ProductType == "BannerProduct" || product.ProductType == "Common") && bannerCateProduct.KeywordId == id && product.BannerCateId == BannerId
+                                   orderby Guid.NewGuid()
+                                   select new
+                                   {
+                                    
                                        product.Video,
                                        product.ProductId,
                                        product.MainCateId,
@@ -1411,7 +1473,14 @@ namespace GiftChoice.Controllers
                                                .Select(q => q.MTitle)
                                                .FirstOrDefault(),
 
-                                   }).ToList()
+                                   }).ToList(),
+                    FilterKeywordList = db.MCKeywordTbls.Where(s => s.MainCateId == BannerId && s.Active == true).Select(s => new
+                    {
+                        s.MainCateId,
+                        s.KeywordId,
+                        s.MCkeywordId,
+                        Filterkeyword = db.KeywordTbls.Where(t => t.KeywordId == s.KeywordId).Select(t => t.Keyword).FirstOrDefault()
+                    })
                 };
                 return Json(res, JsonRequestBehavior.AllowGet);
             }
@@ -1422,7 +1491,8 @@ namespace GiftChoice.Controllers
 
         public JsonResult GetTopProduct(string ProductType)
         {
-            int labelid = ProductType == "TopsellingProduct" ? 1 : ProductType == "NewArivals" ? 3 : ProductType == "NewProduct" ? 2 : 0;
+            long labelid = db.LabelProductTbls.Where(l => l.LTitle == ProductType).Select(l => l.LabelId).FirstOrDefault();
+          //  int labelid = ProductType == "TopsellingProduct" ? 1 : ProductType == "NewArivals" ? 3 : ProductType == "NewProduct" ? 2 : 0;
 
             var res = new
             {
@@ -1449,5 +1519,110 @@ namespace GiftChoice.Controllers
 
         }
 
+
+        public JsonResult GetFilterWordList()
+        {
+            var res = new
+            {
+              Giftsunder499 =  (from bannerCateProduct in db.ProductFilterWordTbls
+                 join product in db.ProductTbls on bannerCateProduct.ProductId equals product.ProductId
+                 where (bannerCateProduct.PFilterId == 1)
+                 orderby Guid.NewGuid()
+                 select new
+                 {
+                     bannerCateProduct.PFilterId,
+                     bannerCateProduct.PFilterTilte,
+                     product.ProductId,
+                     product.MainCateId,
+                     product.ProductTitle,
+                     product.PLabel,
+                     product.Price,
+                     product.SameDay,
+                     product.PUrl,
+                     LabelId = product.LabelId ?? 0,
+                     product.Video,
+                     product.Qty,
+                     product.Create_at,
+                     product.Active,
+                     product.Priority,
+                     ProductImage = db.ProductImages
+                             .Where(i => i.ProductId == product.ProductId)
+                             .Select(i => i.PImage)
+                             .FirstOrDefault(),
+
+                     Maincate = db.MainCateTbls
+                             .Where(q => q.MainCateId == product.MainCateId)
+                             .Select(q => q.MTitle)
+                             .FirstOrDefault(),
+
+                 }).Take(6).ToList(),
+                Giftsunder999 = (from bannerCateProduct in db.ProductFilterWordTbls
+                                 join product in db.ProductTbls on bannerCateProduct.ProductId equals product.ProductId
+                                 where (bannerCateProduct.PFilterId == 2)
+                                 orderby Guid.NewGuid()
+                                 select new
+                                 {
+                                     bannerCateProduct.PFilterId,
+                                     bannerCateProduct.PFilterTilte,
+                                     product.ProductId,
+                                     product.MainCateId,
+                                     product.ProductTitle,
+                                     product.PLabel,
+                                     product.Price,
+                                     product.SameDay,
+                                     product.PUrl,
+                                     LabelId = product.LabelId ?? 0,
+                                     product.Video,
+                                     product.Qty,
+                                     product.Create_at,
+                                     product.Active,
+                                     product.Priority,
+                                     ProductImage = db.ProductImages
+                                             .Where(i => i.ProductId == product.ProductId)
+                                             .Select(i => i.PImage)
+                                             .FirstOrDefault(),
+
+                                     Maincate = db.MainCateTbls
+                                             .Where(q => q.MainCateId == product.MainCateId)
+                                             .Select(q => q.MTitle)
+                                             .FirstOrDefault(),
+
+                                 }).Take(6).ToList(),
+                giftsFriendsbestsellers = (from bannerCateProduct in db.ProductFilterWordTbls
+                                 join product in db.ProductTbls on bannerCateProduct.ProductId equals product.ProductId
+                                 where (bannerCateProduct.PFilterId == 3)
+                                 orderby Guid.NewGuid()
+                                 select new
+                                 {
+                                     bannerCateProduct.PFilterId,
+                                     bannerCateProduct.PFilterTilte,
+                                     product.ProductId,
+                                     product.MainCateId,
+                                     product.ProductTitle,
+                                     product.PLabel,
+                                     product.Price,
+                                     product.SameDay,
+                                     product.PUrl,
+                                     LabelId = product.LabelId ?? 0,
+                                     product.Video,
+                                     product.Qty,
+                                     product.Create_at,
+                                     product.Active,
+                                     product.Priority,
+                                     ProductImage = db.ProductImages
+                                             .Where(i => i.ProductId == product.ProductId)
+                                             .Select(i => i.PImage)
+                                             .FirstOrDefault(),
+
+                                     Maincate = db.MainCateTbls
+                                             .Where(q => q.MainCateId == product.MainCateId)
+                                             .Select(q => q.MTitle)
+                                             .FirstOrDefault(),
+
+                                 }).Take(6).ToList(),
+            };
+            return Json(res, JsonRequestBehavior.AllowGet);
+
+        }
     }
 }

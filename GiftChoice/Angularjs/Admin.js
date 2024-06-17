@@ -1820,9 +1820,9 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
 
 
     $scope.FilterDataList = [
-        { 'PFilterId': 1, 'PFilterTilte': 'Birthday' },
-        { 'PFilterId': 2, 'PFilterTilte': 'Anniversary' },
-        { 'PFilterId': 3, 'PFilterTilte': 'Top Product' },
+        { 'PFilterId': 1, 'PFilterTilte': 'Gifts under 499' },
+        { 'PFilterId': 2, 'PFilterTilte': 'Gifts under 999' },
+        { 'PFilterId': 3, 'PFilterTilte': 'Friends gifts best sellers' },
 
     ];
 

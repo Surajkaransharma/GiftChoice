@@ -80,20 +80,20 @@
     </section>
     <!-- Small Banner End -->
     <!-- Products Section Start -->
-    <section class="product-tabs section-padding">
+    <section class="product-tabs section-padding" ng-show="Relation.length>0">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 col-sm-12 col-12">
                     <div class="section-title d-flex justify-content-between align-items-center mb-3">
-                        <h5 class="section-title">Shop By Relation</h5>
-                        <a href="#" type="button" class="btn btn-theme-1">View All</a>
+                        <h5 class="section-title">Shop By {{Relation[0].Toplabel}}</h5>
+                        <a href="/Home/TopProduct?ProductType={{Relation[0].Toplabel}}" type="button" class="btn btn-theme-1">View All</a>
                     </div>
                 </div>
             </div>
             <div class="tab-content">
                 <div class="tab-pane fade show active" id="tab-one" role="tabpanel" aria-labelledby="tab-one">
-                    <div class="row product-grid-4 g-2" ng-init="GetProduct()">
-                        <div class="col-lg-2 col-6 col-sm-3" ng-repeat="p in ProductData" ng-click="RecentViewData($index)">
+                    <div class="row product-grid-4 g-2" >
+                        <div class="col-lg-2 col-6 col-sm-3" ng-repeat="p in Relation" >
 
                             <div class="product-cart-wrap mb-1">
                                 <div class="product-img-action-wrap">
@@ -125,7 +125,7 @@
                                     </div>
                                     <div class="d-flex justify-content-between align-items-center">
                                         <div class="button-design mt-2">
-                                            <a aria-label="Add To Cart" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight" class="btn theme-button-2" ng-click="addItemToCart($index)"><i class="fi-rs-shopping-bag-add"></i> Add To Cart </a>
+                                            <a aria-label="Add To Cart" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight" class="btn theme-button-2" ng-click="LabeladdItemToCart($index,Relation[0].Toplabel)"><i class="fi-rs-shopping-bag-add"></i> Add To Cart </a>
                                         </div>
                                         @* Popup Button For Image *@
                                         <div class="button-design mt-2" ng-if="!p.Video">
@@ -165,64 +165,66 @@
     </section>
     <!-- Advertisement Banner End -->
     <!-- Products Section Start -->
-    <section class="product-tabs section-padding">
-        <div class="container">
-            <div class="row g-2">
-                <div class="col-lg-6 col-sm-6 col-12">
-                    <div class="bg-light p-3 pp-3">
-                        <div class="row">
-                            <div class="col-lg-12 col-sm-12 col-12">
-                                <div class="section-title d-flex justify-content-between align-items-center mb-3">
-                                    <h5 class="section-title">Birthday Bestseller</h5>
-                                    <a href="#" type="button" class="btn btn-theme-1">View All</a>
+    <filter ng-init="GetFilterWordList()">
+        <section class="product-tabs section-padding">
+            <div class="container">
+                <div class="row g-2">
+                    <div class="col-lg-6 col-sm-6 col-12">
+                        <div class="bg-light p-3 pp-3">
+                            <div class="row">
+                                <div class="col-lg-12 col-sm-12 col-12">
+                                    <div class="section-title d-flex justify-content-between align-items-center mb-3">
+                                        <h5 class="section-title">Gifts under 499</h5>
+                                        <a href="#" type="button" class="btn btn-theme-1">View All</a>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="tab-content">
-                            <div class="tab-pane fade show active" id="tab-one" role="tabpanel" aria-labelledby="tab-one">
-                                <div class="row product-grid-4 g-2" ng-init="GetProduct()">
-                                    <div class="col-lg-4 col-6 col-sm-6" ng-repeat="p in ProductData" ng-click="RecentViewData($index)">
-                                        <div class="product-cart-wrap mb-1">
-                                            <div class="product-img-action-wrap">
-                                                <div class="product-img product-img-zoom">
-                                                    <a href="/Home/Gift?url={{p.PUrl}}">
-                                                        <img class="default-img img-fluid" ng-src="~/images/ProductImg/{{p.ProductImage}}" loading="lazy" alt="product-image" loading="lazy" alt="">
-                                                    </a>
-                                                </div>
-                                                @*<div class="product-badges product-badges-position product-badges-mrg product-badges-position-1"  ng-show="p.Video">
+                            <div class="tab-content">
+                                <div class="tab-pane fade show active" id="tab-one" role="tabpanel" aria-labelledby="tab-one">
+                                    <div class="row product-grid-4 g-2">
+                                        <div class="col-lg-4 col-6 col-sm-6" ng-repeat="p in Giftsunder499">
+                                            <div class="product-cart-wrap mb-1">
+                                                <div class="product-img-action-wrap">
+                                                    <div class="product-img product-img-zoom">
+                                                        <a href="/Home/Gift?url={{p.PUrl}}">
+                                                            <img class="default-img img-fluid" ng-src="~/images/ProductImg/{{p.ProductImage}}" loading="lazy" alt="product-image" loading="lazy" alt="">
+                                                        </a>
+                                                    </div>
+                                                    @*<div class="product-badges product-badges-position product-badges-mrg product-badges-position-1"  ng-show="p.Video">
                                                         <a href="#" ng-click="quickview(p,'video')"><span class="pot"><i class="fa fa-youtube-play" aria-hidden="true"></i></span></a>
                                                     </div>*@
-                                                <div class="product-badges product-badges-position product-badges-mrg" ng-show="p.PLabel!=''">
-                                                    <span class="hot">{{p.PLabel}}</span>
-                                                </div>
-                                                @*<div ng-show="p.SameDay" class="product-badges product-badges-position_1 product-badges-mrg same-day-badge">
+                                                    <div class="product-badges product-badges-position product-badges-mrg" ng-show="p.PLabel!=''">
+                                                        <span class="hot">{{p.PLabel}}</span>
+                                                    </div>
+                                                    @*<div ng-show="p.SameDay" class="product-badges product-badges-position_1 product-badges-mrg same-day-badge">
                                                         <span class="hot">Same Day Available</span>
                                                     </div>*@
-                                            </div>
-                                            <div class="product-content-wrap">
-                                                <h2 class="mt-2"><a href="/Home/Gift?url={{p.PUrl}}">{{p.ProductTitle}}</a></h2>
-
-                                                <div class="product-price d-flex justify-content-between align-items-center">
-                                                    <div class="">
-                                                        <span><i class="fa fa-inr" aria-hidden="true"></i>  {{p.Price}}/-</span>
-                                                    </div>
-                                                    <div class="same-day" ng-show="p.SameDay">
-                                                        <p class="hot text-success animate__fadeIn"><b>Same Day Available</b></p>
-                                                    </div>
                                                 </div>
-                                                <div class="d-flex justify-content-between align-items-center">
-                                                    <div class="button-design mt-2">
-                                                        <a aria-label="Add To Cart" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight" class="btn theme-button-2" ng-click="addItemToCart($index)"><i class="fi-rs-shopping-bag-add"></i> Add To Cart </a>
+                                                <div class="product-content-wrap">
+                                                    <h2 class="mt-2"><a href="/Home/Gift?url={{p.PUrl}}">{{p.ProductTitle}}</a></h2>
+
+                                                    <div class="product-price d-flex justify-content-between align-items-center">
+                                                        <div class="">
+                                                            <span><i class="fa fa-inr" aria-hidden="true"></i>  {{p.Price}}/-</span>
+                                                        </div>
+                                                        <div class="same-day" ng-show="p.SameDay">
+                                                            <p class="hot text-success animate__fadeIn"><b>Same Day Available</b></p>
+                                                        </div>
                                                     </div>
-                                                    @* Popup Button For Image *@
-                                                    <div class="button-design mt-2" ng-if="!p.Video">
-                                                        <a aria-label="View Image" class="btn theme-button-3 d-flex gap-2 align-items-center" ng-click="quickview(p)"><span class="d-lg-none d-sm-none d-block fs-9">View </span><i class="fa fa-eye" aria-hidden="true"></i></a>
-                                                    </div>
+                                                    <div class="d-flex justify-content-between align-items-center">
+                                                        <div class="button-design mt-2">
+                                                            <a aria-label="Add To Cart" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight" class="btn theme-button-2" ng-click="addItemToCart($index)"><i class="fi-rs-shopping-bag-add"></i> Add To Cart </a>
+                                                        </div>
+                                                        @* Popup Button For Image *@
+                                                        <div class="button-design mt-2" ng-if="!p.Video">
+                                                            <a aria-label="View Image" class="btn theme-button-3 d-flex gap-2 align-items-center" ng-click="quickview(p)"><span class="d-lg-none d-sm-none d-block fs-9">View </span><i class="fa fa-eye" aria-hidden="true"></i></a>
+                                                        </div>
 
 
-                                                    @* Popup Button For Video *@
-                                                    <div class="button-design mt-2" ng-if="p.Video">
-                                                        <a aria-label="View Image" class="btn theme-button-3 d-flex gap-2 align-items-center for-video" ng-click="quickview(p)"><span class="d-lg-none d-sm-none d-block fs-9 hide-animation" id="hideText">View </span><i class="fa fa-youtube-play" aria-hidden="true"></i></a>
+                                                        @* Popup Button For Video *@
+                                                        <div class="button-design mt-2" ng-if="p.Video">
+                                                            <a aria-label="View Image" class="btn theme-button-3 d-flex gap-2 align-items-center for-video" ng-click="quickview(p)"><span class="d-lg-none d-sm-none d-block fs-9 hide-animation" id="hideText">View </span><i class="fa fa-youtube-play" aria-hidden="true"></i></a>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -232,135 +234,62 @@
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-lg-6 col-sm-6 col-12">
-                    <div class="bg-light p-3 pp-3">
-                        <div class="row">
-                            <div class="col-lg-12 col-sm-12 col-12">
-                                <div class="section-title d-flex justify-content-between align-items-center mb-3">
-                                    <h5 class="section-title">Love / Anniversary</h5>
-                                    <a href="#" type="button" class="btn btn-theme-1">View All</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="tab-content">
-                            <div class="tab-pane fade show active" id="tab-one" role="tabpanel" aria-labelledby="tab-one">
-                                <div class="row product-grid-4 g-2" ng-init="GetProduct()">
-                                    <div class="col-lg-4 col-6 col-sm-6" ng-repeat="p in ProductData" ng-click="RecentViewData($index)">
-                                        <div class="product-cart-wrap mb-1">
-                                            <div class="product-img-action-wrap">
-                                                <div class="product-img product-img-zoom">
-                                                    <a href="/Home/Gift?url={{p.PUrl}}">
-                                                        <img class="default-img img-fluid" ng-src="~/images/ProductImg/{{p.ProductImage}}" loading="lazy" alt="product-image" loading="lazy" alt="">
-                                                    </a>
-                                                </div>
-                                                @*<div class="product-badges product-badges-position product-badges-mrg product-badges-position-1"  ng-show="p.Video">
-                                                        <a href="#" ng-click="quickview(p,'video')"><span class="pot"><i class="fa fa-youtube-play" aria-hidden="true"></i></span></a>
-                                                    </div>*@
-                                                <div class="product-badges product-badges-position product-badges-mrg" ng-show="p.PLabel!=''">
-                                                    <span class="hot">{{p.PLabel}}</span>
-                                                </div>
-                                                @*<div ng-show="p.SameDay" class="product-badges product-badges-position_1 product-badges-mrg same-day-badge">
-                                                        <span class="hot">Same Day Available</span>
-                                                    </div>*@
-                                            </div>
-                                            <div class="product-content-wrap">
-                                                <h2 class="mt-2"><a href="/Home/Gift?url={{p.PUrl}}">{{p.ProductTitle}}</a></h2>
-
-                                                <div class="product-price d-flex justify-content-between align-items-center">
-                                                    <div class="">
-                                                        <span><i class="fa fa-inr" aria-hidden="true"></i>  {{p.Price}}/-</span>
-                                                    </div>
-                                                    <div class="same-day" ng-show="p.SameDay">
-                                                        <p class="hot text-success animate__fadeIn"><b>Same Day Available</b></p>
-                                                    </div>
-                                                </div>
-                                                <div class="d-flex justify-content-between align-items-center">
-                                                    <div class="button-design mt-2">
-                                                        <a aria-label="Add To Cart" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight" class="btn theme-button-2" ng-click="addItemToCart($index)"><i class="fi-rs-shopping-bag-add"></i> Add To Cart </a>
-                                                    </div>
-                                                    @* Popup Button For Image *@
-                                                    <div class="button-design mt-2" ng-if="!p.Video">
-                                                        <a aria-label="View Image" class="btn theme-button-3 d-flex gap-2 align-items-center" ng-click="quickview(p)"><span class="d-lg-none d-sm-none d-block fs-9">View </span><i class="fa fa-eye" aria-hidden="true"></i></a>
-                                                    </div>
-
-
-                                                    @* Popup Button For Video *@
-                                                    <div class="button-design mt-2" ng-if="p.Video">
-                                                        <a aria-label="View Image" class="btn theme-button-3 d-flex gap-2 align-items-center for-video" ng-click="quickview(p)"><span class="d-lg-none d-sm-none d-block fs-9 hide-animation" id="hideText">View </span><i class="fa fa-youtube-play" aria-hidden="true"></i></a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
+                    <div class="col-lg-6 col-sm-6 col-12">
+                        <div class="bg-light p-3 pp-3">
+                            <div class="row">
+                                <div class="col-lg-12 col-sm-12 col-12">
+                                    <div class="section-title d-flex justify-content-between align-items-center mb-3">
+                                        <h5 class="section-title">Gifts under 999</h5>
+                                        <a href="#" type="button" class="btn btn-theme-1">View All</a>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- Products Section End -->
-    <!-- Products Section Start -->
-    <section class="product-tabs section-padding">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12 col-sm-12 col-12">
-                    <div class="bg-light p-3 pp-3">
-                        <div class="row">
-                            <div class="col-lg-12 col-sm-12 col-12">
-                                <div class="section-title d-flex justify-content-between align-items-center mb-3">
-                                    <h5 class="section-title">Birthday Bestseller</h5>
-                                    <a href="#" type="button" class="btn btn-theme-1">View All</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="tab-content">
-                            <div class="tab-pane fade show active" id="tab-one" role="tabpanel" aria-labelledby="tab-one">
-                                <div class="row product-grid-4 g-2" ng-init="GetProduct()">
-                                    <div class="col-lg-2 col-6 col-sm-6" ng-repeat="p in ProductData" ng-click="RecentViewData($index)">
-                                        <div class="product-cart-wrap mb-1">
-                                            <div class="product-img-action-wrap">
-                                                <div class="product-img product-img-zoom">
-                                                    <a href="/Home/Gift?url={{p.PUrl}}">
-                                                        <img class="default-img img-fluid" ng-src="~/images/ProductImg/{{p.ProductImage}}" loading="lazy" alt="product-image" loading="lazy" alt="">
-                                                    </a>
-                                                </div>
-                                                @*<div class="product-badges product-badges-position product-badges-mrg product-badges-position-1"  ng-show="p.Video">
+                            <div class="tab-content">
+                                <div class="tab-pane fade show active" id="tab-one" role="tabpanel" aria-labelledby="tab-one">
+                                    <div class="row product-grid-4 g-2">
+                                        <div class="col-lg-4 col-6 col-sm-6" ng-repeat="p in Giftsunder999">
+                                            <div class="product-cart-wrap mb-1">
+                                                <div class="product-img-action-wrap">
+                                                    <div class="product-img product-img-zoom">
+                                                        <a href="/Home/Gift?url={{p.PUrl}}">
+                                                            <img class="default-img img-fluid" ng-src="~/images/ProductImg/{{p.ProductImage}}" loading="lazy" alt="product-image" loading="lazy" alt="">
+                                                        </a>
+                                                    </div>
+                                                    @*<div class="product-badges product-badges-position product-badges-mrg product-badges-position-1"  ng-show="p.Video">
                                                         <a href="#" ng-click="quickview(p,'video')"><span class="pot"><i class="fa fa-youtube-play" aria-hidden="true"></i></span></a>
                                                     </div>*@
-                                                <div class="product-badges product-badges-position product-badges-mrg" ng-show="p.PLabel!=''">
-                                                    <span class="hot">{{p.PLabel}}</span>
-                                                </div>
-                                                @*<div ng-show="p.SameDay" class="product-badges product-badges-position_1 product-badges-mrg same-day-badge">
+                                                    <div class="product-badges product-badges-position product-badges-mrg" ng-show="p.PLabel!=''">
+                                                        <span class="hot">{{p.PLabel}}</span>
+                                                    </div>
+                                                    @*<div ng-show="p.SameDay" class="product-badges product-badges-position_1 product-badges-mrg same-day-badge">
                                                         <span class="hot">Same Day Available</span>
                                                     </div>*@
-                                            </div>
-                                            <div class="product-content-wrap">
-                                                <h2 class="mt-2"><a href="/Home/Gift?url={{p.PUrl}}">{{p.ProductTitle}}</a></h2>
-
-                                                <div class="product-price d-flex justify-content-between align-items-center">
-                                                    <div class="">
-                                                        <span><i class="fa fa-inr" aria-hidden="true"></i>  {{p.Price}}/-</span>
-                                                    </div>
-                                                    <div class="same-day" ng-show="p.SameDay">
-                                                        <p class="hot text-success animate__fadeIn"><b>Same Day Available</b></p>
-                                                    </div>
                                                 </div>
-                                                <div class="d-flex justify-content-between align-items-center">
-                                                    <div class="button-design mt-2">
-                                                        <a aria-label="Add To Cart" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight" class="btn theme-button-2" ng-click="addItemToCart($index)"><i class="fi-rs-shopping-bag-add"></i> Add To Cart </a>
+                                                <div class="product-content-wrap">
+                                                    <h2 class="mt-2"><a href="/Home/Gift?url={{p.PUrl}}">{{p.ProductTitle}}</a></h2>
+
+                                                    <div class="product-price d-flex justify-content-between align-items-center">
+                                                        <div class="">
+                                                            <span><i class="fa fa-inr" aria-hidden="true"></i>  {{p.Price}}/-</span>
+                                                        </div>
+                                                        <div class="same-day" ng-show="p.SameDay">
+                                                            <p class="hot text-success animate__fadeIn"><b>Same Day Available</b></p>
+                                                        </div>
                                                     </div>
-                                                    @* Popup Button For Image *@
-                                                    <div class="button-design mt-2" ng-if="!p.Video">
-                                                        <a aria-label="View Image" class="btn theme-button-3 d-flex gap-2 align-items-center" ng-click="quickview(p)"><span class="d-lg-none d-sm-none d-block fs-9">View </span><i class="fa fa-eye" aria-hidden="true"></i></a>
-                                                    </div>
+                                                    <div class="d-flex justify-content-between align-items-center">
+                                                        <div class="button-design mt-2">
+                                                            <a aria-label="Add To Cart" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight" class="btn theme-button-2" ng-click="addItemToCart($index)"><i class="fi-rs-shopping-bag-add"></i> Add To Cart </a>
+                                                        </div>
+                                                        @* Popup Button For Image *@
+                                                        <div class="button-design mt-2" ng-if="!p.Video">
+                                                            <a aria-label="View Image" class="btn theme-button-3 d-flex gap-2 align-items-center" ng-click="quickview(p)"><span class="d-lg-none d-sm-none d-block fs-9">View </span><i class="fa fa-eye" aria-hidden="true"></i></a>
+                                                        </div>
 
 
-                                                    @* Popup Button For Video *@
-                                                    <div class="button-design mt-2" ng-if="p.Video">
-                                                        <a aria-label="View Image" class="btn theme-button-3 d-flex gap-2 align-items-center for-video" ng-click="quickview(p)"><span class="d-lg-none d-sm-none d-block fs-9 hide-animation" id="hideText">View </span><i class="fa fa-youtube-play" aria-hidden="true"></i></a>
+                                                        @* Popup Button For Video *@
+                                                        <div class="button-design mt-2" ng-if="p.Video">
+                                                            <a aria-label="View Image" class="btn theme-button-3 d-flex gap-2 align-items-center for-video" ng-click="quickview(p)"><span class="d-lg-none d-sm-none d-block fs-9 hide-animation" id="hideText">View </span><i class="fa fa-youtube-play" aria-hidden="true"></i></a>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -372,8 +301,81 @@
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
+        <!-- Products Section End -->
+        <!-- Products Section Start -->
+        <section class="product-tabs section-padding">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12 col-sm-12 col-12">
+                        <div class="bg-light p-3 pp-3">
+                            <div class="row">
+                                <div class="col-lg-12 col-sm-12 col-12">
+                                    <div class="section-title d-flex justify-content-between align-items-center mb-3">
+                                        <h5 class="section-title">Friends gifts best sellers</h5>
+                                        <a href="#" type="button" class="btn btn-theme-1">View All</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-content">
+                                <div class="tab-pane fade show active" id="tab-one" role="tabpanel" aria-labelledby="tab-one">
+                                    <div class="row product-grid-4 g-2">
+                                        <div class="col-lg-2 col-6 col-sm-6" ng-repeat="p in giftsFriendsbestsellers">
+                                            <div class="product-cart-wrap mb-1">
+                                                <div class="product-img-action-wrap">
+                                                    <div class="product-img product-img-zoom">
+                                                        <a href="/Home/Gift?url={{p.PUrl}}">
+                                                            <img class="default-img img-fluid" ng-src="~/images/ProductImg/{{p.ProductImage}}" loading="lazy" alt="product-image" loading="lazy" alt="">
+                                                        </a>
+                                                    </div>
+                                                    @*<div class="product-badges product-badges-position product-badges-mrg product-badges-position-1"  ng-show="p.Video">
+                                                        <a href="#" ng-click="quickview(p,'video')"><span class="pot"><i class="fa fa-youtube-play" aria-hidden="true"></i></span></a>
+                                                    </div>*@
+                                                    <div class="product-badges product-badges-position product-badges-mrg" ng-show="p.PLabel!=''">
+                                                        <span class="hot">{{p.PLabel}}</span>
+                                                    </div>
+                                                    @*<div ng-show="p.SameDay" class="product-badges product-badges-position_1 product-badges-mrg same-day-badge">
+                                                        <span class="hot">Same Day Available</span>
+                                                    </div>*@
+                                                </div>
+                                                <div class="product-content-wrap">
+                                                    <h2 class="mt-2"><a href="/Home/Gift?url={{p.PUrl}}">{{p.ProductTitle}}</a></h2>
+
+                                                    <div class="product-price d-flex justify-content-between align-items-center">
+                                                        <div class="">
+                                                            <span><i class="fa fa-inr" aria-hidden="true"></i>  {{p.Price}}/-</span>
+                                                        </div>
+                                                        <div class="same-day" ng-show="p.SameDay">
+                                                            <p class="hot text-success animate__fadeIn"><b>Same Day Available</b></p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="d-flex justify-content-between align-items-center">
+                                                        <div class="button-design mt-2">
+                                                            <a aria-label="Add To Cart" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight" class="btn theme-button-2" ng-click="addItemToCart($index)"><i class="fi-rs-shopping-bag-add"></i> Add To Cart </a>
+                                                        </div>
+                                                        @* Popup Button For Image *@
+                                                        <div class="button-design mt-2" ng-if="!p.Video">
+                                                            <a aria-label="View Image" class="btn theme-button-3 d-flex gap-2 align-items-center" ng-click="quickview(p)"><span class="d-lg-none d-sm-none d-block fs-9">View </span><i class="fa fa-eye" aria-hidden="true"></i></a>
+                                                        </div>
+
+
+                                                        @* Popup Button For Video *@
+                                                        <div class="button-design mt-2" ng-if="p.Video">
+                                                            <a aria-label="View Image" class="btn theme-button-3 d-flex gap-2 align-items-center for-video" ng-click="quickview(p)"><span class="d-lg-none d-sm-none d-block fs-9 hide-animation" id="hideText">View </span><i class="fa fa-youtube-play" aria-hidden="true"></i></a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </filter>
     <!-- Products Section End -->
     <!-- Design Banner Start -->
     <section class="p-0 section-padding" ng-init="GetDesignBanner()">
@@ -429,20 +431,20 @@
     </section>
     <!-- Design Banner End -->
     <!-- Products Section Start -->
-    <section class="product-tabs section-padding">
+    <section class="product-tabs section-padding" ng-show="TopsellingProduct.length>0">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 col-sm-12 col-12">
                     <div class="section-title d-flex justify-content-between align-items-center mb-3">
-                        <h5 class="section-title">Top Products</h5>
-                        <a href="#" type="button" class="btn btn-theme-1">View All</a>
+                        <h5 class="section-title">{{TopsellingProduct[0].Toplabel}}</h5>
+                        <a href="/Home/TopProduct?ProductType={{TopsellingProduct[0].Toplabel}}" type="button" class="btn btn-theme-1">View All</a>
                     </div>
                 </div>
             </div>
             <div class="tab-content">
                 <div class="tab-pane fade show active" id="tab-one" role="tabpanel" aria-labelledby="tab-one">
-                    <div class="row product-grid-4 g-2" ng-init="GetProduct()">
-                        <div class="col-lg-2 col-6 col-sm-3" ng-repeat="p in ProductData" ng-click="RecentViewData($index)">
+                    <div class="row product-grid-4 g-2" >
+                        <div class="col-lg-2 col-6 col-sm-3" ng-repeat="p in TopsellingProduct">
 
                             <div class="product-cart-wrap mb-1">
                                 <div class="product-img-action-wrap">
@@ -474,7 +476,7 @@
                                     </div>
                                     <div class="d-flex justify-content-between align-items-center">
                                         <div class="button-design mt-2">
-                                            <a aria-label="Add To Cart" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight" class="btn theme-button-2" ng-click="addItemToCart($index)"><i class="fi-rs-shopping-bag-add"></i> Add To Cart </a>
+                                            <a aria-label="Add To Cart" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight" class="btn theme-button-2" ng-click="LabeladdItemToCart($index,'TopsellingProduct')"><i class="fi-rs-shopping-bag-add"></i> Add To Cart </a>
                                         </div>
                                         @* Popup Button For Image *@
                                         <div class="button-design mt-2" ng-if="!p.Video">
@@ -558,57 +560,57 @@
             <div class="row">
                 <div class="col-lg-12 col-sm-12 col-12">
                     <div class="section-title d-flex justify-content-between align-items-center mb-3">
-                        <h5 class="section-title">Best Selling Products</h5>
-                        <a href="#" type="button" class="btn btn-theme-1">View All</a>
+                        <h5 class="section-title">{{NewArivals[0].Toplabel}}</h5>
+                        <a href="/Home/TopProduct?ProductType={{NewArivals[0].Toplabel}}" type="button" class="btn btn-theme-1">View All</a>
                     </div>
                 </div>
             </div>
             <div class="tab-content">
                 <div class="tab-pane fade show active" id="tab-one" role="tabpanel" aria-labelledby="tab-one">
-                    <div class="row product-grid-4 g-2" ng-init="GetProduct()">
-                        <div class="col-lg-2 col-6 col-sm-3" ng-repeat="p in ProductData" ng-click="RecentViewData($index)">
+                    <div class="row product-grid-4 g-2" >
+                        <div class="col-lg-2 col-6 col-sm-3" ng-repeat="b in NewArivals" >
 
                             <div class="product-cart-wrap mb-1">
                                 <div class="product-img-action-wrap">
                                     <div class="product-img product-img-zoom">
-                                        <a href="/Home/Gift?url={{p.PUrl}}">
-                                            <img class="default-img img-fluid" ng-src="~/images/ProductImg/{{p.ProductImage}}" loading="lazy" alt="product-image" loading="lazy" alt="">
+                                        <a href="/Home/Gift?url={{b.PUrl}}">
+                                            <img class="default-img img-fluid" ng-src="~/images/ProductImg/{{b.ProductImage}}" loading="lazy" alt="product-image" loading="lazy" alt="">
                                         </a>
                                     </div>
                                     @*<div class="product-badges product-badges-position product-badges-mrg product-badges-position-1"  ng-show="p.Video">
                                             <a href="#" ng-click="quickview(p,'video')"><span class="pot"><i class="fa fa-youtube-play" aria-hidden="true"></i></span></a>
                                         </div>*@
-                                    <div class="product-badges product-badges-position product-badges-mrg" ng-show="p.PLabel!=''">
-                                        <span class="hot">{{p.PLabel}}</span>
+                                    <div class="product-badges product-badges-position product-badges-mrg" ng-show="b.PLabel!=''">
+                                        <span class="hot">{{b.PLabel}}</span>
                                     </div>
                                     @*<div ng-show="p.SameDay" class="product-badges product-badges-position_1 product-badges-mrg same-day-badge">
                                             <span class="hot">Same Day Available</span>
                                         </div>*@
                                 </div>
                                 <div class="product-content-wrap">
-                                    <h2 class="mt-2"><a href="/Home/Gift?url={{p.PUrl}}">{{p.ProductTitle}}</a></h2>
+                                    <h2 class="mt-2"><a href="/Home/Gift?url={{b.PUrl}}">{{b.ProductTitle}}</a></h2>
 
                                     <div class="product-price d-flex justify-content-between align-items-center">
                                         <div class="">
-                                            <span><i class="fa fa-inr" aria-hidden="true"></i>  {{p.Price}}/-</span>
+                                            <span><i class="fa fa-inr" aria-hidden="true"></i>  {{b.Price}}/-</span>
                                         </div>
-                                        <div class="same-day" ng-show="p.SameDay">
+                                        <div class="same-day" ng-show="b.SameDay">
                                             <p class="hot text-success animate__fadeIn"><b>Same Day Available</b></p>
                                         </div>
                                     </div>
                                     <div class="d-flex justify-content-between align-items-center">
                                         <div class="button-design mt-2">
-                                            <a aria-label="Add To Cart" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight" class="btn theme-button-2" ng-click="addItemToCart($index)"><i class="fi-rs-shopping-bag-add"></i> Add To Cart </a>
+                                            <a aria-label="Add To Cart" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight" class="btn theme-button-2" ng-click="LabeladdItemToCart($index,'NewArivals')"><i class="fi-rs-shopping-bag-add"></i> Add To Cart </a>
                                         </div>
                                         @* Popup Button For Image *@
-                                        <div class="button-design mt-2" ng-if="!p.Video">
-                                            <a aria-label="View Image" class="btn theme-button-3 d-flex gap-2 align-items-center" ng-click="quickview(p)"><span class="d-lg-none d-sm-none d-block fs-9">View </span><i class="fa fa-eye" aria-hidden="true"></i></a>
+                                        <div class="button-design mt-2" ng-if="!b.Video">
+                                            <a aria-label="View Image" class="btn theme-button-3 d-flex gap-2 align-items-center" ng-click="quickview(b)"><span class="d-lg-none d-sm-none d-block fs-9">View </span><i class="fa fa-eye" aria-hidden="true"></i></a>
                                         </div>
 
 
                                         @* Popup Button For Video *@
-                                        <div class="button-design mt-2" ng-if="p.Video">
-                                            <a aria-label="View Image" class="btn theme-button-3 d-flex gap-2 align-items-center for-video" ng-click="quickview(p)"><span class="d-lg-none d-sm-none d-block fs-9 hide-animation" id="hideText">View </span><i class="fa fa-youtube-play" aria-hidden="true"></i></a>
+                                        <div class="button-design mt-2" ng-if="b.Video">
+                                            <a aria-label="View Image" class="btn theme-button-3 d-flex gap-2 align-items-center for-video" ng-click="quickview(b)"><span class="d-lg-none d-sm-none d-block fs-9 hide-animation" id="hideText">View </span><i class="fa fa-youtube-play" aria-hidden="true"></i></a>
                                         </div>
                                     </div>
                                 </div>
@@ -638,20 +640,20 @@
     </section>
     <!-- Advertisement Banner End -->
     <!-- Products Section Start -->
-    <section class="product-tabs section-padding">
+    <section class="product-tabs section-padding" ng-show="NewProduct.length>0">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 col-sm-12 col-12">
                     <div class="section-title d-flex justify-content-between align-items-center mb-3">
-                        <h5 class="section-title">New Arrivals</h5>
-                        <a href="#" type="button" class="btn btn-theme-1">View All</a>
+                        <h5 class="section-title">{{NewProduct[0].Toplabel}}</h5>
+                        <a href="/Home/TopProduct?ProductType={{NewProduct[0].Toplabel}}" type="button" class="btn btn-theme-1">View All</a>
                     </div>
                 </div>
             </div>
             <div class="tab-content">
                 <div class="tab-pane fade show active" id="tab-one" role="tabpanel" aria-labelledby="tab-one">
-                    <div class="row product-grid-4 g-2" ng-init="GetProduct()">
-                        <div class="col-lg-2 col-6 col-sm-3" ng-repeat="p in ProductData" ng-click="RecentViewData($index)">
+                    <div class="row product-grid-4 g-2" ng-init="GetLabelProduct()">
+                        <div class="col-lg-2 col-6 col-sm-3" ng-repeat="p in NewProduct" >
 
                             <div class="product-cart-wrap mb-1">
                                 <div class="product-img-action-wrap">
@@ -683,7 +685,7 @@
                                     </div>
                                     <div class="d-flex justify-content-between align-items-center">
                                         <div class="button-design mt-2">
-                                            <a aria-label="Add To Cart" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight" class="btn theme-button-2" ng-click="addItemToCart($index)"><i class="fi-rs-shopping-bag-add"></i> Add To Cart </a>
+                                            <a aria-label="Add To Cart" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight" class="btn theme-button-2" ng-click="LabeladdItemToCart($index,'NewProduct')"><i class="fi-rs-shopping-bag-add"></i> Add To Cart </a>
                                         </div>
                                         @* Popup Button For Image *@
                                         <div class="button-design mt-2" ng-if="!p.Video">

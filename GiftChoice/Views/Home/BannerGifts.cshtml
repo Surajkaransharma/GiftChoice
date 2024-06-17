@@ -9,7 +9,7 @@
 }
 
 
-<main class="main" ng-init="OpenModelInBanner()">
+<main class="main" ng-init="GetBannerAllProductwithmodel()">
 
     <!-- Page Breadcrumb Start -->
     <div class="page-header breadcrumb-wrap">
@@ -29,13 +29,12 @@
                 <div class="col-lg-12">
                     <div class="attr-detail attr-size mb-3">
                         <ul class="list-filter size-filter font-small">
-                            <li class=""><a href="#">All</a></li>
-                            <li class=""><a href="#">Relation Name</a></li>
-                            <li class="active"><a href="#">Relation Name</a></li>
-                            <li><a href="#">Relation Name</a></li>
+                            <li class=""><a href="/Home/BannerGifts?Banner={{banner}}" ng-click="GetBannerAllProductwithmodel()">All</a></li>
+                            <li class="" ng-repeat="f in FilterKeywordList"><a ng-click="GetFilterKeywordBy(f.KeywordId)">{{f.Filterkeyword}}</a></li>
+                       
                         </ul>
                     </div>
-                    <div class="row product-grid-4 g-1 gx-1" ng-init="GetTopProduct()">
+                    <div class="row product-grid-4 g-1 gx-1" >
                         <div class="col-lg-2 col-6 col-sm-3" ng-repeat="q in ProductData">
                             <div data-aos="zoom-in">
                                 <div class="product-cart-wrap mb-10 ">
