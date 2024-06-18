@@ -425,12 +425,15 @@
                             </div>
                             <div class="col-md-3" ng-init="GetVideoData('Active')">
                                 <label for="input1" class="form-label">Select Video</label>
-                                <select id="FVideoTitle" class="form-select"  >
+                                <select id="FVideoTitle" class="form-select">
                                     <option ng-selected="true" value="-1">Select Video</option>
                                     <option ng-repeat="m in VideoDataList" value="{{m.VId}}">{{m.VideoTitle}}</option>
                                 </select>
                             </div>
-
+                            <div class="col-md-2">
+                                <label for="input1" class="form-label">Product Title</label>                           
+                                <input type="text" id="Producttitle" class="form-control"  placeholder="Product Title">
+                            </div>
 
                             <div class="col-md-3">
                                 <div class="d-md-flex d-grid align-items-center gap-3">

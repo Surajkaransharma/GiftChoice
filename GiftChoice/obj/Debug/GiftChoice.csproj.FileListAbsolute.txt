@@ -317,4 +317,3 @@ D:\github\GiftChoice\GiftChoice\GiftChoice\obj\Debug\GiftChoice.csproj.CoreCompi
 D:\github\GiftChoice\GiftChoice\GiftChoice\obj\Debug\GiftChoice.csproj.CopyComplete
 D:\github\GiftChoice\GiftChoice\GiftChoice\obj\Debug\GiftChoice.dll
 D:\github\GiftChoice\GiftChoice\GiftChoice\obj\Debug\GiftChoice.pdb
-D:\github2\GiftChoice\GiftChoice\obj\Debug\GiftChoice.csprojAssemblyReference.cache
