@@ -51,14 +51,14 @@
 <div class="page-wrapper" ng-app="AdminApp" ng-controller="AdminController">
     <div class="page-content">
         <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
-            <div class="breadcrumb-title pe-3">Festival Banner</div>
+            <div class="breadcrumb-title pe-3">Adversities Banner</div>
             <div class="ps-3">
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb mb-0 p-0">
                         <li class="breadcrumb-item">
                             <a href="javascript:;"><i class="bx bx-home-alt"></i></a>
                         </li>
-                        <li class="breadcrumb-item active" aria-current="page">Festival Banner Form</li>
+                        <li class="breadcrumb-item active" aria-current="page">Adversities Banner Form</li>
                     </ol>
                 </nav>
             </div>
@@ -72,11 +72,11 @@
 
                         <form class="row g-3" enctype="multipart/form-data">
 
-                            <div class="col-md-12">
-                                <label for="input1" class="form-label">Festival Banner Title</label>
+                            @*<div class="col-md-12">
+                                <label for="input1" class="form-label">Adversities Banner Title</label>
                                 <input type="text" class="form-control" id="FBTitle" ng-model="FestivalBanner.FBTitle" placeholder="Festival Banner Title">
 
-                            </div>
+                            </div>*@
                             <div class="col-md-12">
                                 <label for="input1" class="form-label">Festival Banner Url</label>
                                 <input type="text" class="form-control" id="FBUrl" ng-model="FestivalBanner.FBUrl" placeholder="Festival Banner Url">
@@ -167,8 +167,8 @@
                                 <thead class="table-light">
                                     <tr>
                                         <th>S.No.</th>
-                                        <th>Festival Banner Title</th>
-                                        <th>Festival Banner Url</th>
+                                        @*<th>Festival Banner Title</th>*@
+                                        <th>Adversities Banner Url</th>
 
 
                                         <th>Image</th>
@@ -181,7 +181,7 @@
                                 <tbody>
                                     <tr ng-repeat="m in GetFestivalBannerData">
                                         <td>{{$index+1}}</td>
-                                        <td>{{m.FBTitle}}</td>
+                                        @*<td>{{m.FBTitle}}</td>*@
                                         <td>{{m.FBUrl}}</td>
 
                                         <td><img src="~/images/FestivalBanner/{{m.FBImage}}"></td>
