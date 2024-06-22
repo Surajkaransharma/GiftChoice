@@ -150,13 +150,13 @@
     </section>
     <!-- Products Section End -->
     <!-- Advertisement Banner Start -->
-    <section class="p-0" ng-init="GetFestivalBanner()" ng-show="FestivalBannerData">
+    <section class="p-0" ng-init="GetFestivalBanner()" ng-show="FestivalBannerData[0]">
         <div class="container pt-2 pb-2" ng-show="FestivalBannerData!=''">
             <div class="row g-1 gx-1">
                 <div class="col-lg-12">
                     <div class="big-banner">
-                        <a href="{{FestivalBannerData.FBUrl}}">
-                            <img ng-src="~/images/FestivalBanner/{{FestivalBannerData.FBImage}}" alt="banner-image" class="img-fluid rounded-3">
+                        <a href="{{FestivalBannerData[0].FBUrl}}">
+                            <img ng-src="~/images/FestivalBanner/{{FestivalBannerData[0].FBImage}}" alt="banner-image" class="img-fluid rounded-3">
                         </a>
                     </div>
                 </div>
@@ -175,7 +175,7 @@
                                 <div class="col-lg-12 col-sm-12 col-12">
                                     <div class="section-title d-flex justify-content-between align-items-center mb-3">
                                         <h5 class="section-title">Gifts under 499</h5>
-                                        <a href="#" type="button" class="btn btn-theme-1">View All</a>
+                                        <a href="/Home/giftfilterkeyword?ProductType=Giftsunder499" type="button" class="btn btn-theme-1">View All</a>
                                     </div>
                                 </div>
                             </div>
@@ -240,7 +240,7 @@
                                 <div class="col-lg-12 col-sm-12 col-12">
                                     <div class="section-title d-flex justify-content-between align-items-center mb-3">
                                         <h5 class="section-title">Gifts under 999</h5>
-                                        <a href="#" type="button" class="btn btn-theme-1">View All</a>
+                                        <a href="/Home/giftfilterkeyword?ProductType=Giftsunder999" type="button" class="btn btn-theme-1">View All</a>
                                     </div>
                                 </div>
                             </div>
@@ -313,7 +313,7 @@
                                 <div class="col-lg-12 col-sm-12 col-12">
                                     <div class="section-title d-flex justify-content-between align-items-center mb-3">
                                         <h5 class="section-title">Friends gifts best sellers</h5>
-                                        <a href="#" type="button" class="btn btn-theme-1">View All</a>
+                                        <a href="/Home/giftfilterkeyword?ProductType=giftsFriendsbestsellers" type="button" class="btn btn-theme-1">View All</a>
                                     </div>
                                 </div>
                             </div>
@@ -501,13 +501,13 @@
     </section>
     <!-- Products Section End -->
     <!-- Advertisement Banner Start -->
-    <section class="p-0" ng-init="GetFestivalBanner()" ng-show="FestivalBannerData">
+    <section class="p-0"  ng-if="FestivalBannerData[1]">
         <div class="container pt-2 pb-2" ng-show="FestivalBannerData!=''">
             <div class="row g-1 gx-1">
                 <div class="col-lg-12">
                     <div class="big-banner">
-                        <a href="{{FestivalBannerData.FBUrl}}">
-                            <img ng-src="~/images/FestivalBanner/{{FestivalBannerData.FBImage}}" alt="banner-image" class="img-fluid rounded-3">
+                        <a href="{{FestivalBannerData[1].FBUrl}}">
+                            <img ng-src="~/images/FestivalBanner/{{FestivalBannerData[1].FBImage}}" alt="banner-image" class="img-fluid rounded-3">
                         </a>
                     </div>
                 </div>
@@ -625,13 +625,13 @@
     </section>
     <!-- Products Section End -->
     <!-- Advertisement Banner Start -->
-    <section class="p-0" ng-init="GetFestivalBanner()" ng-show="FestivalBannerData">
+    <section class="p-0"  ng-show="FestivalBannerData[2]">
         <div class="container pt-2 pb-2" ng-show="FestivalBannerData!=''">
             <div class="row g-1 gx-1">
                 <div class="col-lg-12">
                     <div class="big-banner">
-                        <a href="{{FestivalBannerData.FBUrl}}">
-                            <img ng-src="~/images/FestivalBanner/{{FestivalBannerData.FBImage}}" alt="banner-image" class="img-fluid rounded-3">
+                        <a href="{{FestivalBannerData[2].FBUrl}}">
+                            <img ng-src="~/images/FestivalBanner/{{FestivalBannerData[2].FBImage}}" alt="banner-image" class="img-fluid rounded-3">
                         </a>
                     </div>
                 </div>
@@ -710,13 +710,13 @@
     </section>
     <!-- Products Section End -->
     <!-- Advertisement Banner Start -->
-    <section class="p-0" ng-init="GetFestivalBanner()" ng-show="FestivalBannerData">
+    <section class="p-0" ng-if="FestivalBannerData[3]">
         <div class="container pt-2 pb-2" ng-show="FestivalBannerData!=''">
             <div class="row g-1 gx-1">
                 <div class="col-lg-12">
                     <div class="big-banner">
-                        <a href="{{FestivalBannerData.FBUrl}}">
-                            <img ng-src="~/images/FestivalBanner/{{FestivalBannerData.FBImage}}" alt="banner-image" class="img-fluid rounded-3">
+                        <a href="{{FestivalBannerData[3].FBUrl}}">
+                            <img ng-src="~/images/FestivalBanner/{{FestivalBannerData[3].FBImage}}" alt="banner-image" class="img-fluid rounded-3">
                         </a>
                     </div>
                 </div>

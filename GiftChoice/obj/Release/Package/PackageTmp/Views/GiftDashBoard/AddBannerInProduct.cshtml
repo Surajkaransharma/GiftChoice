@@ -1,13 +1,17 @@
 ﻿
 @{
-    /**/
+                /**/
 
-    /**/
+                /**/
 
-    /**/
+                /**/
 
-    ViewBag.Title = "AddBannerInProduct";
-    Layout = "~/Views/Shared/_Admin.cshtml";
+                /**/
+
+                /**/
+
+                ViewBag.Title = "AddBannerInProduct";
+                Layout = "~/Views/Shared/_Admin.cshtml";
 }
 
 <style>
@@ -114,7 +118,7 @@
                             <div class="col-md-3" ng-init="GetBannerInProduct()">
                                 <label for="input1" class="form-label">Select Banner Title</label>
 
-                                <select id="MainCate" class="form-select" ng-model="Product.BannerCateId" onchange="angular.element(this).scope().GetBannerToQuery(this.value)">
+                                <select id="BannerCate" class="form-select" ng-model="Product.BannerCateId" onchange="angular.element(this).scope().GetBannerCateFilterKeyword(this.value)">
                                     <option ng-selected="true" value="-1">Select Banner Title</option>
                                     <option ng-repeat="m in GetBannerInProductData" value="{{m.MainCateId}}">{{m.MTitle}}</option>
                                 </select>
@@ -130,6 +134,13 @@
                                 </select>
 
 
+                            </div>
+                            <div class="col-md-3" ng-init="GetMainCateData()">
+                                <label for="input1" class="form-label">Select Main Category</label>
+                                <select id="MainCate" class="form-select" ng-model="Product.MainCateId">
+                                    <option ng-selected="true" value="-1">Select Main Category</option>
+                                    <option ng-repeat="m in MainCateData" value="{{m.MainCateId}}">{{m.MTitle}}</option>
+                                </select>
                             </div>
                             @*<div class="col-md-3">
                                     <label for="input1" class="form-label">Select Query</label>
@@ -154,6 +165,11 @@
                                 </div>*@
                             <div class="col-md-4">
                                 <label for="input1" class="form-label">Product Title</label>
+                                <span style="float: right">
+
+                                    <label for="SameDay" class="form-label">Same Day Available</label>
+                                    <input type="checkbox" ng-model="Product.SameDay" id="SameDay" placeholder="">
+                                </span>
                                 <input type="text" id="Producttitle" class="form-control" ng-model="Product.ProductTitle" placeholder="Product Title">
                             </div>
                             <div class="col-md-2">
@@ -174,38 +190,76 @@
                                     <label for="input1" class="form-label">See Video</label>
                                     <input type="text" class="form-control" ng-model="Product.VideoUrl" id="" placeholder="See Video">
                                 </div>*@
-                            <div class="col-md-3">
-                                <label for="input1" class="form-label">See Video  <span ng-show="!duplicateproductbool">    <a ng-show="Product.Video!=null && Product.Video!=''" class="badge bg-danger" href="{{'/images/ProductVideo/' + Product.Video}}" title="see video" target="_blank" role="button">See Video</a> &nbsp;&nbsp;&nbsp;&nbsp;   <a ng-show="Product.Video!=null && Product.Video!=''" ng-click="DeleteProductVideo(Product.ProductId)">Delete Video</a></span></label>
-                                <input type="file" id="VideoData" class="form-control" upload-file="Product.VideoData">
-                            </div>
-                            <div class="col-md-2">
-                                <label for="SameDay" class="form-label">Same Day Available</label>
-                                <input type="checkbox" ng-model="Product.SameDay" id="SameDay" placeholder="">
-                            </div>
-                            <div class="col-md-2">
-                                <label for="Common" class="form-label">Common</label>
-                                <input type="checkbox" ng-model="Product.Common" id="Common" placeholder="">
-                            </div>
-                            <div class="col-md-3" ng-init="GetMainCateData()" ng-show="Product.Common">
-                                <label for="input1" class="form-label">Select Main Category</label>
+                            @*<div class="col-md-3">
+                                    <label for="input1" class="form-label">See Video  <span ng-show="!duplicateproductbool">    <a ng-show="Product.Video!=null && Product.Video!=''" class="badge bg-danger" href="{{'/images/ProductVideo/' + Product.Video}}" title="see video" target="_blank" role="button">See Video</a> &nbsp;&nbsp;&nbsp;&nbsp;   <a ng-show="Product.Video!=null && Product.Video!=''" ng-click="DeleteProductVideo(Product.ProductId)">Delete Video</a></span></label>
+                                    <input type="file" id="VideoData" class="form-control" upload-file="Product.VideoData">
+                                </div>*@
 
-                                <select id="MainCate" class="form-select" ng-model="Product.MainCateId" @*onchange="angular.element(this).scope().MainCateKeyword(this.value)"*@>
-                                    <option ng-selected="true" value="-1">Select Main Category</option>
-                                    <option ng-repeat="m in MainCateData" value="{{m.MainCateId}}">{{m.MTitle}}</option>
+                            <div class="col-md-3" ng-init="GetVideoData('Active')">
+                                <label for="input1" class="form-label">Select Video</label>
+                                <select id="VideoTitle" class="form-select" ng-model="Product.VideoId" onchange="angular.element(this).scope().quickview(this.value)">
+                                    <option ng-selected="true" value="-1">Select Video</option>
+                                    <option ng-repeat="m in VideoDataList" value="{{m.VId}}">{{m.VideoTitle}}</option>
                                 </select>
                             </div>
-                            <div class="col-md-12" ng-if="GetBannerToQueryData.length>0">
-                                <label for="input1" class="form-label">Select Answer</label>
+
+                            <div class="col-md-1">
+                                <div style="position: absolute">
+
+                                    <video width="100%" muted height="150px" id="pVideo">
+                                        <source type="video/mp4">
+                                    </video>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="input1" class="form-label">Add Filter</label>
+
+                                <tags-input ng-model="FilterTag" add-on-paste="true">
+
+                                </tags-input>
+                            </div>
+                            <div class="col-md-12">
+                                <label for="input1" class="form-label">CheckBox</label>
                                 <div class="" id="check_box">
-                                    <label class="checkbox-wrapper" ng-repeat="m in GetBannerToQueryData">
-                                        <input type="checkbox" id="Keyword_{{m.QId}}" class="checkbox-input" value="{{m.QId}}" ng-model="m.Selected" ng-checked="" />
+                                    <label class="checkbox-wrapper" ng-repeat="s in FilterDataList">
+                                        <input type="checkbox" id="filter_{{s.PFilterId}}" class="checkbox-Size" value="{{s.PFilterId}}" ng-model="s.Selected" ng-checked="" />
                                         <span class="checkbox-tile">
-                                            <span class="checkbox-label">{{m.Answer}}</span>
+                                            <span class="checkbox-label">{{s.PFilterTilte}}</span>
                                         </span>
                                     </label>
 
                                 </div>
                             </div>
+                            @*<div class="col-md-2">
+                                    <br />
+                                    <label for="SameDay" class="form-label">Same Day Available</label>
+
+                                    <input type="checkbox" ng-model="Product.SameDay" id="SameDay" placeholder="">
+                                </div>*@
+                            @*<div class="col-md-2">
+                                    <label for="Common" class="form-label">Common</label>
+                                    <input type="checkbox" ng-model="Product.Common" id="Common" placeholder="">
+                                </div>*@
+                            @*<div class="col-md-3" ng-init="GetMainCateData()" ng-show="Product.Common">
+                                    <label for="input1" class="form-label">Select Main Category</label>
+                                    onchange="angular.element(this).scope().MainCateKeyword(this.value)"
+                                    <select id="MainCate" class="form-select" ng-model="Product.MainCateId">
+                                        <option ng-selected="true" value="-1">Select Main Category</option>
+                                        <option ng-repeat="m in MainCateData" value="{{m.MainCateId}}">{{m.MTitle}}</option>
+                                    </select>
+                                </div>*@
+                            @*<div class="col-md-12" ng-if="GetBannerToQueryData.length>0">
+                                    <label for="input1" class="form-label">Select Answer</label>
+                                    <div class="" id="check_box">
+                                        <label class="checkbox-wrapper" ng-repeat="m in GetBannerToQueryData">
+                                            <input type="checkbox" id="Keyword_{{m.QId}}" class="checkbox-input" value="{{m.QId}}" ng-model="m.Selected" ng-checked="" />
+                                            <span class="checkbox-tile">
+                                                <span class="checkbox-label">{{m.Answer}}</span>
+                                            </span>
+                                        </label>
+
+                                    </div>
+                                </div>*@
                             @*<div class="col-md-12" ng-init="GetKeywordData()">
                                     <label for="input1" class="form-label">Select Keyword</label>
                                     <div class="" id="check_box">
@@ -257,11 +311,11 @@
 
                                     </div>
                                 </div>*@
-                            <div class="col-md-12">
+                            <div class="col-md-6">
                                 <label for="input1" class="form-label">Description</label>
-                                <textarea id="PDesc" class="form-control" rows="6" cols="4" ng-model="Product.PDesc"></textarea>
+                                <textarea id="PDesc" class="form-control" rows="12" cols="4" ng-model="Product.PDesc"></textarea>
                             </div>
-                            <div class="col-md-12">
+                            <div class="col-md-6">
                                 <label for="input1" class="form-label">Table Description</label>
                                 <textarea class="ckeditor" id="ckeditor"></textarea>
                             </div>
@@ -270,7 +324,7 @@
                                         CKEDITOR.replace($(this).prop('id'));
                                     });
                                 </script>*@
-                         
+
                             <div class="col-md-3">
 
                                 <p>Drop Zone 1: Drag & drop your image here or click to browse</p>
@@ -356,7 +410,7 @@
                             <div class="col-md-3" ng-init="GetBannerInProductFilter()">
                                 <label for="input1" class="form-label">Select Banner Title</label>
 
-                                <select id="MainCate" class="form-select" onchange="angular.element(this).scope().GetBannerProduct(this.value)">
+                                <select id="FBannerCate" class="form-select" >
                                     <option ng-selected="true" value="-1">Select Banner Title</option>
                                     <option value="-2">All Product</option>
                                     <option ng-repeat="m in GetBannerInProductFilterData" value="{{m.MainCateId}}">{{m.MTitle}}</option>
@@ -364,8 +418,32 @@
 
 
                             </div>
+                            <div class="col-md-3" ng-init="GetMainCateData()">
+                                <label for="input1" class="form-label">Select Main Category</label>
+                                <select id="FMainCate" class="form-select" >
+                                    <option ng-selected="true" value="-1">Select Main Category</option>
+                                    <option ng-repeat="m in MainCateData" value="{{m.MainCateId}}">{{m.MTitle}}</option>
+                                </select>
+                            </div>
+                            <div class="col-md-2" ng-init="GetVideoData('Active')">
+                                <label for="input1" class="form-label">Select Video</label>
+                                <select id="FVideoTitle" class="form-select">
+                                    <option ng-selected="true" value="-1">Select Video</option>
+                                    <option ng-repeat="m in VideoDataList" value="{{m.VId}}">{{m.VideoTitle}}</option>
+                                </select>
+                            </div>
+                            <div class="col-md-2">
+                                <label for="input1" class="form-label">Product Title</label>
+                                <input type="text" id="FProducttitle" class="form-control" placeholder="Product Title">
+                            </div>
 
+                            <div class="col-md-1">
+                                <div class="d-md-flex d-grid align-items-center gap-3">
 
+                                    <button type="button" ng-click="GetBannerProduct()" class="btn btn-primary" style="margin-top: 31px">Filter</button>
+
+                                </div>
+                            </div>
 
                         </div>
                         <div class="table-responsive" ng-show="ProductData.length>0">
@@ -378,7 +456,7 @@
 
 
                                         <th>Label</th>
-                                        <th>See Video</th>
+                                        <th>Video</th>
                                         <th>Same Day</th>
 
                                         <th>Price</th>
@@ -407,7 +485,11 @@
                                         <td>{{m.PLabel}}</td>
                                         <td style="white-space:normal" class="box1">
 
-                                            <a ng-show="m.Video!=null && m.Video!=''" class="badge bg-danger" href="{{'/images/ProductVideo/' + m.Video}}" title="see video" target="_blank" role="button">See Video</a>
+                                            <video width="100%" muted height="150px">
+                                                <source ng-src="{{'/images/ProductVideo/' + m.VideoTitle.Video}}" type="video/mp4">
+                                            </video>
+                                            {{m.VideoTitle.VideoTitle}}
+                                            @*<a ng-show="m.Video!=null && m.Video!=''" class="badge bg-danger" href="{{'/images/ProductVideo/' + m.Video}}" title="see video" target="_blank" role="button">See Video</a>*@
 
                                         </td>
                                         <td>
@@ -416,7 +498,7 @@
 
                                         <td>{{m.Price}}</td>
                                         @*<td>{{m.Priority}}</td>*@
-                                        <td><span ng-repeat="n in m.Submenu">{{n.SubmenuTitle}},<br /></span></td>
+                                        <td><span ng-repeat="n in m.FilterKeyword">{{n.text}},<br /></span></td>
                                         <td>
                                             <table class="table table-bordered" ng-show="m.productDataArray.length>0">
                                                 <tr>

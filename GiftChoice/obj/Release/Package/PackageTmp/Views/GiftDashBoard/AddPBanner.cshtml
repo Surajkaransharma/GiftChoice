@@ -102,51 +102,7 @@
                                     <img class="preview" src="" alt="Image Preview">
                                 </div>
                                 <button class="remove-image" disabled>Remove Image</button>
-                                @*<section id="image-section">
-            <div id="uploadArea" class="upload-area">
-                <!-- Header -->
-                <div class="upload-area__header" style="display:none">
-                    <h1 class="upload-area__title">Upload your file</h1>
-                    <p class="upload-area__paragraph">
-                        File should be an image
-                        <strong class="upload-area__tooltip">
-                            Like
-                            <span class="upload-area__tooltip-data"></span>
-                        </strong>
-                    </p>
-                </div>
-                <!-- End Header -->
-                <!-- Drop Zoon -->
-                <div id="dropZoon" class="upload-area__drop-zoon drop-zoon">
-                    <span class="drop-zoon__icon">
-                        <i class='bx bxs-file-image'></i>
-                    </span>
-                    <p class="drop-zoon__paragraph">Drop your file here or Click to browse</p>
-                    <span id="loadingText" class="drop-zoon__loading-text">Please Wait</span>
-                    <img src="" alt="Preview Image" id="previewImage" class="drop-zoon__preview-image" draggable="false">
-                    <input type="file" id="fileInput" upload-file="BannerProdcutT.Image" class="drop-zoon__file-input" multiple>
-                </div>
-                <!-- End Drop Zoon -->
-                <!-- File Details -->
-                <div id="fileDetails" class="upload-area__file-details file-details" style="display: none">
-                    <h3 class="file-details__title">Uploaded File</h3>
-
-                    <div id="uploadedFile" class="uploaded-file">
-                        <div class="uploaded-file__icon-container">
-                            <i class='bx bxs-file-blank uploaded-file__icon'></i>
-                            <span class="uploaded-file__icon-text"></span>
-
-                        </div>
-
-                        <div id="uploadedFileInfo" class="uploaded-file__info">
-                            <span class="uploaded-file__name">Proejct 1</span>
-                            <span class="uploaded-file__counter">0%</span>
-                        </div>
-                    </div>
-                </div>
-                <!-- End File Details -->
-            </div>
-        </section>*@
+                           
 
                             </div>
 
@@ -155,10 +111,10 @@
                                 <label for="input1" class="form-label">Priority</label>
                                 <input type="number" class="form-control" ng-model="BannerProdcutT.Priority" id="Priority" placeholder="Priority">
                             </div>
-                            <div class="col-md-12">
+                            @*<div class="col-md-12">
                                 <label for="input1" class="form-label">Do You Want any query on this banner ? </label>
                                 <input type="checkbox" ng-model="BannerProdcutT.ModelQuery1" id="ModelQuery" >
-                            </div>
+                            </div>*@
                             @*<div class="col-md-12" ng-init="GetKeywordData()">
                                     <label for="input1" class="form-label">Select Keyword</label>
 
@@ -210,7 +166,7 @@
                                         <th>Banner Title</th>
                                         <th>Position</th>
                                         @*<th>KeyWord</th>*@
-                                        <th>Model Popup</th>
+                                        @*<th>Model Popup</th>*@
                                         <th>Priority</th>
                                         <th>Image</th>
                                         <th>Active</th>
@@ -225,7 +181,7 @@
                                         <td>{{m.MTitle}}</td>
                                         <td>{{m.Position}}</td>
                                         @*<td style="white-space: normal"><span ng-repeat="n in m.Submenu">{{n.SubmenuTitle}},</span></td>*@
-                                        <td> <span class="badge {{m.ModelQuery1==1? 'bg-success' : 'bg-danger'}}">{{m.ModelQuery1==1?'Open':'Close'}}</span> </td>
+                                        @*<td> <span class="badge {{m.ModelQuery1==1? 'bg-success' : 'bg-danger'}}">{{m.ModelQuery1==1?'Open':'Close'}}</span> </td>*@
 
                                         <td>{{m.Priority}}</td>
                                         <td>

@@ -336,6 +336,7 @@
     <Property Name="ProductType" Type="nvarchar" MaxLength="50" />
     <Property Name="BannerCateId" Type="int" />
     <Property Name="Video" Type="nvarchar" MaxLength="50" />
+    <Property Name="VideoId" Type="int" />
   </EntityType>
   <EntityType Name="PSizeTbl">
     <Key>
@@ -398,6 +399,27 @@
     <Property Name="Pincode" Type="varchar" MaxLength="50" />
     <Property Name="Active" Type="bit" />
     <Property Name="Create_at" Type="date" />
+  </EntityType>
+  <EntityType Name="ProductFilterWordTbl">
+    <Key>
+      <PropertyRef Name="PFID" />
+    </Key>
+    <Property Name="PFID" Type="int" Nullable="false" />
+    <Property Name="PFilterId" Type="int" />
+    <Property Name="ProductId" Type="bigint" />
+    <Property Name="PFilterTilte" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="VideoTbl">
+    <Key>
+      <PropertyRef Name="VId" />
+    </Key>
+    <Property Name="VId" Type="int" Nullable="false" />
+    <Property Name="VUrl" Type="nvarchar(max)" />
+    <Property Name="Video" Type="nvarchar(max)" />
+    <Property Name="VideoTitle" Type="nvarchar(max)" />
+    <Property Name="Active" Type="bit" />
+    <Property Name="Create_at" Type="datetime" />
+    <Property Name="Update_at" Type="datetime" />
   </EntityType>
   <!--Errors Found During Generation:
 warning 6002: The table/view 'giftchoice.dbo.AutocompleteSuggestions' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -482,6 +504,8 @@ warning 6002: The table/view 'giftchoice.dbo.VProduct' does not have a primary k
     <EntitySet Name="SizeTbl" EntityType="Self.SizeTbl" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="SliderTbl" EntityType="Self.SliderTbl" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="UserRegister" EntityType="Self.UserRegister" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ProductFilterWordTbl" EntityType="Self.ProductFilterWordTbl" Schema="giftchoice" store:Type="Tables" />
+    <EntitySet Name="VideoTbl" EntityType="Self.VideoTbl" Schema="giftchoice" store:Type="Tables" />
     <EntitySet Name="AutocompleteSuggestions" EntityType="Self.AutocompleteSuggestions" store:Type="Views" store:Schema="dbo">
       <DefiningQuery>SELECT 
     [AutocompleteSuggestions].[ID] AS [ID], 

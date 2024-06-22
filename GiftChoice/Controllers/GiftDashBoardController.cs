@@ -586,7 +586,7 @@ namespace GiftChoice.Controllers
         {
             var res =
 
-               db.ProductTbls.Where(m => m.ProductType == "MainProduct" && (id == -2 ? true : m.MainCateId == id) && m.Active == true).Select(m => new
+               db.ProductTbls.Where(m =>  m.ProductType == "MainProduct" && (id == -2 ? true : m.MainCateId == id) && m.Active == true).Select(m => new
                {
                    m.ProductId,
                    m.MainCateId,
@@ -2997,9 +2997,10 @@ namespace GiftChoice.Controllers
             db.Configuration.ProxyCreationEnabled = false;
             var res =
 
-               db.ProductTbls.Where(m => (model.MainCateId == -1 ? true : m.MainCateId == model.MainCateId) &&
+               db.ProductTbls.Where(m => m.Active == true && (model.MainCateId == -1 ? true : m.MainCateId == model.MainCateId) &&
                (model.BannerCateId == -1 ? true : m.BannerCateId == model.BannerCateId) &&
-                   (model.VideoId == -1 ? true : m.VideoId == model.VideoId)
+                   (model.VideoId == -1 ? true : m.VideoId == model.VideoId) && 
+                   (model.ProductTitle == null ? true : m.ProductTitle.Contains(model.ProductTitle))
                ).Select(m => new
                {
                    m.ProductId,
@@ -3619,14 +3620,14 @@ namespace GiftChoice.Controllers
             {
                 FestivalBannerTbl rws = new FestivalBannerTbl();
 
-                FestivalBannerTbl result = db.FestivalBannerTbls.FirstOrDefault();
-                if (result != null)
-                {
-                    var res = new { res = "-1" };
-                    return Json(res, JsonRequestBehavior.AllowGet);
-                }
-                else
-                {
+                //FestivalBannerTbl result = db.FestivalBannerTbls.FirstOrDefault();
+                //if (result != null)
+                //{
+                //    var res = new { res = "-1" };
+                //    return Json(res, JsonRequestBehavior.AllowGet);
+                //}
+                //else
+                //{
                     rws.FBannerId = db.FestivalBannerTbls.DefaultIfEmpty().Max(r => r == null ? 0 : r.FBannerId) + 1;
 
                     if (model.Image != null)
@@ -3644,7 +3645,7 @@ namespace GiftChoice.Controllers
                     db.SaveChanges();
                     var res = new { res = "1" };
                     return Json(res, JsonRequestBehavior.AllowGet);
-                }
+               // }
             }
             catch (Exception ex)
             {

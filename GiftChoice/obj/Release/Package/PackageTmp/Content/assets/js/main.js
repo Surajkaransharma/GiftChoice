@@ -69,7 +69,7 @@
         autoplay: true,
     });
 
-    //$(".carausel-6-columns").each(function (key, item) {
+    //$(".carausel-5-columns,.carausel-1-columns").each(function (key, item) {
     //    var id = $(this).attr("id");
     //    var sliderID = '#' + id;
     //    var appendArrowsClassName = '#' + id + '-arrows'
@@ -80,30 +80,30 @@
     //        speed: 100,
     //        arrows: true,
     //        autoplay: true,
-    //        slidesToShow: 6,
-    //        slidesToScroll: 2,
+    //        slidesToShow: 9,
+    //        slidesToScroll: 1,
     //        loop: true,
     //        adaptiveHeight: true,
     //        responsive: [
     //            {
     //                breakpoint: 1025,
     //                settings: {
-    //                    slidesToShow: 4,
-    //                    slidesToScroll: 2,
+    //                    slidesToShow: 7,
+    //                    slidesToScroll: 1,
     //                }
     //            },
     //            {
     //                breakpoint: 768,
     //                settings: {
     //                    slidesToShow: 3,
-    //                    slidesToScroll: 2,
+    //                    slidesToScroll: 1,
     //                }
     //            },
     //            {
     //                breakpoint: 480,
     //                settings: {
-    //                    slidesToShow: 2,
-    //                    slidesToScroll: 2
+    //                    slidesToShow: 3,
+    //                    slidesToScroll: 1
     //                }
     //            }
     //        ],
@@ -113,7 +113,7 @@
     //    });
     //});
 
-    //$(".carausel-6-columns").each(function (key, item) {
+    //$(".carausel-5-columns,.carausel-1-columns").each(function (key, item) {
     //    var id = $(this).attr("id");
     //    var sliderID = '#' + id;
     //    var appendArrowsClassName = '#' + id + '-arrows'
@@ -124,30 +124,30 @@
     //        speed: 100,
     //        arrows: true,
     //        autoplay: true,
-    //        slidesToShow: 6,
-    //        slidesToScroll: 2,
+    //        slidesToShow: 9,
+    //        slidesToScroll: 1,
     //        loop: true,
     //        adaptiveHeight: true,
     //        responsive: [
     //            {
     //                breakpoint: 1025,
     //                settings: {
-    //                    slidesToShow: 4,
-    //                    slidesToScroll: 2,
+    //                    slidesToShow: 7,
+    //                    slidesToScroll: 1,
     //                }
     //            },
     //            {
     //                breakpoint: 768,
     //                settings: {
     //                    slidesToShow: 3,
-    //                    slidesToScroll: 2,
+    //                    slidesToScroll: 1,
     //                }
     //            },
     //            {
     //                breakpoint: 480,
     //                settings: {
-    //                    slidesToShow: 2,
-    //                    slidesToScroll: 2
+    //                    slidesToShow: 3,
+    //                    slidesToScroll: 1
     //                }
     //            }
     //        ],
@@ -156,7 +156,7 @@
     //        appendArrows: (appendArrowsClassName),
     //    });
     //});
- 
+
     /*Carausel 4 columns*/
     $(".carausel-4-columns").each(function (key, item) {
         var id = $(this).attr("id");

@@ -1560,6 +1560,25 @@ app.controller("HomeController", ['$scope', '$http', '$sce', 'startFromFilter', 
 
 
     };
+
+    $scope.giftfilterkeyword = function () {
+
+        var urlParams = new URLSearchParams(window.location.search);
+
+        // Get the value of the "CartData" parameter
+        $scope.ProductType = urlParams.get('ProductType');
+
+        $http.get("/Home/getgiftfilterkeyword?ProductType=" + $scope.ProductType).then(function (d) {
+            $scope.ProductData = d.data.ProductList;
+
+
+
+        }, function (error) {
+            alert(error.data);
+        });
+
+
+    };
     $scope.showFullContent = false;
     $scope.toggleContent = function (post) {
         $scope.showFullContent = !$scope.showFullContent;

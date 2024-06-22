@@ -38,6 +38,8 @@
         <EntityTypeShape EntityType="GiftChoiceModel.UserRegister" Width="1.5" PointX="10.75" PointY="15.75" />
         <EntityTypeShape EntityType="GiftChoiceModel.AutocompleteSuggestion" Width="1.5" PointX="16.75" PointY="0.75" />
         <EntityTypeShape EntityType="GiftChoiceModel.VProduct" Width="1.5" PointX="16.75" PointY="3.75" />
+        <EntityTypeShape EntityType="GiftChoiceModel.VideoTbl" Width="1.5" PointX="7.375" PointY="16.75" />
+        <EntityTypeShape EntityType="GiftChoiceModel.ProductFilterWordTbl" Width="1.5" PointX="13.375" PointY="16.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

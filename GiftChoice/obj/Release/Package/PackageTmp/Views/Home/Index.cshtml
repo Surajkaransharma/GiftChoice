@@ -2,10 +2,10 @@
     ViewBag.Title = "Home Page";
 }
 
-<!-- Main Content Start -->
+<!-- Main Content Start GiftChoice V4  -->
 <main class="main">
-    <!-- Slider Start -->
 
+    <!-- Slider Start -->
     <section class="p-0 home-slider" ng-init="SliderList()">
         <div id="carouselId" class="carousel slide" data-bs-ride="carousel">
             <div class="carousel-inner" role="listbox">
@@ -14,8 +14,6 @@
                         <img src="~/images/SliderImg/{{s.SliderImage}}" class="w-100 d-block img-fluid" loading="lazy" alt="corporates-gifts" />
                     </a>
                 </div>
-
-
             </div>
             <button class="carousel-control-prev" type="button" data-bs-target="#carouselId" data-bs-slide="prev">
                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -27,67 +25,361 @@
             </button>
         </div>
     </section>
+    <!-- Slider End -->
+    @* Hero Category Section Start *@
+    <section class="popular-categorie" ng-init="GetHomeMainCateHeroData()" ng-show="HomeHeroMainCateData.length>0">
+        <div class="container wow fadeIn animated pt-2 pb-2">
+            <h5 class="section-title mb-20"><span>Shop By</span> Categories</h5>
+            <div class="carausel-5-columns-cover position-relative">
+                @*<div class="slider-arrow slider-arrow-2 carausel-5-columns-arrow" id="carausel-5-columns-arrows"></div>*@
+                <div class="carausel-5-columns" id="carausel-5-columns">
+                    <div class="card-1" ng-repeat="m in HomeHeroMainCateData">
+                        <figure class=" img-hover-scale overflow-hidden">
+                            <a href="/Home/shop?Main={{m.MTitle}}">
+                                <img ng-src="~/images/MainCate/{{m.MImage}}" alt="{{m.MUrl}}" loading="lazy">
+                            </a>
+                        </figure>
+                    </div>
 
-    <!-- Slider End -->
-    <!-- Slider Start -->
-    <!-- Slider End -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    @*<section class="p-0 category-section section-padding bg-white" ng-init="GetHomeMainCateHeroData()" ng-show="HomeHeroMainCateData.length>0">
+            <div class="container pt-2 pb-2">
+                <h5 class="section-title mb-20">Shop By Categories</h5>
+                <div class="row align-items-center g-1 gx-2">
+                    <div class="col" ng-repeat="m in HomeHeroMainCateData">
+                        <div class="img-hover-scale overflow-hidden border rounded-2">
+                            <a href="/Home/shop?Main={{m.MTitle}}">
+                                <img ng-src="~/images/MainCate/{{m.MImage}}" loading="lazy" alt="Caricatures" class="w-100 img-fluid img-thumbnail rounded-2">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>*@
+    @* Hero Category Section End *@
+
+
     <!-- Small Banner Start -->
-    <section class="p-0 banners section-padding bg-light"  ng-init="GetSmallBanner()" ng-show="GetSmallBannerData.length>0">
-        <div class="container pt-4 pb-4">
-            <div class="row g-2 gx-3 justify-content-start m-nowrap">
-                <div class="col-lg-4 col-sm-4 col-7" ng-repeat="b in GetSmallBannerData">
-
+    <section class="p-0 banners section-padding" ng-init="GetSmallBanner()" ng-show="GetSmallBannerData.length>0">
+        <div class="container pt-2 pb-2">
+            <div class="row g-2 gx-3 justify-content-start">
+                <div class="col-lg-4 col-sm-4 col-12" ng-repeat="b in GetSmallBannerData">
                     <div class="banner-img mb-0 rounded-3">
                         <a href="/Home/BannerGifts?Banner={{b.MainCateId}}">
                             <img ng-src="~/images/MainCate/{{b.MImage}}" loading="lazy" alt="advertisement-image" class="img-fluid w-100">
                         </a>
                     </div>
-
                 </div>
-
             </div>
         </div>
     </section>
     <!-- Small Banner End -->
-    <!-- Festival Banner Start -->
-    <section class="p-0 section-padding"  ng-init="GetFestivalBanner()" ng-show="FestivalBannerData">
-        <div class="container pt-4 pb-4" ng-show="FestivalBannerData!=''">
+    <!-- Products Section Start -->
+    <section class="product-tabs section-padding" ng-show="Relation.length>0" style="display: none">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 col-sm-12 col-12">
+                    <div class="section-title d-flex justify-content-between align-items-center mb-3">
+                        <h5 class="section-title">Shop By {{Relation[0].Toplabel}}</h5>
+                        <a href="/Home/TopProduct?ProductType={{Relation[0].Toplabel}}" type="button" class="btn btn-theme-1">View All</a>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-content">
+                <div class="tab-pane fade show active" id="tab-one" role="tabpanel" aria-labelledby="tab-one">
+                    <div class="row product-grid-4 g-2" >
+                        <div class="col-lg-2 col-6 col-sm-3" ng-repeat="p in Relation" >
+
+                            <div class="product-cart-wrap mb-1">
+                                <div class="product-img-action-wrap">
+                                    <div class="product-img product-img-zoom">
+                                        <a href="/Home/Gift?url={{p.PUrl}}">
+                                            <img class="default-img img-fluid" ng-src="~/images/ProductImg/{{p.ProductImage}}" loading="lazy" alt="product-image" loading="lazy" alt="">
+                                        </a>
+                                    </div>
+                                    @*<div class="product-badges product-badges-position product-badges-mrg product-badges-position-1"  ng-show="p.Video">
+                                            <a href="#" ng-click="quickview(p,'video')"><span class="pot"><i class="fa fa-youtube-play" aria-hidden="true"></i></span></a>
+                                        </div>*@
+                                    <div class="product-badges product-badges-position product-badges-mrg" ng-show="p.PLabel!=''">
+                                        <span class="hot">{{p.PLabel}}</span>
+                                    </div>
+                                    @*<div ng-show="p.SameDay" class="product-badges product-badges-position_1 product-badges-mrg same-day-badge">
+                                            <span class="hot">Same Day Available</span>
+                                        </div>*@
+                                </div>
+                                <div class="product-content-wrap">
+                                    <h2 class="mt-2"><a href="/Home/Gift?url={{p.PUrl}}">{{p.ProductTitle}}</a></h2>
+
+                                    <div class="product-price d-flex justify-content-between align-items-center">
+                                        <div class="">
+                                            <span><i class="fa fa-inr" aria-hidden="true"></i>  {{p.Price}}/-</span>
+                                        </div>
+                                        <div class="same-day" ng-show="p.SameDay">
+                                            <p class="hot text-success animate__fadeIn"><b>Same Day Available</b></p>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div class="button-design mt-2">
+                                            <a aria-label="Add To Cart" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight" class="btn theme-button-2" ng-click="LabeladdItemToCart($index,Relation[0].Toplabel)"><i class="fi-rs-shopping-bag-add"></i> Add To Cart </a>
+                                        </div>
+                                        @* Popup Button For Image *@
+                                        <div class="button-design mt-2" ng-if="!p.Video">
+                                            <a aria-label="View Image" class="btn theme-button-3 d-flex gap-2 align-items-center" ng-click="quickview(p)"><span class="d-lg-none d-sm-none d-block fs-9">View </span><i class="fa fa-eye" aria-hidden="true"></i></a>
+                                        </div>
+
+
+                                        @* Popup Button For Video *@
+                                        <div class="button-design mt-2" ng-if="p.Video">
+                                            <a aria-label="View Image" class="btn theme-button-3 d-flex gap-2 align-items-center for-video" ng-click="quickview(p)"><span class="d-lg-none d-sm-none d-block fs-9 hide-animation" id="hideText">View </span><i class="fa fa-youtube-play" aria-hidden="true"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </section>
+    <!-- Products Section End -->
+    <!-- Advertisement Banner Start -->
+    <section class="p-0" ng-init="GetFestivalBanner()" ng-show="FestivalBannerData[0]">
+        <div class="container pt-2 pb-2" ng-show="FestivalBannerData!=''">
             <div class="row g-1 gx-1">
                 <div class="col-lg-12">
                     <div class="big-banner">
-                        <a href="{{FestivalBannerData.FBUrl}}">
-                            <img ng-src="~/images/FestivalBanner/{{FestivalBannerData.FBImage}}" alt="banner-image" class="img-fluid">
+                        <a href="{{FestivalBannerData[0].FBUrl}}">
+                            <img ng-src="~/images/FestivalBanner/{{FestivalBannerData[0].FBImage}}" alt="banner-image" class="img-fluid rounded-3">
                         </a>
                     </div>
                 </div>
             </div>
         </div>
     </section>
-    <!-- Festival Banner End -->
-    @* Hero Category Section Start *@
-    <section class="p-0 category-section section-padding bg-white"  ng-init="GetHomeMainCateHeroData()" ng-show="HomeHeroMainCateData.length>0">
-        <div class="container pt-4 pb-4">
-            <h3 class="section-title mb-20">Shop By Categories</h3>
-            <div class="row align-items-center g-1 gx-2">
-                <div class="col" ng-repeat="m in HomeHeroMainCateData">
+    <!-- Advertisement Banner End -->
+    <!-- Products Section Start -->
+    <filter ng-init="GetFilterWordList()">
+        <section class="product-tabs section-padding">
+            <div class="container">
+                <div class="row g-2">
+                    <div class="col-lg-6 col-sm-6 col-12">
+                        <div class="bg-light p-3 pp-3">
+                            <div class="row">
+                                <div class="col-lg-12 col-sm-12 col-12">
+                                    <div class="section-title d-flex justify-content-between align-items-center mb-3">
+                                        <h5 class="section-title">Gifts under 499</h5>
+                                        <a href="/Home/giftfilterkeyword?ProductType=Giftsunder499" type="button" class="btn btn-theme-1">View All</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-content">
+                                <div class="tab-pane fade show active" id="tab-one" role="tabpanel" aria-labelledby="tab-one">
+                                    <div class="row product-grid-4 g-2">
+                                        <div class="col-lg-4 col-6 col-sm-6" ng-repeat="p in Giftsunder499">
+                                            <div class="product-cart-wrap mb-1">
+                                                <div class="product-img-action-wrap">
+                                                    <div class="product-img product-img-zoom">
+                                                        <a href="/Home/Gift?url={{p.PUrl}}">
+                                                            <img class="default-img img-fluid" ng-src="~/images/ProductImg/{{p.ProductImage}}" loading="lazy" alt="product-image" loading="lazy" alt="">
+                                                        </a>
+                                                    </div>
+                                                    @*<div class="product-badges product-badges-position product-badges-mrg product-badges-position-1"  ng-show="p.Video">
+                                                        <a href="#" ng-click="quickview(p,'video')"><span class="pot"><i class="fa fa-youtube-play" aria-hidden="true"></i></span></a>
+                                                    </div>*@
+                                                    <div class="product-badges product-badges-position product-badges-mrg" ng-show="p.PLabel!=''">
+                                                        <span class="hot">{{p.PLabel}}</span>
+                                                    </div>
+                                                    @*<div ng-show="p.SameDay" class="product-badges product-badges-position_1 product-badges-mrg same-day-badge">
+                                                        <span class="hot">Same Day Available</span>
+                                                    </div>*@
+                                                </div>
+                                                <div class="product-content-wrap">
+                                                    <h2 class="mt-2"><a href="/Home/Gift?url={{p.PUrl}}">{{p.ProductTitle}}</a></h2>
 
-                    <div class="img-hover-scale overflow-hidden">
-                        <a href="/Home/shop?Main={{m.MTitle}}">
-                            <img ng-src="~/images/MainCate/{{m.MImage}}" loading="lazy" alt="Caricatures" class="w-100 img-fluid img-thumbnail rounded-2">
-                        </a>
+                                                    <div class="product-price d-flex justify-content-between align-items-center">
+                                                        <div class="">
+                                                            <span><i class="fa fa-inr" aria-hidden="true"></i>  {{p.Price}}/-</span>
+                                                        </div>
+                                                        <div class="same-day" ng-show="p.SameDay">
+                                                            <p class="hot text-success animate__fadeIn"><b>Same Day Available</b></p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="d-flex justify-content-between align-items-center">
+                                                        <div class="button-design mt-2">
+                                                            <a aria-label="Add To Cart" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight" class="btn theme-button-2" ng-click="addItemToCart($index)"><i class="fi-rs-shopping-bag-add"></i> Add To Cart </a>
+                                                        </div>
+                                                        @* Popup Button For Image *@
+                                                        <div class="button-design mt-2" ng-if="!p.Video">
+                                                            <a aria-label="View Image" class="btn theme-button-3 d-flex gap-2 align-items-center" ng-click="quickview(p)"><span class="d-lg-none d-sm-none d-block fs-9">View </span><i class="fa fa-eye" aria-hidden="true"></i></a>
+                                                        </div>
 
+
+                                                        @* Popup Button For Video *@
+                                                        <div class="button-design mt-2" ng-if="p.Video">
+                                                            <a aria-label="View Image" class="btn theme-button-3 d-flex gap-2 align-items-center for-video" ng-click="quickview(p)"><span class="d-lg-none d-sm-none d-block fs-9 hide-animation" id="hideText">View </span><i class="fa fa-youtube-play" aria-hidden="true"></i></a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-sm-6 col-12">
+                        <div class="bg-light p-3 pp-3">
+                            <div class="row">
+                                <div class="col-lg-12 col-sm-12 col-12">
+                                    <div class="section-title d-flex justify-content-between align-items-center mb-3">
+                                        <h5 class="section-title">Gifts under 999</h5>
+                                        <a href="/Home/giftfilterkeyword?ProductType=Giftsunder999" type="button" class="btn btn-theme-1">View All</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-content">
+                                <div class="tab-pane fade show active" id="tab-one" role="tabpanel" aria-labelledby="tab-one">
+                                    <div class="row product-grid-4 g-2">
+                                        <div class="col-lg-4 col-6 col-sm-6" ng-repeat="p in Giftsunder999">
+                                            <div class="product-cart-wrap mb-1">
+                                                <div class="product-img-action-wrap">
+                                                    <div class="product-img product-img-zoom">
+                                                        <a href="/Home/Gift?url={{p.PUrl}}">
+                                                            <img class="default-img img-fluid" ng-src="~/images/ProductImg/{{p.ProductImage}}" loading="lazy" alt="product-image" loading="lazy" alt="">
+                                                        </a>
+                                                    </div>
+                                                    @*<div class="product-badges product-badges-position product-badges-mrg product-badges-position-1"  ng-show="p.Video">
+                                                        <a href="#" ng-click="quickview(p,'video')"><span class="pot"><i class="fa fa-youtube-play" aria-hidden="true"></i></span></a>
+                                                    </div>*@
+                                                    <div class="product-badges product-badges-position product-badges-mrg" ng-show="p.PLabel!=''">
+                                                        <span class="hot">{{p.PLabel}}</span>
+                                                    </div>
+                                                    @*<div ng-show="p.SameDay" class="product-badges product-badges-position_1 product-badges-mrg same-day-badge">
+                                                        <span class="hot">Same Day Available</span>
+                                                    </div>*@
+                                                </div>
+                                                <div class="product-content-wrap">
+                                                    <h2 class="mt-2"><a href="/Home/Gift?url={{p.PUrl}}">{{p.ProductTitle}}</a></h2>
+
+                                                    <div class="product-price d-flex justify-content-between align-items-center">
+                                                        <div class="">
+                                                            <span><i class="fa fa-inr" aria-hidden="true"></i>  {{p.Price}}/-</span>
+                                                        </div>
+                                                        <div class="same-day" ng-show="p.SameDay">
+                                                            <p class="hot text-success animate__fadeIn"><b>Same Day Available</b></p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="d-flex justify-content-between align-items-center">
+                                                        <div class="button-design mt-2">
+                                                            <a aria-label="Add To Cart" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight" class="btn theme-button-2" ng-click="addItemToCart($index)"><i class="fi-rs-shopping-bag-add"></i> Add To Cart </a>
+                                                        </div>
+                                                        @* Popup Button For Image *@
+                                                        <div class="button-design mt-2" ng-if="!p.Video">
+                                                            <a aria-label="View Image" class="btn theme-button-3 d-flex gap-2 align-items-center" ng-click="quickview(p)"><span class="d-lg-none d-sm-none d-block fs-9">View </span><i class="fa fa-eye" aria-hidden="true"></i></a>
+                                                        </div>
+
+
+                                                        @* Popup Button For Video *@
+                                                        <div class="button-design mt-2" ng-if="p.Video">
+                                                            <a aria-label="View Image" class="btn theme-button-3 d-flex gap-2 align-items-center for-video" ng-click="quickview(p)"><span class="d-lg-none d-sm-none d-block fs-9 hide-animation" id="hideText">View </span><i class="fa fa-youtube-play" aria-hidden="true"></i></a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-
             </div>
-        </div>
-    </section>
-    @* Hero Category Section End *@
+        </section>
+        <!-- Products Section End -->
+        <!-- Products Section Start -->
+        <section class="product-tabs section-padding">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12 col-sm-12 col-12">
+                        <div class="bg-light p-3 pp-3">
+                            <div class="row">
+                                <div class="col-lg-12 col-sm-12 col-12">
+                                    <div class="section-title d-flex justify-content-between align-items-center mb-3">
+                                        <h5 class="section-title">Friends gifts best sellers</h5>
+                                        <a href="/Home/giftfilterkeyword?ProductType=giftsFriendsbestsellers" type="button" class="btn btn-theme-1">View All</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-content">
+                                <div class="tab-pane fade show active" id="tab-one" role="tabpanel" aria-labelledby="tab-one">
+                                    <div class="row product-grid-4 g-2">
+                                        <div class="col-lg-2 col-6 col-sm-6" ng-repeat="p in giftsFriendsbestsellers">
+                                            <div class="product-cart-wrap mb-1">
+                                                <div class="product-img-action-wrap">
+                                                    <div class="product-img product-img-zoom">
+                                                        <a href="/Home/Gift?url={{p.PUrl}}">
+                                                            <img class="default-img img-fluid" ng-src="~/images/ProductImg/{{p.ProductImage}}" loading="lazy" alt="product-image" loading="lazy" alt="">
+                                                        </a>
+                                                    </div>
+                                                    @*<div class="product-badges product-badges-position product-badges-mrg product-badges-position-1"  ng-show="p.Video">
+                                                        <a href="#" ng-click="quickview(p,'video')"><span class="pot"><i class="fa fa-youtube-play" aria-hidden="true"></i></span></a>
+                                                    </div>*@
+                                                    <div class="product-badges product-badges-position product-badges-mrg" ng-show="p.PLabel!=''">
+                                                        <span class="hot">{{p.PLabel}}</span>
+                                                    </div>
+                                                    @*<div ng-show="p.SameDay" class="product-badges product-badges-position_1 product-badges-mrg same-day-badge">
+                                                        <span class="hot">Same Day Available</span>
+                                                    </div>*@
+                                                </div>
+                                                <div class="product-content-wrap">
+                                                    <h2 class="mt-2"><a href="/Home/Gift?url={{p.PUrl}}">{{p.ProductTitle}}</a></h2>
+
+                                                    <div class="product-price d-flex justify-content-between align-items-center">
+                                                        <div class="">
+                                                            <span><i class="fa fa-inr" aria-hidden="true"></i>  {{p.Price}}/-</span>
+                                                        </div>
+                                                        <div class="same-day" ng-show="p.SameDay">
+                                                            <p class="hot text-success animate__fadeIn"><b>Same Day Available</b></p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="d-flex justify-content-between align-items-center">
+                                                        <div class="button-design mt-2">
+                                                            <a aria-label="Add To Cart" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight" class="btn theme-button-2" ng-click="addItemToCart($index)"><i class="fi-rs-shopping-bag-add"></i> Add To Cart </a>
+                                                        </div>
+                                                        @* Popup Button For Image *@
+                                                        <div class="button-design mt-2" ng-if="!p.Video">
+                                                            <a aria-label="View Image" class="btn theme-button-3 d-flex gap-2 align-items-center" ng-click="quickview(p)"><span class="d-lg-none d-sm-none d-block fs-9">View </span><i class="fa fa-eye" aria-hidden="true"></i></a>
+                                                        </div>
 
 
+                                                        @* Popup Button For Video *@
+                                                        <div class="button-design mt-2" ng-if="p.Video">
+                                                            <a aria-label="View Image" class="btn theme-button-3 d-flex gap-2 align-items-center for-video" ng-click="quickview(p)"><span class="d-lg-none d-sm-none d-block fs-9 hide-animation" id="hideText">View </span><i class="fa fa-youtube-play" aria-hidden="true"></i></a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </filter>
+    <!-- Products Section End -->
     <!-- Design Banner Start -->
-    <section class="p-0 section-padding bg-light" ng-init="GetDesignBanner()">
-        <div class="container pt-4 pb-4">
+    <section class="p-0 section-padding" ng-init="GetDesignBanner()">
+        <div class="container pt-2 pb-2">
             <div class="row g-1">
                 <div class="col-lg-6 col-sm-12 col-12">
                     <div class="row g-1">
@@ -138,233 +430,60 @@
         </div>
     </section>
     <!-- Design Banner End -->
-    <!-- Top Products Start -->
-    <section class="section-padding p-0" ng-show="NewArivals.length>0 || TopsellingProduct.length>0 || NewProduct.length>0" ng-init="GetLabelProduct()">
-        <div class="container pt-4 pb-4">
-            <div class="row gx-2 g-2 overflow-auto">
-                <div class="col-lg-4 col-sm-7 col-9" ng-show="TopsellingProduct.length>0">
-                    <div class="bg-light p-3 pt-4 pb-4 border border-light rounded-5 ppt-4">
-                        <div class="different-products">
-                            <div class="row">
-                                <div class="col-lg-6 col-sm-6 col-6">
-                                    <h3 class="section-title mb-20">{{TopsellingProduct[0].Toplabel}}</h3>
-                                </div>
-                                <div class="col-lg-6 col-sm-6 col-6">
-                                    <p align="right"><a href="/Home/TopProduct?ProductType=TopsellingProduct"><strong>View More</strong></a></p>
-                                </div>
-                            </div>
-
-                            <div class="carausel-6-columns" id="carausel-6-columns-3">
-                                <div class="brand-logo bg-white" ng-repeat="b in TopsellingProduct">
-                                    <div class="product-list-small p-2 pb-0">
-                                        <div class="row align-items-center g-3">
-                                            <div class="col-lg-3 col-sm-6 col-4">
-                                                <a href="/Home/Gift?url={{b.PUrl}}">
-                                                    <img ng-src="~/images/ProductImg/{{b.ProductImage}}" alt="product-image" class="img-fluid p-0">
-                                                </a>
-                                            </div>
-                                            <div class="col-lg-8 col-sm-8 col-8">
-                                                <div class="title-small mb-0">
-                                                    <a class="theme-text-size" href="/Home/Gift?url={{b.PUrl}}">{{b.ProductTitle}}</a>
-                                                </div>
-                                                @*<div class="product-description">
-                            <a href="/Home/shop?Main={{b.Maincate}}">   <p>{{b.Maincate}}</p></a>
-                        </div>*@
-                                                <div class="product-price">
-                                                    <h6><i class="fa fa-inr" aria-hidden="true"></i>{{b.Price}} </h6>
-                                                </div>
-                                                <div class="details">
-                                                    <a href="/Home/Gift?url={{b.PUrl}}" type="button" class="btn btn-primary view-more">View Details</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                 
-                            </div>
-
-
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-sm-7 col-9" ng-show="NewProduct.length>0">
-                    <div class="bg-light p-3 pt-4 pb-4 border border-light rounded-5 ppt-4">
-                        <div class="different-products">
-                            <div class="row">
-                                <div class="col-lg-6 col-sm-6 col-6">
-                                    <h3 class="section-title mb-20">{{NewProduct[0].Toplabel}}</h3>
-                                </div>
-                                <div class="col-lg-6 col-sm-6 col-6">
-                                    <p align="right"><a href="/Home/TopProduct?ProductType=NewProduct"><strong>View More</strong></a></p>
-                                </div>
-                            </div>
-
-                            <div class="carausel-6-columns" id="carausel-6-columns-3_1">
-                                <div class="brand-logo bg-white" ng-repeat="b in NewProduct">
-                                    <div class="product-list-small p-2 pb-0">
-                                        <div class="row align-items-center">
-                                            <div class="col-lg-3 col-sm-6 col-4">
-                                                <a href="/Home/Gift?url={{b.PUrl}}">
-                                                    <img ng-src="~/images/ProductImg/{{b.ProductImage}}" alt="product-image" class="img-fluid p-0">
-                                                </a>
-                                            </div>
-                                            <div class="col-lg-8 col-sm-8 col-8">
-                                                <div class="title-small mb-0">
-                                                    <a class="theme-text-size" href="/Home/Gift?url={{b.PUrl}}">{{b.ProductTitle}}</a>
-                                                </div>
-                                                @*<div class="product-description">
-                                                    <a href="/Home/shop?Main={{b.Maincate}}">   <p>{{b.Maincate}}</p></a>
-                                                </div>*@
-                                                <div class="product-price">
-                                                    <h6><i class="fa fa-inr" aria-hidden="true"></i>{{b.Price}} </h6>
-                                                </div>
-                                                <div class="details">
-                                                    <a href="/Home/Gift?url={{b.PUrl}}" type="button" class="btn btn-primary view-more">View Details</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-sm-7 col-9" ng-show="NewArivals.length>0">
-                    <div class="bg-light p-3 pt-4 pb-4 border border-light rounded-5 ppt-4">
-                        <div class="different-products">
-                            <div class="row">
-                                <div class="col-lg-6 col-sm-6 col-6">
-                                    <h3 class="section-title mb-20">{{NewArivals[0].Toplabel}}</h3>
-                                </div>
-                                <div class="col-lg-6 col-sm-6 col-6">
-                                    <p align="right"><a href="/Home/TopProduct?ProductType=NewArivals"><strong>View More</strong></a></p>
-                                </div>
-                            </div>
-
-                            <div class="carausel-6-columns" id="carausel-6-columns-3_2">
-                                <div class="brand-logo bg-white" ng-repeat="b in NewArivals">
-                                    <div class="product-list-small p-2 pb-0">
-                                        <div class="row align-items-center">
-                                            <div class="col-lg-3 col-sm-6 col-4">
-                                                <a href="/Home/Gift?url={{b.PUrl}}">
-                                                    <img ng-src="~/images/ProductImg/{{b.ProductImage}}" alt="product-image" class="img-fluid p-0">
-                                                </a>
-                                            </div>
-                                            <div class="col-lg-8 col-sm-8 col-8">
-                                                <div class="title-small mb-0">
-                                                    <a class="theme-text-size" href="/Home/Gift?url={{b.PUrl}}">{{b.ProductTitle}}</a>
-                                                </div>
-                                                @*<div class="product-description">
-                            <a href="/Home/shop?Main={{b.Maincate}}">   <p>{{b.Maincate}}</p></a>
-                        </div>*@
-                                                <div class="product-price">
-                                                    <h6><i class="fa fa-inr" aria-hidden="true"></i>{{b.Price}} </h6>
-                                                </div>
-                                                <div class="details">
-                                                    <a href="/Home/Gift?url={{b.PUrl}}" type="button" class="btn btn-primary view-more">View Details</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                      
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-    </section>
-    <!-- Top Products End -->
-    <!-- Multiple Banner Start -->
-    <section class="p-0 section-padding bg-light" ng-show="MultipleBannerData.length>0" ng-init="GetMultipleBanner()">
-        <div class="container pt-4 pb-4">
-            <div class="row g-1 gx-1">
-                <div class="col-lg-3 col-6 col-sm-4" ng-repeat="m in MultipleBannerData">
-
-                    <div class="big-banner">
-                        <a href="/Home/BannerGifts?Banner={{m.MainCateId}}">
-
-                            <img ng-src="~/images/MainCate/{{m.MImage}}" alt="banner-image" class="img-fluid">
-                        </a>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- Multiple Banner End -->
-    @* Normal Category Section Start *@
-    <section class="p-0 category-section section-padding" ng-show="HomeMainCateData.length>0">
-        <div class="container pt-4 pb-4" ng-init="GetHomeMainCateData()">
-            <h3 class="section-title mb-20">Shop By Categories</h3>
-            <div class="row align-items-center g-1 gx-2">
-                <div class="col" ng-repeat="m in HomeMainCateData">
-
-                    <div class="img-hover-scale overflow-hidden">
-                        <a href="/Home/shop?Main={{m.MTitle}}">
-                            <img ng-src="~/images/MainCate/{{m.MImage}}" loading="lazy" alt="Caricatures" class="w-100 img-fluid img-thumbnail rounded-2">
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-
-    </section>
-    @* Normal Category Section End *@
-
-
     <!-- Products Section Start -->
-    <section class="product-tabs section-padding bg-light">
+    <section class="product-tabs section-padding" ng-show="TopsellingProduct.length>0">
         <div class="container">
             <div class="row">
-                <div class="col-lg-6 col-sm-6 col-6">
-                    <div class="section-title" align="left">
-                        <h3 class="section-title mb-20">New Arivals</h3>
+                <div class="col-lg-12 col-sm-12 col-12">
+                    <div class="section-title d-flex justify-content-between align-items-center mb-3">
+                        <h5 class="section-title">{{TopsellingProduct[0].Toplabel}}</h5>
+                        <a href="/Home/TopProduct?ProductType={{TopsellingProduct[0].Toplabel}}" type="button" class="btn btn-theme-1">View All</a>
                     </div>
                 </div>
             </div>
             <div class="tab-content">
                 <div class="tab-pane fade show active" id="tab-one" role="tabpanel" aria-labelledby="tab-one">
-                    <div class="row product-grid-4 g-2" ng-init="GetProduct()">
-                        <div class="col-lg-2 col-6 col-sm-3" ng-repeat="p in ProductData" ng-click="RecentViewData($index)">
+                    <div class="row product-grid-4 g-2" >
+                        <div class="col-lg-2 col-6 col-sm-3" ng-repeat="p in TopsellingProduct">
 
                             <div class="product-cart-wrap mb-1">
                                 <div class="product-img-action-wrap">
-                                    <div class="product-img product-img-zoom">   
+                                    <div class="product-img product-img-zoom">
                                         <a href="/Home/Gift?url={{p.PUrl}}">
                                             <img class="default-img img-fluid" ng-src="~/images/ProductImg/{{p.ProductImage}}" loading="lazy" alt="product-image" loading="lazy" alt="">
                                         </a>
                                     </div>
                                     @*<div class="product-badges product-badges-position product-badges-mrg product-badges-position-1"  ng-show="p.Video">
-                                        <a href="#" ng-click="quickview(p,'video')"><span class="pot"><i class="fa fa-youtube-play" aria-hidden="true"></i></span></a>
-                                    </div>*@
+                                            <a href="#" ng-click="quickview(p,'video')"><span class="pot"><i class="fa fa-youtube-play" aria-hidden="true"></i></span></a>
+                                        </div>*@
                                     <div class="product-badges product-badges-position product-badges-mrg" ng-show="p.PLabel!=''">
                                         <span class="hot">{{p.PLabel}}</span>
                                     </div>
-                                    <div ng-show="p.SameDay" class="product-badges product-badges-position_1 product-badges-mrg same-day-badge">
-                                        <span class="hot">Same Day Available</span>
-                                    </div>
+                                    @*<div ng-show="p.SameDay" class="product-badges product-badges-position_1 product-badges-mrg same-day-badge">
+                                            <span class="hot">Same Day Available</span>
+                                        </div>*@
                                 </div>
                                 <div class="product-content-wrap">
                                     <h2 class="mt-2"><a href="/Home/Gift?url={{p.PUrl}}">{{p.ProductTitle}}</a></h2>
-                                    <div class="product-price">
-                                        <span><i class="fa fa-inr" aria-hidden="true"></i>  {{p.Price}}/-</span>
+
+                                    <div class="product-price d-flex justify-content-between align-items-center">
+                                        <div class="">
+                                            <span><i class="fa fa-inr" aria-hidden="true"></i>  {{p.Price}}/-</span>
+                                        </div>
+                                        <div class="same-day" ng-show="p.SameDay">
+                                            <p class="hot text-success animate__fadeIn"><b>Same Day Available</b></p>
+                                        </div>
                                     </div>
                                     <div class="d-flex justify-content-between align-items-center">
                                         <div class="button-design mt-2">
-                                            <a aria-label="Add To Cart" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight" class="btn theme-button-2" ng-click="addItemToCart($index)"><i class="fi-rs-shopping-bag-add"></i> Add To Cart </a>
+                                            <a aria-label="Add To Cart" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight" class="btn theme-button-2" ng-click="LabeladdItemToCart($index,'TopsellingProduct')"><i class="fi-rs-shopping-bag-add"></i> Add To Cart </a>
                                         </div>
                                         @* Popup Button For Image *@
                                         <div class="button-design mt-2" ng-if="!p.Video">
-                                            <a aria-label="View Image" class="btn theme-button-3 d-flex gap-2 align-items-center" ng-click="quickview(p)"><span class="d-lg-none d-sm-none d-block fs-9" >View </span><i class="fa fa-eye" aria-hidden="true"></i></a>
+                                            <a aria-label="View Image" class="btn theme-button-3 d-flex gap-2 align-items-center" ng-click="quickview(p)"><span class="d-lg-none d-sm-none d-block fs-9">View </span><i class="fa fa-eye" aria-hidden="true"></i></a>
                                         </div>
 
-                                        
+
                                         @* Popup Button For Video *@
                                         <div class="button-design mt-2" ng-if="p.Video">
                                             <a aria-label="View Image" class="btn theme-button-3 d-flex gap-2 align-items-center for-video" ng-click="quickview(p)"><span class="d-lg-none d-sm-none d-block fs-9 hide-animation" id="hideText">View </span><i class="fa fa-youtube-play" aria-hidden="true"></i></a>
@@ -380,11 +499,231 @@
         </div>
 
     </section>
-
-
-
-
     <!-- Products Section End -->
+    <!-- Advertisement Banner Start -->
+    <section class="p-0"  ng-if="FestivalBannerData[1]">
+        <div class="container pt-2 pb-2" ng-show="FestivalBannerData!=''">
+            <div class="row g-1 gx-1">
+                <div class="col-lg-12">
+                    <div class="big-banner">
+                        <a href="{{FestivalBannerData[1].FBUrl}}">
+                            <img ng-src="~/images/FestivalBanner/{{FestivalBannerData[1].FBImage}}" alt="banner-image" class="img-fluid rounded-3">
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Advertisement Banner End -->
+    @* Normal Category Section Start *@
+    <section class="popular-categorie" ng-show="HomeMainCateData.length>0">
+        <div class="container wow fadeIn animated pt-2 pb-2" ng-init="GetHomeMainCateData()">
+            <h5 class="section-title mb-20"><span>Shop By</span> Main Categories</h5>
+            <div class="carausel-1-columns-cover position-relative">
+                @*<div class="slider-arrow slider-arrow-2 carausel-1-columns-arrow" id="carausel-1-columns-arrows"></div>*@
+                <div class="carausel-1-columns" id="carausel-1-columns">
+                    <div class="card-1" ng-repeat="m in HomeMainCateData">
+                        <figure class=" img-hover-scale overflow-hidden">
+                            <a href="/Home/shop?Main={{m.MTitle}}">
+                                <img ng-src="~/images/MainCate/{{m.MImage}}" loading="lazy" alt="{{m.MUrl}}">
+                            </a>
+                        </figure>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+    @*<section class="p-0 category-section section-padding" ng-show="HomeMainCateData.length>0">
+            <div class="container pt-4 pb-4" ng-init="GetHomeMainCateData()">
+                <h5 class="section-title mb-20">Shop By Main Categories</h5>
+                <div class="row align-items-center g-1 gx-2">
+                    <div class="col" ng-repeat="m in HomeMainCateData">
+
+                        <div class="img-hover-scale overflow-hidden">
+                            <a href="/Home/shop?Main={{m.MTitle}}">
+                                <img ng-src="~/images/MainCate/{{m.MImage}}" loading="lazy" alt="Caricatures" class="w-100 img-fluid img-thumbnail rounded-2">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </section>*@
+    @* Normal Category Section End *@
+
+
+    <!-- Products Section Start -->
+    <section class="product-tabs section-padding">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 col-sm-12 col-12">
+                    <div class="section-title d-flex justify-content-between align-items-center mb-3">
+                        <h5 class="section-title">{{NewArivals[0].Toplabel}}</h5>
+                        <a href="/Home/TopProduct?ProductType={{NewArivals[0].Toplabel}}" type="button" class="btn btn-theme-1">View All</a>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-content">
+                <div class="tab-pane fade show active" id="tab-one" role="tabpanel" aria-labelledby="tab-one">
+                    <div class="row product-grid-4 g-2" >
+                        <div class="col-lg-2 col-6 col-sm-3" ng-repeat="b in NewArivals" >
+
+                            <div class="product-cart-wrap mb-1">
+                                <div class="product-img-action-wrap">
+                                    <div class="product-img product-img-zoom">
+                                        <a href="/Home/Gift?url={{b.PUrl}}">
+                                            <img class="default-img img-fluid" ng-src="~/images/ProductImg/{{b.ProductImage}}" loading="lazy" alt="product-image" loading="lazy" alt="">
+                                        </a>
+                                    </div>
+                                    @*<div class="product-badges product-badges-position product-badges-mrg product-badges-position-1"  ng-show="p.Video">
+                                            <a href="#" ng-click="quickview(p,'video')"><span class="pot"><i class="fa fa-youtube-play" aria-hidden="true"></i></span></a>
+                                        </div>*@
+                                    <div class="product-badges product-badges-position product-badges-mrg" ng-show="b.PLabel!=''">
+                                        <span class="hot">{{b.PLabel}}</span>
+                                    </div>
+                                    @*<div ng-show="p.SameDay" class="product-badges product-badges-position_1 product-badges-mrg same-day-badge">
+                                            <span class="hot">Same Day Available</span>
+                                        </div>*@
+                                </div>
+                                <div class="product-content-wrap">
+                                    <h2 class="mt-2"><a href="/Home/Gift?url={{b.PUrl}}">{{b.ProductTitle}}</a></h2>
+
+                                    <div class="product-price d-flex justify-content-between align-items-center">
+                                        <div class="">
+                                            <span><i class="fa fa-inr" aria-hidden="true"></i>  {{b.Price}}/-</span>
+                                        </div>
+                                        <div class="same-day" ng-show="b.SameDay">
+                                            <p class="hot text-success animate__fadeIn"><b>Same Day Available</b></p>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div class="button-design mt-2">
+                                            <a aria-label="Add To Cart" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight" class="btn theme-button-2" ng-click="LabeladdItemToCart($index,'NewArivals')"><i class="fi-rs-shopping-bag-add"></i> Add To Cart </a>
+                                        </div>
+                                        @* Popup Button For Image *@
+                                        <div class="button-design mt-2" ng-if="!b.Video">
+                                            <a aria-label="View Image" class="btn theme-button-3 d-flex gap-2 align-items-center" ng-click="quickview(b)"><span class="d-lg-none d-sm-none d-block fs-9">View </span><i class="fa fa-eye" aria-hidden="true"></i></a>
+                                        </div>
+
+
+                                        @* Popup Button For Video *@
+                                        <div class="button-design mt-2" ng-if="b.Video">
+                                            <a aria-label="View Image" class="btn theme-button-3 d-flex gap-2 align-items-center for-video" ng-click="quickview(b)"><span class="d-lg-none d-sm-none d-block fs-9 hide-animation" id="hideText">View </span><i class="fa fa-youtube-play" aria-hidden="true"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </section>
+    <!-- Products Section End -->
+    <!-- Advertisement Banner Start -->
+    <section class="p-0"  ng-show="FestivalBannerData[2]">
+        <div class="container pt-2 pb-2" ng-show="FestivalBannerData!=''">
+            <div class="row g-1 gx-1">
+                <div class="col-lg-12">
+                    <div class="big-banner">
+                        <a href="{{FestivalBannerData[2].FBUrl}}">
+                            <img ng-src="~/images/FestivalBanner/{{FestivalBannerData[2].FBImage}}" alt="banner-image" class="img-fluid rounded-3">
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Advertisement Banner End -->
+    <!-- Products Section Start -->
+    <section class="product-tabs section-padding" ng-show="NewProduct.length>0">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 col-sm-12 col-12">
+                    <div class="section-title d-flex justify-content-between align-items-center mb-3">
+                        <h5 class="section-title">{{NewProduct[0].Toplabel}}</h5>
+                        <a href="/Home/TopProduct?ProductType={{NewProduct[0].Toplabel}}" type="button" class="btn btn-theme-1">View All</a>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-content">
+                <div class="tab-pane fade show active" id="tab-one" role="tabpanel" aria-labelledby="tab-one">
+                    <div class="row product-grid-4 g-2" ng-init="GetLabelProduct()">
+                        <div class="col-lg-2 col-6 col-sm-3" ng-repeat="p in NewProduct" >
+
+                            <div class="product-cart-wrap mb-1">
+                                <div class="product-img-action-wrap">
+                                    <div class="product-img product-img-zoom">
+                                        <a href="/Home/Gift?url={{p.PUrl}}">
+                                            <img class="default-img img-fluid" ng-src="~/images/ProductImg/{{p.ProductImage}}" loading="lazy" alt="product-image" loading="lazy" alt="">
+                                        </a>
+                                    </div>
+                                    @*<div class="product-badges product-badges-position product-badges-mrg product-badges-position-1"  ng-show="p.Video">
+                                            <a href="#" ng-click="quickview(p,'video')"><span class="pot"><i class="fa fa-youtube-play" aria-hidden="true"></i></span></a>
+                                        </div>*@
+                                    <div class="product-badges product-badges-position product-badges-mrg" ng-show="p.PLabel!=''">
+                                        <span class="hot">{{p.PLabel}}</span>
+                                    </div>
+                                    @*<div ng-show="p.SameDay" class="product-badges product-badges-position_1 product-badges-mrg same-day-badge">
+                                            <span class="hot">Same Day Available</span>
+                                        </div>*@
+                                </div>
+                                <div class="product-content-wrap">
+                                    <h2 class="mt-2"><a href="/Home/Gift?url={{p.PUrl}}">{{p.ProductTitle}}</a></h2>
+
+                                    <div class="product-price d-flex justify-content-between align-items-center">
+                                        <div class="">
+                                            <span><i class="fa fa-inr" aria-hidden="true"></i>  {{p.Price}}/-</span>
+                                        </div>
+                                        <div class="same-day" ng-show="p.SameDay">
+                                            <p class="hot text-success animate__fadeIn"><b>Same Day Available</b></p>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div class="button-design mt-2">
+                                            <a aria-label="Add To Cart" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight" class="btn theme-button-2" ng-click="LabeladdItemToCart($index,'NewProduct')"><i class="fi-rs-shopping-bag-add"></i> Add To Cart </a>
+                                        </div>
+                                        @* Popup Button For Image *@
+                                        <div class="button-design mt-2" ng-if="!p.Video">
+                                            <a aria-label="View Image" class="btn theme-button-3 d-flex gap-2 align-items-center" ng-click="quickview(p)"><span class="d-lg-none d-sm-none d-block fs-9">View </span><i class="fa fa-eye" aria-hidden="true"></i></a>
+                                        </div>
+
+
+                                        @* Popup Button For Video *@
+                                        <div class="button-design mt-2" ng-if="p.Video">
+                                            <a aria-label="View Image" class="btn theme-button-3 d-flex gap-2 align-items-center for-video" ng-click="quickview(p)"><span class="d-lg-none d-sm-none d-block fs-9 hide-animation" id="hideText">View </span><i class="fa fa-youtube-play" aria-hidden="true"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </section>
+    <!-- Products Section End -->
+    <!-- Advertisement Banner Start -->
+    <section class="p-0" ng-if="FestivalBannerData[3]">
+        <div class="container pt-2 pb-2" ng-show="FestivalBannerData!=''">
+            <div class="row g-1 gx-1">
+                <div class="col-lg-12">
+                    <div class="big-banner">
+                        <a href="{{FestivalBannerData[3].FBUrl}}">
+                            <img ng-src="~/images/FestivalBanner/{{FestivalBannerData[3].FBImage}}" alt="banner-image" class="img-fluid rounded-3">
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Advertisement Banner End -->
     <!-- Testimonial Start -->
     <section class="testimonial-start section-padding">
 
@@ -479,5 +818,156 @@
 
     </section>
     <!-- Testimonial End -->
+    <!-- Top Products Start -->
+    @*<section class="section-padding p-0" ng-show="NewArivals.length>0 || TopsellingProduct.length>0 || NewProduct.length>0" ng-init="GetLabelProduct()">
+            <div class="container pt-4 pb-4">
+                <div class="row gx-2 g-2 overflow-auto">
+                    <div class="col-lg-4 col-sm-7 col-9" ng-show="TopsellingProduct.length>0">
+                        <div class="bg-light p-3 pt-4 pb-4 border border-light rounded-5 ppt-4">
+                            <div class="different-products">
+                                <div class="row">
+                                    <div class="col-lg-6 col-sm-6 col-6">
+                                        <h3 class="section-title mb-20">{{TopsellingProduct[0].Toplabel}}</h3>
+                                    </div>
+                                    <div class="col-lg-6 col-sm-6 col-6">
+                                        <p align="right"><a href="/Home/TopProduct?ProductType=TopsellingProduct"><strong>View More</strong></a></p>
+                                    </div>
+                                </div>
+
+                                <div class="carausel-6-columns" id="carausel-6-columns-3">
+                                    <div class="brand-logo bg-white" ng-repeat="b in TopsellingProduct">
+                                        <div class="product-list-small p-2 pb-0">
+                                            <div class="row align-items-center g-3">
+                                                <div class="col-lg-3 col-sm-6 col-4">
+                                                    <a href="/Home/Gift?url={{b.PUrl}}">
+                                                        <img ng-src="~/images/ProductImg/{{b.ProductImage}}" alt="product-image" class="img-fluid p-0">
+                                                    </a>
+                                                </div>
+                                                <div class="col-lg-8 col-sm-8 col-8">
+                                                    <div class="title-small mb-0">
+                                                        <a class="theme-text-size" href="/Home/Gift?url={{b.PUrl}}">{{b.ProductTitle}}</a>
+                                                    </div>
+                                                    <div class="product-price">
+                                                        <h6><i class="fa fa-inr" aria-hidden="true"></i>{{b.Price}} </h6>
+                                                    </div>
+                                                    <div class="details">
+                                                        <a href="/Home/Gift?url={{b.PUrl}}" type="button" class="btn btn-primary view-more">View Details</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-sm-7 col-9" ng-show="NewProduct.length>0">
+                        <div class="bg-light p-3 pt-4 pb-4 border border-light rounded-5 ppt-4">
+                            <div class="different-products">
+                                <div class="row">
+                                    <div class="col-lg-6 col-sm-6 col-6">
+                                        <h3 class="section-title mb-20">{{NewProduct[0].Toplabel}}</h3>
+                                    </div>
+                                    <div class="col-lg-6 col-sm-6 col-6">
+                                        <p align="right"><a href="/Home/TopProduct?ProductType=NewProduct"><strong>View More</strong></a></p>
+                                    </div>
+                                </div>
+
+                                <div class="carausel-6-columns" id="carausel-6-columns-3_1">
+                                    <div class="brand-logo bg-white" ng-repeat="b in NewProduct">
+                                        <div class="product-list-small p-2 pb-0">
+                                            <div class="row align-items-center">
+                                                <div class="col-lg-3 col-sm-6 col-4">
+                                                    <a href="/Home/Gift?url={{b.PUrl}}">
+                                                        <img ng-src="~/images/ProductImg/{{b.ProductImage}}" alt="product-image" class="img-fluid p-0">
+                                                    </a>
+                                                </div>
+                                                <div class="col-lg-8 col-sm-8 col-8">
+                                                    <div class="title-small mb-0">
+                                                        <a class="theme-text-size" href="/Home/Gift?url={{b.PUrl}}">{{b.ProductTitle}}</a>
+                                                    </div>
+                                                    <div class="product-price">
+                                                        <h6><i class="fa fa-inr" aria-hidden="true"></i>{{b.Price}} </h6>
+                                                    </div>
+                                                    <div class="details">
+                                                        <a href="/Home/Gift?url={{b.PUrl}}" type="button" class="btn btn-primary view-more">View Details</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-sm-7 col-9" ng-show="NewArivals.length>0">
+                        <div class="bg-light p-3 pt-4 pb-4 border border-light rounded-5 ppt-4">
+                            <div class="different-products">
+                                <div class="row">
+                                    <div class="col-lg-6 col-sm-6 col-6">
+                                        <h3 class="section-title mb-20">{{NewArivals[0].Toplabel}}</h3>
+                                    </div>
+                                    <div class="col-lg-6 col-sm-6 col-6">
+                                        <p align="right"><a href="/Home/TopProduct?ProductType=NewArivals"><strong>View More</strong></a></p>
+                                    </div>
+                                </div>
+
+                                <div class="carausel-6-columns" id="carausel-6-columns-3_2">
+                                    <div class="brand-logo bg-white" ng-repeat="b in NewArivals">
+                                        <div class="product-list-small p-2 pb-0">
+                                            <div class="row align-items-center">
+                                                <div class="col-lg-3 col-sm-6 col-4">
+                                                    <a href="/Home/Gift?url={{b.PUrl}}">
+                                                        <img ng-src="~/images/ProductImg/{{b.ProductImage}}" alt="product-image" class="img-fluid p-0">
+                                                    </a>
+                                                </div>
+                                                <div class="col-lg-8 col-sm-8 col-8">
+                                                    <div class="title-small mb-0">
+                                                        <a class="theme-text-size" href="/Home/Gift?url={{b.PUrl}}">{{b.ProductTitle}}</a>
+                                                    </div>
+                                                    <div class="product-price">
+                                                        <h6><i class="fa fa-inr" aria-hidden="true"></i>{{b.Price}} </h6>
+                                                    </div>
+                                                    <div class="details">
+                                                        <a href="/Home/Gift?url={{b.PUrl}}" type="button" class="btn btn-primary view-more">View Details</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </section>*@
+    <!-- Top Products End -->
+    <!-- Multiple Banner Start -->
+    @*<section class="p-0 section-padding" ng-show="MultipleBannerData.length>0" ng-init="GetMultipleBanner()">
+            <div class="container pt-4 pb-4">
+                <div class="row g-1 gx-1">
+                    <div class="col-lg-3 col-6 col-sm-4" ng-repeat="m in MultipleBannerData">
+
+                        <div class="big-banner">
+                            <a href="/Home/BannerGifts?Banner={{m.MainCateId}}">
+
+                                <img ng-src="~/images/MainCate/{{m.MImage}}" alt="banner-image" class="img-fluid">
+                            </a>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>*@
+    <!-- Multiple Banner End -->
+
 </main>
 <!-- Main Content End -->

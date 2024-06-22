@@ -2088,7 +2088,7 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
                 MainCateId: $("#FMainCate option:selected").val(),
                 BannerCateId: $("#FBannerCate option:selected").val(),
                 VideoId: $("#FVideoTitle option:selected").val(),
-                ProductTitle: $("#Producttitle").val()
+                ProductTitle: $("#FProducttitle").val()
 
             }
         }).then(function (d) {

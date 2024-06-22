@@ -17,6 +17,12 @@ namespace GiftChoice.Controllers
             ViewBag.silderData = db.SliderTbls.Where(c => c.Active == true).OrderBy(c => c.Priority);
             return View();
         }
+
+        public ActionResult giftfilterkeyword()
+        {
+
+            return View();
+        }
         public JsonResult SliderList()
         {
 
@@ -34,7 +40,7 @@ namespace GiftChoice.Controllers
         public JsonResult GetFestivalBanner()
         {
 
-            var res = db.FestivalBannerTbls.Where(c => c.Active == true).OrderBy(c => c.Priority).FirstOrDefault();
+            var res = db.FestivalBannerTbls.Where(c => c.Active == true).OrderBy(c => c.Priority);
             return Json(res, JsonRequestBehavior.AllowGet);
         }
 
@@ -1518,20 +1524,152 @@ namespace GiftChoice.Controllers
             return Json(res, JsonRequestBehavior.AllowGet);
 
         }
+        public JsonResult getgiftfilterkeyword(string ProductType)
+        {
+            try
+            {
+                if (ProductType == "Giftsunder999")
+                {
+                    var res = new
+                    {
+                        ProductList = (from product in db.ProductTbls
+                                       where (product.Price <= 999 && product.Price >= 499 && product.Active == true)
+                                       orderby Guid.NewGuid()
+                                       select new
+                                       {
+
+                                           product.ProductId,
+                                           product.MainCateId,
+                                           product.ProductTitle,
+                                           product.PLabel,
+                                           product.Price,
+                                           product.SameDay,
+                                           product.PUrl,
+                                           LabelId = product.LabelId ?? 0,
+                                           product.Video,
+                                           product.Qty,
+                                           product.Create_at,
+                                           product.Active,
+                                           product.Priority,
+                                           ProductImage = db.ProductImages
+                                                   .Where(i => i.ProductId == product.ProductId)
+                                                   .Select(i => i.PImage)
+                                                   .FirstOrDefault(),
+
+                                           Maincate = db.MainCateTbls
+                                                   .Where(q => q.MainCateId == product.MainCateId)
+                                                   .Select(q => q.MTitle)
+                                                   .FirstOrDefault(),
+
+                                       }).ToList(),
+                    };
+                    return Json(res, JsonRequestBehavior.AllowGet);
+
+                }
+                else if (ProductType == "Giftsunder499")
+                {
+                    var res = new
+                    {
+                        ProductList = (from product in db.ProductTbls
+                                       where (product.Price <= 499 && product.Active == true)
+                                       orderby Guid.NewGuid()
+                                       select new
+                                       {
+
+                                           product.ProductId,
+                                           product.MainCateId,
+                                           product.ProductTitle,
+                                           product.PLabel,
+                                           product.Price,
+                                           product.SameDay,
+                                           product.PUrl,
+                                           LabelId = product.LabelId ?? 0,
+                                           product.Video,
+                                           product.Qty,
+                                           product.Create_at,
+                                           product.Active,
+                                           product.Priority,
+                                           ProductImage = db.ProductImages
+                                                   .Where(i => i.ProductId == product.ProductId)
+                                                   .Select(i => i.PImage)
+                                                   .FirstOrDefault(),
+
+                                           Maincate = db.MainCateTbls
+                                                   .Where(q => q.MainCateId == product.MainCateId)
+                                                   .Select(q => q.MTitle)
+                                                   .FirstOrDefault(),
+
+                                       }).ToList(),
+                    };
+                    return Json(res, JsonRequestBehavior.AllowGet);
+                }
+                else if (ProductType == "giftsFriendsbestsellers")
+                {
+                    var res = new
+                    {
+                        ProductList = (from bannerCateProduct in db.ProductFilterWordTbls
+                                       join product in db.ProductTbls on bannerCateProduct.ProductId equals product.ProductId
+                                       where (bannerCateProduct.PFilterId == 3 && product.Active == true)
+                                       orderby Guid.NewGuid()
+                                       select new
+                                       {
+                                           bannerCateProduct.PFilterId,
+                                           bannerCateProduct.PFilterTilte,
+                                           product.ProductId,
+                                           product.MainCateId,
+                                           product.ProductTitle,
+                                           product.PLabel,
+                                           product.Price,
+                                           product.SameDay,
+                                           product.PUrl,
+                                           LabelId = product.LabelId ?? 0,
+                                           product.Video,
+                                           product.Qty,
+                                           product.Create_at,
+                                           product.Active,
+                                           product.Priority,
+                                           ProductImage = db.ProductImages
+                                                   .Where(i => i.ProductId == product.ProductId)
+                                                   .Select(i => i.PImage)
+                                                   .FirstOrDefault(),
+
+                                           Maincate = db.MainCateTbls
+                                                   .Where(q => q.MainCateId == product.MainCateId)
+                                                   .Select(q => q.MTitle)
+                                                   .FirstOrDefault(),
+
+                                       }).ToList(),
+                    };
+                    return Json(res, JsonRequestBehavior.AllowGet);
+                };
+
+
+                var res1 = new { res = "0" };
+                return Json(res1, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+
+                var md = ex.Message;
+                var res = new { res = "0" };
+                return Json(res, JsonRequestBehavior.AllowGet);
+
+            }
+            
+
+        }
 
 
         public JsonResult GetFilterWordList()
         {
             var res = new
             {
-              Giftsunder499 =  (from bannerCateProduct in db.ProductFilterWordTbls
-                 join product in db.ProductTbls on bannerCateProduct.ProductId equals product.ProductId
-                 where (bannerCateProduct.PFilterId == 1)
+              Giftsunder499 =  (from product in db.ProductTbls                               
+                                   where (product.Price <= 499 && product.Active == true)
                  orderby Guid.NewGuid()
                  select new
                  {
-                     bannerCateProduct.PFilterId,
-                     bannerCateProduct.PFilterTilte,
+                   
                      product.ProductId,
                      product.MainCateId,
                      product.ProductTitle,
@@ -1556,14 +1694,12 @@ namespace GiftChoice.Controllers
                              .FirstOrDefault(),
 
                  }).Take(6).ToList(),
-                Giftsunder999 = (from bannerCateProduct in db.ProductFilterWordTbls
-                                 join product in db.ProductTbls on bannerCateProduct.ProductId equals product.ProductId
-                                 where (bannerCateProduct.PFilterId == 2)
+                Giftsunder999 = (from product in db.ProductTbls
+                                 where (product.Price <= 999 && product.Price > 499  && product.Active == true)
                                  orderby Guid.NewGuid()
                                  select new
                                  {
-                                     bannerCateProduct.PFilterId,
-                                     bannerCateProduct.PFilterTilte,
+
                                      product.ProductId,
                                      product.MainCateId,
                                      product.ProductTitle,
@@ -1590,7 +1726,7 @@ namespace GiftChoice.Controllers
                                  }).Take(6).ToList(),
                 giftsFriendsbestsellers = (from bannerCateProduct in db.ProductFilterWordTbls
                                  join product in db.ProductTbls on bannerCateProduct.ProductId equals product.ProductId
-                                 where (bannerCateProduct.PFilterId == 3)
+                                 where (bannerCateProduct.PFilterId == 3 && product.Active == true)
                                  orderby Guid.NewGuid()
                                  select new
                                  {

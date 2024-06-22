@@ -928,6 +928,7 @@
     <Content Include="Views\GiftDashBoard\AddLabelProduct.cshtml" />
     <Content Include="Views\Home\BGift.cshtml" />
     <Content Include="Views\GiftDashBoard\AddVideo.cshtml" />
+    <Content Include="Views\Home\giftfilterkeyword.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
