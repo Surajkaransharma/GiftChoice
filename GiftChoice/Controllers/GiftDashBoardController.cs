@@ -168,8 +168,8 @@ namespace GiftChoice.Controllers
                 if (model.Image != null)
                 {
                     string extensionstuimg = Path.GetExtension(model.Image.FileName);
-                    model.Image.SaveAs(Server.MapPath("~/images/MainCate/" + mainCateTbl.MainCateId + "" + extensionstuimg));
-                    MainCateVaryQualityLevel(model.Image.InputStream, mainCateTbl.MainCateId + extensionstuimg);
+                    model.Image.SaveAs(Server.MapPath("~/images/MainCate/" + mainCateTbl.MainCateId + "" + extensionstuimg));                
+                    //  MainCateVaryQualityLevel(model.Image.InputStream, mainCateTbl.MainCateId + extensionstuimg);
                     mainCateTbl.MImage = mainCateTbl.MainCateId + "" + extensionstuimg;
                 }
                 mainCateTbl.Create_at = DateTime.Now;
@@ -270,7 +270,7 @@ namespace GiftChoice.Controllers
                     {
                         string extensionstuimg = Path.GetExtension(model.Image.FileName);
                         model.Image.SaveAs(Server.MapPath("~/images/MainCate/" + result.MainCateId + "" + extensionstuimg));
-                        MainCateVaryQualityLevel(model.Image.InputStream, result.MainCateId + extensionstuimg);
+                       // MainCateVaryQualityLevel(model.Image.InputStream, result.MainCateId + extensionstuimg);
                         result.MImage = result.MainCateId + "" + extensionstuimg;
                     }
                     result.CateType = "MainCate";

@@ -267,6 +267,8 @@
     <Content Include="Angularjs\angular.min.js" />
     <Content Include="Angularjs\Home.js" />
     <Content Include="Angularjs\LoginJs.js" />
+    <Content Include="Angularjs\ng-tags-input.min.css" />
+    <Content Include="Angularjs\ng-tags-input.min.js" />
     <Content Include="Angularjs\toast-alert\toastr.css" />
     <Content Include="Angularjs\toast-alert\toastr.js" />
     <Content Include="assets\ckeditor\adapters\jquery.js" />
