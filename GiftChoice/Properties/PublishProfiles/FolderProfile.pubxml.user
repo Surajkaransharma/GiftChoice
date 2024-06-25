@@ -35,6 +35,12 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="Angularjs/LoginJs.js">
       <publishTime>12/26/2023 11:05:30</publishTime>
     </File>
+    <File Include="Angularjs/ng-tags-input.min.css">
+      <publishTime>06/24/2024 13:01:06</publishTime>
+    </File>
+    <File Include="Angularjs/ng-tags-input.min.js">
+      <publishTime>06/24/2024 13:01:06</publishTime>
+    </File>
     <File Include="Angularjs/toast-alert/toastr.css">
       <publishTime>12/26/2023 11:05:30</publishTime>
     </File>
@@ -3168,10 +3174,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>12/26/2023 11:05:38</publishTime>
     </File>
     <File Include="bin/GiftChoice.dll">
-      <publishTime>06/22/2024 16:14:39</publishTime>
+      <publishTime>06/25/2024 12:50:49</publishTime>
     </File>
     <File Include="bin/GiftChoice.pdb">
-      <publishTime>06/22/2024 16:14:39</publishTime>
+      <publishTime>06/25/2024 12:50:49</publishTime>
     </File>
     <File Include="bin/Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll">
       <publishTime>12/26/2023 11:05:38</publishTime>
@@ -3369,7 +3375,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>04/24/2024 11:36:14</publishTime>
     </File>
     <File Include="Content/assets/css/main.css">
-      <publishTime>06/17/2024 10:46:14</publishTime>
+      <publishTime>06/25/2024 12:43:06</publishTime>
     </File>
     <File Include="Content/assets/css/plugins/jquery-ui.css">
       <publishTime>04/24/2024 11:36:14</publishTime>
@@ -3684,22 +3690,22 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>02/03/2024 11:25:09</publishTime>
     </File>
     <File Include="images/check_img.png">
-      <publishTime>05/03/2024 11:18:59</publishTime>
+      <publishTime>03/05/2024 11:18:59</publishTime>
     </File>
     <File Include="images/FestivalBanner/1.JPG">
-      <publishTime>05/03/2024 11:18:59</publishTime>
+      <publishTime>03/05/2024 11:18:59</publishTime>
     </File>
     <File Include="images/FestivalBanner/1.png">
       <publishTime>01/02/2024 12:40:11</publishTime>
     </File>
     <File Include="images/gift-choice-vertical.png">
-      <publishTime>05/03/2024 11:18:59</publishTime>
+      <publishTime>03/05/2024 11:18:59</publishTime>
     </File>
     <File Include="images/MainCate/1.jpg">
       <publishTime>03/13/2024 12:54:08</publishTime>
     </File>
     <File Include="images/MainCate/10.jpg">
-      <publishTime>05/03/2024 11:18:59</publishTime>
+      <publishTime>03/05/2024 11:18:59</publishTime>
     </File>
     <File Include="images/MainCate/11.jpg">
       <publishTime>12/26/2023 11:05:31</publishTime>
@@ -3729,7 +3735,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>12/26/2023 11:05:31</publishTime>
     </File>
     <File Include="images/MainCate/2.jpg">
-      <publishTime>05/03/2024 11:18:59</publishTime>
+      <publishTime>03/05/2024 11:18:59</publishTime>
     </File>
     <File Include="images/MainCate/20.jpg">
       <publishTime>12/26/2023 11:05:31</publishTime>
@@ -3756,49 +3762,49 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>12/26/2023 11:05:31</publishTime>
     </File>
     <File Include="images/MainCate/3.jpg">
-      <publishTime>05/03/2024 11:18:59</publishTime>
+      <publishTime>03/05/2024 11:18:59</publishTime>
     </File>
     <File Include="images/MainCate/30.jpg">
-      <publishTime>05/03/2024 11:18:59</publishTime>
+      <publishTime>03/05/2024 11:18:59</publishTime>
     </File>
     <File Include="images/MainCate/31.jpg">
-      <publishTime>05/03/2024 11:18:59</publishTime>
+      <publishTime>03/05/2024 11:18:59</publishTime>
     </File>
     <File Include="images/MainCate/32.jpg">
-      <publishTime>05/03/2024 11:18:59</publishTime>
+      <publishTime>03/05/2024 11:18:59</publishTime>
     </File>
     <File Include="images/MainCate/33.jpg">
-      <publishTime>05/03/2024 11:18:59</publishTime>
+      <publishTime>03/05/2024 11:18:59</publishTime>
     </File>
     <File Include="images/MainCate/34.JPG">
-      <publishTime>05/03/2024 11:18:59</publishTime>
+      <publishTime>03/05/2024 11:18:59</publishTime>
     </File>
     <File Include="images/MainCate/34.webp">
       <publishTime>02/16/2024 13:32:50</publishTime>
     </File>
     <File Include="images/MainCate/35.JPG">
-      <publishTime>05/03/2024 11:18:59</publishTime>
+      <publishTime>03/05/2024 11:18:59</publishTime>
     </File>
     <File Include="images/MainCate/36.JPG">
-      <publishTime>05/03/2024 11:18:59</publishTime>
+      <publishTime>03/05/2024 11:18:59</publishTime>
     </File>
     <File Include="images/MainCate/4.jpg">
-      <publishTime>05/03/2024 11:18:59</publishTime>
+      <publishTime>03/05/2024 11:18:59</publishTime>
     </File>
     <File Include="images/MainCate/5.jpg">
-      <publishTime>05/03/2024 11:18:59</publishTime>
+      <publishTime>03/05/2024 11:18:59</publishTime>
     </File>
     <File Include="images/MainCate/6.jpg">
-      <publishTime>05/03/2024 11:18:59</publishTime>
+      <publishTime>03/05/2024 11:18:59</publishTime>
     </File>
     <File Include="images/MainCate/7.jpg">
-      <publishTime>05/03/2024 11:18:59</publishTime>
+      <publishTime>03/05/2024 11:18:59</publishTime>
     </File>
     <File Include="images/MainCate/8.jpg">
-      <publishTime>05/03/2024 11:18:59</publishTime>
+      <publishTime>03/05/2024 11:18:59</publishTime>
     </File>
     <File Include="images/MainCate/9.jpg">
-      <publishTime>05/03/2024 11:18:59</publishTime>
+      <publishTime>03/05/2024 11:18:59</publishTime>
     </File>
     <File Include="images/ProductImg/1.jpg">
       <publishTime>03/13/2024 12:54:08</publishTime>
@@ -4146,10 +4152,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>12/26/2023 11:05:32</publishTime>
     </File>
     <File Include="images/ProductImg/146.jpg">
-      <publishTime>05/03/2024 11:18:59</publishTime>
+      <publishTime>03/05/2024 11:18:59</publishTime>
     </File>
     <File Include="images/ProductImg/147.jpg">
-      <publishTime>05/03/2024 11:18:59</publishTime>
+      <publishTime>03/05/2024 11:18:59</publishTime>
     </File>
     <File Include="images/ProductImg/148.jpg">
       <publishTime>06/08/2024 10:47:59</publishTime>
@@ -4161,10 +4167,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/13/2024 12:54:08</publishTime>
     </File>
     <File Include="images/ProductImg/150.jpg">
-      <publishTime>05/03/2024 11:18:59</publishTime>
+      <publishTime>03/05/2024 11:18:59</publishTime>
     </File>
     <File Include="images/ProductImg/151.jpg">
-      <publishTime>05/03/2024 11:18:59</publishTime>
+      <publishTime>03/05/2024 11:18:59</publishTime>
     </File>
     <File Include="images/ProductImg/152.jpg">
       <publishTime>12/26/2023 11:05:32</publishTime>
@@ -7092,7 +7098,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>01/03/2024 17:35:15</publishTime>
     </File>
     <File Include="Views/GiftDashBoard/AddMainCate.cshtml">
-      <publishTime>04/27/2024 17:12:12</publishTime>
+      <publishTime>06/25/2024 12:47:36</publishTime>
     </File>
     <File Include="Views/GiftDashBoard/AddPBanner.cshtml">
       <publishTime>06/12/2024 12:22:32</publishTime>
@@ -7110,7 +7116,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>12/26/2023 11:05:30</publishTime>
     </File>
     <File Include="Views/GiftDashBoard/AddSlider.cshtml">
-      <publishTime>05/03/2024 11:27:05</publishTime>
+      <publishTime>03/05/2024 11:27:05</publishTime>
     </File>
     <File Include="Views/GiftDashBoard/AddVideo.cshtml">
       <publishTime>06/13/2024 15:22:21</publishTime>
@@ -7152,7 +7158,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>04/06/2024 13:01:38</publishTime>
     </File>
     <File Include="Views/Home/Index.cshtml">
-      <publishTime>06/22/2024 12:24:37</publishTime>
+      <publishTime>06/25/2024 12:43:06</publishTime>
     </File>
     <File Include="Views/Home/privacy_policy.cshtml">
       <publishTime>12/26/2023 11:05:30</publishTime>
@@ -7173,7 +7179,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>12/26/2023 11:05:30</publishTime>
     </File>
     <File Include="Views/Shared/_Admin.cshtml">
-      <publishTime>06/22/2024 11:16:49</publishTime>
+      <publishTime>06/24/2024 13:01:51</publishTime>
     </File>
     <File Include="Views/Shared/_Layout.cshtml">
       <publishTime>06/08/2024 10:47:59</publishTime>
