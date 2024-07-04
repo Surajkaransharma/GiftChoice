@@ -1593,6 +1593,9 @@ app.controller("HomeController", ['$scope', '$http', '$sce', 'startFromFilter', 
             $scope.Giftsunder499 = d.data.Giftsunder499;
             $scope.Giftsunder999 = d.data.Giftsunder999;
             $scope.giftsFriendsbestsellers = d.data.giftsFriendsbestsellers;
+            $scope.loveAnniversaryData = d.data.loveAnniversaryData;
+            $scope.BirthdayData = d.data.BirthdayData;
+
 
 
 
