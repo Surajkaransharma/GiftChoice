@@ -2,6 +2,11 @@
     ViewBag.Title = "Home Page";
 }
 
+
+<!-- Product Slider CDN -->
+<link rel='stylesheet' href='https://unpkg.com/swiper/swiper-bundle.min.css'>
+
+
 <!-- Main Content Start GiftChoice V4  -->
 <main class="main">
 
@@ -26,13 +31,58 @@
         </div>
     </section>
     <!-- Slider End -->
+    @* Category New Slider Start *@
+    <div class="container">
+        <section id="cate-product" class="caterody-product-slider">
+
+            <!-- Title With Arrows -->
+            <div class="row align-items-center pb-3">
+                <div class="col">
+                    <h5 class="section-title mb-0"><span>Shop By</span> Categories</h5>
+                </div>
+                <div class="col clearfix">
+                    <span class="title-section d-flex justify-content-end align-items-center">
+                        <button class="btn btn-archive btn-sm prev-btn arrow-button" type="button">
+                            <i class="fa fa-angle-left"></i>
+                            <span class="visually-hidden">Previous</span>
+                        </button>
+
+                        <span class="mx-1">&nbsp;</span>
+
+                        <button class="btn btn-archive btn-sm next-btn arrow-button" type="button">
+                            <i class="fa fa-angle-right"></i>
+                            <span class="visually-hidden">Next</span>
+                        </button>
+                    </span>
+                </div>
+            </div>
+
+            <!-- Products Slider Code -->
+            <div class="swiper-container" ng-init="GetHomeMainCateHeroData()" ng-show="HomeHeroMainCateData.length>0">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide" ng-repeat="m in HomeHeroMainCateData">
+                        <div class="col">
+                            <div class="card">
+                                <a href="/Home/shop?Main={{m.MTitle}}">
+                                    <img ng-src="~/images/MainCate/{{m.MImage}}" alt="{{m.MUrl}}" loading="lazy">
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    @* Category New Slider End *@
+
+
     @* Hero Category Section Start *@
-    <section class="popular-categorie" ng-init="GetHomeMainCateHeroData()" ng-show="HomeHeroMainCateData.length>0">
+    <!--<section class="popular-categorie" ng-init="GetHomeMainCateHeroData()" ng-show="HomeHeroMainCateData.length>0">
         <div class="container wow fadeIn animated pt-2 pb-2">
             <h5 class="section-title mb-20"><span>Shop By</span> Categories</h5>
-            <div class="carausel-5-columns-cover position-relative">
-                @*<div class="slider-arrow slider-arrow-2 carausel-5-columns-arrow" id="carausel-5-columns-arrows"></div>*@
-                <div class="carausel-5-columns" id="carausel-5-columns">
+            <div class="carausel-5-columns-cover position-relative">-->
+    @*<div class="slider-arrow slider-arrow-2 carausel-5-columns-arrow" id="carausel-5-columns-arrows"></div>*@
+    <!--<div class="carausel-5-columns" id="carausel-5-columns">
                     <div class="card-1" ng-repeat="m in HomeHeroMainCateData">
                         <figure class=" img-hover-scale overflow-hidden">
                             <a href="/Home/shop?Main={{m.MTitle}}">
@@ -44,9 +94,7 @@
                 </div>
             </div>
         </div>
-    </section>
-
-
+    </section>-->
     @*<section class="p-0 category-section section-padding bg-white" ng-init="GetHomeMainCateHeroData()" ng-show="HomeHeroMainCateData.length>0">
             <div class="container pt-2 pb-2">
                 <h5 class="section-title mb-20">Shop By Categories</h5>
@@ -92,8 +140,8 @@
             </div>
             <div class="tab-content">
                 <div class="tab-pane fade show active" id="tab-one" role="tabpanel" aria-labelledby="tab-one">
-                    <div class="row product-grid-4 g-2" >
-                        <div class="col-lg-2 col-6 col-sm-3" ng-repeat="p in Relation" >
+                    <div class="row product-grid-4 g-2">
+                        <div class="col-lg-2 col-6 col-sm-3" ng-repeat="p in Relation">
 
                             <div class="product-cart-wrap mb-1">
                                 <div class="product-img-action-wrap">
@@ -192,14 +240,14 @@
                                                             </a>
                                                         </div>
                                                         @*<div class="product-badges product-badges-position product-badges-mrg product-badges-position-1"  ng-show="p.Video">
-                                                            <a href="#" ng-click="quickview(p,'video')"><span class="pot"><i class="fa fa-youtube-play" aria-hidden="true"></i></span></a>
-                                                        </div>*@
+                                                                <a href="#" ng-click="quickview(p,'video')"><span class="pot"><i class="fa fa-youtube-play" aria-hidden="true"></i></span></a>
+                                                            </div>*@
                                                         <div class="product-badges product-badges-position product-badges-mrg" ng-show="p.PLabel!=''">
                                                             <span class="hot">{{p.PLabel}}</span>
                                                         </div>
                                                         @*<div ng-show="p.SameDay" class="product-badges product-badges-position_1 product-badges-mrg same-day-badge">
-                                                            <span class="hot">Same Day Available</span>
-                                                        </div>*@
+                                                                <span class="hot">Same Day Available</span>
+                                                            </div>*@
                                                     </div>
                                                     <div class="product-content-wrap">
                                                         <h2 class="mt-2"><a href="/Home/Gift?url={{p.PUrl}}">{{p.ProductTitle}}</a></h2>
@@ -259,14 +307,14 @@
                                                             </a>
                                                         </div>
                                                         @*<div class="product-badges product-badges-position product-badges-mrg product-badges-position-1"  ng-show="p.Video">
-                                                            <a href="#" ng-click="quickview(p,'video')"><span class="pot"><i class="fa fa-youtube-play" aria-hidden="true"></i></span></a>
-                                                        </div>*@
+                                                                <a href="#" ng-click="quickview(p,'video')"><span class="pot"><i class="fa fa-youtube-play" aria-hidden="true"></i></span></a>
+                                                            </div>*@
                                                         <div class="product-badges product-badges-position product-badges-mrg" ng-show="p.PLabel!=''">
                                                             <span class="hot">{{p.PLabel}}</span>
                                                         </div>
                                                         @*<div ng-show="p.SameDay" class="product-badges product-badges-position_1 product-badges-mrg same-day-badge">
-                                                            <span class="hot">Same Day Available</span>
-                                                        </div>*@
+                                                                <span class="hot">Same Day Available</span>
+                                                            </div>*@
                                                     </div>
                                                     <div class="product-content-wrap">
                                                         <h2 class="mt-2"><a href="/Home/Gift?url={{p.PUrl}}">{{p.ProductTitle}}</a></h2>
@@ -333,14 +381,14 @@
                                                             </a>
                                                         </div>
                                                         @*<div class="product-badges product-badges-position product-badges-mrg product-badges-position-1"  ng-show="p.Video">
-                                                            <a href="#" ng-click="quickview(p,'video')"><span class="pot"><i class="fa fa-youtube-play" aria-hidden="true"></i></span></a>
-                                                        </div>*@
+                                                                <a href="#" ng-click="quickview(p,'video')"><span class="pot"><i class="fa fa-youtube-play" aria-hidden="true"></i></span></a>
+                                                            </div>*@
                                                         <div class="product-badges product-badges-position product-badges-mrg" ng-show="p.PLabel!=''">
                                                             <span class="hot">{{p.PLabel}}</span>
                                                         </div>
                                                         @*<div ng-show="p.SameDay" class="product-badges product-badges-position_1 product-badges-mrg same-day-badge">
-                                                            <span class="hot">Same Day Available</span>
-                                                        </div>*@
+                                                                <span class="hot">Same Day Available</span>
+                                                            </div>*@
                                                     </div>
                                                     <div class="product-content-wrap">
                                                         <h2 class="mt-2"><a href="/Home/Gift?url={{p.PUrl}}">{{p.ProductTitle}}</a></h2>
@@ -400,14 +448,14 @@
                                                             </a>
                                                         </div>
                                                         @*<div class="product-badges product-badges-position product-badges-mrg product-badges-position-1"  ng-show="p.Video">
-                                                            <a href="#" ng-click="quickview(p,'video')"><span class="pot"><i class="fa fa-youtube-play" aria-hidden="true"></i></span></a>
-                                                        </div>*@
+                                                                <a href="#" ng-click="quickview(p,'video')"><span class="pot"><i class="fa fa-youtube-play" aria-hidden="true"></i></span></a>
+                                                            </div>*@
                                                         <div class="product-badges product-badges-position product-badges-mrg" ng-show="p.PLabel!=''">
                                                             <span class="hot">{{p.PLabel}}</span>
                                                         </div>
                                                         @*<div ng-show="p.SameDay" class="product-badges product-badges-position_1 product-badges-mrg same-day-badge">
-                                                            <span class="hot">Same Day Available</span>
-                                                        </div>*@
+                                                                <span class="hot">Same Day Available</span>
+                                                            </div>*@
                                                     </div>
                                                     <div class="product-content-wrap">
                                                         <h2 class="mt-2"><a href="/Home/Gift?url={{p.PUrl}}">{{p.ProductTitle}}</a></h2>
@@ -476,14 +524,14 @@
                                                             </a>
                                                         </div>
                                                         @*<div class="product-badges product-badges-position product-badges-mrg product-badges-position-1"  ng-show="p.Video">
-                                                            <a href="#" ng-click="quickview(p,'video')"><span class="pot"><i class="fa fa-youtube-play" aria-hidden="true"></i></span></a>
-                                                        </div>*@
+                                                                <a href="#" ng-click="quickview(p,'video')"><span class="pot"><i class="fa fa-youtube-play" aria-hidden="true"></i></span></a>
+                                                            </div>*@
                                                         <div class="product-badges product-badges-position product-badges-mrg" ng-show="p.PLabel!=''">
                                                             <span class="hot">{{p.PLabel}}</span>
                                                         </div>
                                                         @*<div ng-show="p.SameDay" class="product-badges product-badges-position_1 product-badges-mrg same-day-badge">
-                                                            <span class="hot">Same Day Available</span>
-                                                        </div>*@
+                                                                <span class="hot">Same Day Available</span>
+                                                            </div>*@
                                                     </div>
                                                     <div class="product-content-wrap">
                                                         <h2 class="mt-2"><a href="/Home/Gift?url={{p.PUrl}}">{{p.ProductTitle}}</a></h2>
@@ -591,7 +639,7 @@
             </div>
             <div class="tab-content">
                 <div class="tab-pane fade show active" id="tab-one" role="tabpanel" aria-labelledby="tab-one">
-                    <div class="row product-grid-4 g-2" >
+                    <div class="row product-grid-4 g-2">
                         <div class="col-lg-2 col-6 col-sm-3" ng-repeat="p in TopsellingProduct">
 
                             <div class="product-cart-wrap mb-1">
@@ -649,7 +697,7 @@
     </section>
     <!-- Products Section End -->
     <!-- Advertisement Banner Start -->
-    <section class="p-0"  ng-if="FestivalBannerData[1]">
+    <section class="p-0" ng-if="FestivalBannerData[1]">
         <div class="container pt-2 pb-2" ng-show="FestivalBannerData!=''">
             <div class="row g-1 gx-1">
                 <div class="col-lg-12">
@@ -663,13 +711,58 @@
         </div>
     </section>
     <!-- Advertisement Banner End -->
+    @* Normal Category Section STart *@
+    <div class="container">
+        <section id="cate-product" class="caterody-product-slider">
+
+            <!-- Title With Arrows -->
+            <div class="row align-items-center pb-3">
+                <div class="col">
+                    <h5 class="section-title mb-0"><span>Main</span> Categories</h5>
+                </div>
+                <div class="col clearfix">
+                    <span class="title-section d-flex justify-content-end align-items-center">
+                        <button class="btn btn-archive btn-sm prev-btn arrow-button" type="button">
+                            <i class="fa fa-angle-left"></i>
+                            <span class="visually-hidden">Previous</span>
+                        </button>
+
+                        <span class="mx-1">&nbsp;</span>
+
+                        <button class="btn btn-archive btn-sm next-btn arrow-button" type="button">
+                            <i class="fa fa-angle-right"></i>
+                            <span class="visually-hidden">Next</span>
+                        </button>
+                    </span>
+                </div>
+            </div>
+
+            <!-- Products Slider Code -->
+            <div class="swiper-container" ng-show="HomeMainCateData.length>0">
+                <div class="swiper-wrapper" ng-init="GetHomeMainCateData()">
+                    <div class="swiper-slide" ng-repeat="m in HomeMainCateData">
+                        <div class="col">
+                            <div class="card">
+                                <a href="/Home/shop?Main={{m.MTitle}}">
+                                    <img ng-src="~/images/MainCate/{{m.MImage}}" loading="lazy" alt="{{m.MUrl}}">
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    @* Normal Category Section End *@
+
+
     @* Normal Category Section Start *@
-    <section class="popular-categorie" ng-show="HomeMainCateData.length>0">
+    <!--<section class="popular-categorie" ng-show="HomeMainCateData.length>0">
         <div class="container wow fadeIn animated pt-2 pb-2" ng-init="GetHomeMainCateData()">
             <h5 class="section-title mb-20"><span>Shop By</span> Main Categories</h5>
-            <div class="carausel-1-columns-cover position-relative">
+            <div class="carausel-1-columns-cover position-relative">-->
                 @*<div class="slider-arrow slider-arrow-2 carausel-1-columns-arrow" id="carausel-1-columns-arrows"></div>*@
-                <div class="carausel-1-columns" id="carausel-1-columns">
+                <!--<div class="carausel-1-columns" id="carausel-1-columns">
                     <div class="card-1" ng-repeat="m in HomeMainCateData">
                         <figure class=" img-hover-scale overflow-hidden">
                             <a href="/Home/shop?Main={{m.MTitle}}">
@@ -681,7 +774,7 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section>-->
     @*<section class="p-0 category-section section-padding" ng-show="HomeMainCateData.length>0">
             <div class="container pt-4 pb-4" ng-init="GetHomeMainCateData()">
                 <h5 class="section-title mb-20">Shop By Main Categories</h5>
@@ -715,8 +808,8 @@
             </div>
             <div class="tab-content">
                 <div class="tab-pane fade show active" id="tab-one" role="tabpanel" aria-labelledby="tab-one">
-                    <div class="row product-grid-4 g-2" >
-                        <div class="col-lg-2 col-6 col-sm-3" ng-repeat="b in NewArivals" >
+                    <div class="row product-grid-4 g-2">
+                        <div class="col-lg-2 col-6 col-sm-3" ng-repeat="b in NewArivals">
 
                             <div class="product-cart-wrap mb-1">
                                 <div class="product-img-action-wrap">
@@ -773,7 +866,7 @@
     </section>
     <!-- Products Section End -->
     <!-- Advertisement Banner Start -->
-    <section class="p-0"  ng-show="FestivalBannerData[2]">
+    <section class="p-0" ng-show="FestivalBannerData[2]">
         <div class="container pt-2 pb-2" ng-show="FestivalBannerData!=''">
             <div class="row g-1 gx-1">
                 <div class="col-lg-12">
@@ -801,7 +894,7 @@
             <div class="tab-content">
                 <div class="tab-pane fade show active" id="tab-one" role="tabpanel" aria-labelledby="tab-one">
                     <div class="row product-grid-4 g-2" ng-init="GetLabelProduct()">
-                        <div class="col-lg-2 col-6 col-sm-3" ng-repeat="p in NewProduct" >
+                        <div class="col-lg-2 col-6 col-sm-3" ng-repeat="p in NewProduct">
 
                             <div class="product-cart-wrap mb-1">
                                 <div class="product-img-action-wrap">
@@ -1119,3 +1212,5 @@
 
 </main>
 <!-- Main Content End -->
+<!-- Product Slider CDN -->
+<script src='https://unpkg.com/swiper/swiper-bundle.min.js'></script>
