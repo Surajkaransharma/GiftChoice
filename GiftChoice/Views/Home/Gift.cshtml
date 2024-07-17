@@ -36,8 +36,8 @@
                                     <!-- Main Image -->
 
                                     <div class="product-image-slider">
-                                        <figure class="border-radius-10" ng-repeat="i in Product.AllProductImage">
-                                            <img src="~/images/ProductImg/{{i}}" alt="product image" class="img-fluid" loading="lazy">
+                                        <figure class="border-radius-10" ng-repeat="i in Product.AllProductImage">  
+                                            <a data-bs-toggle="modal" data-bs-target="#staticBackdrop"><img src="~/images/ProductImg/{{i}}" alt="product image" class="img-fluid" loading="lazy" ></a>
                                         </figure>
 
                                     </div>
@@ -93,42 +93,99 @@
 
 
                                     @*<div data-aos="zoom-in">
-                                            <div class="attr-detail attr-size mb-30" ng-show="Product.PSizeList.length>0">
-                                                <strong class="mr-10">Size</strong>
-                                                <ul class="list-filter size-filter font-small">
-                                                    <li ng-repeat="s in Product.PSizeList" style="margin-left:5px;"><a href="#">{{s.SizeTitle}}</a> </li>
+                                        <div class="attr-detail attr-size mb-30" ng-show="Product.PSizeList.length>0">
+                                            <strong class="mr-10">Size</strong>
+                                            <ul class="list-filter size-filter font-small">
+                                                <li ng-repeat="s in Product.PSizeList" style="margin-left:5px;"><a href="#">{{s.SizeTitle}}</a> </li>
 
-                                                </ul>
-                                            </div>
-                                        </div>*@
+                                            </ul>
+                                        </div>
+                                    </div>
 
-                                    @*<div data-aos="zoom-in">
-                                            <div class="attr-detail attr-size mb-30" ng-show="Product.productDataArray.length>0">
-                                                <strong class="mr-10">Size</strong>
-                                                <ul class="list-filter size-filter font-small">
-                                                    <li ng-repeat="s in Product.productDataArray" style="margin-left:5px;"><a ng-click="SelectSizePrice(s.ProductSize)">{{s.ProductSize}}</a> </li>
+                                    <div data-aos="zoom-in">
+                                        <div class="attr-detail attr-size mb-30" ng-show="Product.productDataArray.length>0">
+                                            <strong class="mr-10">Size</strong>
+                                            <ul class="list-filter size-filter font-small">
+                                                <li ng-repeat="s in Product.productDataArray" style="margin-left:5px;"><a ng-click="SelectSizePrice(s.ProductSize)">{{s.ProductSize}}</a> </li>
 
-                                                </ul>
-                                            </div>
-                                        </div>*@
+                                            </ul>
+                                        </div>
+                                    </div>*@
 
-                                    <div class="attr-detail attr-size mb-3" ng-if="Product.productDataArray.length>0">
+                                    @* New Size COde *@
+                                    <div class="attr-detail attr-size d-block">
+                                        <h6><strong class="mr-10">Select Size</strong></h6>
+                                        <ul class="list-filter size-filter font-small mt-1">
+                                            <li class="active">
+                                                <a href="#">
+                                                    <span>
+                                                        6x9 Inch (Low Quality)
+                                                    </span> <br />
+                                                    <span class="text-success">
+                                                        <b><i class="fa fa-inr" aria-hidden="true"></i> 600.00</b>
+                                                    </span>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="#">
+                                                    <span>
+                                                        6x9 Inch (Low Quality)
+                                                    </span> <br />
+                                                    <span class="text-success">
+                                                        <b><i class="fa fa-inr" aria-hidden="true"></i> 600.00</b>
+                                                    </span>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="#">
+                                                    <span>
+                                                        6x9 Inch (Low Quality)
+                                                    </span> <br />
+                                                    <span class="text-success">
+                                                        <b><i class="fa fa-inr" aria-hidden="true"></i> 600.00</b>
+                                                    </span>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="#">
+                                                    <span>
+                                                        6x9 Inch (Low Quality)
+                                                    </span> <br />
+                                                    <span class="text-success">
+                                                        <b><i class="fa fa-inr" aria-hidden="true"></i> 600.00</b>
+                                                    </span>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="#">
+                                                    <span>
+                                                        6x9 Inch (Low Quality)
+                                                    </span> <br />
+                                                    <span class="text-success">
+                                                        <b><i class="fa fa-inr" aria-hidden="true"></i> 600.00</b>
+                                                    </span>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+
+                                    <!--<div class="attr-detail attr-size mb-3" ng-if="Product.productDataArray.length>0">
                                         <strong class="mr-10">Size : </strong>
-                                        <select class="form-select form-select-sm w-auto shadow-none theme-button-3 rounded-0 " name="" ng-model="size" id="" ng-change="SelectSizePrice(size)" ng-init="size = Product.productDataArray[0].ProductSize">
+                                        <select class="form-select form-select-sm w-auto shadow-none theme-button-3 rounded-0 " name="" ng-model="size" id="" ng-change="SelectSizePrice(size)" ng-init="size = Product.productDataArray[0].ProductSize">-->
                                             @*<option selected="ture" disabled value="">-- Select Size --</option>*@
-                                            <option class="text-dark" ng-repeat="s in Product.productDataArray" value="{{s.ProductSize}}">{{s.ProductSize}}</option>
+                                            <!--<option class="text-dark" ng-repeat="s in Product.productDataArray" value="{{s.ProductSize}}">{{s.ProductSize}}</option>
                                         </select>
 
-                                    </div>
+                                    </div>-->
 
 
 
                                     <div class="detail-extralink">
                                         @*<div class="detail-qty border radius">
-                                                <a href="#" class="qty-down"><i class="fi-rs-angle-small-down"></i></a>
-                                                <span class="qty-val">1</span>
-                                                <a href="#" class="qty-up"><i class="fi-rs-angle-small-up"></i></a>
-                                            </div>*@
+                <a href="#" class="qty-down"><i class="fi-rs-angle-small-down"></i></a>
+                <span class="qty-val">1</span>
+                <a href="#" class="qty-up"><i class="fi-rs-angle-small-up"></i></a>
+            </div>*@
                                         <div class="d-flex align-items-center gap-3">
                                             <div class="clearfix product-price-cover p-1 mb-2   border-0 mb-0">
                                                 <div class="product-price primary-color float-left">
@@ -149,16 +206,16 @@
 
 
                                     @*<div data-aos="zoom-in">
-                                            <div class="social-icons single-share mb-20">
-                                                <ul class="text-grey-5 d-inline-block">
-                                                    <li><strong class="mr-10">Share this:</strong></li>
-                                                    <li class="social-facebook"><a href="#"><img src="assets/imgs/theme/icons/icon-facebook.svg" alt=""></a></li>
-                                                    <li class="social-twitter"> <a href="#"><img src="assets/imgs/theme/icons/icon-twitter.svg" alt=""></a></li>
-                                                    <li class="social-instagram"><a href="#"><img src="assets/imgs/theme/icons/icon-instagram.svg" alt=""></a></li>
-                                                    <li class="social-linkedin"><a href="#"><img src="assets/imgs/theme/icons/icon-pinterest.svg" alt=""></a></li>
-                                                </ul>
-                                            </div>
-                                        </div>*@
+            <div class="social-icons single-share mb-20">
+                <ul class="text-grey-5 d-inline-block">
+                    <li><strong class="mr-10">Share this:</strong></li>
+                    <li class="social-facebook"><a href="#"><img src="assets/imgs/theme/icons/icon-facebook.svg" alt=""></a></li>
+                    <li class="social-twitter"> <a href="#"><img src="assets/imgs/theme/icons/icon-twitter.svg" alt=""></a></li>
+                    <li class="social-instagram"><a href="#"><img src="assets/imgs/theme/icons/icon-instagram.svg" alt=""></a></li>
+                    <li class="social-linkedin"><a href="#"><img src="assets/imgs/theme/icons/icon-pinterest.svg" alt=""></a></li>
+                </ul>
+            </div>
+        </div>*@
 
 
 
@@ -274,5 +331,38 @@
 
 
 </main>
+
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content rounded-0">
+            <div class="modal-body p-1">
+                <div class="d-flex justify-content-end position-relative" style="z-index : 9 !important; right : 2%;">
+                    <button type="button" class="btn-close shadow-none p-1" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel" style="margin-top : -20px">
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <img src="https://dummyimage.com/500x500/ccc/fff.jpg" alt="product image" class="img-fluid w-100" loading="lazy">
+                        </div>
+                        <div class="carousel-item">
+                            <img src="https://dummyimage.com/500x500/ccc/fff.jpg" alt="product image" class="img-fluid w-100" loading="lazy">
+                        </div>
+                        <div class="carousel-item">
+                            <img src="https://dummyimage.com/500x500/ccc/fff.jpg" alt="product image" class="img-fluid w-100" loading="lazy">
+                        </div>
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 <!-- Main Section End -->

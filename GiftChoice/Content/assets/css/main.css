@@ -52,4 +52,13 @@
     .caterody-product-slider .swiper-slide .card {
         width: 113px;
     }
+
+    .size-filter{
+        display : flex;
+        white-space : nowrap;
+        overflow : auto;
+    }
+        .size-filter.list-filter a{
+            font-size : 11px !important;
+        }
 }
