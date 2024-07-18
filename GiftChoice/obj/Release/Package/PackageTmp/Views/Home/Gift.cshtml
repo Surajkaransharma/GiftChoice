@@ -37,7 +37,7 @@
 
                                     <div class="product-image-slider">
                                         <figure class="border-radius-10" ng-repeat="i in Product.AllProductImage">
-                                            <img src="~/images/ProductImg/{{i}}" alt="product image" class="img-fluid" loading="lazy">
+                                            <a data-bs-toggle="modal" data-bs-target="#staticBackdrop"><img src="~/images/ProductImg/{{i}}" alt="product image" class="img-fluid" loading="lazy"></a>
                                         </figure>
 
                                     </div>
@@ -100,9 +100,9 @@
 
                                                 </ul>
                                             </div>
-                                        </div>*@
+                                        </div>
 
-                                    @*<div data-aos="zoom-in">
+                                        <div data-aos="zoom-in">
                                             <div class="attr-detail attr-size mb-30" ng-show="Product.productDataArray.length>0">
                                                 <strong class="mr-10">Size</strong>
                                                 <ul class="list-filter size-filter font-small">
@@ -112,14 +112,32 @@
                                             </div>
                                         </div>*@
 
-                                    <div class="attr-detail attr-size mb-3" ng-if="Product.productDataArray.length>0">
+                                    @* New Size COde *@
+                                    <div class="attr-detail attr-size d-block" ng-show="Product.productDataArray.length>0">
+                                        <h6><strong class="mr-10">Select Size</strong></h6>
+                                        <ul class="list-filter size-filter font-small mt-1">
+                                            <li ng-repeat="s in Product.productDataArray" class="{{$index == 0 ? 'active' : ''}}">
+                                                <a ng-click="SelectSizePrice(s.ProductSize)">
+                                                    <span>
+                                                        {{s.ProductSize}} @*Inch (Low Quality)*@
+                                                    </span> <br />
+                                                    <span class="text-success">
+                                                        <b><i class="fa fa-inr" aria-hidden="true"></i> {{s.Price}}</b>
+                                                    </span>
+                                                </a>
+                                            </li>
+
+                                        </ul>
+                                    </div>
+
+                                    <!--<div class="attr-detail attr-size mb-3" ng-if="Product.productDataArray.length>0">
                                         <strong class="mr-10">Size : </strong>
-                                        <select class="form-select form-select-sm w-auto shadow-none theme-button-3 rounded-0 " name="" ng-model="size" id="" ng-change="SelectSizePrice(size)" ng-init="size = Product.productDataArray[0].ProductSize">
-                                            @*<option selected="ture" disabled value="">-- Select Size --</option>*@
-                                            <option class="text-dark" ng-repeat="s in Product.productDataArray" value="{{s.ProductSize}}">{{s.ProductSize}}</option>
+                                        <select class="form-select form-select-sm w-auto shadow-none theme-button-3 rounded-0 " name="" ng-model="size" id="" ng-change="SelectSizePrice(size)" ng-init="size = Product.productDataArray[0].ProductSize">-->
+                                    @*<option selected="ture" disabled value="">-- Select Size --</option>*@
+                                    <!--<option class="text-dark" ng-repeat="s in Product.productDataArray" value="{{s.ProductSize}}">{{s.ProductSize}}</option>
                                         </select>
 
-                                    </div>
+                                    </div>-->
 
 
 
@@ -272,7 +290,35 @@
     </section>
     @* Related Product Slider Section End *@
 
-
+    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content rounded-0">
+                <div class="modal-body p-1">
+                    <div class="d-flex justify-content-end position-relative" style="z-index : 9 !important; right : 2%;">
+                        <button type="button" class="btn-close shadow-none p-1" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel" style="margin-top : -20px">
+                        <div class="carousel-inner">
+                            <div  ng-repeat="i in Product.AllProductImage" class="carousel-item {{$index == 0 ? 'active' : ''}}">
+                                <img src="~/images/ProductImg/{{i}}" alt="product image" class="img-fluid w-100" loading="lazy">
+                            </div>
+                          
+                        </div>
+                        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Next</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </main>
+
+
 
 <!-- Main Section End -->

@@ -6,13 +6,13 @@ by editing this MSBuild file. In order to learn more about this please visit htt
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <TimeStampOfAssociatedLegacyPublishXmlFile />
-    <_PublishTargetUrl>D:\Publice Web Project\GiftChoicePublish\08_07_2024</_PublishTargetUrl>
+    <_PublishTargetUrl>D:\Publice Web Project\GiftChoicePublish\18_07_2024</_PublishTargetUrl>
     <History>True|2024-05-05T15:53:06.6956577Z;True|2024-04-28T16:12:39.3516310+05:30;True|2024-04-28T16:05:51.8898905+05:30;True|2024-04-21T13:02:50.5650779+05:30;True|2024-03-12T23:38:22.9024668+05:30;True|2024-02-22T22:20:16.9144167+05:30;True|2024-01-02T10:26:37.3615825+05:30;True|2023-09-30T23:16:46.6890233+05:30;True|2023-09-21T22:14:56.5814878+05:30;True|2023-09-21T00:24:40.0710920+05:30;</History>
     <LastFailureDetails />
   </PropertyGroup>
   <ItemGroup>
     <File Include="Angularjs/Admin.js">
-      <publishTime>04/07/2024 12:31:41</publishTime>
+      <publishTime>07/04/2024 12:31:41</publishTime>
     </File>
     <File Include="Angularjs/AnguAutoComplete/angucomplete-alt.css">
       <publishTime>12/26/2023 11:05:30</publishTime>
@@ -30,7 +30,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/19/2024 15:06:01</publishTime>
     </File>
     <File Include="Angularjs/Home.js">
-      <publishTime>04/07/2024 12:53:04</publishTime>
+      <publishTime>07/04/2024 12:53:04</publishTime>
     </File>
     <File Include="Angularjs/LoginJs.js">
       <publishTime>12/26/2023 11:05:30</publishTime>
@@ -3174,10 +3174,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>12/26/2023 11:05:38</publishTime>
     </File>
     <File Include="bin/GiftChoice.dll">
-      <publishTime>07/08/2024 15:49:51</publishTime>
+      <publishTime>07/18/2024 17:38:25</publishTime>
     </File>
     <File Include="bin/GiftChoice.pdb">
-      <publishTime>07/08/2024 15:49:51</publishTime>
+      <publishTime>07/18/2024 17:38:25</publishTime>
     </File>
     <File Include="bin/Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll">
       <publishTime>12/26/2023 11:05:38</publishTime>
@@ -3354,7 +3354,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>04/24/2024 11:36:14</publishTime>
     </File>
     <File Include="Content/assets/css/font-awasome/font-awesome.min.css">
-      <publishTime>04/07/2024 16:25:07</publishTime>
+      <publishTime>07/04/2024 16:25:07</publishTime>
     </File>
     <File Include="Content/assets/css/font-awasome/fonts/fontawesome-webfont.eot">
       <publishTime>04/24/2024 11:36:14</publishTime>
@@ -3375,34 +3375,34 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>04/24/2024 11:36:14</publishTime>
     </File>
     <File Include="Content/assets/css/main.css">
-      <publishTime>04/07/2024 16:25:07</publishTime>
+      <publishTime>07/18/2024 17:12:37</publishTime>
     </File>
     <File Include="Content/assets/css/plugins/jquery-ui.css">
-      <publishTime>04/07/2024 16:25:07</publishTime>
+      <publishTime>07/04/2024 16:25:07</publishTime>
     </File>
     <File Include="Content/assets/css/plugins/magnific-popup.css">
-      <publishTime>04/07/2024 16:25:07</publishTime>
+      <publishTime>07/04/2024 16:25:07</publishTime>
     </File>
     <File Include="Content/assets/css/plugins/perfect-scrollbar.css">
-      <publishTime>04/07/2024 16:25:07</publishTime>
+      <publishTime>07/04/2024 16:25:07</publishTime>
     </File>
     <File Include="Content/assets/css/plugins/select2.min.css">
-      <publishTime>04/07/2024 16:25:07</publishTime>
+      <publishTime>07/04/2024 16:25:07</publishTime>
     </File>
     <File Include="Content/assets/css/plugins/slick.css">
-      <publishTime>04/07/2024 16:25:07</publishTime>
+      <publishTime>07/04/2024 16:25:07</publishTime>
     </File>
     <File Include="Content/assets/css/vendors/bootstrap.min.css">
-      <publishTime>04/07/2024 16:25:07</publishTime>
+      <publishTime>07/04/2024 16:25:07</publishTime>
     </File>
     <File Include="Content/assets/css/vendors/evara-font.css">
-      <publishTime>04/07/2024 16:25:07</publishTime>
+      <publishTime>07/04/2024 16:25:07</publishTime>
     </File>
     <File Include="Content/assets/css/vendors/normalize.css">
-      <publishTime>04/07/2024 16:25:07</publishTime>
+      <publishTime>07/04/2024 16:25:07</publishTime>
     </File>
     <File Include="Content/assets/css/vendors/uicons-regular-straight.css">
-      <publishTime>04/07/2024 16:25:07</publishTime>
+      <publishTime>07/04/2024 16:25:07</publishTime>
     </File>
     <File Include="Content/assets/fonts/evara-font/evara-font.eot">
       <publishTime>04/24/2024 11:36:14</publishTime>
@@ -3543,73 +3543,73 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>04/24/2024 11:36:15</publishTime>
     </File>
     <File Include="Content/assets/js/main.js">
-      <publishTime>07/08/2024 15:39:06</publishTime>
+      <publishTime>07/18/2024 17:12:37</publishTime>
     </File>
     <File Include="Content/assets/js/plugins/counterup.js">
-      <publishTime>04/07/2024 16:25:07</publishTime>
+      <publishTime>07/04/2024 16:25:07</publishTime>
     </File>
     <File Include="Content/assets/js/plugins/images-loaded.js">
-      <publishTime>04/07/2024 16:25:07</publishTime>
+      <publishTime>07/04/2024 16:25:07</publishTime>
     </File>
     <File Include="Content/assets/js/plugins/isotope.js">
-      <publishTime>04/07/2024 16:25:07</publishTime>
+      <publishTime>07/04/2024 16:25:07</publishTime>
     </File>
     <File Include="Content/assets/js/plugins/jquery-ui.js">
-      <publishTime>04/07/2024 16:25:07</publishTime>
+      <publishTime>07/04/2024 16:25:07</publishTime>
     </File>
     <File Include="Content/assets/js/plugins/jquery.countdown.min.js">
-      <publishTime>04/07/2024 16:25:07</publishTime>
+      <publishTime>07/04/2024 16:25:07</publishTime>
     </File>
     <File Include="Content/assets/js/plugins/jquery.elevatezoom.js">
-      <publishTime>04/07/2024 16:25:08</publishTime>
+      <publishTime>07/04/2024 16:25:08</publishTime>
     </File>
     <File Include="Content/assets/js/plugins/jquery.syotimer.min.js">
-      <publishTime>04/07/2024 16:25:08</publishTime>
+      <publishTime>07/04/2024 16:25:08</publishTime>
     </File>
     <File Include="Content/assets/js/plugins/jquery.theia.sticky.js">
-      <publishTime>04/07/2024 16:25:08</publishTime>
+      <publishTime>07/04/2024 16:25:08</publishTime>
     </File>
     <File Include="Content/assets/js/plugins/jquery.vticker-min.js">
-      <publishTime>04/07/2024 16:25:08</publishTime>
+      <publishTime>07/04/2024 16:25:08</publishTime>
     </File>
     <File Include="Content/assets/js/plugins/leaflet.js">
-      <publishTime>04/07/2024 16:25:08</publishTime>
+      <publishTime>07/04/2024 16:25:08</publishTime>
     </File>
     <File Include="Content/assets/js/plugins/magnific-popup.js">
-      <publishTime>04/07/2024 16:25:08</publishTime>
+      <publishTime>07/04/2024 16:25:08</publishTime>
     </File>
     <File Include="Content/assets/js/plugins/perfect-scrollbar.js">
-      <publishTime>04/07/2024 16:25:08</publishTime>
+      <publishTime>07/04/2024 16:25:08</publishTime>
     </File>
     <File Include="Content/assets/js/plugins/scrollup.js">
-      <publishTime>04/07/2024 16:25:08</publishTime>
+      <publishTime>07/04/2024 16:25:08</publishTime>
     </File>
     <File Include="Content/assets/js/plugins/select2.min.js">
-      <publishTime>04/07/2024 16:25:08</publishTime>
+      <publishTime>07/04/2024 16:25:08</publishTime>
     </File>
     <File Include="Content/assets/js/plugins/slick.js">
-      <publishTime>04/07/2024 16:25:08</publishTime>
+      <publishTime>07/04/2024 16:25:08</publishTime>
     </File>
     <File Include="Content/assets/js/plugins/waypoints.js">
-      <publishTime>04/07/2024 16:25:08</publishTime>
+      <publishTime>07/04/2024 16:25:08</publishTime>
     </File>
     <File Include="Content/assets/js/plugins/wow.js">
-      <publishTime>04/07/2024 16:25:08</publishTime>
+      <publishTime>07/04/2024 16:25:08</publishTime>
     </File>
     <File Include="Content/assets/js/shop.js">
-      <publishTime>04/07/2024 16:25:08</publishTime>
+      <publishTime>07/04/2024 16:25:08</publishTime>
     </File>
     <File Include="Content/assets/js/vendor/bootstrap.bundle.min.js">
-      <publishTime>04/07/2024 16:25:08</publishTime>
+      <publishTime>07/04/2024 16:25:08</publishTime>
     </File>
     <File Include="Content/assets/js/vendor/jquery-3.6.0.min.js">
-      <publishTime>04/07/2024 16:25:08</publishTime>
+      <publishTime>07/04/2024 16:25:08</publishTime>
     </File>
     <File Include="Content/assets/js/vendor/jquery-migrate-3.3.0.min.js">
-      <publishTime>04/07/2024 16:25:08</publishTime>
+      <publishTime>07/04/2024 16:25:08</publishTime>
     </File>
     <File Include="Content/assets/js/vendor/modernizr-3.6.0.min.js">
-      <publishTime>04/07/2024 16:25:08</publishTime>
+      <publishTime>07/04/2024 16:25:08</publishTime>
     </File>
     <File Include="Content/assets/owl-carousel/owl.carousel.css">
       <publishTime>04/24/2024 11:36:15</publishTime>
@@ -8997,7 +8997,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>12/26/2023 11:05:30</publishTime>
     </File>
     <File Include="Views/GiftDashBoard/AddSlider.cshtml">
-      <publishTime>03/05/2024 11:27:05</publishTime>
+      <publishTime>05/03/2024 11:27:05</publishTime>
     </File>
     <File Include="Views/GiftDashBoard/AddVideo.cshtml">
       <publishTime>06/13/2024 15:22:21</publishTime>
@@ -9030,7 +9030,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>04/24/2024 11:36:19</publishTime>
     </File>
     <File Include="Views/Home/Gift.cshtml">
-      <publishTime>06/08/2024 10:47:59</publishTime>
+      <publishTime>07/18/2024 17:33:21</publishTime>
     </File>
     <File Include="Views/Home/giftfilterkeyword.cshtml">
       <publishTime>06/22/2024 11:44:40</publishTime>
@@ -9039,7 +9039,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>04/06/2024 13:01:38</publishTime>
     </File>
     <File Include="Views/Home/Index.cshtml">
-      <publishTime>04/07/2024 12:58:02</publishTime>
+      <publishTime>07/18/2024 17:12:37</publishTime>
     </File>
     <File Include="Views/Home/privacy_policy.cshtml">
       <publishTime>12/26/2023 11:05:30</publishTime>
@@ -9063,7 +9063,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/24/2024 13:01:51</publishTime>
     </File>
     <File Include="Views/Shared/_Layout.cshtml">
-      <publishTime>04/07/2024 17:49:27</publishTime>
+      <publishTime>07/08/2024 15:51:27</publishTime>
     </File>
     <File Include="Views/Web.config">
       <publishTime>12/26/2023 11:05:30</publishTime>
