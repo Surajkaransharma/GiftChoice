@@ -32,29 +32,17 @@
                     <div class="overflow-auto">
                         <div class="attr-detail attr-size mb-3">
 
-                            <button class="filter-btn-animation active-btn">
+                            <button class="filter-btn-animation active-btn" ng-class="{'active-btn': activeFilter === 'all'}" href="/Home/BannerGifts?Banner={{banner}}" ng-click="setActiveFilter('all');GetBannerAllProductwithmodel()">
                                 <i class="animation"></i>All Categories<i class="animation"></i>
                             </button>
 
-                            <button class="filter-btn-animation">
-                                <i class="animation"></i>Rakhi<i class="animation"></i>
+                            <button class="filter-btn-animation" ng-class="{'active-btn': activeFilter === f.KeywordId}" ng-repeat="f in FilterKeywordList">
+                                <a ng-click="setActiveFilter(f.KeywordId);GetFilterKeywordBy(f.KeywordId)">     <i class="animation"></i>{{f.Filterkeyword}}<i class="animation"></i></a>
                             </button>
 
-                            <button class="filter-btn-animation">
-                                <i class="animation"></i>Combo<i class="animation"></i>
-                            </button>
+                    
 
-                            <button class="filter-btn-animation">
-                                <i class="animation"></i>Gifts<i class="animation"></i>
-                            </button>
-
-
-                            @*Old Buttons*@
-                            <ul class="list-filter size-filter font-small">
-                                <li class=""><a href="/Home/BannerGifts?Banner={{banner}}" ng-click="GetBannerAllProductwithmodel()">All</a></li>
-                                <li class="" ng-repeat="f in FilterKeywordList"><a ng-click="GetFilterKeywordBy(f.KeywordId)">{{f.Filterkeyword}}</a></li>
-                            </ul>
-                            @*Old Buttons*@
+                   
                         </div>
                     </div>
                     @*New Button Filter *@

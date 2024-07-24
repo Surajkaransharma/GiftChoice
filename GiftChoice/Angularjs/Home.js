@@ -1350,6 +1350,12 @@ app.controller("HomeController", ['$scope', '$http', '$sce', 'startFromFilter', 
 
 
     };
+    $scope.activeFilter = 'all';
+
+    // Function to set the active filter
+    $scope.setActiveFilter = function (filter) {
+        $scope.activeFilter = filter;
+    };
 
     $scope.GetFilterKeywordBy = function (id) {
         var urlParams = new URLSearchParams(window.location.search);
