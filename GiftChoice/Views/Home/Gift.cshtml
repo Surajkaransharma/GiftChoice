@@ -284,56 +284,7 @@
 
 
 
-    @* Related Product Slider Section Start *@
-    <section class="section-paddin mb-30" ng-show="ProductData.length>0" style="display : none">
-        <div class="container">
-            <h3 class="section-title mb-20 fs-14 mmb-20"><span>Related</span> Products</h3>
-            <div class="carausel-6-columns-cover position-relative">
-                <div class="slider-arrow slider-arrow-2 carausel-6-columns-arrow" id="carausel-6-columns-2-arrows"></div>
-                <div class="carausel-6-columns carausel-arrow-center" id="carausel-6-columns-2">
-                    <div class="product-cart-wrap" ng-repeat="q in ProductData" ng-click="RecentViewData($index)">
-                        <div class="product-img-action-wrap">
-                            <div class="product-img border-0">
-                                <a href="/Home/Gift?url={{q.PUrl}}">
-
-                                    <img class="default-img img-fluid" src="~/images/ProductImg/{{q.ProductImage}}" loading="lazy" alt="product-image">
-                                    <img class="hover-img img-fluid" src="~/images/ProductImg/{{q.ProductImage}}" loading="lazy" alt="product-hover-image">
-                                </a>
-                            </div>
-                            <div class="product-badges product-badges-position product-badges-mrg" ng-show="q.PLabel!=''">
-                                <span class="hot">{{q.PLabel}}</span>
-                            </div>
-                        </div>
-                        <div class="product-content-wrap">
-                            <h2><a href="/Home/Gift?url={{q.PUrl}}">{{q.ProductTitle}}</a></h2>
-
-                            <div class="product-price">
-                                <span><i class="fa fa-inr" aria-hidden="true"></i> {{q.Price}}/-</span>
-
-                            </div>
-                            <div class="d-flex justify-content-between">
-                                <div class="button-design mt-2">
-                                    <a aria-label="Add To Cart" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight" class="btn theme-button-2" ng-click="addItemToCart($index)"><i class="fi-rs-shopping-bag-add"></i> Add To Cart </a>
-                                </div>
-                                @* Popup Button For Image *@
-                                <div class="button-design mt-2" ng-if="!q.Video">
-                                    <a aria-label="View Image" class="btn theme-button-3 d-flex gap-2 align-items-center" ng-click="quickview(q)"><span class="d-lg-none d-sm-none d-block fs-9">View </span><i class="fa fa-eye" aria-hidden="true"></i></a>
-                                </div>
-
-
-                                @* Popup Button For Video *@
-                                <div class="button-design mt-2" ng-if="q.Video">
-                                    <a aria-label="View Image" class="btn theme-button-3 d-flex gap-2 align-items-center for-video" ng-click="quickview(q)"><span class="d-lg-none d-sm-none d-block fs-9 hide-animation" id="hideText">View </span><i class="fa fa-youtube-play" aria-hidden="true"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-    </section>
-    @* Related Product Slider Section End *@
+   
 
 
 
