@@ -295,22 +295,57 @@
                     <div class="d-flex justify-content-end position-relative" style="z-index : 9 !important; right : 2%;">
                         <button type="button" class="btn-close shadow-none p-1" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel" style="margin-top : -20px">
-                        <div class="carousel-inner">
-                            <div ng-repeat="i in Product.AllProductImage" class="carousel-item {{$index == 0 ? 'active' : ''}}">
-                                <img src="~/images/ProductImg/{{i}}" alt="product image" class="img-fluid w-100" loading="lazy">
+                    <div class="product-detail accordion-detail">
+                        <div class="row">
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                <div class="detail-gallery">
+                                    <div class="product-image-slider overflow-hidden mb-0">
+                                        <figure class="border-radius-10">
+                                            <img src="https://giftchoice.net/images/ProductImg/593.JPG" alt="product image">
+                                        </figure>
+                                    </div>
+                                     <div class="slider-nav-thumbnails pl-15 pr-15">
+                                        <div><img src="assets/imgs/shop/thumbnail-3.jpg" alt="product image"></div>
+                                        <div><img src="assets/imgs/shop/thumbnail-4.jpg" alt="product image"></div>
+                                        <div><img src="assets/imgs/shop/thumbnail-5.jpg" alt="product image"></div>
+                                        <div><img src="assets/imgs/shop/thumbnail-6.jpg" alt="product image"></div>
+                                        <div><img src="assets/imgs/shop/thumbnail-7.jpg" alt="product image"></div>
+                                        <div><img src="assets/imgs/shop/thumbnail-8.jpg" alt="product image"></div>
+                                        <div><img src="assets/imgs/shop/thumbnail-9.jpg" alt="product image"></div>
+                                    </div> 
+                                </div>
                             </div>
-
                         </div>
-                        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
-                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                            <span class="visually-hidden">Previous</span>
-                        </button>
-                        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
-                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                            <span class="visually-hidden">Next</span>
-                        </button>
                     </div>
+                    @*<div class="product-detail accordion-detail">
+            <div class="row">
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="detail-gallery mb-0">
+                        <div class="product-image-slider overflow-hidden mb-0">
+                            <figure class="rounded-0">
+                                <img src="https://giftchoice.net/images/ProductImg/593.JPG" alt="product image" class="mb-0 w-100 img-responsive img-fluid rounded-0">
+                            </figure>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>*@
+                    @*<div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel" style="margin-top : -20px">
+            <div class="carousel-inner">
+                <div ng-repeat="i in Product.AllProductImage" class="carousel-item {{$index == 0 ? 'active' : ''}}">
+                    <img src="~/images/ProductImg/{{i}}" alt="product image" class="img-fluid w-100" loading="lazy">
+                </div>
+
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>*@
                 </div>
             </div>
         </div>
