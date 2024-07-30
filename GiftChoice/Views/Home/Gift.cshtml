@@ -326,15 +326,12 @@
                     </div>
                     <div class="detail-gallery">
                         <div class="product-image-slider">
-                            <figure class="border-radius-10">
-                                <img src="http://localhost:27123/images/ProductImg/167.webp" alt="product image">
+                            <figure class="border-radius-10" ng-repeat="i in Product.AllProductImage">
+                                <img src="~/images/ProductImg/{{i}}"  alt="product image">
                             </figure>
                         </div>
                         <div class="slider-nav-thumbnails pl-15 pr-15">
-                            <div><img src="http://localhost:27123/images/ProductImg/167.webp" alt="product image"></div>
-                            <div><img src="http://localhost:27123/images/ProductImg/167.webp" alt="product image"></div>
-                            <div><img src="http://localhost:27123/images/ProductImg/167.webp" alt="product image"></div>
-                            <div><img src="http://localhost:27123/images/ProductImg/167.webp" alt="product image"></div>
+                            <div ng-repeat="i in Product.AllProductImage"><img src="~/images/ProductImg/{{i}}"  alt="product image"></div>                 
                         </div>
                     </div>
                 </div>
