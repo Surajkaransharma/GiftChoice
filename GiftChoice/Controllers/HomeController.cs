@@ -539,7 +539,7 @@ namespace GiftChoice.Controllers
                    m.PLabel,
                    m.Price,
                    m.Create_at,
-          
+                    m.SameDay,
                    m.ProductType,
                    m.PUrl,
                    m.PDesc,
