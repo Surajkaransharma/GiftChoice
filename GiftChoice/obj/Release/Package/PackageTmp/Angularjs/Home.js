@@ -962,6 +962,13 @@ app.controller("HomeController", ['$scope', '$http', '$sce', 'startFromFilter', 
             alert(error.data);
         });
     };
+
+
+    $scope.openimagemodel = function (id) {
+        debugger
+        $scope.productimage = id;
+    };
+
     $scope.SelectSizePrice = function (ProductSize) {
 
 
@@ -1349,6 +1356,12 @@ app.controller("HomeController", ['$scope', '$http', '$sce', 'startFromFilter', 
         });
 
 
+    };
+    $scope.activeFilter = 'all';
+
+    // Function to set the active filter
+    $scope.setActiveFilter = function (filter) {
+        $scope.activeFilter = filter;
     };
 
     $scope.GetFilterKeywordBy = function (id) {

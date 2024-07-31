@@ -962,6 +962,13 @@ app.controller("HomeController", ['$scope', '$http', '$sce', 'startFromFilter', 
             alert(error.data);
         });
     };
+
+
+    $scope.openimagemodel = function (id) {
+        debugger
+        $scope.productimage = id;
+    };
+
     $scope.SelectSizePrice = function (ProductSize) {
 
 

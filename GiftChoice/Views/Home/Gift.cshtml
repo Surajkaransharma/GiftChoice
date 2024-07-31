@@ -44,9 +44,9 @@
                                         <div class="row g-1">
                                             <div class="col-lg-2 col-sm-3 order-lg-1 order-sm-1 order-2">
                                                 <div class="scroll mb-4 pb-4">
-                                                    <div class="carousel-indicators" style="margin-bottom: -20px;">
-                                                        <button ng-repeat="i in Product.AllProductImage" type="button" data-bs-target="#carouselMDExample" data-bs-slide-to="{{$index}}" class="{{$index==0?'active':''}}" aria-current="true" aria-label="First slide">
-                                                            <img class="img-fluid img-responsive d-block" src="~/images/ProductImg/{{i}}" />
+                                                    <div class="carousel-indicators" style="margin-bottom: -20px;" >
+                                                        <button ng-repeat="i in Product.AllProductImage"   type="button" data-bs-target="#carouselMDExample" data-bs-slide-to="{{$index}}" class="{{$index==0?'active':''}}" aria-current="true" aria-label="First slide">
+                                                            <img class="img-fluid img-responsive d-block" src="~/images/ProductImg/{{i}}"  />
                                                         </button>
                                                     </div>
                                                 </div>
@@ -54,7 +54,7 @@
                                             <div class="col-lg-10 col-sm-9 order-lg-2 order-sm-2 order-1">
                                                 <div class="carousel-inner mb-2 shadow-1-strong rounded-3">
                                                     <div ng-repeat="i in Product.AllProductImage" class="carousel-item  {{$index==0?'active':''}}">
-                                                        <img src="~/images/ProductImg/{{i}}" class="d-block img-responsive img-fluid" alt="First slide" data-bs-toggle="modal" data-bs-target="#staticBackdrop" />
+                                                        <img src="~/images/ProductImg/{{i}}" class="d-block img-responsive img-fluid" alt="First slide" data-bs-toggle="modal" data-bs-target="#staticBackdrop" ng-click="openimagemodel(i)" />
                                                     </div>
                                                 </div>
                                             </div>
@@ -326,12 +326,12 @@
                     </div>
                     <div class="detail-gallery">
                         <div class="product-image-slider">
-                            <figure class="border-radius-10" ng-repeat="i in Product.AllProductImage">
-                                <img src="~/images/ProductImg/{{i}}"  alt="product image">
+                            <figure class="border-radius-10">
+                                <img src="~/images/ProductImg/{{productimage}}"  alt="product image">
                             </figure>
                         </div>
-                        <div class="slider-nav-thumbnails pl-15 pr-15">
-                            <div ng-repeat="i in Product.AllProductImage"><img src="~/images/ProductImg/{{i}}"  alt="product image"></div>                 
+                        <div class="slider-nav-thumbnails">
+                            @*<div ng-repeat="i in Product.AllProductImage"><img src="~/images/ProductImg/{{i}}"  alt="product image"></div>*@                 
                         </div>
                     </div>
                 </div>

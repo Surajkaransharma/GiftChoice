@@ -7,6 +7,9 @@
 }
 
 
+<!-- Product Slider CDN -->
+<link rel='stylesheet' href='https://unpkg.com/swiper/swiper-bundle.min.css'>
+
 <main class="main" ng-init="GetProductByid(@ViewBag.id)">
 
     <!-- Breadcrumb Section Start -->
@@ -30,34 +33,42 @@
 
                         <!-- Product Section Start -->
                         <div class="row mb-50">
-                            <div class="col-lg-3 col-sm-4 col-12">
-                                <div class="detail-gallery">
+                            <div class="col-lg-5 col-sm-6 col-12">
 
-                                    <!-- Main Image -->
 
-                                    <div class="product-image-slider">
-                                        <figure class="border-radius-10" ng-repeat="i in Product.AllProductImage">
-                                            <a data-bs-toggle="modal" data-bs-target="#staticBackdrop"><img src="~/images/ProductImg/{{i}}" alt="product image" class="img-fluid" loading="lazy"></a>
-                                        </figure>
 
-                                    </div>
 
-                                    <!-- Main Image -->
-                                    <!-- Small Image -->
-
-                                    <div class="slider-nav-thumbnails pl-15 pr-15" ng-show="Product.AllProductImage.length>1">
-                                        <div ng-repeat="i in Product.AllProductImage" ng-show="i!=null">
-                                            <img src="~/images/ProductImg/{{i}}" ng-show="i!=null" class="img-fluid" loading="lazy" alt="product image">
+                                @* New Code with Active Class *@
+                                <div class="product-display-slider">
+                                    <div id="carouselMDExample" class="carousel slide carousel-fade" data-bs-ride="carousel">
+                                        <div class="row g-1">
+                                            <div class="col-lg-2 col-sm-3 order-lg-1 order-sm-1 order-2">
+                                                <div class="scroll mb-4 pb-4">
+                                                    <div class="carousel-indicators" style="margin-bottom: -20px;" >
+                                                        <button ng-repeat="i in Product.AllProductImage"   type="button" data-bs-target="#carouselMDExample" data-bs-slide-to="{{$index}}" class="{{$index==0?'active':''}}" aria-current="true" aria-label="First slide">
+                                                            <img class="img-fluid img-responsive d-block" src="~/images/ProductImg/{{i}}"  />
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-10 col-sm-9 order-lg-2 order-sm-2 order-1">
+                                                <div class="carousel-inner mb-2 shadow-1-strong rounded-3">
+                                                    <div ng-repeat="i in Product.AllProductImage" class="carousel-item  {{$index==0?'active':''}}">
+                                                        <img src="~/images/ProductImg/{{i}}" class="d-block img-responsive img-fluid" alt="First slide" data-bs-toggle="modal" data-bs-target="#staticBackdrop" ng-click="openimagemodel(i)" />
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
-                                        <div><img src="~/images/ProductImg/{{i}}" ng-show="i!=null" class="img-fluid" loading="lazy" alt="product image"></div>
                                     </div>
-
-
-                                    <!-- Small Image -->
                                 </div>
+                                @* New Code with Active Class *@
+
+
+
+
 
                             </div>
-                            <div class="col-lg-9 col-sm-8 col-xs-12">
+                            <div class="col-lg-7 col-sm-6 col-xs-12">
                                 <div class="detail-info">
                                     <span class="badge bg-success theme-text-size-13 mb-2 animate__flash" ng-show="Product.SameDay">Same Day Available</span>
 
@@ -131,8 +142,8 @@
                                     </div>
 
                                     <!--<div class="attr-detail attr-size mb-3" ng-if="Product.productDataArray.length>0">
-                                        <strong class="mr-10">Size : </strong>
-                                        <select class="form-select form-select-sm w-auto shadow-none theme-button-3 rounded-0 " name="" ng-model="size" id="" ng-change="SelectSizePrice(size)" ng-init="size = Product.productDataArray[0].ProductSize">-->
+                                    <strong class="mr-10">Size : </strong>
+                                    <select class="form-select form-select-sm w-auto shadow-none theme-button-3 rounded-0 " name="" ng-model="size" id="" ng-change="SelectSizePrice(size)" ng-init="size = Product.productDataArray[0].ProductSize">-->
                                     @*<option selected="ture" disabled value="">-- Select Size --</option>*@
                                     <!--<option class="text-dark" ng-repeat="s in Product.productDataArray" value="{{s.ProductSize}}">{{s.ProductSize}}</option>
                                         </select>
@@ -184,134 +195,144 @@
                             </div>
                         </div>
                         <!-- Product Section End -->
-                        <!-- Related Product Start -->
-                        <div class="row mt-60" style="display: none">
-                            <div class="col-12">
-                                <h3 class="section-title style-1 mb-20 theme-text-size-13">Related Gifts</h3>
-                            </div>
-                            <div class="row product-grid-4 g-1 gx-1">
-                                <div class="col-lg-2 col-6 col-sm-3" ng-repeat="q in ProductData" ng-click="RecentViewData($index)">
-                                    <div class="product-cart-wrap">
-                                        <div class="product-img-action-wrap">
-                                            <div class="product-img">
-                                                <a href="/Home/Gift?url={{q.PUrl}}">
-                                                    <img class="default-img img-fluid" src="~/images/ProductImg/{{q.ProductImage}}" loading="lazy" alt="product-image">
-                                                    <img class="hover-img img-fluid" src="~/images/ProductImg/{{q.ProductImage}}" loading="lazy" alt="product-hover-image">
-                                                </a>
-                                            </div>
-                                            <div class="product-badges product-badges-position product-badges-mrg" ng-show="q.PLabel!=''">
-                                                <span class="hot">{{q.PLabel}}</span>
-                                            </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+    @*New Related Product Slider Section*@
+    <div class="container mb-4">
+        <section id="cate-product" class="relaetd-product-slider">
+
+            <!-- Title With Arrows -->
+            <div class="row align-items-center pb-3">
+                <div class="col">
+                    <h5 class="section-title mb-0">Related Products</h5>
+                </div>
+                <div class="col clearfix">
+                    <span class="title-section d-flex justify-content-end align-items-center">
+                        <button class="btn btn-archive btn-sm prev-btn arrow-button" type="button">
+                            <i class="fa fa-angle-left"></i>
+                            <span class="visually-hidden">Previous</span>
+                        </button>
+
+                        <span class="mx-1">&nbsp;</span>
+
+                        <button class="btn btn-archive btn-sm next-btn arrow-button" type="button">
+                            <i class="fa fa-angle-right"></i>
+                            <span class="visually-hidden">Next</span>
+                        </button>
+                    </span>
+                </div>
+            </div>
+
+            <!-- Products Slider Code -->
+            <div class="related-product-swiper">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide" ng-repeat="q in ProductData" ng-click="RecentViewData($index)">
+                        <div class="col">
+                            <div class="card">
+                                <div class="product-cart-wrap">
+                                    <div class="product-img-action-wrap">
+                                        <div class="product-img border-0">
+                                            <a href="/Home/Gift?url={{q.PUrl}}">
+
+                                                <img class="default-img img-fluid" src="~/images/ProductImg/{{q.ProductImage}}" loading="lazy" alt="product-image">
+                                                <img class="hover-img img-fluid" src="~/images/ProductImg/{{q.ProductImage}}" loading="lazy" alt="product-hover-image">
+                                            </a>
                                         </div>
-                                        <div class="product-content-wrap">
-                                            <h2><a href="/Home/Gift?url={{q.PUrl}}">{{q.ProductTitle}}</a></h2>
-                                            <div class="product-price">
-                                                <span><i class="fa fa-inr" aria-hidden="true"></i> {{q.Price}}/-</span>
+                                        <div class="product-badges product-badges-position product-badges-mrg" ng-show="q.PLabel!=''">
+                                            <span class="hot">{{q.PLabel}}</span>
+                                        </div>
+                                    </div>
+                                    <div class="product-content-wrap">
+                                        <h2><a href="/Home/Gift?url={{q.PUrl}}">{{q.ProductTitle}}</a></h2>
+
+                                        <div class="product-price">
+                                            <span><i class="fa fa-inr" aria-hidden="true"></i> {{q.Price}}/-</span>
+
+                                        </div>
+                                        <div class="d-flex justify-content-between">
+                                            <div class="button-design mt-2">
+                                                <a aria-label="Add To Cart" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight" class="btn theme-button-2" ng-click="addItemToCart($index)"><i class="fi-rs-shopping-bag-add"></i> Add To Cart </a>
                                             </div>
-                                            <div class="d-flex justify-content-between">
-                                                <div class="button-design mt-2">
-                                                    <a aria-label="Add To Cart" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight" class="btn theme-button-2" ng-click="addItemToCart($index)"><i class="fi-rs-shopping-bag-add"></i> Add To Cart </a>
-                                                </div>
-                                                @* Popup Button For Image *@
-                                                <div class="button-design mt-2" ng-if="!q.Video">
-                                                    <a aria-label="View Image" class="btn theme-button-3 d-flex gap-2 align-items-center" ng-click="quickview(q)"><span class="d-lg-none d-sm-none d-block fs-9">View </span><i class="fa fa-eye" aria-hidden="true"></i></a>
-                                                </div>
+                                            @* Popup Button For Image *@
+                                            <div class="button-design mt-2" ng-if="!q.Video">
+                                                <a aria-label="View Image" class="btn theme-button-3 d-flex gap-2 align-items-center" ng-click="quickview(q)"><span class="d-lg-none d-sm-none d-block fs-9">View </span><i class="fa fa-eye" aria-hidden="true"></i></a>
+                                            </div>
 
 
-                                                @* Popup Button For Video *@
-                                                <div class="button-design mt-2" ng-if="q.Video">
-                                                    <a aria-label="View Image" class="btn theme-button-3 d-flex gap-2 align-items-center for-video" ng-click="quickview(q)"><span class="d-lg-none d-sm-none d-block fs-9 hide-animation" id="hideText">View </span><i class="fa fa-youtube-play" aria-hidden="true"></i></a>
-                                                </div>
+                                            @* Popup Button For Video *@
+                                            <div class="button-design mt-2" ng-if="q.Video">
+                                                <a aria-label="View Image" class="btn theme-button-3 d-flex gap-2 align-items-center for-video" ng-click="quickview(q)"><span class="d-lg-none d-sm-none d-block fs-9 hide-animation" id="hideText">View </span><i class="fa fa-youtube-play" aria-hidden="true"></i></a>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-
                             </div>
+
                         </div>
-                        <!-- Related Product Start -->
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
+    </div>
 
 
 
 
-    @* Related Product Slider Section Start *@
-    <section class="section-paddin mb-30" ng-show="ProductData.length>0">
-        <div class="container">
-            <h3 class="section-title mb-20 fs-14 mmb-20"><span>Related</span> Products</h3>
-            <div class="carausel-6-columns-cover position-relative">
-                <div class="slider-arrow slider-arrow-2 carausel-6-columns-arrow" id="carausel-6-columns-2-arrows"></div>
-                <div class="carausel-6-columns carausel-arrow-center" id="carausel-6-columns-2">
-                    <div class="product-cart-wrap" ng-repeat="q in ProductData" ng-click="RecentViewData($index)">
-                        <div class="product-img-action-wrap">
-                            <div class="product-img border-0">
-                                <a href="/Home/Gift?url={{q.PUrl}}">
 
-                                    <img class="default-img img-fluid" src="~/images/ProductImg/{{q.ProductImage}}" loading="lazy" alt="product-image">
-                                    <img class="hover-img img-fluid" src="~/images/ProductImg/{{q.ProductImage}}" loading="lazy" alt="product-hover-image">
-                                </a>
-                            </div>
-                            <div class="product-badges product-badges-position product-badges-mrg" ng-show="q.PLabel!=''">
-                                <span class="hot">{{q.PLabel}}</span>
-                            </div>
+
+
+    @*<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content rounded-0">
+                    <div class="modal-body p-1">
+                        <div class="d-flex justify-content-end position-relative" style="z-index : 9 !important; right : 2%;">
+                            <button type="button" class="btn-close shadow-none p-1" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
-                        <div class="product-content-wrap">
-                            <h2><a href="/Home/Gift?url={{q.PUrl}}">{{q.ProductTitle}}</a></h2>
-
-                            <div class="product-price">
-                                <span><i class="fa fa-inr" aria-hidden="true"></i> {{q.Price}}/-</span>
-
-                            </div>
-                            <div class="d-flex justify-content-between">
-                                <div class="button-design mt-2">
-                                    <a aria-label="Add To Cart" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight" class="btn theme-button-2" ng-click="addItemToCart($index)"><i class="fi-rs-shopping-bag-add"></i> Add To Cart </a>
-                                </div>
-                                @* Popup Button For Image *@
-                                <div class="button-design mt-2" ng-if="!q.Video">
-                                    <a aria-label="View Image" class="btn theme-button-3 d-flex gap-2 align-items-center" ng-click="quickview(q)"><span class="d-lg-none d-sm-none d-block fs-9">View </span><i class="fa fa-eye" aria-hidden="true"></i></a>
-                                </div>
-
-
-                                @* Popup Button For Video *@
-                                <div class="button-design mt-2" ng-if="q.Video">
-                                    <a aria-label="View Image" class="btn theme-button-3 d-flex gap-2 align-items-center for-video" ng-click="quickview(q)"><span class="d-lg-none d-sm-none d-block fs-9 hide-animation" id="hideText">View </span><i class="fa fa-youtube-play" aria-hidden="true"></i></a>
+                        <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel" style="margin-top : -20px">
+                            <div class="carousel-inner">
+                                <div ng-repeat="i in Product.AllProductImage" class="carousel-item {{$index == 0 ? 'active' : ''}}">
+                                    <img src="~/images/ProductImg/{{i}}" alt="product image" class="img-fluid w-100" loading="lazy">
                                 </div>
                             </div>
+                            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Previous</span>
+                            </button>
+                            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Next</span>
+                            </button>
                         </div>
                     </div>
-
                 </div>
             </div>
-        </div>
-    </section>
-    @* Related Product Slider Section End *@
+        </div>*@
+
+
 
     <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content rounded-0">
                 <div class="modal-body p-1">
-                    <div class="d-flex justify-content-end position-relative" style="z-index : 9 !important; right : 2%;">
+                    <div class="d-flex justify-content-end" style=" background: #fff; position: absolute;  z-index: 9999999 !important; top: -5%; right: 0; ">
                         <button type="button" class="btn-close shadow-none p-1" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel" style="margin-top : -20px">
-                        <div class="carousel-inner">
-                            <div  ng-repeat="i in Product.AllProductImage" class="carousel-item {{$index == 0 ? 'active' : ''}}">
-                                <img src="~/images/ProductImg/{{i}}" alt="product image" class="img-fluid w-100" loading="lazy">
-                            </div>
-                          
+                    <div class="detail-gallery">
+                        <div class="product-image-slider">
+                            <figure class="border-radius-10">
+                                <img src="~/images/ProductImg/{{productimage}}"  alt="product image">
+                            </figure>
                         </div>
-                        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
-                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                            <span class="visually-hidden">Previous</span>
-                        </button>
-                        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
-                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                            <span class="visually-hidden">Next</span>
-                        </button>
+                        <div class="slider-nav-thumbnails">
+                            @*<div ng-repeat="i in Product.AllProductImage"><img src="~/images/ProductImg/{{i}}"  alt="product image"></div>*@                 
+                        </div>
                     </div>
                 </div>
             </div>
@@ -322,3 +343,5 @@
 
 
 <!-- Main Section End -->
+<!-- Product Slider CDN -->
+<script src='https://unpkg.com/swiper/swiper-bundle.min.js'></script>
