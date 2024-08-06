@@ -45,7 +45,7 @@
                                                     </div>
                                                     <div class="col clearfix">
                                                         <span class="title-section d-flex justify-content-end align-items-center">
-                                                            <a href="/Home/giftfilterkeyword?ProductType=giftsFriendsbestsellers" type="button" class="btn btn-theme-1">View All</a>
+                                                            <a href='/Home/giftbannerfilterkeyword?BannerType= + {{f.MainCateId}} + &&keyword= + {{f.KeywordId}}' type="button" class="btn btn-theme-1">View All</a>
                                                         </span>
                                                     </div>
                                                 </div>
@@ -118,7 +118,7 @@
                                                     </div>
                                                     <div class="col clearfix">
                                                         <span class="title-section d-flex justify-content-end align-items-center">
-                                                            <a href="/Home/giftfilterkeyword?ProductType=giftsFriendsbestsellers" type="button" class="btn btn-theme-1">View All</a>
+                                                            <a href="/Home/giftbannerfilterkeyword?BannerType= + @Request.QueryString["Banner"] + &&keyword= + 0" type="button" class="btn btn-theme-1">View All</a>
                                                         </span>
                                                     </div>
                                                 </div>

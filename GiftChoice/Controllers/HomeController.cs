@@ -23,6 +23,12 @@ namespace GiftChoice.Controllers
 
             return View();
         }
+
+        public ActionResult giftbannerfilterkeyword()
+        {
+
+            return View();
+        }
         public JsonResult SliderList()
         {
 
@@ -1492,7 +1498,7 @@ namespace GiftChoice.Controllers
                 var res = new
                 {
                     FilterKeywordList = FilterKeywordList,
-                    ProductList = FilterKeywordList == null ? (from product in db.ProductTbls
+                    ProductList = FilterKeywordList.Count() == 0 ? (from product in db.ProductTbls
                                    where product.BannerCateId == BannerId && (product.ProductType == "BannerProduct" || product.ProductType == "Common") && product.Active == true
                                    orderby Guid.NewGuid()
                                    select new
