@@ -1329,9 +1329,11 @@ app.controller("HomeController", ['$scope', '$http', '$sce', 'startFromFilter', 
                 id : id
             }
         }).then(function (d) {
+            debugger
             $scope.ProductData = d.data.ProductList;
             $scope.FilterKeywordList = d.data.FilterKeywordList;
 
+     
 
             //$scope.pageSize = 20;
             //$scope.currentPage = 1; // Reset to the first page after fetching data
