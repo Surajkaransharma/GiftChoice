@@ -1594,8 +1594,12 @@ app.controller("HomeController", ['$scope', '$http', '$sce', 'startFromFilter', 
 
 
     };
-    $scope.giftbannerfilterkeyword = function () {
+    $scope.expand = function (limit) {
+        $scope.productlimit += limit;
+    };
+    $scope.productlimit = 24;
 
+    $scope.giftbannerfilterkeyword = function () {
         var urlParams = new URLSearchParams(window.location.search);
 
         // Get the value of the "CartData" parameter
@@ -1616,10 +1620,10 @@ app.controller("HomeController", ['$scope', '$http', '$sce', 'startFromFilter', 
         }).then(function (d) {
             $scope.ProductData = d.data.ProductList;
 
-                      $scope.pageSize = 30;
-            $scope.currentPage = 1; // Reset to the first page after fetching data
-            $scope.totalPages = Math.ceil($scope.ProductData.length / $scope.pageSize);
-            $scope.goToPage(1); // Go to the first page
+            //          $scope.pageSize = 30;
+            //$scope.currentPage = 1; // Reset to the first page after fetching data
+            //$scope.totalPages = Math.ceil($scope.ProductData.length / $scope.pageSize);
+            //$scope.goToPage(1); // Go to the first page
    
         }, function (error) {
             toastr["error"]("Something Went Wrong");

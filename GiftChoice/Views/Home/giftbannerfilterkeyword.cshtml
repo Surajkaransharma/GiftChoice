@@ -45,7 +45,8 @@
                             <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
                                 <div class="row product-grid-4 g-1 gx-1" ng-init="giftbannerfilterkeyword()">
                                     @*<div class="col-lg-3 col-6 col-sm-4" ng-repeat="p in ProductData | startFrom:(currentPage - 1) * pageSize | limitTo:pageSize">*@
-                                    <div class="col-lg-2 col-6 col-sm-3" ng-repeat="q in ProductData | startFrom:(currentPage - 1) * pageSize | limitTo:pageSize">
+                                    @*<div class="col-lg-2 col-6 col-sm-3" ng-repeat="q in ProductData | startFrom:(currentPage - 1) * pageSize | limitTo:pageSize">*@
+                                    <div class="col-lg-2 col-6 col-sm-3" ng-repeat="q in ProductData | limitTo:productlimit">
                                         <div data-aos="zoom-in">
                                             <div class="product-cart-wrap mb-10 ">
                                                 <div class="product-img-action-wrap">
@@ -83,18 +84,21 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="tp-shop-pagination mt-20">
-                                        <div class="tp-pagination">
-
-                                            <div class="d-md-flex d-grid align-items-center gap-3">
-                                                <button type="button" ng-click="prevPage()" ng-disabled="currentPage === 1" class="btn-link">Previous</button>
-                                                <span ng-repeat="page in range(totalPages)">
-                                                    <button type="button" ng-click="goToPage(page + 1)" ng-class="{ 'btn-link': currentPage !== (page + 1), 'btn-link-active': currentPage === (page + 1) }">{{ page + 1 }}</button>
-                                                </span>
-                                                <button type="button" ng-click="nextPage()" ng-disabled="ProductData.length < pageSize" class="btn-link">Next</button>
-                                            </div>
-                                        </div>
+                                    <div class="d-md-flex d-grid align-items-center gap-3">
+                                        <button ng-if="ProductData.length > productlimit" ng-click="expand(productlimit)" class="btn-link btn-link-active">Load More</button>
                                     </div>
+                                    @*<div class="tp-shop-pagination mt-20">
+                                            <div class="tp-pagination">
+
+                                                <div class="d-md-flex d-grid align-items-center gap-3">
+                                                    <button type="button" ng-click="prevPage()" ng-disabled="currentPage === 1" class="btn-link">Previous</button>
+                                                    <span ng-repeat="page in range(totalPages)">
+                                                        <button type="button" ng-click="goToPage(page + 1)" ng-class="{ 'btn-link': currentPage !== (page + 1), 'btn-link-active': currentPage === (page + 1) }">{{ page + 1 }}</button>
+                                                    </span>
+                                                    <button type="button" ng-click="nextPage()" ng-disabled="ProductData.length < pageSize" class="btn-link">Next</button>
+                                                </div>
+                                            </div>
+                                        </div>*@
 
                                 </div>
                             </div>

@@ -44,7 +44,7 @@
                         <div class="tab-content mt-3" id="myTabContent">
                             <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
                                 <div class="row product-grid-4 g-1 gx-1" ng-init="giftfilterkeyword()">
-                                    <div class="col-lg-2 col-6 col-sm-3" ng-repeat="q in ProductData">
+                                    <div class="col-lg-2 col-6 col-sm-3" ng-repeat="q in ProductData  | limitTo:productlimit">
                                         <div data-aos="zoom-in">
                                             <div class="product-cart-wrap mb-10 ">
                                                 <div class="product-img-action-wrap">
@@ -84,10 +84,14 @@
                                     </div>
 
                                 </div>
+                                <div class="d-md-flex d-grid align-items-center gap-3">
+                                    <button ng-if="ProductData.length > productlimit" ng-click="expand(productlimit)" class="btn-link btn-link-active">Load More</button>
+                                </div>
                             </div>
                             <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">...</div>
                             <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">...</div>
                         </div>
+
                     </div>
 
 
