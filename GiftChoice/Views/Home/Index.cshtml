@@ -11,12 +11,12 @@
 <main class="main">
 
     <!-- Slider Start -->
-    <section class="p-0 home-slider" ng-init="SliderList()">
+     <section class="p-0 home-slider" ng-init="SliderList()">
         <div id="carouselId" class="carousel slide" data-bs-ride="carousel">
             <div class="carousel-inner" role="listbox">
                 <div ng-repeat="s in SliderListData" class="carousel-item {{$index==0?'active':''}} ">
                     <a href="{{s.SUrl}}">
-                        <img src="~/images/SliderImg/{{s.SliderImage}}" class="w-100 d-block img-fluid" loading="lazy" alt="corporates-gifts" />
+                        <img src="~/images/SliderImg/{{s.SliderImage}}" class="w-100 d-block img-fluid" loading="lazy" alt="corporates-gifts" width="1920" height="500"/>
                     </a>
                 </div>
             </div>
@@ -64,7 +64,7 @@
                         <div class="col">
                             <div class="card">
                                 <a href="/Home/shop?Main={{m.MTitle}}">
-                                    <img ng-src="~/images/MainCate/{{m.MImage}}" alt="{{m.MUrl}}" loading="lazy">
+                                    <img ng-src="~/images/MainCate/{{m.MImage}}" alt="{{m.MUrl}}" loading="lazy" height="194" width="250">
                                 </a>
                             </div>
                         </div>
@@ -119,7 +119,7 @@
                 <div class="col-lg-4 col-sm-4 col-12" ng-repeat="b in GetSmallBannerData">
                     <div class="banner-img mb-0 rounded-3">
                         <a href="/Home/BannerGifts?Banner={{b.MainCateId}}">
-                            <img ng-src="~/images/MainCate/{{b.MImage}}" loading="lazy" alt="advertisement-image" class="img-fluid w-100">
+                            <img ng-src="~/images/MainCate/{{b.MImage}}" loading="lazy" alt="advertisement-image" class="img-fluid w-100" height="250" width="600">
                         </a>
                     </div>
                 </div>
@@ -147,7 +147,7 @@
                                 <div class="product-img-action-wrap">
                                     <div class="product-img product-img-zoom">
                                         <a href="/Home/Gift?url={{p.PUrl}}">
-                                            <img class="default-img img-fluid" ng-src="~/images/ProductImg/{{p.ProductImage}}" loading="lazy" alt="product-image" loading="lazy" alt="">
+                                            <img class="default-img img-fluid" ng-src="~/images/ProductImg/{{p.ProductImage}}" loading="lazy" alt="product-image" height="560" width="560">
                                         </a>
                                     </div>
                                     @*<div class="product-badges product-badges-position product-badges-mrg product-badges-position-1"  ng-show="p.Video">
@@ -243,7 +243,7 @@
                                                         <div class="product-img-action-wrap">
                                                             <div class="product-img product-img-zoom">
                                                                 <a href="/Home/Gift?url={{p.PUrl}}">
-                                                                    <img class="default-img img-fluid" ng-src="~/images/ProductImg/{{p.ProductImage}}" loading="lazy" alt="product-image" loading="lazy" alt="">
+                                                                    <img class="default-img img-fluid" ng-src="~/images/ProductImg/{{p.ProductImage}}" loading="lazy" alt="product-image" height="560" width="560">
                                                                 </a>
                                                             </div>
                                                             <div class="product-badges product-badges-position product-badges-mrg product-badges-position-1" ng-show="p.Video">
@@ -376,7 +376,7 @@
                                                         <div class="product-img-action-wrap">
                                                             <div class="product-img product-img-zoom">
                                                                 <a href="/Home/Gift?url={{p.PUrl}}">
-                                                                    <img class="default-img img-fluid" ng-src="~/images/ProductImg/{{p.ProductImage}}" loading="lazy" alt="product-image" loading="lazy" alt="">
+                                                                    <img class="default-img img-fluid" ng-src="~/images/ProductImg/{{p.ProductImage}}" loading="lazy" alt="product-image" height="560" width="560">
                                                                 </a>
                                                             </div>
                                                             <div class="product-badges product-badges-position product-badges-mrg product-badges-position-1" ng-show="p.Video">
@@ -517,7 +517,7 @@
                                                         <div class="product-img-action-wrap">
                                                             <div class="product-img product-img-zoom">
                                                                 <a href="/Home/Gift?url={{p.PUrl}}">
-                                                                    <img class="default-img img-fluid" ng-src="~/images/ProductImg/{{p.ProductImage}}" loading="lazy" alt="product-image" loading="lazy" alt="">
+                                                                    <img class="default-img img-fluid" ng-src="~/images/ProductImg/{{p.ProductImage}}" loading="lazy" alt="product-image" height="560" width="560">
                                                                 </a>
                                                             </div>
                                                             <div class="product-badges product-badges-position product-badges-mrg product-badges-position-1" ng-show="p.Video">
@@ -650,7 +650,7 @@
                                                         <div class="product-img-action-wrap">
                                                             <div class="product-img product-img-zoom">
                                                                 <a href="/Home/Gift?url={{p.PUrl}}">
-                                                                    <img class="default-img img-fluid" ng-src="~/images/ProductImg/{{p.ProductImage}}" loading="lazy" alt="product-image" loading="lazy" alt="">
+                                                                    <img class="default-img img-fluid" ng-src="~/images/ProductImg/{{p.ProductImage}}" loading="lazy" alt="product-image" height="560" width="560">
                                                                 </a>
                                                             </div>
                                                             <div class="product-badges product-badges-position product-badges-mrg product-badges-position-1" ng-show="p.Video">
@@ -1060,7 +1060,7 @@
                                                         <div class="product-img-action-wrap">
                                                             <div class="product-img product-img-zoom">
                                                                 <a href="/Home/Gift?url={{p.PUrl}}">
-                                                                    <img class="default-img img-fluid" ng-src="~/images/ProductImg/{{p.ProductImage}}" loading="lazy" alt="product-image" loading="lazy" alt="">
+                                                                    <img class="default-img img-fluid" ng-src="~/images/ProductImg/{{p.ProductImage}}" loading="lazy" alt="product-image" height="560" width="560">
                                                                 </a>
                                                             </div>
                                                             <div class="product-badges product-badges-position product-badges-mrg product-badges-position-1" ng-show="p.Video">
@@ -1244,7 +1244,7 @@
                                 <div class="product-img-action-wrap">
                                     <div class="product-img product-img-zoom">
                                         <a href="/Home/Gift?url={{p.PUrl}}">
-                                            <img class="default-img img-fluid" ng-src="~/images/ProductImg/{{p.ProductImage}}" loading="lazy" alt="product-image" loading="lazy" alt="">
+                                            <img class="default-img img-fluid" ng-src="~/images/ProductImg/{{p.ProductImage}}" loading="lazy" alt="product-image" height="560" width="560">
                                         </a>
                                     </div>
                                     @*<div class="product-badges product-badges-position product-badges-mrg product-badges-position-1"  ng-show="p.Video">
@@ -1342,7 +1342,7 @@
                         <div class="col">
                             <div class="card">
                                 <a href="/Home/shop?Main={{m.MTitle}}">
-                                    <img ng-src="~/images/MainCate/{{m.MImage}}" loading="lazy" alt="{{m.MUrl}}">
+                                    <img ng-src="~/images/MainCate/{{m.MImage}}" loading="lazy" alt="{{m.MUrl}}" height="194" width="250">
                                 </a>
                             </div>
                         </div>
@@ -1413,7 +1413,7 @@
                                 <div class="product-img-action-wrap">
                                     <div class="product-img product-img-zoom">
                                         <a href="/Home/Gift?url={{b.PUrl}}">
-                                            <img class="default-img img-fluid" ng-src="~/images/ProductImg/{{b.ProductImage}}" loading="lazy" alt="product-image" loading="lazy" alt="">
+                                            <img class="default-img img-fluid" ng-src="~/images/ProductImg/{{b.ProductImage}}" loading="lazy" alt="product-image" height="560" width="560">
                                         </a>
                                     </div>
                                     @*<div class="product-badges product-badges-position product-badges-mrg product-badges-position-1"  ng-show="p.Video">
@@ -1498,7 +1498,7 @@
                                 <div class="product-img-action-wrap">
                                     <div class="product-img product-img-zoom">
                                         <a href="/Home/Gift?url={{p.PUrl}}">
-                                            <img class="default-img img-fluid" ng-src="~/images/ProductImg/{{p.ProductImage}}" loading="lazy" alt="product-image" loading="lazy" alt="">
+                                            <img class="default-img img-fluid" ng-src="~/images/ProductImg/{{p.ProductImage}}" loading="lazy" alt="product-image" height="560" width="560">
                                         </a>
                                     </div>
                                     @*<div class="product-badges product-badges-position product-badges-mrg product-badges-position-1"  ng-show="p.Video">
