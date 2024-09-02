@@ -1,4 +1,5 @@
 ﻿using GiftChoice.Models;
+using SkiaSharp;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -168,8 +169,8 @@ namespace GiftChoice.Controllers
                 if (model.Image != null)
                 {
                     string extensionstuimg = Path.GetExtension(model.Image.FileName);
-                    model.Image.SaveAs(Server.MapPath("~/images/MainCate/" + mainCateTbl.MainCateId + "" + extensionstuimg));                
-                    //  MainCateVaryQualityLevel(model.Image.InputStream, mainCateTbl.MainCateId + extensionstuimg);
+                  //  model.Image.SaveAs(Server.MapPath("~/images/MainCate/" + mainCateTbl.MainCateId + "" + extensionstuimg));
+                      MainCateVaryQualityLevel(model.Image.InputStream, mainCateTbl.MainCateId + extensionstuimg);
                     mainCateTbl.MImage = mainCateTbl.MainCateId + "" + extensionstuimg;
                 }
                 mainCateTbl.Create_at = DateTime.Now;
@@ -242,20 +243,54 @@ namespace GiftChoice.Controllers
 
         private void MainCateVaryQualityLevel(Stream stream, string fname)
         {
-            //  size 
-            System.Drawing.Image photo = new Bitmap(stream);
-            //Bitmap bmp1 = new Bitmap(photo, 119, 83);
+            ////  size 
+            //System.Drawing.Image photo = new Bitmap(stream);
+            ////Bitmap bmp1 = new Bitmap(photo, 119, 83);
 
-            Bitmap bmp1 = new Bitmap(photo, 318, 318);
-            // without size
-            //  Bitmap bmp1 = new Bitmap(stream);
-            ImageCodecInfo jgpEncoder = GetEncoder(ImageFormat.Jpeg);
-            System.Drawing.Imaging.Encoder myEncoder = System.Drawing.Imaging.Encoder.Quality;
-            EncoderParameters myEncoderParameters = new EncoderParameters(1);
-            EncoderParameter myEncoderParameter = new EncoderParameter(myEncoder, 30L);
-            myEncoderParameters.Param[0] = myEncoderParameter;
-            bmp1.Save(Server.MapPath("~/images/MainCate/" + fname), jgpEncoder, myEncoderParameters);
-            bmp1.Dispose();
+            //Bitmap bmp1 = new Bitmap(photo, 318, 318);
+            //// without size
+            ////  Bitmap bmp1 = new Bitmap(stream);
+            //ImageCodecInfo jgpEncoder = GetEncoder(ImageFormat.Jpeg);
+            //System.Drawing.Imaging.Encoder myEncoder = System.Drawing.Imaging.Encoder.Quality;
+            //EncoderParameters myEncoderParameters = new EncoderParameters(1);
+            //EncoderParameter myEncoderParameter = new EncoderParameter(myEncoder, 30L);
+            //myEncoderParameters.Param[0] = myEncoderParameter;
+            //bmp1.Save(Server.MapPath("~/images/MainCate/" + fname), jgpEncoder, myEncoderParameters);
+            //bmp1.Dispose();
+
+
+            // Load the image from the stream and resize it
+            using (Bitmap photo = new Bitmap(stream))
+            using (Bitmap bmp1 = new Bitmap(photo, photo.Width, photo.Height))
+            {
+                // Create an SKBitmap with the same dimensions as the resized bitmap
+                using (var skBitmap = new SKBitmap(bmp1.Width, bmp1.Height))
+                {
+                    // Lock the bitmap's bits
+                    BitmapData bmpData = bmp1.LockBits(
+                        new Rectangle(0, 0, bmp1.Width, bmp1.Height),
+                        ImageLockMode.ReadOnly,
+                        bmp1.PixelFormat);
+
+                    // Copy the data from the Bitmap to the SKBitmap
+                    skBitmap.InstallPixels(
+                        new SKImageInfo(bmp1.Width, bmp1.Height),
+                        bmpData.Scan0,
+                        bmpData.Stride);
+
+                    // Unlock the bits
+                    bmp1.UnlockBits(bmpData);
+
+                    // Prepare the file path
+                    string filePath = Server.MapPath("~/images/SliderImg/" +  fname + ".webp");
+
+                    // Save the image as a WebP with quality level 30
+                    using (var webpStream = new SKFileWStream(filePath))
+                    {
+                        skBitmap.Encode(webpStream, SKEncodedImageFormat.Webp, 30); // 30 is the quality level
+                    }
+                }
+            }
 
         }
 
@@ -270,7 +305,7 @@ namespace GiftChoice.Controllers
                     {
                         string extensionstuimg = Path.GetExtension(model.Image.FileName);
                         model.Image.SaveAs(Server.MapPath("~/images/MainCate/" + result.MainCateId + "" + extensionstuimg));
-                       // MainCateVaryQualityLevel(model.Image.InputStream, result.MainCateId + extensionstuimg);
+                        // MainCateVaryQualityLevel(model.Image.InputStream, result.MainCateId + extensionstuimg);
                         result.MImage = result.MainCateId + "" + extensionstuimg;
                     }
                     result.CateType = "MainCate";
@@ -586,7 +621,7 @@ namespace GiftChoice.Controllers
         {
             var res =
 
-               db.ProductTbls.Where(m =>  m.ProductType == "MainProduct" && (id == -2 ? true : m.MainCateId == id) && m.Active == true).Select(m => new
+               db.ProductTbls.Where(m => m.ProductType == "MainProduct" && (id == -2 ? true : m.MainCateId == id) && m.Active == true).Select(m => new
                {
                    m.ProductId,
                    m.MainCateId,
@@ -1400,8 +1435,9 @@ namespace GiftChoice.Controllers
                     if (model.Image != null)
                     {
                         string extensionstuimg = Path.GetExtension(model.Image.FileName);
-                        model.Image.SaveAs(Server.MapPath("~/images/SliderImg/" + model.SliderId + "" + extensionstuimg));
-                        rws.SliderImage = model.SliderId + "" + extensionstuimg;
+                     //   model.Image.SaveAs(Server.MapPath("~/images/SliderImg/" + model.SliderId + "" + extensionstuimg));
+                        MainCateVaryQualityLevel(model.Image.InputStream, model.SliderId.ToString());
+                        rws.SliderImage = model.SliderId + "" + ".webp";
                     }
 
                     rws.Priority = model.Priority;
@@ -2999,7 +3035,7 @@ namespace GiftChoice.Controllers
 
                db.ProductTbls.Where(m => m.Active == true && (model.MainCateId == -1 ? true : m.MainCateId == model.MainCateId) &&
                (model.BannerCateId == -1 ? true : m.BannerCateId == model.BannerCateId) &&
-                   (model.VideoId == -1 ? true : m.VideoId == model.VideoId) && 
+                   (model.VideoId == -1 ? true : m.VideoId == model.VideoId) &&
                    (model.ProductTitle == null ? true : m.ProductTitle.Contains(model.ProductTitle))
                ).Select(m => new
                {
@@ -3628,24 +3664,24 @@ namespace GiftChoice.Controllers
                 //}
                 //else
                 //{
-                    rws.FBannerId = db.FestivalBannerTbls.DefaultIfEmpty().Max(r => r == null ? 0 : r.FBannerId) + 1;
+                rws.FBannerId = db.FestivalBannerTbls.DefaultIfEmpty().Max(r => r == null ? 0 : r.FBannerId) + 1;
 
-                    if (model.Image != null)
-                    {
-                        string extensionstuimg = Path.GetExtension(model.Image.FileName);
-                        model.Image.SaveAs(Server.MapPath("~/images/FestivalBanner/" + rws.FBannerId + "" + extensionstuimg));
-                        rws.FBImage = rws.FBannerId + "" + extensionstuimg;
-                    }
-                    rws.FBTitle = model.FBTitle;
-                    rws.Priority = 1;
-                    rws.FBPosition = model.FBPosition;
-                    rws.FBUrl = model.FBUrl;
-                    rws.Active = true;
-                    db.FestivalBannerTbls.Add(rws);
-                    db.SaveChanges();
-                    var res = new { res = "1" };
-                    return Json(res, JsonRequestBehavior.AllowGet);
-               // }
+                if (model.Image != null)
+                {
+                    string extensionstuimg = Path.GetExtension(model.Image.FileName);
+                    model.Image.SaveAs(Server.MapPath("~/images/FestivalBanner/" + rws.FBannerId + "" + extensionstuimg));
+                    rws.FBImage = rws.FBannerId + "" + extensionstuimg;
+                }
+                rws.FBTitle = model.FBTitle;
+                rws.Priority = 1;
+                rws.FBPosition = model.FBPosition;
+                rws.FBUrl = model.FBUrl;
+                rws.Active = true;
+                db.FestivalBannerTbls.Add(rws);
+                db.SaveChanges();
+                var res = new { res = "1" };
+                return Json(res, JsonRequestBehavior.AllowGet);
+                // }
             }
             catch (Exception ex)
             {
