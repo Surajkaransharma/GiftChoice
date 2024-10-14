@@ -46,7 +46,7 @@
                                 <div class="row product-grid-4 g-1 gx-1" ng-init="giftbannerfilterkeyword()">
                                     @*<div class="col-lg-3 col-6 col-sm-4" ng-repeat="p in ProductData | startFrom:(currentPage - 1) * pageSize | limitTo:pageSize">*@
                                     @*<div class="col-lg-2 col-6 col-sm-3" ng-repeat="q in ProductData | startFrom:(currentPage - 1) * pageSize | limitTo:pageSize">*@
-                                    <div class="col-lg-2 col-6 col-sm-3" ng-repeat="q in ProductData | limitTo:productlimit">
+                                    <div class="col-lg-2 col-6 col-sm-4" ng-repeat="q in ProductData | limitTo:productlimit">
                                         <div data-aos="zoom-in">
                                             <div class="product-cart-wrap mb-10 ">
                                                 <div class="product-img-action-wrap">
@@ -84,8 +84,11 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="d-md-flex d-grid align-items-center gap-3">
-                                        <button ng-if="ProductData.length > productlimit" ng-click="expand(productlimit)" class="btn-link btn-link-active">Load More</button>
+                                    <div class="d-md-flex d-grid align-items-center justify-content-center gap-3">
+                                        <button ng-if="ProductData.length > productlimit" ng-click="expand(productlimit)" class="btn-link product-loadmore-btn">
+                                            Load More
+                                            <svg class="svgIcon" viewBox="0 0 512 512" height="1em" xmlns="http://www.w3.org/2000/svg"><path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zm50.7-186.9L162.4 380.6c-19.4 7.5-38.5-11.6-31-31l55.5-144.3c3.3-8.5 9.9-15.1 18.4-18.4l144.3-55.5c19.4-7.5 38.5 11.6 31 31L325.1 306.7c-3.2 8.5-9.9 15.1-18.4 18.4zM288 256a32 32 0 1 0 -64 0 32 32 0 1 0 64 0z"></path></svg>
+                                        </button>
                                     </div>
                                     @*<div class="tp-shop-pagination mt-20">
                                             <div class="tp-pagination">
