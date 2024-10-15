@@ -10538,3 +10538,61 @@ span.fi-rs-apps {
 .product-tabs .col-lg-2 {
     width: 19.6% !important;
 }
+
+
+
+
+
+.caterody-product-slider {
+    font-family: var(--font1);
+    background: var(--bg-slider-section);
+    -webkit-transition: all 0.3s linear 0s;
+    transition: all 0.3s linear 0s;
+    overflow: hidden;
+}
+
+    .caterody-product-slider .title-section {
+        font-weight: 700;
+        text-transform: uppercase;
+        color: var(--tx-slider-section-title);
+    }
+
+    .caterody-product-slider .arrow-button {
+        background-color: #000;
+        height: 30px;
+        width: 30px;
+        border-radius: 0;
+    }
+
+        .caterody-product-slider .arrow-button i {
+            color: #fff;
+            font-size: 18px;
+        }
+
+        .caterody-product-slider .arrow-button:hover {
+            background-color: #fff;
+            border: 1px solid #000;
+        }
+
+            .caterody-product-slider .arrow-button:hover i {
+                color: #000;
+            }
+
+    .caterody-product-slider .swiper-slide .card {
+        width: 120px;
+        padding: 3px;
+        border-radius: 10px;
+    }
+
+        .caterody-product-slider .swiper-slide .card img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            border-radius: 8px;
+        }
+
+@media only screen and (max-width : 767px) {
+    .caterody-product-slider .swiper-slide .card {
+        width: 113px;
+    }
+}

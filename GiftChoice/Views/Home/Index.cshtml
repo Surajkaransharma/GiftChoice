@@ -304,52 +304,305 @@
                         <section id="selected-product" class="selected-product-slider" style="overflow : hidden !important;">
                             <div class="selected-product">
                                 <div class="swiper-wrapper">
-                                    <div class="swiper-slide" ng-repeat="p in Giftsunder999">
+                                    <div class="swiper-slide">
                                         <div class="col">
                                             <div class="product-cart-wrap mb-1">
                                                 <div class="product-img-action-wrap">
                                                     <div class="product-img product-img-zoom">
-                                                        <a href="/Home/Gift?url={{p.PUrl}}">
-                                                            <img class="default-img img-fluid" ng-src="~/images/ProductImg/{{p.ProductImage}}" loading="lazy" alt="product-image" height="500" width="500">
+                                                        <a href="#">
+                                                            <img class="default-img img-fluid" src="https://dummyimage.com/400x400/ccc/fff" loading="lazy" alt="product-image" height="500" width="500">
                                                         </a>
                                                     </div>
-                                                    <div class="product-badges product-badges-position product-badges-mrg product-badges-position-1" ng-show="p.Video">
-                                                        <a href="#" ng-click="quickview(p,'video')"><span class="pot"><i class="fa fa-youtube-play" aria-hidden="true"></i></span></a>
+                                                    <div class="product-badges product-badges-position product-badges-mrg product-badges-position-1">
+                                                        <a href="#"><span class="pot"><i class="fa fa-youtube-play" aria-hidden="true"></i></span></a>
                                                     </div>
-                                                    <div class="product-badges product-badges-position product-badges-mrg" ng-show="p.PLabel!=''">
-                                                        <span class="hot">{{p.PLabel}}</span>
+                                                    <div class="product-badges product-badges-position product-badges-mrg">
+                                                        <span class="hot">New Arrival</span>
                                                     </div>
-                                                    <div ng-show="p.SameDay" class="product-badges product-badges-position_1 product-badges-mrg same-day-badge">
-                                                        <span class="hot"><i class="fa fa-circle" aria-hidden="true"></i> Same Day</span>
+                                                    <div class="product-badges product-badges-position_1 product-badges-mrg same-day-badge">
+                                                        <span class="hot"><i class="fa fa-circle" aria-hidden="true"></i> Same Day Deliver</span>
                                                     </div>
                                                 </div>
                                                 <div class="product-content-wrap">
-                                                    <h2 class="mt-2"><a href="/Home/Gift?url={{p.PUrl}}">{{p.ProductTitle}}</a></h2>
+                                                    <h2 class="mt-2">
+                                                        <a href="#">Gift choice Bhilwara Product</a>
+                                                    </h2>
 
                                                     <div class="product-price d-flex justify-content-between align-items-center">
                                                         <div class="">
-                                                            <span><i class="fa fa-inr" aria-hidden="true"></i>  {{p.Price}}/-</span>
+                                                            <span><i class="fa fa-inr" aria-hidden="true"></i> 200.00/-</span>
                                                         </div>
-                                                        <div class="same-day" ng-show="p.SameDay">
-                                                            <p class="hot text-success animate__fadeIn"><b><i class="fa fa-circle" aria-hidden="true"></i> Same Day</b></p>
+                                                        <div class="same-day">
+                                                            <p class="hot text-success animate__fadeIn">
+                                                                <b><i class="fa fa-circle" aria-hidden="true"></i> Same Day Delivery</b>
+                                                            </p>
                                                         </div>
                                                     </div>
                                                     <div class="d-flex justify-content-between align-items-center">
                                                         <div class="button-design mt-2">
-                                                            <a aria-label="Add To Cart" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight" class="btn theme-button-2" ng-click="LabeladdItemToCart($index,'Giftsunder999')"><i class="fi-rs-shopping-bag-add"></i> Add To Cart </a>
+                                                            <a aria-label="Add To Cart" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight" class="btn theme-button-2">
+                                                                <i class="fi-rs-shopping-bag-add"></i> Add To Cart
+                                                            </a>
                                                         </div>
 
-                                                        <div class="button-design mt-2" ng-if="!p.Video">
-                                                            <a aria-label="View Image" class="btn theme-button-3 d-flex gap-2 align-items-center" ng-click="quickview(p)"><span class="d-lg-none d-sm-none d-block fs-9">View </span><i class="fa fa-eye" aria-hidden="true"></i></a>
+                                                        <div class="button-design mt-2">
+                                                            <a aria-label="View Image" class="btn theme-button-3 d-flex gap-2 align-items-center">
+                                                                <span class="d-lg-none d-sm-none d-block fs-9">View </span>
+                                                                <i class="fa fa-eye" aria-hidden="true"></i>
+                                                            </a>
                                                         </div>
 
-                                                        <div class="button-design mt-2" ng-if="p.Video">
-                                                            <a aria-label="View Image" class="btn theme-button-3 d-flex gap-2 align-items-center for-video" ng-click="quickview(p)"><span class="d-lg-none d-sm-none d-block fs-9 hide-animation" id="hideText">View </span><i class="fa fa-youtube-play" aria-hidden="true"></i></a>
+                                                        <div class="button-design mt-2">
+                                                            <a aria-label="View Image" class="btn theme-button-3 d-flex gap-2 align-items-center for-video">
+                                                                <span class="d-lg-none d-sm-none d-block fs-9 hide-animation" id="hideText">View </span>
+                                                                <i class="fa fa-youtube-play" aria-hidden="true"></i>
+                                                            </a>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
+
+                                    </div>
+                                    <div class="swiper-slide">
+                                        <div class="col">
+                                            <div class="product-cart-wrap mb-1">
+                                                <div class="product-img-action-wrap">
+                                                    <div class="product-img product-img-zoom">
+                                                        <a href="#">
+                                                            <img class="default-img img-fluid" src="https://dummyimage.com/400x400/ccc/fff" loading="lazy" alt="product-image" height="500" width="500">
+                                                        </a>
+                                                    </div>
+                                                    <div class="product-badges product-badges-position product-badges-mrg product-badges-position-1">
+                                                        <a href="#"><span class="pot"><i class="fa fa-youtube-play" aria-hidden="true"></i></span></a>
+                                                    </div>
+                                                    <div class="product-badges product-badges-position product-badges-mrg">
+                                                        <span class="hot">New Arrival</span>
+                                                    </div>
+                                                    <div class="product-badges product-badges-position_1 product-badges-mrg same-day-badge">
+                                                        <span class="hot"><i class="fa fa-circle" aria-hidden="true"></i> Same Day Deliver</span>
+                                                    </div>
+                                                </div>
+                                                <div class="product-content-wrap">
+                                                    <h2 class="mt-2">
+                                                        <a href="#">Gift choice Bhilwara Product</a>
+                                                    </h2>
+
+                                                    <div class="product-price d-flex justify-content-between align-items-center">
+                                                        <div class="">
+                                                            <span><i class="fa fa-inr" aria-hidden="true"></i> 200.00/-</span>
+                                                        </div>
+                                                        <div class="same-day">
+                                                            <p class="hot text-success animate__fadeIn">
+                                                                <b><i class="fa fa-circle" aria-hidden="true"></i> Same Day Delivery</b>
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="d-flex justify-content-between align-items-center">
+                                                        <div class="button-design mt-2">
+                                                            <a aria-label="Add To Cart" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight" class="btn theme-button-2">
+                                                                <i class="fi-rs-shopping-bag-add"></i> Add To Cart
+                                                            </a>
+                                                        </div>
+
+                                                        <div class="button-design mt-2">
+                                                            <a aria-label="View Image" class="btn theme-button-3 d-flex gap-2 align-items-center">
+                                                                <span class="d-lg-none d-sm-none d-block fs-9">View </span>
+                                                                <i class="fa fa-eye" aria-hidden="true"></i>
+                                                            </a>
+                                                        </div>
+
+                                                        <div class="button-design mt-2">
+                                                            <a aria-label="View Image" class="btn theme-button-3 d-flex gap-2 align-items-center for-video">
+                                                                <span class="d-lg-none d-sm-none d-block fs-9 hide-animation" id="hideText">View </span>
+                                                                <i class="fa fa-youtube-play" aria-hidden="true"></i>
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="swiper-slide">
+                                        <div class="col">
+                                            <div class="product-cart-wrap mb-1">
+                                                <div class="product-img-action-wrap">
+                                                    <div class="product-img product-img-zoom">
+                                                        <a href="#">
+                                                            <img class="default-img img-fluid" src="https://dummyimage.com/400x400/ccc/fff" loading="lazy" alt="product-image" height="500" width="500">
+                                                        </a>
+                                                    </div>
+                                                    <div class="product-badges product-badges-position product-badges-mrg product-badges-position-1">
+                                                        <a href="#"><span class="pot"><i class="fa fa-youtube-play" aria-hidden="true"></i></span></a>
+                                                    </div>
+                                                    <div class="product-badges product-badges-position product-badges-mrg">
+                                                        <span class="hot">New Arrival</span>
+                                                    </div>
+                                                    <div class="product-badges product-badges-position_1 product-badges-mrg same-day-badge">
+                                                        <span class="hot"><i class="fa fa-circle" aria-hidden="true"></i> Same Day Deliver</span>
+                                                    </div>
+                                                </div>
+                                                <div class="product-content-wrap">
+                                                    <h2 class="mt-2">
+                                                        <a href="#">Gift choice Bhilwara Product</a>
+                                                    </h2>
+
+                                                    <div class="product-price d-flex justify-content-between align-items-center">
+                                                        <div class="">
+                                                            <span><i class="fa fa-inr" aria-hidden="true"></i> 200.00/-</span>
+                                                        </div>
+                                                        <div class="same-day">
+                                                            <p class="hot text-success animate__fadeIn">
+                                                                <b><i class="fa fa-circle" aria-hidden="true"></i> Same Day Delivery</b>
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="d-flex justify-content-between align-items-center">
+                                                        <div class="button-design mt-2">
+                                                            <a aria-label="Add To Cart" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight" class="btn theme-button-2">
+                                                                <i class="fi-rs-shopping-bag-add"></i> Add To Cart
+                                                            </a>
+                                                        </div>
+
+                                                        <div class="button-design mt-2">
+                                                            <a aria-label="View Image" class="btn theme-button-3 d-flex gap-2 align-items-center">
+                                                                <span class="d-lg-none d-sm-none d-block fs-9">View </span>
+                                                                <i class="fa fa-eye" aria-hidden="true"></i>
+                                                            </a>
+                                                        </div>
+
+                                                        <div class="button-design mt-2">
+                                                            <a aria-label="View Image" class="btn theme-button-3 d-flex gap-2 align-items-center for-video">
+                                                                <span class="d-lg-none d-sm-none d-block fs-9 hide-animation" id="hideText">View </span>
+                                                                <i class="fa fa-youtube-play" aria-hidden="true"></i>
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="swiper-slide">
+                                        <div class="col">
+                                            <div class="product-cart-wrap mb-1">
+                                                <div class="product-img-action-wrap">
+                                                    <div class="product-img product-img-zoom">
+                                                        <a href="#">
+                                                            <img class="default-img img-fluid" src="https://dummyimage.com/400x400/ccc/fff" loading="lazy" alt="product-image" height="500" width="500">
+                                                        </a>
+                                                    </div>
+                                                    <div class="product-badges product-badges-position product-badges-mrg product-badges-position-1">
+                                                        <a href="#"><span class="pot"><i class="fa fa-youtube-play" aria-hidden="true"></i></span></a>
+                                                    </div>
+                                                    <div class="product-badges product-badges-position product-badges-mrg">
+                                                        <span class="hot">New Arrival</span>
+                                                    </div>
+                                                    <div class="product-badges product-badges-position_1 product-badges-mrg same-day-badge">
+                                                        <span class="hot"><i class="fa fa-circle" aria-hidden="true"></i> Same Day Deliver</span>
+                                                    </div>
+                                                </div>
+                                                <div class="product-content-wrap">
+                                                    <h2 class="mt-2">
+                                                        <a href="#">Gift choice Bhilwara Product</a>
+                                                    </h2>
+
+                                                    <div class="product-price d-flex justify-content-between align-items-center">
+                                                        <div class="">
+                                                            <span><i class="fa fa-inr" aria-hidden="true"></i> 200.00/-</span>
+                                                        </div>
+                                                        <div class="same-day">
+                                                            <p class="hot text-success animate__fadeIn">
+                                                                <b><i class="fa fa-circle" aria-hidden="true"></i> Same Day Delivery</b>
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="d-flex justify-content-between align-items-center">
+                                                        <div class="button-design mt-2">
+                                                            <a aria-label="Add To Cart" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight" class="btn theme-button-2">
+                                                                <i class="fi-rs-shopping-bag-add"></i> Add To Cart
+                                                            </a>
+                                                        </div>
+
+                                                        <div class="button-design mt-2">
+                                                            <a aria-label="View Image" class="btn theme-button-3 d-flex gap-2 align-items-center">
+                                                                <span class="d-lg-none d-sm-none d-block fs-9">View </span>
+                                                                <i class="fa fa-eye" aria-hidden="true"></i>
+                                                            </a>
+                                                        </div>
+
+                                                        <div class="button-design mt-2">
+                                                            <a aria-label="View Image" class="btn theme-button-3 d-flex gap-2 align-items-center for-video">
+                                                                <span class="d-lg-none d-sm-none d-block fs-9 hide-animation" id="hideText">View </span>
+                                                                <i class="fa fa-youtube-play" aria-hidden="true"></i>
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="swiper-slide">
+                                        <div class="col">
+                                            <div class="product-cart-wrap mb-1">
+                                                <div class="product-img-action-wrap">
+                                                    <div class="product-img product-img-zoom">
+                                                        <a href="#">
+                                                            <img class="default-img img-fluid" src="https://dummyimage.com/400x400/ccc/fff" loading="lazy" alt="product-image" height="500" width="500">
+                                                        </a>
+                                                    </div>
+                                                    <div class="product-badges product-badges-position product-badges-mrg product-badges-position-1">
+                                                        <a href="#"><span class="pot"><i class="fa fa-youtube-play" aria-hidden="true"></i></span></a>
+                                                    </div>
+                                                    <div class="product-badges product-badges-position product-badges-mrg">
+                                                        <span class="hot">New Arrival</span>
+                                                    </div>
+                                                    <div class="product-badges product-badges-position_1 product-badges-mrg same-day-badge">
+                                                        <span class="hot"><i class="fa fa-circle" aria-hidden="true"></i> Same Day Deliver</span>
+                                                    </div>
+                                                </div>
+                                                <div class="product-content-wrap">
+                                                    <h2 class="mt-2">
+                                                        <a href="#">Gift choice Bhilwara Product</a>
+                                                    </h2>
+
+                                                    <div class="product-price d-flex justify-content-between align-items-center">
+                                                        <div class="">
+                                                            <span><i class="fa fa-inr" aria-hidden="true"></i> 200.00/-</span>
+                                                        </div>
+                                                        <div class="same-day">
+                                                            <p class="hot text-success animate__fadeIn">
+                                                                <b><i class="fa fa-circle" aria-hidden="true"></i> Same Day Delivery</b>
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="d-flex justify-content-between align-items-center">
+                                                        <div class="button-design mt-2">
+                                                            <a aria-label="Add To Cart" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight" class="btn theme-button-2">
+                                                                <i class="fi-rs-shopping-bag-add"></i> Add To Cart
+                                                            </a>
+                                                        </div>
+
+                                                        <div class="button-design mt-2">
+                                                            <a aria-label="View Image" class="btn theme-button-3 d-flex gap-2 align-items-center">
+                                                                <span class="d-lg-none d-sm-none d-block fs-9">View </span>
+                                                                <i class="fa fa-eye" aria-hidden="true"></i>
+                                                            </a>
+                                                        </div>
+
+                                                        <div class="button-design mt-2">
+                                                            <a aria-label="View Image" class="btn theme-button-3 d-flex gap-2 align-items-center for-video">
+                                                                <span class="d-lg-none d-sm-none d-block fs-9 hide-animation" id="hideText">View </span>
+                                                                <i class="fa fa-youtube-play" aria-hidden="true"></i>
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
                                     </div>
                                 </div>
                             </div>
