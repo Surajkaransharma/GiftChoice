@@ -37,6 +37,7 @@
     <script src="~/Angularjs/angular.min.js" defer="defer"></script>
     <script src="~/Angularjs/Home.js" defer="defer"></script>
 
+    
 </head>
 <body ng-app="HomeApp" ng-controller="HomeController">
     <div>
@@ -101,7 +102,12 @@
 
                                 <form ng-submit="SearchDataShop()">
 
-                                    <input type="text" id="Keyword" placeholder="Search for items..." style="max-width : 700px" ng-model="Keyword" ng-change="GetRandomKeyword()" class="w-100">
+                                    <input type="text" list="programmingLanguages" id="Keyword" placeholder="Search for items..." style="max-width : 700px" ng-model="Keyword" ng-change="GetRandomKeyword()" class="w-100">
+                                    <datalist id="programmingLanguages">
+                                        <option value="mug">mug</option>
+                                      
+                     
+                                    </datalist>
                                 </form>
 
                             </div>

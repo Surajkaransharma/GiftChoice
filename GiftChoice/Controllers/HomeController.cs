@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web.Mvc;
 
 namespace GiftChoice.Controllers
@@ -29,19 +30,20 @@ namespace GiftChoice.Controllers
 
             return View();
         }
-        public JsonResult SliderList()
+        public async Task<JsonResult> SliderList()
         {
-
-            var res = db.SliderTbls.Where(c => c.Active == true).Select(c => new
-            {
-                c.MainCateId,
-                c.SUrl,
-                c.SliderId,
-                c.Priority,
-                c.SliderImage,
-                c.Active
-            }).OrderBy(c => c.Priority);
+            var res = await db.Database.SqlQuery<Models.getdatamodel.Slider>("SliderList").ToListAsync();
             return Json(res, JsonRequestBehavior.AllowGet);
+            //var res = db.SliderTbls.Where(c => c.Active == true).Select(c => new
+            //{
+            //    c.MainCateId,
+            //    c.SUrl,
+            //    c.SliderId,
+            //    c.Priority,
+            //    c.SliderImage,
+            //    c.Active
+            //}).OrderBy(c => c.Priority);
+            //return Json(res, JsonRequestBehavior.AllowGet);
         }
         public JsonResult GetFestivalBanner()
         {
@@ -828,60 +830,40 @@ namespace GiftChoice.Controllers
             return View();
         }
 
-        public JsonResult GetNavbarMenu()
+        public async Task<JsonResult> GetNavbarMenu()
         {
+            var MenuList = await db.Database.SqlQuery<Models.getdatamodel.NavbarMenuDto>("[GetNavbarMenu]").ToListAsync();
+        
+            var navbarMenuList = MenuList.Take(6).ToList();
 
-            var res = new
-            {
+            // Skip the first 6 items and take the rest for ScondNavbarMenuList
+            var scondNavbarMenuList = MenuList.Skip(6).ToList();
+            return Json(new { NavbarMenuList = navbarMenuList, ScondNavbarMenuList = scondNavbarMenuList }, JsonRequestBehavior.AllowGet);
+            //var res = new
+            //{
 
-                NavbarMenuList = db.MainCateTbls.Where(m => m.CateType == "MainCate" && m.Active == true).Select(m => new
-                {
-                    m.MainCateId,
-                    m.MUrl,
-                    m.MTitle,
-                    m.Priority,
+            //    NavbarMenuList = db.MainCateTbls.Where(m => m.CateType == "BannerCate" && m.Active == true).Select(m => new
+            //    {
+            //        m.MainCateId,
+            //        m.MUrl,
+            //        m.MTitle,
+            //        m.Priority,
 
-                }).OrderBy(m => m.Priority).Take(6),
-                ScondNavbarMenuList = db.MainCateTbls.Where(m => m.CateType == "MainCate" && m.Active == true).Select(m => new
-                {
-                    m.MainCateId,
-                    m.MUrl,
-                    m.MTitle,
-                    m.Priority,
-                }).OrderBy(m => m.Priority).Skip(6),
-            };
+            //    }).OrderBy(m => m.Priority).Take(6),
+            //    ScondNavbarMenuList = db.MainCateTbls.Where(m => m.CateType == "BannerCate" && m.Active == true).Select(m => new
+            //    {
+            //        m.MainCateId,
+            //        m.MUrl,
+            //        m.MTitle,
+            //        m.Priority,
+            //    }).OrderBy(m => m.Priority).Skip(6),
+            //};
 
-            return Json(res, JsonRequestBehavior.AllowGet);
+            //return Json(res, JsonRequestBehavior.AllowGet);
 
         }
 
-        //public JsonResult GetNavbarMenu()
-        //{
-        //   
-        //    var res = new
-        //    {
-
-        //        NavbarMenuList = db.BannerCateTbls.Where(m => m.Active == true).Select(m => new
-        //        {
-        //            m.BannerCateId,
-        //            m.BUrl,
-        //            m.BTitle,
-        //            m.Priority,
-
-        //        }).OrderBy(m => m.Priority).Take(6),
-        //        ScondNavbarMenuList = db.BannerCateTbls.Where(m => m.Active == true).Select(m => new
-        //        {
-        //            m.BannerCateId,
-        //            m.BUrl,
-        //            m.BTitle,
-        //            m.Priority,
-        //        }).OrderBy(m => m.Priority).Skip(6),
-        //    };
-
-        //    return Json(res, JsonRequestBehavior.AllowGet);
-
-        //}
-
+  
         public JsonResult GetKeyword()
         {
 
@@ -1633,6 +1615,7 @@ namespace GiftChoice.Controllers
                                            product.ProductTitle,
                                            product.PLabel,
                                            product.Price,
+                                           title = "gifts under ₹999",
                                            product.SameDay,
                                            product.PUrl,
                                            LabelId = product.LabelId ?? 0,
@@ -1673,6 +1656,7 @@ namespace GiftChoice.Controllers
                                            product.Price,
                                            product.SameDay,
                                            product.PUrl,
+                                           title = "gifts under ₹499",
                                            LabelId = product.LabelId ?? 0,
                                            product.Video,
                                            product.Qty,
@@ -1712,6 +1696,7 @@ namespace GiftChoice.Controllers
                                            product.Price,
                                            product.SameDay,
                                            product.PUrl,
+                                           title = "Friends gifts best sellers",
                                            LabelId = product.LabelId ?? 0,
                                            product.Video,
                                            product.Qty,
@@ -1750,6 +1735,7 @@ namespace GiftChoice.Controllers
                                            product.PLabel,
                                            product.Price,
                                            product.SameDay,
+                                           title = "Birthday",
                                            product.PUrl,
                                            LabelId = product.LabelId ?? 0,
                                            product.Video,
@@ -1787,6 +1773,7 @@ namespace GiftChoice.Controllers
                                            product.MainCateId,
                                            product.ProductTitle,
                                            product.PLabel,
+                                           title = "love & Anniversary",
                                            product.Price,
                                            product.SameDay,
                                            product.PUrl,

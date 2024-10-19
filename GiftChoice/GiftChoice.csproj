@@ -186,6 +186,7 @@
     <Compile Include="Models\FestivalBannerTbl.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\getdatamodel.cs" />
     <Compile Include="Models\JsonNetFilterAttribute.cs" />
     <Compile Include="Models\KeywordTbl.cs">
       <DependentUpon>Model1.tt</DependentUpon>
