@@ -10279,16 +10279,16 @@ span.fi-rs-apps {
 .product-display-slider .carousel-indicators button {
     border: 1px solid #ddd;
     padding: 1px;
-    height: 60px;
-    width: 60px;
+    height: 90px;
+    width: 90px;
     cursor: -webkit-grab;
     cursor: grab
 }
 
     .product-display-slider .carousel-indicators button img {
         border-radius: 2px !important;
-        height: 60px;
-        width: 60px;
+        height: 90px;
+        width: 90px;
         object-fit: contain;
         cursor: -webkit-grab;
         cursor: grab
@@ -10594,5 +10594,86 @@ span.fi-rs-apps {
 @media only screen and (max-width : 767px) {
     .caterody-product-slider .swiper-slide .card {
         width: 113px;
+    }
+}
+
+.product-detail-product-name {
+    font-size : 20px !important;
+}
+
+.product-detail-description{
+    font-size : 16px !important;
+}
+
+
+
+/*Happy CLients*/
+
+
+.home-testimonial h2 {
+    font-size: 20px;
+}
+
+.testimonial-inner .tour-desc {
+    border-radius: 5px;
+    padding: 40px
+}
+
+.color-grey-3 {
+    font-size: 14px;
+    color: #6c83a2
+}
+
+.testimonial-inner img.tm-people {
+    width: 60px;
+    height: 60px;
+    -webkit-border-radius: 50%;
+    border-radius: 50%;
+    -o-object-fit: cover;
+    object-fit: cover;
+    max-width: none
+}
+
+.instafeed a {
+    font-weight: 500;
+}
+
+.product-price-base{
+    bottom :0;
+    right : 0;
+    z-index : 99;
+}
+.product-size-base {
+    bottom: 0;
+    left: 0;
+    z-index : 99;
+}
+
+.product-price-disclose {
+    border-radius: 20px 0 0 0 ;
+}
+
+.product-size-disclose {
+    border-radius:  0 20px 0 0;
+}
+.highlight-thing {
+    color: #4aa17c !important;
+    font-size : 14px !important;
+    font-weight : 500 !important;
+}
+@media only screen and (max-width : 767px) {
+    .instafeed h5{
+        font-size : 10px !important
+    }
+    .instafeed .color-grey-3{
+        font-size : 10px !important;
+        line-height : 16px !important
+    }
+    .instafeed a{
+        font-size : 10px !important;
+    }
+    .home-testimonial .product-content-wrap h2,
+    .product-detail-product-name {
+        font-size: 16px !important;
     }
 }

@@ -307,19 +307,19 @@ var swiper = new Swiper(".swiper-container", {
     },
 });
 (swiper = new Swiper(".related-product-swiper", {
-    slidesPerView: 3,
-    spaceBetween: 6,
+    slidesPerView: 1,
+    spaceBetween: 1,
     autoplay: { delay: 1500 },
     pagination: { el: ".swiper-pagination", clickable: !0 },
     navigation: { nextEl: ".next-btn", prevEl: ".prev-btn" },
     breakpoints: {
-        250: { slidesPerView: 1, spaceBetween: 10 },
-        340: { slidesPerView: 2, spaceBetween: 10 },
-        480: { slidesPerView: 2, spaceBetween: 10 },
-        768: { slidesPerView: 2, spaceBetween: 10 },
-        990: { slidesPerView: 6, spaceBetween: 10 },
-        1366: { slidesPerView: 6, spaceBetween: 10 },
-        1440: { slidesPerView: 6, spaceBetween: 10 },
+        250: { slidesPerView: 1, spaceBetween: 5 },
+        340: { slidesPerView: 2, spaceBetween: 5 },
+        480: { slidesPerView: 2, spaceBetween: 5 },
+        768: { slidesPerView: 2, spaceBetween: 5 },
+        990: { slidesPerView: 3, spaceBetween: 5 },
+        1366: { slidesPerView: 3, spaceBetween: 5 },
+        1440: { slidesPerView: 3, spaceBetween: 5 },
     },
 })),
 
