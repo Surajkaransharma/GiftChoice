@@ -1,5 +1,5 @@
 ﻿var app = angular.module("HomeApp", []);
-app.controller("HomeController", ['$scope', '$http', '$sce', 'orderByFilter', function ($scope, $http, $sce, orderBy) {
+app.controller("HomeController", ['$scope', '$http', '$sce', 'startFromFilter', 'orderByFilter', function ($scope, $http, $sce, orderBy) {
 
 
 
@@ -7,13 +7,13 @@ app.controller("HomeController", ['$scope', '$http', '$sce', 'orderByFilter', fu
         $scope.NavbarMenuList = d.data.NavbarMenuList;
         $scope.ScondNavbarMenuList = d.data.ScondNavbarMenuList;
 
-        debugger
+
     }, function (error) {
         alert(error.data);
     });
     $scope.RecentViewGifts = [];
     $scope.RecentViewData = function (index) {
-        debugger
+
 
         var selectedProduct = $scope.ProductData[index];
         var productId = selectedProduct.ProductId;
@@ -34,7 +34,7 @@ app.controller("HomeController", ['$scope', '$http', '$sce', 'orderByFilter', fu
     };
 
     $scope.GetRecentViewGifts = function () {
-        debugger
+
 
 
         $scope.RecentViewGifts = JSON.parse(localStorage.getItem('RecentViewGifts')) || [];
@@ -42,9 +42,10 @@ app.controller("HomeController", ['$scope', '$http', '$sce', 'orderByFilter', fu
 
     };
     $scope.cart = [];
+
     //$scope.CartItem = JSON.parse(localStorage.getItem('cart'));
     $scope.GetCart = function () {
-        debugger
+
         var cartlist = [];
 
         $scope.cart = JSON.parse(localStorage.getItem('cart')) || [];
@@ -55,10 +56,16 @@ app.controller("HomeController", ['$scope', '$http', '$sce', 'orderByFilter', fu
                 $scope.TotalAmount += $scope.cart[i].Price * $scope.cart[i].Qty;
             }
         }
+        $scope.whatsappdata = '';
+        for (var i = 0; i < $scope.cart.length; i++) {
+
+            $scope.whatsappdata += '*S.No. ' + (i + 1) + '* Gift Name =*' + $scope.cart[i].ProductTitle + '*%0a' + 'Price =*' + $scope.cart[i].Price + '*%0a' + 'Gift Url = *https://www.giftchoice.net/Home/Gift?url=' + $scope.cart[i].PUrl + '*%0a';
+        }
+
     };
     $scope.addItemToCart = function (index) {
-        debugger
-        debugger;
+
+        
 
         var selectedProduct = $scope.ProductData[index];
         var productId = selectedProduct.ProductId;
@@ -73,12 +80,50 @@ app.controller("HomeController", ['$scope', '$http', '$sce', 'orderByFilter', fu
             $scope.cart.push(selectedProduct);
             localStorage.setItem('cart', JSON.stringify($scope.cart));
             $scope.GetCart();
-            toastr["success"]("Product successfully added to the cart.");
+            //  toastr["success"]("Product successfully added to the cart.");
         } else {
             // If the product is already in the cart, you can handle this case as needed.
             // For example, you can display a message to the user.
 
-            toastr["error"]('This product is already in your cart.');
+            //  toastr["error"]('This product is already in your cart.');
+            return;
+        }
+        //$scope.cart.push($scope.ProductData[index]);
+        ////$scope.cart =    $scope.ProductData[index];
+        ////$scope.cart.push({
+        ////    'name': $scope.name,
+        ////    'price': $scope.price
+        ////});
+        //localStorage.setItem('cart', JSON.stringify($scope.cart));
+        //$scope.GetCart();
+    };
+
+
+    $scope.LabeladdItemToCart = function (index,id) {
+
+
+        debugger
+
+        var aid = $scope[id];
+        var selectedProduct = aid[index];
+        var productId = selectedProduct.ProductId;
+
+        // Check if the product with the same productId is already in the cart
+        var productInCart = $scope.cart.find(function (item) {
+            return item.ProductId === productId;
+        });
+
+        if (!productInCart) {
+            // If the product is not in the cart, add it
+            $scope.cart.push(selectedProduct);
+            localStorage.setItem('cart', JSON.stringify($scope.cart));
+            $scope.GetCart();
+            //  toastr["success"]("Product successfully added to the cart.");
+        } else {
+            // If the product is already in the cart, you can handle this case as needed.
+            // For example, you can display a message to the user.
+
+            //  toastr["error"]('This product is already in your cart.');
             return;
         }
         //$scope.cart.push($scope.ProductData[index]);
@@ -92,8 +137,8 @@ app.controller("HomeController", ['$scope', '$http', '$sce', 'orderByFilter', fu
     };
 
     $scope.RecentViewaddItemToCart = function (index) {
-        debugger
-        debugger;
+
+        ;
 
         var selectedProduct = $scope.RecentViewGifts[index];
         var productId = selectedProduct.ProductId;
@@ -127,8 +172,8 @@ app.controller("HomeController", ['$scope', '$http', '$sce', 'orderByFilter', fu
     };
 
     $scope.GiftsaddItemToCart = function (index) {
-        debugger
-        debugger;
+
+        ;
 
         var selectedProduct = $scope.ProductData[index];
         var productId = selectedProduct.ProductId;
@@ -174,7 +219,7 @@ app.controller("HomeController", ['$scope', '$http', '$sce', 'orderByFilter', fu
     };
     $scope.Qty = 1;
     $scope.AddQty = function (id, index) {
-        debugger
+
 
         if (id == 1) {
 
@@ -247,7 +292,7 @@ app.controller("HomeController", ['$scope', '$http', '$sce', 'orderByFilter', fu
     };
 
     $scope.SearchDataShop = function () {
-        debugger
+
         var id = $("#Keyword").val();
         $http({
             url: '/Home/SearchDataShop',
@@ -257,9 +302,9 @@ app.controller("HomeController", ['$scope', '$http', '$sce', 'orderByFilter', fu
 
             }
         }).then(function (d) {
-            debugger
+
             $scope.result = d.data.Keywords;
-            debugger
+
 
             location.href = '/Home/Shop?Keyword=' + $scope.result;
         }, function (error) {
@@ -269,7 +314,7 @@ app.controller("HomeController", ['$scope', '$http', '$sce', 'orderByFilter', fu
     };
 
     $scope.GetRandomKeywordMobile = function () {
-        debugger
+
         $("#MKeyword").addClass('ui-autocomplete-loader-center');
         $http.get("/Home/GetRandomKeyword?id=" + $scope.Keyword).then(function (d) {
 
@@ -306,9 +351,9 @@ app.controller("HomeController", ['$scope', '$http', '$sce', 'orderByFilter', fu
 
 
     $scope.SearchData = function () {
-        debugger
+
         $scope.kk = $("#Keyword").val();
-        debugger;
+        ;
         $http({
             url: '/Home/SearchData',
             method: 'POST',
@@ -320,9 +365,9 @@ app.controller("HomeController", ['$scope', '$http', '$sce', 'orderByFilter', fu
                 maincategory_id: $("#MainCate").val()
             }
         }).then(function (d) {
-            debugger
+
             $scope.result = d.data.Keywordlist;
-            debugger
+
             //    location.href = '/Home/SearchList?list=' + $scope.result.list + 'brand' + $scope.result.brand + 'CompanyName' + $scope.result.cname + 'CityId' + $scope.result.ctid + 'MainCate' + $scope.result.mcate;
 
         }, function (error) {
@@ -332,10 +377,10 @@ app.controller("HomeController", ['$scope', '$http', '$sce', 'orderByFilter', fu
     };
 
     $scope.SliderList = function () {
-        debugger
+
         $http.get("/Home/SliderList").then(function (d) {
 
-            debugger
+
             $scope.SliderListData = d.data;
             setTimeout(() => {
                 var mainslider = $(".home-slider");
@@ -360,10 +405,10 @@ app.controller("HomeController", ['$scope', '$http', '$sce', 'orderByFilter', fu
         });
     };
     $scope.GetFestivalBanner = function () {
-        debugger
+
         $http.get("/Home/GetFestivalBanner").then(function (d) {
 
-            debugger
+
             $scope.FestivalBannerData = d.data;
 
         }, function (error) {
@@ -371,61 +416,63 @@ app.controller("HomeController", ['$scope', '$http', '$sce', 'orderByFilter', fu
         });
     };
     $scope.GetLabelProduct = function () {
-        debugger
+
         $http.get("/Home/GetLabelProduct").then(function (d) {
 
-            debugger
+
             $scope.TopsellingProduct = d.data.TopsellingProduct;
             $scope.NewProduct = d.data.NewProduct;
             $scope.NewArivals = d.data.NewArivals;
-            setTimeout(() => {
+            $scope.Relation = d.data.Relation;
 
-                /*Carausel 6 columns*/
-                $(".carausel-6-columns").each(function (key, item) {
-                    var id = $(this).attr("id");
-                    var sliderID = '#' + id;
-                    var appendArrowsClassName = '#' + id + '-arrows'
+            //setTimeout(() => {
 
-                    $(sliderID).slick({
-                        dots: false,
-                        infinite: false,
-                        speed: 1000,
-                        arrows: true,
-                        autoplay: true,
-                        slidesToShow: 1,
-                        slidesToScroll: 1,
-                        loop: false,
-                        adaptiveHeight: true,
-                        responsive: [
-                            {
-                                breakpoint: 1025,
-                                settings: {
-                                    slidesToShow: 1,
-                                    slidesToScroll: 1,
-                                }
-                            },
-                            {
-                                breakpoint: 768,
-                                settings: {
-                                    slidesToShow: 1,
-                                    slidesToScroll: 1,
-                                }
-                            },
-                            {
-                                breakpoint: 480,
-                                settings: {
-                                    slidesToShow: 1,
-                                    slidesToScroll: 1
-                                }
-                            }
-                        ],
-                        prevArrow: '<span class="slider-btn slider-prev"><i class="fi-rs-angle-left"></i></span>',
-                        nextArrow: '<span class="slider-btn slider-next"><i class="fi-rs-angle-right"></i></span>',
-                        appendArrows: (appendArrowsClassName),
-                    });
-                });
+            //    /*Carausel 6 columns*/
+            //    $(".carausel-6-columns").each(function (key, item) {
+            //        var id = $(this).attr("id");
+            //        var sliderID = '#' + id;
+            //        var appendArrowsClassName = '#' + id + '-arrows'
 
-            }, 10);
+            //        $(sliderID).slick({
+            //            dots: false,
+            //            infinite: false,
+            //            speed: 1000,
+            //            arrows: true,
+            //            autoplay: true,
+            //            slidesToShow: 1,
+            //            slidesToScroll: 1,
+            //            loop: false,
+            //            adaptiveHeight: true,
+            //            responsive: [
+            //                {
+            //                    breakpoint: 1025,
+            //                    settings: {
+            //                        slidesToShow: 1,
+            //                        slidesToScroll: 1,
+            //                    }
+            //                },
+            //                {
+            //                    breakpoint: 768,
+            //                    settings: {
+            //                        slidesToShow: 1,
+            //                        slidesToScroll: 1,
+            //                    }
+            //                },
+            //                {
+            //                    breakpoint: 480,
+            //                    settings: {
+            //                        slidesToShow: 1,
+            //                        slidesToScroll: 1
+            //                    }
+            //                }
+            //            ],
+            //            prevArrow: '<span class="slider-btn slider-prev"><i class="fi-rs-angle-left"></i></span>',
+            //            nextArrow: '<span class="slider-btn slider-next"><i class="fi-rs-angle-right"></i></span>',
+            //            appendArrows: (appendArrowsClassName),
+            //        });
+            //    });
+
+            //}, 10);
 
 
         }, function (error) {
@@ -433,7 +480,7 @@ app.controller("HomeController", ['$scope', '$http', '$sce', 'orderByFilter', fu
         });
     };
     $scope.sortByPrice = function (order) {
-        debugger
+
         $scope.ProductData.sort(function (a, b) {
             if (order === 'asc') {
                 return a.Price - b.Price;
@@ -473,14 +520,14 @@ app.controller("HomeController", ['$scope', '$http', '$sce', 'orderByFilter', fu
     //$scope.reverse = true;
     //$scope.ProductData = orderBy($scope.ProductData, $scope.propertyName, $scope.reverse);
     //$scope.sortBy = function (propertyName) {
-    //    debugger;
+    //    ;
     //    $scope.reverse = (propertyName !== null && $scope.propertyName === propertyName)
     //        ? !$scope.reverse : false;
     //    $scope.propertyName = propertyName;
     //    $scope.ProductData = orderBy($scope.ProductData, $scope.propertyName, $scope.reverse);
     //};
     $scope.FilterProductData = function (id) {
-        debugger;
+
 
         var Cid = [];
         var Bid = [];
@@ -510,7 +557,7 @@ app.controller("HomeController", ['$scope', '$http', '$sce', 'orderByFilter', fu
             $scope.lastItem = priceTblarr[priceTblarr.length - 1];
             $scope.maxPrice = $scope.lastItem.maxPrice;
         }
-        debugger
+
         $http({
             url: '/Home/FilterProductData',
             method: 'post',
@@ -521,7 +568,7 @@ app.controller("HomeController", ['$scope', '$http', '$sce', 'orderByFilter', fu
                 Bid: Bid
             }
         }).then(function (d) {
-            debugger
+
             $scope.ProductData = d.data.ProductList;
             $('.offcanvas').removeClass('show');
         }), function (error) {
@@ -532,7 +579,7 @@ app.controller("HomeController", ['$scope', '$http', '$sce', 'orderByFilter', fu
     $scope.GetMainCateData = function () {
         $http.get("/Home/GetMainCateData").then(function (d) {
             $scope.MainCateData = d.data;
-            debugger
+
             //setTimeout(() => {
             //    $(".carausel-6-columns").each(function (key, item) {
             //        var id = $(this).attr("id");
@@ -632,7 +679,51 @@ app.controller("HomeController", ['$scope', '$http', '$sce', 'orderByFilter', fu
     $scope.GetHomeMainCateData = function () {
         $http.get("/Home/GetHomeMainCateData").then(function (d) {
             $scope.HomeMainCateData = d.data;
-            debugger
+            setTimeout(() => {
+                $(".carausel-1-columns").each(function (key, item) {
+                    var id = $(this).attr("id");
+                    var sliderID = '#' + id;
+                    var appendArrowsClassName = '#' + id + '-arrows'
+
+                    $(sliderID).slick({
+                        dots: false,
+                        infinite: true,
+                        speed: 100,
+                        arrows: true,
+                        autoplay: true,
+                        slidesToShow: 9,
+                        slidesToScroll: 1,
+                        loop: true,
+                        adaptiveHeight: true,
+                        responsive: [
+                            {
+                                breakpoint: 1025,
+                                settings: {
+                                    slidesToShow: 7,
+                                    slidesToScroll: 1,
+                                }
+                            },
+                            {
+                                breakpoint: 768,
+                                settings: {
+                                    slidesToShow: 3,
+                                    slidesToScroll: 1,
+                                }
+                            },
+                            {
+                                breakpoint: 480,
+                                settings: {
+                                    slidesToShow: 3,
+                                    slidesToScroll: 1
+                                }
+                            }
+                        ],
+                        prevArrow: '<span class="slider-btn slider-prev"><i class="fi-rs-angle-left"></i></span>',
+                        nextArrow: '<span class="slider-btn slider-next"><i class="fi-rs-angle-right"></i></span>',
+                        appendArrows: (appendArrowsClassName),
+                    });
+                });
+            }, 10);
 
         }, function (error) {
             alert(error.data);
@@ -642,7 +733,51 @@ app.controller("HomeController", ['$scope', '$http', '$sce', 'orderByFilter', fu
     $scope.GetHomeMainCateHeroData = function () {
         $http.get("/Home/GetHomeMainCateHeroData").then(function (d) {
             $scope.HomeHeroMainCateData = d.data;
-            debugger
+            setTimeout(() => {
+                $(".carausel-5-columns").each(function (key, item) {
+                    var id = $(this).attr("id");
+                    var sliderID = '#' + id;
+                    var appendArrowsClassName = '#' + id + '-arrows'
+
+                    $(sliderID).slick({
+                        dots: false,
+                        infinite: true,
+                        speed: 100,
+                        arrows: true,
+                        autoplay: true,
+                        slidesToShow: 9,
+                        slidesToScroll: 1,
+                        loop: true,
+                        adaptiveHeight: true,
+                        responsive: [
+                            {
+                                breakpoint: 1025,
+                                settings: {
+                                    slidesToShow: 7,
+                                    slidesToScroll: 1,
+                                }
+                            },
+                            {
+                                breakpoint: 768,
+                                settings: {
+                                    slidesToShow: 3,
+                                    slidesToScroll: 1,
+                                }
+                            },
+                            {
+                                breakpoint: 480,
+                                settings: {
+                                    slidesToShow: 3,
+                                    slidesToScroll: 1
+                                }
+                            }
+                        ],
+                        prevArrow: '<span class="slider-btn slider-prev"><i class="fi-rs-angle-left"></i></span>',
+                        nextArrow: '<span class="slider-btn slider-next"><i class="fi-rs-angle-right"></i></span>',
+                        appendArrows: (appendArrowsClassName),
+                    });
+                });
+            }, 10);
 
         }, function (error) {
             alert(error.data);
@@ -653,16 +788,16 @@ app.controller("HomeController", ['$scope', '$http', '$sce', 'orderByFilter', fu
     $scope.GetBannerCateData = function () {
         $http.get("/Home/GetBannerCateData").then(function (d) {
             $scope.MainCateData = d.data;
-            debugger
+
         }, function (error) {
             alert(error.data);
         });
     };
 
     $scope.GetProduct = function () {
-        debugger
+
         $http.get("/Home/GetProduct").then(function (d) {
-            debugger
+
             $scope.ProductData = d.data;
 
             //setTimeout(() => {
@@ -683,13 +818,17 @@ app.controller("HomeController", ['$scope', '$http', '$sce', 'orderByFilter', fu
     };
 
     $scope.FilterProduct = function () {
-        debugger
+
         $http.get("/Home/FilterProduct").then(function (d) {
-            debugger
+
 
 
             $scope.ProductData = d.data;
-            debugger
+
+            //$scope.pageSize = 28;
+            //$scope.currentPage = 1; // Reset to the first page after fetching data
+            //$scope.totalPages = Math.ceil($scope.ProductData.length / $scope.pageSize);
+            //$scope.goToPage(1); // Go to the first page
         }, function (error) {
             alert(error.data);
         });
@@ -707,10 +846,10 @@ app.controller("HomeController", ['$scope', '$http', '$sce', 'orderByFilter', fu
 
 
     $scope.BannerList = function () {
-        debugger
+
         $http.get("/Home/BannerList").then(function (d) {
 
-            debugger
+
             $scope.BannerListData = d.data;
 
         }, function (error) {
@@ -721,8 +860,8 @@ app.controller("HomeController", ['$scope', '$http', '$sce', 'orderByFilter', fu
 
 
     $scope.GiftAddItemToCart = function (Productid) {
-        debugger
-        debugger;
+
+        ;
 
         var selectedProduct = $scope.Product;
         var productId = selectedProduct.ProductId;
@@ -756,13 +895,102 @@ app.controller("HomeController", ['$scope', '$http', '$sce', 'orderByFilter', fu
     };
 
     $scope.GetProductByid = function (id) {
-        debugger
+
         $http.get("/Home/GetProductByid?id=" + id).then(function (d) {
-            debugger
+
+            $scope.Product = d.data;
+            //$scope.idd = $scope.Product.MainCateId;
+            if ($scope.Product.ProductType == "BannerProduct") {
+
+                $scope.GetBSmillerProduct($scope.Product.ProductId, $scope.Product.BannerCateId);
+            } else {
+
+                $scope.GetSmillerProduct($scope.Product.ProductId, $scope.Product.MainCateId);
+            }
+
+            $('#desc').html($scope.Product.TableDesc);
+
+            setTimeout(() => {
+
+
+                $('.product-image-slider').slick({
+                    slidesToShow: 1,
+                    slidesToScroll: 1,
+                    arrows: false,
+                    fade: false,
+                    asNavFor: '.slider-nav-thumbnails',
+                });
+
+                $('.slider-nav-thumbnails').slick({
+                    slidesToShow: 5,
+                    slidesToScroll: 1,
+                    asNavFor: '.product-image-slider',
+                    dots: false,
+                    focusOnSelect: true,
+                    prevArrow: '<button type="button" class="slick-prev"><i class="fi-rs-angle-left"></i></button>',
+                    nextArrow: '<button type="button" class="slick-next"><i class="fi-rs-angle-right"></i></button>'
+                });
+
+                // Remove active class from all thumbnail slides
+                $('.slider-nav-thumbnails .slick-slide').removeClass('slick-active');
+
+                // Set active class to first thumbnail slides
+                $('.slider-nav-thumbnails .slick-slide').eq(0).addClass('slick-active');
+
+                // On before slide change match active thumbnail to current slide
+                $('.product-image-slider').on('beforeChange', function (event, slick, currentSlide, nextSlide) {
+                    var mySlideNumber = nextSlide;
+                    $('.slider-nav-thumbnails .slick-slide').removeClass('slick-active');
+                    $('.slider-nav-thumbnails .slick-slide').eq(mySlideNumber).addClass('slick-active');
+                });
+
+                $('.product-image-slider').on('beforeChange', function (event, slick, currentSlide, nextSlide) {
+                    var img = $(slick.$slides[nextSlide]).find("img");
+                    $('.zoomWindowContainer,.zoomContainer').remove();
+                    $(img).elevateZoom({
+                        zoomType: "inner",
+                        cursor: "crosshair",
+                        zoomWindowFadeIn: 500,
+                        zoomWindowFadeOut: 750
+                    });
+                });
+
+
+            }, 10);
+
+        }, function (error) {
+            alert(error.data);
+        });
+    };
+
+
+    $scope.openimagemodel = function (id) {
+        debugger
+        $scope.productimage = id;
+    };
+
+    $scope.SelectSizePrice = function (ProductSize) {
+
+
+        debugger
+        var selectedProduct = $scope.Product.productDataArray.find(function (product) {
+            return product.ProductSize === ProductSize;
+        });
+
+
+        if (selectedProduct) {
+            $scope.Product.Price = selectedProduct.Price;
+        }
+
+    };
+    $scope.GetBProductByid = function (id) {
+
+        $http.get("/Home/GetBProductByid?id=" + id).then(function (d) {
+
             $scope.Product = d.data;
             //$scope.idd = $scope.Product.MainCateId;
 
-            $scope.GetSmillerProduct($scope.Product.ProductId, $scope.Product.MainCateId);
+            $scope.GetBSmillerProduct($scope.Product.ProductId, $scope.Product.BannerCateId);
 
             $('#desc').html($scope.Product.TableDesc);
 
@@ -816,87 +1044,60 @@ app.controller("HomeController", ['$scope', '$http', '$sce', 'orderByFilter', fu
             alert(error.data);
         });
     };
-    $scope.SelectSizePrice = function (ProductSize) {
-
-      
-
-        var selectedProduct = $scope.Product.productDataArray.find(function (product) {
-            return product.ProductSize === ProductSize;
-        });
-
-  
-        if (selectedProduct) {
-            $scope.Product.Price = selectedProduct.Price;
-        }
-    
-    };
-    $scope.GetBProductByid = function (id) {
-        debugger
-        $http.get("/Home/GetBProductByid?id=" + id).then(function (d) {
-            debugger
-            $scope.Product = d.data;
-            //$scope.idd = $scope.Product.MainCateId;
-
-            $scope.GetBSmillerProduct($scope.Product.ProductId, $scope.Product.MainCateId);
-
-            $('#desc').html($scope.Product.PDesc1);
-
-            setTimeout(() => {
-
-
-                $('.product-image-slider').slick({
-                    slidesToShow: 1,
-                    slidesToScroll: 1,
-                    arrows: false,
-                    fade: false,
-                    asNavFor: '.slider-nav-thumbnails',
-                });
-
-                $('.slider-nav-thumbnails').slick({
-                    slidesToShow: 5,
-                    slidesToScroll: 1,
-                    asNavFor: '.product-image-slider',
-                    dots: false,
-                    focusOnSelect: true,
-                    prevArrow: '<button type="button" class="slick-prev"><i class="fi-rs-angle-left"></i></button>',
-                    nextArrow: '<button type="button" class="slick-next"><i class="fi-rs-angle-right"></i></button>'
-                });
-
-                // Remove active class from all thumbnail slides
-                $('.slider-nav-thumbnails .slick-slide').removeClass('slick-active');
-
-                // Set active class to first thumbnail slides
-                $('.slider-nav-thumbnails .slick-slide').eq(0).addClass('slick-active');
-
-                // On before slide change match active thumbnail to current slide
-                $('.product-image-slider').on('beforeChange', function (event, slick, currentSlide, nextSlide) {
-                    var mySlideNumber = nextSlide;
-                    $('.slider-nav-thumbnails .slick-slide').removeClass('slick-active');
-                    $('.slider-nav-thumbnails .slick-slide').eq(mySlideNumber).addClass('slick-active');
-                });
-
-                $('.product-image-slider').on('beforeChange', function (event, slick, currentSlide, nextSlide) {
-                    var img = $(slick.$slides[nextSlide]).find("img");
-                    $('.zoomWindowContainer,.zoomContainer').remove();
-                    $(img).elevateZoom({
-                        zoomType: "inner",
-                        cursor: "crosshair",
-                        zoomWindowFadeIn: 500,
-                        zoomWindowFadeOut: 750
-                    });
-                });
-            }, 10);
-
-        }, function (error) {
-            alert(error.data);
-        });
-    };
 
     $scope.GetSmillerProduct = function (id, idd) {
-        debugger
+
         $http.get("/Home/GetSmillerProduct?id=" + id + '&idd=' + idd).then(function (d) {
             debugger
             $scope.ProductData = d.data;
+
+            setTimeout(() => {
+
+                $(".carausel-6-columns").each(function (key, item) {
+                    var id = $(this).attr("id");
+                    var sliderID = '#' + id;
+                    var appendArrowsClassName = '#' + id + '-arrows'
+
+                    $(sliderID).slick({
+                        dots: false,
+                        infinite: true,
+                        speed: 100,
+                        arrows: true,
+                        autoplay: true,
+                        slidesToShow: 6,
+                        slidesToScroll: 2,
+                        loop: true,
+                        adaptiveHeight: true,
+                        responsive: [
+                            {
+                                breakpoint: 1025,
+                                settings: {
+                                    slidesToShow: 4,
+                                    slidesToScroll: 2,
+                                }
+                            },
+                            {
+                                breakpoint: 768,
+                                settings: {
+                                    slidesToShow: 3,
+                                    slidesToScroll: 2,
+                                }
+                            },
+                            {
+                                breakpoint: 480,
+                                settings: {
+                                    slidesToShow: 2,
+                                    slidesToScroll: 2
+                                }
+                            }
+                        ],
+                        prevArrow: '<span class="slider-btn slider-prev"><i class="fi-rs-angle-left"></i></span>',
+                        nextArrow: '<span class="slider-btn slider-next"><i class="fi-rs-angle-right"></i></span>',
+                        appendArrows: (appendArrowsClassName),
+                    });
+                });
+
+            }, 10);
 
 
 
@@ -907,10 +1108,60 @@ app.controller("HomeController", ['$scope', '$http', '$sce', 'orderByFilter', fu
     };
 
     $scope.GetBSmillerProduct = function (id, idd) {
-        debugger
+
         $http.get("/Home/GetBSmillerProduct?id=" + id + '&idd=' + idd).then(function (d) {
             debugger
             $scope.ProductData = d.data;
+
+            setTimeout(() => {
+
+                $(".carausel-6-columns").each(function (key, item) {
+                    var id = $(this).attr("id");
+                    var sliderID = '#' + id;
+                    var appendArrowsClassName = '#' + id + '-arrows'
+
+                    $(sliderID).slick({
+                        dots: false,
+                        infinite: true,
+                        speed: 100,
+                        arrows: true,
+                        autoplay: true,
+                        slidesToShow: 6,
+                        slidesToScroll: 2,
+                        loop: true,
+                        adaptiveHeight: true,
+                        responsive: [
+                            {
+                                breakpoint: 1025,
+                                settings: {
+                                    slidesToShow: 4,
+                                    slidesToScroll: 2,
+                                }
+                            },
+                            {
+                                breakpoint: 768,
+                                settings: {
+                                    slidesToShow: 3,
+                                    slidesToScroll: 2,
+                                }
+                            },
+                            {
+                                breakpoint: 480,
+                                settings: {
+                                    slidesToShow: 2,
+                                    slidesToScroll: 2
+                                }
+                            }
+                        ],
+                        prevArrow: '<span class="slider-btn slider-prev"><i class="fi-rs-angle-left"></i></span>',
+                        nextArrow: '<span class="slider-btn slider-next"><i class="fi-rs-angle-right"></i></span>',
+                        appendArrows: (appendArrowsClassName),
+                    });
+                });
+
+            }, 10);
+
+
         }, function (error) {
             alert(error.data);
         });
@@ -930,7 +1181,7 @@ app.controller("HomeController", ['$scope', '$http', '$sce', 'orderByFilter', fu
             return;
         }
 
-        debugger;
+        ;
         $http({
             url: '/Home/AddOrder',
             method: 'post',
@@ -947,7 +1198,7 @@ app.controller("HomeController", ['$scope', '$http', '$sce', 'orderByFilter', fu
             }
         }).then(function (d) {
             $scope.result = d.data;
-            debugger
+
             if ($scope.result.res === "1") {
 
                 $scope.cart = [];
@@ -962,44 +1213,44 @@ app.controller("HomeController", ['$scope', '$http', '$sce', 'orderByFilter', fu
 
 
     $scope.GetSmallBanner = function () {
-        debugger
+
         $http.get("/Home/GetSmallBanner").then(function (d) {
             $scope.GetSmallBannerData = d.data.SmallBanner;
-            debugger
+
         }, function (error) {
             alert(error.data);
         });
     };
     $scope.GetDesignBanner = function () {
-        debugger
+
         $http.get("/Home/GetDesignBanner").then(function (d) {
             $scope.DesignBannerData = d.data.DesignBanner;
-            debugger
+          
         }, function (error) {
             alert(error.data);
         });
     };
     $scope.GetMultipleBanner = function () {
-        debugger
+
         $http.get("/Home/GetMultipleBanner").then(function (d) {
             $scope.MultipleBannerData = d.data.MultipleBanner;
-            debugger
+
         }, function (error) {
             alert(error.data);
         });
     };
     $scope.OpenModelInBanner = function () {
-        debugger
+
         var urlParams = new URLSearchParams(window.location.search);
         $scope.banner = urlParams.get('Banner');
         $scope.BannerAll = urlParams.get('BannerAll');
 
-        debugger
+
         $http.get("/Home/GetBannerAsk1?banner=" + $scope.banner).then(function (d) {
             $scope.GetBannerAsk1Data = d.data.Querydata;
             $scope.ModelStatus = d.data.ModelStatus;
 
-            debugger
+
             if ($scope.ModelStatus == true) {
 
                 if ($scope.GetBannerAsk1Data[0].BannerTitle.ModelQuery1 == true) {
@@ -1011,7 +1262,7 @@ app.controller("HomeController", ['$scope', '$http', '$sce', 'orderByFilter', fu
             } else {
                 $scope.GetBannerAllProductwithmodel();
             }
-                    
+
 
         }, function (error) {
             alert(error.data);
@@ -1025,20 +1276,22 @@ app.controller("HomeController", ['$scope', '$http', '$sce', 'orderByFilter', fu
         $scope.banner = urlParams.get('Banner');
         $scope.BannerAll = urlParams.get('BannerAll');
 
-        debugger
+
         $http.get("/Home/GetBannerAsk1?banner=" + $scope.banner).then(function (d) {
             $scope.GetBannerAsk1Data = d.data.Querydata;
             $scope.ModelStatus = d.data.ModelStatus;
 
-            debugger
-         
-                if ($scope.GetBannerAsk1Data[0].BannerTitle.ModelQuery1 == true) {
 
-                    setTimeout(() => {
-                        $('#modalId').modal("toggle");
-                    }, 100);
-                }
-             
+
+            if ($scope.GetBannerAsk1Data[0].BannerTitle.ModelQuery1 == true) {
+
+                setTimeout(() => {
+                    $('#modalId').modal("toggle");
+                }, 100);
+            } else {
+                $scope.GetBannerAllProduct();
+            }
+
 
         }, function (error) {
             alert(error.data);
@@ -1046,19 +1299,45 @@ app.controller("HomeController", ['$scope', '$http', '$sce', 'orderByFilter', fu
 
 
     };
+    $scope.quickview = function (product) {
+        debugger
+        $scope.product = product;
+    
+
+        $('#quickview').modal("toggle");
+
+        setTimeout(() => {
+            var videoElement = document.getElementById('pVideo');
+            if (videoElement) {
+                videoElement.src = '/images/ProductVideo/' + $scope.product.Video;
+            }
+
+        }, 100);
+
+
+    }
     $scope.GetBannerAllProductwithmodel = function () {
         debugger
         var urlParams = new URLSearchParams(window.location.search);
         $scope.banner = urlParams.get('Banner');
-
+       var  id = 0;
         $http({
             url: '/Home/modelTofilterBannerProduct',
             method: 'post',
             data: {
-                BannerId: $scope.banner
+                BannerId: $scope.banner,
+                id : id
             }
         }).then(function (d) {
             $scope.ProductData = d.data.ProductList;
+            $scope.FilterKeywordList = d.data.FilterKeywordList;
+
+
+            //$scope.pageSize = 20;
+            //$scope.currentPage = 1; // Reset to the first page after fetching data
+            //$scope.totalPages = Math.ceil($scope.ProductData.length / $scope.pageSize);
+            //$scope.goToPage(1); // Go to the first page
+
             //setTimeout(() => {
 
             //    for (var i = 0; i < $scope.ProductData.length; i++) {
@@ -1078,11 +1357,97 @@ app.controller("HomeController", ['$scope', '$http', '$sce', 'orderByFilter', fu
 
 
     };
+    $scope.activeFilter = 'all';
+
+    // Function to set the active filter
+    $scope.setActiveFilter = function (filter) {
+        $scope.activeFilter = filter;
+    };
+
+    $scope.GetFilterKeywordBy = function (id) {
+        var urlParams = new URLSearchParams(window.location.search);
+        $scope.banner = urlParams.get('Banner');
+        
+        $http({
+            url: '/Home/modelTofilterBannerProduct',
+            method: 'post',
+            data: {
+                BannerId: $scope.banner,
+                id: id
+            }
+        }).then(function (d) {
+            $scope.ProductData = d.data.ProductList;           
+
+
+            //$scope.pageSize = 20;
+            //$scope.currentPage = 1; // Reset to the first page after fetching data
+            //$scope.totalPages = Math.ceil($scope.ProductData.length / $scope.pageSize);
+            //$scope.goToPage(1); // Go to the first page
+
+            //setTimeout(() => {
+
+            //    for (var i = 0; i < $scope.ProductData.length; i++) {
+            //        if ($scope.ProductData[i].VideoUrl != null) {
+
+            //            var site = "https://www.youtube.com/embed/" + $scope.ProductData[i].VideoUrl + "?autoplay=1&loop=1&mute=1";
+            //            document.getElementById('iFrameName' + i).src = site;
+            //        }
+
+
+            //    }
+            //}, 10);
+
+        }, function (error) {
+            toastr["error"]("Something Went Wrong");
+        });
+
+
+    };
+
+    /////// pagenation
+    $scope.ProductData = [];
+    $scope.currentPage = 1;
+    $scope.pageSize = 20;
+
+    $scope.goToPage = function (page) {
+
+        $scope.currentPage = page;
+    };
+
+    $scope.prevPage = function () {
+
+        if ($scope.currentPage > 1) {
+            $scope.goToPage($scope.currentPage - 1);
+        }
+        $('html, body').scrollTop(0);
+        //   $('html, body').animate({ scrollTop: 0 }, '300');
+
+    };
+
+    $scope.nextPage = function () {
+
+        if (($scope.currentPage * $scope.pageSize) < $scope.ProductData.length) {
+            $scope.goToPage($scope.currentPage + 1);
+        }
+        $('html, body').scrollTop(0);
+
+    };
+
+    $scope.range = function (totalPages) {
+        $scope.pages = [];
+        for (i = 0; i < totalPages; i++) {
+            if (i <= 3) {
+                $scope.pages.push(i);
+
+            }
+        } return $scope.pages;
+    };
+    /////// pagenation
     $scope.trustSrc = function (src) {
         return $sce.trustAsResourceUrl(src);
     };
     $scope.GetBannerAllProduct = function () {
-        debugger
+
         var urlParams = new URLSearchParams(window.location.search);
         $scope.banner = urlParams.get('Banner');
 
@@ -1094,7 +1459,12 @@ app.controller("HomeController", ['$scope', '$http', '$sce', 'orderByFilter', fu
             }
         }).then(function (d) {
             $scope.ProductData = d.data.ProductList;
+
             $('#modalId').modal("toggle");
+            //$scope.pageSize = 20;
+            //$scope.currentPage = 1; // Reset to the first page after fetching data
+            //$scope.totalPages = Math.ceil($scope.ProductData.length / $scope.pageSize);
+            //$scope.goToPage(1); // Go to the first page
 
         }, function (error) {
             toastr["error"]("Something Went Wrong");
@@ -1104,7 +1474,7 @@ app.controller("HomeController", ['$scope', '$http', '$sce', 'orderByFilter', fu
     };
 
     $scope.ContinueAskQues1 = function () {
-        debugger
+
 
         for (var i = 0; i < $scope.GetBannerAsk1Data.length; i++) {
 
@@ -1115,7 +1485,7 @@ app.controller("HomeController", ['$scope', '$http', '$sce', 'orderByFilter', fu
 
         $http.get("/Home/ContinueAskQues1?QId=" + $scope.QId).then(function (d) {
             $scope.GetBannerAsk2Data = d.data;
-            debugger
+
 
 
 
@@ -1127,7 +1497,7 @@ app.controller("HomeController", ['$scope', '$http', '$sce', 'orderByFilter', fu
     };
 
     $scope.ContinueAskQues2 = function () {
-        debugger
+
 
         for (var i = 0; i < $scope.GetBannerAsk2Data.length; i++) {
             for (var k = 0; k < $scope.GetBannerAsk2Data[i].AnswerList.length; k++) {
@@ -1140,7 +1510,7 @@ app.controller("HomeController", ['$scope', '$http', '$sce', 'orderByFilter', fu
 
         $http.get("/Home/ContinueAskQues2?BSubDId=" + $scope.BSubDId).then(function (d) {
             $scope.GetContinueAskQues2Data = d.data;
-            debugger
+
 
 
 
@@ -1152,7 +1522,7 @@ app.controller("HomeController", ['$scope', '$http', '$sce', 'orderByFilter', fu
     };
 
     $scope.modelTofilterBannerProduct = function () {
-        debugger
+
         var Keywordarr = [];
         for (var i = 0; i < $scope.GetBannerAsk1Data.length; i++) {
             if ($("#AskQues1_" + $scope.GetBannerAsk1Data[i].QId).is(":checked")) {
@@ -1174,6 +1544,11 @@ app.controller("HomeController", ['$scope', '$http', '$sce', 'orderByFilter', fu
 
             $('#modalId').modal("toggle");
 
+            $scope.pageSize = 20;
+            $scope.currentPage = 1; // Reset to the first page after fetching data
+            $scope.totalPages = Math.ceil($scope.ProductData.length / $scope.pageSize);
+            $scope.goToPage(1); // Go to the first page
+
         }, function (error) {
             toastr["error"]("Something Went Wrong");
         });
@@ -1181,15 +1556,34 @@ app.controller("HomeController", ['$scope', '$http', '$sce', 'orderByFilter', fu
     };
 
     $scope.GetTopProduct = function () {
-        debugger
+
         var urlParams = new URLSearchParams(window.location.search);
 
         // Get the value of the "CartData" parameter
         $scope.ProductType = urlParams.get('ProductType');
-        debugger
+
         $http.get("/Home/GetTopProduct?ProductType=" + $scope.ProductType).then(function (d) {
             $scope.ProductData = d.data.ProductList;
-            debugger
+
+
+
+        }, function (error) {
+            alert(error.data);
+        });
+
+
+    };
+
+    $scope.giftfilterkeyword = function () {
+
+        var urlParams = new URLSearchParams(window.location.search);
+
+        // Get the value of the "CartData" parameter
+        $scope.ProductType = urlParams.get('ProductType');
+
+        $http.get("/Home/getgiftfilterkeyword?ProductType=" + $scope.ProductType).then(function (d) {
+            $scope.ProductData = d.data.ProductList;
+
 
 
         }, function (error) {
@@ -1202,4 +1596,31 @@ app.controller("HomeController", ['$scope', '$http', '$sce', 'orderByFilter', fu
     $scope.toggleContent = function (post) {
         $scope.showFullContent = !$scope.showFullContent;
     };
+
+
+    $scope.GetFilterWordList = function () {
+
+        $http.get("/Home/GetFilterWordList").then(function (d) {
+
+
+            $scope.Giftsunder499 = d.data.Giftsunder499;
+            $scope.Giftsunder999 = d.data.Giftsunder999;
+            $scope.giftsFriendsbestsellers = d.data.giftsFriendsbestsellers;
+            $scope.loveAnniversaryData = d.data.loveAnniversaryData;
+            $scope.BirthdayData = d.data.BirthdayData;
+
+
+
+
+        }, function (error) {
+            alert(error.data);
+        });
+    };
 }]);
+
+app.filter('startFrom', function () {
+    return function (input, start) {
+        start = +start;
+        return input.slice(start);
+    };
+});

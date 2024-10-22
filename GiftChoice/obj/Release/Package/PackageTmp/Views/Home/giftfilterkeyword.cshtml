@@ -1,0 +1,98 @@
+﻿
+@{
+    ViewBag.Title = "giftfilterkeyword";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<main class="main">
+
+    <!-- Page Breadcrumb Start -->
+    <div class="page-header breadcrumb-wrap">
+        <div class="container">
+            <div class="breadcrumb">
+                <a href="index.html" rel="nofollow">Home</a>
+                <span></span> Best Products
+            </div>
+        </div>
+    </div>
+    <!-- Page Breadcrumb End -->
+
+
+    <section class="mt-50 mb-50">
+        <div class="container">
+            <div class="row flex-row-reverse gx-1 g-1">
+                <div class="col-lg-12">
+                    <div class="shop-product-fillter">
+                        <div class="totall-product">
+                            <p>Welcome to Gift Choice Bhilwara</p>
+                        </div>
+                    </div>
+
+                    <div class="tab-navigation">
+
+                        @*<ul class="nav nav-tabs" id="myTab" role="tablist">
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">All</button>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">Relation Name</button>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact" type="button" role="tab" aria-controls="contact" aria-selected="false">Relation Name</button>
+                                </li>
+                            </ul>*@
+                        <div class="tab-content mt-3" id="myTabContent">
+                            <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                                <div class="row product-grid-4 g-1 gx-1" ng-init="giftfilterkeyword()">
+                                    <div class="col-lg-2 col-6 col-sm-3" ng-repeat="q in ProductData">
+                                        <div data-aos="zoom-in">
+                                            <div class="product-cart-wrap mb-10 ">
+                                                <div class="product-img-action-wrap">
+                                                    <div class="product-img product-img-zoom">
+                                                        <a href="/Home/Gift?url={{q.PUrl}}">
+                                                            <img class="default-img img-fluid" src="~/images/ProductImg/{{q.ProductImage}}" loading="lazy" alt="product-image" loading="lazy" alt="">
+                                                            <img class="hover-img img-fluid" src="~/images/ProductImg/{{q.ProductImage}}" loading="lazy" alt="product-hover-image" loading="lazy" alt="">
+                                                        </a>
+                                                    </div>
+                                                    <div class="product-badges product-badges-position product-badges-mrg" ng-show="q.PLabel!=''">
+                                                        <span class="hot">{{q.PLabel}}</span>
+                                                    </div>
+                                                </div>
+                                                <div class="product-content-wrap">
+                                                    <h2><a href="/Home/Gift?url={{q.PUrl}}">{{q.ProductTitle}}</a></h2>
+                                                    <div class="product-price">
+                                                        <span><i class="fa fa-inr" aria-hidden="true"></i> {{q.Price}}/-</span>
+                                                    </div>
+                                                    <div class="d-flex justify-content-between">
+                                                        <div class="button-design mt-2">
+                                                            <a aria-label="Add To Cart" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight" class="btn theme-button-2" ng-click="addItemToCart($index)"><i class="fi-rs-shopping-bag-add"></i> Add To Cart </a>
+                                                        </div>
+                                                        @* Popup Button For Image *@
+                                                        <div class="button-design mt-2" ng-if="!q.Video">
+                                                            <a aria-label="View Image" class="btn theme-button-3 d-flex gap-2 align-items-center" ng-click="quickview(q)"><span class="d-lg-none d-sm-none d-block fs-9">View </span><i class="fa fa-eye" aria-hidden="true"></i></a>
+                                                        </div>
+
+
+                                                        @* Popup Button For Video *@
+                                                        <div class="button-design mt-2" ng-if="q.Video">
+                                                            <a aria-label="View Image" class="btn theme-button-3 d-flex gap-2 align-items-center for-video" ng-click="quickview(q)"><span class="d-lg-none d-sm-none d-block fs-9 hide-animation" id="hideText">View </span><i class="fa fa-youtube-play" aria-hidden="true"></i></a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">...</div>
+                            <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">...</div>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </section>
+</main>

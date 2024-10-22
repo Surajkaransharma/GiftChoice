@@ -9,14 +9,49 @@
 }
 
 <style>
-    img {
-        width: 50px
-    }
 
     .box1 {
         inline-size: 150px !important;
         overflow-wrap: break-word !important;
     }
+
+    .drop-zone {
+        width: 300px;
+        height: 200px;
+        border: 2px dashed #ccc;
+        margin: 0 auto;
+        text-align: center;
+        padding: 20px;
+        margin-bottom: 20px;
+    }
+
+        .drop-zone p {
+            margin-bottom: 10px;
+        }
+
+    .image-input {
+        display: none;
+    }
+
+    .preview {
+        width: 150px;
+        margin-bottom: 10px;
+        display: none;
+        margin: 0 auto;
+    }
+
+    .remove-image {
+        background-color: #ccc;
+        border: none;
+        padding: 5px 10px;
+        cursor: pointer;
+        opacity: 0.5;
+        transition: opacity 0.2s ease;
+    }
+
+        .remove-image:hover {
+            opacity: 1;
+        }
 </style>
 
 <script src="~/Angularjs/Admin.js"></script>
@@ -54,7 +89,7 @@
 
                             </div>
                             <div class="col-md-2" ng-init="GetLabelProduct()">
-                                <label for="input1" class="form-label">Select Main Category</label>
+                                <label for="input1" class="form-label">Select Label</label>
 
                                 <select id="LabelId" class="form-select" ng-model="Product.LabelId">
                                     <option ng-selected="true" value="">Select Label</option>
@@ -81,13 +116,45 @@
                                 <label for="input1" class="form-label">Price</label>
                                 <input type="number" class="form-control" ng-model="Product.Price" id="" placeholder="Price">
                             </div>
+                            @*<div class="col-md-2">
+                                    <label for="input1" class="form-label">See Video</label>
+                                    <input type="text" class="form-control" ng-model="Product.VideoUrl" id="" placeholder="See Video">
+                                </div>*@
                             <div class="col-md-2">
-                                <label for="input1" class="form-label">See Video</label>
-                                <input type="text" class="form-control" ng-model="Product.VideoUrl" id="" placeholder="See Video">
+                                <label for="input1" class="form-label">See Video     <a ng-show="Product.Video!=null && Product.Video!=''" class="badge bg-danger" href="{{'/images/ProductVideo/' + Product.Video}}" title="see video" target="_blank" role="button">See Video</a> &nbsp;&nbsp;&nbsp;&nbsp;   <a ng-show="Product.Video!=null && Product.Video!=''" ng-click="DeleteProductVideo(Product.ProductId)">Delete Video</a></label>
+                                <input type="file" id="VideoData" class="form-control" upload-file="Product.VideoData">
                             </div>
                             <div class="col-md-2">
-                                <label for="input1" class="form-label">Same Day Deliver</label>
-                                <input type="checkbox" ng-model="Product.SameDay" id="" placeholder="">
+                                <label for="SameDay" class="form-label">Same Day Deliver</label>
+                                <input type="checkbox" ng-model="Product.SameDay" id="SameDay" placeholder="">
+                            </div>
+                            <div ng-init="AddProductDetails()">
+
+                                <div class="row g-3" ng-repeat="a in productDataArray">
+
+                                    <div class="col-md-2" ng-init="GetProductSizeList($index)">
+                                        <label for="input1" class="form-label">Size</label>
+                                        <select id="P_Size" class="form-select" ng-model="a.SizeId" ng-options="q.SizeId as q.SizeTitle for q in a.SizeList"></select>
+                                    </div>
+
+
+
+                                    <div class="col-md-2">
+                                        <label for="input1" class="form-label">Price</label>
+                                        <input type="text" class="form-control" ng-model="a.Price" id="" placeholder="Price" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');">
+                                    </div>
+
+
+                                    <div class="col-md-2">
+                                        <div class="d-md-flex d-grid align-items-center gap-3" style="margin-top: 30px">
+                                            <button type="button" ng-click="removeproductDataArraydata($index)" class="btn btn-primary px-4 mt-28"><i class="bx bx-trash"></i></button>
+
+                                            <button ng-show="$last" type="button" id="Adbtn" ng-click="AddProductDetails()" class="btn btn-primary px-4 mt-28"><i class="bx bx-plus"></i></button>
+                                        </div>
+                                    </div>
+
+
+                                </div>
                             </div>
                             <div class="col-md-12" ng-init="GetKeywordData()">
                                 <label for="input1" class="form-label">Select Keyword</label>
@@ -101,49 +168,111 @@
 
                                 </div>
                             </div>
-                            <div class="col-md-12" ng-init="GetSizeData()">
-                                <label for="input1" class="form-label">Select Size</label>
-                                <div class="" id="check_box">
-                                    <label class="checkbox-wrapper" ng-repeat="s in SizeList">
-                                        <input type="checkbox" id="Size_{{s.SizeId}}" class="checkbox-Size" value="{{s.SizeId}}" ng-model="s.Selected" ng-checked="" />
-                                        <span class="checkbox-tile">
-                                            <span class="checkbox-label">{{s.SizeTitle}}</span>
-                                        </span>
-                                    </label>
+                            @*<div class="col-md-12" ng-init="GetSizeData()">
+                                    <label for="input1" class="form-label">Select Size</label>
+                                    <div class="" id="check_box">
+                                        <label class="checkbox-wrapper" ng-repeat="s in SizeList">
+                                            <input type="checkbox" id="Size_{{s.SizeId}}" class="checkbox-Size" value="{{s.SizeId}}" ng-model="s.Selected" ng-checked="" />
+                                            <span class="checkbox-tile">
+                                                <span class="checkbox-label">{{s.SizeTitle}}</span>
+                                            </span>
+                                        </label>
 
-                                </div>
-                            </div>
+                                    </div>
+                                </div>*@
                             <div class="col-md-12">
                                 <label for="input1" class="form-label">Description</label>
                                 <textarea id="TableDesc" class="form-control" rows="6" cols="4" ng-model="Product.PDesc"></textarea>
                             </div>
                             <div class="col-md-12">
-                                ss
+
                                 <label for="input1" class="form-label">Table Description</label>
                                 <textarea class="ckeditor" id="ckeditor"></textarea>
                             </div>
-                            <div class="col-md-2">
-                                <label for="input1" class="form-label">Image 1</label>
+                            @*<div class="col-md-2">
+                                    <label for="input1" class="form-label">Image 1</label>
 
-                                <input type="file" id="image1" class="form-control" upload-file="Product.Image1">
-                            </div>
+                                    <input type="file" class="form-control image-input" onchange="angular.element(this).scope().previewImage1(0)" upload-file="Product.Image1">
+                                    <img class="image-preview" id="image-preview-0" alt="Image Preview">
 
-                            <div class="col-md-2">
-                                <label for="input1" class="form-label">Image 2</label>
-                                <input type="file" class="form-control" upload-file="Product.Image2" id="">
-                            </div>
+                                </div>
 
-                            <div class="col-md-2">
-                                <label for="input1" class="form-label">Image 3</label>
-                                <input type="file" class="form-control" upload-file="Product.Image3" id="">
+                                <div class="col-md-2">
+                                    <label for="input1" class="form-label">Image 2</label>
+                                    <input type="file" class="form-control" upload-file="Product.Image2" id="">
+                                </div>
+
+                                <div class="col-md-2">
+                                    <label for="input1" class="form-label">Image 3</label>
+                                    <input type="file" class="form-control" upload-file="Product.Image3" id="">
+                                </div>
+                                <div class="col-md-2">
+                                    <label for="input1" class="form-label">Image 4</label>
+                                    <input type="file" class="form-control" upload-file="Product.Image4" id="">
+                                </div>
+                                <div class="col-md-2">
+                                    <label for="input1" class="form-label">Image 5</label>
+                                    <input type="file" class="form-control" upload-file="Product.Image5" id="">
+                                </div>*@
+                            <div class="col-md-3">
+
+                                <p>Drop Zone 1: Drag & drop your image here or click to browse</p>
+                                <div class="drop-zone">
+                                    <input type="file" class="image-input" accept="image/*">
+                                    <img class="preview" src="" alt="Image Preview">
+                                </div>
+                                <button class="remove-image" disabled>Remove Image</button>
+                       <button class="btn btn-danger" ng-show="Product.ProductImage[0]" style="float: right" ng-click="DeleteProductImage(Product.ProductImage[0],Product.ProductId)">Delete Image</button>
+
+
                             </div>
-                            <div class="col-md-2">
-                                <label for="input1" class="form-label">Image 4</label>
-                                <input type="file" class="form-control" upload-file="Product.Image4" id="">
+                            <div class="col-md-3">
+
+                                <p>Drop Zone 2: Drag & drop your image here or click to browse</p>
+                                <div class="drop-zone">
+                                    <input type="file" class="image-input" accept="image/*">
+                                    <img class="preview" src="" alt="Image Preview">
+                                </div>
+                                <button class="remove-image" disabled>Remove Image</button>
+                                <button class="btn btn-danger" ng-show="Product.ProductImage[1]" style="float: right" ng-click="DeleteProductImage(Product.ProductImage[1],Product.ProductId)">Delete Image</button>
+
+
                             </div>
-                            <div class="col-md-2">
-                                <label for="input1" class="form-label">Image 5</label>
-                                <input type="file" class="form-control" upload-file="Product.Image5" id="">
+                            <div class="col-md-3">
+
+                                <p>Drop Zone 3: Drag & drop your image here or click to browse</p>
+                                <div class="drop-zone">
+                                    <input type="file" class="image-input" accept="image/*">
+                                    <img class="preview" src="" alt="Image Preview">
+                                </div>
+                                <button class="remove-image" disabled>Remove Image</button>
+                                <button class="btn btn-danger" ng-show="Product.ProductImage[2]" style="float: right" ng-click="DeleteProductImage(Product.ProductImage[2],Product.ProductId)">Delete Image</button>
+
+
+                            </div>
+                            <div class="col-md-3">
+
+                                <p>Drop Zone 4: Drag & drop your image here or click to browse</p>
+                                <div class="drop-zone">
+                                    <input type="file" class="image-input" accept="image/*">
+                                    <img class="preview" src="" alt="Image Preview">
+                                </div>
+                                <button class="remove-image" disabled>Remove Image</button>
+                                <button class="btn btn-danger" ng-show="Product.ProductImage[3]" style="float: right" ng-click="DeleteProductImage(Product.ProductImage[3],Product.ProductId)">Delete Image</button>
+
+
+                            </div>
+                            <div class="col-md-3" style="display: none">
+
+                                <p>Drop Zone 5: Drag & drop your image here or click to browse</p>
+                                <div class="drop-zone">
+                                    <input type="file" class="image-input" accept="image/*">
+                                    <img class="preview" src="" alt="Image Preview">
+                                </div>
+                                <button class="remove-image" disabled>Remove Image</button>
+                                <button class="btn btn-danger" ng-show="Product.ProductImage[4]" style="float: right" ng-click="DeleteProductImage(Product.ProductImage[4],Product.ProductId)">Delete Image</button>
+
+
                             </div>
                             <div class="col-md-12">
                                 <div class="d-md-flex d-grid align-items-center gap-3">
@@ -152,6 +281,7 @@
                                     <button type="button" class="btn btn-light px-4" onClick="refreshPage()">Reset</button>
                                 </div>
                             </div>
+
                         </form>
                     </div>
                 </div>
@@ -212,8 +342,27 @@
                                         <td>{{m.Price}}</td>
                                         <td>{{m.Priority}}</td>
                                         <td><span ng-repeat="n in m.Submenu">{{n.SubmenuTitle}},<br /></span></td>
-                                        <td><span ng-repeat="n in m.PSizeList">{{n.SizeTitle}},<br /></span></td>
-                                        <td><span ng-repeat="i in m.ProductImage"><img src="~/images/ProductImg/{{i}}"><br /></span> </td>
+                                        <td>
+                                            <table class="table table-bordered">
+                                                <tr>
+                                                    <td>Price</td>
+                                                    <td>Size</td>
+
+                                                </tr>
+                                                <tr ng-repeat="a in m.productDataArray">
+                                                    <td>{{a.Price}}</td>
+                                                    <td>{{a.ProductSize}}</td>
+
+                                                </tr>
+
+                                                @*<span ng-repeat="n in m.PSizeList">
+                                                        {{n.SizeTitle}},<br />
+
+                                                    </span>*@
+                                            </table>
+                                            @*<span ng-repeat="n in m.PSizeList">{{n.SizeTitle}},<br /></span>*@
+                                        </td>
+                                        <td><span ng-repeat="i in m.ProductImage"><img src="~/images/ProductImg/{{i}}" width="150px"><br /></span> </td>
                                         <td><a ng-click="ProductActiveDeActive(m.ProductId)"> <span class="badge {{m.Active==1? 'bg-success' : 'bg-danger'}}">{{m.Active==1?'Active':'Deactive'}}</span></a> </td>
                                         <td><a><i class="bx bxs-pencil" ng-click="GetProductbyid($index)"></i></a></td>
                                     </tr>
@@ -227,249 +376,63 @@
     </div>
 </div>
 <script src="~/assets/ckeditor/ckeditor.js"></script>
+
+
 <script>
+    const dropZones = document.querySelectorAll('.drop-zone');
+    const imageInputs = document.querySelectorAll('.image-input');
+    const previews = document.querySelectorAll('.preview');
+    const removeButtons = document.querySelectorAll('.remove-image');
 
+    dropZones.forEach((dropZone, index) => {
+        dropZone.addEventListener('dragover', (event) => {
+            event.preventDefault();
+            dropZone.classList.add('dragover');
+        });
 
-    // Select Upload-Area
-    const uploadArea = document.querySelector('#uploadArea')
+        dropZone.addEventListener('dragleave', () => {
+            dropZone.classList.remove('dragover');
+        });
 
-    // Select Drop-Zoon Area
-    const dropZoon = document.querySelector('#dropZoon');
+        dropZone.addEventListener('drop', (event) => {
+            event.preventDefault();
+            dropZone.classList.remove('dragover');
 
-    // Loading Text
-    const loadingText = document.querySelector('#loadingText');
-
-    // Slect File Input
-    const fileInput = document.querySelector('#fileInput');
-
-    // Select Preview Image
-    const previewImage = document.querySelector('#previewImage');
-
-    // File-Details Area
-    const fileDetails = document.querySelector('#fileDetails');
-
-    // Uploaded File
-    const uploadedFile = document.querySelector('#uploadedFile');
-
-    // Uploaded File Info
-    const uploadedFileInfo = document.querySelector('#uploadedFileInfo');
-
-    // Uploaded File  Name
-    const uploadedFileName = document.querySelector('.uploaded-file__name');
-
-    // Uploaded File Icon
-    const uploadedFileIconText = document.querySelector('.uploaded-file__icon-text');
-
-    // Uploaded File Counter
-    const uploadedFileCounter = document.querySelector('.uploaded-file__counter');
-
-    // ToolTip Data
-    const toolTipData = document.querySelector('.upload-area__tooltip-data');
-
-    // Images Types
-    const imagesTypes = [
-        "jpeg",
-        "png",
-        "svg",
-        "gif"
-    ];
-
-    // Append Images Types Array Inisde Tooltip Data
-    toolTipData.innerHTML = [...imagesTypes].join(', .');
-
-    // When (drop-zoon) has (dragover) Event
-    dropZoon.addEventListener('dragover', function (event) {
-        // Prevent Default Behavior
-        event.preventDefault();
-
-        // Add Class (drop-zoon--over) On (drop-zoon)
-        dropZoon.classList.add('drop-zoon--over');
-    });
-
-    // When (drop-zoon) has (dragleave) Event
-    dropZoon.addEventListener('dragleave', function (event) {
-        // Remove Class (drop-zoon--over) from (drop-zoon)
-        dropZoon.classList.remove('drop-zoon--over');
-    });
-
-    // When (drop-zoon) has (drop) Event
-    dropZoon.addEventListener('drop', function (event) {
-        // Prevent Default Behavior
-        event.preventDefault();
-
-        // Remove Class (drop-zoon--over) from (drop-zoon)
-        dropZoon.classList.remove('drop-zoon--over');
-
-        // Select The Dropped File
-        const file = event.dataTransfer.files[0];
-
-        // Call Function uploadFile(), And Send To Her The Dropped File :)
-        uploadFile(file);
-    });
-
-    // When (drop-zoon) has (click) Event
-    dropZoon.addEventListener('click', function (event) {
-        // Click The (fileInput)
-        fileInput.click();
-    });
-
-    // When (fileInput) has (change) Event
-    fileInput.addEventListener('change', function (event) {
-        // Select The Chosen File
-        const file = event.target.files[0];
-
-        // Call Function uploadFile(), And Send To Her The Chosen File :)
-        uploadFile(file);
-    });
-
-    // Upload File Function
-    function uploadFile(file) {
-        // FileReader()
-        const fileReader = new FileReader();
-        // File Type
-        const fileType = file.type;
-        // File Size
-        const fileSize = file.size;
-        const image = new Image();
-        image.src = URL.createObjectURL(file);
-
-        image.onload = function () {
-            if (image.naturalWidth === 1920 && image.naturalHeight === 700) {
-                // If File Is Passed from the (File Validation) Function
-                if (fileValidate(fileType, fileSize)) {
-
-                    // Add Class (drop-zoon--Uploaded) on (drop-zoon)
-                    dropZoon.classList.add('drop-zoon--Uploaded');
-
-                    // Show Loading-text
-                    loadingText.style.display = "block";
-                    // Hide Preview Image
-                    previewImage.style.display = 'none';
-
-                    // Remove Class (uploaded-file--open) From (uploadedFile)
-                    uploadedFile.classList.remove('uploaded-file--open');
-                    // Remove Class (uploaded-file__info--active) from (uploadedFileInfo)
-                    uploadedFileInfo.classList.remove('uploaded-file__info--active');
-
-                    // After File Reader Loaded
-                    fileReader.addEventListener('load', function () {
-                        // After Half Second
-
-
-                        setTimeout(function () {
-                            // Add Class (upload-area--open) On (uploadArea)
-                            uploadArea.classList.add('upload-area--open');
-
-                            // Hide Loading-text (please-wait) Element
-                            loadingText.style.display = "none";
-                            // Show Preview Image
-                            previewImage.style.display = 'block';
-
-                            // Add Class (file-details--open) On (fileDetails)
-                            fileDetails.classList.add('file-details--open');
-                            // Add Class (uploaded-file--open) On (uploadedFile)
-                            uploadedFile.classList.add('uploaded-file--open');
-                            // Add Class (uploaded-file__info--active) On (uploadedFileInfo)
-                            uploadedFileInfo.classList.add('uploaded-file__info--active');
-                        }, 500); // 0.5s
-
-                        // Add The (fileReader) Result Inside (previewImage) Source
-                        previewImage.setAttribute('src', fileReader.result);
-
-                        //const base64Data = fileReader.result.split(',')[1];
-                        //$("#imgcode").val(base64Data)
-                        //// Now you have the base64 encoded image data in base64Data variable
-                        //console.log('Base64 Encoded Image Data:', base64Data);
-
-                        // Replace with your actual base64 data
-
-                        // Create a new Image element
-                        //const decodedImage = new Image();
-
-                        //// Set the src attribute to the base64 data
-                        //decodedImage.src = 'data:image/jpeg;base64,' + base64Data;
-
-                        //// Add the image to a container element
-                        //const imageContainer = document.querySelector('#imageContainer'); // Replace with your container element's ID
-                        //imageContainer.appendChild(decodedImage);
-
-                        // Add File Name Inside Uploaded File Name
-                        uploadedFileName.innerHTML = file.name;
-
-                        // Call Function progressMove();
-                        progressMove();
-                    });
-
-                    // Read (file) As Data Url
-                    fileReader.readAsDataURL(file);
-                } else { // Else
-
-                    this; // (this) Represent The fileValidate(fileType, fileSize) Function
-
-                };
-            } else {
-                alert('Please make sure your image has dimensions of 1920*700 pixels.');
-                return false;
+            const file = event.dataTransfer.files[0];
+            if (!file || !file.type.startsWith('image/')) {
+                alert('Please drag and drop an image file.');
+                return;
             }
+            uploadFile(file, previews[index], removeButtons[index], imageInputs[index]);
+        });
+
+        dropZone.addEventListener('click', () => {
+            imageInputs[index].click();
+        });
+
+        imageInputs[index].addEventListener('change', (event) => {
+            const file = event.target.files[0];
+            uploadFile(file, previews[index], removeButtons[index], imageInputs[index]);
+        });
+
+        removeButtons[index].addEventListener('click', () => {
+            previews[index].src = '';
+            imageInputs[index].value = '';
+            previews[index].style.display = 'none';
+            removeButtons[index].disabled = true;
+        });
+    });
+
+    function uploadFile(file, preview, removeButton, input) {
+        const reader = new FileReader();
+        reader.onload = (e) => {
+            preview.src = e.target.result;
+            preview.style.display = 'block';
+
+            removeButton.disabled = false;
         };
-
-    };
-
-    // Progress Counter Increase Function
-    function progressMove() {
-        // Counter Start
-        let counter = 0;
-
-        // After 600ms
-        setTimeout(() => {
-            // Every 100ms
-            let counterIncrease = setInterval(() => {
-                // If (counter) is equle 100
-                if (counter === 100) {
-                    // Stop (Counter Increase)
-                    clearInterval(counterIncrease);
-                } else { // Else
-                    // plus 10 on counter
-                    counter = counter + 10;
-                    // add (counter) vlaue inisde (uploadedFileCounter)
-                    uploadedFileCounter.innerHTML = `${counter}%`
-                }
-            }, 100);
-        }, 600);
-    };
-
-
-    // Simple File Validate Function
-    function fileValidate(fileType, fileSize) {
-        // File Type Validation
-        let isImage = imagesTypes.filter((type) => fileType.indexOf(`image/${type}`) !== -1);
-
-
-
-        // If The Uploaded File Type Is 'jpeg'
-        if (isImage[0] === 'jpeg') {
-            // Add Inisde (uploadedFileIconText) The (jpg) Value
-            uploadedFileIconText.innerHTML = 'jpg';
-        } else { // else
-            // Add Inisde (uploadedFileIconText) The Uploaded File Type
-            uploadedFileIconText.innerHTML = isImage[0];
-        };
-
-        // If The Uploaded File Is An Image
-        if (isImage.length !== 0) {
-            // Check, If File Size Is 2MB or Less
-            if (fileSize <= 2000000) { // 2MB :)
-                return true;
-            } else { // Else File Size
-                return alert('Please Your File Should be 2 Megabytes or Less');
-            };
-        } else { // Else File Type
-            return alert('Please make sure to upload An Image File Type');
-        };
-    };
-
-        // :)
+        reader.readAsDataURL(file);
+        debugger
+        input.files = event.dataTransfer.files;
+    }
 </script>
-
-
-

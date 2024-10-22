@@ -30,13 +30,17 @@ namespace GiftChoice.Models
         public virtual DbSet<BannerCateTbl> BannerCateTbls { get; set; }
         public virtual DbSet<BannerProductImage> BannerProductImages { get; set; }
         public virtual DbSet<BannerProductTbl> BannerProductTbls { get; set; }
+        public virtual DbSet<BannerPTTbl> BannerPTTbls { get; set; }
+        public virtual DbSet<BannerQueryListTbl> BannerQueryListTbls { get; set; }
         public virtual DbSet<BannerTbl> BannerTbls { get; set; }
         public virtual DbSet<BCKeywordTbl> BCKeywordTbls { get; set; }
         public virtual DbSet<BPKeywordTbl> BPKeywordTbls { get; set; }
         public virtual DbSet<BPSizeTbl> BPSizeTbls { get; set; }
         public virtual DbSet<BPTKeywordTbl> BPTKeywordTbls { get; set; }
         public virtual DbSet<BSubKTbl> BSubKTbls { get; set; }
+        public virtual DbSet<BSubTitleDetailTbl> BSubTitleDetailTbls { get; set; }
         public virtual DbSet<BSubTitleTbl> BSubTitleTbls { get; set; }
+        public virtual DbSet<FestivalBannerTbl> FestivalBannerTbls { get; set; }
         public virtual DbSet<KeywordTbl> KeywordTbls { get; set; }
         public virtual DbSet<LabelProductTbl> LabelProductTbls { get; set; }
         public virtual DbSet<MainCateTbl> MainCateTbls { get; set; }
@@ -44,19 +48,17 @@ namespace GiftChoice.Models
         public virtual DbSet<OrderMainTbl> OrderMainTbls { get; set; }
         public virtual DbSet<OrderTbl> OrderTbls { get; set; }
         public virtual DbSet<PKeywordTbl> PKeywordTbls { get; set; }
+        public virtual DbSet<ProductDetailTbl> ProductDetailTbls { get; set; }
         public virtual DbSet<ProductImage> ProductImages { get; set; }
         public virtual DbSet<ProductTbl> ProductTbls { get; set; }
         public virtual DbSet<PSizeTbl> PSizeTbls { get; set; }
+        public virtual DbSet<QueryTbl> QueryTbls { get; set; }
         public virtual DbSet<SizeTbl> SizeTbls { get; set; }
         public virtual DbSet<SliderTbl> SliderTbls { get; set; }
         public virtual DbSet<UserRegister> UserRegisters { get; set; }
-        public virtual DbSet<BannerPTTbl> BannerPTTbls { get; set; }
-        public virtual DbSet<BannerQueryListTbl> BannerQueryListTbls { get; set; }
-        public virtual DbSet<BSubTitleDetailTbl> BSubTitleDetailTbls { get; set; }
-        public virtual DbSet<FestivalBannerTbl> FestivalBannerTbls { get; set; }
-        public virtual DbSet<QueryTbl> QueryTbls { get; set; }
-        public virtual DbSet<VProduct> VProducts { get; set; }
         public virtual DbSet<AutocompleteSuggestion> AutocompleteSuggestions { get; set; }
-        public virtual DbSet<ProductDetailTbl> ProductDetailTbls { get; set; }
+        public virtual DbSet<VProduct> VProducts { get; set; }
+        public virtual DbSet<VideoTbl> VideoTbls { get; set; }
+        public virtual DbSet<ProductFilterWordTbl> ProductFilterWordTbls { get; set; }
     }
 }

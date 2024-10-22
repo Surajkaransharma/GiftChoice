@@ -1,29 +1,3 @@
-/*
- *	jQuery elevateZoom 3.0.8
- *	Demo's and documentation:
- *	www.elevateweb.co.uk/image-zoom
- *
- *	Copyright (c) 2012 Andrew Eades
- *	www.elevateweb.co.uk
- *
- *	Dual licensed under the GPL and MIT licenses.
- *	http://en.wikipedia.org/wiki/MIT_License
- *	http://en.wikipedia.org/wiki/GNU_General_Public_License
- *
-
-/*
- *	jQuery elevateZoom 3.0.3
- *	Demo's and documentation:
- *	www.elevateweb.co.uk/image-zoom
- *
- *	Copyright (c) 2012 Andrew Eades
- *	www.elevateweb.co.uk
- *
- *	Dual licensed under the GPL and MIT licenses.
- *	http://en.wikipedia.org/wiki/MIT_License
- *	http://en.wikipedia.org/wiki/GNU_General_Public_License
- */
-
 
 if (typeof Object.create !== 'function') {
 	Object.create = function (obj) {
@@ -257,44 +231,44 @@ if (typeof Object.create !== 'function') {
 			//create the div's                                                + ""
 			//self.zoomContainer = $('<div/>').addClass('zoomContainer').css({"position":"relative", "height":self.nzHeight, "width":self.nzWidth});
 
-			// self.zoomContainer = $('<div class="zoomContainer" style="-webkit-transform: translateZ(0);position:absolute;left:'+self.nzOffset.left+'px;top:'+self.nzOffset.top+'px;height:'+self.nzHeight+'px;width:'+self.nzWidth+'px;"></div>');
-			// $('body').append(self.zoomContainer);	
+			self.zoomContainer = $('<div class="zoomContainer" style="-webkit-transform: translateZ(0);position:absolute;left:' + self.nzOffset.left + 'px;top:' + self.nzOffset.top + 'px;height:' + self.nzHeight + 'px;width:' + self.nzWidth + 'px;"></div>');
+			$('body').append(self.zoomContainer);
 
 
 			//this will add overflow hidden and contrain the lens on lens mode       
-			// if(self.options.containLensZoom && self.options.zoomType == "lens"){
-			// 	self.zoomContainer.css("overflow", "hidden");
-			// }
-			// if(self.options.zoomType != "inner") {
-			// 	self.zoomLens = $("<div class='zoomLens' style='" + self.lensStyle + self.lensRound +"'>&nbsp;</div>")
-			// 	.appendTo(self.zoomContainer)
-			// 	.click(function () {
-			// 		self.$elem.trigger('click');
-			// 	});
+			if (self.options.containLensZoom && self.options.zoomType == "lens") {
+				self.zoomContainer.css("overflow", "hidden");
+			}
+			if (self.options.zoomType != "inner") {
+				self.zoomLens = $("<div class='zoomLens' style='" + self.lensStyle + self.lensRound + "'>&nbsp;</div>")
+					.appendTo(self.zoomContainer)
+					.click(function () {
+						self.$elem.trigger('click');
+					});
 
 
-			// 	if(self.options.tint) {
-			// 		self.tintContainer = $('<div/>').addClass('tintContainer');	
-			// 		self.zoomTint = $("<div class='zoomTint' style='"+self.tintStyle+"'></div>");
+				if (self.options.tint) {
+					self.tintContainer = $('<div/>').addClass('tintContainer');
+					self.zoomTint = $("<div class='zoomTint' style='" + self.tintStyle + "'></div>");
 
 
-			// 		self.zoomLens.wrap(self.tintContainer);
+					self.zoomLens.wrap(self.tintContainer);
 
 
-			// 		self.zoomTintcss = self.zoomLens.after(self.zoomTint);	
+					self.zoomTintcss = self.zoomLens.after(self.zoomTint);
 
-			// 		//if tint enabled - set an image to show over the tint
+					//if tint enabled - set an image to show over the tint
 
-			// 		self.zoomTintImage = $('<img style="position: absolute; left: 0px; top: 0px; max-width: none; width: '+self.nzWidth+'px; height: '+self.nzHeight+'px;" src="'+self.imageSrc+'">')
-			// 		.appendTo(self.zoomLens)
-			// 		.click(function () {
+					self.zoomTintImage = $('<img style="position: absolute; left: 0px; top: 0px; max-width: none; width: ' + self.nzWidth + 'px; height: ' + self.nzHeight + 'px;" src="' + self.imageSrc + '">')
+						.appendTo(self.zoomLens)
+						.click(function () {
 
-			// 			self.$elem.trigger('click');
-			// 		});
+							self.$elem.trigger('click');
+						});
 
-			// 	}          
+				}
 
-			// }
+			}
 
 
 
@@ -303,79 +277,79 @@ if (typeof Object.create !== 'function') {
 
 
 			//create zoom window 
-			// if(isNaN(self.options.zoomWindowPosition)){
-			// 	self.zoomWindow = $("<div style='z-index:999;left:"+(self.windowOffsetLeft)+"px;top:"+(self.windowOffsetTop)+"px;" + self.zoomWindowStyle + "' class='zoomWindow'>&nbsp;</div>")
-			// 	.appendTo('body')
-			// 	.click(function () {
-			// 		self.$elem.trigger('click');
-			// 	});
-			// }else{
-			// 	self.zoomWindow = $("<div style='z-index:999;left:"+(self.windowOffsetLeft)+"px;top:"+(self.windowOffsetTop)+"px;" + self.zoomWindowStyle + "' class='zoomWindow'>&nbsp;</div>")
-			// 	.appendTo(self.zoomContainer)
-			// 	.click(function () {
-			// 		self.$elem.trigger('click');
-			// 	});
-			// }              
-			// self.zoomWindowContainer = $('<div/>').addClass('zoomWindowContainer').css("width",self.options.zoomWindowWidth);
-			// self.zoomWindow.wrap(self.zoomWindowContainer);
+			if (isNaN(self.options.zoomWindowPosition)) {
+				self.zoomWindow = $("<div style='z-index:999;left:" + (self.windowOffsetLeft) + "px;top:" + (self.windowOffsetTop) + "px;" + self.zoomWindowStyle + "' class='zoomWindow'>&nbsp;</div>")
+					.appendTo('body')
+					.click(function () {
+						self.$elem.trigger('click');
+					});
+			} else {
+				self.zoomWindow = $("<div style='z-index:999;left:" + (self.windowOffsetLeft) + "px;top:" + (self.windowOffsetTop) + "px;" + self.zoomWindowStyle + "' class='zoomWindow'>&nbsp;</div>")
+					.appendTo(self.zoomContainer)
+					.click(function () {
+						self.$elem.trigger('click');
+					});
+			}
+			self.zoomWindowContainer = $('<div/>').addClass('zoomWindowContainer').css("width", self.options.zoomWindowWidth);
+			self.zoomWindow.wrap(self.zoomWindowContainer);
 
 
 			//  self.captionStyle = "text-align: left;background-color: black;color: white;font-weight: bold;padding: 10px;font-family: sans-serif;font-size: 11px";                                                                                                                                                                                                                                          
 			// self.zoomCaption = $('<div class="elevatezoom-caption" style="'+self.captionStyle+'display: block; width: 280px;">INSERT ALT TAG</div>').appendTo(self.zoomWindow.parent());
 
-			// if(self.options.zoomType == "lens") {
-			// 	self.zoomLens.css({ backgroundImage: "url('" + self.imageSrc + "')" }); 
-			// }
-			// if(self.options.zoomType == "window") {
-			// 	self.zoomWindow.css({ backgroundImage: "url('" + self.imageSrc + "')" }); 
-			// }
-			// if(self.options.zoomType == "inner") {
-			// 	self.zoomWindow.css({ backgroundImage: "url('" + self.imageSrc + "')" }); 
-			// }
+			if (self.options.zoomType == "lens") {
+				self.zoomLens.css({ backgroundImage: "url('" + self.imageSrc + "')" });
+			}
+			if (self.options.zoomType == "window") {
+				self.zoomWindow.css({ backgroundImage: "url('" + self.imageSrc + "')" });
+			}
+			if (self.options.zoomType == "inner") {
+				self.zoomWindow.css({ backgroundImage: "url('" + self.imageSrc + "')" });
+			}
 			/*-------------------END THE ZOOM WINDOW AND LENS----------------------------------*/
 			//touch events
-			// self.$elem.bind('touchmove', function(e){    
-			// 	e.preventDefault();
-			// 	var touch = e.originalEvent.touches[0] || e.originalEvent.changedTouches[0];  
-			// 	self.setPosition(touch);
+			self.$elem.bind('touchmove', function (e) {
+				e.preventDefault();
+				var touch = e.originalEvent.touches[0] || e.originalEvent.changedTouches[0];
+				self.setPosition(touch);
 
-			// });  
-			// self.zoomContainer.bind('touchmove', function(e){ 
-			// 	if(self.options.zoomType == "inner") {
-			// 		self.showHideWindow("show");
+			});
+			self.zoomContainer.bind('touchmove', function (e) {
+				if (self.options.zoomType == "inner") {
+					self.showHideWindow("show");
 
-			// 	}
-			// 	e.preventDefault();
-			// 	var touch = e.originalEvent.touches[0] || e.originalEvent.changedTouches[0];  
-			// 	self.setPosition(touch); 
+				}
+				e.preventDefault();
+				var touch = e.originalEvent.touches[0] || e.originalEvent.changedTouches[0];
+				self.setPosition(touch);
 
-			// });  	
-			// self.zoomContainer.bind('touchend', function(e){ 
-			// 	self.showHideWindow("hide");
-			// 	if(self.options.showLens) {self.showHideLens("hide");}
-			// 	if(self.options.tint && self.options.zoomType != "inner") {self.showHideTint("hide");}
-			// });  	
+			});
+			self.zoomContainer.bind('touchend', function (e) {
+				self.showHideWindow("hide");
+				if (self.options.showLens) { self.showHideLens("hide"); }
+				if (self.options.tint && self.options.zoomType != "inner") { self.showHideTint("hide"); }
+			});
 
-			// self.$elem.bind('touchend', function(e){ 
-			// 	self.showHideWindow("hide");
-			// 	if(self.options.showLens) {self.showHideLens("hide");}
-			// 	if(self.options.tint && self.options.zoomType != "inner") {self.showHideTint("hide");}
-			// });  	
-			// if(self.options.showLens) {
-			// 	self.zoomLens.bind('touchmove', function(e){ 
+			self.$elem.bind('touchend', function (e) {
+				self.showHideWindow("hide");
+				if (self.options.showLens) { self.showHideLens("hide"); }
+				if (self.options.tint && self.options.zoomType != "inner") { self.showHideTint("hide"); }
+			});
+			if (self.options.showLens) {
+				self.zoomLens.bind('touchmove', function (e) {
 
-			// 		e.preventDefault();
-			// 		var touch = e.originalEvent.touches[0] || e.originalEvent.changedTouches[0];  
-			// 		self.setPosition(touch); 
-			// 	});    
+					e.preventDefault();
+					var touch = e.originalEvent.touches[0] || e.originalEvent.changedTouches[0];
+					self.setPosition(touch);
+				});
 
 
-			// 	self.zoomLens.bind('touchend', function(e){ 
-			// 		self.showHideWindow("hide");
-			// 		if(self.options.showLens) {self.showHideLens("hide");}
-			// 		if(self.options.tint && self.options.zoomType != "inner") {self.showHideTint("hide");}
-			// 	});  
-			// }
+				self.zoomLens.bind('touchend', function (e) {
+					self.showHideWindow("hide");
+					if (self.options.showLens) { self.showHideLens("hide"); }
+					if (self.options.tint && self.options.zoomType != "inner") { self.showHideTint("hide"); }
+				});
+			}
 			//Needed to work in IE
 			self.$elem.bind('mousemove', function (e) {
 				if (self.overWindow == false) { self.setElements("show"); }
@@ -389,83 +363,83 @@ if (typeof Object.create !== 'function') {
 
 			});
 
-			// self.zoomContainer.bind('mousemove', function(e){ 
+			self.zoomContainer.bind('mousemove', function (e) {
 
-			// 	if(self.overWindow == false){self.setElements("show");} 
+				if (self.overWindow == false) { self.setElements("show"); }
 
-			// 	//make sure on orientation change the setposition is not fired 
-			// 	if(self.lastX !== e.clientX || self.lastY !== e.clientY){
-			// 		self.setPosition(e);
-			// 		self.currentLoc = e;
-			// 	}   
-			// 	self.lastX = e.clientX;
-			// 	self.lastY = e.clientY;    
-			// });  	
-			// if(self.options.zoomType != "inner") {
-			// 	self.zoomLens.bind('mousemove', function(e){      
-			// 		//make sure on orientation change the setposition is not fired
-			// 		if(self.lastX !== e.clientX || self.lastY !== e.clientY){
-			// 			self.setPosition(e);
-			// 			self.currentLoc = e;
-			// 		}   
-			// 		self.lastX = e.clientX;
-			// 		self.lastY = e.clientY;    
-			// 	});
-			// }
-			// if(self.options.tint && self.options.zoomType != "inner") {
-			// 	self.zoomTint.bind('mousemove', function(e){ 
-			// 		//make sure on orientation change the setposition is not fired
-			// 		if(self.lastX !== e.clientX || self.lastY !== e.clientY){
-			// 			self.setPosition(e);
-			// 			self.currentLoc = e;
-			// 		}   
-			// 		self.lastX = e.clientX;
-			// 		self.lastY = e.clientY;    
-			// 	});
+				//make sure on orientation change the setposition is not fired 
+				if (self.lastX !== e.clientX || self.lastY !== e.clientY) {
+					self.setPosition(e);
+					self.currentLoc = e;
+				}
+				self.lastX = e.clientX;
+				self.lastY = e.clientY;
+			});
+			if (self.options.zoomType != "inner") {
+				self.zoomLens.bind('mousemove', function (e) {
+					//make sure on orientation change the setposition is not fired
+					if (self.lastX !== e.clientX || self.lastY !== e.clientY) {
+						self.setPosition(e);
+						self.currentLoc = e;
+					}
+					self.lastX = e.clientX;
+					self.lastY = e.clientY;
+				});
+			}
+			if (self.options.tint && self.options.zoomType != "inner") {
+				self.zoomTint.bind('mousemove', function (e) {
+					//make sure on orientation change the setposition is not fired
+					if (self.lastX !== e.clientX || self.lastY !== e.clientY) {
+						self.setPosition(e);
+						self.currentLoc = e;
+					}
+					self.lastX = e.clientX;
+					self.lastY = e.clientY;
+				});
 
-			// }
-			// if(self.options.zoomType == "inner") {
-			// 	self.zoomWindow.bind('mousemove', function(e) {
-			// 		//self.overWindow = true;
-			// 		//make sure on orientation change the setposition is not fired
-			// 		if(self.lastX !== e.clientX || self.lastY !== e.clientY){
-			// 			self.setPosition(e);
-			// 			self.currentLoc = e;
-			// 		}   
-			// 		self.lastX = e.clientX;
-			// 		self.lastY = e.clientY;    
-			// 	});
+			}
+			if (self.options.zoomType == "inner") {
+				self.zoomWindow.bind('mousemove', function (e) {
+					//self.overWindow = true;
+					//make sure on orientation change the setposition is not fired
+					if (self.lastX !== e.clientX || self.lastY !== e.clientY) {
+						self.setPosition(e);
+						self.currentLoc = e;
+					}
+					self.lastX = e.clientX;
+					self.lastY = e.clientY;
+				});
 
-			// }
+			}
 
 
 			//  lensFadeOut: 500,  zoomTintFadeIn
-			// 	self.zoomContainer.add(self.$elem).mouseenter(function(){
+			self.zoomContainer.add(self.$elem).mouseenter(function () {
 
-			// 		if(self.overWindow == false){self.setElements("show");} 
+				if (self.overWindow == false) { self.setElements("show"); }
 
 
-			// 	}).mouseleave(function(){
-			// 		if(!self.scrollLock){
-			// 			self.setElements("hide");
-			// self.options.onDestroy(self.$elem);
-			// 		}
-			// 	});
+			}).mouseleave(function () {
+				if (!self.scrollLock) {
+					self.setElements("hide");
+					self.options.onDestroy(self.$elem);
+				}
+			});
 			//end ove image
 
 
 
 
 
-			// if(self.options.zoomType != "inner") {
-			// 	self.zoomWindow.mouseenter(function(){
-			// 		self.overWindow = true;   
-			// 		self.setElements("hide");                  
-			// 	}).mouseleave(function(){
+			if (self.options.zoomType != "inner") {
+				self.zoomWindow.mouseenter(function () {
+					self.overWindow = true;
+					self.setElements("hide");
+				}).mouseleave(function () {
 
-			// 		self.overWindow = false;
-			// 	});
-			// }
+					self.overWindow = false;
+				});
+			}
 			//end ove image
 
 
@@ -475,91 +449,96 @@ if (typeof Object.create !== 'function') {
 			//      $(this).empty();    
 			//    return false;
 
-			// //fix for initial zoom setting
-			// if (self.options.zoomLevel != 1){
-			// 	//	self.changeZoomLevel(self.currentZoomLevel);
-			// }
-			// //set the min zoomlevel
-			// if(self.options.minZoomLevel){
-			// 	self.minZoomLevel = self.options.minZoomLevel;
-			// }
-			// else{
-			// 	self.minZoomLevel = self.options.scrollZoomIncrement * 2;
-			// }
+			//fix for initial zoom setting
+			if (self.options.zoomLevel != 1) {
+				//	self.changeZoomLevel(self.currentZoomLevel);
+			}
+			//set the min zoomlevel
+			if (self.options.minZoomLevel) {
+				self.minZoomLevel = self.options.minZoomLevel;
+			}
+			else {
+				self.minZoomLevel = self.options.scrollZoomIncrement * 2;
+			}
 
 
-			// if(self.options.scrollZoom){
+			if (self.options.scrollZoom) {
 
 
-			// 	self.zoomContainer.add(self.$elem).bind('mousewheel DOMMouseScroll MozMousePixelScroll', function(e){
+				self.zoomContainer.add(self.$elem).bind('mousewheel DOMMouseScroll MozMousePixelScroll', function (e) {
 
 
+					//						in IE there is issue with firing of mouseleave - So check whether still scrolling
+					//						and on mouseleave check if scrolllock          
+					self.scrollLock = true;
+					clearTimeout($.data(this, 'timer'));
+					$.data(this, 'timer', setTimeout(function () {
+						self.scrollLock = false;
+						//do something
+					}, 250));
+
+					var theEvent = e.originalEvent.wheelDelta || e.originalEvent.detail * -1
 
 
-			// 		self.scrollLock = true;
-			// 		clearTimeout($.data(this, 'timer'));
-			// 		$.data(this, 'timer', setTimeout(function() {
-			// 			self.scrollLock = false;
-
-			// 		}, 250));
-
-			// 		var theEvent = e.originalEvent.wheelDelta || e.originalEvent.detail*-1
+					//this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+					//   e.preventDefault();
 
 
-
-			// 		e.stopImmediatePropagation();
-			// 		e.stopPropagation();
-			// 		e.preventDefault();
-
-
-			// 		if(theEvent /120 > 0) {
-
-			// 			if(self.currentZoomLevel >= self.minZoomLevel){ 
-			// 				self.changeZoomLevel(self.currentZoomLevel-self.options.scrollZoomIncrement);        
-			// 			}
-
-			// 		}
-			// 		else{
+					e.stopImmediatePropagation();
+					e.stopPropagation();
+					e.preventDefault();
 
 
+					if (theEvent / 120 > 0) {
+						//scrolling up
+						if (self.currentZoomLevel >= self.minZoomLevel) {
+							self.changeZoomLevel(self.currentZoomLevel - self.options.scrollZoomIncrement);
+						}
 
-			// 			if(self.options.maxZoomLevel){
-			// 				if(self.currentZoomLevel <= self.options.maxZoomLevel){           
-			// 					self.changeZoomLevel(parseFloat(self.currentZoomLevel)+self.options.scrollZoomIncrement);
-			// 				}
-			// 			}
-			// 			else{
+					}
+					else {
+						//scrolling down
 
-			// 				self.changeZoomLevel(parseFloat(self.currentZoomLevel)+self.options.scrollZoomIncrement);
-			// 			}
 
-			// 		}
-			// 		return false;
-			// 	});
-			// }
+						if (self.options.maxZoomLevel) {
+							if (self.currentZoomLevel <= self.options.maxZoomLevel) {
+								self.changeZoomLevel(parseFloat(self.currentZoomLevel) + self.options.scrollZoomIncrement);
+							}
+						}
+						else {
+							//andy 
+
+							self.changeZoomLevel(parseFloat(self.currentZoomLevel) + self.options.scrollZoomIncrement);
+						}
+
+					}
+					return false;
+				});
+			}
 
 
 		},
-		// 	setElements: function(type) {
-		// 		var self = this;
-		// if(!self.options.zoomEnabled){return false;}
-		// 		if(type=="show"){
-		// 			if(self.isWindowSet){
-		// 				if(self.options.zoomType == "inner") {self.showHideWindow("show");}
-		// 				if(self.options.zoomType == "window") {self.showHideWindow("show");}
-		// 				if(self.options.showLens) {self.showHideLens("show");}
-		// 				if(self.options.tint && self.options.zoomType != "inner") {self.showHideTint("show");
-		// 				}
-		// 			}
-		// 		}
+		setElements: function (type) {
+			var self = this;
+			if (!self.options.zoomEnabled) { return false; }
+			if (type == "show") {
+				if (self.isWindowSet) {
+					if (self.options.zoomType == "inner") { self.showHideWindow("show"); }
+					if (self.options.zoomType == "window") { self.showHideWindow("show"); }
+					if (self.options.showLens) { self.showHideLens("show"); }
+					if (self.options.tint && self.options.zoomType != "inner") {
+						self.showHideTint("show");
+					}
+				}
+			}
 
-		// 		if(type=="hide"){
-		// 			if(self.options.zoomType == "window") {self.showHideWindow("hide");}
-		// 			if(!self.options.tint) {self.showHideWindow("hide");}
-		// 			if(self.options.showLens) {self.showHideLens("hide");}
-		// 			if(self.options.tint) {	self.showHideTint("hide");}
-		// 		}   
-		// 	},
+			if (type == "hide") {
+				if (self.options.zoomType == "window") { self.showHideWindow("hide"); }
+				if (!self.options.tint) { self.showHideWindow("hide"); }
+				if (self.options.showLens) { self.showHideLens("hide"); }
+				if (self.options.tint) { self.showHideTint("hide"); }
+			}
+		},
 		setPosition: function (e) {
 
 			var self = this;
@@ -634,8 +613,8 @@ if (typeof Object.create !== 'function') {
 			}
 
 			//container fix
-			// self.zoomContainer.css({ top: self.nzOffset.top});
-			// self.zoomContainer.css({ left: self.nzOffset.left});
+			self.zoomContainer.css({ top: self.nzOffset.top });
+			self.zoomContainer.css({ left: self.nzOffset.left });
 			self.mouseLeft = parseInt(e.pageX - self.nzOffset.left);
 			self.mouseTop = parseInt(e.pageY - self.nzOffset.top);
 			//calculate the Location of the Lens
@@ -1265,8 +1244,8 @@ if (typeof Object.create !== 'function') {
 					self.zoomTint.css({ width: self.$elem.width() });
 				}
 
-				// self.zoomContainer.css("height", self.$elem.height());
-				// self.zoomContainer.css("width", self.$elem.width());
+				self.zoomContainer.css("height", self.$elem.height());
+				self.zoomContainer.css("width", self.$elem.width());
 
 				if (self.options.zoomType == "inner") {
 					if (!self.options.constrainType) {
@@ -1294,8 +1273,8 @@ if (typeof Object.create !== 'function') {
 					self.zoomTint.css({ height: self.$elem.height() });
 
 				}
-				// self.zoomContainer.css("height", self.$elem.height());
-				// self.zoomContainer.css("width", self.$elem.width());
+				self.zoomContainer.css("height", self.$elem.height());
+				self.zoomContainer.css("width", self.$elem.width());
 
 				if (self.options.imageCrossfade) {
 					self.zoomWrap.css("height", self.$elem.height());
@@ -1307,8 +1286,8 @@ if (typeof Object.create !== 'function') {
 				//This will contrain the image proportions
 				if (self.options.constrainType == "height") {
 
-					// self.zoomContainer.css("height", self.options.constrainSize);
-					// self.zoomContainer.css("width", "auto");
+					self.zoomContainer.css("height", self.options.constrainSize);
+					self.zoomContainer.css("width", "auto");
 
 					if (self.options.imageCrossfade) {
 						self.zoomWrap.css("height", self.options.constrainSize);
@@ -1341,8 +1320,8 @@ if (typeof Object.create !== 'function') {
 
 				}
 				if (self.options.constrainType == "width") {
-					// self.zoomContainer.css("height", "auto");
-					// self.zoomContainer.css("width", self.options.constrainSize);
+					self.zoomContainer.css("height", "auto");
+					self.zoomContainer.css("width", self.options.constrainSize);
 
 					if (self.options.imageCrossfade) {
 						self.zoomWrap.css("height", "auto");

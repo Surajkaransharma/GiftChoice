@@ -1,6 +1,128 @@
-﻿var app = angular.module("AdminApp", ['lr.upload']);
+﻿var app = angular.module("AdminApp", ['lr.upload', 'ngTagsInput']);
 app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function ($scope, upload, $http, $sce) {
 
+
+    //$scope.loadTags = function (query) {
+    //    return $http.get("/GiftDashBoard/GetKeywordData");
+    //};
+    //$scope.tags = [
+    //    { text: 'Tag1' },
+    //    { text: 'Tag2' },
+    //    { text: 'Tag3' }
+    //];
+
+    //$scope.tagsj = [
+    //    { "text": "Tag1" },
+    //    { "text": "Tag2" },
+    //    { "text": "Tag3" },
+    //    { "text": "Tag4" },
+    //    { "text": "Tag5" },
+    //    { "text": "Tag6" },
+    //    { "text": "Tag7" },
+    //    { "text": "Tag8" },
+    //    { "text": "Tag9" },
+    //    { "text": "Tag10" }
+    //];
+
+    ////// duplicateProduct
+
+    $scope.duplicateProduct = function (index) {
+        debugger
+        $('#btn').css('display', 'inline');
+        $('#edbtn').css('display', 'none');
+
+        $scope.Product = $scope.ProductData[index];
+        $scope.duplicateproductbool = true;
+
+
+        //if ($scope.Product.ProductType == "Common") {
+        //    $("#Common").attr('checked', true).trigger("click");
+        //    $scope.Product.Common = true;
+        //} else {
+        //    $scope.Product.Common = false;
+
+        //}
+        $scope.productDataArray = [];
+        if ($scope.Product.productDataArray.length > 0) {
+
+            $scope.productDataArray = $scope.Product.productDataArray;
+        } else {
+            $scope.AddProductDetails();
+        }
+
+        const previews = document.querySelectorAll('.preview');
+        const removeButtons = document.querySelectorAll('.remove-image');
+
+        for (var k = 0; k < $scope.Product.ProductImage.length; k++) {
+
+            previews[k].style.display = 'block';
+            removeButtons[k].disabled = false;
+            previews[k].setAttribute("src", "/images/ProductImg/" + $scope.Product.ProductImage[k]);
+        }
+
+        if ($scope.Product.FilterKeyword.length > 0) {
+            $scope.FilterTag = $scope.Product.FilterKeyword;
+        }
+        if ($scope.Product.ProductFilterWord.length > 0) {
+
+            for (var i = 0; i < $scope.Product.ProductFilterWord.length; i++) {
+                var vallc = $scope.Product.ProductFilterWord[i].PFilterId;
+                $scope.Filterobj = $scope.FilterDataList.find(item => item.PFilterId === vallc);
+                $scope.Filterobj.Selected = true;
+                //   $('#filter_' + vallc).prop('checked', true);
+            }
+        }
+        //     $scope.GetBannerToQuery($scope.Product.BannerCateId);
+
+        //if ($scope.GetBannerToQueryData != undefined) {
+
+        //    for (var s = 0; s < $scope.GetBannerToQueryData.length; s++) {
+        //        var vallc1s = $scope.GetBannerToQueryData[s].QId;
+        //        $('#Keyword_' + vallc1s).prop('checked', false);
+
+        //    }
+        //}
+
+
+
+        /*        CKEDITOR.instances.ckeditor.setData($scope.Product.PDesc);*/
+        //CKEDITOR.instances.ckeditor.setData($scope.Product.PDesc1);
+
+        CKEDITOR.instances.ckeditor.setData($scope.Product.TableDesc);
+
+        //const previewImage = document.querySelector('#previewImage');
+        //$('#previewImage').css('display', 'block');
+        //previewImage.setAttribute("src", "/images/MainCate/" + $scope.MainCate.MImage);
+
+        //if ($scope.Product.Submenu.length > 0) {
+
+        //    for (var i = 0; i < $scope.Product.Submenu.length; i++) {
+        //        var vallc = $scope.Product.Submenu[i].QueryId;
+        //        $('#Keyword_' + vallc).prop('checked', true);
+        //    }
+        //}
+        //if ($scope.Product.PSizeList.length > 0) {
+
+        //    for (var i = 0; i < $scope.Product.PSizeList.length; i++) {
+        //        var vallc = $scope.Product.PSizeList[i].SizeId;
+        //        $('#Size_' + vallc).prop('checked', true);
+        //    }
+        //}
+        if ($scope.Product.VideoTitle) {
+
+            setTimeout(() => {
+                var videoElement = document.getElementById('pVideo');
+                if (videoElement) {
+                    videoElement.src = '/images/ProductVideo/' + $scope.Product.VideoTitle.Video;
+                }
+
+            }, 100);
+        }
+
+        $('html, body').animate({ scrollTop: 0 }, '300');
+
+
+    };
 
     var BannerCateProductArr = [];
     $scope.SubmitBannerCateProduct = function () {
@@ -12,7 +134,7 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
         $.each($(".checkbox-input:checked"), function () {
             BannerCateProductArr.push({ 'ProductId': $(this).val() });
         });
-        debugger
+
         $http({
             url: '/GiftDashBoard/SubmitBannerCateProduct',
             method: 'post',
@@ -48,7 +170,7 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
         if ($scope.BannerCateId != "-1") {
             $http.get("/GiftDashBoard/GetBannerCateProductByid?id=" + $scope.BannerCateId).then(function (d) {
                 $scope.result = d.data;
-                debugger
+
                 for (var i = 0; i < $scope.result.length; i++) {
                     var vallc = $scope.result[i].ProductId;
                     $('#ProductId_' + vallc).prop('checked', true);
@@ -73,7 +195,7 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
                 BKeywordarr.push($scope.KeywordList[i]);
             }
         }
-        debugger
+
         $http({
             url: '/GiftDashBoard/SubmitBannerCate',
             method: 'post',
@@ -126,7 +248,7 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
     };
 
     $scope.UpdateBannerCate = function () {
-        debugger
+
         if ($("#BTitle").val() === "") {
             toastr["error"]("Please Enter Banner Category");
 
@@ -187,7 +309,7 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
     $scope.GetBannerCate = function () {
         $http.get("/GiftDashBoard/GetBannerCate").then(function (d) {
             $scope.BannerCateData = d.data;
-            debugger
+
         }, function (error) {
             alert(error.data);
         });
@@ -201,7 +323,7 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
     ///////  Add Product Start 
 
     $scope.MainCateKeyword = function (MainCateId) {
-        debugger;
+        ;
         for (var s = 0; s < $scope.KeywordList.length; s++) {
             var vallc1s = $scope.KeywordList[s].KeywordId;
             $('#Keyword_' + vallc1s).prop('checked', false);
@@ -228,11 +350,29 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
         }
     };
 
+    $scope.previewImage1 = function (index) {
+        debugger
+
+        var input = document.getElementsByClassName('image-input')[index];
+        var preview = document.getElementById('image-preview-' + index);
+        debugger
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                preview.src = e.target.result;
+            };
+
+            reader.readAsDataURL(input.files[0]);
+        }
+
+    };
 
     $scope.GetProductbyid = function (index) {
+        debugger
         $('#btn').css('display', 'none');
         $('#edbtn').css('display', 'inline');
-        debugger
+
 
         for (var s = 0; s < $scope.KeywordList.length; s++) {
             var vallc1s = $scope.KeywordList[s].KeywordId;
@@ -242,34 +382,55 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
 
 
         $scope.Product = $scope.ProductData[index];
+        $scope.productDataArray = [];
+
+        if ($scope.Product.productDataArray.length > 0) {
+
+            $scope.productDataArray = $scope.Product.productDataArray;
+        } else {
+            $scope.AddProductDetails();
+        }
 
         CKEDITOR.instances.ckeditor.setData($scope.Product.TableDesc);
-        //const previewImage = document.querySelector('#previewImage');
-        //$('#previewImage').css('display', 'block');
-        //previewImage.setAttribute("src", "/images/MainCate/" + $scope.MainCate.MImage);
-        debugger
-        for (var i = 0; i < $scope.Product.Submenu.length; i++) {
-            var vallc = $scope.Product.Submenu[i].KeywordId;
-            $('#Keyword_' + vallc).prop('checked', true);
-        }
-        for (var i = 0; i < $scope.Product.PSizeList.length; i++) {
-            var vallc = $scope.Product.PSizeList[i].SizeId;
-            $('#Size_' + vallc).prop('checked', true);
+
+        const previews = document.querySelectorAll('.preview');
+        const removeButtons = document.querySelectorAll('.remove-image');
+
+        for (var k = 0; k < $scope.Product.ProductImage.length; k++) {
+
+            previews[k].style.display = 'block';
+            removeButtons[k].disabled = false;
+            previews[k].setAttribute("src", "/images/ProductImg/" + $scope.Product.ProductImage[k]);
         }
 
-        debugger
+
+        if ($scope.Product.Submenu.length > 0) {
+
+            for (var i = 0; i < $scope.Product.Submenu.length; i++) {
+                var vallc = $scope.Product.Submenu[i].KeywordId;
+                $('#Keyword_' + vallc).prop('checked', true);
+            }
+        }
+        if ($scope.Product.PSizeList.length > 0) {
+
+            for (var i = 0; i < $scope.Product.PSizeList.length; i++) {
+                var vallc = $scope.Product.PSizeList[i].SizeId;
+                $('#Size_' + vallc).prop('checked', true);
+            }
+
+        }
 
         //ckeditor.replace('postBody');
         // $("#ckeditor").val($scope.Product.Description);
 
 
-        debugger
+
         $('html, body').animate({ scrollTop: 0 }, '300');
     };
 
 
     $scope.GetProduct = function (id) {
-        debugger
+
         if (id != "-1" && id != undefined) {
 
             $http.get("/GiftDashBoard/GetProduct?id=" + id).then(function (d) {
@@ -298,7 +459,7 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
 
 
     $scope.OrderDetails = function (index) {
-        debugger
+
         $scope.OrderDetailsData = $scope.OrderData[index];
         $("#OrderDetailsModel").modal("toggle");
     };
@@ -341,7 +502,7 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
     $scope.productDataArray = [];
 
     $scope.AddProductDetails = function () {
-        debugger
+
         $scope.productDataArray.push({
             'SizeId': -1,
             //   'Color_Id': -1,
@@ -352,6 +513,9 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
 
         });
     };
+    $scope.removeproductDataArraydata = function (index) {
+        $scope.productDataArray.splice(index, 1)
+    }
     $scope.GetProductSizeList = function (index) {
 
         $http.get("/GiftDashBoard/GetSizeData").then(function (d) {
@@ -371,9 +535,16 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
         $scope.Description = editorText;
 
 
+        //var files1 = document.getElementById('image1').files;
+        const imageInputs = document.querySelectorAll('.image-input');
+        $scope.Product.Image1 = imageInputs[0].files[0];
+        $scope.Product.Image2 = imageInputs[1].files[0];
+        $scope.Product.Image3 = imageInputs[2].files[0];
+        $scope.Product.Image4 = imageInputs[3].files[0];
+        $scope.Product.Image5 = imageInputs[4].files[0];
 
 
-        debugger;
+
         //for (var i = 0; i < $scope.KeywordList.length; i++) {
         //    if ($scope.KeywordList[i].Selected) {
         //        Keywordarr.push($scope.KeywordList[i]);
@@ -382,13 +553,13 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
         $.each($(".checkbox-input:checked"), function () {
             Keywordarr.push({ 'KeywordId': $(this).val() });
         });
-        for (var i = 0; i < $scope.SizeList.length; i++) {
-            if ($scope.SizeList[i].Selected) {
-                PSizeArr.push($scope.SizeList[i]);
-            }
-        }
+        //for (var i = 0; i < $scope.SizeList.length; i++) {
+        //    if ($scope.SizeList[i].Selected) {
+        //        PSizeArr.push($scope.SizeList[i]);
+        //    }
+        //}
 
-        debugger;
+
         upload({
             url: '/GiftDashBoard/SubmitProduct',
             method: 'post',
@@ -396,7 +567,7 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
         }).then(function (d) {
             $scope.result = d.data;
             if ($scope.result.res === "1") {
-                debugger
+
                 $scope.ProductArrayData($scope.result.ProductId);
                 //toastr["success"]("Product save successfully");
                 //$scope.Product = null;
@@ -414,7 +585,7 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
     };
 
     $scope.ProductArrayData = function (id) {
-        debugger;
+        ;
         $http({
             url: '/GiftDashBoard/ProductArrayData',
             method: 'post',
@@ -422,7 +593,8 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
                 ProductId: id,
                 TableDesc: $scope.Description,
                 KeywordTbls: Keywordarr,
-                SizeTbls: PSizeArr
+                SizeTbls: PSizeArr,
+                ProductDataArray: $scope.productDataArray
             }
         }).then(function (d) {
             $scope.result = d.data;
@@ -443,7 +615,12 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
 
 
     $scope.UpdateProductData = function () {
-        debugger
+        const imageInputs = document.querySelectorAll('.image-input');
+        $scope.Product.Image1 = imageInputs[0].files[0];
+        $scope.Product.Image2 = imageInputs[1].files[0];
+        $scope.Product.Image3 = imageInputs[2].files[0];
+        $scope.Product.Image4 = imageInputs[3].files[0];
+        $scope.Product.Image5 = imageInputs[4].files[0];
         var editorText = CKEDITOR.instances.ckeditor.getData();
         $scope.Description = editorText;
 
@@ -468,7 +645,7 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
         //    return;
         //}
 
-        debugger;
+        ;
         //for (var i = 0; i < $scope.KeywordList.length; i++) {
         //    if ($scope.KeywordList[i].Selected) {
         //        Keywordarr.push($scope.KeywordList[i]);
@@ -488,7 +665,7 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
         $scope.PDescval = $scope.Product.PDesc;
         delete $scope.Product.PDesc;
 
-        debugger;
+        ;
         upload({
             url: '/GiftDashBoard/UpdateProductData',
             method: 'post',
@@ -496,7 +673,7 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
         }).then(function (d) {
             $scope.result = d.data;
             if ($scope.result.res === "1") {
-                debugger
+
                 $scope.UpdateProductArrayData($scope.result.ProductId);
                 //toastr["success"]("Product save successfully");
                 //$scope.Product = null;
@@ -514,7 +691,7 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
     };
 
     $scope.UpdateProductArrayData = function (id) {
-        debugger;
+        ;
         $http({
             url: '/GiftDashBoard/UpdateProductArrayData',
             method: 'post',
@@ -523,7 +700,9 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
                 TableDesc: $scope.Description,
                 PDesc: $scope.PDescval,
                 KeywordTbls: Keywordarr,
-                SizeTbls: PSizeArr
+                SizeTbls: PSizeArr,
+                ProductDataArray: $scope.productDataArray
+
 
             }
         }).then(function (d) {
@@ -548,7 +727,7 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
 
 
     $scope.UpdateMainCateType = function () {
-        debugger
+
 
         $http({
             url: '/GiftDashBoard/UpdateMainCateType',
@@ -575,6 +754,7 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
     var Keywordarr = [];
 
     $scope.SubmitMainCate = function () {
+
         debugger
         for (var i = 0; i < $scope.KeywordList.length; i++) {
             if ($scope.KeywordList[i].Selected) {
@@ -591,10 +771,15 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
             return;
         }
 
+        $scope.MainCate.CateType = $("#CateType").val();
 
-        debugger
+        const imageInputs = document.querySelectorAll('.image-input');
+        $scope.MainCate.Image = imageInputs[0].files[0];
 
-        debugger
+
+
+
+
         upload({
             url: '/GiftDashBoard/SubmitMainCate',
             method: 'post',
@@ -624,7 +809,7 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
 
 
     $scope.KeywordArrayData = function (id) {
-        debugger;
+
         $http({
             url: '/GiftDashBoard/KeywordArrayData',
             method: 'post',
@@ -633,7 +818,7 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
                 keywordTbls: Keywordarr,
             }
         }).then(function (d) {
-            debugger
+
             $scope.result = d.data;
             if ($scope.result.res === "1") {
                 toastr["success"]("Main Category save successfully");
@@ -652,7 +837,7 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
     $scope.GetMainCatebyid = function (index) {
         $('#btn').css('display', 'none');
         $('#edbtn').css('display', 'inline');
-        debugger
+
 
         for (var s = 0; s < $scope.KeywordList.length; s++) {
             var vallc1s = $scope.KeywordList[s].KeywordId;
@@ -665,14 +850,22 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
 
 
         $scope.MainCate = $scope.MainCateData[index];
-        const previewImage = document.querySelector('#previewImage');
-        const loadingText = document.querySelector('#loadingText');
-        const dropZoon = document.querySelector('#dropZoon');
-        dropZoon.classList.add('drop-zoon--Uploaded');
-        loadingText.style.display = "none";
-        $('#previewImage').css('display', 'block');
-        previewImage.setAttribute("src", "/images/MainCate/" + $scope.MainCate.MImage);
-        debugger
+        //const previewImage = document.querySelector('#previewImage');
+        //const loadingText = document.querySelector('#loadingText');
+        //const dropZoon = document.querySelector('#dropZoon');
+        //dropZoon.classList.add('drop-zoon--Uploaded');
+        //loadingText.style.display = "none";
+        //$('#previewImage').css('display', 'block');
+
+        const previews = document.querySelectorAll('.preview');
+        const removeButtons = document.querySelectorAll('.remove-image');
+
+
+        previews[0].style.display = 'block';
+        removeButtons[0].disabled = false;
+        previews[0].setAttribute("src", "/images/MainCate/" + $scope.MainCate.MImage);
+
+
         for (var i = 0; i < $scope.MainCate.Submenu.length; i++) {
             var vallc = $scope.MainCate.Submenu[i].KeywordId;
             $('#Keyword_' + vallc).prop('checked', true);
@@ -691,13 +884,13 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
         }
 
 
-        debugger
+
         // CKEDITOR.instances.ckeditor.setData($scope.Product.Description);
         //ckeditor.replace('postBody');
         // $("#ckeditor").val($scope.Product.Description);
 
 
-        debugger
+
         $('html, body').animate({ scrollTop: 0 }, '300');
     };
 
@@ -725,7 +918,9 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
                 Keywordarr.push($scope.KeywordList[i]);
             }
         }
-        debugger
+        $scope.MainCate.CateType = $("#CateType").val();
+        const imageInputs = document.querySelectorAll('.image-input');
+        $scope.MainCate.Image = imageInputs[0].files[0];
 
         upload({
             url: '/GiftDashBoard/UpdateMainCate',
@@ -750,7 +945,7 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
     };
 
     $scope.UpdateKeywordArrayData = function (id) {
-        debugger;
+        ;
         $http({
             url: '/GiftDashBoard/UpdateKeywordArrayData',
             method: 'post',
@@ -759,7 +954,7 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
                 keywordTbls: Keywordarr,
             }
         }).then(function (d) {
-            debugger
+
             $scope.result = d.data;
             if ($scope.result.res === "1") {
                 toastr["success"]("Main Category Update successfully");
@@ -803,7 +998,7 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
 
             return;
         }
-        debugger
+
         $http({
             url: '/GiftDashBoard/SubmitKeyword',
             method: 'post',
@@ -885,7 +1080,7 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
     $scope.GetKeywords = function () {
         $http.get("/GiftDashBoard/GetKeywords").then(function (d) {
             $scope.KeywordsData = d.data;
-            debugger
+
         }, function (error) {
             alert(error.data);
         });
@@ -937,7 +1132,7 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
 
     //--------------Slider->------------->---------------------->---------------------------->------->------------>---------->---
     $scope.SubmitSlider = function () {
-        debugger
+
         //$scope.slideimg = $('#input-file-now').val();
         //if ($scope.slideimg == "" || $scope.slideimg == undefined) {
         //    toastr["error"]("Please Select Image");
@@ -950,7 +1145,9 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
         //    return;
         //}
 
-        debugger
+        const imageInputs = document.querySelectorAll('.image-input');
+        $scope.Slider.Image = imageInputs[0].files[0];
+
         upload({
             url: '/GiftDashBoard/SubmitSlider',
             method: 'post',
@@ -977,10 +1174,10 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
     };
 
     $scope.SliderList = function () {
-        debugger
+
         $http.get("/GiftDashBoard/SliderList").then(function (d) {
 
-            debugger
+
             $scope.SliderListData = d.data;
 
         }, function (error) {
@@ -990,15 +1187,23 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
     $scope.GetSliderDetail = function (index) {
         $('#edbtn').css('display', 'block');
         $('#btn').css('display', 'none');
-        debugger
+
         $scope.Slider = $scope.SliderListData[index];
-        const previewImage = document.querySelector('#previewImage');
-        const loadingText = document.querySelector('#loadingText');
-        const dropZoon = document.querySelector('#dropZoon');
-        dropZoon.classList.add('drop-zoon--Uploaded');
-        loadingText.style.display = "none";
-        $('#previewImage').css('display', 'block');
-        previewImage.setAttribute("src", "/images/SliderImg/" + $scope.Slider.SliderImage);
+
+        const previews = document.querySelectorAll('.preview');
+        const removeButtons = document.querySelectorAll('.remove-image');
+
+
+        previews[0].style.display = 'block';
+        removeButtons[0].disabled = false;
+        previews[0].setAttribute("src", "/images/SliderImg/" + $scope.Slider.SliderImage);
+        //const previewImage = document.querySelector('#previewImage');
+        //const loadingText = document.querySelector('#loadingText');
+        //const dropZoon = document.querySelector('#dropZoon');
+        //dropZoon.classList.add('drop-zoon--Uploaded');
+        //loadingText.style.display = "none";
+        //$('#previewImage').css('display', 'block');
+        //previewImage.setAttribute("src", "/images/SliderImg/" + $scope.Slider.SliderImage);
 
     };
     $scope.UpdateSlider = function () {
@@ -1014,7 +1219,8 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
         //    return;
         //}
 
-        debugger
+        const imageInputs = document.querySelectorAll('.image-input');
+        $scope.Slider.Image = imageInputs[0].files[0];
         upload({
             url: '/GiftDashBoard/UpdateSlider',
             method: 'post',
@@ -1041,9 +1247,9 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
     };
     $scope.ADAcDcShortPage = function (id) {
 
-        debugger
+
         $http.get("/GiftDashBoard/ADAcDcShortPage?id=" + id).then(function (d) {
-            debugger
+
             $scope.rees = d.data;
 
 
@@ -1063,7 +1269,7 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
 
     //--------------Banner->------------->---------------------->---------------------------->------->------------>---------->---
     $scope.SubmitBanner = function () {
-        debugger
+
 
         if ($("#MainCateSelect option:selected").val() == "-1" || $("#MainCateSelect option:selected").val() == "") {
             toastr["error"]("Select Main Category");
@@ -1076,7 +1282,7 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
         }
 
 
-        debugger
+
         upload({
             url: '/GiftDashBoard/SubmitBanner',
             method: 'post',
@@ -1103,10 +1309,10 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
     };
 
     $scope.BannerList = function () {
-        debugger
+
         $http.get("/GiftDashBoard/BannerList").then(function (d) {
 
-            debugger
+
             $scope.BannerListData = d.data;
 
         }, function (error) {
@@ -1116,7 +1322,7 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
     $scope.GetBannerDetail = function (index) {
         $('#edbtn').css('display', 'block');
         $('#btn').css('display', 'none');
-        debugger
+
         $scope.Banner = $scope.BannerListData[index];
         const previewImage = document.querySelector('#previewImage');
         const loadingText = document.querySelector('#loadingText');
@@ -1128,7 +1334,7 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
 
     };
     $scope.UpdateBanner = function () {
-        debugger
+
         if ($("#MainCateSelect option:selected").val() == "-1" || $("#MainCateSelect option:selected").val() == "") {
             toastr["error"]("Select Main Category");
             return;
@@ -1138,7 +1344,7 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
             return;
         }
 
-        debugger
+
         upload({
             url: '/GiftDashBoard/UpdateBanner',
             method: 'post',
@@ -1165,9 +1371,9 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
     };
     $scope.ADBanner = function (id) {
 
-        debugger
+
         $http.get("/GiftDashBoard/ADBanner?id=" + id).then(function (d) {
-            debugger
+
             $scope.rees = d.data;
 
 
@@ -1193,7 +1399,7 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
             toastr["error"]("Please Enter Size");
             return;
         }
-        debugger
+
         $http({
             url: '/GiftDashBoard/SubmitSize',
             method: 'post',
@@ -1275,7 +1481,7 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
     $scope.GetSize = function () {
         $http.get("/GiftDashBoard/GetSize").then(function (d) {
             $scope.SizeData = d.data;
-            debugger
+
         }, function (error) {
             alert(error.data);
         });
@@ -1321,7 +1527,7 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
 
     $scope.GetBannerProdcutT = function () {
         $http.get("/GiftDashBoard/GetBannerProdcutT").then(function (d) {
-            debugger
+
             $scope.GetBannerProdcutTData = d.data;
         }, function (error) {
             alert(error.data);
@@ -1331,7 +1537,7 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
     var BPKeywordarr = [];
 
     $scope.SubmitBannerProdcutT = function () {
-        debugger
+
         //for (var i = 0; i < $scope.KeywordList.length; i++) {
         //    if ($scope.KeywordList[i].Selected) {
         //        BPKeywordarr.push($scope.KeywordList[i]);
@@ -1348,9 +1554,10 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
         }
 
 
-        debugger
+        const imageInputs = document.querySelectorAll('.image-input');
+        $scope.BannerProdcutT.Image = imageInputs[0].files[0];
 
-        debugger
+
         upload({
             url: '/GiftDashBoard/SubmitBannerProdcutT',
             method: 'post',
@@ -1358,11 +1565,11 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
         }).then(function (d) {
             $scope.result = d.data;
             if ($scope.result.res === "1") {
-                if (Keywordarr != null) {
+                toastr["success"]("Banner Save Successfully");
+                //if (Keywordarr != null) {
 
-                    $scope.BannerProdcutTKeywordArray($scope.result.MainCateId);
-                }
-                //toastr["success"]("Banner Save Successfully");
+                //    $scope.BannerProdcutTKeywordArray($scope.result.MainCateId);
+                //}
                 //$scope.BannerProdcutT = null;
                 //$scope.GetBannerProdcutT();
 
@@ -1380,7 +1587,7 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
 
 
     $scope.BannerProdcutTKeywordArray = function (id) {
-        debugger;
+
         $http({
             url: '/GiftDashBoard/BannerProdcutTKeywordArray',
             method: 'post',
@@ -1389,7 +1596,7 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
                 keywordTbls: BPKeywordarr,
             }
         }).then(function (d) {
-            debugger
+
             $scope.result = d.data;
             if ($scope.result.res === "1") {
                 toastr["success"]("Banner save successfully");
@@ -1406,7 +1613,7 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
     $scope.GetBannerProdcutTid = function (index) {
         $('#btn').css('display', 'none');
         $('#edbtn').css('display', 'inline');
-        debugger
+
 
         //for (var s = 0; s < $scope.KeywordList.length; s++) {
         //    var vallc1s = $scope.KeywordList[s].KeywordId;
@@ -1419,14 +1626,17 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
 
 
         $scope.BannerProdcutT = $scope.GetBannerProdcutTData[index];
-        const previewImage = document.querySelector('#previewImage');
-        const loadingText = document.querySelector('#loadingText');
-        const dropZoon = document.querySelector('#dropZoon');
-        dropZoon.classList.add('drop-zoon--Uploaded');
-        loadingText.style.display = "none";
-        $('#previewImage').css('display', 'block');
-        previewImage.setAttribute("src", "/images/BannerPTImage/" + $scope.BannerProdcutT.MImage);
-        debugger
+        previews[0].style.display = 'block';
+        removeButtons[0].disabled = false;
+        previews[0].setAttribute("src", "/images/MainCate/" + $scope.BannerProdcutT.MImage);
+        //const previewImage = document.querySelector('#previewImage');
+        //const loadingText = document.querySelector('#loadingText');
+        //const dropZoon = document.querySelector('#dropZoon');
+        //dropZoon.classList.add('drop-zoon--Uploaded');
+        //loadingText.style.display = "none";
+        //$('#previewImage').css('display', 'block');
+        //previewImage.setAttribute("src", "/images/BannerPTImage/" + $scope.BannerProdcutT.MImage);
+
         //for (var i = 0; i < $scope.BannerProdcutT.Submenu.length; i++) {
         //    var vallc = $scope.BannerProdcutT.Submenu[i].KeywordId;
         //    $('#Keyword_' + vallc).prop('checked', true);
@@ -1435,19 +1645,19 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
         //}
 
 
-        debugger
+
         // CKEDITOR.instances.ckeditor.setData($scope.Product.Description);
         //ckeditor.replace('postBody');
         // $("#ckeditor").val($scope.Product.Description);
 
 
-        debugger
+
         $('html, body').animate({ scrollTop: 0 }, '300');
     };
 
 
     $scope.UpdateBannerProdcutT = function () {
-        debugger
+
         var maincate = angular.element(document.getElementById("MTitle"));
         if (maincate.val() === "") {
             toastr["error"]("Please Enter Banner Title");
@@ -1469,7 +1679,8 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
         //        BPKeywordarr.push($scope.KeywordList[i]);
         //    }
         //}
-        debugger
+        const imageInputs = document.querySelectorAll('.image-input');
+        $scope.BannerProdcutT.Image = imageInputs[0].files[0];
 
         upload({
             url: '/GiftDashBoard/UpdateBannerProdcutT',
@@ -1478,10 +1689,12 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
         }).then(function (d) {
             $scope.result = d.data;
             if ($scope.result.res === "1") {
-                if (Keywordarr !== null) {
+                toastr["success"]("Banner Update successfully");
 
-                    $scope.UpdateBannerProdcutTKeywordArray($scope.result.MainCateId);
-                }
+                //if (Keywordarr !== null) {
+
+                //    $scope.UpdateBannerProdcutTKeywordArray($scope.result.MainCateId);
+                //}
                 //$scope.BannerProdcutT = null;
                 //$scope.GetBannerProdcutT();
             }
@@ -1491,7 +1704,7 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
     };
 
     $scope.UpdateBannerProdcutTKeywordArray = function (id) {
-        debugger;
+        ;
         $http({
             url: '/GiftDashBoard/UpdateBannerProdcutTKeywordArray',
             method: 'post',
@@ -1500,7 +1713,7 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
                 keywordTbls: BPKeywordarr,
             }
         }).then(function (d) {
-            debugger
+
             $scope.result = d.data;
             if ($scope.result.res === "1") {
                 toastr["success"]("Banner Update successfully");
@@ -1537,10 +1750,10 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
 
     //-------------- add Banner in Product ->------------->---------------------->---------------------------->------->------------>---------->---
 
-    $scope.GetBannerInProduct = function (id) {
-        debugger
-        $http.get("/GiftDashBoard/GetBannerInProduct?id=" + id).then(function (d) {
-            debugger
+    $scope.GetBannerInProduct = function () {
+
+        $http.get("/GiftDashBoard/GetBannerInProduct").then(function (d) {
+
             $scope.GetBannerInProductData = d.data;
         }, function (error) {
             alert(error.data);
@@ -1549,9 +1762,9 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
 
 
     $scope.GetBannerInProductFilter = function () {
-        debugger
+
         $http.get("/GiftDashBoard/GetBannerInProductFilter").then(function (d) {
-            debugger
+
             $scope.GetBannerInProductFilterData = d.data;
         }, function (error) {
             alert(error.data);
@@ -1559,11 +1772,11 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
     };
 
     $scope.GetSubTitleList = function (id) {
-        debugger
+
         if (id != "-1" && id != "") {
 
             $http.get("/GiftDashBoard/GetSubTitleList?id=" + id).then(function (d) {
-                debugger
+
                 $scope.GetSubTitleListData = d.data;
             }, function (error) {
                 alert(error.data);
@@ -1575,7 +1788,7 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
 
 
     $scope.GetQueryKeywordlist = function (BSubId) {
-        debugger;
+        ;
 
         for (var s = 0; s < $scope.KeywordList.length; s++) {
             var vallc1s = $scope.KeywordList[s].KeywordId;
@@ -1605,10 +1818,18 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
 
     };
 
+
+    $scope.FilterDataList = [
+        { 'PFilterId': 1, 'PFilterTilte': 'love & Anniversary' },
+        { 'PFilterId': 2, 'PFilterTilte': 'Birthday' },
+        { 'PFilterId': 3, 'PFilterTilte': 'Friends gifts best sellers' },
+
+    ];
+
     var PSizeArr = [];
     $scope.SubmitBannerProduct = function () {
-        debugger
 
+        debugger
 
         var editorText = CKEDITOR.instances.ckeditor.getData();
         $scope.Description = editorText;
@@ -1617,25 +1838,38 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
         //$scope.Description2 = editorText2;
 
 
-        debugger;
+        ;
         //for (var i = 0; i < $scope.KeywordList.length; i++) {
         //    if ($scope.KeywordList[i].Selected) {
         //        Keywordarr.push($scope.KeywordList[i]);
         //    }
         //}
-        //var Keywordarr = [];
+        //  var Keywordarr = [];
         //var PSizeArr = [];
+        $scope.keywordTbls = [];
 
-        $.each($(".checkbox-input:checked"), function () {
-            Keywordarr.push({ 'QueryId': $(this).val() });
-        });
-        //for (var i = 0; i < $scope.SizeList.length; i++) {
-        //    if ($scope.SizeList[i].Selected) {
-        //        PSizeArr.push($scope.SizeList[i]);
-        //    }
-        //}
+        $scope.keywordTbls = $scope.FilterTag;
 
-        debugger;
+        //$.each($(".checkbox-input:checked"), function () {
+        //    Keywordarr.push({ 'QueryId': $(this).val() });
+        //});
+        //$.each($(".checkbox-Size:checked"), function () {
+        //    ProductFilterWordTbl.push({ 'FilterId': $(this).val() });
+        //});
+        $scope.ProductFilterWordTbl = [];
+        for (var i = 0; i < $scope.FilterDataList.length; i++) {
+            if ($scope.FilterDataList[i].Selected) {
+                $scope.ProductFilterWordTbl.push($scope.FilterDataList[i]);
+            }
+        }
+        const imageInputs = document.querySelectorAll('.image-input');
+        $scope.Product.Image1 = imageInputs[0].files[0];
+        $scope.Product.Image2 = imageInputs[1].files[0];
+        $scope.Product.Image3 = imageInputs[2].files[0];
+        $scope.Product.Image4 = imageInputs[3].files[0];
+        $scope.Product.Image5 = imageInputs[4].files[0];
+
+
         upload({
             url: '/GiftDashBoard/SubmitBannerProduct',
             method: 'post',
@@ -1643,7 +1877,7 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
         }).then(function (d) {
             $scope.result = d.data;
             if ($scope.result.res === "1") {
-                debugger
+
                 $scope.BannerProductArrayData($scope.result.ProductId);
                 //toastr["success"]("Product save successfully");
                 //$scope.Product = null;
@@ -1661,26 +1895,25 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
     };
 
     $scope.BannerProductArrayData = function (id) {
-        debugger;
+        debugger
         $http({
             url: '/GiftDashBoard/BannerProductArrayData',
             method: 'post',
             data: {
                 ProductId: id,
                 PDesc1: $scope.Description,
-                bannerQueryListTbls: Keywordarr,
-                BPSizeTbl: PSizeArr,
+                KeywordTbls: $scope.keywordTbls,
+                ProductFilterWordTbl: $scope.ProductFilterWordTbl,
                 ProductDataArray: $scope.productDataArray
-
-
             }
         }).then(function (d) {
             $scope.result = d.data;
+            location.href = '/GiftDashBoard/AddBannerInProduct';
             if ($scope.result.res === "1") {
 
                 toastr["success"]("Product save successfully");
+                Keywordarr = [];
                 //$('#MainCate').val("-1").trigger('change');
-                location.href = '/GiftDashBoard/AddBannerInProduct';
                 //$scope.Product.ProductTitle = null;
                 //$scope.Product.PLabel = null;
                 //$scope.Product.Price = null;
@@ -1716,7 +1949,7 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
 
 
     $scope.BannerUpdateProductData = function () {
-        debugger
+
         var editorText = CKEDITOR.instances.ckeditor.getData();
         $scope.Description = editorText;
 
@@ -1744,21 +1977,38 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
         //    return;
         //}
 
-        debugger;
+        ;
         //for (var i = 0; i < $scope.KeywordList.length; i++) {
         //    if ($scope.KeywordList[i].Selected) {
         //        Keywordarr.push($scope.KeywordList[i]);
         //    }
         //}
-        $.each($(".checkbox-input:checked"), function () {
-            Keywordarr.push({ 'QueryId': $(this).val() });
-        });
-        $.each($(".checkbox-Size:checked"), function () {
-            PSizeArr.push({ 'SizeId': $(this).val() });
-        });
-        delete $scope.Product.PDesc1;
+        //$.each($(".checkbox-input:checked"), function () {
+        //    Keywordarr.push({ 'QueryId': $(this).val() });
+        //});
+        //$.each($(".checkbox-Size:checked"), function () {
+        //    PSizeArr.push({ 'SizeId': $(this).val() });
+        //});
+        $scope.keywordTbls = [];
 
-        debugger;
+        $scope.keywordTbls = $scope.FilterTag;
+
+        $scope.ProductFilterWordTbl = [];
+        for (var i = 0; i < $scope.FilterDataList.length; i++) {
+            if ($scope.FilterDataList[i].Selected) {
+                $scope.ProductFilterWordTbl.push($scope.FilterDataList[i]);
+            }
+        }
+        delete $scope.Product.PDesc1;
+        delete $scope.Product.TableDesc;
+        const imageInputs = document.querySelectorAll('.image-input');
+        $scope.Product.Image1 = imageInputs[0].files[0];
+        $scope.Product.Image2 = imageInputs[1].files[0];
+        $scope.Product.Image3 = imageInputs[2].files[0];
+        $scope.Product.Image4 = imageInputs[3].files[0];
+        $scope.Product.Image5 = imageInputs[4].files[0];
+
+
         upload({
             url: '/GiftDashBoard/BannerUpdateProductData',
             method: 'post',
@@ -1766,7 +2016,7 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
         }).then(function (d) {
             $scope.result = d.data;
             if ($scope.result.res === "1") {
-                debugger
+
                 $scope.BannerUpdateProductArrayData($scope.result.ProductId);
                 //toastr["success"]("Product save successfully");
                 //$scope.Product = null;
@@ -1784,17 +2034,16 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
     };
 
     $scope.BannerUpdateProductArrayData = function (id) {
-        debugger;
+
         $http({
             url: '/GiftDashBoard/BannerUpdateProductArrayData',
             method: 'post',
             data: {
                 ProductId: id,
                 PDesc1: $scope.Description,
-                bannerQueryListTbls: Keywordarr,
-                BPSizeTbl: PSizeArr,
+                KeywordTbls: $scope.keywordTbls,
+                ProductFilterWordTbl: $scope.ProductFilterWordTbl,
                 ProductDataArray: $scope.productDataArray
-
 
             }
         }).then(function (d) {
@@ -1831,25 +2080,71 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
         });
     };
 
-    $scope.GetBannerProduct = function (id) {
-        debugger
-        if (id != "-1" && id != undefined) {
+    $scope.GetBannerProduct = function () {
+        $http({
+            url: '/GiftDashBoard/GetBannerProduct',
+            method: 'post',
+            data: {
+                MainCateId: $("#FMainCate option:selected").val(),
+                BannerCateId: $("#FBannerCate option:selected").val(),
+                VideoId: $("#FVideoTitle option:selected").val(),
+                ProductTitle: $("#FProducttitle").val()
 
-            $http.get("/GiftDashBoard/GetBannerProduct?id=" + id).then(function (d) {
-                $scope.ProductData = d.data;
-            }, function (error) {
-                alert(error.data);
-            });
-        }
+            }
+        }).then(function (d) {
+            $scope.ProductData = d.data;
+
+        }, function (error) {
+            toastr["error"]("Something Went Wrong");
+        });
+        //if (id != "-1" && id != undefined) {
+
+        //    $http.get("/GiftDashBoard/GetBannerProduct?id=" + id).then(function (d) {
+        //        $scope.ProductData = d.data;
+        //    }, function (error) {
+        //        alert(error.data);
+        //    });
+        //}
+    };
+    $scope.DeleteProductVideo = function (id) {
+
+        $http.get("/GiftDashBoard/DeleteProductVideo?id=" + id).then(function (d) {
+
+
+            window.location.reload();
+        }, function (error) {
+            toastr.error(error.data);
+        });
+    };
+    $scope.DeleteProductImage = function (id, pid) {
+
+        $http.get("/GiftDashBoard/DeleteProductImage?id=" + id + "&pid=" + pid).then(function (d) {
+
+
+            window.location.reload();
+        }, function (error) {
+            toastr.error(error.data);
+        });
     };
 
     $scope.GetBannerProductbyid = function (index) {
+        debugger
         $('#btn').css('display', 'none');
         $('#edbtn').css('display', 'inline');
-        debugger
+
 
         $scope.Product = $scope.ProductData[index];
 
+        //if ($scope.Product.ProductType == "Common") {
+        //    $("#Common").attr('checked', true).trigger("click");
+        //    $scope.Product.Common = true;
+        //} else {
+        //    $scope.Product.Common = false;
+
+        //}
+
+        $scope.duplicateproductbool = false;
+        $scope.productDataArray = [];
         if ($scope.Product.productDataArray.length > 0) {
 
             $scope.productDataArray = $scope.Product.productDataArray;
@@ -1858,40 +2153,86 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
         }
 
 
-        $scope.GetBannerToQuery($scope.Product.MainCateId);
 
-        for (var s = 0; s < $scope.GetBannerToQueryData.length; s++) {
-            var vallc1s = $scope.GetBannerToQueryData[s].QId;
-            $('#Keyword_' + vallc1s).prop('checked', false);
+        const previews = document.querySelectorAll('.preview');
+        const removeButtons = document.querySelectorAll('.remove-image');
 
+        for (var k = 0; k < $scope.Product.ProductImage.length; k++) {
+
+            previews[k].style.display = 'block';
+            removeButtons[k].disabled = false;
+            previews[k].setAttribute("src", "/images/ProductImg/" + $scope.Product.ProductImage[k]);
+        }
+        if ($scope.Product.FilterKeyword.length > 0) {
+            $scope.FilterTag = $scope.Product.FilterKeyword;
+        }
+        if ($scope.Product.ProductFilterWord.length > 0) {
+
+            for (var i = 0; i < $scope.Product.ProductFilterWord.length; i++) {
+                var vallc = $scope.Product.ProductFilterWord[i].PFilterId;
+
+                $scope.Filterobj = $scope.FilterDataList.find(item => item.PFilterId === vallc);
+                $scope.Filterobj.Selected = true;
+                //    $('#filter_' + vallc).prop('checked', true);
+            }
         }
 
 
+        CKEDITOR.instances.ckeditor.setData($scope.Product.TableDesc);
 
-        /*        CKEDITOR.instances.ckeditor.setData($scope.Product.PDesc);*/
-        CKEDITOR.instances.ckeditor.setData($scope.Product.PDesc1);
+
+        if ($scope.Product.VideoTitle) {
+            setTimeout(() => {
+                var videoElement = document.getElementById('pVideo');
+                if (videoElement) {
+                    videoElement.src = '/images/ProductVideo/' + $scope.Product.VideoTitle.Video;
+                }
+
+            }, 100);
+        }
+
+        $('html, body').animate({ scrollTop: 0 }, '300');
 
         //const previewImage = document.querySelector('#previewImage');
         //$('#previewImage').css('display', 'block');
         //previewImage.setAttribute("src", "/images/MainCate/" + $scope.MainCate.MImage);
-        debugger
-        for (var i = 0; i < $scope.Product.Submenu.length; i++) {
-            var vallc = $scope.Product.Submenu[i].QueryId;
-            $('#Keyword_' + vallc).prop('checked', true);
-        }
-        for (var i = 0; i < $scope.Product.PSizeList.length; i++) {
-            var vallc = $scope.Product.PSizeList[i].SizeId;
-            $('#Size_' + vallc).prop('checked', true);
-        }
 
-        debugger
+        //if ($scope.Product.Submenu.length > 0) {
+
+        //    for (var i = 0; i < $scope.Product.Submenu.length; i++) {
+        //        var vallc = $scope.Product.Submenu[i].QueryId;
+        //        $('#Keyword_' + vallc).prop('checked', true);
+        //    }
+        //}
+        //if ($scope.Product.PSizeList.length > 0) {
+
+        //    for (var i = 0; i < $scope.Product.PSizeList.length; i++) {
+        //        var vallc = $scope.Product.PSizeList[i].SizeId;
+        //        $('#Size_' + vallc).prop('checked', true);
+        //    }
+        //}
+
+        //      $scope.GetBannerToQuery($scope.Product.BannerCateId);
+
+        //if ($scope.GetBannerToQueryData != undefined) {
+
+        //    for (var s = 0; s < $scope.GetBannerToQueryData.length; s++) {
+        //        var vallc1s = $scope.GetBannerToQueryData[s].QId;
+        //        $('#Keyword_' + vallc1s).prop('checked', false);
+
+        //    }
+        //}
+
+
+
+        /*        CKEDITOR.instances.ckeditor.setData($scope.Product.PDesc);*/
+        //CKEDITOR.instances.ckeditor.setData($scope.Product.PDesc1);
 
         //ckeditor.replace('postBody');
         // $("#ckeditor").val($scope.Product.Description);
 
 
-        debugger
-        $('html, body').animate({ scrollTop: 0 }, '300');
+
     };
 
     //-------------- add Banner in Product End ->------------->---------------------->---------------------------->------->------------>---------->---
@@ -1911,18 +2252,18 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
 
     $scope.GetBannerProdcutT = function () {
         $http.get("/GiftDashBoard/GetBannerProdcutT").then(function (d) {
-            debugger
+
             $scope.GetBannerProdcutTData = d.data;
         }, function (error) {
             alert(error.data);
         });
     };
     $scope.GetBannerToQuery = function (id) {
-        debugger
+
         if (id != "-1" && id != "") {
 
             $http.get("/GiftDashBoard/GetBannerToQuery?id=" + id).then(function (d) {
-                debugger
+
                 $scope.GetBannerToQueryData = d.data;
             }, function (error) {
                 alert(error.data);
@@ -1932,7 +2273,7 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
     //var BPKeywordarr = [];
 
     $scope.SubmitBannerSubCateTitle = function () {
-        debugger
+
         //for (var i = 0; i < $scope.KeywordList.length; i++) {
         //    if ($scope.KeywordList[i].Selected) {
         //        BPKeywordarr.push($scope.KeywordList[i]);
@@ -1991,7 +2332,7 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
 
 
     //$scope.BannerProdcutTKeywordArray = function (id) {
-    //    debugger;
+    //    ;
     //    $http({
     //        url: '/GiftDashBoard/BannerProdcutTKeywordArray',
     //        method: 'post',
@@ -2000,7 +2341,7 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
     //            keywordTbls: BPKeywordarr,
     //        }
     //    }).then(function (d) {
-    //        debugger
+    //        
     //        $scope.result = d.data;
     //        if ($scope.result.res === "1") {
     //            toastr["success"]("Banner save successfully");
@@ -2016,12 +2357,12 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
 
     $scope.GetBannerSubCateTitleById = function (index) {
 
-        debugger
+
         $('#btn').css('display', 'none');
         $('#edbtn').css('display', 'inline');
 
         $scope.BSubTitleTbl = $scope.GetBannerSubCateTitleData[index];
-        debugger
+
 
         //for (var s = 0; s < $scope.KeywordList.length; s++) {
         //    var vallc1s = $scope.KeywordList[s].KeywordId;
@@ -2032,7 +2373,7 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
 
 
 
-        debugger
+
         //for (var i = 0; i < $scope.BannerProdcutT.Submenu.length; i++) {
         //    var vallc = $scope.BannerProdcutT.Submenu[i].KeywordId;
         //    $('#Keyword_' + vallc).prop('checked', true);
@@ -2041,19 +2382,19 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
         //}
 
 
-        debugger
+
         // CKEDITOR.instances.ckeditor.setData($scope.Product.Description);
         //ckeditor.replace('postBody');
         // $("#ckeditor").val($scope.Product.Description);
 
 
-        debugger
+
         $('html, body').animate({ scrollTop: 0 }, '300');
     };
 
 
     $scope.UpdateBannerSubCateTitle = function () {
-        debugger
+
         if ($("#AskQues2").val() === "") {
             toastr["error"]("Please Enter Ask Question ?");
             return;
@@ -2088,7 +2429,7 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
         //        BPKeywordarr.push($scope.KeywordList[i]);
         //    }
         //}
-        debugger
+
 
         $http({
             url: '/GiftDashBoard/UpdateBannerSubCateTitle',
@@ -2113,7 +2454,7 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
     };
 
     //$scope.UpdateBannerProdcutTKeywordArray = function (id) {
-    //    debugger;
+    //    ;
     //    $http({
     //        url: '/GiftDashBoard/UpdateBannerProdcutTKeywordArray',
     //        method: 'post',
@@ -2122,7 +2463,7 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
     //            keywordTbls: BPKeywordarr,
     //        }
     //    }).then(function (d) {
-    //        debugger
+    //        
     //        $scope.result = d.data;
     //        if ($scope.result.res === "1") {
     //            toastr["success"]("Banner Update successfully");
@@ -2159,7 +2500,7 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
 
     $scope.GetBannerSubCateTitle = function () {
         $http.get("/GiftDashBoard/GetBannerSubCateTitle").then(function (d) {
-            debugger
+
             $scope.GetBannerSubCateTitleData = d.data;
         }, function (error) {
             alert(error.data);
@@ -2175,12 +2516,12 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
         $scope.AnswerArr.push({
             'Answer': ''
         });
-    }
+    };
     $scope.AnswerRemove = function (index) {
         $scope.AnswerArr.splice(index, 1);
-    }
+    };
 
-    var BKeywordarr = [];
+
     $scope.SubmitQuerymodel = function () {
         if ($("#AskQues1").val() === "") {
             toastr["error"]("Please Enter Ask Question ?");
@@ -2191,10 +2532,10 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
             return;
         }
 
-        debugger
+
         //  $scope.Querymodel.push({'AnswerArr': $scope.AnswerArr });
 
-        debugger
+
         $http({
             url: '/GiftDashBoard/SubmitQuerymodel',
             method: 'post',
@@ -2230,7 +2571,7 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
 
         //}
 
-        debugger
+
         $scope.Querymodeldata = $scope.GetQuerymodelData.filter(item => item.MainCateId === index);
         $scope.Querymodel = {};
         $scope.Querymodel.AskQues1 = $scope.Querymodeldata[0].AskQues1;
@@ -2254,7 +2595,7 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
     };
 
     $scope.UpdateQuerymodel = function () {
-        debugger
+
         //if ($("#BTitle").val() === "") {
         //    toastr["error"]("Please Enter Banner Category");
 
@@ -2269,7 +2610,7 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
             return;
         }
 
-        debugger
+
         $http({
             url: '/GiftDashBoard/UpdateQuerymodel',
             method: 'post',
@@ -2314,7 +2655,7 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
     $scope.GetQuerymodel = function () {
         $http.get("/GiftDashBoard/GetQuerymodel").then(function (d) {
             $scope.GetQuerymodelData = d.data;
-            debugger
+
         }, function (error) {
             alert(error.data);
         });
@@ -2330,11 +2671,11 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
     //-------------- Submit Query keyword model Start ->------------->---------------------->---------------------------->------->------------>---------->---
 
     $scope.GetQueryToKeyword = function (id) {
-        debugger
+
         if (id != "-1" && id != "") {
 
             $http.get("/GiftDashBoard/GetQueryToKeyword?id=" + id).then(function (d) {
-                debugger
+
                 $scope.GetQueryToKeywordData = d.data;
             }, function (error) {
                 alert(error.data);
@@ -2344,11 +2685,11 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
 
 
     $scope.GetKeywordToAskQuestion = function (id) {
-        debugger
+
         if (id != "-1" && id != "") {
 
             $http.get("/GiftDashBoard/GetKeywordToAskQuestion?id=" + id).then(function (d) {
-                debugger
+
                 $scope.GetKeywordToAskQuestionData = d.data;
             }, function (error) {
                 alert(error.data);
@@ -2357,11 +2698,11 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
     };
 
     $scope.GetQueryAnswerKeyword = function (id) {
-        debugger
+
 
 
         $http.get("/GiftDashBoard/GetQueryAnswerKeyword?id=" + id).then(function (d) {
-            debugger
+
             $scope.GetQueryAnswerKeywordData = d.data;
         }, function (error) {
             alert(error.data);
@@ -2375,7 +2716,7 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
         //    return;
         //}
 
-        debugger
+
         //  $scope.Querymodel.push({'AnswerArr': $scope.AnswerArr });
         var BPKeywordarr = [];
         for (var i = 0; i < $scope.KeywordList.length; i++) {
@@ -2383,7 +2724,7 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
                 BPKeywordarr.push($scope.KeywordList[i]);
             }
         }
-        debugger
+
         $http({
             url: '/GiftDashBoard/SubmitQueryAnswerKeyword',
             method: 'post',
@@ -2414,12 +2755,12 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
 
     $scope.GetQueryAnswerKeywordById = function (index) {
 
-        debugger
+
         $('#btn').css('display', 'none');
         $('#edbtn').css('display', 'inline');
 
         $scope.BSubTitleTbl = $scope.GetQueryAnswerKeywordData[index];
-        debugger
+
 
         for (var s = 0; s < $scope.BSubTitleTbl.KeywordList.length; s++) {
             var vallc1s = $scope.BSubTitleTbl.KeywordList[s].KeywordId;
@@ -2434,7 +2775,7 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
         // $scope.GetBannerInProduct($scope.BSubTitleTbl.bMainTitle.Position);
         $("#MainCate").val($scope.BSubTitleTbl.MainCateId);
 
-        debugger
+
         //for (var i = 0; i < $scope.BannerProdcutT.Submenu.length; i++) {
         //    var vallc = $scope.BannerProdcutT.Submenu[i].KeywordId;
         //    $('#Keyword_' + vallc).prop('checked', true);
@@ -2443,20 +2784,20 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
         //}
 
 
-        debugger
+
         // CKEDITOR.instances.ckeditor.setData($scope.Product.Description);
         //ckeditor.replace('postBody');
         // $("#ckeditor").val($scope.Product.Description);
 
 
-        debugger
+
         //    $('html, body').animate({ scrollTop: 0 }, '300');
 
 
     };
 
     $scope.UpdateQueryAnswerKeyword = function () {
-        debugger
+
         //var maincate = angular.element(document.getElementById("MTitle"));
         //if (maincate.val() === "") {
         //    toastr["error"]("Please Enter Banner Title");
@@ -2477,7 +2818,7 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
         $.each($(".checkbox-input:checked"), function () {
             BPKeywordarr.push({ 'KeywordId': $(this).val() });
         });
-        debugger
+
 
         $http({
             url: '/GiftDashBoard/UpdateQueryAnswerKeyword',
@@ -2505,7 +2846,7 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
 
 
     $scope.SubmitFestivalBanner = function () {
-        debugger
+
         //$scope.slideimg = $('#input-file-now').val();
         //if ($scope.slideimg == "" || $scope.slideimg == undefined) {
         //    toastr["error"]("Please Select Image");
@@ -2517,8 +2858,9 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
         //    $('#priority').focus;
         //    return;
         //}
+        const imageInputs = document.querySelectorAll('.image-input');
+        $scope.FestivalBanner.Image = imageInputs[0].files[0];
 
-        debugger
         upload({
             url: '/GiftDashBoard/SubmitFestivalBanner',
             method: 'post',
@@ -2545,10 +2887,10 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
     };
 
     $scope.GetFestivalBanner = function () {
-        debugger
+
         $http.get("/GiftDashBoard/GetFestivalBanner").then(function (d) {
 
-            debugger
+
             $scope.GetFestivalBannerData = d.data;
 
         }, function (error) {
@@ -2558,15 +2900,23 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
     $scope.GetFestivalBannerByid = function (index) {
         $('#edbtn').css('display', 'block');
         $('#btn').css('display', 'none');
-        debugger
+
         $scope.FestivalBanner = $scope.GetFestivalBannerData[index];
-        const previewImage = document.querySelector('#previewImage');
-        const loadingText = document.querySelector('#loadingText');
-        const dropZoon = document.querySelector('#dropZoon');
-        dropZoon.classList.add('drop-zoon--Uploaded');
-        loadingText.style.display = "none";
-        $('#previewImage').css('display', 'block');
-        previewImage.setAttribute("src", "/images/FestivalBanner/" + $scope.FestivalBanner.FBImage);
+
+        const previews = document.querySelectorAll('.preview');
+        const removeButtons = document.querySelectorAll('.remove-image');
+
+
+        previews[0].style.display = 'block';
+        removeButtons[0].disabled = false;
+        previews[0].setAttribute("src", "/images/FestivalBanner/" + $scope.FestivalBanner.FBImage);
+        //const previewImage = document.querySelector('#previewImage');
+        //const loadingText = document.querySelector('#loadingText');
+        //const dropZoon = document.querySelector('#dropZoon');
+        //dropZoon.classList.add('drop-zoon--Uploaded');
+        //loadingText.style.display = "none";
+        //$('#previewImage').css('display', 'block');
+        //previewImage.setAttribute("src", "/images/FestivalBanner/" + $scope.FestivalBanner.FBImage);
 
     };
     $scope.UpdateFestivalBanner = function () {
@@ -2581,8 +2931,9 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
         //    $('#priority').focus;
         //    return;
         //}
+        const imageInputs = document.querySelectorAll('.image-input');
+        $scope.FestivalBanner.Image = imageInputs[0].files[0];
 
-        debugger
         upload({
             url: '/GiftDashBoard/UpdateFestivalBanner',
             method: 'post',
@@ -2609,9 +2960,9 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
     };
     $scope.FestivalBannerActiveDeActive = function (id) {
 
-        debugger
+
         $http.get("/GiftDashBoard/FestivalBannerActiveDeActive?id=" + id).then(function (d) {
-            debugger
+
             $scope.rees = d.data;
 
 
@@ -2640,7 +2991,7 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
 
 
     $scope.SubmitLabelProduct = function () {
-        debugger
+
         //$scope.slideimg = $('#input-file-now').val();
         //if ($scope.slideimg == "" || $scope.slideimg == undefined) {
         //    toastr["error"]("Please Select Image");
@@ -2653,7 +3004,7 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
         //    return;
         //}
 
-        debugger
+
         $http({
             url: '/GiftDashBoard/SubmitLabelProduct',
             method: 'post',
@@ -2680,10 +3031,10 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
     };
 
     $scope.GetLabelProduct = function () {
-        debugger
+
         $http.get("/GiftDashBoard/GetLabelProduct").then(function (d) {
 
-            debugger
+
             $scope.LabelProductData = d.data;
 
         }, function (error) {
@@ -2691,10 +3042,10 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
         });
     };
     $scope.GetLabelProductByid = function (index) {
-        debugger
+
         $('#edbtn').css('display', 'block');
         $('#btn').css('display', 'none');
-        debugger
+
         $scope.LabelProduct = $scope.LabelProductData[index];
 
     };
@@ -2711,7 +3062,7 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
         //    return;
         //}
 
-        debugger
+
         $http({
             url: '/GiftDashBoard/UpdateLabelProduct',
             method: 'post',
@@ -2738,9 +3089,9 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
     };
     $scope.LabelProductActiveDeActive = function (id) {
 
-        debugger
+
         $http.get("/GiftDashBoard/LabelProductActiveDeActive?id=" + id).then(function (d) {
-            debugger
+
             $scope.rees = d.data;
 
 
@@ -2760,6 +3111,223 @@ app.controller("AdminController", ['$scope', 'upload', '$http', '$sce', function
 
 
     //-------------- Submit Label Product End ->------------->---------------------->---------------------------->------->------------>---------->---
+
+
+    //-------------- Submit Filter Keyword Start ->------------->---------------------->---------------------------->------->------------>---------->---
+    $scope.FilterTag = [];
+    $scope.SubmitFilterKeyword = function () {
+        if ($("#MainCate").val() == "" || $("#MainCate").val() == "-1") {
+            toastr["error"]("Enter Banner Title");
+            return;
+        }
+
+        debugger
+        $scope.Filter.keywordTbls = $scope.FilterTag;
+
+
+        $http({
+            url: '/GiftDashBoard/SubmitFilterKeyword',
+            method: 'post',
+            data: $scope.Filter
+        }).then(function (d) {
+            $scope.result = d.data;
+            if ($scope.result.res === "1") {
+                toastr["success"]("Banner Category save successfully");
+                $scope.GetFilterData();
+                $scope.Filter = null;
+                $scope.FilterTag = [];
+            } else if ($scope.result.res === "2") {
+                toastr["error"]("Banner Category already exist");
+            }
+            else {
+                toastr["error"]("Banner Category not save");
+            }
+        }, function (error) {
+            toastr["error"]("Something Went Wrong");
+        });
+    };
+
+
+    $scope.UpdateFilterKeyword = function () {
+        if ($("#MainCate").val() == "" || $("#MainCate").val() == "-1") {
+            toastr["error"]("Enter Banner Title");
+            return;
+        }
+
+        debugger
+        $scope.Filter.keywordTbls = $scope.FilterTag;
+
+
+        $http({
+            url: '/GiftDashBoard/UpdateFilterKeyword',
+            method: 'post',
+            data: $scope.Filter
+        }).then(function (d) {
+            $scope.result = d.data;
+            if ($scope.result.res === "1") {
+                toastr["success"]("Banner Category save successfully");
+                $scope.GetFilterData();
+                $scope.Filter = null;
+                $scope.FilterTag = [];
+            } else if ($scope.result.res === "2") {
+                toastr["error"]("Banner Category already exist");
+            }
+            else {
+                toastr["error"]("Banner Category not save");
+            }
+        }, function (error) {
+            toastr["error"]("Something Went Wrong");
+        });
+    };
+    $scope.GetFilterData = function () {
+        $http.get("/GiftDashBoard/GetFilterData").then(function (d) {
+            $scope.FilterData = d.data;
+        }, function (error) {
+            alert(error.data);
+        });
+    };
+
+    $scope.GetBannerCateFilterKeyword = function (id) {
+        $http.get("/GiftDashBoard/GetBannerCateFilterKeyword?id=" + id).then(function (d) {
+            $scope.FilterTag = d.data;
+            debugger
+        }, function (error) {
+            alert(error.data);
+        });
+    };
+
+
+    $scope.GetBannerCateFilterById = function (index) {
+        $('#btn').css('display', 'none');
+        $('#edbtn').css('display', 'inline');
+
+        debugger
+        $scope.Filter = $scope.FilterData.find(item => item.MainCateId === index);
+
+        $scope.FilterTag = $scope.Filter.Submenu;
+    };
+
+
+
+
+    //-------------- Submit Festival Banner End ->------------->---------------------->---------------------------->------->------------>---------->---
+
+
+    //-------------- Submit Video Start->------------->---------------------->---------------------------->------->------------>---------->---
+
+    $scope.GetVideoData = function (id) {
+        $http.get("/GiftDashBoard/GetVideoData?id=" + id).then(function (d) {
+            $scope.VideoDataList = d.data;
+
+        }, function (error) {
+            alert(error.data);
+        });
+    };
+    $scope.quickview = function (id) {
+        debugger
+
+        id = parseInt(id);
+        $scope.VideoData = $scope.VideoDataList.find(item => item.VId === id);
+
+
+        setTimeout(() => {
+            var videoElement = document.getElementById('pVideo');
+            if (videoElement) {
+                videoElement.src = '/images/ProductVideo/' + $scope.VideoData.Video;
+            }
+
+        }, 100);
+
+
+    };
+    $scope.SubmitVideo = function () {
+
+        debugger
+
+        if ($("#VideoTitle").val() == "") {
+            toastr["error"]("Enter Video Title");
+            return;
+        }
+        upload({
+            url: '/GiftDashBoard/SubmitVideo',
+            method: 'post',
+            data: $scope.Video
+        }).then(function (d) {
+            $scope.result = d.data;
+            if ($scope.result.res === "1") {
+
+                toastr["success"]("Video save successfully");
+                $scope.Video = null;
+                $scope.GetVideoData();
+
+            } else if ($scope.result.res === "2") {
+                toastr["error"]("Video Title already exist");
+            }
+            else {
+                toastr["error"]("Video not save");
+            }
+        }, function (error) {
+            toastr["error"]("Something Went Wrong");
+        });
+    };
+
+    $scope.GetVideoById = function (index) {
+        $('#btn').css('display', 'none');
+        $('#edbtn').css('display', 'inline');
+
+
+        $scope.Video = $scope.VideoDataList[index];
+
+
+        $('html, body').animate({ scrollTop: 0 }, '300');
+    };
+
+
+    $scope.UpdateVideo = function () {
+        debugger
+        var maincate = angular.element(document.getElementById("VideoTitle"));
+        if (maincate.val() === "") {
+            toastr["error"]("Enter Video Title");
+            maincate.focus();
+            return;
+        }
+
+        upload({
+            url: '/GiftDashBoard/UpdateVideo',
+            method: 'post',
+            data: $scope.Video
+        }).then(function (d) {
+            $scope.result = d.data;
+            if ($scope.result.res === "1") {
+                $scope.Video = null;
+                $scope.GetVideoData();
+            }
+            else {
+                toastr["error"]("Video not save");
+            }
+        }, function (error) {
+            toastr["error"]("Something Went Wrong");
+        });
+    };
+
+    $scope.VideoActiveDeActive = function (id) {
+        $http.get("/GiftDashBoard/VideoActiveDeActive?id=" + id).then(function (d) {
+            $scope.rees = d.data;
+            if ($scope.rees.res === "1") {
+                toastr["success"]("successful");
+                $scope.GetVideoData();
+            }
+            else {
+                toastr["error"]("something went wrong");
+            }
+
+
+        }, function (error) {
+            alert(error.data);
+        });
+    };
+
+    //-------------- Submit Video End->------------->---------------------->---------------------------->------->------------>---------->---
 
 
 

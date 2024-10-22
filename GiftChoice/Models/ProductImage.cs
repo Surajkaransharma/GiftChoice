@@ -18,5 +18,6 @@ namespace GiftChoice.Models
         public Nullable<long> ProductId { get; set; }
         public string PImage { get; set; }
         public Nullable<bool> Active { get; set; }
+        public Nullable<int> ImageIndex { get; set; }
     }
 }

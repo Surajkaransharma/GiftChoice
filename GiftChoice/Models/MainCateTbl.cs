@@ -14,12 +14,6 @@ namespace GiftChoice.Models
     
     public partial class MainCateTbl
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public MainCateTbl()
-        {
-            this.MCKeywordTbls = new HashSet<MCKeywordTbl>();
-        }
-    
         public long MainCateId { get; set; }
         public string MTitle { get; set; }
         public string MUrl { get; set; }
@@ -30,8 +24,8 @@ namespace GiftChoice.Models
         public string MImage { get; set; }
         public Nullable<long> UserId { get; set; }
         public string MainCateType { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<MCKeywordTbl> MCKeywordTbls { get; set; }
+        public string CateType { get; set; }
+        public string Position { get; set; }
+        public Nullable<bool> ModelQuery1 { get; set; }
     }
 }

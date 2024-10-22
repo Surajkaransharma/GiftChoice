@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
@@ -52,6 +53,11 @@ namespace GiftChoice.Controllers
         }
 
         public ActionResult AddSize()
+        {
+            return View();
+        }
+
+        public ActionResult AddVideo()
         {
             return View();
         }
@@ -127,6 +133,11 @@ namespace GiftChoice.Controllers
         {
             public string MainCateType { get; set; }
 
+
+            public string CateType { get; set; }
+
+
+            public Nullable<bool> ModelQuery1 { get; set; }
             public string Menu { get; set; }
             public string Position { get; set; }
 
@@ -139,7 +150,7 @@ namespace GiftChoice.Controllers
             public Nullable<System.DateTime> Update_at { get; set; }
             public string MImage { get; set; }
             public HttpPostedFileBase Image { get; set; }
-            public Nullable<bool> ModelQuery1 { get; set; }
+
             public Nullable<long> UserId { get; set; }
             public List<KeywordTbl> keywordTbls { get; set; }
         }
@@ -157,13 +168,15 @@ namespace GiftChoice.Controllers
                 if (model.Image != null)
                 {
                     string extensionstuimg = Path.GetExtension(model.Image.FileName);
-                    model.Image.SaveAs(Server.MapPath("~/images/MainCate/" + mainCateTbl.MainCateId + "" + extensionstuimg));
-                    MainCateVaryQualityLevel(model.Image.InputStream, mainCateTbl.MainCateId + extensionstuimg);
+                    model.Image.SaveAs(Server.MapPath("~/images/MainCate/" + mainCateTbl.MainCateId + "" + extensionstuimg));                
+                    //  MainCateVaryQualityLevel(model.Image.InputStream, mainCateTbl.MainCateId + extensionstuimg);
                     mainCateTbl.MImage = mainCateTbl.MainCateId + "" + extensionstuimg;
                 }
                 mainCateTbl.Create_at = DateTime.Now;
                 mainCateTbl.Update_at = DateTime.Now;
                 mainCateTbl.Active = true;
+                mainCateTbl.MainCateType = "Normal";
+                mainCateTbl.CateType = "MainCate";
                 mainCateTbl.Priority = model.Priority;
                 db.MainCateTbls.Add(mainCateTbl);
                 db.SaveChanges();
@@ -257,9 +270,10 @@ namespace GiftChoice.Controllers
                     {
                         string extensionstuimg = Path.GetExtension(model.Image.FileName);
                         model.Image.SaveAs(Server.MapPath("~/images/MainCate/" + result.MainCateId + "" + extensionstuimg));
-                        MainCateVaryQualityLevel(model.Image.InputStream, result.MainCateId + extensionstuimg);
+                       // MainCateVaryQualityLevel(model.Image.InputStream, result.MainCateId + extensionstuimg);
                         result.MImage = result.MainCateId + "" + extensionstuimg;
                     }
+                    result.CateType = "MainCate";
                     result.MTitle = model.MTitle;
                     result.MUrl = result.MTitle.Replace(" ", "-");
                     result.Priority = model.Priority;
@@ -293,6 +307,7 @@ namespace GiftChoice.Controllers
                     if (result != null)
                     {
                         result.MainCateType = model.MainCateTblModel[i].MainCateType;
+                        result.Priority = model.MainCateTblModel[i].Priority;
                         db.SaveChanges();
 
                     }
@@ -388,13 +403,14 @@ namespace GiftChoice.Controllers
         {
             var res =
 
-               db.MainCateTbls.Select(m => new
+               db.MainCateTbls.Where(m => m.CateType == "MainCate").Select(m => new
                {
                    m.MainCateId,
                    m.MUrl,
                    m.MTitle,
                    m.Active,
                    m.MImage,
+                   m.CateType,
                    m.Priority,
                    m.MainCateType,
                    Submenu = db.MCKeywordTbls.Where(s => s.MainCateId == m.MainCateId && s.Active == true).Select(s => new
@@ -417,12 +433,13 @@ namespace GiftChoice.Controllers
             db.Configuration.ProxyCreationEnabled = false;
             var res =
 
-               db.MainCateTbls.Where(m => m.Active == true).Select(m => new
+               db.MainCateTbls.Where(m => m.Active == true && m.CateType == "MainCate").Select(m => new
                {
                    m.MainCateId,
                    m.MUrl,
                    m.MTitle,
                    m.Active,
+                   m.CateType,
                    m.MImage,
                    m.Priority,
                    Submenu = db.MCKeywordTbls.Where(s => s.MainCateId == m.MainCateId && s.Active == true).Select(s => new
@@ -459,7 +476,7 @@ namespace GiftChoice.Controllers
 
         public JsonResult GetKeywordData()
         {
-            var res = db.KeywordTbls.Where(k => k.Active == true).Select(k => new { k.Keyword, k.Active, k.KeywordId });
+            var res = db.KeywordTbls.Where(k => k.Active == true).Select(k => new { text = k.Keyword, k.Active, k.KeywordId });
             return Json(res, JsonRequestBehavior.AllowGet);
 
         }
@@ -569,13 +586,14 @@ namespace GiftChoice.Controllers
         {
             var res =
 
-               db.ProductTbls.Where(m => id == -2 ? true : m.MainCateId == id && m.Active == true).Select(m => new
+               db.ProductTbls.Where(m =>  m.ProductType == "MainProduct" && (id == -2 ? true : m.MainCateId == id) && m.Active == true).Select(m => new
                {
                    m.ProductId,
                    m.MainCateId,
                    m.ProductTitle,
                    m.PLabel,
                    m.Price,
+                   m.BannerCateId,
                    m.PUrl,
                    m.Active,
                    m.TableDesc,
@@ -600,6 +618,14 @@ namespace GiftChoice.Controllers
                        s.SizeId,
                        s.PSizeId,
                        SizeTitle = db.SizeTbls.Where(t => t.SizeId == s.SizeId && t.Active == true).Select(t => t.SizeTitle).FirstOrDefault()
+                   }),
+                   productDataArray = db.ProductDetailTbls.Where(p => p.ProductId == m.ProductId).Select(p => new
+                   {
+                       p.ProductId,
+                       p.Price,
+                       p.SizeId,
+                       p.SizeName,
+                       ProductSize = db.SizeTbls.Where(s => s.SizeId == p.SizeId).OrderByDescending(s => s.SizeTitle).Select(s => s.SizeTitle).FirstOrDefault(),
                    })
                });
             return Json(res, JsonRequestBehavior.AllowGet);
@@ -647,6 +673,14 @@ namespace GiftChoice.Controllers
 
         public partial class ProductTblmodel
         {
+            public string ProductType { get; set; }
+
+            public Nullable<int> VideoId { get; set; }
+
+            public Nullable<int> BannerCateId { get; set; }
+
+            public string Video { get; set; }
+
             public Nullable<int> LabelId { get; set; }
 
             public long ProductId { get; set; }
@@ -680,9 +714,14 @@ namespace GiftChoice.Controllers
             public List<SizeTbl> SizeTbls { get; set; }
             public List<BPSizeTbl> BPSizeTbl { get; set; }
 
+            public List<ProductFilterWordTbl> ProductFilterWordTbl { get; set; }
+
+
             public string VideoUrl { get; set; }
 
             public Nullable<bool> SameDay { get; set; }
+            public Nullable<bool> Common { get; set; }
+
             public Nullable<int> QueryId { get; set; }
 
             public Nullable<int> BSubId { get; set; }
@@ -708,25 +747,41 @@ namespace GiftChoice.Controllers
 
         }
 
-        private void ProductVaryQualityLevel(Stream stream, string fname)
+        //private void ProductVaryQualityLevel(Stream stream, string fname)
+        //{
+        //    //  size 
+        //    System.Drawing.Image photo = new Bitmap(stream);
+        //    //Bitmap bmp1 = new Bitmap(photo, 119, 83);
+
+        //    Bitmap bmp1 = new Bitmap(photo, 550, 550);
+        //    // without size
+        //    //  Bitmap bmp1 = new Bitmap(stream);
+        //    ImageCodecInfo jgpEncoder = GetEncoder(ImageFormat.Jpeg);
+        //    System.Drawing.Imaging.Encoder myEncoder = System.Drawing.Imaging.Encoder.Quality;
+        //    EncoderParameters myEncoderParameters = new EncoderParameters(1);
+        //    EncoderParameter myEncoderParameter = new EncoderParameter(myEncoder, 30L);
+        //    myEncoderParameters.Param[0] = myEncoderParameter;
+        //    bmp1.Save(Server.MapPath("~/images/ProductImg/" + fname), jgpEncoder, myEncoderParameters);
+        //    bmp1.Dispose();
+
+        //}
+
+        private void ReduceImageSize(double scaleFactor, Stream sourcePath, string targetPath)
         {
-            //  size 
-            System.Drawing.Image photo = new Bitmap(stream);
-            //Bitmap bmp1 = new Bitmap(photo, 119, 83);
-
-            Bitmap bmp1 = new Bitmap(photo, 550, 550);
-            // without size
-            //  Bitmap bmp1 = new Bitmap(stream);
-            ImageCodecInfo jgpEncoder = GetEncoder(ImageFormat.Jpeg);
-            System.Drawing.Imaging.Encoder myEncoder = System.Drawing.Imaging.Encoder.Quality;
-            EncoderParameters myEncoderParameters = new EncoderParameters(1);
-            EncoderParameter myEncoderParameter = new EncoderParameter(myEncoder, 30L);
-            myEncoderParameters.Param[0] = myEncoderParameter;
-            bmp1.Save(Server.MapPath("~/images/ProductImg/" + fname), jgpEncoder, myEncoderParameters);
-            bmp1.Dispose();
-
+            using (var image = System.Drawing.Image.FromStream(sourcePath))
+            {
+                var newWidth = (int)(550 * scaleFactor);
+                var newHeight = (int)(550 * scaleFactor);
+                var thumbnailImg = new Bitmap(newWidth, newHeight);
+                var thumbGraph = Graphics.FromImage(thumbnailImg);
+                thumbGraph.CompositingQuality = CompositingQuality.HighQuality;
+                thumbGraph.SmoothingMode = SmoothingMode.HighQuality;
+                thumbGraph.InterpolationMode = InterpolationMode.HighQualityBicubic;
+                var imageRectangle = new Rectangle(0, 0, newWidth, newHeight);
+                thumbGraph.DrawImage(image, imageRectangle);
+                thumbnailImg.Save(targetPath, image.RawFormat);
+            }
         }
-
         public JsonResult SubmitProduct(ProductTblmodel model)
         {
 
@@ -734,7 +789,7 @@ namespace GiftChoice.Controllers
             {
                 ProductTbl productmodel = new ProductTbl();
 
-                ProductTbl result = db.ProductTbls.Where(c => c.ProductTitle == model.ProductTitle).FirstOrDefault();
+                ProductTbl result = db.ProductTbls.Where(c => c.ProductTitle == model.ProductTitle && c.ProductType == "MainProduct").FirstOrDefault();
                 if (result != null)
                 {
                     var res = new { res = "-1" };
@@ -745,9 +800,10 @@ namespace GiftChoice.Controllers
                     productmodel.ProductId = db.ProductTbls.DefaultIfEmpty().Max(r => r == null ? 0 : r.ProductId) + 1;
 
                     productmodel.MainCateId = model.MainCateId;
+                    productmodel.BannerCateId = model.BannerCateId;
 
                     productmodel.ProductTitle = model.ProductTitle;
-                    productmodel.LabelId = model.LabelId;
+                    productmodel.LabelId = model.LabelId ?? 0;
                     productmodel.Active = true;
                     productmodel.PUrl = model.ProductTitle.Replace(" ", "-");
                     productmodel.PDesc = model.PDesc;
@@ -756,9 +812,18 @@ namespace GiftChoice.Controllers
                     productmodel.Qty = 1;
                     productmodel.VideoUrl = model.VideoUrl ?? "";
                     productmodel.SameDay = model.SameDay;
+                    productmodel.ProductType = "MainProduct";
+
                     productmodel.Create_at = DateTime.Now;
                     productmodel.Update_at = DateTime.Now;
                     productmodel.Priority = model.Priority;
+                    if (model.VideoData != null)
+                    {
+                        string extensionstuimg = Path.GetExtension(model.VideoData.FileName);
+                        model.VideoData.SaveAs(Server.MapPath("~/images/ProductVideo/" + productmodel.ProductId + extensionstuimg));
+                        productmodel.Video = productmodel.ProductId + extensionstuimg;
+
+                    }
                     db.ProductTbls.Add(productmodel);
                     db.SaveChanges();
 
@@ -768,8 +833,8 @@ namespace GiftChoice.Controllers
                         productImage.PImageId = db.ProductImages.DefaultIfEmpty().Max(r => r == null ? 0 : r.PImageId) + 1;
                         string extensionstuimg = Path.GetExtension(model.Image1.FileName);
                         model.Image1.SaveAs(Server.MapPath("~/images/ProductImg/" + productImage.PImageId + extensionstuimg));
-                        ProductVaryQualityLevel(model.Image1.InputStream, productImage.PImageId + extensionstuimg);
-
+                        //ProductVaryQualityLevel(model.Image1.InputStream, productImage.PImageId + extensionstuimg);
+                        productImage.ImageIndex = 1;
                         productImage.PImage = productImage.PImageId + extensionstuimg;
                         productImage.ProductId = productmodel.ProductId;
                         productImage.Active = true;
@@ -783,7 +848,8 @@ namespace GiftChoice.Controllers
                         string extensionstuimg = Path.GetExtension(model.Image2.FileName);
                         //  VaryQualityLevel(model.Image1.InputStream, productImage.PImageId + extensionstuimg);
                         model.Image2.SaveAs(Server.MapPath("~/images/ProductImg/" + productImage.PImageId + extensionstuimg));
-                        ProductVaryQualityLevel(model.Image2.InputStream, productImage.PImageId + extensionstuimg);
+                        //   ProductVaryQualityLevel(model.Image2.InputStream, productImage.PImageId + extensionstuimg);
+                        productImage.ImageIndex = 2;
 
                         productImage.PImage = productImage.PImageId + extensionstuimg;
                         productImage.ProductId = productmodel.ProductId;
@@ -797,7 +863,8 @@ namespace GiftChoice.Controllers
                         productImage.PImageId = db.ProductImages.DefaultIfEmpty().Max(r => r == null ? 0 : r.PImageId) + 1;
                         string extensionstuimg = Path.GetExtension(model.Image3.FileName);
                         model.Image3.SaveAs(Server.MapPath("~/images/ProductImg/" + productImage.PImageId + extensionstuimg));
-                        ProductVaryQualityLevel(model.Image3.InputStream, productImage.PImageId + extensionstuimg);
+                        // ProductVaryQualityLevel(model.Image3.InputStream, productImage.PImageId + extensionstuimg);
+                        productImage.ImageIndex = 3;
 
                         productImage.PImage = productImage.PImageId + extensionstuimg;
                         productImage.ProductId = productmodel.ProductId;
@@ -811,7 +878,8 @@ namespace GiftChoice.Controllers
                         productImage.PImageId = db.ProductImages.DefaultIfEmpty().Max(r => r == null ? 0 : r.PImageId) + 1;
                         string extensionstuimg = Path.GetExtension(model.Image4.FileName);
                         model.Image4.SaveAs(Server.MapPath("~/images/ProductImg/" + productImage.PImageId + extensionstuimg));
-                        ProductVaryQualityLevel(model.Image4.InputStream, productImage.PImageId + extensionstuimg);
+                        //  ProductVaryQualityLevel(model.Image4.InputStream, productImage.PImageId + extensionstuimg);
+                        productImage.ImageIndex = 4;
 
                         productImage.PImage = productImage.PImageId + extensionstuimg;
                         productImage.ProductId = productmodel.ProductId;
@@ -825,8 +893,8 @@ namespace GiftChoice.Controllers
                         productImage.PImageId = db.ProductImages.DefaultIfEmpty().Max(r => r == null ? 0 : r.PImageId) + 1;
                         string extensionstuimg = Path.GetExtension(model.Image5.FileName);
                         model.Image5.SaveAs(Server.MapPath("~/images/ProductImg/" + productImage.PImageId + extensionstuimg));
-                        ProductVaryQualityLevel(model.Image5.InputStream, productImage.PImageId + extensionstuimg);
-
+                        //   ProductVaryQualityLevel(model.Image5.InputStream, productImage.PImageId + extensionstuimg);
+                        productImage.ImageIndex = 5;
                         productImage.PImage = productImage.PImageId + extensionstuimg;
                         productImage.ProductId = productmodel.ProductId;
                         productImage.Active = true;
@@ -847,7 +915,7 @@ namespace GiftChoice.Controllers
         }
 
 
-        public JsonResult ProductArrayData(ProductTblmodel model)
+        public JsonResult ProductArrayData(ProductTblmodel model, List<ProductDetailTbl> productDataArray)
         {
 
             try
@@ -891,6 +959,29 @@ namespace GiftChoice.Controllers
 
                     }
                 }
+                if (productDataArray != null)
+                {
+
+                    for (int i = 0; i < productDataArray.Count; i++)
+                    {
+                        if (productDataArray[i].SizeId != -1)
+                        {
+
+                            ProductDetailTbl productDetail = new ProductDetailTbl();
+                            productDetail.PdId = db.ProductDetailTbls.DefaultIfEmpty().Max(r => r == null ? 0 : r.PdId) + 1;
+                            productDetail.ProductId = result.ProductId;
+                            productDetail.SizeId = productDataArray[i].SizeId;
+                            productDetail.Price = productDataArray[i].Price;
+                            productDetail.ProductType = result.ProductType;
+                            productDetail.Priority = productDataArray[i].Priority;
+                            productDetail.ProductType = "MainProduct";
+                            productDetail.Active = true;
+                            db.ProductDetailTbls.Add(productDetail);
+                            db.SaveChanges();
+                        }
+                    }
+                }
+
                 var res = new { res = "1", };
                 return Json(res, JsonRequestBehavior.AllowGet);
 
@@ -969,6 +1060,7 @@ namespace GiftChoice.Controllers
 
 
                     result.MainCateId = model.MainCateId;
+                    result.BannerCateId = model.BannerCateId;
                     result.ProductTitle = model.ProductTitle;
                     result.LabelId = model.LabelId;
                     result.PUrl = model.ProductTitle.Replace(" ", "-");
@@ -976,22 +1068,30 @@ namespace GiftChoice.Controllers
                     result.Price = model.Price;
                     result.VideoUrl = model.VideoUrl ?? "";
                     result.SameDay = model.SameDay;
+                    result.ProductType = "MainProduct";
+                    if (model.VideoData != null)
+                    {
+                        string extensionstuimg = Path.GetExtension(model.VideoData.FileName);
+                        model.VideoData.SaveAs(Server.MapPath("~/images/ProductVideo/" + result.ProductId + extensionstuimg));
+                        result.Video = result.ProductId + extensionstuimg;
+
+                    }
                     result.Update_at = DateTime.Now;
                     result.Priority = model.Priority;
                     db.SaveChanges();
 
                     if (model.Image1 != null)
                     {
-                        List<ProductImage> productImage = db.ProductImages.Where(c => c.ProductId == result.ProductId).ToList();
+                        var productImage = db.ProductImages.Where(c => c.ProductId == result.ProductId && c.ImageIndex == 1).FirstOrDefault();
 
                         if (productImage != null)
                         {
-                            var Pimageid = productImage[0].PImageId;
+                            var Pimageid = productImage.PImageId;
                             ProductImage pimagearr = db.ProductImages.Where(c => c.PImageId == Pimageid).FirstOrDefault();
                             string extensionstuimg = Path.GetExtension(model.Image1.FileName);
 
                             model.Image1.SaveAs(Server.MapPath("~/images/ProductImg/" + pimagearr.PImageId + extensionstuimg));
-                            ProductVaryQualityLevel(model.Image1.InputStream, Pimageid + extensionstuimg);
+                            //    ProductVaryQualityLevel(model.Image1.InputStream, Pimageid + extensionstuimg);
                             pimagearr.PImage = pimagearr.PImageId + extensionstuimg;
                             db.SaveChanges();
                         }
@@ -1001,8 +1101,9 @@ namespace GiftChoice.Controllers
                             productImage1.PImageId = db.ProductImages.DefaultIfEmpty().Max(r => r == null ? 0 : r.PImageId) + 1;
                             string extensionstuimg = Path.GetExtension(model.Image1.FileName);
                             model.Image1.SaveAs(Server.MapPath("~/images/ProductImg/" + productImage1.PImageId + extensionstuimg));
-                            ProductVaryQualityLevel(model.Image1.InputStream, productImage1.PImageId + extensionstuimg);
+                            //  ProductVaryQualityLevel(model.Image1.InputStream, productImage1.PImageId + extensionstuimg);
                             productImage1.PImage = productImage1.PImageId + extensionstuimg;
+                            productImage1.ImageIndex = 1;
                             productImage1.ProductId = result.ProductId;
                             productImage1.Active = true;
                             db.ProductImages.Add(productImage1);
@@ -1014,15 +1115,15 @@ namespace GiftChoice.Controllers
 
                     if (model.Image2 != null)
                     {
-                        List<ProductImage> productImage = db.ProductImages.Where(c => c.ProductId == result.ProductId).ToList();
+                        var productImage = db.ProductImages.Where(c => c.ProductId == result.ProductId && c.ImageIndex == 2).FirstOrDefault();
 
                         if (productImage != null)
                         {
-                            var Pimageid = productImage[1].PImageId;
+                            var Pimageid = productImage.PImageId;
                             ProductImage pimagearr = db.ProductImages.Where(c => c.PImageId == Pimageid).FirstOrDefault();
                             string extensionstuimg = Path.GetExtension(model.Image2.FileName);
                             model.Image2.SaveAs(Server.MapPath("~/images/ProductImg/" + pimagearr.PImageId + extensionstuimg));
-                            ProductVaryQualityLevel(model.Image2.InputStream, Pimageid + extensionstuimg);
+                            //    ProductVaryQualityLevel(model.Image2.InputStream, Pimageid + extensionstuimg);
                             pimagearr.PImage = pimagearr.PImageId + extensionstuimg;
                             db.SaveChanges();
                         }
@@ -1032,9 +1133,11 @@ namespace GiftChoice.Controllers
                             productImage1.PImageId = db.ProductImages.DefaultIfEmpty().Max(r => r == null ? 0 : r.PImageId) + 1;
                             string extensionstuimg = Path.GetExtension(model.Image2.FileName);
                             model.Image2.SaveAs(Server.MapPath("~/images/ProductImg/" + productImage1.PImageId + extensionstuimg));
-                            ProductVaryQualityLevel(model.Image2.InputStream, productImage1.PImageId + extensionstuimg);
+                            //    ProductVaryQualityLevel(model.Image2.InputStream, productImage1.PImageId + extensionstuimg);
                             productImage1.PImage = productImage1.PImageId + extensionstuimg;
                             productImage1.ProductId = result.ProductId;
+                            productImage1.ImageIndex = 2;
+
                             productImage1.Active = true;
                             db.ProductImages.Add(productImage1);
                             db.SaveChanges();
@@ -1043,15 +1146,15 @@ namespace GiftChoice.Controllers
                     }
                     if (model.Image3 != null)
                     {
-                        List<ProductImage> productImage = db.ProductImages.Where(c => c.ProductId == result.ProductId).ToList();
+                        var productImage = db.ProductImages.Where(c => c.ProductId == result.ProductId && c.ImageIndex == 3).FirstOrDefault();
 
                         if (productImage != null)
                         {
-                            var Pimageid = productImage[2].PImageId;
+                            var Pimageid = productImage.PImageId;
                             ProductImage pimagearr = db.ProductImages.Where(c => c.PImageId == Pimageid).FirstOrDefault();
                             string extensionstuimg = Path.GetExtension(model.Image3.FileName);
                             model.Image3.SaveAs(Server.MapPath("~/images/ProductImg/" + pimagearr.PImageId + extensionstuimg));
-                            ProductVaryQualityLevel(model.Image3.InputStream, pimagearr.PImageId + extensionstuimg);
+                            //  ProductVaryQualityLevel(model.Image3.InputStream, pimagearr.PImageId + extensionstuimg);
                             pimagearr.PImage = pimagearr.PImageId + extensionstuimg;
                             db.SaveChanges();
                         }
@@ -1061,9 +1164,10 @@ namespace GiftChoice.Controllers
                             productImage1.PImageId = db.ProductImages.DefaultIfEmpty().Max(r => r == null ? 0 : r.PImageId) + 1;
                             string extensionstuimg = Path.GetExtension(model.Image3.FileName);
                             model.Image3.SaveAs(Server.MapPath("~/images/ProductImg/" + productImage1.PImageId + extensionstuimg));
-                            ProductVaryQualityLevel(model.Image3.InputStream, productImage1.PImageId + extensionstuimg);
+                            //   ProductVaryQualityLevel(model.Image3.InputStream, productImage1.PImageId + extensionstuimg);
                             productImage1.PImage = productImage1.PImageId + extensionstuimg;
                             productImage1.ProductId = result.ProductId;
+                            productImage1.ImageIndex = 3;
                             productImage1.Active = true;
                             db.ProductImages.Add(productImage1);
                             db.SaveChanges();
@@ -1072,15 +1176,15 @@ namespace GiftChoice.Controllers
                     }
                     if (model.Image4 != null)
                     {
-                        List<ProductImage> productImage = db.ProductImages.Where(c => c.ProductId == result.ProductId).ToList();
+                        var productImage = db.ProductImages.Where(c => c.ProductId == result.ProductId && c.ImageIndex == 4).FirstOrDefault();
 
                         if (productImage != null)
                         {
-                            var Pimageid = productImage[3].PImageId;
+                            var Pimageid = productImage.PImageId;
                             ProductImage pimagearr = db.ProductImages.Where(c => c.PImageId == Pimageid).FirstOrDefault();
                             string extensionstuimg = Path.GetExtension(model.Image4.FileName);
                             model.Image4.SaveAs(Server.MapPath("~/images/ProductImg/" + pimagearr.PImageId + extensionstuimg));
-                            ProductVaryQualityLevel(model.Image1.InputStream, pimagearr.PImageId + extensionstuimg);
+                            //   ProductVaryQualityLevel(model.Image1.InputStream, pimagearr.PImageId + extensionstuimg);
                             pimagearr.PImage = pimagearr.PImageId + extensionstuimg;
                             db.SaveChanges();
                         }
@@ -1090,9 +1194,10 @@ namespace GiftChoice.Controllers
                             productImage1.PImageId = db.ProductImages.DefaultIfEmpty().Max(r => r == null ? 0 : r.PImageId) + 1;
                             string extensionstuimg = Path.GetExtension(model.Image4.FileName);
                             model.Image4.SaveAs(Server.MapPath("~/images/ProductImg/" + productImage1.PImageId + extensionstuimg));
-                            ProductVaryQualityLevel(model.Image1.InputStream, productImage1.PImageId + extensionstuimg);
+                            ///  ProductVaryQualityLevel(model.Image1.InputStream, productImage1.PImageId + extensionstuimg);
                             productImage1.PImage = productImage1.PImageId + extensionstuimg;
                             productImage1.ProductId = result.ProductId;
+                            productImage1.ImageIndex = 4;
                             productImage1.Active = true;
                             db.ProductImages.Add(productImage1);
                             db.SaveChanges();
@@ -1101,15 +1206,15 @@ namespace GiftChoice.Controllers
                     }
                     if (model.Image5 != null)
                     {
-                        List<ProductImage> productImage = db.ProductImages.Where(c => c.ProductId == result.ProductId).ToList();
+                        var productImage = db.ProductImages.Where(c => c.ProductId == result.ProductId && c.ImageIndex == 5).FirstOrDefault();
 
                         if (productImage != null)
                         {
-                            var Pimageid = productImage[4].PImageId;
+                            var Pimageid = productImage.PImageId;
                             ProductImage pimagearr = db.ProductImages.Where(c => c.PImageId == Pimageid).FirstOrDefault();
                             string extensionstuimg = Path.GetExtension(model.Image5.FileName);
                             model.Image5.SaveAs(Server.MapPath("~/images/ProductImg/" + pimagearr.PImageId + extensionstuimg));
-                            ProductVaryQualityLevel(model.Image1.InputStream, pimagearr.PImageId + extensionstuimg);
+                            //   ProductVaryQualityLevel(model.Image1.InputStream, pimagearr.PImageId + extensionstuimg);
                             pimagearr.PImage = pimagearr.PImageId + extensionstuimg;
                             db.SaveChanges();
                         }
@@ -1119,9 +1224,11 @@ namespace GiftChoice.Controllers
                             productImage1.PImageId = db.ProductImages.DefaultIfEmpty().Max(r => r == null ? 0 : r.PImageId) + 1;
                             string extensionstuimg = Path.GetExtension(model.Image5.FileName);
                             model.Image5.SaveAs(Server.MapPath("~/images/ProductImg/" + productImage1.PImageId + extensionstuimg));
-                            ProductVaryQualityLevel(model.Image1.InputStream, productImage1.PImageId + extensionstuimg);
+                            //   ProductVaryQualityLevel(model.Image1.InputStream, productImage1.PImageId + extensionstuimg);
                             productImage1.PImage = productImage1.PImageId + extensionstuimg;
                             productImage1.ProductId = result.ProductId;
+                            productImage1.ImageIndex = 5;
+
                             productImage1.Active = true;
                             db.ProductImages.Add(productImage1);
                             db.SaveChanges();
@@ -1129,77 +1236,6 @@ namespace GiftChoice.Controllers
 
                     }
 
-                    //   ProductImage productImage = new ProductImage();
-                    //List<ProductImage> productImage = db.ProductImages.Where(c => c.ProductId == model.ProductId).ToList();
-
-                    //for (int i = 0; i < productImage.Count(); i++)
-                    //{
-                    //    if (i == 0)
-                    //    {
-                    //        if (model.Image1 != null)
-                    //        {
-
-                    //            var Pimageid = productImage[i].PImageId;
-                    //            ProductImage pimagearr = db.ProductImages.Where(c => c.PImageId == Pimageid).FirstOrDefault();
-                    //            string extensionstuimg = Path.GetExtension(model.Image1.FileName);
-                    //            model.Image1.SaveAs(Server.MapPath("~/images/ProductImg/" + pimagearr.PImageId + extensionstuimg));
-                    //            pimagearr.PImage = pimagearr.PImageId + extensionstuimg;
-                    //            db.SaveChanges();
-                    //        }
-                    //    }
-                    //    else if (i == 1)
-                    //    {
-                    //        if (model.Image2 != null)
-                    //        {
-                    //            var Pimageid = productImage[i].PImageId;
-                    //            ProductImage pimagearr = db.ProductImages.Where(c => c.PImageId == Pimageid).FirstOrDefault();
-                    //            string extensionstuimg = Path.GetExtension(model.Image2.FileName);
-                    //            model.Image2.SaveAs(Server.MapPath("~/images/ProductImg/" + pimagearr.PImageId + extensionstuimg));
-                    //            pimagearr.PImage = pimagearr.PImageId + extensionstuimg;
-                    //            db.SaveChanges();
-                    //        }
-                    //    }
-                    //    else if (i == 2)
-                    //    {
-                    //        if (model.Image3 != null)
-                    //        {
-                    //            var Pimageid = productImage[i].PImageId;
-                    //            ProductImage pimagearr = db.ProductImages.Where(c => c.PImageId == Pimageid).FirstOrDefault();
-
-                    //            string extensionstuimg = Path.GetExtension(model.Image3.FileName);
-                    //            model.Image3.SaveAs(Server.MapPath("~/images/ProductImg/" + pimagearr.PImageId + extensionstuimg));
-                    //            pimagearr.PImage = pimagearr.PImageId + extensionstuimg;
-                    //            db.SaveChanges();
-                    //        }
-                    //    }
-                    //    else if (i == 3)
-                    //    {
-                    //        if (model.Image4 != null)
-                    //        {
-                    //            var Pimageid = productImage[i].PImageId;
-                    //            ProductImage pimagearr = db.ProductImages.Where(c => c.PImageId == Pimageid).FirstOrDefault();
-
-                    //            string extensionstuimg = Path.GetExtension(model.Image4.FileName);
-                    //            model.Image4.SaveAs(Server.MapPath("~/images/ProductImg/" + pimagearr.PImageId + extensionstuimg));
-                    //            pimagearr.PImage = pimagearr.PImageId + extensionstuimg;
-                    //            db.SaveChanges();
-                    //        }
-                    //    }
-                    //    else if (i == 4)
-                    //    {
-                    //        if (model.Image5 != null)
-                    //        {
-                    //            var Pimageid = productImage[i].PImageId;
-                    //            ProductImage pimagearr = db.ProductImages.Where(c => c.PImageId == Pimageid).FirstOrDefault();
-
-                    //            string extensionstuimg = Path.GetExtension(model.Image5.FileName);
-                    //            model.Image5.SaveAs(Server.MapPath("~/images/ProductImg/" + pimagearr.PImageId + extensionstuimg));
-                    //            pimagearr.PImage = pimagearr.PImageId + extensionstuimg;
-                    //            db.SaveChanges();
-                    //        }
-                    //    }
-
-                    //}
                 }
                 var res = new { res = "1", ProductId = result.ProductId };
                 return Json(res, JsonRequestBehavior.AllowGet);
@@ -1213,7 +1249,7 @@ namespace GiftChoice.Controllers
             }
         }
 
-        public JsonResult UpdateProductArrayData(ProductTblmodel model)
+        public JsonResult UpdateProductArrayData(ProductTblmodel model, List<ProductDetailTbl> productDataArray)
         {
 
             try
@@ -1262,6 +1298,32 @@ namespace GiftChoice.Controllers
 
                         }
                     }
+
+                    // Remove ProductDetail_Tbl records for the given PId
+                    var RemoveProductDetail = db.ProductDetailTbls.Where(r => r.ProductId == model.ProductId);
+                    db.ProductDetailTbls.RemoveRange(RemoveProductDetail);
+                    db.SaveChanges();
+
+                    for (int i = 0; i < productDataArray.Count; i++)
+                    {
+
+                        if (productDataArray[i].SizeId != -1)
+                        {
+
+                            ProductDetailTbl productDetail = new ProductDetailTbl();
+                            productDetail.PdId = db.ProductDetailTbls.DefaultIfEmpty().Max(r => r == null ? 0 : r.PdId) + 1;
+                            productDetail.ProductId = result.ProductId;
+                            productDetail.ProductType = result.ProductType;
+                            productDetail.SizeId = productDataArray[i].SizeId;
+                            productDetail.Price = productDataArray[i].Price;
+                            productDetail.Priority = productDataArray[i].Priority;
+                            productDetail.ProductType = "MainProduct";
+                            productDetail.Active = true;
+                            db.ProductDetailTbls.Add(productDetail);
+                            db.SaveChanges();
+                        }
+
+                    }
                 }
 
 
@@ -1303,7 +1365,7 @@ namespace GiftChoice.Controllers
                     }
                     rws.MainCateId = model.MainCateId;
                     rws.Priority = model.Priority;
-                    rws.SUrl = db.MainCateTbls.Where(m => m.MainCateId == model.MainCateId).Select(m => m.MUrl).FirstOrDefault();
+                    rws.SUrl = model.SUrl;
                     rws.Active = true;
                     db.SliderTbls.Add(rws);
                     db.SaveChanges();
@@ -1344,7 +1406,7 @@ namespace GiftChoice.Controllers
 
                     rws.Priority = model.Priority;
                     rws.MainCateId = model.MainCateId;
-                    rws.SUrl = db.MainCateTbls.Where(m => m.MainCateId == model.MainCateId).Select(m => m.MUrl).FirstOrDefault();
+                    rws.SUrl = model.SUrl;
                     db.SaveChanges();
                     var res = new { res = "1" };
                     return Json(res, JsonRequestBehavior.AllowGet);
@@ -1382,9 +1444,9 @@ namespace GiftChoice.Controllers
             {
                 c.MainCateId,
                 c.SliderId,
+                c.SUrl,
                 c.Priority,
                 c.SliderImage,
-                MainCate = db.MainCateTbls.Where(m => m.MainCateId == c.MainCateId).Select(m => m.MTitle).FirstOrDefault(),
                 c.Active
             }).OrderBy(c => c.Priority);
             return Json(res, JsonRequestBehavior.AllowGet);
@@ -1845,7 +1907,7 @@ namespace GiftChoice.Controllers
         {
             try
             {
-                var result = db.BannerPTTbls.Where(p => p.Position == model.Position && p.Position != "Multiple Banner").Count();
+                var result = db.MainCateTbls.Where(p => p.Position == model.Position && p.Position != "Multiple Banner").Count();
 
                 if (model.Position == "Small Banner" && result > 3)
                 {
@@ -1861,8 +1923,8 @@ namespace GiftChoice.Controllers
 
                 }
 
-                BannerPTTbl mainCateTbl = new BannerPTTbl();
-                mainCateTbl.MainCateId = db.BannerPTTbls.DefaultIfEmpty().Max(r => r == null ? 0 : r.MainCateId) + 1;
+                MainCateTbl mainCateTbl = new MainCateTbl();
+                mainCateTbl.MainCateId = db.MainCateTbls.DefaultIfEmpty().Max(r => r == null ? 0 : r.MainCateId) + 1;
 
 
                 mainCateTbl.MTitle = model.MTitle;
@@ -1870,7 +1932,7 @@ namespace GiftChoice.Controllers
                 if (model.Image != null)
                 {
                     string extensionstuimg = Path.GetExtension(model.Image.FileName);
-                    model.Image.SaveAs(Server.MapPath("~/images/BannerPTImage/" + mainCateTbl.MainCateId + "" + extensionstuimg));
+                    model.Image.SaveAs(Server.MapPath("~/images/MainCate/" + mainCateTbl.MainCateId + "" + extensionstuimg));
                     //   MainCateVaryQualityLevel(model.Image.InputStream, mainCateTbl.MainCateId + extensionstuimg);
                     mainCateTbl.MImage = mainCateTbl.MainCateId + "" + extensionstuimg;
                 }
@@ -1879,8 +1941,10 @@ namespace GiftChoice.Controllers
                 mainCateTbl.ModelQuery1 = model.ModelQuery1;
                 mainCateTbl.Update_at = DateTime.Now;
                 mainCateTbl.Active = true;
+                mainCateTbl.MainCateType = "";
+                mainCateTbl.CateType = "BannerCate";
                 mainCateTbl.Priority = model.Priority;
-                db.BannerPTTbls.Add(mainCateTbl);
+                db.MainCateTbls.Add(mainCateTbl);
                 db.SaveChanges();
                 var res = new { res = "1", MainCateId = mainCateTbl.MainCateId };
                 return Json(res, JsonRequestBehavior.AllowGet);
@@ -1900,7 +1964,7 @@ namespace GiftChoice.Controllers
             try
             {
 
-                BannerPTTbl result = db.BannerPTTbls.Where(c => c.MainCateId == model.MainCateId).FirstOrDefault();
+                MainCateTbl result = db.MainCateTbls.Where(c => c.MainCateId == model.MainCateId).FirstOrDefault();
 
                 if (result == null)
                 {
@@ -1944,18 +2008,20 @@ namespace GiftChoice.Controllers
         {
             try
             {
-                var result = db.BannerPTTbls.FirstOrDefault(p => p.MainCateId == model.MainCateId);
+                var result = db.MainCateTbls.FirstOrDefault(p => p.MainCateId == model.MainCateId);
                 if (result != null)
                 {
                     if (model.Image != null)
                     {
                         string extensionstuimg = Path.GetExtension(model.Image.FileName);
-                        model.Image.SaveAs(Server.MapPath("~/images/BannerPTImage/" + result.MainCateId + "" + extensionstuimg));
+                        model.Image.SaveAs(Server.MapPath("~/images/MainCate/" + result.MainCateId + "" + extensionstuimg));
                         result.MImage = result.MainCateId + "" + extensionstuimg;
                     }
                     result.MTitle = model.MTitle;
                     result.Position = model.Position;
                     result.ModelQuery1 = model.ModelQuery1;
+                    result.MainCateType = "";
+                    result.CateType = "BannerCate";
                     result.MUrl = result.MTitle.Replace(" ", "-");
                     result.Priority = model.Priority;
                     result.Update_at = DateTime.Now;
@@ -1979,7 +2045,7 @@ namespace GiftChoice.Controllers
             try
             {
 
-                BannerPTTbl result = db.BannerPTTbls.Where(c => c.MainCateId == model.MainCateId).FirstOrDefault();
+                MainCateTbl result = db.MainCateTbls.Where(c => c.MainCateId == model.MainCateId).FirstOrDefault();
 
                 if (result == null)
                 {
@@ -2024,7 +2090,7 @@ namespace GiftChoice.Controllers
         {
             try
             {
-                var jb = db.BannerPTTbls.Where(c => c.MainCateId == id).FirstOrDefault();
+                var jb = db.MainCateTbls.Where(c => c.MainCateId == id).FirstOrDefault();
                 if (jb != null)
                 {
 
@@ -2051,7 +2117,7 @@ namespace GiftChoice.Controllers
         {
             var res =
 
-               db.BannerPTTbls.Select(m => new
+               db.MainCateTbls.Where(m => m.CateType == "BannerCate").Select(m => new
                {
                    m.MainCateId,
                    m.MUrl,
@@ -2077,11 +2143,11 @@ namespace GiftChoice.Controllers
 
         //-------------- Add Banner in Product->------------->---------------------->---------------------------->------->------------>---------->---
 
-        public JsonResult GetBannerInProduct(string id)
+        public JsonResult GetBannerInProduct()
         {
             var res =
 
-               db.BannerPTTbls.Where(m => m.Position == id && m.Active == true).Select(m => new
+               db.MainCateTbls.Where(m => m.Active == true && m.CateType == "BannerCate").Select(m => new
                {
                    m.MainCateId,
                    m.MUrl,
@@ -2089,6 +2155,7 @@ namespace GiftChoice.Controllers
                    m.Active,
                    m.MImage,
                    m.Position,
+                   m.CateType,
                    m.Priority,
                    Submenu = db.BPTKeywordTbls.Where(s => s.MainCateId == m.MainCateId && s.Active == true).Select(s => new
                    {
@@ -2101,11 +2168,36 @@ namespace GiftChoice.Controllers
             return Json(res, JsonRequestBehavior.AllowGet);
 
         }
+
+        //public JsonResult GetBannerInProduct(string id)
+        //{
+        //    var res =
+
+        //       db.BannerPTTbls.Where(m => m.Position == id && m.Active == true).Select(m => new
+        //       {
+        //           m.MainCateId,
+        //           m.MUrl,
+        //           m.MTitle,
+        //           m.Active,
+        //           m.MImage,
+        //           m.Position,
+        //           m.Priority,
+        //           Submenu = db.BPTKeywordTbls.Where(s => s.MainCateId == m.MainCateId && s.Active == true).Select(s => new
+        //           {
+        //               s.MainCateId,
+        //               s.KeywordId,
+        //               s.MCkeywordId,
+        //               SubmenuTitle = db.KeywordTbls.Where(t => t.KeywordId == s.KeywordId).Select(t => t.Keyword).FirstOrDefault()
+        //           })
+        //       }).OrderBy(m => m.Priority);
+        //    return Json(res, JsonRequestBehavior.AllowGet);
+
+        //}
         public JsonResult GetBannerInProductFilter()
         {
             var res =
 
-               db.BannerPTTbls.Where(m => m.Active == true).Select(m => new
+               db.MainCateTbls.Where(m => m.Active == true && m.CateType == "BannerCate").Select(m => new
                {
                    m.MainCateId,
                    m.MUrl,
@@ -2175,9 +2267,9 @@ namespace GiftChoice.Controllers
 
             try
             {
-                BannerProductTbl productmodel = new BannerProductTbl();
+                ProductTbl productmodel = new ProductTbl();
 
-                BannerProductTbl result = db.BannerProductTbls.Where(c => c.ProductTitle == model.ProductTitle).FirstOrDefault();
+                ProductTbl result = db.ProductTbls.Where(c => c.ProductTitle == model.ProductTitle && (c.ProductType == "BannerProduct" || c.ProductType == "Common")).FirstOrDefault();
                 if (result != null)
                 {
                     var res = new { res = "-1" };
@@ -2185,103 +2277,130 @@ namespace GiftChoice.Controllers
                 }
                 else
                 {
-                    productmodel.ProductId = db.BannerProductTbls.DefaultIfEmpty().Max(r => r == null ? 0 : r.ProductId) + 1;
-
+                    string ProductType = "";
+                    if (model.MainCateId.HasValue && !model.BannerCateId.HasValue)
+                    {
+                        ProductType = "MainProduct";
+                    }
+                    else if (!model.MainCateId.HasValue && model.BannerCateId.HasValue)
+                    {
+                        ProductType = "BannerProduct";
+                    }
+                    else if (model.MainCateId.HasValue && model.BannerCateId.HasValue)
+                    {
+                        ProductType = "Common";
+                    }
+                    else
+                    {
+                        var res1 = new { res = "0" };
+                        return Json(res1, JsonRequestBehavior.AllowGet); // Optional: handle the case where both are null
+                    }
+                    productmodel.ProductId = db.ProductTbls.DefaultIfEmpty().Max(r => r == null ? 0 : r.ProductId) + 1;
                     productmodel.MainCateId = model.MainCateId;
-                    productmodel.QueryId = model.QueryId;
-                    productmodel.BSubId = db.BSubTitleDetailTbls.Where(q => q.BSubDId == model.BSubDId).Select(q => q.BSubId).FirstOrDefault();
-                    productmodel.BSubDId = model.BSubDId;
-
+                    productmodel.BannerCateId = model.BannerCateId;
+                    //productmodel.QueryId = model.QueryId;
+                    //productmodel.BSubId = db.BSubTitleDetailTbls.Where(q => q.BSubDId == model.BSubDId).Select(q => q.BSubId).FirstOrDefault();
+                    //productmodel.BSubDId = model.BSubDId;
+                    productmodel.LabelId = model.LabelId ?? 0;
                     productmodel.ProductTitle = model.ProductTitle;
                     productmodel.Active = true;
+                    productmodel.VideoId = model.VideoId;
                     productmodel.VideoUrl = model.VideoUrl ?? "";
                     productmodel.SameDay = model.SameDay;
                     productmodel.PUrl = model.ProductTitle.Replace(" ", "-");
                     productmodel.PDesc = model.PDesc;
                     productmodel.PLabel = model.PLabel == null ? "" : model.PLabel;
                     productmodel.Price = model.Price;
+                    productmodel.ProductType = ProductType;
+                    //   productmodel.ProductType = model.Common == true ? "Common" : "BannerProduct";
                     productmodel.Qty = 1;
                     if (model.VideoData != null)
                     {
                         string extensionstuimg = Path.GetExtension(model.VideoData.FileName);
-                        model.VideoData.SaveAs(Server.MapPath("~/images/ProductVideo/" + "B_" + productmodel.ProductId + extensionstuimg));
-                        productmodel.Video = "B_" + productmodel.ProductId + extensionstuimg;
+                        model.VideoData.SaveAs(Server.MapPath("~/images/ProductVideo/" + productmodel.ProductId + extensionstuimg));
+                        productmodel.Video = productmodel.ProductId + extensionstuimg;
 
                     }
 
                     productmodel.Create_at = DateTime.Now;
                     productmodel.Update_at = DateTime.Now;
                     productmodel.Priority = model.Priority;
-                    db.BannerProductTbls.Add(productmodel);
+                    db.ProductTbls.Add(productmodel);
                     db.SaveChanges();
 
 
                     if (model.Image1 != null)
                     {
-                        BannerProductImage productImage = new BannerProductImage();
-                        productImage.PImageId = db.BannerProductImages.DefaultIfEmpty().Max(r => r == null ? 0 : r.PImageId) + 1;
+                        ProductImage productImage = new ProductImage();
+                        productImage.PImageId = db.ProductImages.DefaultIfEmpty().Max(r => r == null ? 0 : r.PImageId) + 1;
                         string extensionstuimg = Path.GetExtension(model.Image1.FileName);
-                        model.Image1.SaveAs(Server.MapPath("~/images/ProductImg/" + "B_" + productImage.PImageId + extensionstuimg));
-                        // ProductVaryQualityLevel(model.Image1.InputStream, productImage.PImageId + extensionstuimg);
-                        productImage.PImage = "B_" + productImage.PImageId + extensionstuimg;
+                        model.Image1.SaveAs(Server.MapPath("~/images/ProductImg/" + productImage.PImageId + extensionstuimg));
+                        //  ProductVaryQualityLevel(model.Image1.InputStream, productImage.PImageId + extensionstuimg);
+                        productImage.ImageIndex = 1;
+                        productImage.PImage = productImage.PImageId + extensionstuimg;
                         productImage.ProductId = productmodel.ProductId;
                         productImage.Active = true;
-                        db.BannerProductImages.Add(productImage);
+                        db.ProductImages.Add(productImage);
                         db.SaveChanges();
                     }
                     if (model.Image2 != null)
                     {
-                        BannerProductImage productImage = new BannerProductImage();
-                        productImage.PImageId = db.BannerProductImages.DefaultIfEmpty().Max(r => r == null ? 0 : r.PImageId) + 1;
+                        ProductImage productImage = new ProductImage();
+                        productImage.PImageId = db.ProductImages.DefaultIfEmpty().Max(r => r == null ? 0 : r.PImageId) + 1;
                         string extensionstuimg = Path.GetExtension(model.Image2.FileName);
                         //  VaryQualityLevel(model.Image1.InputStream, productImage.PImageId + extensionstuimg);
-                        model.Image2.SaveAs(Server.MapPath("~/images/ProductImg/" + "B_" + productImage.PImageId + extensionstuimg));
-                        //ProductVaryQualityLevel(model.Image2.InputStream, productImage.PImageId + extensionstuimg);
-                        productImage.PImage = "B_" + productImage.PImageId + extensionstuimg;
+                        model.Image2.SaveAs(Server.MapPath("~/images/ProductImg/" + productImage.PImageId + extensionstuimg));
+                        //    ProductVaryQualityLevel(model.Image2.InputStream, productImage.PImageId + extensionstuimg);
+                        productImage.ImageIndex = 2;
+
+                        productImage.PImage = productImage.PImageId + extensionstuimg;
                         productImage.ProductId = productmodel.ProductId;
                         productImage.Active = true;
-                        db.BannerProductImages.Add(productImage);
+                        db.ProductImages.Add(productImage);
                         db.SaveChanges();
                     }
                     if (model.Image3 != null)
                     {
-                        BannerProductImage productImage = new BannerProductImage();
-
-                        productImage.PImageId = db.BannerProductImages.DefaultIfEmpty().Max(r => r == null ? 0 : r.PImageId) + 1;
+                        ProductImage productImage = new ProductImage();
+                        productImage.PImageId = db.ProductImages.DefaultIfEmpty().Max(r => r == null ? 0 : r.PImageId) + 1;
                         string extensionstuimg = Path.GetExtension(model.Image3.FileName);
-                        model.Image3.SaveAs(Server.MapPath("~/images/ProductImg/" + "B_" + productImage.PImageId + extensionstuimg));
-                        //ProductVaryQualityLevel(model.Image3.InputStream, productImage.PImageId + extensionstuimg);
-                        productImage.PImage = "B_" + productImage.PImageId + extensionstuimg;
+                        model.Image3.SaveAs(Server.MapPath("~/images/ProductImg/" + productImage.PImageId + extensionstuimg));
+                        //  ProductVaryQualityLevel(model.Image3.InputStream, productImage.PImageId + extensionstuimg);
+                        productImage.ImageIndex = 3;
+
+                        productImage.PImage = productImage.PImageId + extensionstuimg;
                         productImage.ProductId = productmodel.ProductId;
                         productImage.Active = true;
-                        db.BannerProductImages.Add(productImage);
+                        db.ProductImages.Add(productImage);
                         db.SaveChanges();
                     }
                     if (model.Image4 != null)
                     {
-                        BannerProductImage productImage = new BannerProductImage();
-
-                        productImage.PImageId = db.BannerProductImages.DefaultIfEmpty().Max(r => r == null ? 0 : r.PImageId) + 1;
+                        ProductImage productImage = new ProductImage();
+                        productImage.PImageId = db.ProductImages.DefaultIfEmpty().Max(r => r == null ? 0 : r.PImageId) + 1;
                         string extensionstuimg = Path.GetExtension(model.Image4.FileName);
-                        model.Image4.SaveAs(Server.MapPath("~/images/ProductImg/" + "B_" + productImage.PImageId + extensionstuimg));
-                        //ProductVaryQualityLevel(model.Image4.InputStream, productImage.PImageId + extensionstuimg);
-                        productImage.PImage = "B_" + productImage.PImageId + extensionstuimg;
+                        model.Image4.SaveAs(Server.MapPath("~/images/ProductImg/" + productImage.PImageId + extensionstuimg));
+                        // ProductVaryQualityLevel(model.Image4.InputStream, productImage.PImageId + extensionstuimg);
+                        productImage.ImageIndex = 4;
+
+                        productImage.PImage = productImage.PImageId + extensionstuimg;
                         productImage.ProductId = productmodel.ProductId;
                         productImage.Active = true;
-                        db.BannerProductImages.Add(productImage);
+                        db.ProductImages.Add(productImage);
                         db.SaveChanges();
                     }
                     if (model.Image5 != null)
                     {
-                        BannerProductImage productImage = new BannerProductImage();
-                        productImage.PImageId = db.BannerProductImages.DefaultIfEmpty().Max(r => r == null ? 0 : r.PImageId) + 1;
+                        ProductImage productImage = new ProductImage();
+                        productImage.PImageId = db.ProductImages.DefaultIfEmpty().Max(r => r == null ? 0 : r.PImageId) + 1;
                         string extensionstuimg = Path.GetExtension(model.Image5.FileName);
-                        model.Image5.SaveAs(Server.MapPath("~/images/ProductImg/" + "B_" + productImage.PImageId + extensionstuimg));
-                        //ProductVaryQualityLevel(model.Image5.InputStream, productImage.PImageId + extensionstuimg);
-                        productImage.PImage = "B_" + productImage.PImageId + extensionstuimg;
+                        model.Image5.SaveAs(Server.MapPath("~/images/ProductImg/" + productImage.PImageId + extensionstuimg));
+                        // ProductVaryQualityLevel(model.Image5.InputStream, productImage.PImageId + extensionstuimg);
+                        productImage.ImageIndex = 5;
+                        productImage.PImage = productImage.PImageId + extensionstuimg;
                         productImage.ProductId = productmodel.ProductId;
                         productImage.Active = true;
-                        db.BannerProductImages.Add(productImage);
+                        db.ProductImages.Add(productImage);
                         db.SaveChanges();
                     }
 
@@ -2304,72 +2423,136 @@ namespace GiftChoice.Controllers
             try
             {
 
-                BannerProductTbl result = db.BannerProductTbls.Where(c => c.ProductId == model.ProductId).FirstOrDefault();
+                ProductTbl result = db.ProductTbls.Where(c => c.ProductId == model.ProductId).FirstOrDefault();
 
                 if (result != null)
                 {
 
-                    result.PDesc1 = model.PDesc1;
+                    result.TableDesc = model.PDesc1;
                     db.SaveChanges();
-                }
 
 
-                if (model.bannerQueryListTbls != null)
-                {
-                    for (int i = 0; i < model.bannerQueryListTbls.Count; i++)
+                    //if (model.bannerQueryListTbls != null)
+                    //{
+                    //    for (int i = 0; i < model.bannerQueryListTbls.Count; i++)
+                    //    {
+                    //        BannerQueryListTbl pKeyword = new BannerQueryListTbl();
+                    //        pKeyword.BannerQueryListId = db.BannerQueryListTbls.DefaultIfEmpty().Max(r => r == null ? 0 : r.BannerQueryListId) + 1;
+                    //        pKeyword.BMainCateId = Convert.ToInt32(result.BannerCateId);
+                    //        pKeyword.ProductId = result.ProductId;
+                    //        pKeyword.QueryId = model.bannerQueryListTbls[i].QueryId;
+                    //        db.BannerQueryListTbls.Add(pKeyword);
+                    //        db.SaveChanges();
+
+                    //    }
+                    //}
+
+                    if (model.ProductFilterWordTbl != null)
                     {
-                        BannerQueryListTbl pKeyword = new BannerQueryListTbl();
-                        pKeyword.BannerQueryListId = db.BannerQueryListTbls.DefaultIfEmpty().Max(r => r == null ? 0 : r.BannerQueryListId) + 1;
-                        pKeyword.BMainCateId = Convert.ToInt32(result.MainCateId);
-                        pKeyword.ProductId = result.ProductId;
-                        pKeyword.QueryId = model.bannerQueryListTbls[i].QueryId;
-                        db.BannerQueryListTbls.Add(pKeyword);
-                        db.SaveChanges();
 
+                        for (int l = 0; l < model.ProductFilterWordTbl.Count; l++)
+                        {
+
+                            ProductFilterWordTbl keywordTbl = new ProductFilterWordTbl();
+                            keywordTbl.PFID = db.ProductFilterWordTbls.DefaultIfEmpty().Max(r => r == null ? 0 : r.PFID) + 1;
+                            keywordTbl.PFilterTilte = model.ProductFilterWordTbl[l].PFilterTilte;
+                            keywordTbl.PFilterId = model.ProductFilterWordTbl[l].PFilterId;
+                            keywordTbl.ProductId = result.ProductId;
+                            db.ProductFilterWordTbls.Add(keywordTbl);
+                            db.SaveChanges();
+                        }
                     }
-                }
 
-                //if (model.KeywordTbls != null)
-                //{
-                //    for (int i = 0; i < model.KeywordTbls.Count; i++)
-                //    {
-                //        BPKeywordTbl pKeyword = new BPKeywordTbl();
-                //        pKeyword.PKeywordId = db.BPKeywordTbls.DefaultIfEmpty().Max(r => r == null ? 0 : r.PKeywordId) + 1;
-                //        pKeyword.ProductId = model.ProductId;
-                //        pKeyword.Active = true;
-                //        pKeyword.KeywordId = model.KeywordTbls[i].KeywordId;
-                //        db.BPKeywordTbls.Add(pKeyword);
-                //        db.SaveChanges();
 
-                //    }
-                //}
-
-                if (model.BPSizeTbl != null)
-                {
-                    for (int i = 0; i < model.BPSizeTbl.Count; i++)
+                    if (model.KeywordTbls != null)
                     {
-                        BPSizeTbl pSizeTbl = new BPSizeTbl();
-                        pSizeTbl.BPSizeId = db.BPSizeTbls.DefaultIfEmpty().Max(r => r == null ? 0 : r.BPSizeId) + 1;
-                        pSizeTbl.ProductId = model.ProductId;
-                        pSizeTbl.Active = true;
-                        pSizeTbl.SizeId = model.BPSizeTbl[i].SizeId;
-                        db.BPSizeTbls.Add(pSizeTbl);
-                        db.SaveChanges();
+                        //     public string Menu { get; set; }
+                        // public string text { get; set; }
+                        for (int k = 0; k < model.KeywordTbls.Count; k++)
+                        {
+                            string keyword = model.KeywordTbls[k].text;
+                            KeywordTbl result2 = db.KeywordTbls.Where(c => c.Keyword == keyword).FirstOrDefault();
+                            if (result2 == null)
+                            {
 
+                                KeywordTbl keywordTbl = new KeywordTbl();
+                                keywordTbl.KeywordId = db.KeywordTbls.DefaultIfEmpty().Max(r => r == null ? 0 : r.KeywordId) + 1;
+
+
+                                keywordTbl.Keyword = model.KeywordTbls[k].text;
+                                keywordTbl.KUrl = model.KeywordTbls[k].text.Replace(" ", "-");
+                                keywordTbl.Create_at = DateTime.Now;
+                                keywordTbl.Update_at = DateTime.Now;
+                                keywordTbl.Active = true;
+                                keywordTbl.Priority = model.Priority;
+                                db.KeywordTbls.Add(keywordTbl);
+                                db.SaveChanges();
+                            }
+                        }
                     }
-                }
-                for (int i = 0; i < productDataArray.Count; i++)
-                {
-                    ProductDetailTbl productDetail = new ProductDetailTbl();
-                    productDetail.PdId = db.ProductDetailTbls.DefaultIfEmpty().Max(r => r == null ? 0 : r.PdId) + 1;
-                    productDetail.ProductId = result.ProductId;
-                    productDetail.SizeId = productDataArray[i].SizeId;
-                    productDetail.Price = productDataArray[i].Price;
-                    productDetail.ProductType = "BannerProduct";
-                    productDetail.Priority = productDataArray[i].Priority;
-                    productDetail.Active = true;
-                    db.ProductDetailTbls.Add(productDetail);
-                    db.SaveChanges();
+
+                    if (model.KeywordTbls != null)
+                    {
+                        for (int i = 0; i < model.KeywordTbls.Count; i++)
+                        {
+                            string keyword = model.KeywordTbls[i].text;
+
+                            PKeywordTbl pKeyword = new PKeywordTbl();
+                            pKeyword.PKeywordId = db.PKeywordTbls.DefaultIfEmpty().Max(r => r == null ? 0 : r.PKeywordId) + 1;
+                            pKeyword.ProductId = model.ProductId;
+                            pKeyword.Active = true;
+                            pKeyword.KeywordId = db.KeywordTbls.Where(k => k.Keyword == keyword).Select(k => k.KeywordId).FirstOrDefault();
+                            db.PKeywordTbls.Add(pKeyword);
+                            db.SaveChanges();
+
+                        }
+                    }
+
+                    //if (model.BPSizeTbl != null)
+                    //{
+                    //    for (int i = 0; i < model.BPSizeTbl.Count; i++)
+                    //    {
+                    //        BPSizeTbl pSizeTbl = new BPSizeTbl();
+                    //        pSizeTbl.BPSizeId = db.BPSizeTbls.DefaultIfEmpty().Max(r => r == null ? 0 : r.BPSizeId) + 1;
+                    //        pSizeTbl.ProductId = model.ProductId;
+                    //        pSizeTbl.Active = true;
+                    //        pSizeTbl.SizeId = model.BPSizeTbl[i].SizeId;
+                    //        db.BPSizeTbls.Add(pSizeTbl);
+                    //        db.SaveChanges();
+
+                    //    }
+                    //}
+
+                    //if (model.SizeTbls != null)
+                    //{
+                    //    for (int i = 0; i < model.SizeTbls.Count; i++)
+                    //    {
+                    //        PSizeTbl pSizeTbl = new PSizeTbl();
+                    //        pSizeTbl.PSizeId = db.PSizeTbls.DefaultIfEmpty().Max(r => r == null ? 0 : r.PSizeId) + 1;
+                    //        pSizeTbl.ProductId = model.ProductId;
+                    //        pSizeTbl.Active = true;
+                    //        pSizeTbl.SizeId = model.SizeTbls[i].SizeId;
+                    //        db.PSizeTbls.Add(pSizeTbl);
+                    //        db.SaveChanges();
+
+                    //    }
+                    //}
+                    for (int i = 0; i < productDataArray.Count; i++)
+                    {
+                        if (productDataArray[i].SizeId != -1)
+                        {
+                            ProductDetailTbl productDetail = new ProductDetailTbl();
+                            productDetail.PdId = db.ProductDetailTbls.DefaultIfEmpty().Max(r => r == null ? 0 : r.PdId) + 1;
+                            productDetail.ProductId = result.ProductId;
+                            productDetail.SizeId = productDataArray[i].SizeId;
+                            productDetail.Price = productDataArray[i].Price;
+                            productDetail.ProductType = result.ProductType;
+                            productDetail.Priority = productDataArray[i].Priority;
+                            productDetail.Active = true;
+                            db.ProductDetailTbls.Add(productDetail);
+                            db.SaveChanges();
+                        }
+                    }
                 }
                 var res = new { res = "1", };
                 return Json(res, JsonRequestBehavior.AllowGet);
@@ -2387,7 +2570,7 @@ namespace GiftChoice.Controllers
         {
             try
             {
-                var jb = db.BannerProductTbls.Where(c => c.ProductId == id).FirstOrDefault();
+                var jb = db.ProductTbls.Where(c => c.ProductId == id).FirstOrDefault();
                 if (jb != null)
                 {
 
@@ -2415,25 +2598,46 @@ namespace GiftChoice.Controllers
             try
             {
 
-                BannerProductTbl result = db.BannerProductTbls.Where(c => c.ProductId == model.ProductId).FirstOrDefault();
+                ProductTbl result = db.ProductTbls.Where(c => c.ProductId == model.ProductId).FirstOrDefault();
                 if (result != null)
                 {
 
-
+                    string ProductType = "";
+                    if (model.MainCateId.HasValue && !model.BannerCateId.HasValue)
+                    {
+                        ProductType = "MainProduct";
+                    }
+                    else if (!model.MainCateId.HasValue && model.BannerCateId.HasValue)
+                    {
+                        ProductType = "BannerProduct";
+                    }
+                    else if (model.MainCateId.HasValue && model.BannerCateId.HasValue)
+                    {
+                        ProductType = "Common";
+                    }
+                    else
+                    {
+                        var res1 = new { res = "0" };
+                        return Json(res1, JsonRequestBehavior.AllowGet); // Optional: handle the case where both are null
+                    }
                     result.MainCateId = model.MainCateId;
-                    result.QueryId = model.QueryId;
-                    result.BSubId = db.BSubTitleDetailTbls.Where(q => q.BSubDId == model.BSubDId).Select(q => q.BSubId).FirstOrDefault();
-                    result.BSubDId = model.BSubDId;
+                    result.BannerCateId = model.BannerCateId;
+                    //result.QueryId = model.QueryId;
+                    //result.BSubId = db.BSubTitleDetailTbls.Where(q => q.BSubDId == model.BSubDId).Select(q => q.BSubId).FirstOrDefault();
+                    //result.BSubDId = model.BSubDId;
+                    result.LabelId = model.LabelId ?? 0;
                     result.ProductTitle = model.ProductTitle;
                     result.VideoUrl = model.VideoUrl ?? "";
                     result.SameDay = model.SameDay;
+                    result.VideoId = model.VideoId;
                     result.PDesc = model.PDesc;
+                    result.ProductType = ProductType;
                     result.PUrl = model.ProductTitle.Replace(" ", "-");
                     if (model.VideoData != null)
                     {
                         string extensionstuimg = Path.GetExtension(model.VideoData.FileName);
-                        model.VideoData.SaveAs(Server.MapPath("~/images/ProductVideo/" + "B_" + result.ProductId + extensionstuimg));
-                        result.Video = "B_" + result.ProductId + extensionstuimg; 
+                        model.VideoData.SaveAs(Server.MapPath("~/images/ProductVideo/" + result.ProductId + extensionstuimg));
+                        result.Video = result.ProductId + extensionstuimg;
                     }
                     result.PLabel = model.PLabel == null ? "" : model.PLabel;
                     result.Price = model.Price;
@@ -2443,30 +2647,35 @@ namespace GiftChoice.Controllers
 
                     if (model.Image1 != null)
                     {
-                        List<BannerProductImage> productImage = db.BannerProductImages.Where(c => c.ProductId == result.ProductId).ToList();
+                        var productImage = db.ProductImages.Where(c => c.ProductId == result.ProductId && c.ImageIndex == 1).FirstOrDefault();
 
-                        if (productImage != null && productImage.Count != 0)
+                        if (productImage != null)
                         {
-                            var Pimageid = productImage[0].PImageId;
-                            BannerProductImage pimagearr = db.BannerProductImages.Where(c => c.PImageId == Pimageid).FirstOrDefault();
+                            var Pimageid = productImage.PImageId;
+                            ProductImage pimagearr = db.ProductImages.Where(c => c.PImageId == Pimageid).FirstOrDefault();
                             string extensionstuimg = Path.GetExtension(model.Image1.FileName);
 
-                            model.Image1.SaveAs(Server.MapPath("~/images/ProductImg/" + "B_" + pimagearr.PImageId + extensionstuimg));
-                            //ProductVaryQualityLevel(model.Image1.InputStream, Pimageid + extensionstuimg);
-                            pimagearr.PImage = "B_" + pimagearr.PImageId + extensionstuimg;
+                            model.Image1.SaveAs(Server.MapPath("~/images/ProductImg/" + pimagearr.PImageId + extensionstuimg));
+                            //string targetPath = Server.MapPath("~/images/ProductImg/" + pimagearr.PImageId + extensionstuimg);
+                            //Stream strm = model.Image1.InputStream;
+                            //var targetFile = targetPath;
+                            //     ReduceImageSize(0.5, strm, targetFile);
+                            //     ProductVaryQualityLevel(model.Image1.InputStream, Pimageid + extensionstuimg);
+                            pimagearr.PImage = pimagearr.PImageId + extensionstuimg;
                             db.SaveChanges();
                         }
                         else
                         {
-                            BannerProductImage productImage1 = new BannerProductImage();
-                            productImage1.PImageId = db.BannerProductImages.DefaultIfEmpty().Max(r => r == null ? 0 : r.PImageId) + 1;
+                            ProductImage productImage1 = new ProductImage();
+                            productImage1.PImageId = db.ProductImages.DefaultIfEmpty().Max(r => r == null ? 0 : r.PImageId) + 1;
                             string extensionstuimg = Path.GetExtension(model.Image1.FileName);
-                            model.Image1.SaveAs(Server.MapPath("~/images/ProductImg/" + "B_" + productImage1.PImageId + extensionstuimg));
-                            //ProductVaryQualityLevel(model.Image1.InputStream, productImage1.PImageId + extensionstuimg);
-                            productImage1.PImage = "B_" + productImage1.PImageId + extensionstuimg;
+                            model.Image1.SaveAs(Server.MapPath("~/images/ProductImg/" + productImage1.PImageId + extensionstuimg));
+                            //     ProductVaryQualityLevel(model.Image1.InputStream, productImage1.PImageId + extensionstuimg);
+                            productImage1.PImage = productImage1.PImageId + extensionstuimg;
+                            productImage1.ImageIndex = 1;
                             productImage1.ProductId = result.ProductId;
                             productImage1.Active = true;
-                            db.BannerProductImages.Add(productImage1);
+                            db.ProductImages.Add(productImage1);
                             db.SaveChanges();
                         }
 
@@ -2475,116 +2684,122 @@ namespace GiftChoice.Controllers
 
                     if (model.Image2 != null)
                     {
-                        List<BannerProductImage> productImage = db.BannerProductImages.Where(c => c.ProductId == result.ProductId).ToList();
+                        var productImage = db.ProductImages.Where(c => c.ProductId == result.ProductId && c.ImageIndex == 2).FirstOrDefault();
 
                         if (productImage != null)
                         {
-                            var Pimageid = productImage[1].PImageId;
+                            var Pimageid = productImage.PImageId;
                             ProductImage pimagearr = db.ProductImages.Where(c => c.PImageId == Pimageid).FirstOrDefault();
                             string extensionstuimg = Path.GetExtension(model.Image2.FileName);
-                            model.Image2.SaveAs(Server.MapPath("~/images/ProductImg/" + "B_" + pimagearr.PImageId + extensionstuimg));
-                            //ProductVaryQualityLevel(model.Image2.InputStream, Pimageid + extensionstuimg);
-                            pimagearr.PImage = "B_" + pimagearr.PImageId + extensionstuimg;
+                            model.Image2.SaveAs(Server.MapPath("~/images/ProductImg/" + pimagearr.PImageId + extensionstuimg));
+                            //  ProductVaryQualityLevel(model.Image2.InputStream, Pimageid + extensionstuimg);
+                            pimagearr.PImage = pimagearr.PImageId + extensionstuimg;
                             db.SaveChanges();
                         }
                         else
                         {
-                            BannerProductImage productImage1 = new BannerProductImage();
-                            productImage1.PImageId = db.BannerProductImages.DefaultIfEmpty().Max(r => r == null ? 0 : r.PImageId) + 1;
+                            ProductImage productImage1 = new ProductImage();
+                            productImage1.PImageId = db.ProductImages.DefaultIfEmpty().Max(r => r == null ? 0 : r.PImageId) + 1;
                             string extensionstuimg = Path.GetExtension(model.Image2.FileName);
-                            model.Image2.SaveAs(Server.MapPath("~/images/ProductImg/" + "B_" + productImage1.PImageId + extensionstuimg));
-                            //ProductVaryQualityLevel(model.Image2.InputStream, productImage1.PImageId + extensionstuimg);
-                            productImage1.PImage = "B_" + productImage1.PImageId + extensionstuimg;
+                            model.Image2.SaveAs(Server.MapPath("~/images/ProductImg/" + productImage1.PImageId + extensionstuimg));
+                            //    ProductVaryQualityLevel(model.Image2.InputStream, productImage1.PImageId + extensionstuimg);
+                            productImage1.PImage = productImage1.PImageId + extensionstuimg;
                             productImage1.ProductId = result.ProductId;
+                            productImage1.ImageIndex = 2;
+
                             productImage1.Active = true;
-                            db.BannerProductImages.Add(productImage1);
+                            db.ProductImages.Add(productImage1);
                             db.SaveChanges();
                         }
 
                     }
                     if (model.Image3 != null)
                     {
-                        List<BannerProductImage> productImage = db.BannerProductImages.Where(c => c.ProductId == result.ProductId).ToList();
+                        var productImage = db.ProductImages.Where(c => c.ProductId == result.ProductId && c.ImageIndex == 3).FirstOrDefault();
 
                         if (productImage != null)
                         {
-                            var Pimageid = productImage[2].PImageId;
-                            BannerProductImage pimagearr = db.BannerProductImages.Where(c => c.PImageId == Pimageid).FirstOrDefault();
+                            var Pimageid = productImage.PImageId;
+                            ProductImage pimagearr = db.ProductImages.Where(c => c.PImageId == Pimageid).FirstOrDefault();
                             string extensionstuimg = Path.GetExtension(model.Image3.FileName);
-                            model.Image3.SaveAs(Server.MapPath("~/images/ProductImg/" + "B_" + pimagearr.PImageId + extensionstuimg));
-                            //ProductVaryQualityLevel(model.Image3.InputStream, pimagearr.PImageId + extensionstuimg);
-                            pimagearr.PImage = "B_" + pimagearr.PImageId + extensionstuimg;
+                            model.Image3.SaveAs(Server.MapPath("~/images/ProductImg/" + pimagearr.PImageId + extensionstuimg));
+                            //    ProductVaryQualityLevel(model.Image3.InputStream, pimagearr.PImageId + extensionstuimg);
+                            pimagearr.PImage = pimagearr.PImageId + extensionstuimg;
                             db.SaveChanges();
                         }
                         else
                         {
-                            BannerProductImage productImage1 = new BannerProductImage();
-                            productImage1.PImageId = db.BannerProductImages.DefaultIfEmpty().Max(r => r == null ? 0 : r.PImageId) + 1;
+                            ProductImage productImage1 = new ProductImage();
+                            productImage1.PImageId = db.ProductImages.DefaultIfEmpty().Max(r => r == null ? 0 : r.PImageId) + 1;
                             string extensionstuimg = Path.GetExtension(model.Image3.FileName);
-                            model.Image3.SaveAs(Server.MapPath("~/images/ProductImg/" + "B_" + productImage1.PImageId + extensionstuimg));
-                            //ProductVaryQualityLevel(model.Image3.InputStream, productImage1.PImageId + extensionstuimg);
-                            productImage1.PImage = "B_" + productImage1.PImageId + extensionstuimg;
+                            model.Image3.SaveAs(Server.MapPath("~/images/ProductImg/" + productImage1.PImageId + extensionstuimg));
+                            //  ProductVaryQualityLevel(model.Image3.InputStream, productImage1.PImageId + extensionstuimg);
+                            productImage1.PImage = productImage1.PImageId + extensionstuimg;
                             productImage1.ProductId = result.ProductId;
+                            productImage1.ImageIndex = 3;
                             productImage1.Active = true;
-                            db.BannerProductImages.Add(productImage1);
+                            db.ProductImages.Add(productImage1);
                             db.SaveChanges();
                         }
 
                     }
                     if (model.Image4 != null)
                     {
-                        List<BannerProductImage> productImage = db.BannerProductImages.Where(c => c.ProductId == result.ProductId).ToList();
+                        var productImage = db.ProductImages.Where(c => c.ProductId == result.ProductId && c.ImageIndex == 4).FirstOrDefault();
 
                         if (productImage != null)
                         {
-                            var Pimageid = productImage[3].PImageId;
-                            BannerProductImage pimagearr = db.BannerProductImages.Where(c => c.PImageId == Pimageid).FirstOrDefault();
+                            var Pimageid = productImage.PImageId;
+                            ProductImage pimagearr = db.ProductImages.Where(c => c.PImageId == Pimageid).FirstOrDefault();
                             string extensionstuimg = Path.GetExtension(model.Image4.FileName);
-                            model.Image4.SaveAs(Server.MapPath("~/images/ProductImg/" + "B_" + pimagearr.PImageId + extensionstuimg));
-                            //ProductVaryQualityLevel(model.Image1.InputStream, pimagearr.PImageId + extensionstuimg);
-                            pimagearr.PImage = "B_" + pimagearr.PImageId + extensionstuimg;
+                            model.Image4.SaveAs(Server.MapPath("~/images/ProductImg/" + pimagearr.PImageId + extensionstuimg));
+                            //  ProductVaryQualityLevel(model.Image1.InputStream, pimagearr.PImageId + extensionstuimg);
+                            pimagearr.PImage = pimagearr.PImageId + extensionstuimg;
                             db.SaveChanges();
                         }
                         else
                         {
-                            BannerProductImage productImage1 = new BannerProductImage();
-                            productImage1.PImageId = db.BannerProductImages.DefaultIfEmpty().Max(r => r == null ? 0 : r.PImageId) + 1;
+                            ProductImage productImage1 = new ProductImage();
+                            productImage1.PImageId = db.ProductImages.DefaultIfEmpty().Max(r => r == null ? 0 : r.PImageId) + 1;
                             string extensionstuimg = Path.GetExtension(model.Image4.FileName);
-                            model.Image4.SaveAs(Server.MapPath("~/images/ProductImg/" + "B_" + productImage1.PImageId + extensionstuimg));
-                            //ProductVaryQualityLevel(model.Image1.InputStream, productImage1.PImageId + extensionstuimg);
-                            productImage1.PImage = "B_" + productImage1.PImageId + extensionstuimg;
+                            model.Image4.SaveAs(Server.MapPath("~/images/ProductImg/" + productImage1.PImageId + extensionstuimg));
+                            //   ProductVaryQualityLevel(model.Image1.InputStream, productImage1.PImageId + extensionstuimg);
+                            productImage1.PImage = productImage1.PImageId + extensionstuimg;
                             productImage1.ProductId = result.ProductId;
+                            productImage1.ImageIndex = 4;
                             productImage1.Active = true;
-                            db.BannerProductImages.Add(productImage1);
+                            db.ProductImages.Add(productImage1);
                             db.SaveChanges();
                         }
 
                     }
                     if (model.Image5 != null)
                     {
-                        List<BannerProductImage> productImage = db.BannerProductImages.Where(c => c.ProductId == result.ProductId).ToList();
+                        var productImage = db.ProductImages.Where(c => c.ProductId == result.ProductId && c.ImageIndex == 5).FirstOrDefault();
 
                         if (productImage != null)
                         {
-                            var Pimageid = productImage[4].PImageId;
-                            BannerProductImage pimagearr = db.BannerProductImages.Where(c => c.PImageId == Pimageid).FirstOrDefault();
+                            var Pimageid = productImage.PImageId;
+                            ProductImage pimagearr = db.ProductImages.Where(c => c.PImageId == Pimageid).FirstOrDefault();
                             string extensionstuimg = Path.GetExtension(model.Image5.FileName);
-                            model.Image5.SaveAs(Server.MapPath("~/images/ProductImg/" + "B_" + pimagearr.PImageId + extensionstuimg));
-                            //ProductVaryQualityLevel(model.Image1.InputStream, pimagearr.PImageId + extensionstuimg);
-                            pimagearr.PImage = "B_" + pimagearr.PImageId + extensionstuimg;
+                            model.Image5.SaveAs(Server.MapPath("~/images/ProductImg/" + pimagearr.PImageId + extensionstuimg));
+                            //  ProductVaryQualityLevel(model.Image1.InputStream, pimagearr.PImageId + extensionstuimg);
+                            pimagearr.PImage = pimagearr.PImageId + extensionstuimg;
                             db.SaveChanges();
                         }
                         else
                         {
-                            BannerProductImage productImage1 = new BannerProductImage();
-                            productImage1.PImageId = db.BannerProductImages.DefaultIfEmpty().Max(r => r == null ? 0 : r.PImageId) + 1;
+                            ProductImage productImage1 = new ProductImage();
+                            productImage1.PImageId = db.ProductImages.DefaultIfEmpty().Max(r => r == null ? 0 : r.PImageId) + 1;
                             string extensionstuimg = Path.GetExtension(model.Image5.FileName);
-                            model.Image5.SaveAs(Server.MapPath("~/images/ProductImg/" + "B_" + productImage1.PImageId + extensionstuimg));
-                            //ProductVaryQualityLevel(model.Image1.InputStream, productImage1.PImageId + extensionstuimg);
-                            productImage1.PImage = "B_" + productImage1.PImageId + extensionstuimg;
+                            model.Image5.SaveAs(Server.MapPath("~/images/ProductImg/" + productImage1.PImageId + extensionstuimg));
+                            //   ProductVaryQualityLevel(model.Image1.InputStream, productImage1.PImageId + extensionstuimg);
+                            productImage1.PImage = productImage1.PImageId + extensionstuimg;
                             productImage1.ProductId = result.ProductId;
+                            productImage1.ImageIndex = 5;
+
                             productImage1.Active = true;
-                            db.BannerProductImages.Add(productImage1);
+                            db.ProductImages.Add(productImage1);
                             db.SaveChanges();
                         }
 
@@ -2608,29 +2823,78 @@ namespace GiftChoice.Controllers
         {
             try
             {
-                BannerProductTbl result = db.BannerProductTbls.Where(c => c.ProductId == model.ProductId).FirstOrDefault();
+                ProductTbl result = db.ProductTbls.Where(c => c.ProductId == model.ProductId).FirstOrDefault();
                 if (result != null)
                 {
-                    result.PDesc1 = model.PDesc1;
+                    result.TableDesc = model.PDesc1;
 
                     db.SaveChanges();
-                    var totoid = db.BannerQueryListTbls.Where(p => p.ProductId == model.ProductId);
-                    db.BannerQueryListTbls.RemoveRange(totoid);
-                    db.SaveChanges();
-                    if (model.bannerQueryListTbls != null)
+                    //var totoid = db.BannerQueryListTbls.Where(p => p.ProductId == model.ProductId);
+                    //db.BannerQueryListTbls.RemoveRange(totoid);
+                    //db.SaveChanges();
+                    //if (model.bannerQueryListTbls != null)
+                    //{
+                    //    for (int i = 0; i < model.bannerQueryListTbls.Count; i++)
+                    //    {
+                    //        BannerQueryListTbl pKeyword = new BannerQueryListTbl();
+                    //        pKeyword.BannerQueryListId = db.BannerQueryListTbls.DefaultIfEmpty().Max(r => r == null ? 0 : r.BannerQueryListId) + 1;
+                    //        pKeyword.BMainCateId = Convert.ToInt32(result.BannerCateId);
+                    //        pKeyword.ProductId = result.ProductId;
+                    //        pKeyword.QueryId = model.bannerQueryListTbls[i].QueryId;
+                    //        db.BannerQueryListTbls.Add(pKeyword);
+                    //        db.SaveChanges();
+
+                    //    }
+                    //}
+
+                    if (model.KeywordTbls != null)
                     {
-                        for (int i = 0; i < model.bannerQueryListTbls.Count; i++)
+                        //     public string Menu { get; set; }
+                        // public string text { get; set; }
+                        for (int k = 0; k < model.KeywordTbls.Count; k++)
                         {
-                            BannerQueryListTbl pKeyword = new BannerQueryListTbl();
-                            pKeyword.BannerQueryListId = db.BannerQueryListTbls.DefaultIfEmpty().Max(r => r == null ? 0 : r.BannerQueryListId) + 1;
-                            pKeyword.BMainCateId = Convert.ToInt32(result.MainCateId);
-                            pKeyword.ProductId = result.ProductId;
-                            pKeyword.QueryId = model.bannerQueryListTbls[i].QueryId;
-                            db.BannerQueryListTbls.Add(pKeyword);
+                            string keyword = model.KeywordTbls[k].text;
+                            KeywordTbl result2 = db.KeywordTbls.Where(c => c.Keyword == keyword).FirstOrDefault();
+                            if (result2 == null)
+                            {
+
+                                KeywordTbl keywordTbl = new KeywordTbl();
+                                keywordTbl.KeywordId = db.KeywordTbls.DefaultIfEmpty().Max(r => r == null ? 0 : r.KeywordId) + 1;
+
+
+                                keywordTbl.Keyword = model.KeywordTbls[k].text;
+                                keywordTbl.KUrl = model.KeywordTbls[k].text.Replace(" ", "-");
+                                keywordTbl.Create_at = DateTime.Now;
+                                keywordTbl.Update_at = DateTime.Now;
+                                keywordTbl.Active = true;
+                                keywordTbl.Priority = model.Priority;
+                                db.KeywordTbls.Add(keywordTbl);
+                                db.SaveChanges();
+                            }
+                        }
+                    }
+
+                    var PKeyword = db.PKeywordTbls.Where(p => p.ProductId == result.ProductId);
+                    db.PKeywordTbls.RemoveRange(PKeyword);
+                    db.SaveChanges();
+                    if (model.KeywordTbls != null)
+                    {
+
+                        for (int i = 0; i < model.KeywordTbls.Count; i++)
+                        {
+                            string keyword = model.KeywordTbls[i].text;
+
+                            PKeywordTbl pKeyword = new PKeywordTbl();
+                            pKeyword.PKeywordId = db.PKeywordTbls.DefaultIfEmpty().Max(r => r == null ? 0 : r.PKeywordId) + 1;
+                            pKeyword.ProductId = model.ProductId;
+                            pKeyword.Active = true;
+                            pKeyword.KeywordId = db.KeywordTbls.Where(k => k.Keyword == keyword).Select(k => k.KeywordId).FirstOrDefault();
+                            db.PKeywordTbls.Add(pKeyword);
                             db.SaveChanges();
 
                         }
                     }
+
                     //var totoid = db.BPKeywordTbls.Where(p => p.ProductId == model.ProductId);
                     //db.BPKeywordTbls.RemoveRange(totoid);
                     //db.SaveChanges();
@@ -2649,23 +2913,23 @@ namespace GiftChoice.Controllers
                     //    }
                     //}
 
-                    var Sizeid = db.BPSizeTbls.Where(p => p.ProductId == model.ProductId);
-                    db.BPSizeTbls.RemoveRange(Sizeid);
-                    db.SaveChanges();
-                    if (model.BPSizeTbl != null)
-                    {
-                        for (int i = 0; i < model.BPSizeTbl.Count; i++)
-                        {
-                            BPSizeTbl pSizeTbl = new BPSizeTbl();
-                            pSizeTbl.BPSizeId = db.BPSizeTbls.DefaultIfEmpty().Max(r => r == null ? 0 : r.BPSizeId) + 1;
-                            pSizeTbl.ProductId = model.ProductId;
-                            pSizeTbl.Active = true;
-                            pSizeTbl.SizeId = model.BPSizeTbl[i].SizeId;
-                            db.BPSizeTbls.Add(pSizeTbl);
-                            db.SaveChanges();
+                    //var Sizeid = db.BPSizeTbls.Where(p => p.ProductId == model.ProductId);
+                    //db.BPSizeTbls.RemoveRange(Sizeid);
+                    //db.SaveChanges();
+                    //if (model.BPSizeTbl != null)
+                    //{
+                    //    for (int i = 0; i < model.BPSizeTbl.Count; i++)
+                    //    {
+                    //        BPSizeTbl pSizeTbl = new BPSizeTbl();
+                    //        pSizeTbl.BPSizeId = db.BPSizeTbls.DefaultIfEmpty().Max(r => r == null ? 0 : r.BPSizeId) + 1;
+                    //        pSizeTbl.ProductId = model.ProductId;
+                    //        pSizeTbl.Active = true;
+                    //        pSizeTbl.SizeId = model.BPSizeTbl[i].SizeId;
+                    //        db.BPSizeTbls.Add(pSizeTbl);
+                    //        db.SaveChanges();
 
-                        }
-                    }
+                    //    }
+                    //}
                     // Remove ProductDetail_Tbl records for the given PId
                     var RemoveProductDetail = db.ProductDetailTbls.Where(r => r.ProductId == model.ProductId);
                     db.ProductDetailTbls.RemoveRange(RemoveProductDetail);
@@ -2680,7 +2944,7 @@ namespace GiftChoice.Controllers
                             ProductDetailTbl productDetail = new ProductDetailTbl();
                             productDetail.PdId = db.ProductDetailTbls.DefaultIfEmpty().Max(r => r == null ? 0 : r.PdId) + 1;
                             productDetail.ProductId = result.ProductId;
-                            productDetail.ProductType = "BannerProduct";
+                            productDetail.ProductType = result.ProductType;
                             productDetail.SizeId = productDataArray[i].SizeId;
                             productDetail.Price = productDataArray[i].Price;
                             productDetail.Priority = productDataArray[i].Priority;
@@ -2688,8 +2952,31 @@ namespace GiftChoice.Controllers
                             db.ProductDetailTbls.Add(productDetail);
                             db.SaveChanges();
                         }
-                        
+
                     }
+
+                    var RemoveFProductWord = db.ProductFilterWordTbls.Where(r => r.ProductId == result.ProductId);
+                    db.ProductFilterWordTbls.RemoveRange(RemoveFProductWord);
+                    db.SaveChanges();
+
+                    if (model.ProductFilterWordTbl != null)
+                    {
+
+                        for (int l = 0; l < model.ProductFilterWordTbl.Count; l++)
+                        {
+
+                            ProductFilterWordTbl keywordTbl = new ProductFilterWordTbl();
+                            keywordTbl.PFID = db.ProductFilterWordTbls.DefaultIfEmpty().Max(r => r == null ? 0 : r.PFID) + 1;
+                            keywordTbl.PFilterTilte = model.ProductFilterWordTbl[l].PFilterTilte;
+                            keywordTbl.PFilterId = model.ProductFilterWordTbl[l].PFilterId;
+                            keywordTbl.ProductId = result.ProductId;
+                            db.ProductFilterWordTbls.Add(keywordTbl);
+                            db.SaveChanges();
+                        }
+                    }
+
+
+
                 }
 
 
@@ -2705,47 +2992,63 @@ namespace GiftChoice.Controllers
             }
         }
 
-        public JsonResult GetBannerProduct(int id)
+        public JsonResult GetBannerProduct(ProductTblmodel model)
         {
+            db.Configuration.ProxyCreationEnabled = false;
             var res =
 
-               db.BannerProductTbls.Where(m => id == -2 ? true : m.MainCateId == id && m.Active == true).Select(m => new
+               db.ProductTbls.Where(m => m.Active == true && (model.MainCateId == -1 ? true : m.MainCateId == model.MainCateId) &&
+               (model.BannerCateId == -1 ? true : m.BannerCateId == model.BannerCateId) &&
+                   (model.VideoId == -1 ? true : m.VideoId == model.VideoId) && 
+                   (model.ProductTitle == null ? true : m.ProductTitle.Contains(model.ProductTitle))
+               ).Select(m => new
                {
                    m.ProductId,
                    m.MainCateId,
                    m.ProductTitle,
                    m.PLabel,
                    m.Price,
+                   m.LabelId,
                    m.PUrl,
                    m.Active,
                    m.PDesc,
                    m.SameDay,
                    m.VideoUrl,
-                   m.PDesc1,
+                   m.ProductType,
+                   m.TableDesc,
+                   m.Video,
+                   m.BannerCateId,
+                   m.VideoId,
                    m.Priority,
-                   ProductImage = db.BannerProductImages.Where(i => i.ProductId == m.ProductId).Select(i => i.PImage),
-                   Maincate = db.BannerPTTbls.Where(p => p.MainCateId == m.MainCateId).FirstOrDefault(),
-                   Submenu = db.BannerQueryListTbls.Where(s => s.ProductId == m.ProductId).Select(s => new
-                   {
-                       s.ProductId,
-                       s.QueryId,
-                       s.BannerQueryListId,
-                       SubmenuTitle = db.QueryTbls.Where(t => t.QId == s.QueryId && t.Active == true).Select(t => t.Answer).FirstOrDefault()
-                   }),
-                   //Submenu = db.BPKeywordTbls.Where(s => s.ProductId == m.ProductId && s.Active == true).Select(s => new
+                   Label = db.LabelProductTbls.Where(i => i.LabelId == m.LabelId).FirstOrDefault(),
+                   VideoTitle = db.VideoTbls.Where(i => i.VId == m.VideoId).FirstOrDefault(),
+
+                   ProductImage = db.ProductImages.Where(i => i.ProductId == m.ProductId).Select(i => i.PImage),
+                   Maincate = db.MainCateTbls.Where(p => p.MainCateId == m.MainCateId).FirstOrDefault(),
+                   Bannercate = db.MainCateTbls.Where(p => p.MainCateId == m.BannerCateId).FirstOrDefault(),
+                   //Submenu = db.BannerQueryListTbls.Where(s => s.ProductId == m.ProductId).Select(s => new
                    //{
                    //    s.ProductId,
-                   //    s.KeywordId,
-                   //    s.PKeywordId,
-                   //    SubmenuTitle = db.KeywordTbls.Where(t => t.KeywordId == s.KeywordId && t.Active == true).Select(t => t.Keyword).FirstOrDefault()
+                   //    s.QueryId,
+                   //    s.BannerQueryListId,
+                   //    SubmenuTitle = db.QueryTbls.Where(t => t.QId == s.QueryId && t.Active == true).Select(t => t.Answer).FirstOrDefault()
                    //}),
-                   PSizeList = db.BPSizeTbls.Where(s => s.ProductId == m.ProductId && s.Active == true).Select(s => new
+                   FilterKeyword = db.PKeywordTbls.Where(s => s.ProductId == m.ProductId && s.Active == true).Select(s => new
                    {
                        s.ProductId,
-                       s.SizeId,
-                       s.BPSizeId,
-                       SizeTitle = db.SizeTbls.Where(t => t.SizeId == s.SizeId && t.Active == true).Select(t => t.SizeTitle).FirstOrDefault()
+                       s.KeywordId,
+                       s.PKeywordId,
+                       text = db.KeywordTbls.Where(t => t.KeywordId == s.KeywordId && t.Active == true).Select(t => t.Keyword).FirstOrDefault()
                    }),
+                   ProductFilterWord = db.ProductFilterWordTbls.Where(f => f.ProductId == m.ProductId),
+                   //PSizeList = db.BPSizeTbls.Where(s => s.ProductId == m.ProductId && s.Active == true).Select(s => new
+                   //{
+                   //    s.ProductId,
+                   //    s.SizeId,
+                   //    s.BPSizeId,
+                   //    SizeTitle = db.SizeTbls.Where(t => t.SizeId == s.SizeId && t.Active == true).Select(t => t.SizeTitle).FirstOrDefault()
+                   //}),
+
                    productDataArray = db.ProductDetailTbls.Where(p => p.ProductId == m.ProductId).Select(p => new
                    {
                        p.ProductId,
@@ -2759,6 +3062,80 @@ namespace GiftChoice.Controllers
 
         }
 
+
+        [JsonNetFilter]
+        public JsonResult DeleteProductVideo(int id)
+        {
+            try
+            {
+
+
+                ProductTbl productTbl = db.ProductTbls.Where(p => p.ProductId == id).FirstOrDefault();
+                if (productTbl != null)
+                {
+
+
+                    string filePath = Server.MapPath("~/images/ProductVideo/" + productTbl.Video);
+                    if (System.IO.File.Exists(filePath))
+                    {
+                        System.IO.File.Delete(filePath);
+                    }
+                    productTbl.Video = "";
+                    productTbl.Update_at = DateTime.Now;
+
+                    db.SaveChanges();
+
+
+
+                }
+                var res = new { res = "1" };
+                return Json(res, JsonRequestBehavior.AllowGet);
+
+
+            }
+            catch
+            {
+                var res = new { res = "0" };
+                return Json(res, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+
+        [JsonNetFilter]
+        public JsonResult DeleteProductImage(string id, int pid)
+        {
+            try
+            {
+
+
+                ProductImage productTbl = db.ProductImages.Where(p => p.PImage == id && p.ProductId == pid).FirstOrDefault();
+                if (productTbl != null)
+                {
+
+
+                    string filePath = Server.MapPath("~/images/ProductImg/" + productTbl.PImage);
+                    if (System.IO.File.Exists(filePath))
+                    {
+                        System.IO.File.Delete(filePath);
+                    }
+
+                    db.ProductImages.Remove(productTbl);
+                    db.SaveChanges();
+
+
+
+                }
+                var res = new { res = "1" };
+                return Json(res, JsonRequestBehavior.AllowGet);
+
+
+            }
+            catch
+            {
+                var res = new { res = "0" };
+                return Json(res, JsonRequestBehavior.AllowGet);
+            }
+        }
         //-------------- Add Banner in Product End->------------->---------------------->---------------------------->------->------------>---------->---
 
 
@@ -2970,9 +3347,52 @@ namespace GiftChoice.Controllers
                 return Json(res, JsonRequestBehavior.AllowGet);
             }
         }
+        //public JsonResult SubmitQuerymodel(QueryTblmodel query, List<AnswerArr> answerArrs)
+        //{
+        //    try
+        //    {
+        //        var result = db.QueryTbls.Where(p => p.AskQues1 == query.AskQues1).FirstOrDefault();
+
+        //        if (result != null)
+        //        {
+
+        //            var res1 = new { res = "2" };
+        //            return Json(res1, JsonRequestBehavior.AllowGet);
+
+        //        }
+
+        //        for (int i = 0; i < answerArrs.Count; i++)
+        //        {
+
+        //            QueryTbl queryTbl = new QueryTbl();
+        //            queryTbl.QId = db.QueryTbls.DefaultIfEmpty().Max(r => r == null ? 0 : r.QId) + 1;
+        //            queryTbl.MainCateId = query.MainCateId;
+        //            queryTbl.AskQues1 = query.AskQues1;
+        //            queryTbl.Answer = answerArrs[i].Answer;
+        //            queryTbl.ModelQuery2 = query.ModelQuery2;
+        //            queryTbl.Create_at = DateTime.Now;
+        //            queryTbl.Update_at = DateTime.Now;
+        //            queryTbl.Active = true;
+        //            queryTbl.Priority = query.Priority;
+        //            db.QueryTbls.Add(queryTbl);
+        //            db.SaveChanges();
+        //        }
+
+        //        var res = new { res = "1" };
+        //        return Json(res, JsonRequestBehavior.AllowGet);
+        //    }
+        //    catch (Exception ex)
+        //    {
+
+        //        var res = new { res = "0" };
+        //        return Json(res, JsonRequestBehavior.AllowGet);
+        //    }
+        //}
 
         public JsonResult GetQuerymodel()
         {
+            db.Configuration.ProxyCreationEnabled = false;
+
             var res =
 
                db.QueryTbls.Select(m => new
@@ -2982,7 +3402,7 @@ namespace GiftChoice.Controllers
                    m.QId,
                    m.ModelQuery2,
                    m.Answer,
-                   bMainTitle = db.BannerPTTbls.Where(b => b.MainCateId == m.MainCateId).FirstOrDefault(),
+                   bMainTitle = db.MainCateTbls.Where(b => b.MainCateId == m.MainCateId).FirstOrDefault(),
                    m.Active,
                    m.Priority,
 
@@ -3200,14 +3620,14 @@ namespace GiftChoice.Controllers
             {
                 FestivalBannerTbl rws = new FestivalBannerTbl();
 
-                FestivalBannerTbl result = db.FestivalBannerTbls.FirstOrDefault();
-                if (result != null)
-                {
-                    var res = new { res = "-1" };
-                    return Json(res, JsonRequestBehavior.AllowGet);
-                }
-                else
-                {
+                //FestivalBannerTbl result = db.FestivalBannerTbls.FirstOrDefault();
+                //if (result != null)
+                //{
+                //    var res = new { res = "-1" };
+                //    return Json(res, JsonRequestBehavior.AllowGet);
+                //}
+                //else
+                //{
                     rws.FBannerId = db.FestivalBannerTbls.DefaultIfEmpty().Max(r => r == null ? 0 : r.FBannerId) + 1;
 
                     if (model.Image != null)
@@ -3225,7 +3645,7 @@ namespace GiftChoice.Controllers
                     db.SaveChanges();
                     var res = new { res = "1" };
                     return Json(res, JsonRequestBehavior.AllowGet);
-                }
+               // }
             }
             catch (Exception ex)
             {
@@ -3311,7 +3731,7 @@ namespace GiftChoice.Controllers
                 LabelProductTbl rws = new LabelProductTbl();
 
                 var result = db.LabelProductTbls.Count();
-                if (result >= 3)
+                if (result >= 4)
                 {
                     var res = new { res = "-1" };
                     return Json(res, JsonRequestBehavior.AllowGet);
@@ -3387,6 +3807,319 @@ namespace GiftChoice.Controllers
         //-------------- Submit Festival Banner End ->------------->---------------------->---------------------------->------->------------>---------->---
 
 
+
+
+        //-------------- Submit Filter  Main Cate Keyword Start ->------------->---------------------->---------------------------->------->------------>---------->---
+
+        public JsonResult SubmitFilterKeyword(MainCateTblModel model)
+        {
+
+            try
+            {
+
+                MainCateTbl result = db.MainCateTbls.Where(c => c.MainCateId == model.MainCateId).FirstOrDefault();
+
+                if (result == null)
+                {
+                    var res1 = new { res = "0" };
+                    return Json(res1, JsonRequestBehavior.AllowGet);
+                }
+
+                if (model.keywordTbls != null)
+                {
+                    //     public string Menu { get; set; }
+                    // public string text { get; set; }
+                    for (int k = 0; k < model.keywordTbls.Count; k++)
+                    {
+                        string keyword = model.keywordTbls[k].text;
+                        KeywordTbl result2 = db.KeywordTbls.Where(c => c.Keyword == keyword).FirstOrDefault();
+                        if (result2 == null)
+                        {
+
+                            KeywordTbl keywordTbl = new KeywordTbl();
+                            keywordTbl.KeywordId = db.KeywordTbls.DefaultIfEmpty().Max(r => r == null ? 0 : r.KeywordId) + 1;
+
+
+                            keywordTbl.Keyword = model.keywordTbls[k].text;
+                            keywordTbl.KUrl = model.keywordTbls[k].text.Replace(" ", "-");
+                            keywordTbl.Create_at = DateTime.Now;
+                            keywordTbl.Update_at = DateTime.Now;
+                            keywordTbl.Active = true;
+                            keywordTbl.Priority = model.Priority;
+                            db.KeywordTbls.Add(keywordTbl);
+                            db.SaveChanges();
+                        }
+                    }
+                }
+                if (model.keywordTbls != null)
+                {
+                    //     public string Menu { get; set; }
+                    for (int i = 0; i < model.keywordTbls.Count; i++)
+                    {
+                        string keyword = model.keywordTbls[i].text;
+                        MCKeywordTbl mCKeyword = new MCKeywordTbl();
+                        mCKeyword.MCkeywordId = db.MCKeywordTbls.DefaultIfEmpty().Max(r => r == null ? 0 : r.MCkeywordId) + 1;
+                        mCKeyword.MainCateId = model.MainCateId;
+                        mCKeyword.Menu = model.keywordTbls[i].Menu == "Menu" ? true : false;
+                        mCKeyword.Fliter = model.keywordTbls[i].Menu == "Fliter" ? true : false;
+
+                        mCKeyword.MenuFilter = model.keywordTbls[i].Menu == "MenuFilter" ? true : false;
+
+                        mCKeyword.KeywordId = db.KeywordTbls.Where(k => k.Keyword == keyword).Select(k => k.KeywordId).FirstOrDefault();
+                        mCKeyword.Active = true;
+                        db.MCKeywordTbls.Add(mCKeyword);
+                        db.SaveChanges();
+
+                    }
+                }
+
+                var res = new { res = "1", };
+                return Json(res, JsonRequestBehavior.AllowGet);
+
+            }
+            catch (Exception ex)
+            {
+                var md = ex.Message;
+                var res = new { res = "0" };
+                return Json(res, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+
+        public JsonResult UpdateFilterKeyword(MainCateTblModel model)
+        {
+
+            try
+            {
+
+                MCKeywordTbl result = db.MCKeywordTbls.Where(c => c.MainCateId == model.MainCateId).FirstOrDefault();
+
+                if (result != null)
+                {
+
+                    var totoid = db.MCKeywordTbls.Where(p => p.MainCateId == model.MainCateId);
+                    db.MCKeywordTbls.RemoveRange(totoid);
+                    db.SaveChanges();
+                    if (model.keywordTbls != null)
+                    {
+                        //     public string Menu { get; set; }
+                        // public string text { get; set; }
+                        for (int k = 0; k < model.keywordTbls.Count; k++)
+                        {
+                            string keyword = model.keywordTbls[k].text;
+                            KeywordTbl result2 = db.KeywordTbls.Where(c => c.Keyword == keyword).FirstOrDefault();
+                            if (result2 == null)
+                            {
+
+                                KeywordTbl keywordTbl = new KeywordTbl();
+                                keywordTbl.KeywordId = db.KeywordTbls.DefaultIfEmpty().Max(r => r == null ? 0 : r.KeywordId) + 1;
+
+
+                                keywordTbl.Keyword = model.keywordTbls[k].text;
+                                keywordTbl.KUrl = model.keywordTbls[k].text.Replace(" ", "-");
+                                keywordTbl.Create_at = DateTime.Now;
+                                keywordTbl.Update_at = DateTime.Now;
+                                keywordTbl.Active = true;
+                                keywordTbl.Priority = model.Priority;
+                                db.KeywordTbls.Add(keywordTbl);
+                                db.SaveChanges();
+                            }
+                        }
+                    }
+                    if (model.keywordTbls != null)
+                    {
+                        for (int i = 0; i < model.keywordTbls.Count; i++)
+                        {
+                            string keyword = model.keywordTbls[i].text;
+                            MCKeywordTbl mCKeyword = new MCKeywordTbl();
+                            mCKeyword.MCkeywordId = db.MCKeywordTbls.DefaultIfEmpty().Max(r => r == null ? 0 : r.MCkeywordId) + 1;
+                            mCKeyword.MainCateId = model.MainCateId;
+                            mCKeyword.Menu = model.keywordTbls[i].Menu == "Menu" ? true : false;
+                            mCKeyword.Fliter = model.keywordTbls[i].Menu == "Fliter" ? true : false;
+
+                            mCKeyword.MenuFilter = model.keywordTbls[i].Menu == "MenuFilter" ? true : false;
+
+                            mCKeyword.KeywordId = db.KeywordTbls.Where(k => k.Keyword == keyword).Select(k => k.KeywordId).FirstOrDefault();
+                            mCKeyword.Active = true;
+                            db.MCKeywordTbls.Add(mCKeyword);
+                            db.SaveChanges();
+
+                        }
+                    }
+
+
+                }
+
+
+                var res = new { res = "1", };
+                return Json(res, JsonRequestBehavior.AllowGet);
+
+            }
+            catch (Exception ex)
+            {
+                var md = ex.Message;
+                var res = new { res = "0" };
+                return Json(res, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+
+        public JsonResult GetFilterData()
+        {
+            var res =
+
+               db.MainCateTbls.Where(m => m.Active == true && m.CateType == "BannerCate").Select(m => new
+               {
+                   m.MainCateId,
+                   m.MUrl,
+                   m.MTitle,
+                   m.Active,
+                   m.MImage,
+                   m.Position,
+                   m.CateType,
+                   m.Priority,
+                   Submenu = db.MCKeywordTbls.Where(s => s.MainCateId == m.MainCateId && s.Active == true).Select(s => new
+                   {
+                       s.MainCateId,
+                       s.KeywordId,
+                       s.MCkeywordId,
+                       text = db.KeywordTbls.Where(t => t.KeywordId == s.KeywordId).Select(t => t.Keyword).FirstOrDefault()
+                   })
+               }).OrderBy(m => m.Priority);
+            return Json(res, JsonRequestBehavior.AllowGet);
+
+
+        }
+
+        public JsonResult GetBannerCateFilterKeyword(int id)
+        {
+            var res =
+                    db.MCKeywordTbls.Where(s => s.MainCateId == id && s.Active == true).Select(s => new
+                    {
+                        s.MainCateId,
+                        s.KeywordId,
+                        s.MCkeywordId,
+                        text = db.KeywordTbls.Where(t => t.KeywordId == s.KeywordId).Select(t => t.Keyword).FirstOrDefault()
+                    });
+
+            return Json(res, JsonRequestBehavior.AllowGet);
+
+
+        }
+        //-------------- Submit Filter Main Cate Keyword End ->------------->---------------------->---------------------------->------->------------>---------->---
+
+
+        //-------------- Submit Video Start ->------------->---------------------->---------------------------->------->------------>---------->---
+
+
+
+
+        public JsonResult SubmitVideo(VideoTbl model)
+        {
+            // public HttpPostedFileBase Image { get; set; }
+            try
+            {
+                VideoTbl rws = new VideoTbl();
+
+                VideoTbl result = db.VideoTbls.Where(v => v.VideoTitle == model.VideoTitle).FirstOrDefault();
+                if (result != null)
+                {
+                    var res = new { res = "-1" };
+                    return Json(res, JsonRequestBehavior.AllowGet);
+                }
+                else
+                {
+                    rws.VId = db.VideoTbls.DefaultIfEmpty().Max(r => r == null ? 0 : r.VId) + 1;
+
+                    if (model.Image != null)
+                    {
+                        string extensionstuimg = Path.GetExtension(model.Image.FileName);
+                        model.Image.SaveAs(Server.MapPath("~/images/ProductVideo/" + rws.VId + extensionstuimg));
+
+                        rws.Video = rws.VId + "" + extensionstuimg;
+
+
+                    }
+                    rws.VideoTitle = model.VideoTitle;
+                    rws.VUrl = rws.VideoTitle.Replace(" ", "-");
+                    rws.Active = true;
+                    rws.Create_at = DateTime.Now;
+                    rws.Update_at = DateTime.Now;
+                    db.VideoTbls.Add(rws);
+                    db.SaveChanges();
+                    var res = new { res = "1" };
+                    return Json(res, JsonRequestBehavior.AllowGet);
+                }
+            }
+            catch (Exception ex)
+            {
+                var md = ex.Message;
+                var res = new { res = "0" };
+                return Json(res, JsonRequestBehavior.AllowGet);
+            }
+        }
+        public JsonResult UpdateVideo(VideoTbl model)
+        {
+            // public HttpPostedFileBase Image { get; set; }
+            try
+            {
+                var rws = db.VideoTbls.Where(r => r.VId == model.VId).FirstOrDefault();
+                if (rws != null)
+                {
+
+                    if (model.Image != null)
+                    {
+                        string extensionstuimg = Path.GetExtension(model.Image.FileName);
+                        model.Image.SaveAs(Server.MapPath("~/images/ProductVideo/" + rws.VId + extensionstuimg));
+
+                        rws.Video = rws.VId + "" + extensionstuimg;
+
+
+                    }
+                    rws.VideoTitle = model.VideoTitle;
+                    rws.VUrl = rws.VideoTitle.Replace(" ", "-");
+                    rws.Active = true;
+                    rws.Update_at = DateTime.Now;
+                    db.SaveChanges();
+                }
+                var res = new { res = "1" };
+                return Json(res, JsonRequestBehavior.AllowGet);
+                //}
+            }
+            catch (Exception ex)
+            {
+                var md = ex.Message;
+                var res = new { res = "0" };
+                return Json(res, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        public JsonResult VideoActiveDeActive(int id)
+        {
+            var jb = db.VideoTbls.Where(c => c.VId == id).FirstOrDefault();
+            if (jb != null)
+            {
+                jb.Active = jb.Active == true ? false : true;
+                db.SaveChanges();
+                var res = new { res = "1" };
+                return Json(res, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                var res = new { res = "2" };
+                return Json(res, JsonRequestBehavior.AllowGet);
+            }
+
+        }
+        public JsonResult GetVideoData(string id)
+        {
+
+            var res = db.VideoTbls.Where(v => id == "All" ? true : v.Active == true);
+            return Json(res, JsonRequestBehavior.AllowGet);
+        }
+
+
+        //-------------- Submit Video End ->------------->---------------------->---------------------------->------->------------>---------->---
 
     }
 }

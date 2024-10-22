@@ -73,6 +73,31 @@
           <Property Name="BSubDId" Type="int" />
           <Property Name="Video" Type="nvarchar(max)" />
         </EntityType>
+        <EntityType Name="BannerPTTbl">
+          <Key>
+            <PropertyRef Name="MainCateId" />
+          </Key>
+          <Property Name="MainCateId" Type="bigint" Nullable="false" />
+          <Property Name="MTitle" Type="nvarchar(max)" />
+          <Property Name="Position" Type="nvarchar(max)" />
+          <Property Name="MUrl" Type="nvarchar(max)" />
+          <Property Name="Active" Type="bit" />
+          <Property Name="Priority" Type="bigint" />
+          <Property Name="MImage" Type="nvarchar(max)" />
+          <Property Name="Create_at" Type="datetime" />
+          <Property Name="Update_at" Type="datetime" />
+          <Property Name="UserId" Type="bigint" />
+          <Property Name="ModelQuery1" Type="bit" />
+        </EntityType>
+        <EntityType Name="BannerQueryListTbl">
+          <Key>
+            <PropertyRef Name="BannerQueryListId" />
+          </Key>
+          <Property Name="BannerQueryListId" Type="int" Nullable="false" />
+          <Property Name="QueryId" Type="int" />
+          <Property Name="BMainCateId" Type="int" />
+          <Property Name="ProductId" Type="bigint" />
+        </EntityType>
         <EntityType Name="BannerTbl">
           <Key>
             <PropertyRef Name="BannerId" />
@@ -136,6 +161,16 @@
           <Property Name="Priority" Type="bigint" />
           <Property Name="Active" Type="bit" />
         </EntityType>
+        <EntityType Name="BSubTitleDetailTbl">
+          <Key>
+            <PropertyRef Name="BSubDId" />
+          </Key>
+          <Property Name="BSubDId" Type="int" Nullable="false" />
+          <Property Name="MainCateId" Type="int" />
+          <Property Name="QueryId" Type="int" />
+          <Property Name="BSubId" Type="int" />
+          <Property Name="kSubTitle" Type="nvarchar(max)" />
+        </EntityType>
         <EntityType Name="BSubTitleTbl">
           <Key>
             <PropertyRef Name="BSubId" />
@@ -150,6 +185,21 @@
           <Property Name="QueryId" Type="int" />
           <Property Name="KeywordTitle" Type="nvarchar(max)" />
           <Property Name="AskQues2" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="FestivalBannerTbl">
+          <Key>
+            <PropertyRef Name="FBannerId" />
+          </Key>
+          <Property Name="FBannerId" Type="bigint" Nullable="false" />
+          <Property Name="FBTitle" Type="nvarchar(max)" />
+          <Property Name="FBPosition" Type="nvarchar(max)" />
+          <Property Name="FBUrl" Type="nvarchar(max)" />
+          <Property Name="Active" Type="bit" />
+          <Property Name="Priority" Type="bigint" />
+          <Property Name="FBImage" Type="nvarchar(max)" />
+          <Property Name="Create_at" Type="datetime" />
+          <Property Name="Update_at" Type="datetime" />
+          <Property Name="UserId" Type="bigint" />
         </EntityType>
         <EntityType Name="KeywordTbl">
           <Key>
@@ -191,6 +241,9 @@
           <Property Name="MImage" Type="nvarchar(max)" />
           <Property Name="UserId" Type="bigint" />
           <Property Name="MainCateType" Type="nvarchar" MaxLength="50" />
+          <Property Name="CateType" Type="nvarchar" MaxLength="50" />
+          <Property Name="Position" Type="nvarchar" MaxLength="50" />
+          <Property Name="ModelQuery1" Type="bit" />
         </EntityType>
         <EntityType Name="MCKeywordTbl">
           <Key>
@@ -241,6 +294,19 @@
           <Property Name="KeywordId" Type="bigint" />
           <Property Name="Active" Type="bit" />
         </EntityType>
+        <EntityType Name="ProductDetailTbl">
+          <Key>
+            <PropertyRef Name="PdId" />
+          </Key>
+          <Property Name="PdId" Type="bigint" Nullable="false" />
+          <Property Name="ProductId" Type="bigint" />
+          <Property Name="ProductType" Type="nvarchar" MaxLength="50" />
+          <Property Name="Price" Type="nvarchar" MaxLength="50" />
+          <Property Name="SizeId" Type="int" />
+          <Property Name="SizeName" Type="nvarchar" MaxLength="50" />
+          <Property Name="Priority" Type="bigint" />
+          <Property Name="Active" Type="bit" />
+        </EntityType>
         <EntityType Name="ProductImage">
           <Key>
             <PropertyRef Name="PImageId" />
@@ -249,6 +315,7 @@
           <Property Name="ProductId" Type="bigint" />
           <Property Name="PImage" Type="nvarchar(max)" />
           <Property Name="Active" Type="bit" />
+          <Property Name="ImageIndex" Type="int" />
         </EntityType>
         <EntityType Name="ProductTbl">
           <Key>
@@ -271,6 +338,10 @@
           <Property Name="TableDesc" Type="nvarchar(max)" />
           <Property Name="SameDay" Type="bit" />
           <Property Name="VideoUrl" Type="nvarchar(max)" />
+          <Property Name="ProductType" Type="nvarchar" MaxLength="50" />
+          <Property Name="BannerCateId" Type="int" />
+          <Property Name="Video" Type="nvarchar" MaxLength="50" />
+          <Property Name="VideoId" Type="int" />
         </EntityType>
         <EntityType Name="PSizeTbl">
           <Key>
@@ -280,6 +351,20 @@
           <Property Name="SizeId" Type="int" />
           <Property Name="ProductId" Type="bigint" />
           <Property Name="Active" Type="bit" />
+        </EntityType>
+        <EntityType Name="QueryTbl">
+          <Key>
+            <PropertyRef Name="QId" />
+          </Key>
+          <Property Name="QId" Type="int" Nullable="false" />
+          <Property Name="MainCateId" Type="int" />
+          <Property Name="AskQues1" Type="nvarchar(max)" />
+          <Property Name="Answer" Type="nvarchar(max)" />
+          <Property Name="Priority" Type="bit" />
+          <Property Name="Active" Type="bit" />
+          <Property Name="ModelQuery2" Type="bit" />
+          <Property Name="Create_at" Type="datetime" />
+          <Property Name="Update_at" Type="datetime" />
         </EntityType>
         <EntityType Name="SizeTbl">
           <Key>
@@ -320,82 +405,35 @@
           <Property Name="Active" Type="bit" />
           <Property Name="Create_at" Type="date" />
         </EntityType>
-        <EntityType Name="BannerPTTbl">
+        <EntityType Name="ProductFilterWordTbl">
           <Key>
-            <PropertyRef Name="MainCateId" />
+            <PropertyRef Name="PFID" />
           </Key>
-          <Property Name="MainCateId" Type="bigint" Nullable="false" />
-          <Property Name="MTitle" Type="nvarchar(max)" />
-          <Property Name="Position" Type="nvarchar(max)" />
-          <Property Name="MUrl" Type="nvarchar(max)" />
-          <Property Name="Active" Type="bit" />
-          <Property Name="Priority" Type="bigint" />
-          <Property Name="MImage" Type="nvarchar(max)" />
-          <Property Name="Create_at" Type="datetime" />
-          <Property Name="Update_at" Type="datetime" />
-          <Property Name="UserId" Type="bigint" />
-          <Property Name="ModelQuery1" Type="bit" />
-        </EntityType>
-        <EntityType Name="BannerQueryListTbl">
-          <Key>
-            <PropertyRef Name="BannerQueryListId" />
-          </Key>
-          <Property Name="BannerQueryListId" Type="int" Nullable="false" />
-          <Property Name="QueryId" Type="int" />
-          <Property Name="BMainCateId" Type="int" />
+          <Property Name="PFID" Type="int" Nullable="false" />
+          <Property Name="PFilterId" Type="int" />
           <Property Name="ProductId" Type="bigint" />
+          <Property Name="PFilterTilte" Type="nvarchar(max)" />
         </EntityType>
-        <EntityType Name="BSubTitleDetailTbl">
+        <EntityType Name="VideoTbl">
           <Key>
-            <PropertyRef Name="BSubDId" />
+            <PropertyRef Name="VId" />
           </Key>
-          <Property Name="BSubDId" Type="int" Nullable="false" />
-          <Property Name="MainCateId" Type="int" />
-          <Property Name="QueryId" Type="int" />
-          <Property Name="BSubId" Type="int" />
-          <Property Name="kSubTitle" Type="nvarchar(max)" />
-        </EntityType>
-        <EntityType Name="FestivalBannerTbl">
-          <Key>
-            <PropertyRef Name="FBannerId" />
-          </Key>
-          <Property Name="FBannerId" Type="bigint" Nullable="false" />
-          <Property Name="FBTitle" Type="nvarchar(max)" />
-          <Property Name="FBPosition" Type="nvarchar(max)" />
-          <Property Name="FBUrl" Type="nvarchar(max)" />
+          <Property Name="VId" Type="int" Nullable="false" />
+          <Property Name="VUrl" Type="nvarchar(max)" />
+          <Property Name="Video" Type="nvarchar(max)" />
+          <Property Name="VideoTitle" Type="nvarchar(max)" />
           <Property Name="Active" Type="bit" />
-          <Property Name="Priority" Type="bigint" />
-          <Property Name="FBImage" Type="nvarchar(max)" />
           <Property Name="Create_at" Type="datetime" />
           <Property Name="Update_at" Type="datetime" />
-          <Property Name="UserId" Type="bigint" />
         </EntityType>
-        <EntityType Name="ProductDetailTbl">
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'giftchoice.dbo.AutocompleteSuggestions' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="AutocompleteSuggestions">
           <Key>
-            <PropertyRef Name="PdId" />
+            <PropertyRef Name="ID" />
           </Key>
-          <Property Name="PdId" Type="bigint" Nullable="false" />
-          <Property Name="ProductId" Type="bigint" />
-          <Property Name="ProductType" Type="nvarchar" MaxLength="50" />
-          <Property Name="Price" Type="nvarchar" MaxLength="50" />
-          <Property Name="SizeId" Type="int" />
-          <Property Name="SizeName" Type="nvarchar" MaxLength="50" />
-          <Property Name="Priority" Type="bigint" />
-          <Property Name="Active" Type="bit" />
-        </EntityType>
-        <EntityType Name="QueryTbl">
-          <Key>
-            <PropertyRef Name="QId" />
-          </Key>
-          <Property Name="QId" Type="int" Nullable="false" />
-          <Property Name="MainCateId" Type="int" />
-          <Property Name="AskQues1" Type="nvarchar(max)" />
-          <Property Name="Answer" Type="nvarchar(max)" />
-          <Property Name="Priority" Type="bit" />
-          <Property Name="Active" Type="bit" />
-          <Property Name="ModelQuery2" Type="bit" />
-          <Property Name="Create_at" Type="datetime" />
-          <Property Name="Update_at" Type="datetime" />
+          <Property Name="ID" Type="bigint" Nullable="false" />
+          <Property Name="Suggestion" Type="nvarchar(max)" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'giftchoice.dbo.VProduct' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -439,52 +477,23 @@ warning 6002: The table/view 'giftchoice.dbo.VProduct' does not have a primary k
           <Property Name="Expr14" Type="datetime" />
           <Property Name="Qty" Type="bigint" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'giftchoice.giftchoice.AutocompleteSuggestions' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-        <EntityType Name="AutocompleteSuggestions">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="bigint" Nullable="false" />
-          <Property Name="Suggestion" Type="nvarchar(max)" />
-        </EntityType>
-        <Association Name="FK__MCKeyword__Keywo__52593CB8">
-          <End Role="KeywordTbl" Type="Self.KeywordTbl" Multiplicity="0..1" />
-          <End Role="MCKeywordTbl" Type="Self.MCKeywordTbl" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="KeywordTbl">
-              <PropertyRef Name="KeywordId" />
-            </Principal>
-            <Dependent Role="MCKeywordTbl">
-              <PropertyRef Name="KeywordId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__MCKeyword__MainC__534D60F1">
-          <End Role="MainCateTbl" Type="Self.MainCateTbl" Multiplicity="0..1" />
-          <End Role="MCKeywordTbl" Type="Self.MCKeywordTbl" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="MainCateTbl">
-              <PropertyRef Name="MainCateId" />
-            </Principal>
-            <Dependent Role="MCKeywordTbl">
-              <PropertyRef Name="MainCateId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityContainer Name="GiftChoiceModelStoreContainer">
           <EntitySet Name="AdminTbl" EntityType="Self.AdminTbl" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="BannerCateProductTbl" EntityType="Self.BannerCateProductTbl" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="BannerCateTbl" EntityType="Self.BannerCateTbl" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="BannerProductImage" EntityType="Self.BannerProductImage" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="BannerProductTbl" EntityType="Self.BannerProductTbl" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BannerPTTbl" EntityType="Self.BannerPTTbl" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BannerQueryListTbl" EntityType="Self.BannerQueryListTbl" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="BannerTbl" EntityType="Self.BannerTbl" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="BCKeywordTbl" EntityType="Self.BCKeywordTbl" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="BPKeywordTbl" EntityType="Self.BPKeywordTbl" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="BPSizeTbl" EntityType="Self.BPSizeTbl" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="BPTKeywordTbl" EntityType="Self.BPTKeywordTbl" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="BSubKTbl" EntityType="Self.BSubKTbl" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BSubTitleDetailTbl" EntityType="Self.BSubTitleDetailTbl" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="BSubTitleTbl" EntityType="Self.BSubTitleTbl" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FestivalBannerTbl" EntityType="Self.FestivalBannerTbl" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="KeywordTbl" EntityType="Self.KeywordTbl" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="LabelProductTbl" EntityType="Self.LabelProductTbl" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MainCateTbl" EntityType="Self.MainCateTbl" Schema="dbo" store:Type="Tables" />
@@ -492,18 +501,22 @@ warning 6002: The table/view 'giftchoice.giftchoice.AutocompleteSuggestions' doe
           <EntitySet Name="OrderMainTbl" EntityType="Self.OrderMainTbl" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="OrderTbl" EntityType="Self.OrderTbl" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PKeywordTbl" EntityType="Self.PKeywordTbl" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProductDetailTbl" EntityType="Self.ProductDetailTbl" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ProductImage" EntityType="Self.ProductImage" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ProductTbl" EntityType="Self.ProductTbl" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PSizeTbl" EntityType="Self.PSizeTbl" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="QueryTbl" EntityType="Self.QueryTbl" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SizeTbl" EntityType="Self.SizeTbl" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SliderTbl" EntityType="Self.SliderTbl" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserRegister" EntityType="Self.UserRegister" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="BannerPTTbl" EntityType="Self.BannerPTTbl" Schema="giftchoice" store:Type="Tables" />
-          <EntitySet Name="BannerQueryListTbl" EntityType="Self.BannerQueryListTbl" Schema="giftchoice" store:Type="Tables" />
-          <EntitySet Name="BSubTitleDetailTbl" EntityType="Self.BSubTitleDetailTbl" Schema="giftchoice" store:Type="Tables" />
-          <EntitySet Name="FestivalBannerTbl" EntityType="Self.FestivalBannerTbl" Schema="giftchoice" store:Type="Tables" />
-          <EntitySet Name="ProductDetailTbl" EntityType="Self.ProductDetailTbl" Schema="giftchoice" store:Type="Tables" />
-          <EntitySet Name="QueryTbl" EntityType="Self.QueryTbl" Schema="giftchoice" store:Type="Tables" />
+          <EntitySet Name="ProductFilterWordTbl" EntityType="Self.ProductFilterWordTbl" Schema="giftchoice" store:Type="Tables" />
+          <EntitySet Name="VideoTbl" EntityType="Self.VideoTbl" Schema="giftchoice" store:Type="Tables" />
+          <EntitySet Name="AutocompleteSuggestions" EntityType="Self.AutocompleteSuggestions" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [AutocompleteSuggestions].[ID] AS [ID], 
+    [AutocompleteSuggestions].[Suggestion] AS [Suggestion]
+    FROM [dbo].[AutocompleteSuggestions] AS [AutocompleteSuggestions]</DefiningQuery>
+          </EntitySet>
           <EntitySet Name="VProduct" EntityType="Self.VProduct" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [VProduct].[ProductId] AS [ProductId], 
@@ -542,20 +555,6 @@ warning 6002: The table/view 'giftchoice.giftchoice.AutocompleteSuggestions' doe
     [VProduct].[Qty] AS [Qty]
     FROM [dbo].[VProduct] AS [VProduct]</DefiningQuery>
           </EntitySet>
-          <EntitySet Name="AutocompleteSuggestions" EntityType="Self.AutocompleteSuggestions" store:Type="Views" store:Schema="giftchoice">
-            <DefiningQuery>SELECT 
-    [AutocompleteSuggestions].[ID] AS [ID], 
-    [AutocompleteSuggestions].[Suggestion] AS [Suggestion]
-    FROM [giftchoice].[AutocompleteSuggestions] AS [AutocompleteSuggestions]</DefiningQuery>
-          </EntitySet>
-          <AssociationSet Name="FK__MCKeyword__Keywo__52593CB8" Association="Self.FK__MCKeyword__Keywo__52593CB8">
-            <End Role="KeywordTbl" EntitySet="KeywordTbl" />
-            <End Role="MCKeywordTbl" EntitySet="MCKeywordTbl" />
-          </AssociationSet>
-          <AssociationSet Name="FK__MCKeyword__MainC__534D60F1" Association="Self.FK__MCKeyword__MainC__534D60F1">
-            <End Role="MainCateTbl" EntitySet="MainCateTbl" />
-            <End Role="MCKeywordTbl" EntitySet="MCKeywordTbl" />
-          </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -567,13 +566,17 @@ warning 6002: The table/view 'giftchoice.giftchoice.AutocompleteSuggestions' doe
           <EntitySet Name="BannerCateTbls" EntityType="GiftChoiceModel.BannerCateTbl" />
           <EntitySet Name="BannerProductImages" EntityType="GiftChoiceModel.BannerProductImage" />
           <EntitySet Name="BannerProductTbls" EntityType="GiftChoiceModel.BannerProductTbl" />
+          <EntitySet Name="BannerPTTbls" EntityType="GiftChoiceModel.BannerPTTbl" />
+          <EntitySet Name="BannerQueryListTbls" EntityType="GiftChoiceModel.BannerQueryListTbl" />
           <EntitySet Name="BannerTbls" EntityType="GiftChoiceModel.BannerTbl" />
           <EntitySet Name="BCKeywordTbls" EntityType="GiftChoiceModel.BCKeywordTbl" />
           <EntitySet Name="BPKeywordTbls" EntityType="GiftChoiceModel.BPKeywordTbl" />
           <EntitySet Name="BPSizeTbls" EntityType="GiftChoiceModel.BPSizeTbl" />
           <EntitySet Name="BPTKeywordTbls" EntityType="GiftChoiceModel.BPTKeywordTbl" />
           <EntitySet Name="BSubKTbls" EntityType="GiftChoiceModel.BSubKTbl" />
+          <EntitySet Name="BSubTitleDetailTbls" EntityType="GiftChoiceModel.BSubTitleDetailTbl" />
           <EntitySet Name="BSubTitleTbls" EntityType="GiftChoiceModel.BSubTitleTbl" />
+          <EntitySet Name="FestivalBannerTbls" EntityType="GiftChoiceModel.FestivalBannerTbl" />
           <EntitySet Name="KeywordTbls" EntityType="GiftChoiceModel.KeywordTbl" />
           <EntitySet Name="LabelProductTbls" EntityType="GiftChoiceModel.LabelProductTbl" />
           <EntitySet Name="MainCateTbls" EntityType="GiftChoiceModel.MainCateTbl" />
@@ -581,28 +584,18 @@ warning 6002: The table/view 'giftchoice.giftchoice.AutocompleteSuggestions' doe
           <EntitySet Name="OrderMainTbls" EntityType="GiftChoiceModel.OrderMainTbl" />
           <EntitySet Name="OrderTbls" EntityType="GiftChoiceModel.OrderTbl" />
           <EntitySet Name="PKeywordTbls" EntityType="GiftChoiceModel.PKeywordTbl" />
+          <EntitySet Name="ProductDetailTbls" EntityType="GiftChoiceModel.ProductDetailTbl" />
           <EntitySet Name="ProductImages" EntityType="GiftChoiceModel.ProductImage" />
           <EntitySet Name="ProductTbls" EntityType="GiftChoiceModel.ProductTbl" />
           <EntitySet Name="PSizeTbls" EntityType="GiftChoiceModel.PSizeTbl" />
+          <EntitySet Name="QueryTbls" EntityType="GiftChoiceModel.QueryTbl" />
           <EntitySet Name="SizeTbls" EntityType="GiftChoiceModel.SizeTbl" />
           <EntitySet Name="SliderTbls" EntityType="GiftChoiceModel.SliderTbl" />
           <EntitySet Name="UserRegisters" EntityType="GiftChoiceModel.UserRegister" />
-          <EntitySet Name="BannerPTTbls" EntityType="GiftChoiceModel.BannerPTTbl" />
-          <EntitySet Name="BannerQueryListTbls" EntityType="GiftChoiceModel.BannerQueryListTbl" />
-          <EntitySet Name="BSubTitleDetailTbls" EntityType="GiftChoiceModel.BSubTitleDetailTbl" />
-          <EntitySet Name="FestivalBannerTbls" EntityType="GiftChoiceModel.FestivalBannerTbl" />
-          <EntitySet Name="QueryTbls" EntityType="GiftChoiceModel.QueryTbl" />
-          <EntitySet Name="VProducts" EntityType="GiftChoiceModel.VProduct" />
           <EntitySet Name="AutocompleteSuggestions" EntityType="GiftChoiceModel.AutocompleteSuggestion" />
-          <AssociationSet Name="FK__MCKeyword__Keywo__52593CB8" Association="GiftChoiceModel.FK__MCKeyword__Keywo__52593CB8">
-            <End Role="KeywordTbl" EntitySet="KeywordTbls" />
-            <End Role="MCKeywordTbl" EntitySet="MCKeywordTbls" />
-          </AssociationSet>
-          <AssociationSet Name="FK__MCKeyword__MainC__534D60F1" Association="GiftChoiceModel.FK__MCKeyword__MainC__534D60F1">
-            <End Role="MainCateTbl" EntitySet="MainCateTbls" />
-            <End Role="MCKeywordTbl" EntitySet="MCKeywordTbls" />
-          </AssociationSet>
-          <EntitySet Name="ProductDetailTbls" EntityType="GiftChoiceModel.ProductDetailTbl" />
+          <EntitySet Name="VProducts" EntityType="GiftChoiceModel.VProduct" />
+          <EntitySet Name="VideoTbls" EntityType="GiftChoiceModel.VideoTbl" />
+          <EntitySet Name="ProductFilterWordTbls" EntityType="GiftChoiceModel.ProductFilterWordTbl" />
         </EntityContainer>
         <EntityType Name="AdminTbl">
           <Key>
@@ -672,6 +665,31 @@ warning 6002: The table/view 'giftchoice.giftchoice.AutocompleteSuggestions' doe
           <Property Name="BSubDId" Type="Int32" />
           <Property Name="Video" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
+        <EntityType Name="BannerPTTbl">
+          <Key>
+            <PropertyRef Name="MainCateId" />
+          </Key>
+          <Property Name="MainCateId" Type="Int64" Nullable="false" />
+          <Property Name="MTitle" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Position" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="MUrl" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Active" Type="Boolean" />
+          <Property Name="Priority" Type="Int64" />
+          <Property Name="MImage" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Create_at" Type="DateTime" Precision="3" />
+          <Property Name="Update_at" Type="DateTime" Precision="3" />
+          <Property Name="UserId" Type="Int64" />
+          <Property Name="ModelQuery1" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="BannerQueryListTbl">
+          <Key>
+            <PropertyRef Name="BannerQueryListId" />
+          </Key>
+          <Property Name="BannerQueryListId" Type="Int32" Nullable="false" />
+          <Property Name="QueryId" Type="Int32" />
+          <Property Name="BMainCateId" Type="Int32" />
+          <Property Name="ProductId" Type="Int64" />
+        </EntityType>
         <EntityType Name="BannerTbl">
           <Key>
             <PropertyRef Name="BannerId" />
@@ -735,6 +753,16 @@ warning 6002: The table/view 'giftchoice.giftchoice.AutocompleteSuggestions' doe
           <Property Name="Priority" Type="Int64" />
           <Property Name="Active" Type="Boolean" />
         </EntityType>
+        <EntityType Name="BSubTitleDetailTbl">
+          <Key>
+            <PropertyRef Name="BSubDId" />
+          </Key>
+          <Property Name="BSubDId" Type="Int32" Nullable="false" />
+          <Property Name="MainCateId" Type="Int32" />
+          <Property Name="QueryId" Type="Int32" />
+          <Property Name="BSubId" Type="Int32" />
+          <Property Name="kSubTitle" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
         <EntityType Name="BSubTitleTbl">
           <Key>
             <PropertyRef Name="BSubId" />
@@ -750,6 +778,21 @@ warning 6002: The table/view 'giftchoice.giftchoice.AutocompleteSuggestions' doe
           <Property Name="KeywordTitle" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="AskQues2" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
+        <EntityType Name="FestivalBannerTbl">
+          <Key>
+            <PropertyRef Name="FBannerId" />
+          </Key>
+          <Property Name="FBannerId" Type="Int64" Nullable="false" />
+          <Property Name="FBTitle" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="FBPosition" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="FBUrl" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Active" Type="Boolean" />
+          <Property Name="Priority" Type="Int64" />
+          <Property Name="FBImage" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Create_at" Type="DateTime" Precision="3" />
+          <Property Name="Update_at" Type="DateTime" Precision="3" />
+          <Property Name="UserId" Type="Int64" />
+        </EntityType>
         <EntityType Name="KeywordTbl">
           <Key>
             <PropertyRef Name="KeywordId" />
@@ -762,7 +805,6 @@ warning 6002: The table/view 'giftchoice.giftchoice.AutocompleteSuggestions' doe
           <Property Name="Active" Type="Boolean" />
           <Property Name="Priority" Type="Int64" />
           <Property Name="UserId" Type="Int64" />
-          <NavigationProperty Name="MCKeywordTbls" Relationship="GiftChoiceModel.FK__MCKeyword__Keywo__52593CB8" FromRole="KeywordTbl" ToRole="MCKeywordTbl" />
         </EntityType>
         <EntityType Name="LabelProductTbl">
           <Key>
@@ -790,8 +832,10 @@ warning 6002: The table/view 'giftchoice.giftchoice.AutocompleteSuggestions' doe
           <Property Name="Update_at" Type="DateTime" Precision="3" />
           <Property Name="MImage" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="UserId" Type="Int64" />
-          <NavigationProperty Name="MCKeywordTbls" Relationship="GiftChoiceModel.FK__MCKeyword__MainC__534D60F1" FromRole="MainCateTbl" ToRole="MCKeywordTbl" />
           <Property Name="MainCateType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CateType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Position" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ModelQuery1" Type="Boolean" />
         </EntityType>
         <EntityType Name="MCKeywordTbl">
           <Key>
@@ -804,8 +848,6 @@ warning 6002: The table/view 'giftchoice.giftchoice.AutocompleteSuggestions' doe
           <Property Name="Menu" Type="Boolean" />
           <Property Name="Fliter" Type="Boolean" />
           <Property Name="MenuFilter" Type="Boolean" />
-          <NavigationProperty Name="KeywordTbl" Relationship="GiftChoiceModel.FK__MCKeyword__Keywo__52593CB8" FromRole="MCKeywordTbl" ToRole="KeywordTbl" />
-          <NavigationProperty Name="MainCateTbl" Relationship="GiftChoiceModel.FK__MCKeyword__MainC__534D60F1" FromRole="MCKeywordTbl" ToRole="MainCateTbl" />
         </EntityType>
         <EntityType Name="OrderMainTbl">
           <Key>
@@ -844,6 +886,19 @@ warning 6002: The table/view 'giftchoice.giftchoice.AutocompleteSuggestions' doe
           <Property Name="KeywordId" Type="Int64" />
           <Property Name="Active" Type="Boolean" />
         </EntityType>
+        <EntityType Name="ProductDetailTbl">
+          <Key>
+            <PropertyRef Name="PdId" />
+          </Key>
+          <Property Name="PdId" Type="Int64" Nullable="false" />
+          <Property Name="ProductId" Type="Int64" />
+          <Property Name="ProductType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Price" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SizeId" Type="Int32" />
+          <Property Name="SizeName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Priority" Type="Int64" />
+          <Property Name="Active" Type="Boolean" />
+        </EntityType>
         <EntityType Name="ProductImage">
           <Key>
             <PropertyRef Name="PImageId" />
@@ -852,6 +907,7 @@ warning 6002: The table/view 'giftchoice.giftchoice.AutocompleteSuggestions' doe
           <Property Name="ProductId" Type="Int64" />
           <Property Name="PImage" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Active" Type="Boolean" />
+          <Property Name="ImageIndex" Type="Int32" />
         </EntityType>
         <EntityType Name="ProductTbl">
           <Key>
@@ -874,6 +930,10 @@ warning 6002: The table/view 'giftchoice.giftchoice.AutocompleteSuggestions' doe
           <Property Name="TableDesc" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="SameDay" Type="Boolean" />
           <Property Name="VideoUrl" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ProductType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="BannerCateId" Type="Int32" />
+          <Property Name="Video" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="VideoId" Type="Int32" />
         </EntityType>
         <EntityType Name="PSizeTbl">
           <Key>
@@ -883,6 +943,20 @@ warning 6002: The table/view 'giftchoice.giftchoice.AutocompleteSuggestions' doe
           <Property Name="SizeId" Type="Int32" />
           <Property Name="ProductId" Type="Int64" />
           <Property Name="Active" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="QueryTbl">
+          <Key>
+            <PropertyRef Name="QId" />
+          </Key>
+          <Property Name="QId" Type="Int32" Nullable="false" />
+          <Property Name="MainCateId" Type="Int32" />
+          <Property Name="AskQues1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Answer" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Priority" Type="Boolean" />
+          <Property Name="Active" Type="Boolean" />
+          <Property Name="ModelQuery2" Type="Boolean" />
+          <Property Name="Create_at" Type="DateTime" Precision="3" />
+          <Property Name="Update_at" Type="DateTime" Precision="3" />
         </EntityType>
         <EntityType Name="SizeTbl">
           <Key>
@@ -923,69 +997,12 @@ warning 6002: The table/view 'giftchoice.giftchoice.AutocompleteSuggestions' doe
           <Property Name="Active" Type="Boolean" />
           <Property Name="Create_at" Type="DateTime" Precision="0" />
         </EntityType>
-        <EntityType Name="BannerPTTbl">
+        <EntityType Name="AutocompleteSuggestion">
           <Key>
-            <PropertyRef Name="MainCateId" />
+            <PropertyRef Name="ID" />
           </Key>
-          <Property Name="MainCateId" Type="Int64" Nullable="false" />
-          <Property Name="MTitle" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Position" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="MUrl" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Active" Type="Boolean" />
-          <Property Name="Priority" Type="Int64" />
-          <Property Name="MImage" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Create_at" Type="DateTime" Precision="3" />
-          <Property Name="Update_at" Type="DateTime" Precision="3" />
-          <Property Name="UserId" Type="Int64" />
-          <Property Name="ModelQuery1" Type="Boolean" />
-        </EntityType>
-        <EntityType Name="BannerQueryListTbl">
-          <Key>
-            <PropertyRef Name="BannerQueryListId" />
-          </Key>
-          <Property Name="BannerQueryListId" Type="Int32" Nullable="false" />
-          <Property Name="QueryId" Type="Int32" />
-          <Property Name="BMainCateId" Type="Int32" />
-          <Property Name="ProductId" Type="Int64" />
-        </EntityType>
-        <EntityType Name="BSubTitleDetailTbl">
-          <Key>
-            <PropertyRef Name="BSubDId" />
-          </Key>
-          <Property Name="BSubDId" Type="Int32" Nullable="false" />
-          <Property Name="MainCateId" Type="Int32" />
-          <Property Name="QueryId" Type="Int32" />
-          <Property Name="BSubId" Type="Int32" />
-          <Property Name="kSubTitle" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-        </EntityType>
-        <EntityType Name="FestivalBannerTbl">
-          <Key>
-            <PropertyRef Name="FBannerId" />
-          </Key>
-          <Property Name="FBannerId" Type="Int64" Nullable="false" />
-          <Property Name="FBTitle" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="FBPosition" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="FBUrl" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Active" Type="Boolean" />
-          <Property Name="Priority" Type="Int64" />
-          <Property Name="FBImage" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Create_at" Type="DateTime" Precision="3" />
-          <Property Name="Update_at" Type="DateTime" Precision="3" />
-          <Property Name="UserId" Type="Int64" />
-        </EntityType>
-        <EntityType Name="QueryTbl">
-          <Key>
-            <PropertyRef Name="QId" />
-          </Key>
-          <Property Name="QId" Type="Int32" Nullable="false" />
-          <Property Name="MainCateId" Type="Int32" />
-          <Property Name="AskQues1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Answer" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Priority" Type="Boolean" />
-          <Property Name="Active" Type="Boolean" />
-          <Property Name="ModelQuery2" Type="Boolean" />
-          <Property Name="Create_at" Type="DateTime" Precision="3" />
-          <Property Name="Update_at" Type="DateTime" Precision="3" />
+          <Property Name="ID" Type="Int64" Nullable="false" />
+          <Property Name="Suggestion" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="VProduct">
           <Key>
@@ -1027,49 +1044,26 @@ warning 6002: The table/view 'giftchoice.giftchoice.AutocompleteSuggestions' doe
           <Property Name="Expr14" Type="DateTime" Precision="3" />
           <Property Name="Qty" Type="Int64" />
         </EntityType>
-        <EntityType Name="AutocompleteSuggestion">
+        <EntityType Name="VideoTbl">
           <Key>
-            <PropertyRef Name="ID" />
+            <PropertyRef Name="VId" />
           </Key>
-          <Property Name="ID" Type="Int64" Nullable="false" />
-          <Property Name="Suggestion" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-        </EntityType>
-        <Association Name="FK__MCKeyword__Keywo__52593CB8">
-          <End Type="GiftChoiceModel.KeywordTbl" Role="KeywordTbl" Multiplicity="0..1" />
-          <End Type="GiftChoiceModel.MCKeywordTbl" Role="MCKeywordTbl" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="KeywordTbl">
-              <PropertyRef Name="KeywordId" />
-            </Principal>
-            <Dependent Role="MCKeywordTbl">
-              <PropertyRef Name="KeywordId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__MCKeyword__MainC__534D60F1">
-          <End Type="GiftChoiceModel.MainCateTbl" Role="MainCateTbl" Multiplicity="0..1" />
-          <End Type="GiftChoiceModel.MCKeywordTbl" Role="MCKeywordTbl" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="MainCateTbl">
-              <PropertyRef Name="MainCateId" />
-            </Principal>
-            <Dependent Role="MCKeywordTbl">
-              <PropertyRef Name="MainCateId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityType Name="ProductDetailTbl">
-          <Key>
-            <PropertyRef Name="PdId" />
-          </Key>
-          <Property Name="PdId" Type="Int64" Nullable="false" />
-          <Property Name="ProductId" Type="Int64" />
-          <Property Name="ProductType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Price" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="SizeId" Type="Int32" />
-          <Property Name="SizeName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Priority" Type="Int64" />
+          <Property Name="VId" Type="Int32" Nullable="false" />
+          <Property Name="VUrl" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Video" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="VideoTitle" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Active" Type="Boolean" />
+          <Property Name="Create_at" Type="DateTime" Precision="3" />
+          <Property Name="Update_at" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="ProductFilterWordTbl">
+          <Key>
+            <PropertyRef Name="PFID" />
+          </Key>
+          <Property Name="PFID" Type="Int32" Nullable="false" />
+          <Property Name="PFilterId" Type="Int32" />
+          <Property Name="ProductId" Type="Int64" />
+          <Property Name="PFilterTilte" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -1150,6 +1144,33 @@ warning 6002: The table/view 'giftchoice.giftchoice.AutocompleteSuggestions' doe
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="BannerPTTbls">
+            <EntityTypeMapping TypeName="GiftChoiceModel.BannerPTTbl">
+              <MappingFragment StoreEntitySet="BannerPTTbl">
+                <ScalarProperty Name="ModelQuery1" ColumnName="ModelQuery1" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Update_at" ColumnName="Update_at" />
+                <ScalarProperty Name="Create_at" ColumnName="Create_at" />
+                <ScalarProperty Name="MImage" ColumnName="MImage" />
+                <ScalarProperty Name="Priority" ColumnName="Priority" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="MUrl" ColumnName="MUrl" />
+                <ScalarProperty Name="Position" ColumnName="Position" />
+                <ScalarProperty Name="MTitle" ColumnName="MTitle" />
+                <ScalarProperty Name="MainCateId" ColumnName="MainCateId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BannerQueryListTbls">
+            <EntityTypeMapping TypeName="GiftChoiceModel.BannerQueryListTbl">
+              <MappingFragment StoreEntitySet="BannerQueryListTbl">
+                <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+                <ScalarProperty Name="BMainCateId" ColumnName="BMainCateId" />
+                <ScalarProperty Name="QueryId" ColumnName="QueryId" />
+                <ScalarProperty Name="BannerQueryListId" ColumnName="BannerQueryListId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="BannerTbls">
             <EntityTypeMapping TypeName="GiftChoiceModel.BannerTbl">
               <MappingFragment StoreEntitySet="BannerTbl">
@@ -1219,6 +1240,17 @@ warning 6002: The table/view 'giftchoice.giftchoice.AutocompleteSuggestions' doe
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="BSubTitleDetailTbls">
+            <EntityTypeMapping TypeName="GiftChoiceModel.BSubTitleDetailTbl">
+              <MappingFragment StoreEntitySet="BSubTitleDetailTbl">
+                <ScalarProperty Name="kSubTitle" ColumnName="kSubTitle" />
+                <ScalarProperty Name="BSubId" ColumnName="BSubId" />
+                <ScalarProperty Name="QueryId" ColumnName="QueryId" />
+                <ScalarProperty Name="MainCateId" ColumnName="MainCateId" />
+                <ScalarProperty Name="BSubDId" ColumnName="BSubDId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="BSubTitleTbls">
             <EntityTypeMapping TypeName="GiftChoiceModel.BSubTitleTbl">
               <MappingFragment StoreEntitySet="BSubTitleTbl">
@@ -1232,6 +1264,22 @@ warning 6002: The table/view 'giftchoice.giftchoice.AutocompleteSuggestions' doe
                 <ScalarProperty Name="SubTitle" ColumnName="SubTitle" />
                 <ScalarProperty Name="MainCateId" ColumnName="MainCateId" />
                 <ScalarProperty Name="BSubId" ColumnName="BSubId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FestivalBannerTbls">
+            <EntityTypeMapping TypeName="GiftChoiceModel.FestivalBannerTbl">
+              <MappingFragment StoreEntitySet="FestivalBannerTbl">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Update_at" ColumnName="Update_at" />
+                <ScalarProperty Name="Create_at" ColumnName="Create_at" />
+                <ScalarProperty Name="FBImage" ColumnName="FBImage" />
+                <ScalarProperty Name="Priority" ColumnName="Priority" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="FBUrl" ColumnName="FBUrl" />
+                <ScalarProperty Name="FBPosition" ColumnName="FBPosition" />
+                <ScalarProperty Name="FBTitle" ColumnName="FBTitle" />
+                <ScalarProperty Name="FBannerId" ColumnName="FBannerId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1266,6 +1314,9 @@ warning 6002: The table/view 'giftchoice.giftchoice.AutocompleteSuggestions' doe
           <EntitySetMapping Name="MainCateTbls">
             <EntityTypeMapping TypeName="GiftChoiceModel.MainCateTbl">
               <MappingFragment StoreEntitySet="MainCateTbl">
+                <ScalarProperty Name="ModelQuery1" ColumnName="ModelQuery1" />
+                <ScalarProperty Name="Position" ColumnName="Position" />
+                <ScalarProperty Name="CateType" ColumnName="CateType" />
                 <ScalarProperty Name="MainCateType" ColumnName="MainCateType" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
                 <ScalarProperty Name="MImage" ColumnName="MImage" />
@@ -1332,9 +1383,24 @@ warning 6002: The table/view 'giftchoice.giftchoice.AutocompleteSuggestions' doe
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="ProductDetailTbls">
+            <EntityTypeMapping TypeName="GiftChoiceModel.ProductDetailTbl">
+              <MappingFragment StoreEntitySet="ProductDetailTbl">
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="Priority" ColumnName="Priority" />
+                <ScalarProperty Name="SizeName" ColumnName="SizeName" />
+                <ScalarProperty Name="SizeId" ColumnName="SizeId" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="ProductType" ColumnName="ProductType" />
+                <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+                <ScalarProperty Name="PdId" ColumnName="PdId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="ProductImages">
             <EntityTypeMapping TypeName="GiftChoiceModel.ProductImage">
               <MappingFragment StoreEntitySet="ProductImage">
+                <ScalarProperty Name="ImageIndex" ColumnName="ImageIndex" />
                 <ScalarProperty Name="Active" ColumnName="Active" />
                 <ScalarProperty Name="PImage" ColumnName="PImage" />
                 <ScalarProperty Name="ProductId" ColumnName="ProductId" />
@@ -1345,6 +1411,10 @@ warning 6002: The table/view 'giftchoice.giftchoice.AutocompleteSuggestions' doe
           <EntitySetMapping Name="ProductTbls">
             <EntityTypeMapping TypeName="GiftChoiceModel.ProductTbl">
               <MappingFragment StoreEntitySet="ProductTbl">
+                <ScalarProperty Name="VideoId" ColumnName="VideoId" />
+                <ScalarProperty Name="Video" ColumnName="Video" />
+                <ScalarProperty Name="BannerCateId" ColumnName="BannerCateId" />
+                <ScalarProperty Name="ProductType" ColumnName="ProductType" />
                 <ScalarProperty Name="VideoUrl" ColumnName="VideoUrl" />
                 <ScalarProperty Name="SameDay" ColumnName="SameDay" />
                 <ScalarProperty Name="TableDesc" ColumnName="TableDesc" />
@@ -1372,6 +1442,21 @@ warning 6002: The table/view 'giftchoice.giftchoice.AutocompleteSuggestions' doe
                 <ScalarProperty Name="ProductId" ColumnName="ProductId" />
                 <ScalarProperty Name="SizeId" ColumnName="SizeId" />
                 <ScalarProperty Name="PSizeId" ColumnName="PSizeId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="QueryTbls">
+            <EntityTypeMapping TypeName="GiftChoiceModel.QueryTbl">
+              <MappingFragment StoreEntitySet="QueryTbl">
+                <ScalarProperty Name="Update_at" ColumnName="Update_at" />
+                <ScalarProperty Name="Create_at" ColumnName="Create_at" />
+                <ScalarProperty Name="ModelQuery2" ColumnName="ModelQuery2" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="Priority" ColumnName="Priority" />
+                <ScalarProperty Name="Answer" ColumnName="Answer" />
+                <ScalarProperty Name="AskQues1" ColumnName="AskQues1" />
+                <ScalarProperty Name="MainCateId" ColumnName="MainCateId" />
+                <ScalarProperty Name="QId" ColumnName="QId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1417,72 +1502,11 @@ warning 6002: The table/view 'giftchoice.giftchoice.AutocompleteSuggestions' doe
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="BannerPTTbls">
-            <EntityTypeMapping TypeName="GiftChoiceModel.BannerPTTbl">
-              <MappingFragment StoreEntitySet="BannerPTTbl">
-                <ScalarProperty Name="ModelQuery1" ColumnName="ModelQuery1" />
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
-                <ScalarProperty Name="Update_at" ColumnName="Update_at" />
-                <ScalarProperty Name="Create_at" ColumnName="Create_at" />
-                <ScalarProperty Name="MImage" ColumnName="MImage" />
-                <ScalarProperty Name="Priority" ColumnName="Priority" />
-                <ScalarProperty Name="Active" ColumnName="Active" />
-                <ScalarProperty Name="MUrl" ColumnName="MUrl" />
-                <ScalarProperty Name="Position" ColumnName="Position" />
-                <ScalarProperty Name="MTitle" ColumnName="MTitle" />
-                <ScalarProperty Name="MainCateId" ColumnName="MainCateId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="BannerQueryListTbls">
-            <EntityTypeMapping TypeName="GiftChoiceModel.BannerQueryListTbl">
-              <MappingFragment StoreEntitySet="BannerQueryListTbl">
-                <ScalarProperty Name="ProductId" ColumnName="ProductId" />
-                <ScalarProperty Name="BMainCateId" ColumnName="BMainCateId" />
-                <ScalarProperty Name="QueryId" ColumnName="QueryId" />
-                <ScalarProperty Name="BannerQueryListId" ColumnName="BannerQueryListId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="BSubTitleDetailTbls">
-            <EntityTypeMapping TypeName="GiftChoiceModel.BSubTitleDetailTbl">
-              <MappingFragment StoreEntitySet="BSubTitleDetailTbl">
-                <ScalarProperty Name="kSubTitle" ColumnName="kSubTitle" />
-                <ScalarProperty Name="BSubId" ColumnName="BSubId" />
-                <ScalarProperty Name="QueryId" ColumnName="QueryId" />
-                <ScalarProperty Name="MainCateId" ColumnName="MainCateId" />
-                <ScalarProperty Name="BSubDId" ColumnName="BSubDId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="FestivalBannerTbls">
-            <EntityTypeMapping TypeName="GiftChoiceModel.FestivalBannerTbl">
-              <MappingFragment StoreEntitySet="FestivalBannerTbl">
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
-                <ScalarProperty Name="Update_at" ColumnName="Update_at" />
-                <ScalarProperty Name="Create_at" ColumnName="Create_at" />
-                <ScalarProperty Name="FBImage" ColumnName="FBImage" />
-                <ScalarProperty Name="Priority" ColumnName="Priority" />
-                <ScalarProperty Name="Active" ColumnName="Active" />
-                <ScalarProperty Name="FBUrl" ColumnName="FBUrl" />
-                <ScalarProperty Name="FBPosition" ColumnName="FBPosition" />
-                <ScalarProperty Name="FBTitle" ColumnName="FBTitle" />
-                <ScalarProperty Name="FBannerId" ColumnName="FBannerId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="QueryTbls">
-            <EntityTypeMapping TypeName="GiftChoiceModel.QueryTbl">
-              <MappingFragment StoreEntitySet="QueryTbl">
-                <ScalarProperty Name="Update_at" ColumnName="Update_at" />
-                <ScalarProperty Name="Create_at" ColumnName="Create_at" />
-                <ScalarProperty Name="ModelQuery2" ColumnName="ModelQuery2" />
-                <ScalarProperty Name="Active" ColumnName="Active" />
-                <ScalarProperty Name="Priority" ColumnName="Priority" />
-                <ScalarProperty Name="Answer" ColumnName="Answer" />
-                <ScalarProperty Name="AskQues1" ColumnName="AskQues1" />
-                <ScalarProperty Name="MainCateId" ColumnName="MainCateId" />
-                <ScalarProperty Name="QId" ColumnName="QId" />
+          <EntitySetMapping Name="AutocompleteSuggestions">
+            <EntityTypeMapping TypeName="GiftChoiceModel.AutocompleteSuggestion">
+              <MappingFragment StoreEntitySet="AutocompleteSuggestions">
+                <ScalarProperty Name="Suggestion" ColumnName="Suggestion" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1526,25 +1550,26 @@ warning 6002: The table/view 'giftchoice.giftchoice.AutocompleteSuggestions' doe
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="AutocompleteSuggestions">
-            <EntityTypeMapping TypeName="GiftChoiceModel.AutocompleteSuggestion">
-              <MappingFragment StoreEntitySet="AutocompleteSuggestions">
-                <ScalarProperty Name="Suggestion" ColumnName="Suggestion" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
+          <EntitySetMapping Name="VideoTbls">
+            <EntityTypeMapping TypeName="GiftChoiceModel.VideoTbl">
+              <MappingFragment StoreEntitySet="VideoTbl">
+                <ScalarProperty Name="Update_at" ColumnName="Update_at" />
+                <ScalarProperty Name="Create_at" ColumnName="Create_at" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="VideoTitle" ColumnName="VideoTitle" />
+                <ScalarProperty Name="Video" ColumnName="Video" />
+                <ScalarProperty Name="VUrl" ColumnName="VUrl" />
+                <ScalarProperty Name="VId" ColumnName="VId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="ProductDetailTbls">
-            <EntityTypeMapping TypeName="GiftChoiceModel.ProductDetailTbl">
-              <MappingFragment StoreEntitySet="ProductDetailTbl">
-                <ScalarProperty Name="Active" ColumnName="Active" />
-                <ScalarProperty Name="Priority" ColumnName="Priority" />
-                <ScalarProperty Name="SizeName" ColumnName="SizeName" />
-                <ScalarProperty Name="SizeId" ColumnName="SizeId" />
-                <ScalarProperty Name="Price" ColumnName="Price" />
-                <ScalarProperty Name="ProductType" ColumnName="ProductType" />
+          <EntitySetMapping Name="ProductFilterWordTbls">
+            <EntityTypeMapping TypeName="GiftChoiceModel.ProductFilterWordTbl">
+              <MappingFragment StoreEntitySet="ProductFilterWordTbl">
+                <ScalarProperty Name="PFilterTilte" ColumnName="PFilterTilte" />
                 <ScalarProperty Name="ProductId" ColumnName="ProductId" />
-                <ScalarProperty Name="PdId" ColumnName="PdId" />
+                <ScalarProperty Name="PFilterId" ColumnName="PFilterId" />
+                <ScalarProperty Name="PFID" ColumnName="PFID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

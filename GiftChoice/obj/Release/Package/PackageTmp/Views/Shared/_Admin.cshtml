@@ -33,6 +33,9 @@
     <title>Welcome to Gift Choice Bhilwara</title>
     <script src="~/Angularjs/angular.min.js"></script>
     <script src="~/Angularjs/angular-upload.js"></script>
+    <link rel="stylesheet" href="~/Angularjs/ng-tags-input.min.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.2/angular.min.js"></script>
+    <script src="~/Angularjs/ng-tags-input.min.js"></script>
     <style>
         a {
             cursor: pointer
@@ -90,7 +93,7 @@
                         <div class="offcanvas-header border-bottom">
                             <div class="d-flex align-items-center">
                                 <div class="">
-                                    <img src="~/Content/assets/imgs/resources/gift-choice.png" style="width: 150px" class="logo-icon" alt="logo icon">
+                                    @*<img src="~/Content/assets/imgs/resources/gift-choice.png" style="width: 150px" class="logo-icon" alt="logo icon">*@
                                 </div>
 
                             </div>
@@ -98,16 +101,16 @@
                         </div>
                         <div class="offcanvas-body">
                             <ul class="navbar-nav align-items-center flex-grow-1">
-                                <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle dropdown-toggle-nocaret" href="/GiftDashBoard/AddKeyword">
-                                        <div class="parent-icon">
-                                            <i class='bx bx-category-alt'></i>
-                                        </div>
-                                        <div class="menu-title d-flex align-items-center">Add KeyWords</div>
+                                @*<li class="nav-item dropdown">
+                                        <a class="nav-link dropdown-toggle dropdown-toggle-nocaret" href="/GiftDashBoard/AddKeyword">
+                                            <div class="parent-icon">
+                                                <i class='bx bx-category-alt'></i>
+                                            </div>
+                                            <div class="menu-title d-flex align-items-center">Add KeyWords</div>
 
-                                    </a>
+                                        </a>
 
-                                </li>
+                                    </li>*@
                                 <li class="nav-item dropdown">
                                     <a class="nav-link dropdown-toggle dropdown-toggle-nocaret" href="/GiftDashBoard/AddSlider">
                                         <div class="parent-icon">
@@ -146,6 +149,37 @@
 
                                     </li>*@
                                 <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle dropdown-toggle-nocaret" href="/GiftDashBoard/AddMainCate">
+                                        <div class="parent-icon">
+                                            <i class='bx bx-category-alt'></i>
+                                        </div>
+                                        <div class="menu-title d-flex align-items-center">Add Main Category</div>
+
+                                    </a>
+
+                                </li>
+                                @*<li class="nav-item dropdown">
+                                        <a class="nav-link dropdown-toggle dropdown-toggle-nocaret" data-bs-toggle="dropdown">
+                                            <div class="parent-icon">
+                                                <i class='bx bx-category-alt'></i>
+                                            </div>
+                                            <div class="menu-title d-flex align-items-center">Add Product Add Main Category</div>
+                                            <div class="ms-auto dropy-icon"><i class="bx bx-chevron-down"></i></div>
+
+                                        </a>
+                                        <ul class="dropdown-menu">
+
+                                            <li><a class="dropdown-item" href="/GiftDashBoard/AddMainCate"><i class="bx bx-category-alt"></i>Add Main Category</a></li>
+                                            <li><a class="dropdown-item" href="/GiftDashBoard/AddLabelProduct"><i class="bx bx-category-alt"></i>Add Label</a></li>
+
+                                            <li><a class="dropdown-item" href="/GiftDashBoard/AddProduct"><i class="bx bx-category-alt"></i>Add Products</a></li>
+
+
+                                        </ul>
+                                    </li>*@
+
+
+                                <li class="nav-item dropdown">
                                     <a class="nav-link dropdown-toggle dropdown-toggle-nocaret" data-bs-toggle="dropdown">
                                         <div class="parent-icon">
                                             <i class='bx bx-category-alt'></i>
@@ -155,16 +189,28 @@
 
                                     </a>
                                     <ul class="dropdown-menu">
+                                        <li><a class="dropdown-item" href="/GiftDashBoard/AddPBanner"><i class="bx bx-category-alt"></i>Add Banner</a></li>
+                                        <li><a class="dropdown-item" href="/GiftDashBoard/AddRelation"><i class="bx bx-category-alt"></i>Add Filter</a></li>
 
-                                        <li><a class="dropdown-item" href="/GiftDashBoard/AddMainCate"><i class="bx bx-category-alt"></i>Add Main Category</a></li>
-                                        <li><a class="dropdown-item" href="/GiftDashBoard/AddLabelProduct"><i class="bx bx-category-alt"></i>Add Label</a></li>
+                                        @*<li><a class="dropdown-item" href="/GiftDashBoard/AddRelation"><i class="bx bx-category-alt"></i>Add Query</a></li>*@
 
-                                        <li><a class="dropdown-item" href="/GiftDashBoard/AddProduct"><i class="bx bx-category-alt"></i>Add Products</a></li>
-
+                                        @*<li><a class="dropdown-item" href="/GiftDashBoard/AddBannerQAndAnswer"><i class="bx bx-category-alt"></i>Add Query Keyword</a></li>
+                                            <li><a class="dropdown-item" href="/GiftDashBoard/AddQueryKeyword"><i class="bx bx-category-alt"></i>Add Answer Keyword</a></li>*@
+                                        @*<li><a class="dropdown-item" href="/GiftDashBoard/AddBannerInProduct"><i class="bx bx-category-alt"></i>Add Banner In Product</a></li>*@
+                                        <li><a class="dropdown-item" href="/GiftDashBoard/AddBannerInProduct"><i class="bx bx-category-alt"></i>Add Product</a></li>
 
                                     </ul>
                                 </li>
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle dropdown-toggle-nocaret" href="/GiftDashBoard/AddVideo">
+                                        <div class="parent-icon">
+                                            <i class='bx bx-category-alt'></i>
+                                        </div>
+                                        <div class="menu-title d-flex align-items-center">Add Video</div>
 
+                                    </a>
+
+                                </li>
                                 <li class="nav-item dropdown">
                                     <a class="nav-link dropdown-toggle dropdown-toggle-nocaret" href="/GiftDashBoard/AddSize">
                                         <div class="parent-icon">
@@ -175,47 +221,26 @@
                                     </a>
 
                                 </li>
+                                @*<li class="nav-item dropdown">
+                                        <a class="nav-link dropdown-toggle dropdown-toggle-nocaret" href="/GiftDashBoard/FestivalBanner">
+                                            <div class="parent-icon">
+                                                <i class='bx bx-category-alt'></i>
+                                            </div>
+                                            <div class="menu-title d-flex align-items-center">Festival Banner</div>
 
-                                <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle dropdown-toggle-nocaret" data-bs-toggle="dropdown">
-                                        <div class="parent-icon">
-                                            <i class='bx bx-category-alt'></i>
-                                        </div>
-                                        <div class="menu-title d-flex align-items-center">Add Banner Product</div>
-                                        <div class="ms-auto dropy-icon"><i class="bx bx-chevron-down"></i></div>
+                                        </a>
 
-                                    </a>
-                                    <ul class="dropdown-menu">
-                                        <li><a class="dropdown-item" href="/GiftDashBoard/AddPBanner"><i class="bx bx-category-alt"></i>Add Banner</a></li>
-                                        <li><a class="dropdown-item" href="/GiftDashBoard/AddRelation"><i class="bx bx-category-alt"></i>Add Query</a></li>
+                                    </li>*@
+                                @*<li class="nav-item dropdown">
+                                        <a class="nav-link dropdown-toggle dropdown-toggle-nocaret" href="/GiftDashBoard/OrderList">
+                                            <div class="parent-icon">
+                                                <i class='bx bx-category-alt'></i>
+                                            </div>
+                                            <div class="menu-title d-flex align-items-center">Order List</div>
 
-                                        @*<li><a class="dropdown-item" href="/GiftDashBoard/AddBannerQAndAnswer"><i class="bx bx-category-alt"></i>Add Query Keyword</a></li>
-                                            <li><a class="dropdown-item" href="/GiftDashBoard/AddQueryKeyword"><i class="bx bx-category-alt"></i>Add Answer Keyword</a></li>*@
-                                        <li><a class="dropdown-item" href="/GiftDashBoard/AddBannerInProduct"><i class="bx bx-category-alt"></i>Add Banner In Product</a></li>
+                                        </a>
 
-
-                                    </ul>
-                                </li>
-                                <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle dropdown-toggle-nocaret" href="/GiftDashBoard/FestivalBanner">
-                                        <div class="parent-icon">
-                                            <i class='bx bx-category-alt'></i>
-                                        </div>
-                                        <div class="menu-title d-flex align-items-center">Festival Banner</div>
-
-                                    </a>
-
-                                </li>
-                                <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle dropdown-toggle-nocaret" href="/GiftDashBoard/OrderList">
-                                        <div class="parent-icon">
-                                            <i class='bx bx-category-alt'></i>
-                                        </div>
-                                        <div class="menu-title d-flex align-items-center">Order List</div>
-
-                                    </a>
-
-                                </li>
+                                    </li>*@
 
                             </ul>
                         </div>
