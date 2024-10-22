@@ -291,7 +291,23 @@ function myFunction() {
         e("#news-flash").vTicker({ speed: 500, pause: 3e3, animation: "fade", mousePause: !1, showItems: 1 });
 })(jQuery);
 var swiper = new Swiper(".swiper-container", {
-    slidesPerView: 3,
+    slidesPerView: 1,
+    spaceBetween: 6,
+    autoplay: { delay: 1500 },
+    pagination: { el: ".swiper-pagination", clickable: !0 },
+    navigation: { nextEl: ".next-btn", prevEl: ".prev-btn" },
+    breakpoints: {
+        250: { slidesPerView: 2, spaceBetween: 10 },
+        340: { slidesPerView: 3, spaceBetween: 10 },
+        480: { slidesPerView: 4, spaceBetween: 10 },
+        768: { slidesPerView: 5, spaceBetween: 10 },
+        990: { slidesPerView: 7, spaceBetween: 10 },
+        1366: { slidesPerView: 8, spaceBetween: 10 },
+        1440: { slidesPerView: 10, spaceBetween: 10 },
+    },
+});
+var swiper = new Swiper(".swiper-container-1", {
+    slidesPerView: 1,
     spaceBetween: 6,
     autoplay: { delay: 1500 },
     pagination: { el: ".swiper-pagination", clickable: !0 },

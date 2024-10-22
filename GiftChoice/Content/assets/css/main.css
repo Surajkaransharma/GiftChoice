@@ -6298,11 +6298,10 @@ span.fi-rs-apps {
             background-color: #ff3551
         }
 
-.main-menu > nav > ul > li:hover ul.more-category {
-    height: 30em;
+/*.main-menu > nav > ul > li:hover ul.more-category {
     overflow-x: auto
 }
-
+*/
 .main-menu.hover-boder > nav > ul > li > a::after {
     content: none;
     position: absolute;
@@ -9419,7 +9418,7 @@ span.fi-rs-apps {
     }
 
     .mobile-justify-content-between {
-        justify-content: space-between !important
+        justify-content: space-between !important;
     }
 
     .mobile-header-wrapper-style .mobile-header-wrapper-inner .mobile-header-content-area .mobile-menu-wrap nav .mobile-menu li.menu-item-has-children .menu-expand {
@@ -10675,5 +10674,32 @@ span.fi-rs-apps {
     .home-testimonial .product-content-wrap h2,
     .product-detail-product-name {
         font-size: 16px !important;
+    }
+    .d-ruby{
+        display : ruby !important;
+        white-space : nowrap;
+        overflow : scroll !important;
+    }
+    .o-auto{
+        overflow : auto !important;
+    }
+
+    .caterody-product-slider .arrow-button{
+        height : 25px !important;
+    }
+
+    section{
+        padding : 10px 0  10px 0 !important;
+    }
+}
+
+@media only screen and (device-width : 768px) and (device-height : 1024px) and (orientation : portrait){
+    .mobile-justify-content-between {
+        justify-content: space-between !important;
+    }
+}
+@media only screen and (device-width : 800px) and (device-height : 1280px) and (orientation : portrait) {
+    .mobile-justify-content-between {
+        justify-content: space-between !important;
     }
 }
