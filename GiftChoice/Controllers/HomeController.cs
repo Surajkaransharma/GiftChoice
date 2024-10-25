@@ -566,13 +566,13 @@ namespace GiftChoice.Controllers
                    //    s.PKeywordId,
                    //    SubmenuTitle = db.KeywordTbls.Where(t => t.KeywordId == s.KeywordId && t.Active == true).Select(t => t.Keyword).FirstOrDefault()
                    //}),
-                   PSizeList = db.PSizeTbls.Where(s => s.ProductId == m.ProductId && s.Active == true).Select(s => new
-                   {
-                       s.ProductId,
-                       s.SizeId,
-                       s.PSizeId,
-                       SizeTitle = db.SizeTbls.Where(t => t.SizeId == s.SizeId && t.Active == true).Select(t => t.SizeTitle).FirstOrDefault()
-                   }),
+                   //PSizeList = db.PSizeTbls.Where(s => s.ProductId == m.ProductId && s.Active == true).Select(s => new
+                   //{
+                   //    s.ProductId,
+                   //    s.SizeId,
+                   //    s.PSizeId,
+                   //    SizeTitle = db.SizeTbls.Where(t => t.SizeId == s.SizeId && t.Active == true).Select(t => t.SizeTitle).FirstOrDefault()
+                   //}),
                    productDataArray = db.ProductDetailTbls.Where(p => p.ProductId == m.ProductId).Select(p => new
                    {
                        p.ProductId,
