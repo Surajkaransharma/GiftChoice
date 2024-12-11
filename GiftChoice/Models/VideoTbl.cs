@@ -15,10 +15,11 @@ namespace GiftChoice.Models
 
     public partial class VideoTbl
     {
+
+        public HttpPostedFileBase Image { get; set; }
         public int VId { get; set; }
         public string VUrl { get; set; }
         public string Video { get; set; }
-        public HttpPostedFileBase Image { get; set; }
         public string VideoTitle { get; set; }
         public Nullable<bool> Active { get; set; }
         public Nullable<System.DateTime> Create_at { get; set; }

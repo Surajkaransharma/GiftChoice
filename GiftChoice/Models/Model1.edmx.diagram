@@ -29,17 +29,17 @@
         <EntityTypeShape EntityType="GiftChoiceModel.OrderTbl" Width="1.5" PointX="12.75" PointY="4.75" />
         <EntityTypeShape EntityType="GiftChoiceModel.PKeywordTbl" Width="1.5" PointX="12.75" PointY="8.75" />
         <EntityTypeShape EntityType="GiftChoiceModel.ProductDetailTbl" Width="1.5" PointX="12.75" PointY="11.75" />
-        <EntityTypeShape EntityType="GiftChoiceModel.ProductImage" Width="1.5" PointX="14.75" PointY="0.75" />
-        <EntityTypeShape EntityType="GiftChoiceModel.ProductTbl" Width="1.5" PointX="14.75" PointY="3.75" />
-        <EntityTypeShape EntityType="GiftChoiceModel.PSizeTbl" Width="1.5" PointX="4.75" PointY="14.75" />
+        <EntityTypeShape EntityType="GiftChoiceModel.ProductFilterWordTbl" Width="1.5" PointX="14.75" PointY="0.75" />
+        <EntityTypeShape EntityType="GiftChoiceModel.ProductImage" Width="1.5" PointX="14.75" PointY="3.75" />
+        <EntityTypeShape EntityType="GiftChoiceModel.ProductTbl" Width="1.5" PointX="4.75" PointY="14.75" />
+        <EntityTypeShape EntityType="GiftChoiceModel.PSizeTbl" Width="1.5" PointX="14.75" PointY="6.75" />
         <EntityTypeShape EntityType="GiftChoiceModel.QueryTbl" Width="1.5" PointX="14.75" PointY="9.75" />
         <EntityTypeShape EntityType="GiftChoiceModel.SizeTbl" Width="1.5" PointX="14.75" PointY="13.75" />
         <EntityTypeShape EntityType="GiftChoiceModel.SliderTbl" Width="1.5" PointX="0.75" PointY="15.75" />
         <EntityTypeShape EntityType="GiftChoiceModel.UserRegister" Width="1.5" PointX="10.75" PointY="15.75" />
-        <EntityTypeShape EntityType="GiftChoiceModel.AutocompleteSuggestion" Width="1.5" PointX="16.75" PointY="0.75" />
-        <EntityTypeShape EntityType="GiftChoiceModel.VProduct" Width="1.5" PointX="16.75" PointY="3.75" />
-        <EntityTypeShape EntityType="GiftChoiceModel.VideoTbl" Width="1.5" PointX="7.375" PointY="16.75" />
-        <EntityTypeShape EntityType="GiftChoiceModel.ProductFilterWordTbl" Width="1.5" PointX="13.375" PointY="16.75" />
+        <EntityTypeShape EntityType="GiftChoiceModel.VideoTbl" Width="1.5" PointX="16.75" PointY="0.75" />
+        <EntityTypeShape EntityType="GiftChoiceModel.AutocompleteSuggestion" Width="1.5" PointX="16.75" PointY="4.75" />
+        <EntityTypeShape EntityType="GiftChoiceModel.VProduct" Width="1.5" PointX="6.75" PointY="16.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

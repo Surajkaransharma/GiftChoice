@@ -49,6 +49,7 @@ namespace GiftChoice.Models
         public virtual DbSet<OrderTbl> OrderTbls { get; set; }
         public virtual DbSet<PKeywordTbl> PKeywordTbls { get; set; }
         public virtual DbSet<ProductDetailTbl> ProductDetailTbls { get; set; }
+        public virtual DbSet<ProductFilterWordTbl> ProductFilterWordTbls { get; set; }
         public virtual DbSet<ProductImage> ProductImages { get; set; }
         public virtual DbSet<ProductTbl> ProductTbls { get; set; }
         public virtual DbSet<PSizeTbl> PSizeTbls { get; set; }
@@ -56,9 +57,8 @@ namespace GiftChoice.Models
         public virtual DbSet<SizeTbl> SizeTbls { get; set; }
         public virtual DbSet<SliderTbl> SliderTbls { get; set; }
         public virtual DbSet<UserRegister> UserRegisters { get; set; }
+        public virtual DbSet<VideoTbl> VideoTbls { get; set; }
         public virtual DbSet<AutocompleteSuggestion> AutocompleteSuggestions { get; set; }
         public virtual DbSet<VProduct> VProducts { get; set; }
-        public virtual DbSet<VideoTbl> VideoTbls { get; set; }
-        public virtual DbSet<ProductFilterWordTbl> ProductFilterWordTbls { get; set; }
     }
 }
