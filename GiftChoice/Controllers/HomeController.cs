@@ -80,7 +80,7 @@ namespace GiftChoice.Controllers
             }
             else
             {
-                var res = db.MainCateTbls.Where(m => m.Active == true).Select(m => new
+                var res = db.MainCateTbls.Where(m => m.Active == true && m.CateType == "MainCate").Select(m => new
                 {
                     m.MainCateId,
                     m.MUrl,
@@ -355,7 +355,7 @@ namespace GiftChoice.Controllers
                 WITH CTE AS (
                     SELECT p.*, m.MTitle, kw.Keyword , i.PImage, ROW_NUMBER() OVER (PARTITION BY p.ProductId ORDER BY kw.KeywordID, i.PImageId) AS RowNum
                     FROM ProductTbl p
-                    JOIN MainCateTbl m ON m.MainCateId = p.MainCateId
+                    JOIN MainCateTbl m ON m.MainCateId = p.MainCateId or m.MainCateId = p.BannerCateId
                     LEFT JOIN ProductImage i ON p.ProductId = i.ProductId
                     LEFT JOIN PKeywordTbl k ON p.ProductId = k.ProductId
                     LEFT JOIN KeywordTbl kw ON k.KeywordId = kw.KeywordID
@@ -477,7 +477,7 @@ namespace GiftChoice.Controllers
                ProductImage = db.ProductImages.Where(i => i.ProductId == m.ProductId).Select(i => i.PImage).FirstOrDefault(),
                Maincate = db.MainCateTbls.Where(p => p.MainCateId == m.MainCateId).Select(p => p.MTitle).FirstOrDefault(),
 
-           }).OrderBy(x => Guid.NewGuid());
+           }).OrderBy(x => Guid.NewGuid()).ToList();
                 return Json(res, JsonRequestBehavior.AllowGet);
             }
 
@@ -1436,43 +1436,43 @@ namespace GiftChoice.Controllers
                     s.MainCateId,
                     s.KeywordId,
                     s.MCkeywordId,
-                    ProductList = (from bannerCateProduct in db.PKeywordTbls
-                                   join product in db.ProductTbls on bannerCateProduct.ProductId equals product.ProductId
-                                   where product.Active == true && (product.ProductType == "BannerProduct" || product.ProductType == "Common") && bannerCateProduct.KeywordId == s.KeywordId && product.BannerCateId == BannerId
-                                   orderby Guid.NewGuid()
-                                   select new
-                                   {
+                  ProductList = (from bannerCateProduct in db.PKeywordTbls
+                                 join product in db.ProductTbls on bannerCateProduct.ProductId equals product.ProductId
+                                 where product.Active == true && (product.ProductType == "BannerProduct" || product.ProductType == "Common") && bannerCateProduct.KeywordId == s.KeywordId && product.BannerCateId == BannerId
+                                 orderby Guid.NewGuid()
+                                 select new
+                                 {
 
-                                       product.Video,
-                                       product.ProductId,
-                                       product.MainCateId,
-                                       product.ProductTitle,
-                                       product.PLabel,
-                                       LabelId = product.LabelId ?? 0,
-                                       product.Price,
-                                       product.PUrl,
-                                       product.Qty,
-                                       product.Create_at,
-                                       product.VideoUrl,
-                                       product.SameDay,
-                                       product.Active,
-                                       product.Priority,
-                                       ProductImage = db.ProductImages
-                                               .Where(i => i.ProductId == product.ProductId)
-                                               .Select(i => i.PImage)
-                                               .FirstOrDefault(),
-                                       Maincate = db.MainCateTbls
-                                               .Where(q => q.MainCateId == product.MainCateId)
-                                               .Select(q => q.MTitle)
-                                               .FirstOrDefault(),
-                                       Bannercate = db.MainCateTbls
-                                               .Where(q => q.MainCateId == product.BannerCateId)
-                                               .Select(q => q.MTitle)
-                                               .FirstOrDefault(),
+                                     product.Video,
+                                     product.ProductId,
+                                     product.MainCateId,
+                                     product.ProductTitle,
+                                     product.PLabel,
+                                     LabelId = product.LabelId ?? 0,
+                                     product.Price,
+                                     product.PUrl,
+                                     product.Qty,
+                                     product.Create_at,
+                                     product.VideoUrl,
+                                     product.SameDay,
+                                     product.Active,
+                                     product.Priority,
+                                     ProductImage = db.ProductImages
+                                             .Where(i => i.ProductId == product.ProductId)
+                                             .Select(i => i.PImage)
+                                             .FirstOrDefault(),
+                                     Maincate = db.MainCateTbls
+                                             .Where(q => q.MainCateId == product.MainCateId)
+                                             .Select(q => q.MTitle)
+                                             .FirstOrDefault(),
+                                     Bannercate = db.MainCateTbls
+                                             .Where(q => q.MainCateId == product.BannerCateId)
+                                             .Select(q => q.MTitle)
+                                             .FirstOrDefault(),
 
-                                   }).ToList(),
-                    Filterkeyword = db.KeywordTbls.Where(t => t.KeywordId == s.KeywordId).Select(t => t.Keyword).FirstOrDefault()
-                });
+                                 }).ToList(),
+                  Filterkeyword = db.KeywordTbls.Where(t => t.KeywordId == s.KeywordId).Select(t => t.Keyword).FirstOrDefault()
+              }).ToList();
 
            
                

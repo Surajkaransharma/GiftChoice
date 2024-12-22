@@ -139,7 +139,7 @@
                                 <nav>
                                     <ul>
                                         <li ng-repeat="n in NavbarMenuList">
-                                            <a href="/Home/shop?Main={{n.MTitle}}">{{n.MTitle}} @*<i ng-show="n.Submenu.length>0" class="fi-rs-angle-down"></i>*@</a>
+                                            <a href="/Home/BannerGifts?Banner={{n.MainCateId}}">{{n.MTitle}} @*<i ng-show="n.Submenu.length>0" class="fi-rs-angle-down"></i>*@</a>
                                             @*<ul class="sub-menu" ng-show="n.Submenu.length>0">
                                                     <li ng-repeat="s in n.Submenu"><a href="/Home/shop?Keyword={{s.SubmenuTitle.Keyword}}">{{s.SubmenuTitle.Keyword}}</a></li>
 
@@ -149,7 +149,7 @@
                                         <li ng-show='NavbarMenuList.length>5'>
                                             <a href="#">More Category <i class="fi-rs-angle-down"></i></a>
                                             <ul class="sub-menu more-category">
-                                                <li ng-repeat="s in ScondNavbarMenuList"><a href="/Home/shop?Main={{s.MTitle}}">{{s.MTitle}}</a></li>
+                                                <li ng-repeat="s in ScondNavbarMenuList"><a href="/Home/BannerGifts?Banner={{s.MainCateId}}">{{s.MTitle}}</a></li>
 
                                             </ul>
                                         </li>

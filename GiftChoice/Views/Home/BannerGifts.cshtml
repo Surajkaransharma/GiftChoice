@@ -26,7 +26,7 @@
     <!-- Page Breadcrumb End -->
 
 
-    <section class="product-tabs section-padding mb-3" ng-repeat="f in FilterKeywordList" ng-show="FilterKeywordList.length>0 && f.ProductList>0" >
+    <section class="product-tabs section-padding mb-3" ng-repeat="f in FilterKeywordList" ng-if="f.ProductList && f.ProductList.length > 0" >
         <div class="container">
             <div class="content-data">
                 <div class="row align-items-center">
@@ -46,7 +46,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-9 col-sm-9 col-12 order-lg-2 order-sm-2 order-2">
+                    <div class="col-lg-9 col-sm-9 col-12 order-lg-2 order-sm-2 order-2" >
                         <section id="selected-product" class="selected-product-slider" style="overflow : hidden !important;">
                             <div class="selected-product">
                                 <div class="swiper-wrapper">
@@ -101,11 +101,11 @@
 
 
 
-    <section class="mt-50 mb-50">
+    <section class="mt-50 mb-50 d-none">
         <div class="container">
             <div class="row flex-row-reverse gx-1 g-1">
                 <div class="col-lg-12">
-                    <section class="product-tabs section-padding mb-0 pb-1" ng-repeat="f in FilterKeywordList" ng-show="FilterKeywordList.length>0 && f.ProductList>0">
+                    <section class="product-tabs section-padding mb-0 pb-1" ng-repeat="f in FilterKeywordList" ng-if="f.ProductList && f.ProductList.length > 0">
                         <div class="container">
                             <div class="row g-2">
                                 <div class="col-lg-12 col-sm-12 col-12">

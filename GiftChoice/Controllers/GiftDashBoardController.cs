@@ -2592,6 +2592,32 @@ namespace GiftChoice.Controllers
             }
 
         }
+        public JsonResult BannerProductSameDay(int id)
+        {
+            try
+            {
+                var jb = db.ProductTbls.Where(c => c.ProductId == id).FirstOrDefault();
+                if (jb != null)
+                {
+
+                    jb.SameDay = jb.SameDay == true ? false : true;
+                    db.SaveChanges();
+                    var res = new { res = "1" };
+                    return Json(res, JsonRequestBehavior.AllowGet);
+                }
+                else
+                {
+                    var res = new { res = "2" };
+                    return Json(res, JsonRequestBehavior.AllowGet);
+                }
+            }
+            catch (Exception ex)
+            {
+                var res = new { res = "0" };
+                return Json(res, JsonRequestBehavior.AllowGet);
+            }
+
+        }
 
         public JsonResult BannerUpdateProductData(ProductTblmodel model)
         {
